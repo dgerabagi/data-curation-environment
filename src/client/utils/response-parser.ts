@@ -1,11 +1,10 @@
 // src/client/utils/response-parser.ts
-// Updated on: C14 (Make file tag parsing more flexible)
+// Updated on: C48 (Add handling for 'assistantfinal' marker)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
 const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
-// C14 Update: More flexible closing tag matching
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
@@ -13,7 +12,16 @@ export function parseResponse(rawText: string): ParsedResponse {
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
+    let processedText = rawText.replace(/\</g, '<').replace(/\>/g, '>').replace(/\_/g, '_');
+
+    // C48 Fix: Ignore model chatter before the final response marker
+    const finalResponseMarker = 'assistantfinal';
+    const markerIndex = processedText.indexOf(finalResponseMarker);
+    if (markerIndex !== -1) {
+        processedText = processedText.substring(markerIndex + finalResponseMarker.length);
+        // Also remove any leading characters like > or ] that might follow the marker
+        processedText = processedText.replace(/^.>/, '').trim();
+    }
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
@@ -28,7 +36,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            // C14 Update: Add new tags to the removal list
             const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {

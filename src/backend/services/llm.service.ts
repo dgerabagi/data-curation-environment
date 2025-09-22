@@ -36,8 +36,7 @@ export class LlmService {
                     model: "unsloth/gpt-oss-20b",
                     prompt: prompt,
                     n: count,
-                    // max_tokens is removed to let the server use its default.
-                    // This prevents errors where prompt_tokens + max_tokens > context_window.
+                    max_tokens: 8192,
                     stream: false
                 }),
             });

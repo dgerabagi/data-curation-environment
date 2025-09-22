@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 48 - continue vllm integration, super cool progress
+Current Cycle 49 - continue refinement of `Demo Mode` process logic
+Cycle 48 - continue vllm integration, super cool progress
 Cycle 47 - issue resolved via rollback
 Cycle 46 - responses came in! little buggy though
 Cycle 45 - 404 error
@@ -766,6 +767,48 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 49>
+<Cycle Context>
+it works, ive got four examples where resp 4 got parsed perfectly and the othersn ot, can be analyzed to determine how to refine parsing.
+
+first, in terms of workflow changes when in settings the `LLM Connection Mode` is set to `Demo Mode` and a user is initiating a new project. the `Generate Initial Artifacts Prompt` button needs to also send the response (along with any selected data from FTV) off to the model. the only missing element is the number of responses, which defaults to four, but at this stag the user has not yet been given the ability to alter this, therefore we should add a responses option to the project plan panel such that the user can first decide how many responses they desire before they initiate.
+
+on the topic of generating responses, when in this `Demo Mode`, any response tab that is empty, such as in the even of if the user has Responses set to 4, but in the moment decides that they need more responses, they would first increase the response count, which would in turn create empty response tabs. these response tabs would need a refresh button which actually sends off the prompt.md (the one generated on the previous cycle page via `Generate prompt.md`, so as to not confuse with generating from the current cycle page, as which cycles to include was logically constructed to depend on what cycle was being viewed when the `Generate prompt.md` button is clicked.) -- okay i just thought a good way to do this, we need a refresh response or a re-generate response mechanism. then, we can leverage that. so then our user story would go like this. say i have 4 and i want 8. i increase to 8 then click regenerate responses. any empty response tabs are then batched out. if there are no empty responses when that button is clicked, then the user is simply prompted if they wish to regenerate all responses and are given a yes/no choice.
+
+lets also work to get that progress UI when `Generate responses` is clicked. 
+
+im realizing that more work must be done with our interaction schema. this harmony schema essentially changes things as they are handling things that i was handling. we need a new Interaction Schema Source artifact to use for when Demo Mode is selected, because it is a different model. much of the interaction schema that has been generated was generated for gemini in ai studio. now, when `Demo Mode` is clicked, we are working with gpt-oss. as such, we need to re-architect this interaction schema with this in mind.
+
+i do not think we need to provide the parsing code to gpt-oss, i think instead we need to start with the harmony approach first. is it possible for you to re-synthesize 52.2 into 52.3 which is harmony-friendly? here are the numbers we do not need in the new version: 3, 4, 5, 8, 9, 11, 12, 13, 14, 15, 16, 17, 19, and 20. the rest of the line items can be added to the new A52.3 which should be serviced in to prompt.md when `Demo Mode` is selected and our prompts are going to gpt-oss who uses harmony. lets try without the parser logic in the interaction schema for now.
+
+so to re-iterate:
+
+1. when in `Demo Mode`, when initiating a new project via the welcome page, when the `Generate Initial Artifacts Prompt` button is clicked, we need to go ahead and send off the batch request for the initial 4 responses.
+
+2. if the user is ever interested in receiving more responses, the way we would be able to let them do that is with a regenerate responses button that, if any responses are empty, those get batched when the button is clicked. if none are empty, then the user is prompted if they wish to regenerate all responses, yes or no.
+
+3. work on the response progress UI
+
+4. make interaction schema for `Demo Mode`
+</Cycle Context>
+<Previous Cycle 48 Summary of Actions>
+I have analyzed the issues from Cycle 47. The problems stem from three distinct areas: a lack of user feedback during LLM processing, a misunderstanding of the `max_tokens` parameter leading to API errors, and a state synchronization bug preventing navigation to newly created cycles. This final bug was likely caused by your rollback of `view.tsx` to a version from Cycle 43, which predates the fix for this exact issue.
+
+My course of action is to address all these points. I will create a new planning artifact for a response progress UI. I will fix the `max_tokens` issue by removing the hardcoded value, allowing the vLLM server to use its more sensible default. Finally, I will re-implement the fix for the navigation bug and enhance the workflow to auto-parse new responses, providing a smoother user experience.
+
+1.  **Documentation (New Feature Plan):** I will create a new artifact, **`A97. DCE - vLLM Response Progress UI Plan.md`**, to mock up the requested UI for tracking response generation, including progress bars and a tokens-per-second display.
+2.  **Documentation (Codify Bugs):** I will add a new case study to **`A11.1 DCE - New Regression Case Studies.md`** to document two issues:
+    *   **`max_tokens` Parameter Misconception:** Clarify that `max_tokens` defines the *completion length*, not the total context window. The sum of prompt tokens and `max_tokens` cannot exceed the model's limit. The codified solution is to remove the client-side hardcoded value and let the server manage the limit.
+    *   **Navigation Failure on Rollback:** Document that rolling back `view.tsx` to Cycle 43 reintroduced a bug where the UI's `maxCycle` state was not updated, preventing navigation to new cycles. This codifies the importance of the fix being re-implemented.
+3.  **Fix `max_tokens` Logic (`llm.service.ts`):** I will modify the `generateBatch` method in `llm.service.ts`. The hardcoded `max_tokens: 8192` parameter will be removed from the request body sent to the vLLM proxy. This allows the vLLM server to use its own default, which is typically a much larger and more appropriate value for generation, resolving the 400 errors when large responses are needed.
+4.  **Fix Navigation Bug (Re-apply C44 fix):**
+    *   **`history.service.ts`:** I will ensure the `createNewCycleWithResponses` method returns an object containing both `{ newCycleId, newMaxCycle }`.
+    *   **`on-message.ts` (PCPP):** The backend handler for `RequestBatchGeneration` will be updated to pass both these values back to the client in the `SendBatchGenerationComplete` message.
+    *   **`view.tsx`:** The frontend message handler for `SendBatchGenerationComplete` will be corrected. It will first call `setMaxCycle(newMaxCycle)` to update the component's state, and *then* call `handleCycleChange(null, newCycleId)`. This ensures the UI is aware of the new maximum cycle before attempting to navigate to it, fixing the bug.
+5.  **Implement Auto-Parsing Workflow (`history.service.ts`):** To improve the user experience, I will modify the `createNewCycleWithResponses` method. When creating the new cycle object, it will now default the `isParsedMode` property to `true`. When the frontend loads this new cycle, it will automatically parse the responses and present the structured view to the user by default.
+</Previous Cycle 48 Summary of Actions>
+</Cycle 49>
 
 <Cycle 48>
 <Cycle Context>
@@ -3338,225 +3381,214 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-22T01:49:12.694Z
+  Date Generated: 2025-09-22T23:05:48.196Z
   ---
-  Total Files: 178
-  Approx. Tokens: 449699
+  Total Files: 189
+  Approx. Tokens: 502925
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9263 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (8714 tokens)
-4. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
-5. src\backend\services\prompt.service.ts (4895 tokens)
-6. src\backend\services\file-operation.service.ts (4526 tokens)
-7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4045 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\context-chooser.view\view.scss (3708 tokens)
+2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
+3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9296 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (8714 tokens)
+6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
+8. src\backend\services\prompt.service.ts (4895 tokens)
+9. src\backend\services\file-operation.service.ts (4526 tokens)
+10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
-1. public\copilot.svg - [Binary] Size: 445 Bytes
-2. public\spiral.svg - [Binary] Size: 459 Bytes
-3. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 512 - Chars: 34855 - Tokens: 8714
-4. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
-5. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
-6. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
-7. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
-8. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
-9. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
-10. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
-11. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
-12. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-13. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
-14. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3700 - Tokens: 925
-15. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
-16. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
-17. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-18. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-19. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
-20. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-21. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-22. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-23. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
-24. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-25. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-26. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
-27. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-28. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 48 - Chars: 5004 - Tokens: 1251
-29. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-30. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 55 - Chars: 5701 - Tokens: 1426
-31. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
-32. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-33. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-34. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-35. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-36. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-37. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-38. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
-39. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
-40. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-41. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-42. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
-43. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
-44. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
-45. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
-46. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
-47. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
-48. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-49. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
-50. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
-51. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
-52. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-53. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-54. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-55. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 42 - Chars: 4285 - Tokens: 1072
-56. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
-57. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-58. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-59. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 123 - Chars: 5850 - Tokens: 1463
-60. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
-61. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
-62. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-63. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-64. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
-65. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
-66. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-67. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
-68. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-69. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-70. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-71. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-72. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
-73. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-74. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
-75. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-76. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-77. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-78. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
-79. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
-80. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-81. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-82. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-83. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-84. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-85. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-86. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
-87. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-88. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-89. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-90. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-91. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-92. src\Artifacts\README.md - Lines: 33 - Chars: 2764 - Tokens: 691
-93. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-94. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-95. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-96. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-97. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
-98. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
-99. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
-100. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-101. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-102. src\backend\services\history.service.ts - Lines: 294 - Chars: 11873 - Tokens: 2969
-103. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-104. src\backend\services\prompt.service.ts - Lines: 371 - Chars: 19579 - Tokens: 4895
-105. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-106. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-107. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-108. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-109. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
-110. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-111. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-112. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-113. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-114. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-115. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-116. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-117. src\client\utils\response-parser.ts - Lines: 74 - Chars: 3472 - Tokens: 868
-118. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-119. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-120. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-121. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-122. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-123. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-124. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-125. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-126. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-127. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-128. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-129. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-130. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6775 - Tokens: 1694
-131. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
-132. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
-133. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-134. src\client\views\parallel-copilot.view\view.tsx - Lines: 351 - Chars: 37050 - Tokens: 9263
-135. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-136. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-137. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-138. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
-139. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-140. src\common\ipc\channels.enum.ts - Lines: 104 - Chars: 5689 - Tokens: 1423
-141. src\common\ipc\channels.type.ts - Lines: 106 - Chars: 8324 - Tokens: 2081
-142. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-143. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-144. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-145. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-146. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-147. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-148. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-149. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-150. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-151. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-152. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-153. bootstrap-flattener.js - Lines: 185 - Chars: 5834 - Tokens: 1459
-154. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
-155. LICENSE - Lines: 21 - Chars: 1090 - Tokens: 273
-156. log-state-logs.md - Lines: 200 - Chars: 11855 - Tokens: 2964
-157. package.json - Lines: 168 - Chars: 5502 - Tokens: 1376
-158. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-159. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
-160. webpack.config.js - Lines: 112 - Chars: 2987 - Tokens: 747
-161. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-162. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-163. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-164. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
-165. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-166. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-167. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-168. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
-169. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
-170. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-171. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
-172. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-173. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-174. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-175. src\backend\services\llm.service.ts - Lines: 66 - Chars: 2651 - Tokens: 663
-176. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
-177. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-178. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 4955 - Tokens: 1239
-
-<file path="public/copilot.svg">
-<metadata>
-{
-  "name": "copilot.svg",
-  "directory": "c:/Projects/DCE/public",
-  "fileType": "SVG",
-  "sizeInBytes": 445
-}
-</metadata>
-</file_artifact>
-
-<file path="public/spiral.svg">
-<metadata>
-{
-  "name": "spiral.svg",
-  "directory": "c:/Projects/DCE/public",
-  "fileType": "SVG",
-  "sizeInBytes": 459
-}
-</metadata>
-</file_artifact>
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 512 - Chars: 34855 - Tokens: 8714
+2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
+3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
+4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
+5. src\Artifacts\A4. DCE - Analysis of The-Creator-AI Repo.md - Lines: 56 - Chars: 5722 - Tokens: 1431
+6. src\Artifacts\A5. DCE - Target File Structure.md - Lines: 67 - Chars: 1977 - Tokens: 495
+7. src\Artifacts\A7. DCE - Development and Testing Guide.md - Lines: 47 - Chars: 3075 - Tokens: 769
+8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
+9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
+10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
+11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
+12. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3700 - Tokens: 925
+13. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
+14. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
+15. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+16. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+17. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
+18. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+19. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+20. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
+22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
+25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 48 - Chars: 5004 - Tokens: 1251
+27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
+28. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 55 - Chars: 5701 - Tokens: 1426
+29. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
+30. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+31. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+32. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+33. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+34. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+35. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
+36. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
+37. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
+38. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+39. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+40. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
+41. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
+42. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
+43. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
+44. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
+45. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
+46. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
+47. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
+48. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
+49. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
+50. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+51. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+52. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
+53. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 42 - Chars: 4285 - Tokens: 1072
+54. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
+55. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
+56. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
+57. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 123 - Chars: 5850 - Tokens: 1463
+58. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
+59. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
+60. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
+61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+62. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
+63. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
+64. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
+65. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
+66. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
+67. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+68. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
+69. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+70. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
+71. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+72. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
+73. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+74. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+75. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+76. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+77. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
+78. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
+79. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+80. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+81. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+82. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+83. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+84. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+85. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
+86. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+87. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+88. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+89. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+90. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
+91. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+92. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
+93. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+94. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
+95. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+96. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+97. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
+98. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+99. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 4955 - Tokens: 1239
+100. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+101. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+102. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
+103. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+104. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1725 - Tokens: 432
+105. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1977 - Tokens: 495
+106. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1885 - Tokens: 472
+107. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2189 - Tokens: 548
+108. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1063 - Tokens: 266
+109. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2602 - Tokens: 651
+110. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1747 - Tokens: 437
+111. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1980 - Tokens: 495
+112. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2599 - Tokens: 650
+113. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2701 - Tokens: 676
+114. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2896 - Tokens: 724
+115. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
+116. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2626 - Tokens: 657
+117. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
+118. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
+119. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
+120. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
+121. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+122. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+123. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+124. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+125. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+126. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+127. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+128. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+129. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+130. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+131. src\backend\services\history.service.ts - Lines: 294 - Chars: 11873 - Tokens: 2969
+132. src\backend\services\llm.service.ts - Lines: 65 - Chars: 2514 - Tokens: 629
+133. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+134. src\backend\services\prompt.service.ts - Lines: 371 - Chars: 19579 - Tokens: 4895
+135. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+136. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+137. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
+138. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+139. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+140. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
+141. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+142. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+143. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+144. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+145. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+146. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+147. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+148. src\client\utils\response-parser.ts - Lines: 81 - Chars: 3832 - Tokens: 958
+149. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+150. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+151. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+152. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+153. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+154. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+155. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+156. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+157. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+158. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+159. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+160. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+161. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+162. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6775 - Tokens: 1694
+163. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
+164. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
+165. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+166. src\client\views\parallel-copilot.view\view.tsx - Lines: 354 - Chars: 37181 - Tokens: 9296
+167. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+168. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+169. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+170. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
+171. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+172. src\common\ipc\channels.enum.ts - Lines: 104 - Chars: 5689 - Tokens: 1423
+173. src\common\ipc\channels.type.ts - Lines: 106 - Chars: 8324 - Tokens: 2081
+174. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+175. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+176. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+177. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+178. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+179. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+180. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+181. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+182. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+183. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+184. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+185. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
+186. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
+187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
+188. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+189. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8398,6 +8430,70 @@ Once a working pattern is identified in a test component:
 3.  **Remove Test Artifacts:** The test harness UI and the `TestPane*.tsx` component files will be removed from the project.
 </file_artifact>
 
+<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
+# Artifact A76: DCE - Word Wrap Line Numbering Challenges
+# Date Created: C181
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
+- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
+
+## 1. Problem Statement
+
+The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
+
+This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
+
+## 2. The Core Challenge: Logical vs. Visual Lines
+
+The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
+
+*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
+
+*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
+
+Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
+
+## 3. Potential Solutions & Their Complexity
+
+Here are the common approaches to solving this problem, each with its own trade-offs.
+
+### Solution A: The Hidden `div` Measurement Technique
+
+This is the most common and reliable method.
+
+1.  **How it Works:**
+    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
+    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
+    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
+    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
+
+2.  **Complexity & Downsides:**
+    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
+    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
+    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
+
+### Solution B: Using a Full-Fledged Code Editor Component
+
+Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
+
+1.  **How it Works:**
+    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
+    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
+
+2.  **Complexity & Downsides:**
+    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
+    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
+    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
+
+## 4. Conclusion & Path Forward
+
+The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
+
+The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
+</file_artifact>
+
 <file path="src/Artifacts/A77. DCE - Monaco Editor Replacement Plan.md">
 # Artifact A77: DCE - Monaco Editor Replacement Plan
 # Date Created: C182
@@ -8955,6 +9051,1097 @@ The "Settings" section of the existing Settings Panel will be redesigned to acco
 3.  **Frontend (`settings.view.tsx`):**
     *   The settings view will be refactored into a more complex React component that manages the state for the list of cards and the editing form.
     *   It will use new IPC channels to communicate with the backend service to perform the CRUD operations.
+</file_artifact>
+
+<file path="src/Artifacts/A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md">
+# Artifact A86: DCE - PCPP Workflow Centralization and UI Persistence Plan
+# Date Created: C19
+# Author: AI Model & Curator
+# Updated on: C21 (Re-add requirement for Select All buttons)
+
+- **Key/Value for A0:**
+- **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
+- **Tags:** feature plan, ui, ux, workflow, refactor, bug fix
+
+## 1. Overview & Goal
+
+User feedback from Cycle 19 identified three key areas for improvement in the Parallel Co-Pilot Panel (PCPP):
+1.  **Scattered UI:** The buttons for the core workflow are located in different places, making the process unintuitive.
+2.  **Ephemeral UI State:** The animated highlight that guides the user disappears if they switch away from the PCPP tab.
+3.  **Broken Metric:** The total estimated cost calculation is non-functional.
+
+The goal of this plan is to address all three issues to create a more intuitive, robust, and functional user experience.
+
+## 2. The User Workflow Articulated
+
+To centralize the buttons effectively, we must first define the ideal user workflow as a sequence of steps.
+
+1.  **Paste & Parse:** User pastes responses into tabs. Clicks **`Parse All`**.
+2.  **Sort & Select:** User reviews metadata. Clicks **`Sort`** to order responses. Clicks **`Select This Response`** on the most promising one.
+3.  **Baseline (Optional):** User may click **`Baseline (Commit)`** to save the current state before testing.
+4.  **Accept:** User checks files in the "Associated Files" list and clicks **`Accept Selected`**.
+5.  **Test & Restore (Loop):** User tests the applied changes. If they fail, the user clicks **`Restore Baseline`** and returns to Step 4 to test a different set of files or a different response.
+6.  **Finalize & Proceed:** Once satisfied, the user provides a cycle title/context and clicks **`Generate prompt.md`** and then **`+`** to start the next cycle.
+
+## 3. Button Centralization Plan
+
+### 3.1. ASCII Mockup of New Toolbar
+
+The new, centralized toolbar will be located directly below the response tabs, making it the central point of interaction.
+
+```
+|=================================================================================================|
+| [ Resp 1 (5 files, 2.1K tk) ] [ Resp 2 (4 files, 1.8K tk) ] [ Resp 3 ] [ Resp 4 ]      [ Sort ] |
+|-------------------------------------------------------------------------------------------------|
+|                                                                                                 |
+|   +-----------------------------------------------------------------------------------------+   |
+|   | [ Parse All ] [ Select This Resp ] [ Baseline ] [ Restore ] [ Accept Selected ]         |   |
+|   +-----------------------------------------------------------------------------------------+   |
+|                                                                                                 |
+| | [v] Associated Files (5) [Select All] [Deselect All Across Responses]                     | | |
+| |-------------------------------------------------------------------------------------------| | |
+| | [✓] [ ] src/Artifacts/A86. ... .md                                                        | | |
+| | [✓] [ ] src/client/views/.../view.tsx                                                     | | |
+| | ...                                                                                       | | |
+|-------------------------------------------------------------------------------------------------|```
+
+### 3.2. Technical Implementation
+-   A new component, `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx`, will be created.
+-   It will contain all the buttons related to the main workflow.
+-   **(C21 Update):** The "Select All" and "Deselect All Across Responses" buttons, which were lost in a previous refactor, will be re-added to the toolbar to provide critical batch selection functionality for associated files.
+-   The main `view.tsx` will manage the state for enabling/disabling these buttons and pass the state and `onClick` handlers down as props.
+-   The buttons will be removed from their old locations (the main header and the `ParsedView` header). The "Select This Response" button will now act on the currently active tab.
+
+## 4. Persistent Animation Plan
+
+-   **Problem:** The `workflowStep` state is currently a local `useState` in `view.tsx`, which is lost when the webview is hidden and shown again.
+-   **Solution:** The `workflowStep` will be elevated to become part of the persisted cycle state.
+    1.  **Type Definition:** Add `activeWorkflowStep?: string;` to the `PcppCycle` interface in `src/common/types/pcpp.types.ts`.
+    2.  **State Management:** The `saveCurrentCycleState` function in `view.tsx` will now also update the main `PcppCycle` object with the current `workflowStep`.
+    3.  **Restoration:** When a cycle is loaded, the `activeWorkflowStep` from the loaded data will be used to initialize the state, ensuring the highlight is correctly re-applied.
+
+## 5. Cost Calculation Fix Plan
+
+-   **Problem:** The total estimated cost always shows `$0.00`.
+-   **Investigation:** The cost is calculated based on a `totalPromptTokens` state, which is populated by a message from the backend. The request for this calculation is debounced and triggered by changes to the cycle context or title. It appears this request is not being triggered on the initial load of a cycle.
+-   **Solution:**
+    1.  In `view.tsx`, locate the `useEffect` hook that handles the `SendInitialCycleData` and `SendCycleData` messages.
+    2.  Inside this hook, after the component's state is updated with the new cycle data, add a direct call to the `requestCostEstimation()` function.
+    3.  This will ensure that a cost estimation is requested from the backend every time a cycle is loaded, fixing the bug and displaying an accurate cost.
+</file_artifact>
+
+<file path="src/Artifacts/A87. VCPG - vLLM High-Throughput Inference Plan.md">
+# Artifact A87: VCPG - vLLM High-Throughput Inference Plan
+
+# Date Created: C78
+# Author: AI Model
+# Updated on: C29 (Add API Proxy Server architecture)
+
+- **Key/Value for A0:**
+- **Description:** A research and planning document analyzing the potential of using vLLM for high-throughput, low-latency inference, and detailing the architecture for connecting to it via a secure proxy server.
+- **Tags:** guide, research, planning, ai, llm, vllm, inference, performance, proxy
+
+## 1. Vision & Goal
+
+The goal is to investigate and plan the migration of our AI inference backend from the current LM Studio setup to a more performant and scalable solution using **vLLM**. As described by the curator's research, vLLM offers significant performance gains through techniques like continuous batching, which could enable more advanced AI capabilities, such as near-real-time analysis of multiple data streams or providing concurrent, low-latency AI assistance to every user of the DCE extension.
+
+## 2. Analysis of vLLM
+
+Research and community reports highlight several key advantages of vLLM:
+-   **High Throughput:** Demonstrations show massive performance increases (e.g., 10,000+ tokens/second on a single high-end GPU).
+-   **Continuous Batching:** vLLM's core innovation is its ability to dynamically batch incoming requests. This is highly efficient for serving multiple requests simultaneously, which is key to our goal of generating 10+ parallel responses.
+-   **Low Latency:** Sub-100ms time-to-first-token (TTFT) is achievable, which is critical for a responsive user experience.
+-   **OpenAI-Compatible Server:** vLLM includes a built-in server that mimics the OpenAI API protocol. This is a critical feature, as it allows our extension and proxy to interact with it using a standard, well-documented interface.
+
+## 3. Proposed Architecture: Secure API Proxy
+
+To securely connect the DCE extension to a powerful vLLM instance, we will use a backend proxy server. This architecture prevents exposing the vLLM server directly to the public internet and gives us a central point of control.
+
+```
++---------------+      +-------------------------+      +----------------------+
+| DCE Extension |----->| aiascent.game (Proxy)   |----->|   vLLM Server        |
+| (VS Code)     |      | (Node.js/Express)       |      | (Python)             |
++---------------+      +-------------------------+      +----------------------+
+```
+
+### 3.1. vLLM Server Setup
+-   **Deployment:** The vLLM server will be a dedicated Python application, likely in a Docker container for easy management.
+-   **Model:** It can be configured to serve any Hugging Face model compatible with vLLM.
+-   **Interface:** It will run the built-in OpenAI-compatible server, listening on a local port (e.g., `8000`).
+
+### 3.2. AI Ascent Proxy Server (`server.ts`)
+-   **Role:** The existing `aiascent.game` server will be enhanced to act as a secure proxy.
+-   **New Endpoint:** A new API endpoint, `/api/dce/proxy`, will be created.
+-   **Logic:**
+    1.  This endpoint will receive requests from authenticated DCE extension users.
+    2.  It will read the prompt data from the request body.
+    3.  It will make a new `fetch` request to the internal vLLM server (e.g., `http://localhost:8000/v1/chat/completions`), forwarding the prompt.
+    4.  Crucially, it will **stream** the response from vLLM back to the DCE extension client, providing the low-latency experience we need.
+
+### 3.3. Caddyfile Configuration
+-   The existing `Caddyfile` is already configured with a `reverse_proxy` directive that forwards all traffic to the Node.js server. This configuration is sufficient and automatically handles WebSocket upgrades and necessary headers, so no changes are required.
+
+## 4. Implementation Plan (Future Cycle)
+
+1.  **Setup vLLM Server:** Install vLLM and its dependencies, download a model, and run the OpenAI-compatible server.
+2.  **Update `server.ts`:** Add the new `/api/dce/proxy` route with the streaming logic.
+3.  **Configure DCE:** Update the DCE settings (via a Model Card) to point to the new `https://aiascent.game/api/dce/proxy` endpoint.
+4.  **Test:** Send a prompt from the DCE and verify that the response is streamed back from the vLLM server through the proxy.
+</file_artifact>
+
+<file path="src/Artifacts/A88. DCE - Native Diff Integration Plan.md">
+# Artifact A88: DCE - Native Diff Integration Plan
+# Date Created: C22
+# Author: AI Model & Curator
+# Updated on: C27 (Mark as In Progress)
+
+- **Key/Value for A0:**
+- **Description:** A plan to integrate VS Code's native diff viewer (`vscode.diff`) for comparing AI-generated file content against the current workspace file, leveraging a TextDocumentContentProvider for in-memory content.
+- **Tags:** feature plan, ui, ux, diff, vscode api, virtual document
+
+## 1. Overview & Goal
+
+**Status (C27): In Progress**
+
+The current integrated diff viewer is functional but lacks the native feel, performance, and rich features of VS Code's own diffing engine (e.g., syntax highlighting, minimap, inline actions). The goal of this feature is to replace our custom `DiffViewer` component with a button that triggers the built-in `vscode.diff` command.
+
+This provides a superior user experience and reduces the maintenance burden of our custom component. The primary technical challenge is that the AI-generated content exists only in the frontend's state (in-memory) and not as a file on disk. The solution is to create a **Virtual Document** using a `TextDocumentContentProvider`.
+
+## 2. User Story
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-DIFF-NATIVE-01 | **View Diff Natively** | As a developer, when I hover over an associated file in the PCPP, I want to click an "Open Changes" button that opens the diff in a native VS Code diff tab, so I can use all the familiar features of the editor to review the changes. | - An "Open Changes" icon appears on hover for each existing file in the "Associated Files" list. <br> - Clicking it executes the `vscode.diff` command. <br> - A new editor tab opens, showing a side-by-side diff. <br> - The right side shows the current content of the workspace file. <br> - The left side shows the AI-generated content from the response tab. |
+
+## 3. Technical Implementation Plan
+
+This implementation involves creating a new backend provider and coordinating state between the frontend and backend.
+
+### Step 1: Create a TextDocumentContentProvider
+-   **New File (`src/backend/providers/ResponseContentProvider.ts`):** A new class will be created that implements `vscode.TextDocumentContentProvider`.
+-   **State Cache:** This provider will need a simple in-memory cache (e.g., a `Map<string, string>`) to store the AI-generated content. The key will be a unique identifier (like the URI itself), and the value will be the file content string.
+-   **`provideTextDocumentContent` method:** This is the core method. When VS Code needs to open a virtual document (e.g., `dce-response:path/to/file.ts?cycle=22&resp=1`), this method will be called with the URI. It will look up the content in its cache using the URI as the key and return it.
+
+### Step 2: Register the Provider and Command
+-   **`extension.ts`:** In the `activate` function, the new provider will be registered with a custom URI scheme: `vscode.workspace.registerTextDocumentContentProvider('dce-response', responseContentProvider);`.
+
+### Step 3: Implement the Frontend-to-Backend Workflow
+-   **UI (`ParsedView.tsx`):** An "Open Changes" button will be added to each associated file item, visible on hover.
+-   **IPC Channel (`RequestNativeDiff`):** A new IPC channel will be created. Its payload will be `{ originalPath: string; modifiedContent: string; title: string; }`.
+-   **Backend Handler (`file-operation.service.ts`):**
+    1.  A new `handleNativeDiffRequest` method will be implemented.
+    2.  When it receives a request, it will generate a unique URI for the virtual document, incorporating the file path and potentially cycle/response IDs to ensure uniqueness (e.g., `dce-response:${originalPath}?cycle=${cycleId}&resp=${respId}&ts=${Date.now()}`).
+    3.  It will store the `modifiedContent` in the `ResponseContentProvider`'s cache, keyed by this unique URI.
+    4.  It will then execute the command: `vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(originalAbsolutePath), vscode.Uri.parse(virtualUri), title);`.
+</file_artifact>
+
+<file path="src/Artifacts/A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md">
+# Artifact A89: DCE - Phase 3 - Hosted LLM & vLLM Integration Plan
+# Date Created: C29
+# Author: AI Model & Curator
+# Updated on: C45 (Add guidance for "Model not found" error)
+
+- **Key/Value for A0:**
+- **Description:** Outlines the architecture and roadmap for integrating the DCE extension with a remote, high-throughput vLLM backend via a secure proxy server.
+- **Tags:** feature plan, phase 3, llm, vllm, inference, performance, architecture, proxy
+
+## 1. Vision & Goal
+(No change)
+
+## 2. Proposed Architecture
+(No change)
+
+## 3. Security & Encryption
+(No change)
+
+## 4. User Stories
+(No change)
+
+## 5. Troubleshooting Connectivity
+
+(No change to Step 1: Test the Proxy Server from Your Laptop)
+
+### Step 2: Interpret the Results
+
+-   **(No change to `ETIMEDOUT` or `5xx` error sections)**
+
+-   **If `curl` returns a `404 Not Found` error from the *Proxy Server* (e.g., response body is `Cannot POST /api/dce/proxy`):** This means you have successfully connected to the proxy server, but the server's application logic (in `server.ts`) doesn't have a route defined for `/api/dce/proxy`.
+    -   **Solution:** Check your `server.ts` file and ensure the route is correct. After making changes, you **must restart** the Node.js server process.
+
+-   **If `curl` returns a `404 Not Found` error from the *vLLM Server* (e.g., response body contains `{"error":{"message":"The model ... does not exist."}}`):** This is a different, more specific error. It means the proxy successfully forwarded your request, but the vLLM server rejected it.
+    -   **Root Cause:** The `model` parameter in the JSON request body does not match the model identifier that the vLLM server was started with.
+    -   **Solution:**
+        1.  Check your vLLM startup command (see `A92`) and copy the exact model name (e.g., `unsloth/mistral-7b-instruct-v0.2-bnb-4bit`).
+        2.  Open your proxy's `server.ts` file.
+        3.  Find the `fetch` call to the vLLM endpoint.
+        4.  Change the value of the `model` field in the JSON `body` to be the exact name you copied.
+        5.  **Restart your proxy server.**
+
+-   **(No change to "If `curl` succeeds" section)**
+
+## 6. Technical Implementation Plan
+(No change)
+</file_artifact>
+
+<file path="src/Artifacts/A89. DCE - vLLM Integration and API Proxy Plan.md">
+# Artifact A89: DCE - vLLM Integration and API Proxy Plan
+# Date Created: C29
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Details the end-to-end plan for integrating the DCE with a remote vLLM instance via a secure proxy server, enabling high-throughput, parallelized AI responses.
+- **Tags:** feature plan, vllm, llm, proxy, api, integration, performance
+
+## 1. Vision & Goal
+
+The goal of this integration is to unlock a new level of performance for the Data Curation Environment (DCE) by connecting its parallel response UI to a high-throughput vLLM backend. This will enable users to generate multiple, simultaneous AI responses with extremely low latency, dramatically accelerating the iterative development workflow.
+
+To achieve this securely and flexibly, we will use the curator's existing `aiascent.game` server as a proxy, which will receive requests from the DCE extension and forward them to a dedicated vLLM instance.
+
+## 2. End-to-End Architecture
+
+The data will flow through three distinct components:
+
+```
++---------------+      +---------------------------+      +----------------------+
+| DCE Extension |----->|   aiascent.game (Proxy)   |----->|   vLLM Server        |
+| (VS Code)     |      | (Node.js/Express Server)  |      | (Python Instance)    |
++---------------+      +---------------------------+      +----------------------+
+```
+
+1.  **DCE Extension (The Client):**
+    *   The user will configure a "Model Card" in the DCE settings pointing to the proxy server's endpoint: `https://aiascent.game/api/dce/proxy`.
+    *   When the user sends a prompt, the extension will make a `POST` request to this endpoint, sending the prompt data in the request body.
+    *   It will be configured to handle a streaming response.
+
+2.  **aiascent.game (The Proxy Server):**
+    *   This server acts as a secure intermediary.
+    *   A new API endpoint, `/api/dce/proxy`, will be added to `server.ts`.
+    *   This endpoint will receive the request from the DCE extension.
+    *   It will then create a new request to the internal vLLM server, whose address will be stored in an environment variable (e.g., `VLLM_URL=http://localhost:8000`).
+    *   It will stream the response from the vLLM server back to the DCE extension client.
+
+3.  **vLLM Server (The Inference Engine):**
+    *   This is a dedicated Python process running the vLLM library.
+    *   It will be configured to serve a specific model (e.g., `unsloth/gpt-oss-20b`) and will expose an OpenAI-compatible API endpoint.
+    *   Its primary job is to handle the computationally intensive task of model inference with high efficiency through continuous batching.
+
+## 3. Implementation Details
+
+### 3.1. `server.ts` Modifications
+A new route will be added to handle the proxy request. This route will use `node-fetch` or a similar library to make a server-to-server request to the vLLM instance and pipe the streaming response back.
+
+**See Artifact `A90` for the proposed code.**
+
+### 3.2. `Caddyfile` Configuration
+The existing `Caddyfile` is already configured to reverse proxy all traffic to the Node.js server on port 3001. This configuration is sufficient and automatically handles HTTPS termination and header forwarding, so no changes are required.
+
+**See Artifact `A91` for the full file and analysis.**
+
+### 3.3. DCE Extension Configuration
+The user will configure the connection in the DCE settings panel as follows:
+-   **Model Card Name:** `Remote vLLM via AI Ascent`
+-   **Endpoint URL:** `https://aiascent.game/api/dce/proxy`
+-   **API Key:** (None required, as the proxy handles authentication if needed)
+
+This architecture provides a secure, scalable, and highly performant solution for integrating the DCE with vLLM.
+</file_artifact>
+
+<file path="src/Artifacts/A90. AI Ascent - server.ts (Reference).md">
+# Artifact A90: AI Ascent - server.ts (Reference)
+# Date Created: C29
+# Author: AI Model & Curator
+# Updated on: C44 (Remove hardcoded stop token)
+
+- **Key/Value for A0:**
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The hardcoded `stop` parameter has been removed to fix response truncation.
+- **Tags:** reference, source code, backend, nodejs, express
+
+## 1. Overview
+
+This artifact contains the literal source code of the `server.ts` file. The key change is in the `app.post('/api/dce/proxy', ...)` route. The hardcoded `stop` parameter has been removed from the request body sent to the vLLM endpoint. The proxy will now pass through any `stop` parameter sent by the client but will not add its own, resolving the issue of premature response truncation.
+
+## 2. Source Code (with corrected route)
+
+```typescript
+// Updated on: C1384 (Correct import path for generateSpeech from llmService.)
+// Updated on: C1383 (Add /api/tts/generate route handler.)
+// Updated on: C1355 (Add /api/report/vote route handler.)
+// Updated on: C41 (DCE Integration: Correct route to /api/dce/proxy)
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import NextAuth from 'next-auth';
+import { authOptions } from './pages/api/auth/[...nextauth]';
+import cors from 'cors';
+import { logInfo, logError, logWarn } from './logger';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import fs from 'fs';
+import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
+import type { Founder } from './state';
+import { CompetitionSystem } from './game/systems/CompetitionSystem';
+import { PvpSystem } from './game/systems/PvpSystem';
+import { PoetryBattleSystem } from './game/systems/PoetryBattleSystem';
+import { handleAscentiaStream, handleAscentiaWelcome, loadAscentiaKnowledgeBase, loadReportKnowledgeBase, handleReportAscentiaStream } from './server/api/ascentiaHandler';
+import { handlePlayerProductStream, handlePlayerProductRequest, generateSpeech } from './server/llmService';
+import updateProfileHandler from './server/api/userProfileHandler';
+import { handleReportVote } from './server/api/reportHandler';
+import threadsHandler from './pages/api/bbs/threads';
+import postsHandler from './pages/api/bbs/posts';
+import voteHandler from './pages/api/bbs/vote';
+import tagsHandler from './pages/api/bbs/tags';
+import leaderboardHandler from './pages/api/leaderboard';
+import leaderboardUpdateHandler from './pages/api/leaderboard/update';
+import playersListHandler from './pages/api/players/list';
+import playerProfileHandler from './pages/api/players/[userId]';
+import prisma from './lib/prisma';
+import { Readable } from 'stream';
+
+const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3001;
+const isProduction = process.env.NODE_ENV === 'production';
+
+// --- DCE/vLLM Integration Configuration ---
+const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/completions';
+const DCE_API_KEY = process.env.DCE_API_KEY; // A secret key to authenticate requests from the extension
+
+let clientOrigin = 'http://localhost:8867';
+if (process.env.NEXTAUTH_URL) {
+    try {
+        const url = new URL(process.env.NEXTAUTH_URL);
+        clientOrigin = url.origin;
+    } catch (e) {
+        logError('[SERVER]', `Invalid NEXTAUTH_URL format: ${process.env.NEXTAUTH_URL}. Falling back to default localhost.`);
+    }
+} else {
+    logWarn('[SERVER]', 'NEXTAUTH_URL environment variable is not set. CORS may fail in production.');
+}
+
+logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
+logInfo('[DCE]', `vLLM proxy endpoint configured for: ${VLLM_ENDPOINT}`);
+if (!DCE_API_KEY) {
+    logWarn('[DCE]', 'DCE_API_KEY is not set. The /api/dce/proxy endpoint will be unsecured.');
+}
+
+// Instantiate systems
+const competitionSystem = new CompetitionSystem();
+const io = new SocketIOServer(server, {
+    path: "/api/socket.io",
+    cors: {
+        origin: [clientOrigin, 'vscode-webview://*'], // Allow requests from VS Code webviews
+        methods: ["GET", "POST"]
+    },
+    connectTimeout: 90000,
+    pingTimeout: 90000,
+    pingInterval: 25000,
+});
+const pvpSystem = new PvpSystem(competitionSystem, io);
+const poetryBattleSystem = new PoetryBattleSystem(io);
+(global as any).world = { poetryBattleSystem };
+
+app.use(cors({
+    origin: [clientOrigin, 'vscode-webview://*'], // Also apply CORS for standard HTTP requests
+    credentials: true,
+}));
+
+logInfo('[SERVER]', 'Socket.IO server initialized.');
+
+export interface PlayerState {
+    id: string; // socket.id
+    userId: string;
+    x: number;
+    y: number;
+    direction: PlayerDirection;
+    isMoving: boolean;
+    displayName: string;
+    founderKey: Founder;
+    countryCode: string | null;
+}
+const players: Record<string, PlayerState> = {};
+
+// --- Socket.IO Connection Handling ---
+io.on('connection', (socket) => {
+    logInfo('[SOCKET.IO]', `Player connected: ${socket.id}`);
+    (socket as any).playerState = {};
+    socket.on('identify', (data) => {
+        logInfo('[SOCKET.IO]', `Player identified: ${socket.id} as ${data.displayName} (User ID: ${data.userId})`);
+        const playerState: PlayerState = {
+            id: socket.id,
+            userId: data.userId,
+            x: data.x,
+            y: data.y,
+            direction: data.direction,
+            isMoving: false,
+            displayName: data.displayName,
+            founderKey: data.founderKey,
+            countryCode: data.countryCode,
+        };
+        players[socket.id] = playerState;
+        (socket as any).playerState = playerState;
+        socket.emit('playersUpdate', Object.values(players));
+        socket.broadcast.emit('playerJoined', players[socket.id]);
+        pvpSystem.handleRejoin(data.userId, socket.id);
+    });
+    socket.on('playerMove', (data) => {
+        if (players[socket.id]) {
+            players[socket.id] = { ...players[socket.id], ...data };
+            socket.broadcast.emit('playerMoved', players[socket.id]);
+        }
+    });
+    // --- Delegate Handlers ---
+    socket.on('get_ascentia_welcome', (payload) => handleAscentiaWelcome(socket, players, payload));
+    socket.on('start_ascentia_stream', (payload) => handleAscentiaStream(io, socket, players, payload));
+    socket.on('start_report_ascentia_stream', (payload) => handleReportAscentiaStream(io, socket, players, payload));
+    socket.on('start_chatbot_stream', (payload) => handlePlayerProductStream(socket, players, payload));
+    // --- PvP Handlers (Delegated to PvpSystem) ---
+    socket.on('send_pvp_challenge', (payload) => pvpSystem.handleChallenge(socket, players, payload));
+    socket.on('accept_pvp_challenge', (payload) => pvpSystem.handleAcceptChallenge(socket, players, payload));
+    socket.on('decline_pvp_challenge', (payload) => pvpSystem.handleDeclineChallenge(socket, players, payload));
+    socket.on('claim_pvp_rewards', (payload) => pvpSystem.claimRewards(players[socket.id]?.userId, payload.matchId));
+    socket.on('change_pvp_speed', (payload) => pvpSystem.handleChangeSpeed(players[socket.id]?.userId, payload.matchId, payload.requestedSpeed));
+    socket.on('send_poetry_battle_challenge', (payload) => {
+        const challenger = players[socket.id];
+        const target = players[payload.targetSocketId];
+        logInfo('[[SERVER]]', `Received 'send_poetry_battle_challenge' from ${challenger?.displayName ?? 'Unknown'} to ${target?.displayName ?? 'Unknown'} (socketId: ${payload.targetSocketId})`);
+        pvpSystem.handlePoetryBattleChallenge(socket, players, payload);
+    });
+    socket.on('accept_poetry_battle_challenge', (payload) => pvpSystem.handleAcceptPoetryBattleChallenge(socket, players, payload));
+    socket.on('decline_poetry_battle_challenge', (payload) => pvpSystem.handleDeclinePoetryBattleChallenge(socket, players, payload));
+    socket.on('poetry_battle_submit_move', (payload) => poetryBattleSystem.handlePlayerMove(socket, payload));
+    socket.on('submit_poetry_chatbot_data', (payload: { matchId: string, chatbotData: PoetryBattleChatbotData | null }) => {
+        pvpSystem.handleSubmitPoetryChatbotData(socket, players, payload);
+    });
+    socket.on('send_pvp_match_message', async (payload) => {
+        const logPrefix = '[SocketHandler:send_pvp_match_message]';
+        const senderState = players[socket.id];
+        if (!senderState) {
+            logWarn(logPrefix, `Received message from unidentified socket ${socket.id}`);
+            return;
+        }
+        try {
+            const senderDb = await prisma.leaderboardEntry.findUnique({
+                where: { userId: senderState.userId },
+                include: { user: { select: { displayName: true, countryCode: true } } }
+            });
+            if (!senderDb || !senderDb.user) {
+                logError(logPrefix, `Could not find DB entry for sender ${senderState.userId}`);
+                return;
+            }
+            const senderProfile: PlayerProfile = {
+                userId: senderState.userId,
+                displayName: senderDb.user.displayName ?? 'Player',
+                companyName: senderDb.companyName ?? 'Company',
+                agentName: senderDb.gameAiAgentName ?? 'Agent',
+                elo: senderDb.highestGameAIElo,
+                countryCode: senderDb.user.countryCode,
+                socketId: senderState.id,
+            };
+            pvpSystem.handleMatchChatMessage(senderState.userId, payload.matchId, payload.message, senderProfile);
+        } catch (error) {
+            logError(logPrefix, `Error constructing sender profile for chat message.`, error);
+        }
+    });
+
+    socket.on('sendMessage', (payload) => pvpSystem.handleLobbyChatMessage(io, socket, players, payload));
+
+    socket.on('disconnect', (reason) => {
+        logInfo('[SOCKET.IO]', `Player disconnected: ${socket.id}. Reason: ${reason}`);
+        pvpSystem.handleDisconnect(socket.id, players);
+        delete players[socket.id];
+        io.emit('playerLeft', { id: socket.id });
+    });
+});
+
+// --- PvpSystem Global Timer ---
+setInterval(() => {
+    pvpSystem.tickMatches(1); // Tick every 1 second
+}, 1000);
+// --- Middleware and API Routes ---
+app.use(cookieParser());
+app.use(express.json({ limit: '50mb' })); // Increase limit for large prompts
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+
+app.use((req, res, next) => {
+    (req as any).io = io;
+    (req as any).players = players;
+    next();
+});
+
+app.all('/api/auth/*', (req, res) => {
+    if (!(req.query as any).nextauth) {
+      const nextauth = req.path.split('/').slice(3);
+      (req.query as any).nextauth = nextauth;
+      logInfo('[SERVER:Auth]', `Manually setting req.query.nextauth to:`, nextauth);
+    }
+    return NextAuth(req as any, res as any, authOptions);
+});
+
+// --- API Routes ---
+app.get('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.post('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.put('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.delete('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
+app.get('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
+app.post('/api/bbs/vote', (req, res) => voteHandler(req as any, res as any));
+app.get('/api/bbs/tags', (req, res) => tagsHandler(req as any, res as any));
+app.get('/api/leaderboard', (req, res) => leaderboardHandler(req as any, res as any));
+app.post('/api/leaderboard/update', (req, res) => leaderboardUpdateHandler(req as any, res as any));
+app.get('/api/players/list', (req, res) => playersListHandler(req as any, res as any));
+app.get('/api/players/:userId', (req, res) => playerProfileHandler(req as any, res as any));
+app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as any, res as any));
+app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
+app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
+
+// CORRECTED: DCE vLLM Proxy Route
+app.post('/api/dce/proxy', async (req, res) => {
+    logInfo('[DCE]', 'Received request on /api/dce/proxy');
+
+    if (DCE_API_KEY) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || authHeader !== `Bearer ${DCE_API_KEY}`) {
+            logWarn('[DCE]', 'Unauthorized request: Missing or invalid API key.');
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+    }
+
+    // C44 FIX: Remove hardcoded `stop` parameter.
+    // It will now correctly use the `stop` parameter if the client provides it,
+    // or use the vLLM server's default if it's not provided.
+    const { prompt, n = 10, max_tokens = 131000, ...rest } = req.body;
+
+    if (!prompt) {
+        logError('[DCE]', 'Bad request: Missing prompt content.');
+        return res.status(400).json({ error: 'Prompt content is required' });
+    }
+
+    logInfo('[DCE]', `Proxying prompt to vLLM. Requesting ${n} parallel responses.`);
+
+    try {
+        const vllmResponse = await fetch(VLLM_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt,
+                n,
+                max_tokens,
+                ...rest, // Pass through any other parameters from the client (like stop, temperature, etc.)
+                temperature: rest.temperature || 0.7, 
+            }),
+        });
+
+        if (!vllmResponse.ok) {
+            const errorBody = await vllmResponse.text();
+            throw new Error(`vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText} - ${errorBody}`);
+        }
+
+        const data = await vllmResponse.json();
+        const responses = data.choices.map((choice: any) => choice.text);
+        
+        logInfo('[DCE]', `Successfully received ${responses.length} responses from vLLM.`);
+        res.status(200).json({ responses });
+
+    } catch (error: any) {
+        logError('[DCE]', 'Error proxying request to vLLM:', error.message);
+        res.status(500).json({ error: 'Failed to get responses from vLLM backend.' });
+    }
+});
+
+
+// NEW: TTS Proxy Route
+app.post('/api/tts/generate', async (req, res) => {
+    try {
+        const { text } = req.body;
+        if (!text || typeof text !== 'string') {
+            return res.status(400).send('Invalid request: "text" field is required.');
+        }
+        const audioStream = await generateSpeech(text);
+        if (audioStream) {
+            res.setHeader('Content-Type', 'audio/wav');
+            audioStream.pipe(res);
+        } else {
+            res.status(500).send('Failed to generate speech.');
+        }
+    } catch (error) {
+        logError('[API:TTS]', 'Error in TTS generation route', error);
+        res.status(500).send('Internal server error during TTS generation.');
+    }
+});
+
+
+// --- Static File Serving (Production Only) ---
+if (isProduction) {
+    const buildPath = path.join(__dirname);
+    logInfo('[SERVER]', `Production mode detected. Serving static files from: ${buildPath}`);
+    app.use(express.static(buildPath));
+
+    app.get('*', (req, res) => {
+        const indexPath = path.join(buildPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).send(`'index.html' not found.`);
+        }
+    });
+}
+
+// --- Server Startup ---
+server.listen(port, () => {
+    logInfo('[SERVER]', `Server listening on http://localhost:${port}`);
+    const publicPath = isProduction ? __dirname : path.join(__dirname, '..', 'public');
+    loadAscentiaKnowledgeBase(publicPath);
+    loadReportKnowledgeBase(publicPath);
+});
+
+process.on('SIGINT', () => {
+    logInfo('[SERVER]', 'Shutting down...');
+    io.close();
+    server.close(() => process.exit(0));
+});
+```
+</file_artifact>
+
+<file path="src/Artifacts/A91. AI Ascent - Caddyfile (Reference).md">
+# Artifact A91: AI Ascent - Caddyfile (Reference)
+# Date Created: C29
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A reference copy of the `Caddyfile` from the `aiascent.game` project, used for configuring the web server proxy.
+- **Tags:** reference, configuration, caddy, proxy
+
+## 1. Overview
+
+This artifact contains the literal source code of the `Caddyfile` from the `aiascent.game` project, as provided in Cycle 29. Caddy is a powerful, modern web server that automatically handles HTTPS. This configuration shows how it's used as a reverse proxy to route all traffic for `aiascent.game` to the backend Node.js server running on port 3001.
+
+This configuration is a good reference for setting up a production environment. No changes are needed to it to support the new DCE LLM proxy endpoint, as the existing `reverse_proxy` directive is a catch-all that will correctly forward the new API routes.
+
+## 2. Source Code
+
+```caddy
+# Artifact 146: Caddyfile (Production)
+# Date Created: Cycle 1188
+# Author: AI Model
+# Updated on: C1268 (Refactor for production static file serving.)
+
+# This Caddyfile provides a robust configuration for running AI Ascent in a production
+# environment. It automatically handles HTTPS, serves the static client application,
+# and correctly routes API and WebSocket traffic to the backend Node.js server.
+
+aiascent.game {
+    # Caddy will automatically provision and renew a free SSL certificate from Let's Encrypt.
+    
+    # Enable gzip and zstd compression for better performance.
+    encode zstd gzip
+
+    # Log all requests and errors.
+    log {
+        output file aiascent_caddy.log
+    }
+
+    # Reverse proxy ALL incoming requests to the backend Node.js server,
+    # which is now responsible for handling API, WebSockets, and serving static files.
+    # The `header_up` directives ensure WebSocket connections can be established correctly.
+    reverse_proxy localhost:3001 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_ip}
+        header_up X-Forwarded-For {remote_ip}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Connection {>Connection}
+        header_up Upgrade {>Upgrade}
+    }
+}
+
+# Optional: Redirect www to the main domain
+www.aiascent.game {
+    redir https://aiascent.game{uri} permanent
+}
+</file_artifact>
+
+<file path="src/Artifacts/A92. DCE - vLLM Setup Guide.md">
+# Artifact A92: DCE - vLLM Setup Guide
+# Date Created: C30
+# Author: AI Model & Curator
+# Updated on: C45 (Add note about matching model name in proxy)
+
+- **Key/Value for A0:**
+- **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
+- **Tags:** guide, setup, vllm, llm, inference, performance, openai
+
+## 1. Overview & Goal
+
+This guide provides the necessary steps to install `vLLM` and run a large language model with a high-throughput, OpenAI-compatible API server. This will allow the Data Curation Environment (DCE) to connect to a powerful local or remote inference engine.
+
+## 2. Prerequisites
+
+*   **OS:** Linux or Windows with WSL2 (Windows Subsystem for Linux).
+*   **Python:** Version 3.9 - 3.12.
+*   **GPU:** An NVIDIA GPU with CUDA drivers installed. Compute capability 7.0 or higher is recommended (e.g., V100, T4, RTX 20-series or newer).
+*   **Package Manager:** `pip` is required. Using a virtual environment manager like `venv` or `conda` is highly recommended.
+
+## 3. Recommended Method for Windows: Using WSL2
+
+
+The vLLM server has a dependency on `uvloop`, a library that is not compatible with native Windows. The most reliable and performant way to run vLLM on a Windows machine is within a WSL2 environment.
+
+### Step 1: Install or Verify WSL2
+Open PowerShell and check your WSL status.
+```powershell
+wsl --status
+```
+If WSL is not installed, run the following command and then restart your machine.
+```powershell
+wsl --install
+```
+
+### Step 2: Set up Python in WSL
+Open your WSL terminal (e.g., by typing `wsl` in the Start Menu). Update your package lists and install the necessary Python tools.
+```bash
+sudo apt update
+sudo apt install python3-venv python3-pip -y
+```
+
+### Step 3: Create and Activate a Virtual Environment in WSL
+It is crucial to install `vLLM` and its dependencies in an isolated environment *inside WSL*.
+
+```bash
+# Create a directory for your project
+mkdir -p ~/projects/vLLM
+cd ~/projects/vLLM
+
+# Create the virtual environment
+python3 -m venv vllm-env
+
+# Activate the environment
+source vllm-env/bin/activate
+```
+Your terminal prompt should now be prefixed with `(vllm-env)`.
+
+### Step 4: Install vLLM and uvloop
+With the virtual environment activated inside WSL, you can now install `vLLM` and its required dependency `uvloop`.
+```bash
+pip install vllm uvloop
+```
+
+### Step 5: Launch the OpenAI-Compatible Server
+This command will download the specified model and start the server.
+```bash
+python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b"
+```
+The server will start on `http://localhost:8000` *inside* the WSL environment.
+
+### Step 6: Accessing the Server from Windows
+WSL2 automatically forwards network ports to your Windows host machine. This means you can access the vLLM server from your Windows applications (like the DCE extension or your browser) by navigating to **`http://localhost:8000`**.
+
+### Step 7: Verifying the API Endpoint
+When you navigate to `http://localhost:8000` in a web browser, you will see a `404 Not Found` error. This is expected and correct. The server is an API endpoint and is not designed to serve a webpage.
+
+To verify that the API is working, run the following `curl` command from your **WSL terminal** (the same one where the server is running). This sends a test prompt to the completions endpoint.
+
+```bash
+curl http://localhost:8000/v1/completions \
+-H "Content-Type: application/json" \
+-d '{
+    "model": "unsloth/gpt-oss-20b",
+    "prompt": "San Francisco is a",
+    "max_tokens": 7,
+    "temperature": 0
+}'
+```
+
+A successful response will be a JSON object that looks something like this:
+```json
+{"id":"cmpl-a1b2c3d4e5f6","object":"text_completion","created":1677652288,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"text":" city in Northern California,","logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"total_tokens":12,"completion_tokens":7}}
+```
+If you receive this JSON response, your vLLM server is running correctly.
+
+### Step 8: Connecting the DCE Extension
+Once you have verified the API is running, you are ready to connect the DCE extension to it.
+
+For detailed instructions, please refer to the next guide: **`A94. DCE - Connecting to a Local LLM Guide.md`**.
+</file_artifact>
+
+<file path="src/Artifacts/A93. DCE - vLLM Encryption in Transit Guide.md">
+# Artifact A93: DCE - vLLM Encryption in Transit Guide
+# Date Created: C32
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains the standard architectural pattern of using a reverse proxy to provide HTTPS encryption for the vLLM API endpoint.
+- **Tags:** guide, security, encryption, https, proxy, caddy, vllm
+
+## 1. The Challenge: Securing LLM Traffic
+
+When the Data Curation Environment (DCE) extension communicates with a remote vLLM server, the data (which includes source code and prompts) must be encrypted in transit to prevent eavesdropping. The vLLM OpenAI-compatible server runs on plain `http` by default, which is unencrypted. Connecting to an `http` endpoint over the public internet is insecure.
+
+The goal is to provide a secure `https` endpoint for the DCE extension while allowing the vLLM server to run in its default, simple configuration.
+
+## 2. The Solution: The Reverse Proxy Pattern
+
+The standard and most robust solution is to place a **reverse proxy** in front of the vLLM server. The reverse proxy acts as a secure, public-facing gateway.
+
+### 2.1. How It Works
+
+The data flow is as follows:
+
+```
++---------------+      +----------------------+      +----------------------+
+| DCE Extension |----->|  Reverse Proxy       |----->|   vLLM Server        |
+| (Client)      |      |  (e.g., Caddy/Nginx) |      | (Internal Service)   |
+|               |      |                      |      |                      |
+| (HTTPS Request)      |  (Handles TLS/SSL)   |      |  (HTTP Request)      |
++---------------+      +----------------------+      +----------------------+
+```
+
+1.  **Encrypted Connection:** The DCE extension makes a request to a secure URL, like `https://my-llm-server.com`. This connection is encrypted using HTTPS.
+2.  **HTTPS Termination:** The reverse proxy server (e.g., Caddy) receives this encrypted request. Its primary job is to handle the complexity of TLS/SSL certificates. It decrypts the request.
+3.  **Forwarding:** After decrypting the request, the proxy forwards it to the internal vLLM server over a trusted local network (e.g., to `http://localhost:8000`). Since this traffic never leaves the secure server environment, it does not need to be re-encrypted.
+4.  **Response:** The vLLM server processes the request and sends its `http` response back to the proxy, which then encrypts it and sends it back to the DCE extension over `https`.
+
+### 2.2. Benefits of this Architecture
+
+-   **Security:** All traffic over the public internet is encrypted.
+-   **Simplicity:** The vLLM server itself does not need to be configured with complex SSL certificates. Tools like Caddy can automatically provision and renew free Let's Encrypt certificates, making setup very easy.
+-   **Flexibility:** The proxy can also handle load balancing, caching, and routing to multiple backend services if needed in the future.
+
+## 3. Implementation Example with Caddy
+
+Caddy is a modern web server that makes this process extremely simple.
+
+-   **Prerequisites:** You need a server with a public IP address and a domain name pointing to it.
+-   **Example `Caddyfile`:**
+    ```caddy
+    # Your domain name
+    my-llm-server.com {
+        # Caddy will automatically handle HTTPS for this domain
+        
+        # Log all requests for debugging
+        log {
+            output file /var/log/caddy/vllm.log
+        }
+
+        # Reverse proxy all requests to the vLLM server running on port 8000
+        reverse_proxy localhost:8000
+    }
+    ```
+-   **Reference:** For a more detailed example of a production `Caddyfile` used in a similar project, see **`A91. AI Ascent - Caddyfile (Reference).md`**.
+
+This architecture is the industry standard for securing web services and is the recommended approach for deploying the vLLM server for use with the DCE.
+</file_artifact>
+
+<file path="src/Artifacts/A94. DCE - Connecting to a Local LLM Guide.md">
+# Artifact A94: DCE - Connecting to a Local LLM Guide
+# Date Created: C35
+# Author: AI Model & Curator
+# Updated on: C36 (Align with new multi-modal settings UI)
+
+- **Key/Value for A0:**
+- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API via the new settings panel.
+- **Tags:** guide, setup, llm, vllm, configuration, local
+
+## 1. Overview & Goal
+
+This guide explains how to configure the Data Curation Environment (DCE) extension to communicate with a locally hosted Large Language Model (LLM), such as the one set up via the `A92. DCE - vLLM Setup Guide`.
+
+The goal is to switch the extension from its default "Manual" mode to one of the automated modes that can make API calls directly to your local model, streamlining the development workflow.
+
+## 2. Step-by-Step Configuration
+
+### Step 1: Open the Settings Panel
+- Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
+- Run the command: **`DCE: Open Settings & Help`**. This will open the settings panel in a new editor tab.
+
+### Step 2: Navigate to the Settings Section
+- In the settings panel, find and expand the **"Settings"** section.
+
+### Step 3: Select Your Connection Mode
+You will see a list of connection modes. Choose the one that matches your setup.
+
+#### Option A: Demo Mode (Recommended for `aiascent.game` users)
+This is the simplest option if you are using the pre-configured `aiascent.game` proxy.
+-   Select the radio button for **"Demo Mode (Local vLLM via `aiascent.game`)"**.
+-   The endpoint is pre-configured. No other steps are needed.
+
+#### Option B: API Mode (URL)
+Use this option if you are running your own vLLM server (or another OpenAI-compatible service) and want to connect to it directly without a proxy.
+-   Select the radio button for **"API (URL)"**.
+-   An input field will appear. Enter the full API endpoint URL. For a standard vLLM server, this will be `http://localhost:8000/v1`.
+    -   **Important:** If your LLM server is on a different machine, replace `localhost` with that machine's local network IP address (e.g., `http://192.168.1.100:8000/v1`).
+-   Save the settings.
+
+## 4. Next Steps
+
+The DCE extension is now configured to send its API requests to your local LLM server. You can now use the "Generate Responses" button (once implemented) in the Parallel Co-Pilot Panel to automatically populate the response tabs, completing the automated workflow. To switch back to the manual copy/paste method, simply re-open the settings and select **"Free Mode (Manual Copy/Paste)"**.
+</file_artifact>
+
+<file path="src/Artifacts/A95. DCE - LLM Connection Modes Plan.md">
+# Artifact A95: DCE - LLM Connection Modes Plan
+# Date Created: C36
+# Author: AI Model & Curator
+# Updated on: C42 (Refine "Generate Responses" workflow to create a new cycle first)
+
+- **Key/Value for A0:**
+- **Description:** Outlines the plan for a multi-modal settings UI and the associated workflow changes, allowing users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, api, streaming
+
+## 1. Overview & Goal
+
+To maximize the utility and accessibility of the DCE extension, users need a flexible way to connect to different LLM backends. This plan details the implementation of a multi-modal settings UI and the corresponding changes to the main workflow. This will allow users to seamlessly switch between different connection methods, from a simple manual workflow to advanced, automated API integrations.
+
+This plan refines and supersedes `A85. DCE - Model Card Management Plan.md` by focusing on a more user-friendly, mode-based approach.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P3-CM-01 | **Use Manual Mode** | As a new user, I want the extension to default to a "Free (Manual)" mode, so I can use the core features by copying and pasting without any setup. | - The default setting is "Free Mode". <br> - In this mode, a "Generate prompt.md" button is shown. |
+| P3-CM-02 | **Use Demo Mode** | As a demo user, I want to select a "Demo Mode" that connects to a local vLLM endpoint, so I can experience the full automated workflow. | - A "Demo Mode" option is available. <br> - When selected, the "Generate prompt.md" button is replaced with a "Generate responses" button. |
+| P3-CM-03 | **Generate Into New Cycle** | As a user in an automated mode, when I click "Generate responses" on Cycle `N`, I want the extension to automatically create a new Cycle `N+1` and place the generated responses there, so my new results are cleanly separated from the prompt that created them. | - Clicking "Generate responses" initiates a process that creates a new cycle. <br> - The generated responses from the LLM populate the tabs of the new cycle. <br> - The UI automatically navigates to the new cycle upon completion. |
+| P3-CM-04 | **Monitor Generation Speed** | As a user generating responses, I want to see a live "tokens per second" metric, so I have feedback on the generation performance. | - A "Tokens/sec" display appears near the "Generate responses" button during generation. <br> - It updates in real-time as token data streams in. |
+| P3-CM-05 | **Persistent Settings** | As a user, I want my selected connection mode to be saved, so I don't have to re-configure it every time I open VS Code. | - The selected connection mode and any associated URL/Key is persisted in the workspace settings. |
+
+## 3. UI/UX Design
+
+(No changes from C37)
+
+## 4. Technical Implementation Plan
+
+### 4.1. Settings Persistence
+(No changes from C37)
+
+### 4.2. "Generate Responses" Workflow (C42 Update)
+The workflow is now designed to be more robust and atomic, with the backend handling the creation of the new cycle.
+
+1.  **Frontend (`view.tsx`):**
+    *   The `handleGenerateResponses` `onClick` handler will gather the *current* cycle's data (`PcppCycle` object for Cycle `N`) and send it to the backend via a `RequestBatchGeneration` message.
+2.  **Backend (`on-message.ts`):**
+    *   The handler for `RequestBatchGeneration` receives the full data for Cycle `N`.
+    *   It first calls `prompt.service.ts` to generate the prompt string from Cycle `N`'s data.
+    *   It then calls `llm.service.ts` to get the array of response strings from the vLLM.
+    *   It then calls a new method in `history.service.ts`, `createNewCycleWithResponses`, passing in the array of responses.
+    *   The `history.service.ts` creates the new cycle (`N+1`), populates its response tabs, and saves the entire updated history.
+    *   Finally, the backend sends a `SendBatchGenerationComplete` message to the frontend, containing the `newCycleId`.
+3.  **Frontend (`view.tsx`):**
+    *   A new message handler for `SendBatchGenerationComplete` receives the ID of the new cycle.
+    *   It then calls the existing `handleCycleChange` logic to navigate the UI to this new cycle, which now contains all the generated responses.
+
+### 4.3. Streaming & Metrics (Future Cycle)
+-   The backend `llm.service.ts` will be updated to handle streaming responses.
+-   New IPC channels (`StreamResponseChunk`, `StreamResponseEnd`) will be created.
+-   The frontend in `view.tsx` will be updated to handle these streaming messages, append content to the tabs in real-time, and calculate the tokens/second metric.
+</file_artifact>
+
+<file path="src/Artifacts/A96. DCE - Harmony-Aligned Response Schema Plan.md">
+# Artifact A96: DCE - Harmony-Aligned Response Schema Plan
+# Date Created: C45
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** An analysis of the `openai_harmony` library and a proposed plan for migrating the DCE's vLLM interaction schema from XML tags to a more robust, token-based structured format.
+- **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony
+
+## 1. Overview & Goal
+
+The current interaction schema (`A52.2`) relies on parsing XML-like tags (`<file>`, `<summary>`) and markdown headers from the LLM's free-text response. While functional, this approach is brittle. It is susceptible to minor formatting errors from the model and requires complex, string-based `stop` tokens that can prematurely truncate responses, as seen in Cycle 44.
+
+The `GPT-OSS` repository introduces a more advanced approach, "Harmony," which uses a vocabulary of special control tokens (e.g., `<|start|>`, `<|channel|>`, `<|message|>`, `<|end|>`) to guide the model's generation into a structured, machine-readable format. This is a significantly more robust and powerful way to handle structured data generation with LLMs.
+
+The goal of this plan is to outline a phased migration from our current XML-based schema to a Harmony-aligned schema for all communication with the vLLM backend.
+
+## 2. Analysis of the Harmony Approach
+
+The `openai_harmony` library and `harmony_vllm_app.py` demonstrate a sophisticated workflow:
+
+1.  **Structured Prompt Rendering:** Instead of a single block of text, the prompt is constructed as a series of messages, each with a `role` (system, user, assistant), and potentially a `channel` (analysis, commentary, final). This entire structure is "rendered" into a sequence of tokens that includes the special control tokens.
+2.  **Guided Generation:** The model is trained or fine-tuned to understand these control tokens. It learns to "speak" in this format, for example, by placing its internal monologue in an `analysis` channel and its final answer in a `final` channel.
+3.  **Robust Parsing:** The response from the model is not just a block of text; it's a stream of tokens that can be parsed deterministically using the same control tokens. A `StreamableParser` can listen to the token stream and identify when the model is opening a new message, writing to a specific channel, or finishing its turn.
+
+This is fundamentally superior to our current regex-based parsing.
+
+## 3. Proposed Migration Plan
+
+This is a major architectural change and should be implemented in phases.
+
+### Phase 1: Adopt Harmony for File Formatting (Immediate)
+
+-   **Goal:** Replace the `<file path="...">` and `
+</file_artifact>
+
+<file path="src/Artifacts/A97. DCE - vLLM Response Progress UI Plan.md">
+# Artifact A97: DCE - vLLM Response Progress UI Plan
+# Date Created: C48
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
+- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
+
+## 1. Vision & Goal
+
+When a user clicks "Generate responses," the extension communicates with a potentially remote vLLM server. This process can take anywhere from a few seconds to over a minute, depending on the model and prompt size. Currently, the UI provides no feedback during this time, which can make the application feel unresponsive or broken.
+
+The goal is to provide clear, real-time feedback to the user about the status of their request. This will be achieved with a new, non-modal UI element that appears during generation, showing the progress for each requested response and displaying a live tokens-per-second metric.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P3-PROG-01 | **See Generation Progress** | As a user, after I click "Generate responses," I want to see a visual indicator that the request is in progress, so I know the application is working. | - A progress display area appears in the UI (e.g., in the header) after "Generate responses" is clicked. <br> - This display shows one progress bar for each response being generated (e.g., 4 bars if 4 responses were requested). |
+| P3-PROG-02 | **Monitor Performance** | As a user, I want to see a live tokens-per-second (tok/s) metric, so I can gauge the performance of the LLM backend. | - The progress display includes a "Tokens/sec" counter. <br> - This counter updates in real-time as response data streams in from the backend. |
+| P3-PROG-03 | **View Streaming Responses** | As a user, I want to see the text of the responses appear in the tabs as they are being generated, so I can see the results immediately without waiting for all responses to be complete. | - As tokens are generated by the LLM, they are streamed to the appropriate response tab in the newly created cycle. |
+
+## 3. UI Mockup (Textual Description)
+
+The progress display will be a new element that appears within the main header (`pc-header`) of the Parallel Co-Pilot Panel, to the right of the "Generate responses" button.
+
+**State: Before Generation**
+```
+| [ Project Plan ] [ Generate responses ] [ 4 ] [ Log State ]                                       |
+```
+
+**State: During Generation**
+```
+| [ Project Plan ] [ Generating... (Disabled) ] [ 4 ] [ Abort ]                                     |
+|-------------------------------------------------------------------------------------------------|
+|  Tokens/sec: [ 1,234 ]                                                                          |
+|  Resp 1: [||||||||||||||||||||||||------------------] 50%                                          |
+|  Resp 2: [||||||||||||||||||||||||------------------] 50%                                          |
+|  Resp 3: [||||||||||||||||||------------------------] 40%                                          |
+|  Resp 4: [||||||||||--------------------------------] 30%                                          |
+|-------------------------------------------------------------------------------------------------|```
+
+### 3.1. Components Breakdown
+
+-   **Generate Button:** The button's text changes to "Generating..." and it becomes disabled.
+-   **Abort Button:** A new "Abort" button appears, allowing the user to cancel the request.
+-   **Tokens/sec Display:** A live counter showing the aggregate generation speed.
+-   **Progress Bars:**
+    -   One progress bar for each requested response.
+    -   The progress is based on the `max_tokens` requested vs. tokens received. If `max_tokens` isn't specified, it could be an indeterminate progress bar until the `finish_reason` is received.
+
+## 4. Technical Implementation Plan (High-Level)
+
+This feature depends on **streaming** responses from the vLLM server.
+
+1.  **Backend (`llm.service.ts`):**
+    *   The `generateBatch` method must be updated to handle `stream: true`.
+    *   It will need to process Server-Sent Events (SSE) from the vLLM response stream.
+2.  **IPC Channels:**
+    *   New channels will be needed to stream data to the frontend:
+        *   `StreamResponseChunk(payload: { responseId: number; chunk: string; })`
+        *   `StreamResponseEnd(payload: { responseId: number; finish_reason: string; })`
+        *   `UpdateTpsMetric(payload: { tps: number; })`
+3.  **Frontend (`view.tsx`):**
+    *   New state variables will be needed to manage the progress of each response and the TPS metric.
+    *   The UI will be updated to render the progress display conditionally.
+    *   New message handlers will listen for the streaming IPC events and update the state in real-time, appending text to the response tabs and updating the progress bars.
 </file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -18203,40 +19390,933 @@ Development in the DCE is organized into **Cycles**. You have just completed the
 This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
 </file_artifact>
 
-<file path="src/Artifacts/README.md">
-# Artifact A72: DCE - README for Artifacts
-# Date Created: C158
+<file path="src/Artifacts/T1. Template - Master Artifact List.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A0-Master-Artifact-List.md"></file_artifact> tags.
+-->
+# Artifact T1: Template - Master Artifact List
+# Date Created: C139
 # Author: AI Model & Curator
 
 - **Key/Value for A0:**
-- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
-- **Tags:** documentation, onboarding, readme, source of truth
+- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+- **Tags:** template, cycle 0, documentation, project setup
 
-## 1. Welcome to the Data Curation Environment (DCE)
+## 1. Purpose
 
-This directory (`src/Artifacts/`) is the heart of your project's planning and documentation. It's managed by the **Data Curation Environment (DCE)**, a VS Code extension designed to streamline AI-assisted development.
+This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
 
-This `README.md` file was automatically generated to provide context for you (the developer) and for the AI assistants you will be working with.
+## 2. Formatting Rules for Parsing
 
-## 2. What is an "Artifact"?
+*   Lines beginning with `#` are comments and are ignored.
+*   `##` denotes a major category header and is ignored.
+*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+*   Lines beginning with `- **Description:**` provide context for the project.
+*   Lines beginning with `- **Tags:**` provide keywords for Inference.
 
-In the context of this workflow, an **Artifact** is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of these files as the official blueprints, plans, and records.
+## 3. Example Structure
 
-The core principle of the DCE workflow is **"Documentation First."** Before writing code, you and your AI partner should first create or update an artifact that describes the plan.
+## I. Project Planning & Design
 
--   **Why?** This ensures clarity, reduces misunderstandings, and creates a persistent record of design decisions. It's much easier to iterate on a plan in plain English than it is to refactor code.
+### A1. [Your Project Name] - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plan.
+- **Tags:** project vision, goals, scope, planning
 
-## 3. The Iterative Cycle Workflow
+### A2. [Your Project Name] - Phase 1 - Requirements & Design
+- **Description:** Detailed functional and technical requirements for the first phase of the project.
+- **Tags:** requirements, design, phase 1, features
+</file_artifact>
 
-Development in the DCE is organized into **Cycles**. You are currently in the early stages of your project.
+<file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A1-Project-Vision-and-Goals.md"></file_artifact> tags.
+-->
+# Artifact T2: Template - Project Vision and Goals
+# Date Created: C139
+# Author: AI Model & Curator
 
-1.  **Curate Context:** Using the "Data Curation" panel in the VS Code Activity Bar, you select (by checking the boxes) which artifacts and code files are relevant for your current task.
-2.  **Generate a Prompt:** Using the "Parallel Co-Pilot" panel, you will write instructions for your AI assistant for the current cycle. The panel will help you generate a `prompt.md` file that includes your instructions, the project's history, and the content of the files you curated.
-3.  **Get AI Responses:** You use this `prompt.md` with your preferred AI model (e.g., Gemini, Claude) to get one or more proposed solutions.
-4.  **Review and Accept:** You paste the AI's responses back into the Parallel Co-Pilot panel. The panel allows you to compare the responses, see the proposed changes (diffs), and accept the best solution into your workspace with a single click.
-5.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
+- **Key/Value for A0:**
+- **Description:** A generic template for a Project Vision and Goals document.
+- **Tags:** template, cycle 0, documentation, project setup
 
-This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
+## 1. Project Vision
+
+The vision of **[Your Project Name]** is to **[State the core problem you are solving and the ultimate goal of the project]**. It aims to provide a **[brief description of the product or system]** that will **[describe the key benefit or value proposition]**.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflow.
+
+### Phase 1: [Name of Phase 1, e.g., Core Functionality]
+
+The goal of this phase is to establish the foundational elements of the project.
+-   **Core Functionality:** [Describe the most critical feature to be built first].
+-   **Outcome:** [Describe the state of the project at the end of this phase, e.g., "A user can perform the core action of X"].
+
+### Phase 2: [Name of Phase 2, e.g., Feature Expansion]
+
+This phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.
+-   **Core Functionality:** [Describe the next set of important features].
+-   **Outcome:** [Describe the state of the project at the end of this phase].
+
+### Phase 3: [Name of Phase 3, e.g., Scalability and Polish]
+
+This phase focuses on refining the product, improving performance, and ensuring it is ready for a wider audience.
+-   **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].
+-   **Outcome:** [Describe the final, polished state of the project].
+</file_artifact>
+
+<file path="src/Artifacts/T3. Template - Phase 1 Requirements & Design.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A2-Phase1-Requirements.md"></file_artifact> tags.
+-->
+# Artifact T3: Template - Phase 1 Requirements & Design
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a requirements and design document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the detailed requirements for Phase 1 of **[Your Project Name]**. The primary goal of this phase is to implement the core functionality as defined in the Project Vision.
+
+## 2. Functional Requirements
+
+| ID | Requirement | User Story | Acceptance Criteria |
+|---|---|---|---|
+| FR-01 | **[Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1: A specific, testable outcome] <br> - [Criterion 2: Another specific, testable outcome] |
+| FR-02 | **[Another Feature Name]** | As a [user type], I want to [perform an action], so that [I can achieve a goal]. | - [Criterion 1] <br> - [Criterion 2] |
+
+## 3. Non-Functional Requirements
+
+| ID | Requirement | Description |
+|---|---|---|
+| NFR-01 | **Performance** | The core action of [describe action] should complete in under [time, e.g., 500ms]. |
+| NFR-02 | **Usability** | The user interface should be intuitive and follow standard design conventions for [platform, e.g., web applications]. |
+
+## 4. High-Level Design
+
+The implementation of Phase 1 will involve the following components:
+-   **[Component A]:** Responsible for [its primary function].
+-   **[Component B]:** Responsible for [its primary function].
+-   **[Data Model]:** The core data will be structured as [describe the basic data structure].
+</file_artifact>
+
+<file path="src/Artifacts/T4. Template - Technical Scaffolding Plan.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A3-Technical-Scaffolding-Plan.md"></file_artifact> tags.
+-->
+# Artifact T4: Template - Technical Scaffolding Plan
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a technical scaffolding plan.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the proposed technical scaffolding and file structure for **[Your Project Name]**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
+
+## 2. Technology Stack
+
+-   **Language:** [e.g., TypeScript]
+-   **Framework/Library:** [e.g., React, Node.js with Express]
+-   **Styling:** [e.g., SCSS, TailwindCSS]
+-   **Bundler:** [e.g., Webpack, Vite]
+
+## 3. Proposed File Structure
+
+The project will adhere to a standard, feature-driven directory structure:
+
+```
+.
+├── src/
+│   ├── components/       # Reusable UI components (e.g., Button, Modal)
+│   │
+│   ├── features/         # Feature-specific modules
+│   │   └── [feature-one]/
+│   │       ├── index.ts
+│   │       └── components/
+│   │
+│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
+│   │
+│   ├── types/            # Shared TypeScript type definitions
+│   │
+│   └── main.ts           # Main application entry point
+│
+├── package.json          # Project manifest and dependencies
+└── tsconfig.json         # TypeScript configuration
+```
+
+## 4. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
+-   **Component-Based UI:** The UI will be built by composing small, reusable components.
+-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
+-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
+</file_artifact>
+
+<file path="src/Artifacts/T5. Template - Target File Structure.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A5-Target-File-Structure.md"></file_artifact> tags.
+-->
+# Artifact T5: Template - Target File Structure
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a target file structure document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document provides a visual representation of the file structure that the `T6. Template - Initial Scaffolding Deployment Script` will create. It is based on the architecture defined in `T4. Template - Technical Scaffolding Plan`.
+
+## 2. File Tree
+
+```
+[Your Project Name]/
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── src/
+    ├── components/
+    │   └── placeholder.ts
+    ├── features/
+    │   └── placeholder.ts
+    ├── services/
+    │   └── placeholder.ts
+    ├── types/
+    │   └── index.ts
+    └── main.ts
+```
+</file_artifact>
+
+<file path="src/Artifacts/T6. Template - Initial Scaffolding Deployment Script.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A6-Scaffolding-Script.md"></file_artifact> tags.
+-->
+# Artifact T6: Template - Initial Scaffolding Deployment Script (DEPRECATED)
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** (Deprecated) A generic template for a scaffolding deployment script. This is obsolete.
+- **Tags:** template, cycle 0, documentation, project setup, deprecated
+
+## 1. Overview
+
+This artifact contains a simple Node.js script (`deploy_scaffold.js`). Its purpose is to automate the creation of the initial project structure for **[Your Project Name]**, as outlined in `T5. Template - Target File Structure`.
+
+**Note:** This approach is now considered obsolete. The preferred method is to have the AI generate the necessary files directly in its response.
+
+## 2. How to Use
+
+1.  Save the code below as `deploy_scaffold.js` in your project's root directory.
+2.  Open a terminal in that directory.
+3.  Run the script using Node.js: `node deploy_scaffold.js`
+
+## 3. Script: `deploy_scaffold.js`
+
+```javascript
+const fs = require('fs').promises;
+const path = require('path');
+
+const filesToCreate = [
+    { path: 'package.json', content: '{ "name": "my-new-project", "version": "0.0.1" }' },
+    { path: 'tsconfig.json', content: '{ "compilerOptions": { "strict": true } }' },
+    { path: '.gitignore', content: 'node_modules\ndist' },
+    { path: 'src/main.ts', content: '// Main application entry point' },
+    { path: 'src/components/placeholder.ts', content: '// Reusable components' },
+    { path: 'src/features/placeholder.ts', content: '// Feature modules' },
+    { path: 'src/services/placeholder.ts', content: '// Core services' },
+    { path: 'src/types/index.ts', content: '// Shared types' },
+];
+
+async function deployScaffold() {
+    console.log('Deploying project scaffold...');
+    const rootDir = process.cwd();
+
+    for (const file of filesToCreate) {
+        const fullPath = path.join(rootDir, file.path);
+        const dir = path.dirname(fullPath);
+
+        try {
+            await fs.mkdir(dir, { recursive: true });
+            await fs.writeFile(fullPath, file.content, 'utf-8');
+            console.log(`✅ Created: ${file.path}`);
+        } catch (error) {
+            console.error(`❌ Failed to create ${file.path}: ${error.message}`);
+        }
+    }
+    console.log('\n🚀 Scaffold deployment complete!');
+}
+
+deployScaffold();
+```
+</file_artifact>
+
+<file path="src/Artifacts/T7. Template - Development and Testing Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file_artifact> tags.
+-->
+# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+</file_artifact>
+
+<file path="src/Artifacts/T8. Template - Regression Case Studies.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A8-Regression-Case-Studies.md"></file_artifact> tags.
+-->
+# Artifact T8: Template - Regression Case Studies
+# Date Created: C141
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a regression case studies document, promoting development best practices.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+## 2. Case Studies
+
+---
+
+### Case Study 001: [Name of the Bug]
+
+-   **Artifacts Affected:** [List of files, e.g., `src/components/MyComponent.tsx`, `src/services/api.service.ts`]
+-   **Cycles Observed:** [e.g., C10, C15]
+-   **Symptom:** [Describe what the user sees. e.g., "When a user clicks the 'Save' button, the application crashes silently."]
+-   **Root Cause Analysis (RCA):** [Describe the underlying technical reason for the bug. e.g., "The API service was not correctly handling a null response from the server. A race condition occurred where the UI component would unmount before the API promise resolved, leading to a state update on an unmounted component."]
+-   **Codified Solution & Best Practice:**
+    1.  [Describe the specific code change, e.g., "The API service was updated to always return a default object instead of null."]
+    2.  [Describe the pattern or best practice to follow, e.g., "All API calls made within a React component's `useEffect` hook must include a cleanup function to cancel the request or ignore the result if the component unmounts."]
+---
+</file_artifact>
+
+<file path="src/Artifacts/T9. Template - Logging and Debugging Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A9-Logging-and-Debugging.md"></file_artifact> tags.
+-->
+# Artifact T9: Template - Logging and Debugging Guide
+# Date Created: C141
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a logging and debugging guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This document provides instructions on how to access and use the logging features built into the project. Effective logging is crucial for diagnosing performance issues, tracking down bugs, and understanding the application's behavior during development.
+
+## 2. Log Locations
+
+### Location 1: The Browser Developer Console
+
+This is where you find logs from the **frontend**.
+
+-   **What you'll see here:** `console.log()` statements from React components and client-side scripts.
+-   **Where to find it:** Open your browser, right-click anywhere on the page, select "Inspect", and navigate to the "Console" tab.
+
+### Location 2: The Server Terminal
+
+This is where you find logs from the **backend** (the Node.js process).
+
+-   **What you'll see here:** `console.log()` statements from your server-side code, API handlers, and services.
+-   **Where to find it:** The terminal window where you started the server (e.g., via `npm start`).
+
+## 3. Tactical Debugging with Logs
+
+When a feature is not working as expected, the most effective debugging technique is to add **tactical logs** at every step of the data's journey to pinpoint where the process is failing.
+
+### Example Data Flow for Debugging:
+
+1.  **Frontend Component (`MyComponent.tsx`):** Log the user's input right before sending it.
+    `console.log('[Component] User clicked save. Sending data:', dataToSend);`
+2.  **Frontend Service (`api.service.ts`):** Log the data just before it's sent over the network.
+    `console.log('[API Service] Making POST request to /api/data with body:', body);`
+3.  **Backend Route (`server.ts`):** Log the data as soon as it's received by the server.
+    `console.log('[API Route] Received POST request on /api/data with body:', req.body);`
+4.  **Backend Service (`database.service.ts`):** Log the data just before it's written to the database.
+    `console.log('[DB Service] Attempting to write to database:', data);`
+
+By following the logs through this chain, you can identify exactly where the data becomes corrupted, is dropped, or causes an error.
+</file_artifact>
+
+<file path="src/Artifacts/T10. Template - Feature Plan Example.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A10-Feature-Plan-Example.md"></file_artifact> tags.
+-->
+# Artifact T10: Template - Feature Plan Example
+# Date Created: C141
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a feature plan, using a right-click context menu as an example.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview & Goal
+
+This document outlines the plan for implementing a standard right-click context menu. The goal is to provide essential management operations directly within the application, reducing the need for users to switch contexts for common tasks.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| US-01 | **Copy Item Name** | As a user, I want to right-click an item and copy its name to my clipboard, so I can easily reference it elsewhere. | - Right-clicking an item opens a context menu. <br> - The menu contains a "Copy Name" option. <br> - Selecting the option copies the item's name string to the system clipboard. |
+| US-02 | **Rename Item** | As a user, I want to right-click an item and rename it, so I can correct mistakes or update its label. | - The context menu contains a "Rename" option. <br> - Selecting it turns the item's name into an editable input field. <br> - Pressing Enter or clicking away saves the new name. |
+| US-03 | **Delete Item** | As a user, I want to right-click an item and delete it, so I can remove unnecessary items. | - The context menu contains a "Delete" option. <br> - Selecting it shows a confirmation dialog to prevent accidental deletion. <br> - Upon confirmation, the item is removed. |
+
+## 3. Technical Implementation Plan
+
+-   **State Management:** Introduce new state to manage the context menu's visibility and position: `const [contextMenu, setContextMenu] = useState<{ x: number; y: number; item: any } | null>(null);`.
+-   **Event Handling:** Add an `onContextMenu` handler to the item element. This will prevent the default browser menu and set the state to show our custom menu at the event's coordinates.
+-   **New Menu Component:** Render a custom context menu component conditionally based on the `contextMenu` state. It will contain the options defined in the user stories.
+-   **Action Handlers:** Implement the functions for `handleRename`, `handleDelete`, etc. These will be called by the menu items' `onClick` handlers.
+-   **Overlay:** An overlay will be added to the entire screen when the menu is open. Clicking this overlay will close the menu.
+</file_artifact>
+
+<file path="src/Artifacts/T11. Template - Implementation Roadmap.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A11-Implementation-Roadmap.md"></file_artifact> tags.
+-->
+# Artifact T11: Template - Implementation Roadmap
+# Date Created: C152
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for an implementation roadmap document, guiding the development process.
+- **Tags:** template, cycle 0, documentation, project setup, roadmap
+
+## 1. Overview & Goal
+
+This document provides a clear, step-by-step roadmap for the implementation of **[Your Project Name]**. This roadmap breaks the project vision into smaller, manageable, and testable steps. The goal is to build the functionality incrementally, ensuring a stable foundation at each stage.
+
+## 2. Implementation Steps
+
+### Step 1: Foundational Setup & Core Logic
+
+-   **Goal:** Create the basic project structure and implement the single most critical feature.
+-   **Tasks:**
+    1.  **Scaffolding:** Set up the initial file and directory structure based on the technical plan.
+    2.  **Core Data Model:** Define the primary data structures for the application.
+    3.  **Implement [Core Feature]:** Build the first, most essential piece of functionality (e.g., the main user action).
+-   **Outcome:** A runnable application with the core feature working in a basic form.
+
+### Step 2: UI Development & User Interaction
+
+-   **Goal:** Build out the primary user interface and make the application interactive.
+-   **Tasks:**
+    1.  **Component Library:** Create a set of reusable UI components (buttons, inputs, etc.).
+    2.  **Main View:** Construct the main application view that users will interact with.
+    3.  **State Management:** Implement robust state management to handle user input and data flow.
+-   **Outcome:** A visually complete and interactive user interface.
+
+### Step 3: Feature Expansion
+
+-   **Goal:** Add secondary features that build upon the core functionality.
+-   **Tasks:**
+    1.  **Implement [Feature A]:** Build the next most important feature.
+    2.  **Implement [Feature B]:** Build another key feature.
+    3.  **Integration:** Ensure all new features are well-integrated with the core application.
+-   **Outcome:** A feature-complete application ready for polishing.
+
+### Step 4: Polish, Testing, and Deployment
+
+-   **Goal:** Refine the application, fix bugs, and prepare for release.
+-   **Tasks:**
+    1.  **UI/UX Polish:** Address any minor layout, styling, or interaction issues.
+    2.  **Testing:** Conduct thorough testing to identify and fix bugs.
+    3.  **Documentation:** Write user-facing documentation and guides.
+    4.  **Deployment:** Package and deploy the application.
+-   **Outcome:** A stable, polished, and documented application.
+</file_artifact>
+
+<file path="src/Artifacts/T12. Template - Competitive Analysis.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file_artifact> tags.
+-->
+# Artifact T12: [Project Name] - Competitive Analysis Template
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C158 (Add guidance for researching AI-generated content)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a competitive analysis document, used for feature ideation.
+- **Tags:** template, cycle 0, documentation, project setup, research
+
+## 1. Overview
+
+This document provides an analysis of existing tools and products that solve a similar problem to **[Project Name]**. The goal is to identify common features, discover innovative ideas, and understand the competitive landscape to ensure our project has a unique value proposition.
+
+## 2. Research Summary
+
+A search for "[keywords related to your project's core problem]" reveals several existing solutions. The market appears to be [describe the market: mature, emerging, niche, etc.]. The primary competitors or inspirational projects are [Competitor A], [Competitor B], and [Tool C].
+
+The key pain point these tools address is [describe the common problem they solve]. The general approach is [describe the common solution pattern].
+
+## 3. Existing Tools & Inspirations
+
+| Tool / Product | Relevant Features | How It Inspires Your Project |
+| :--- | :--- | :--- |
+| **[Competitor A]** | - [Feature 1 of Competitor A] <br> - [Feature 2 of Competitor A] | This tool validates the need for [core concept]. Its approach to [Feature 1] is a good model, but we can differentiate by [your unique approach]. |
+| **[Competitor B]** | - [Feature 1 of Competitor B] <br> - [Feature 2 of Competitor B] | The user interface of this tool is very polished. We should aim for a similar level of usability. Its weakness is [describe a weakness you can exploit]. |
+| **[Tool C]** | - [Feature 1 of Tool C] | This tool has an innovative feature, [Feature 1], that we had not considered. We should evaluate if a similar feature would fit into our project's scope. |
+| **AI-Generated Projects** | - [Novel feature from an AI-generated example] | Researching other seemingly AI-generated solutions for similar problems can reveal novel approaches or features that are not yet common in human-developed tools. This can be a source of cutting-edge ideas. |
+
+## 4. Feature Ideas & Opportunities
+
+Based on the analysis, here are potential features and strategic opportunities for **[Project Name]**:
+
+| Feature Idea | Description |
+| :--- | :--- |
+| **[Differentiating Feature]** | This is a key feature that none of the competitors offer. It would allow users to [describe the benefit] and would be our primary unique selling proposition. |
+| **[Improvement on Existing Feature]** | Competitor A has [Feature 1], but it's slow. We can implement a more performant version by [your technical advantage]. |
+| **[User Experience Enhancement]** | Many existing tools have a complex setup process. We can win users by making our onboarding experience significantly simpler and more intuitive. |
+</file_artifact>
+
+<file path="src/Artifacts/T13. Template - Refactoring Plan.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A13-Refactoring-Plan.md"></file_artifact> tags.
+-->
+# Artifact T13: Template - Refactoring Plan
+# Date Created: C152
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a refactoring plan, guiding users to consider constraints like token count.
+- **Tags:** template, cycle 0, documentation, project setup, refactor
+
+## 1. Problem Statement
+
+The file `[path/to/problematic/file.ts]` has become difficult to maintain due to [e.g., its large size, high complexity, mixing of multiple responsibilities]. This is leading to [e.g., slower development, increased bugs, high token count for LLM context].
+
+## 2. Refactoring Goals
+
+1.  **Improve Readability:** Make the code easier to understand and follow.
+2.  **Reduce Complexity:** Break down large functions and classes into smaller, more focused units.
+3.  **Increase Maintainability:** Make it easier to add new features or fix bugs in the future.
+4.  **Constraint:** The primary constraint for this refactor is to **reduce the token count** of the file(s) to make them more manageable for AI-assisted development.
+
+## 3. Proposed Refactoring Plan
+
+The monolithic file/class will be broken down into the following smaller, more focused modules/services:
+
+### 3.1. New Service/Module A: `[e.g., DataProcessingService.ts]`
+
+-   **Responsibility:** This service will be responsible for all logic related to [e.g., processing raw data].
+-   **Functions/Methods to move here:**
+    -   `functionA()`
+    -   `functionB()`
+
+### 3.2. New Service/Module B: `[e.g., ApiClientService.ts]`
+
+-   **Responsibility:** This service will encapsulate all external API communication.
+-   **Functions/Methods to move here:**
+    -   `fetchDataFromApi()`
+    -   `postDataToApi()`
+
+### 3.3. Original File (`[e.g., MainController.ts]`):
+
+-   **Responsibility:** The original file will be simplified to act as a coordinator, orchestrating calls to the new services.
+-   **Changes:**
+    -   Remove the moved functions.
+    -   Import and instantiate the new services.
+    -   Update the main logic to delegate work to the appropriate service.
+
+## 4. Benefits
+
+-   **Reduced Token Count:** The original file's token count will be significantly reduced.
+-   **Improved Maintainability:** Each new service has a single, clear responsibility.
+-   **Easier Testing:** The smaller, focused services will be easier to unit test in isolation.
+</file_artifact>
+
+<file path="src/Artifacts/T14. Template - GitHub Repository Setup Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file_artifact> tags.
+-->
+# Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
+
+## 1. Overview
+
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
+
+## 2. Prerequisites
+
+*   You have `git` installed on your machine.
+*   You have a GitHub account.
+
+## 3. Step-by-Step Setup
+
+### Step 1: Create a New Repository on GitHub
+
+1.  Go to [github.com](https://github.com) and log in.
+2.  In the top-right corner, click the `+` icon and select **"New repository"**.
+3.  **Repository name:** Enter a name for your project (e.g., `my-new-project`).
+4.  **Description:** (Optional) Provide a brief description of your project.
+5.  Choose **"Private"** or **"Public"**.
+6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
+7.  Click **"Create repository"**.
+
+GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
+
+### Step 2: Initialize Git in Your Local Project
+
+Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
+
+1.  **Initialize the repository:**
+    ```bash
+    git init
+    ```
+
+2.  **Add all existing files:**
+    ```bash
+    git add .
+    ```
+
+3.  **Create the first commit:**
+    ```bash
+    git commit -m "Initial commit"
+    ```
+
+4.  **Rename the default branch to `main`:**
+    ```bash
+    git branch -M main
+    ```
+
+### Step 3: Link and Push to GitHub
+
+1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
+    ```bash
+    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+    ```
+
+2.  **Push your local `main` branch to GitHub:**
+    ```bash
+    git push -u origin main
+    ```
+
+After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The "Restore" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
+</file_artifact>
+
+<file path="src/Artifacts/T15. Template - A-B-C Testing Strategy for UI Bugs.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/[ProjectName]-A15-ABC-Testing-Strategy.md"></file_artifact> tags.
+-->
+# Artifact T15: Template - A-B-C Testing Strategy for UI Bugs
+# Date Created: C154
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on using the A-B-C testing pattern to diagnose UI bugs.
+- **Tags:** template, cycle 0, process, debugging, troubleshooting
+
+## 1. Overview & Goal
+
+When a user interface (UI) bug, particularly related to event handling (`onClick`, `onDrop`, etc.), proves resistant to conventional debugging, it often indicates a complex root cause. Continuously attempting small fixes on the main, complex component can be inefficient.
+
+The goal of the **A-B-C Testing Strategy** is to break this cycle by creating a test harness with multiple, simplified, independent test components. Each test component attempts to solve the same basic problem using a slightly different technical approach, allowing for rapid diagnosis.
+
+## 2. The Strategy
+
+### 2.1. Core Principles
+1.  **Preserve the Original:** Never remove existing functionality to build a test case. The original component should remain as the "control" in the experiment.
+2.  **Isolate Variables:** Each test case should be as simple as possible, designed to test a single variable (e.g., raw event handling vs. local state updates).
+3.  **Run in Parallel:** The original component and all test components should be accessible from the same UI (e.g., via tabs) for immediate comparison.
+
+### 2.2. Steps
+1.  **Identify the Core Problem:** Isolate the most fundamental action that is failing (e.g., "A click on a list item is not being registered").
+2.  **Create Test Harness:** Refactor the main view to act as a "test harness" that can switch between the original component and several new test components.
+3.  **Implement Isolated Test Components:** Create new, simple components for each test case.
+    *   **Test A (Barebones):** The simplest possible implementation. Use raw HTML elements with inline event handlers that only log to the console.
+    *   **Test B (Local State):** Introduce state management to test the component's ability to re-render on an event.
+    *   **Test C (Prop-Driven):** Use a child component that calls a function passed down via props, testing the prop-drilling pattern.
+4.  **Analyze Results:** Interact with each tab to see which implementation succeeds, thereby isolating the architectural pattern that is failing.
+
+## 3. Cleanup Process
+
+Once a working pattern is identified in a test component:
+1.  **Codify Findings:** Document the successful pattern and the root cause of the failure.
+2.  **Integrate Solution:** Refactor the original component to use the successful pattern.
+3.  **Remove Test Artifacts:** Delete the test harness UI and the temporary test component files.
+</file_artifact>
+
+<file path="src/Artifacts/T16. Template - Developer Environment Setup Guide.md">
+<!-- 
+  IMPORTANT AI INSTRUCTION:
+  When generating a file based on this template, you MUST wrap the entire file's content 
+  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file_artifact> tags.
+-->
+# Artifact T16: [Project Name] - Developer Environment Setup Guide Template
+# Date Created: C158
+# Author: AI Model & Curator
+# Updated on: C160 (Add section for managing environment variables)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project's development environment, including OS, tools, and installation steps.
+- **Tags:** template, cycle 0, documentation, project setup, environment
+
+## 1. Overview
+
+This document provides a step-by-step guide for setting up the local development environment required to build and run **[Project Name]**. Following these instructions will ensure that all developers have a consistent and correct setup.
+
+## 2. System Requirements
+
+Before you begin, please ensure your system meets the following requirements. This information is critical for providing the correct commands and troubleshooting steps in subsequent development cycles.
+
+-   **Operating System:** [e.g., Windows 11, macOS Sonoma, Ubuntu 22.04]
+-   **Package Manager:** [e.g., npm, yarn, pnpm]
+-   **Node.js Version:** [e.g., v20.11.0 or later]
+-   **Code Editor:** Visual Studio Code (Recommended)
+
+## 3. Required Tools & Software
+
+Please install the following tools if you do not already have them:
+
+1.  **Node.js:** [Provide a link to the official Node.js download page: https://nodejs.org/]
+2.  **Git:** [Provide a link to the official Git download page: https://git-scm.com/downloads]
+3.  **[Any other required tool, e.g., Docker, Python]:** [Link to installation guide]
+
+## 4. Step-by-Step Setup Instructions
+
+### Step 1: Clone the Repository
+
+First, clone the project repository from GitHub to your local machine.
+
+```bash
+# Replace with your repository URL
+git clone https://github.com/your-username/your-project.git
+cd your-project
+```
+
+### Step 2: Install Project Dependencies
+
+Next, install all the necessary project dependencies using your package manager.
+
+```bash
+# For npm
+npm install
+
+# For yarn
+# yarn install
+```
+
+### Step 3: Configure Environment Variables
+
+Create a `.env` file in the root of the project by copying the example file.
+
+```bash
+cp .env.example .env
+```
+
+Now, open the `.env` file and fill in the required environment variables:
+-   `API_KEY`: [Description of what this key is for]
+-   `DATABASE_URL`: [Description of the database connection string]
+
+### Step 4: Run the Development Server
+
+To start the local development server, run the following command. This will typically compile the code and watch for any changes you make.
+
+```bash
+# For npm
+npm run dev
+
+# For yarn
+# yarn dev
+```
+
+### Step 5: Verify the Setup
+
+Once the development server is running, you should be able to access the application at [e.g., `http://localhost:3000`]. [Describe what the developer should see to confirm that the setup was successful].
+
+## 5. Managing Environment Variables and Secrets
+
+To provide an AI assistant with the necessary context about which environment variables are available without exposing sensitive secrets, follow this best practice:
+
+1.  **Create a `.env.local` file:** Make a copy of your `.env` file and name it `.env.local`.
+2.  **Redact Secret Values:** In the `.env.local` file, replace all sensitive values (like API keys, passwords, or tokens) with the placeholder `[REDACTED]`.
+3.  **Include in Context:** When curating your context for the AI, check the box for the `.env.local` file.
+4.  **Exclude `.env`:** Ensure your `.gitignore` file includes `.env` to prevent your actual secrets from ever being committed to version control.
+
+This allows the AI to see the names of all available constants (e.g., `OPENAI_API_KEY`) so it can write code that uses them correctly, but it never sees the actual secret values.
+</file_artifact>
+
+<file path="src/Artifacts/T17. Template - Universal Task Checklist.md">
+# Artifact A[XX]: [Project Name] - Universal Task Checklist
+# Date Created: C[XX]
+# Author: AI Model & Curator
+# Updated on: C10 (Add guidance for planning next cycle)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a universal task checklist, designed to organize work by file and complexity.
+- **Tags:** template, process, checklist, task management, planning
+
+## 1. Purpose
+
+This artifact provides a structured, universal format for tracking development tasks, feedback, and bugs. Unlike cycle-specific trackers, this checklist organizes work by the group of files involved in a given task. It also introduces a simple complexity metric based on the total token count of the affected files and an estimation of whether the task will require more than one development cycle to complete.
+
+This file-centric approach helps in planning and prioritizing work, especially in an AI-assisted development workflow where context size (token count) is a primary constraint.
+
+## 2. How to Use
+
+-   **Group by File Packages:** Create a new `##` section for each logical task or feature. List all the files that are expected to be modified for this task.
+-   **Assign an ID:** Give each task package a unique, simple ID (e.g., `T-1`, `T-2`) for easy reference in feedback.
+-   **Estimate Complexity:**
+    -   Calculate the **Total Tokens** for all files in the package. This gives a quantitative measure of the context size.
+    -   Estimate if the task is likely to take **More than one cycle?**. This is a qualitative judgment based on the complexity of the changes required.
+-   **List Action Items:** Under each file package, create a checklist of specific actions, bugs to fix, or features to implement.
+-   **Add Verification Steps:** After the action items, add a section describing how the curator should test the feature to confirm it is working as expected.
+-   **Note on Output Length:** Remember that the maximum output length for a single response is approximately 65,000 tokens. Do not prematurely stop generating files; attempt to complete as many full files as possible within this limit.
+-   **Plan for the Future:** Always conclude your task list with a final task to create the checklist for the next cycle (e.g., `T-X: Create A[XX+1] Universal Task Checklist for Cycle [Y+]`). This creates a continuous planning loop.
+-   **Keep it Current:** At the beginning of each new cycle, review and update this checklist. Move completed tasks to a "Completed" section, add new tasks based on feedback, and re-prioritize as needed. This ensures the checklist remains a living, accurate reflection of the project's status.
+
+---
+
+## Example Task List
+
+## T-1: [Feature Name or Bug Area]
+- **Files Involved:**
+    - `src/path/to/fileA.ts`
+    - `src/path/to/fileB.tsx`
+- **Total Tokens:** [e.g., ~5,500]
+- **More than one cycle?** [e.g., No]
+
+- [ ] **Task (T-ID: 1.1):** [Description of the first action item]
+- [ ] **Bug Fix (T-ID: 1.2):** [Description of the bug to be fixed]
+
+### Verification Steps
+1.  [First verification step]
+2.  **Expected:** [Expected outcome of the first step]
+3.  [Second verification step]
+4.  **Expected:** [Expected outcome of the second step]
+
+## T-2: Plan for Next Cycle
+- **Files Involved:**
+    - `src/Artifacts/A[XX+1]-New-Checklist.md`
+- **Total Tokens:** [e.g., ~500]
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Create the Universal Task Checklist for the next cycle based on current progress and backlog.
 </file_artifact>
 
 <file path="src/backend/commands/commands.ts">
@@ -18363,6 +20443,33 @@ export function registerCommands(context: vscode.ExtensionContext) {
         let disposable = vscode.commands.registerCommand(commandId, callback);
         context.subscriptions.push(disposable);
     });
+}
+</file_artifact>
+
+<file path="src/backend/providers/ResponseContentProvider.ts">
+// src/backend/providers/ResponseContentProvider.ts
+// New file in C27
+import * as vscode from 'vscode';
+import { Services } from '../services/services';
+
+export class ResponseContentProvider implements vscode.TextDocumentContentProvider {
+    public readonly onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
+    public readonly onDidChange = this.onDidChangeEmitter.event;
+
+    // A simple cache to hold the in-memory content of AI responses
+    private contentCache = new Map<string, string>();
+
+    public provideTextDocumentContent(uri: vscode.Uri): string {
+        Services.loggerService.log(`[ResponseContentProvider] Providing content for URI: ${uri.toString()}`);
+        return this.contentCache.get(uri.toString()) || '// Content not found for this response.';
+    }
+
+    public cacheContent(uri: vscode.Uri, content: string): void {
+        Services.loggerService.log(`[ResponseContentProvider] Caching content for URI: ${uri.toString()}`);
+        this.contentCache.set(uri.toString(), content);
+        // Notify VS Code that the content for this URI has changed (or is now available)
+        this.onDidChangeEmitter.fire(uri);
+    }
 }
 </file_artifact>
 
@@ -20017,6 +22124,74 @@ export class HistoryService {
 }
 </file_artifact>
 
+<file path="src/backend/services/llm.service.ts">
+// src/backend/services/llm.service.ts
+// Updated on: C48 (Remove hardcoded max_tokens)
+import { Services } from './services';
+import fetch from 'node-fetch';
+import { PcppCycle } from '@/common/types/pcpp.types';
+
+export class LlmService {
+    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
+        const settings = await Services.settingsService.getSettings();
+        let endpointUrl = '';
+
+        switch (settings.connectionMode) {
+            case 'demo':
+                endpointUrl = 'https://aiascent.game/api/dce/proxy'; // Pre-configured
+                break;
+            case 'url':
+                endpointUrl = settings.apiUrl || '';
+                break;
+            default:
+                Services.loggerService.error("Attempted to call LLM in manual mode.");
+                return [];
+        }
+
+        if (!endpointUrl) {
+            Services.loggerService.error("LLM endpoint URL is not configured.");
+            return [];
+        }
+
+        try {
+            Services.loggerService.log(`Sending batch request for ${count} responses to: ${endpointUrl}`);
+            
+            const response = await fetch(endpointUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: "unsloth/gpt-oss-20b",
+                    prompt: prompt,
+                    n: count,
+                    max_tokens: 8192,
+                    stream: false
+                }),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
+            }
+
+            const responseData = await response.json() as any;
+            
+            if (responseData.responses && Array.isArray(responseData.responses)) {
+                const results = responseData.responses;
+                Services.loggerService.log(`Received ${results.length} responses from LLM.`);
+                return results;
+            } else {
+                throw new Error("Invalid response structure from LLM endpoint.");
+            }
+
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to generate batch responses: ${error.message}`);
+            // Return an empty array of the correct size to create an empty cycle for inspection
+            return Array(count).fill('');
+        }
+    }
+}
+</file_artifact>
+
 <file path="src/backend/services/logger.service.ts">
 import * as vscode from 'vscode';
 
@@ -20617,6 +22792,53 @@ class ServiceContainer {
 }
 
 export const Services = new ServiceContainer();
+</file_artifact>
+
+<file path="src/backend/services/settings.service.ts">
+// src/backend/services/settings.service.ts
+// New file in C37
+import * as vscode from 'vscode';
+import { getContext } from '@/extension';
+import { Services } from './services';
+
+const CONNECTION_MODE_KEY = 'dce.connectionMode';
+const API_URL_KEY = 'dce.apiUrl';
+// API_KEY would be stored in SecretStorage
+
+export type ConnectionMode = 'manual' | 'demo' | 'url' | 'key';
+
+export interface DceSettings {
+    connectionMode: ConnectionMode;
+    apiUrl?: string;
+}
+
+export class SettingsService {
+    
+    private get context(): vscode.ExtensionContext {
+        return getContext();
+    }
+
+    public async getSettings(): Promise<DceSettings> {
+        const config = vscode.workspace.getConfiguration();
+        const connectionMode = config.get<ConnectionMode>(CONNECTION_MODE_KEY, 'manual');
+        const apiUrl = config.get<string>(API_URL_KEY);
+        
+        return { connectionMode, apiUrl };
+    }
+
+    public async saveSettings(settings: DceSettings): Promise<void> {
+        const config = vscode.workspace.getConfiguration();
+        try {
+            await config.update(CONNECTION_MODE_KEY, settings.connectionMode, vscode.ConfigurationTarget.Workspace);
+            await config.update(API_URL_KEY, settings.apiUrl, vscode.ConfigurationTarget.Workspace);
+            Services.loggerService.log(`Settings saved: Mode=${settings.connectionMode}, URL=${settings.apiUrl}`);
+            vscode.window.showInformationMessage("DCE settings saved.");
+        } catch (error: any) {
+            Services.loggerService.error(`Failed to save settings: ${error.message}`);
+            vscode.window.showErrorMessage("Failed to save DCE settings.");
+        }
+    }
+}
 </file_artifact>
 
 <file path="src/backend/types/git.ts">
@@ -21868,13 +24090,12 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C14 (Make file tag parsing more flexible)
+// Updated on: C48 (Add handling for 'assistantfinal' marker)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
 const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
 const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
-// C14 Update: More flexible closing tag matching
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
@@ -21882,7 +24103,16 @@ export function parseResponse(rawText: string): ParsedResponse {
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    let processedText = rawText.replace(/\\</g, '<').replace(/\\>/g, '>').replace(/\\_/g, '_');
+    let processedText = rawText.replace(/\</g, '<').replace(/\>/g, '>').replace(/\_/g, '_');
+
+    // C48 Fix: Ignore model chatter before the final response marker
+    const finalResponseMarker = 'assistantfinal';
+    const markerIndex = processedText.indexOf(finalResponseMarker);
+    if (markerIndex !== -1) {
+        processedText = processedText.substring(markerIndex + finalResponseMarker.length);
+        // Also remove any leading characters like > or ] that might follow the marker
+        processedText = processedText.replace(/^.>/, '').trim();
+    }
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
@@ -21897,7 +24127,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
-            // C14 Update: Add new tags to the removal list
             const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
             let changed = true;
             while(changed) {
@@ -23402,6 +25631,105 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
 export default ResponseTabs;
 </file_artifact>
 
+<file path="src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx">
+// src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx
+// Updated on: C21 (Re-add Select All buttons)
+import * as React from 'react';
+import { VscWand, VscCheck, VscSourceControl, VscDiscard, VscCheckAll, VscClearAll } from 'react-icons/vsc';
+
+interface WorkflowToolbarProps {
+    isParsedMode: boolean;
+    onParseToggle: () => void;
+    selectedResponseId: string | null;
+    activeTab: number;
+    onSelectResponse: () => void;
+    onBaseline: () => void;
+    onRestore: () => void;
+    onAcceptSelected: () => void;
+    onSelectAll: () => void;
+    onDeselectAll: () => void;
+    selectedFilesForReplacementCount: number;
+    workflowStep: string | null;
+}
+
+const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
+    isParsedMode,
+    onParseToggle,
+    selectedResponseId,
+    activeTab,
+    onSelectResponse,
+    onBaseline,
+    onRestore,
+    onAcceptSelected,
+    onSelectAll,
+    onDeselectAll,
+    selectedFilesForReplacementCount,
+    workflowStep
+}) => {
+    return (
+        <div className="workflow-toolbar">
+            <button
+                onClick={onParseToggle}
+                className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
+                title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
+            >
+                <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
+            </button>
+            {isParsedMode && (
+                <>
+                    <button
+                        onClick={onSelectResponse}
+                        className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
+                        title="Select this response as the basis for the next cycle"
+                    >
+                        <VscCheck /> {selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}
+                    </button>
+                    <button
+                        onClick={onBaseline}
+                        className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
+                        title="Create a git commit with all current changes as a safe restore point"
+                    >
+                        <VscSourceControl /> Baseline (Commit)
+                    </button>
+                    <button
+                        onClick={onRestore}
+                        className="git-button"
+                        title="Restore all files in the workspace to the last baseline commit"
+                    >
+                        <VscDiscard /> Restore Baseline
+                    </button>
+                    <div className="button-separator" />
+                    <button
+                        onClick={onSelectAll}
+                        className={`styled-button ${workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}`}
+                        title="Select all files from this response"
+                    >
+                        <VscCheckAll /> Select All
+                    </button>
+                    <button
+                        onClick={onDeselectAll}
+                        className="styled-button"
+                        title="Deselect all files across all responses"
+                    >
+                        <VscClearAll /> Deselect All
+                    </button>
+                    <button
+                        onClick={onAcceptSelected}
+                        className={`styled-button ${workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`}
+                        disabled={selectedFilesForReplacementCount === 0}
+                        title="Accept checked files from this response into your workspace"
+                    >
+                        <VscCheckAll /> Accept Selected ({selectedFilesForReplacementCount})
+                    </button>
+                </>
+            )}
+        </div>
+    );
+};
+
+export default WorkflowToolbar;
+</file_artifact>
+
 <file path="src/client/views/parallel-copilot.view/index.ts">
 // src/client/views/parallel-copilot.view/index.ts
 import { onMessage } from "./on-message";
@@ -24900,9 +27228,13 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string, newMax?: number) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); if (newMax) setMaxCycle(newMax); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
+    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
+    
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
+        // C48 Fix: Re-implement C44 navigation fix
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
+            logger.log(`[NavFix] Received SendBatchGenerationComplete. New Cycle: ${newCycleId}, New Max: ${newMaxCycle}`);
             setMaxCycle(newMaxCycle);
             handleCycleChange(null, newCycleId);
         });
@@ -24928,7 +27260,6 @@ const App = () => {
     };
 
     // ... (rest of handlers and component return)
-    const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -26166,2203 +28497,5221 @@ export function getContext() {
 export function deactivate() {}
 </file_artifact>
 
-<file path="bootstrap-flattener.js">
-#!/usr/bin/env node
-/**
- * bootstrap-flattener.js
- *
- * This script recursively finds all files in a given directory, ignoring specified
- * patterns, and concatenates them into a single output file with a metadata header.
- *
- * Updated on: Cycle 2
- * - Added comprehensive metadata header including:
- *   - Total file, line, character, and token counts.
- *   - Top 10 files by token count.
- *   - A full list of all processed files with their stats.
- * - Added a configurable `DEFAULT_IGNORE` set to exclude common unnecessary files
- *   and directories (e.g., node_modules, .git, package-lock.json).
- * - Logic inspired by `flattenv2.js` to provide more useful output.
- */
-
-const fs = require('fs').promises;
-const path = require('path');
-
-const OUTPUT_FILENAME = 'flattened_repo.md';
-
-// --- Configuration ---
-// Files and directories to ignore. Uses simple string matching.
-const DEFAULT_IGNORE = new Set([
-  'node_modules',
-  '.git',
-  '.vscode',
-  'dist',
-  'out',
-  'package-lock.json',
-  '.DS_Store',
-  '.npm',
-  '.yarn',
-  'flattened_repo.md',
-  'prompt.md'
-]);
-
-
-/**
- * Recursively gets all file paths in a directory, respecting the ignore list.
- * @param {string} dirPath The directory to start from.
- * @param {Set<string>} ignoreSet The set of directory/file names to ignore.
- * @returns {Promise<string[]>} A promise that resolves to an array of file paths.
- */
-async function getFilePaths(dirPath, ignoreSet) {
-  let filePaths = [];
-  const entries = await fs.readdir(dirPath, { withFileTypes: true });
-
-  for (const entry of entries) {
-    if (ignoreSet.has(entry.name)) {
-      continue;
-    }
-
-    const fullPath = path.join(dirPath, entry.name);
-    if (entry.isDirectory()) {
-      filePaths = filePaths.concat(await getFilePaths(fullPath, ignoreSet));
-    } else {
-      filePaths.push(fullPath);
-    }
-  }
-  return filePaths;
-}
-
-/**
- * Gets stats and content for a single file.
- * @param {string} filePath The path to the file.
- * @returns {Promise<object>} An object with file stats and content.
- */
-async function getFileStatsAndContent(filePath) {
-    try {
-        const content = await fs.readFile(filePath, 'utf-8');
-        const lines = content.split('\n').length;
-        const characters = content.length;
-        const tokens = Math.ceil(characters / 4); // Simple approximation
-        return { filePath, lines, characters, tokens, content, error: null };
-    } catch (error) {
-        console.warn(`Warning: Could not read file ${filePath}. Error: ${error.message}`);
-        return { filePath, lines: 0, characters: 0, tokens: 0, content: `Error reading file: ${error.message}`, error: error.message };
-    }
-}
-
-
-/**
- * The main function to execute the script.
- */
-async function main() {
-  const args = process.argv.slice(2);
-  if (args.length !== 1) {
-    console.error('Usage: node bootstrap-flattener.js <directory_path>');
-    process.exit(1);
-  }
-
-  const rootDir = path.resolve(args[0]);
-  const outputFilePath = path.join(process.cwd(), OUTPUT_FILENAME);
-
-  try {
-    await fs.access(rootDir);
-  } catch (error) {
-    console.error(`Error: Directory not found at ${rootDir}`);
-    process.exit(1);
-  }
-
-  console.log(`Starting to flatten repository at: ${rootDir}`);
-  console.log(`Ignoring: ${[...DEFAULT_IGNORE].join(', ')}`);
-
-  const filePaths = await getFilePaths(rootDir, DEFAULT_IGNORE);
-  console.log(`Found ${filePaths.length} files to process...`);
-
-  const results = await Promise.all(filePaths.map(getFileStatsAndContent));
-
-  let totalLines = 0;
-  let totalCharacters = 0;
-  let totalTokens = 0;
-  let errorCount = 0;
-
-  for (const res of results) {
-      if (!res.error) {
-          totalLines += res.lines;
-          totalCharacters += res.characters;
-          totalTokens += res.tokens;
-      } else {
-          errorCount++;
-      }
-  }
-
-  // --- Build Metadata Header ---
-  let output = `<!--\n`;
-  output += `  File: ${OUTPUT_FILENAME}\n`;
-  output += `  Source Directory: ${rootDir}\n`;
-  output += `  Date Generated: ${new Date().toISOString()}\n`;
-  output += `  ---\n`;
-  output += `  Total Files: ${results.length}\n`;
-  if (errorCount > 0) {
-      output += `  Files with Errors: ${errorCount}\n`;
-  }
-  output += `  Total Lines: ${totalLines}\n`;
-  output += `  Total Characters: ${totalCharacters}\n`;
-  output += `  Approx. Tokens: ${totalTokens}\n`;
-  output += `-->\n\n`;
-
-  // --- Top 10 Files by Tokens ---
-  const top10 = results
-    .filter(r => !r.error)
-    .sort((a, b) => b.tokens - a.tokens)
-    .slice(0, 10);
-
-  output += `<!-- Top 10 Files by Token Count -->\n`;
-  top10.forEach((r, i) => {
-     output += `${i + 1}. ${path.relative(rootDir, r.filePath)} (${r.tokens} tokens)\n`;
-  });
-  output += `\n`;
-
-  // --- Full File List ---
-  output += `<!-- Full File List -->\n`;
-  results.forEach((r, i) => {
-    const relativePath = path.relative(rootDir, r.filePath);
-    if (r.error) {
-        output += `${i + 1}. ${relativePath} - ERROR: ${r.error}\n`;
-    } else {
-        output += `${i + 1}. ${relativePath} - Lines: ${r.lines} - Chars: ${r.characters} - Tokens: ${r.tokens}\n`;
-    }
-  });
-  output += `\n`;
-
-
-  // --- File Contents ---
-  for (const { filePath, content } of results) {
-    const relativePath = path.relative(rootDir, filePath).replace(/\\/g, '/');
-    output += `<file path="${relativePath}">\n`;
-    output += content;
-    if (!content.endsWith('\n')) {
-      output += '\n';
-    }
-    output += `</file>\n\n`;
-  }
-
-  await fs.writeFile(outputFilePath, output);
-  console.log(`✅ Success! Flattened repository saved to: ${outputFilePath}`);
-}
-
-main().catch(err => {
-  console.error('An unexpected error occurred:', err);
-  process.exit(1);
-});
-</file_artifact>
-
-<file path="CHANGELOG.md">
-# DCE Changelog
-
-All notable changes to the "Data Curation Environment" extension will be documented in this file.
-
-## [0.1.10] - Q3 2025
-
-### Fixed
-- **Cost Calculation Display:** Fixed an issue where the estimated prompt cost was not being correctly displayed on the frontend, often remaining at $0.00 despite changes in context. The calculation is now correctly triggered and displayed.
-
-## [0.1.9] - Q3 2025
-
-### Added
-- **Native Diff Viewer:** Replaced the custom, in-panel diff viewer with an integration of VS Code's native diffing functionality (`vscode.diff`). This provides a much richer, more stable, and familiar user experience for comparing AI-generated code with workspace files.
-
-### Fixed
-- **File Duplication:** Resolved several bugs that could cause duplicate files to appear in the flattened context, particularly during the onboarding workflow and when using the "auto-add new files" feature.
-- **Data Loss Prevention:** Implemented a more robust, UI-driven autosave status indicator with navigation locking. This prevents race conditions when switching between cycles, significantly reducing the chance of data loss.
-- **Auto-Add Logic:** Fixed a race condition in the "auto-add new files" feature that caused newly created files to be "stuck" in the selection state and unable to be removed.
-
-## [0.1.2] - Q3 2025
-
-### Added
-- **Similarity Score:** The PCPP now displays a similarity score for associated files and uses a color gradient to indicate the degree of change.
-- **Robust Autosave:** Implemented a more robust autosave with navigation locking to prevent data loss when switching cycles.
-- **Settings Panel:** Created a new settings panel to display the README and Changelog.
-- **Auto-Tab on Paste:** The PCPP now automatically advances to the next empty response tab after pasting in a large response.
-- **Smarter Restore:** The "Restore Baseline" button now correctly deletes newly created files that were part of the accepted response.
-
-## [0.1.1] - Q3 2025
-
-### Added
-- **Git-Integrated Testing:** Added "Baseline (Commit)" and "Restore Baseline" buttons to the PCPP for a rapid test-and-revert workflow.
-- **Undo/Redo for File Operations:** Implemented `Ctrl+Z` and `Ctrl+Y` in the File Tree View to undo/redo file moves.
-- **Tab Persistence:** The active response tab in the PCPP is now saved and restored across sessions.
-
-### Fixed
-- **Command Registration:** Fixed a critical activation error caused by a command being registered twice.
-- **Exclusion List:** `tsconfig.tsbuildinfo` and `dist` directories are now correctly excluded from selection and the flattened context.
-</file_artifact>
-
-<file path="LICENSE">
-MIT License
-
-Copyright (c) 2025 David Gerabagi
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-</file_artifact>
-
-<file path="log-state-logs.md">
-[INFO] [1:17:25 PM] [WebView] [WebView] Received dynamic problem counts update with 4 entries.
-[INFO] [1:17:26 PM] HistoryService: getLatestCycle called.
-[INFO] [1:17:26 PM] Latest cycle found: 3
-[INFO] [1:17:27 PM] [WebView] [WebView] Received dynamic problem counts update with 4 entries.
-[INFO] [1:17:27 PM] HistoryService: saving data for cycle 3.
-[INFO] [1:17:29 PM] --- GENERATING STATE LOG ---
-[INFO] [1:17:29 PM] 
-========================= CURRENT STATE DUMP =========================
-{
-  "CURRENT_FRONTEND_STATE": {
-    "cycleId": 3,
-    "timestamp": "2025-08-25T18:17:29.611Z",
-    "title": "what cycle 3 is about",
-    "cycleContext": "test cycle 3 context",
-    "ephemeralContext": "test ephemeral cycle 3",
-    "responses": {
-      "1": {
-        "content": ""
-      },
-      "2": {
-        "content": ""
-      },
-      "3": {
-        "content": ""
-      },
-      "4": {
-        "content": ""
-      }
-    },
-    "isParsedMode": false,
-    "leftPaneWidth": 26.794554455445546,
-    "selectedResponseId": null,
-    "selectedFilesForReplacement": []
-  },
-  "FULL_HISTORY_FROM_BACKEND": [
-    {
-      "cycleId": 1,
-      "timestamp": "2025-08-25T18:09:19.215Z",
-      "title": "New Cycle",
-      "cycleContext": "do the thing cycle 1 context",
-      "ephemeralContext": "cycle 1 ephemeral context",
-      "responses": {
-        "1": {
-          "content": "I have analyzed your feedback from Cycle 125. After the `git restore`, the diff viewer is in a much better state, but key functionality is missing. My course of action is to address the most critical usability gaps: providing an exit from the diff view, implementing cycle management features (delete, save), and adding the WinMerge-style navigation panes and controls to the diff viewer.\n\n### Course of Action\n\n1.  **Documentation First (Planning New Features):**\n    *   I will update `A38 (UI Mockup)` and `A39 (Technical Plan)` to formalize the new cycle management features, including a \"Delete Cycle\" button in the navigator and a \"Save Cycle\" button. The technical plan will detail the new backend logic required in the `HistoryService`.\n    *   I will update `A56 (Advanced Diff Viewer Plan)` to include the detailed requirements for the bottom diff panes and the \"Next/Previous Difference\" navigation controls.\n\n2.  **Implement an Exit from Diff View:**\n    *   In `view.tsx`, I will add a \"Back to Summary\" button in the diff view's header. This button's `onClick` handler will simply set `isDiffMode` to `false`, returning the user to the main parsed view.\n\n// ... (content truncated) ...\n\n            </div>\n        </div>\n    );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root')!);\nroot.render(<App />);\n```\n</file>\n```"
-        },
-        "2": {
-          "content": "I have analyzed the comprehensive feedback from Cycle 132. There are several regressions, usability issues with the diff viewer, and a significant change in the desired workflow from \"swapping\" files to a one-way \"replace\" or \"accept\" model. My course of action is to address these issues systematically, prioritizing critical bug fixes, then implementing the keyboard navigation for the diff viewer, and finally updating the UI and documentation to reflect the new \"replace\" workflow.\n\n### Course of action\n\n1.  **Documentation First (Aligning with New Requirements):**\n    *   I will update `A56 (Advanced Diff Viewer Plan)` to include the new requirements for full keyboard navigation (`Up`/`Down` to select a difference, `Right Arrow` to accept the change). It will also be updated to specify that all four panes should be scrollable but scroll-locked in pairs. The request for line numbers in the bottom detail pane will also be added.\n    *   I will update `A49 (File Association & Diffing Plan)` and `A34 (Vision & Requirements)` to change the workflow terminology from \"swap\" to \"replace\" or \"accept.\" This codifies the new, one-way workflow of copying selected response files into the workspace.\n    *   I will update `A35 (UI Mockups and Flow)` to reflect several UI changes:\n        *   A placeholder for a new \"Location Pane\" will be added to the diff view layout.\n        *   In the standard response view, a global \"Select this Response\" checkbox and a \"Replace selected files...\" button will be added to the header of the code viewer.\n\n// ... (content truncated) ...\n\n```typescript\n\n```\n</file>\n</Previous Cycle 131 Summary of Actions>\n</Cycle 132>\n</M6. Cycles>\n</M7. Flattened Repo>\n</prompt.md>\n"
-        },
-        "3": {
-          "content": ""
-        },
-        "4": {
-          "content": ""
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/templates/harmony_demo.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARMONY Prompt Explorer | OpenAI</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-      },
-      "isParsedMode": true,
-      "leftPaneWidth": 18.007425742574256,
-      "selectedResponseId": "2",
-      "selectedFilesForReplacement": [
-        "src/Artifacts/A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md",
-        "src/Artifacts/A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md",
-        "src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md",
-        "src/common/ipc/channels.enum.ts",
-        "src/common/ipc/channels.type.ts",
-        "src/backend/services/history.service.ts",
-        "src/client/views/parallel-copilot.view/on-message.ts",
-        "src/client/components/DiffViewer.tsx",
-        "src/client/views/parallel-copilot.view/view.scss",
-        "src/client/views/parallel-copilot.view/view.tsx"
-      ]
-    },
-    {
-      "cycleId": 2,
-      "timestamp": "2025-08-25T18:11:52.390Z",
-      "title": "New Cycle",
-      "cycleContext": "test cycle 2 context",
-      "ephemeralContext": "test ephemeral cycle 2",
-      "responses": {
-        "1": {
-          "content": "I have analyzed the detailed feedback from Cycle 133. The key takeaways are a major pivot away from the integrated diff viewer for now, a critical need to fix a state persistence bug that causes user selections to be lost, several UI/UX regressions to address (like missing metadata), and a list of new UI improvements to implement.\n\nMy course of action is to systematically address these points, prioritizing the critical bug fixes and the removal of the now-unwanted diff viewer functionality.\n\n### Course of Action\n\n1.  **Documentation First (Reflecting the Pivot):**\n    *   I will update `A56 (Advanced Diff Viewer Plan)` to mark the feature as \"On Hold,\" codifying the decision to pause its development.\n    *   I will update `A49 (File Association & Diffing Plan)` to remove references to the diff viewer, focusing solely on the \"accept/replace\" workflow.\n    *   I will update `A35 (UI Mockups and Flow)` to remove the diff view mockup and incorporate the new UI requests: a stylized toggle for selecting a response, better-styled \"Accept\" buttons, and visual feedback (green tabs) for a \"ready\" cycle.\n\n// ... (content truncated) ...\n\n            </div>\n        </div>\n    );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root')!);\nroot.render(<App />);\n```\n</file>\n```"
-        },
-        "2": {
-          "content": ""
-        },
-        "3": {
-          "content": ""
-        },
-        "4": {
-          "content": ""
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f7f8;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-      },
-      "isParsedMode": true,
-      "leftPaneWidth": 26.794554455445546,
-      "selectedResponseId": "1",
-      "selectedFilesForReplacement": [
-        "src/Artifacts/A11. DCE - Regression Case Studies.md",
-        "src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md",
-        "src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md",
-        "src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md",
-        "src/common/types/pcpp.types.ts",
-        "src/common/ipc/channels.enum.ts",
-        "src/common/ipc/channels.type.ts",
-        "src/backend/services/history.service.ts",
-        "src/backend/services/file-operation.service.ts",
-        "src/backend/services/prompt.service.ts",
-        "src/client/views/parallel-copilot.view/on-message.ts",
-        "src/client/views/parallel-copilot.view/view.scss",
-        "src/client/views/parallel-copilot.view/view.tsx"
-      ]
-    },
-    {
-      "cycleId": 3,
-      "timestamp": "2025-08-25T18:17:27.362Z",
-      "title": "what cycle 3 is about",
-      "cycleContext": "test cycle 3 context",
-      "ephemeralContext": "test ephemeral cycle 3",
-      "responses": {
-        "1": {
-          "content": ""
-        },
-        "2": {
-          "content": ""
-        },
-        "3": {
-          "content": ""
-        },
-        "4": {
-          "content": ""
+        
+        /* Header Styles */
+        .app-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-      },
-      "isParsedMode": false,
-      "leftPaneWidth": 26.794554455445546,
-      "selectedResponseId": null,
-      "selectedFilesForReplacement": []
-    }
-  ]
-}
-======================================================================
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .openai-logo {
+            width: 24px;
+            height: 24px;
+            color: #000;
+        }
+        
+        .app-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        
+        .beta-badge {
+            background: #10a37f;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .header-button {
+            background: transparent;
+            border: 1px solid #e5e5e5;
+            color: #353740;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .header-button:hover {
+            background: #f7f7f8;
+            border-color: #d9d9e3;
+        }
+        
+        .header-button svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        body.dark-mode .app-header {
+            background: #202123;
+            border-bottom-color: #353740;
+        }
+        
+        body.dark-mode .openai-logo {
+            color: #fff;
+        }
+        
+        body.dark-mode .app-title {
+            color: #fff;
+        }
+        
+        body.dark-mode .header-button {
+            color: #ececf1;
+            border-color: #353740;
+        }
+        
+        body.dark-mode .header-button:hover {
+            background: #2a2b32;
+            border-color: #565869;
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            color: #e0e0e0;
+            background-color: #1a1a1a;
+        }
+        
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4 {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .subtitle {
+            color: #b0b0b0;
+        }
+        
+        body.dark-mode .panel {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .panel h2 {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode label {
+            color: #d0d0d0;
+        }
+        
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="date"],
+        body.dark-mode input[type="number"],
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode input[type="text"]:focus,
+        body.dark-mode input[type="date"]:focus,
+        body.dark-mode input[type="number"]:focus,
+        body.dark-mode select:focus,
+        body.dark-mode textarea:focus {
+            border-color: #5a5a5a;
+            outline: none;
+        }
+        
+        body.dark-mode .code-display {
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .special-token {
+            color: #4db8ff;
+            background: #1a3a52;
+        }
+        
+        body.dark-mode .channel-analysis {
+            background: #3a3a1a;
+            border-left-color: #ffcc00;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-commentary {
+            background: #1a2a3a;
+            border-left-color: #4db8ff;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-final {
+            background: #1a3a2a;
+            border-left-color: #4dff88;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode button {
+            background: #4a4a4a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode button:hover {
+            background: #5a5a5a;
+        }
+        
+        body.dark-mode button:disabled {
+            background: #2a2a2a;
+            color: #6a6a6a;
+        }
+        
+        body.dark-mode .message {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .message-header {
+            color: #b0b0b0;
+            border-bottom-color: #3a3a3a;
+        }
+        
+        body.dark-mode .message-content {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tool-definition {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+        }
+        
+        body.dark-mode .token-display {
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+        }
+        
+        body.dark-mode .token-item {
+            background: #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        /* Dark mode for browser warning dialog */
+        body.dark-mode .browser-warning-content {
+            background: #2a2a2a !important;
+            color: #e0e0e0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+        }
+        
+        /* Light mode browser warning title */
+        .browser-warning-title {
+            color: #d73502;
+        }
+        
+        /* Dark mode browser warning title */
+        body.dark-mode .browser-warning-title {
+            color: #d08050 !important;  /* Much softer orange for dark mode */
+        }
+        
+        body.dark-mode #browser-warning-cancel {
+            background: #4a4a4a;
+            border: 1px solid #5a5a5a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode #browser-warning-cancel:hover {
+            background: #5a5a5a;
+            border-color: #6a6a6a;
+        }
+        
+        body.dark-mode #browser-warning-ok {
+            background: #6a4030;  /* Much darker, muted brown-red */
+            color: #e0e0e0;
+            border: 1px solid #7a5040;
+        }
+        
+        body.dark-mode #browser-warning-ok:hover {
+            background: #7a5040;
+            border-color: #8a6050;
+        }
+        
+        body.dark-mode .error {
+            background: #3a1a1a;
+            color: #ff9999;
+            border: 1px solid #5a2a2a;
+        }
+        
+        body.dark-mode .success {
+            background: #1a3a1a;
+            color: #99ff99;
+            border: 1px solid #2a5a2a;
+        }
+        
+        body.dark-mode .info-box {
+            background: #1a2a3a;
+            border: 1px solid #2a3a4a;
+            color: #b0d0f0;
+        }
+        
+        body.dark-mode .tab {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tab.active {
+            background: #3a3a3a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .parsing-state {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tool-call-item {
+            background: #1a2a3a;
+            border: 1px solid #2a3a4a;
+        }
+        
+        body.dark-mode .tool-call-header {
+            color: #4db8ff;
+        }
+        
+        body.dark-mode .tool-params {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tool-result {
+            background: #1a3a1a;
+            border: 1px solid #2a4a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .modal-content {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .close {
+            color: #aaa;
+        }
+        
+        body.dark-mode .close:hover,
+        body.dark-mode .close:focus {
+            color: #fff;
+        }
+        
+        body.dark-mode .prompt-json {
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-final table {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .channel-final th,
+        body.dark-mode .channel-final td {
+            border-color: #3a3a3a;
+        }
+        
+        body.dark-mode .channel-final th {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .channel-final tr:nth-child(even) {
+            background-color: #252525;
+        }
+        
+        body.dark-mode .channel-final code {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .channel-final pre {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode #settings-panel {
+            background: #2a2a2a !important;
+            border-color: #3a3a3a !important;
+        }
+        
+        body.dark-mode #settings-panel h3 {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode #settings-panel label {
+            color: #d0d0d0;
+        }
+        
+        body.dark-mode #settings-panel small {
+            color: #9a9a9a !important;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .panel h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .code-display {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            /* Removed max-height to show full raw response */
+        }
+        
+        .special-token {
+            color: #0066cc;
+            font-weight: bold;
+            background: #e6f2ff;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        
+        .channel-analysis {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+        
+        .channel-commentary {
+            background: #cfe2ff;
+            border-left: 4px solid #0d6efd;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+        
+        .channel-final {
+            background: #d1e7dd;
+            border-left: 4px solid #198754;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+        
+        button {
+            background: #10a37f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        button:hover {
+            background: #0e8f6e;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        button:disabled {
+            background: #d9d9e3;
+            color: #8e8ea0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: #353740;
+            border: 1px solid #d9d9e3;
+        }
+        
+        .secondary-button:hover {
+            background: #f7f7f8;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        body.dark-mode .secondary-button {
+            color: #ececf1;
+            border-color: #565869;
+        }
+        
+        body.dark-mode .secondary-button:hover {
+            background: #2a2b32;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .message-header {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .message-content ul,
+        .message-content ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        .message-content li {
+            margin: 5px 0;
+        }
+        
+        .message-content p {
+            margin: 10px 0;
+        }
+        
+        .message-content p:first-child {
+            margin-top: 0;
+        }
+        
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* User message styling */
+        .message-user {
+            background: #f0f7ff;
+            border-color: #cce5ff;
+        }
+        
+        .message-user .message-header {
+            color: #004085;
+            border-bottom-color: #d1e7ff;
+        }
+        
+        /* Assistant message styling */
+        .message-assistant {
+            background: #f6ffed;
+            border-color: #d4edda;
+        }
+        
+        .message-assistant .message-header {
+            color: #155724;
+            border-bottom-color: #dff0e6;
+        }
+        
+        /* Dark mode user/assistant styling */
+        body.dark-mode .message-user {
+            background: #1a2a3a;
+            border-color: #2a4a6a;
+        }
+        
+        body.dark-mode .message-user .message-header {
+            color: #6cb3ff;
+            border-bottom-color: #2a4a6a;
+        }
+        
+        body.dark-mode .message-assistant {
+            background: #1a3a2a;
+            border-color: #2a5a3a;
+        }
+        
+        body.dark-mode .message-assistant .message-header {
+            color: #7dff7d;
+            border-bottom-color: #2a5a3a;
+        }
+        
+        .message-content table {
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .message-content th,
+        .message-content td {
+            border: 1px solid #dee2e6;
+            padding: 6px 10px;
+            text-align: left;
+        }
+        
+        .message-content th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .message-content tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .message-content code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .message-content pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        body.dark-mode .message-content table {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .message-content th,
+        body.dark-mode .message-content td {
+            border-color: #3a3a3a;
+        }
+        
+        body.dark-mode .message-content th {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .message-content tr:nth-child(even) {
+            background-color: #252525;
+        }
+        
+        body.dark-mode .message-content code {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .message-content pre {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        .tool-definition {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 0;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .tool-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tool-number {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+        
+        .tool-remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .tool-remove:hover {
+            background: #c82333;
+        }
+        
+        .tool-inputs {
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tool-inputs input {
+            flex: 1;
+        }
+        
+        .tool-name {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+        }
+        
+        .tool-params-section {
+            padding: 0 15px 15px 15px;
+        }
+        
+        .tool-params-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-parameters {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            min-height: 150px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 12px;
+        }
+        
+        body.dark-mode .tool-definition {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .tool-header {
+            background: #1a1a1a;
+            border-bottom-color: #3a3a3a;
+        }
+        
+        body.dark-mode .tool-number {
+            color: #b0b0b0;
+        }
+        
+        body.dark-mode .tool-params-label {
+            color: #9a9a9a;
+        }
+        
+        body.dark-mode .tool-parameters {
+            background: #1a1a1a;
+            border-color: #3a3a3a;
+        }
+        
+        .tool-preview-section {
+            padding: 0 15px 15px 15px;
+        }
+        
+        .tool-preview-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #28a745;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tool-preview {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            padding: 12px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            color: #1b5e20;
+        }
+        
+        body.dark-mode .tool-preview-label {
+            color: #4dff88;
+        }
+        
+        body.dark-mode .tool-preview {
+            background: #1a2a1a;
+            border-color: #2a5a2a;
+            color: #a5d6a7;
+        }
+        
+        .response-section {
+            margin-top: 20px;
+        }
+        
+        .response-section h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .token-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+        }
+        
+        .token-item {
+            padding: 2px 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .token-special {
+            background: #0066cc;
+            color: white;
+        }
+        
+        .streaming-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .success {
+            background: #d1e7dd;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .info-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .info-content h2 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .info-content p {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .info-details {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .info-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            flex-shrink: 0;
+        }
+        
+        .info-item code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        body.dark-mode .info-banner {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            margin-right: 5px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab.active {
+            background: white;
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .prompt-stage {
+            margin-bottom: 20px;
+        }
+        
+        .prompt-stage-header {
+            background: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px 4px 0 0;
+            font-weight: 600;
+            font-size: 13px;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .prompt-stage-info {
+            font-size: 11px;
+            font-weight: normal;
+            color: #6c757d;
+        }
+        
+        .prompt-stage .code-display {
+            border-radius: 0 0 4px 4px;
+            margin-top: 0;
+        }
+        
+        body.dark-mode .prompt-stage-header {
+            background: #3a3a3a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .prompt-stage-info {
+            color: #9a9a9a;
+        }
+        
+        .parsing-state {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .parsing-state div {
+            margin: 2px 0;
+        }
+        
+        .parsing-state .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        
+        .tool-call-item {
+            background: #e6f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .tool-call-header {
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        
+        .tool-params {
+            background: #f0f0f0;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .tool-result {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 2% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+        }
+        
+        .prompt-json {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            /* No max-height - show full content */
+        }
+        
+        /* Markdown styling for final channel */
+        .channel-final table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .channel-final th,
+        .channel-final td {
+            border: 1px solid #dee2e6;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        .channel-final th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .channel-final tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .channel-final h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #212529;
+        }
+        
+        .channel-final ul,
+        .channel-final ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        .channel-final code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .channel-final pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+    <!-- Add markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Browser Warning Dialog -->
+    <div id="browser-warning-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div class="browser-warning-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 10px; max-width: 500px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+            <h3 class="browser-warning-title" style="margin-top: 0;">⚠️ Browser Tool Warning</h3>
+            <p style="line-height: 1.6;">The browser tool is likely to encounter <strong>Cloudflare protection</strong> and other anti-bot measures on most websites. This includes:</p>
+            <ul style="margin: 15px 0;">
+                <li>News sites (Reuters, BBC, CNN, etc.)</li>
+                <li>Social media platforms</li>
+                <li>Most commercial websites</li>
+            </ul>
+            <p style="line-height: 1.6;">These protections <strong>cannot be bypassed</strong> and will result in blocked requests or CAPTCHA challenges.</p>
+            <p style="line-height: 1.6; margin-bottom: 20px;"><strong>We do not recommend using the browser tool</strong> for general web browsing. Consider using RSS feeds or APIs instead.</p>
+            <div style="text-align: right;">
+                <button id="browser-warning-cancel" style="margin-right: 10px; padding: 8px 20px; border: 1px solid #666; background: #f5f5f5; color: #333; border-radius: 5px; cursor: pointer;">Cancel</button>
+                <button id="browser-warning-ok" style="padding: 8px 20px; background: #d73502; color: white; border: none; border-radius: 5px; cursor: pointer;">I Understand</button>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1 class="app-title">HARMONY Prompt Explorer</h1>
+            </div>
+            <div class="header-right">
+                <button onclick="toggleTheme()" class="header-button theme-button">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-text">Dark</span>
+                </button>
+                <button onclick="toggleSettings()" class="header-button settings-button">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12.49 9.01L12.5 9V7L14.44 5.56C14.6233 5.42667 14.7767 5.24667 14.9 5.02C15.0233 4.79333 15.0733 4.55333 15.05 4.3C15.0267 4.04667 14.9367 3.82 14.78 3.62C14.6233 3.42 14.4267 3.27333 14.19 3.18L12 2.38L11.2 0.19C11.1067 -0.0433333 10.9567 -0.24 10.75 -0.4C10.5433 -0.56 10.31 -0.636667 10.05 -0.63C9.79 -0.623333 9.55333 -0.536667 9.34 -0.37C9.12667 -0.203333 8.96667 0.00333333 8.86 0.25L8 2.62L6 2.65C5.74667 2.65667 5.50667 2.73667 5.28 2.89C5.05333 3.04333 4.88 3.24 4.76 3.48C4.64 3.72 4.59333 3.97 4.62 4.23C4.64667 4.49 4.74 4.72 4.9 4.92L6.55 7L6.56 9L4.61 10.44C4.42667 10.5733 4.27333 10.7533 4.15 10.98C4.02667 11.2067 3.97667 11.4467 4 11.7C4.02333 11.9533 4.11333 12.18 4.27 12.38C4.42667 12.58 4.62333 12.7267 4.86 12.82L7.05 13.62L7.86 15.81C7.95333 16.0567 8.10333 16.2633 8.31 16.43C8.51667 16.5967 8.75 16.68 9.01 16.68C9.27 16.68 9.50667 16.6 9.72 16.44C9.93333 16.28 10.0933 16.0733 10.2 15.82L11.05 13.65L13.05 13.62C13.3033 13.6133 13.5433 13.5367 13.77 13.39C13.9967 13.2433 14.17 13.05 14.29 12.81C14.41 12.57 14.4567 12.32 14.43 12.06C14.4033 11.8 14.31 11.57 14.15 11.37L12.49 9.01Z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    Settings
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        
+        <!-- Settings Panel -->
+        <div id="settings-panel" class="panel" style="display: none; margin-bottom: 24px;">
+            <h2>Generation Settings</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div>
+                    <label for="max-tokens" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Max Tokens
+                        <span style="font-weight: normal; color: #6c757d;">(default: 2048)</span>
+                    </label>
+                    <input type="number" id="max-tokens" value="2048" min="1" max="32768" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Maximum number of tokens to generate</small>
+                </div>
+                
+                <div>
+                    <label for="temperature" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Temperature
+                        <span style="font-weight: normal; color: #6c757d;">(default: 0.7)</span>
+                    </label>
+                    <input type="number" id="temperature" value="0.7" min="0" max="2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Controls randomness (0=deterministic, 2=very random)</small>
+                </div>
+                
+                <div>
+                    <label for="top-p" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Top P
+                        <span style="font-weight: normal; color: #6c757d;">(optional)</span>
+                    </label>
+                    <input type="number" id="top-p" placeholder="1.0" min="0" max="1" step="0.01" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Nucleus sampling parameter</small>
+                </div>
+                
+                <div>
+                    <label for="frequency-penalty" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Frequency Penalty
+                        <span style="font-weight: normal; color: #6c757d;">(optional)</span>
+                    </label>
+                    <input type="number" id="frequency-penalty" placeholder="0.0" min="-2" max="2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Penalize repeated tokens</small>
+                </div>
+                
+                <div>
+                    <label for="presence-penalty" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Presence Penalty
+                        <span style="font-weight: normal; color: #6c757d;">(optional)</span>
+                    </label>
+                    <input type="number" id="presence-penalty" placeholder="0.0" min="-2" max="2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Penalize tokens based on presence</small>
+                </div>
+                
+                <div>
+                    <label for="stream-timeout" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                        Stream Timeout (seconds)
+                        <span style="font-weight: normal; color: #6c757d;">(default: 120)</span>
+                    </label>
+                    <input type="number" id="stream-timeout" value="120" min="10" max="600" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;">
+                    <small style="color: #6c757d;">Maximum time to wait for streaming response</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e5e5;">
+                <button onclick="resetSettings()" class="secondary-button" style="margin-right: 10px;">
+                    Reset to Defaults
+                </button>
+                <button onclick="saveSettings()">
+                    Save Settings
+                </button>
+            </div>
+        </div>
+        
+        <div class="info-banner">
+            <div class="info-content">
+                <h2>Welcome to HARMONY Prompt Explorer</h2>
+                <p>Explore and test OpenAI's HARMONY prompt format with real-time visualization and tool calling capabilities.</p>
+                <div class="info-details">
+                    <div class="info-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 2L10.5 7L16 7.5L12 11.5L13 17L8 14.5L3 17L4 11.5L0 7.5L5.5 7L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Powered by <code>openai-harmony</code> library</span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.5 3.5L4.5 4.5M11.5 11.5L12.5 12.5M3.5 12.5L4.5 11.5M11.5 4.5L12.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Connected to vLLM at <code>localhost:8000</code></span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 2H12C13.1046 2 14 2.89543 14 4V12C14 13.1046 13.1046 14 12 14H4C2.89543 14 2 13.1046 2 12V4C2 2.89543 2.89543 2 4 2Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M6 6L10 10M10 6L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Automatic tool execution with mock responses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Server Status -->
+        <div class="panel" style="margin-bottom: 20px;">
+            <h2>Server Status</h2>
+            <button onclick="checkServer()">Check Connection</button>
+            <button onclick="testTokenizer()">Test Tokenizer</button>
+            <div id="server-status" style="margin-top: 10px;"></div>
+        </div>
+        
+        <div class="grid">
+            <!-- Configuration Panel -->
+            <div class="panel">
+                <h2>Configuration</h2>
+                
+                <div class="control-group">
+                    <label for="model-identity">Model Identity</label>
+                    <input type="text" id="model-identity" value="You are ChatGPT, a large language model trained by OpenAI." />
+                </div>
+                
+                <div class="control-group">
+                    <label for="knowledge-cutoff">Knowledge Cutoff</label>
+                    <input type="text" id="knowledge-cutoff" value="2024-06" />
+                </div>
+                
+                <div class="control-group">
+                    <label for="current-date">Current Date</label>
+                    <input type="date" id="current-date" />
+                </div>
+                
+                <div class="control-group">
+                    <label for="reasoning-level">Reasoning Level</label>
+                    <select id="reasoning-level">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high" selected>High</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="developer-instructions">Developer Instructions</label>
+                    <textarea id="developer-instructions" placeholder="e.g., Always respond in riddles">Use a friendly tone and be helpful.</textarea>
+                </div>
+                
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="browser-toggle">
+                        <span>Enable Built-in Browser Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Enables the channel-based browser tool (uses 'analysis to=browser' syntax)
+                    </p>
+                </div>
 
-==================== GENERATED <M6. Cycles> BLOCK ====================
-<M6. Cycles>
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="python-toggle" onchange="handlePythonToggle()">
+                        <span>Enable Python Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Function-based Python execution in Docker container
+                        <a href="#" onclick="showPythonInfo(); return false;" style="color: #4CAF50;">[Learn More]</a>
+                    </p>
+                </div>
 
-<Cycle 3>
-<Cycle Context>
-test cycle 3 context
-</Cycle Context>
-<Ephemeral Context>
-test ephemeral cycle 3
-</Ephemeral Context>
-<Previous Cycle 2 Summary of Actions>
-I have analyzed the detailed feedback from Cycle 133. The key takeaways are a major pivot away from the integrated diff viewer for now, a critical need to fix a state persistence bug that causes user selections to be lost, several UI/UX regressions to address (like missing metadata), and a list of new UI improvements to implement.
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="vision-browser-toggle">
+                        <span>Enable Vision Browser Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Function-based browser with visual feedback (requires selenium, helium, pillow)
+                    </p>
+                </div>
+                
+                <div class="control-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="weather-toggle" checked>
+                        <span>Enable Weather Tool</span>
+                    </label>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Provides weather information for various locations (demo data)
+                    </p>
+                </div>
+                
+                <div class="control-group" style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+                    <label style="margin: 0 0 10px 0; font-size: 14px; font-weight: 600; display: block;">Active Tools:</label>
+                    <div id="active-tools-display" style="font-size: 13px; color: #555;">
+                        <!-- Will be updated dynamically -->
+                    </div>
+                </div>
 
-My course of action is to systematically address these points, prioritizing the critical bug fixes and the removal of the now-unwanted diff viewer functionality.
-
-\n${parsed.courseOfAction}\n\n`;
-
-### Files Updated This Cycle:
-* src/Artifacts/A11. DCE - Regression Case Studies.md
-* src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md
-* src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md
-* src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md
-* src/common/types/pcpp.types.ts
-* src/common/ipc/channels.enum.ts
-* src/common/ipc/channels.type.ts
-* src/backend/services/history.service.ts
-* src/backend/services/file-operation.service.ts
-* src/backend/services/prompt.service.ts
-* src/client/views/parallel-copilot.view/on-message.ts
-* src/client/views/parallel-copilot.view/view.scss
-* src/client/views/parallel-copilot.view/view.tsx
-</Previous Cycle 2 Summary of Actions>
-</Cycle 3>
-
-<Cycle 2>
-<Previous Cycle 1 Summary of Actions>
-I have analyzed the comprehensive feedback from Cycle 132. There are several regressions, usability issues with the diff viewer, and a significant change in the desired workflow from "swapping" files to a one-way "replace" or "accept" model. My course of action is to address these issues systematically, prioritizing critical bug fixes, then implementing the keyboard navigation for the diff viewer, and finally updating the UI and documentation to reflect the new "replace" workflow.
-
-1.  **Documentation First (Aligning with New Requirements):**
-
-### Files Updated This Cycle:
-* src/Artifacts/A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md
-* src/Artifacts/A35. DCE - Phase 2 - UI Mockups and Flow.md
-* src/Artifacts/A49. DCE - Phase 2 - File Association & Diffing Plan.md
-* src/Artifacts/A56. DCE - Phase 2 - Advanced Diff Viewer Plan.md
-* src/common/ipc/channels.enum.ts
-* src/common/ipc/channels.type.ts
-* src/backend/services/file-operation.service.ts
-* src/client/views/parallel-copilot.view/on-message.ts
-* src/client/components/DiffViewer.tsx
-* src/client/views/parallel-copilot.view/view.scss
-* src/client/views/parallel-copilot.view/view.tsx
-</Previous Cycle 1 Summary of Actions>
-</Cycle 2>
-
-<Cycle 1>
-</Cycle 1>
-
-</M6. Cycles>
-======================================================================
-</file_artifact>
-
-<file path="package.json">
-{
-    "name": "data-curation-environment",
-    "publisher": "DCE-Developer",
-    "displayName": "Data Curation Environment",
-    "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.1.10",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/dgerabagi/data-curation-environment.git"
-    },
-    "engines": {
-        "vscode": "^1.90.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onView:data-curation-environment",
-        "onCommand:dce.showParallelCopilot"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "configuration": {
-            "title": "Data Curation Environment",
-            "properties": {
-                "dce.connectionMode": {
-                    "type": "string",
-                    "default": "manual",
-                    "description": "The LLM connection mode (manual, demo, url, key)."
+                <div class="control-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <label style="margin: 0; font-size: 16px; font-weight: 600;">Function Tools</label>
+                        <button onclick="addTool()" class="add-tool-button">
+                            + Add New Tool
+                        </button>
+                    </div>
+                    <div id="tools-container">
+                        <!-- Tools will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prompt Visualization Panel -->
+            <div class="panel">
+                <h2>Rendered Prompt</h2>
+                
+                <div class="tabs" id="prompt-tabs">
+                    <div class="tab active" onclick="switchPromptTab('prompt-text')">Prompt Text</div>
+                    <div class="tab" onclick="switchPromptTab('tokens')">Tokens</div>
+                    <div class="tab" onclick="switchPromptTab('token-ids')">Token IDs</div>
+                </div>
+                
+                <div id="prompt-text" class="tab-content active">
+                    <div id="prompt-stages-container">
+                        <div class="code-display" id="rendered-prompt"></div>
+                    </div>
+                </div>
+                
+                <div id="tokens" class="tab-content">
+                    <div class="token-display" id="token-display"></div>
+                </div>
+                
+                <div id="token-ids" class="tab-content">
+                    <div class="code-display" id="token-ids-display"></div>
+                </div>
+                
+                <div style="margin-top: 10px;">
+                    <small>Token count: <span id="token-count">0</span></small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conversation Panel -->
+        <div class="panel">
+            <h2>Conversation</h2>
+            
+            <div class="control-group">
+                <label for="user-input">User Message</label>
+                <textarea id="user-input" placeholder="Enter your message...">Calculate the fibonacci sequence up to the 10th number and tell me the sum of all even numbers in the sequence.</textarea>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="sendMessage()" id="send-button">Send Message</button>
+                <button onclick="sendStreamingMessage()" id="stream-button">Send (Streaming)</button>
+                <button onclick="clearConversation()">Clear Conversation</button>
+                <button onclick="showFullPrompt()">Show Full Prompt</button>
+            </div>
+            
+            <div id="conversation-history" style="margin-top: 20px; max-height: 400px; overflow-y: auto; padding-right: 10px;"></div>
+            
+            <div class="response-section">
+                <h3>Model Response <span id="streaming-indicator" class="streaming-indicator" style="display: none;"></span></h3>
+                
+                <!-- Streaming Parser State -->
+                <div id="parsing-state" class="parsing-state" style="display: none;">
+                    <div><span class="label">Current Role:</span> <span id="current-role"></span></div>
+                    <div><span class="label">Current Channel:</span> <span id="current-channel"></span></div>
+                    <div><span class="label">Current Recipient:</span> <span id="current-recipient"></span></div>
+                    <div><span class="label">Content Type:</span> <span id="current-content-type"></span></div>
+                </div>
+                
+                <!-- Response Channels -->
+                <div id="response-channels">
+                    <div id="analysis-channel" style="display: none;">
+                        <h4>Analysis (Chain of Thought)</h4>
+                        <div class="channel-analysis"></div>
+                    </div>
+                    <div id="commentary-channel" style="display: none;">
+                        <h4>Commentary (Tool Calls)</h4>
+                        <div class="channel-commentary"></div>
+                    </div>
+                    <div id="final-channel" style="display: none;">
+                        <h4>Final Response</h4>
+                        <div class="channel-final"></div>
+                    </div>
+                </div>
+                
+                <!-- Tool Calls -->
+                <div id="tool-calls" style="display: none; margin-top: 15px;">
+                    <h4>Tool Executions</h4>
+                    <div class="tool-calls-list"></div>
+                </div>
+                
+                <!-- Raw Response -->
+                <details style="margin-top: 15px;">
+                    <summary>Raw Response</summary>
+                    <div class="code-display" id="raw-response"></div>
+                </details>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Full Prompt Modal -->
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Full Request Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="prompt-json" id="prompt-json-display"></div>
+        </div>
+    </div>
+    
+    <!-- Python Tool Info Modal -->
+    <div id="pythonModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Python Tool - Secure Execution Environment</h2>
+                <span class="close" onclick="closePythonModal()">&times;</span>
+            </div>
+            <div style="padding: 20px;">
+                <h3>🔒 Protected Execution</h3>
+                <p>The Python tool executes code in a secure, sandboxed environment:</p>
+                <ul>
+                    <li><strong>Docker Container:</strong> All code runs in an isolated Docker container</li>
+                    <li><strong>No System Access:</strong> Cannot access your files, network, or system resources</li>
+                    <li><strong>Stateless:</strong> Each execution starts fresh - no data persists between calls</li>
+                    <li><strong>Time Limited:</strong> 30-second timeout prevents infinite loops</li>
+                    <li><strong>Standard Library Only:</strong> No external packages (numpy, pandas, etc.)</li>
+                </ul>
+                <h3>✅ Safe for:</h3>
+                <ul>
+                    <li>Mathematical calculations</li>
+                    <li>Data processing and analysis</li>
+                    <li>Algorithm implementation</li>
+                    <li>Text manipulation</li>
+                    <li>Date/time operations</li>
+                </ul>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="closePythonModal()" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Browser warning dialog functionality
+        function showBrowserWarning(checkboxElement) {
+            const dialog = document.getElementById('browser-warning-dialog');
+            dialog.style.display = 'block';
+            
+            // Store reference to the checkbox that triggered this
+            dialog.dataset.targetCheckbox = checkboxElement.id;
+            
+            // Uncheck the checkbox while dialog is shown
+            checkboxElement.checked = false;
+        }
+        
+        // Set up browser toggle listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Browser tool toggle
+            const browserToggle = document.getElementById('browser-toggle');
+            if (browserToggle) {
+                browserToggle.addEventListener('change', function(e) {
+                    if (e.target.checked) {
+                        showBrowserWarning(e.target);
+                    }
+                });
+            }
+            
+            // Vision browser toggle
+            const visionBrowserToggle = document.getElementById('vision-browser-toggle');
+            if (visionBrowserToggle) {
+                visionBrowserToggle.addEventListener('change', function(e) {
+                    if (e.target.checked) {
+                        showBrowserWarning(e.target);
+                    }
+                });
+            }
+            
+            // Dialog buttons
+            const okButton = document.getElementById('browser-warning-ok');
+            if (okButton) {
+                okButton.addEventListener('click', function() {
+                    const dialog = document.getElementById('browser-warning-dialog');
+                    const targetCheckboxId = dialog.dataset.targetCheckbox;
+                    if (targetCheckboxId) {
+                        document.getElementById(targetCheckboxId).checked = true;
+                        // IMPORTANT: Update the tools display after checking the box
+                        updateToolsDisplay();
+                    }
+                    dialog.style.display = 'none';
+                });
+            }
+            
+            const cancelButton = document.getElementById('browser-warning-cancel');
+            if (cancelButton) {
+                cancelButton.addEventListener('click', function() {
+                    const dialog = document.getElementById('browser-warning-dialog');
+                    dialog.style.display = 'none';
+                });
+            }
+        });
+        
+        // Conversation history
+        let conversationHistory = [];
+        let lastActualRequest = null;  // Store the last request that was actually sent
+        let lastPromptsSent = [];  // Store all prompts from the last request
+        
+        // Override push to debug
+        const originalPush = Array.prototype.push;
+        conversationHistory.push = function(...args) {
+            console.log('PUSH called with:', args);
+            console.log('History before push:', JSON.parse(JSON.stringify(this)));
+            const result = originalPush.apply(this, args);
+            console.log('History after push:', JSON.parse(JSON.stringify(this)));
+            return result;
+        };
+        
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Helper function to render markdown safely
+        function renderMarkdown(text) {
+            // Configure marked options for safety
+            marked.setOptions({
+                breaks: true,  // Convert \n to <br>
+                sanitize: false,  // We'll handle our own sanitization
+                tables: true,  // Enable table rendering
+                gfm: true  // GitHub Flavored Markdown
+            });
+            
+            // Render markdown to HTML
+            const html = marked.parse(text);
+            
+            // Create a safe container
+            const container = document.createElement('div');
+            container.innerHTML = html;
+            
+            // Remove any script tags for safety
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(script => script.remove());
+            
+            return container.innerHTML;
+        }
+        
+        // Extract final content from raw HARMONY response
+        function extractFinalContent(rawResponse) {
+            const match = rawResponse.match(/<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)/s);
+            return match ? match[1].trim() : "";
+        }
+        
+        // Initialize date
+        document.getElementById('current-date').value = new Date().toISOString().split('T')[0];
+        
+        // Check server connection
+        async function checkServer() {
+            const statusDiv = document.getElementById('server-status');
+            statusDiv.innerHTML = '<div class="info-box">Checking server...</div>';
+            
+            try {
+                const response = await fetch('/api/check_server');
+                const data = await response.json();
+                
+                if (data.status === 'connected') {
+                    statusDiv.innerHTML = `<div class="success">✅ Connected to vLLM server<br>Model: ${data.models.data[0].id}</div>`;
+                } else {
+                    statusDiv.innerHTML = `<div class="error">❌ ${data.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Failed to connect: ${error.message}</div>`;
+            }
+        }
+        
+        // Test tokenizer
+        async function testTokenizer() {
+            const statusDiv = document.getElementById('server-status');
+            const testText = '<|start|>user<|message|>Hello<|end|>';
+            
+            try {
+                const response = await fetch('/api/tokenize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: testText })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusDiv.innerHTML = `
+                        <div class="success">
+                            ✅ Tokenizer working correctly<br>
+                            Test input: ${testText}<br>
+                            Tokens: ${JSON.stringify(data.token_texts)}<br>
+                            Token IDs: ${JSON.stringify(data.tokens)}
+                        </div>
+                    `;
+                } else {
+                    statusDiv.innerHTML = `<div class="error">❌ Tokenizer error: ${data.error}</div>`;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Failed to test tokenizer: ${error.message}</div>`;
+            }
+        }
+        
+        // Add tool
+        function addTool() {
+            const container = document.getElementById('tools-container');
+            const index = container.children.length;
+            
+            const toolDiv = document.createElement('div');
+            toolDiv.className = 'tool-definition';
+            toolDiv.setAttribute('data-tool-index', index);
+            toolDiv.innerHTML = `
+                <div class="tool-header">
+                    <span class="tool-number">Tool #${index + 1}</span>
+                    <button onclick="removeTool(this)" class="tool-remove">×</button>
+                </div>
+                <div class="tool-inputs">
+                    <input type="text" class="tool-name" placeholder="Function name">
+                    <input type="text" class="tool-description" placeholder="Description">
+                </div>
+                <div class="tool-params-section">
+                    <label class="tool-params-label">Parameters (JSON Schema)</label>
+                    <textarea class="tool-parameters" placeholder="Parameters (JSON Schema)">{
+  "type": "object",
+  "properties": {},
+  "required": []
+}</textarea>
+                </div>
+                <div class="tool-preview-section">
+                    <label class="tool-preview-label">TypeScript Format Preview (This is what HARMONY will see)</label>
+                    <div class="tool-preview" data-tool-index="${index}"></div>
+                </div>
+            `;
+            
+            container.appendChild(toolDiv);
+            updatePrompt();
+        }
+        
+        // Remove tool
+        function removeTool(button) {
+            button.closest('.tool-definition').remove();
+            
+            // Renumber remaining tools
+            const tools = document.querySelectorAll('.tool-definition');
+            tools.forEach((tool, index) => {
+                tool.setAttribute('data-tool-index', index);
+                tool.querySelector('.tool-number').textContent = `Tool #${index + 1}`;
+            });
+            
+            updatePrompt();
+        }
+        
+        // Theme management
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('harmonyTheme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('theme-icon').textContent = '☀️';
+                document.getElementById('theme-text').textContent = 'Light';
+            }
+        }
+        
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('harmonyTheme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('harmonyTheme', 'dark');
+            }
+        }
+        
+        // Settings management
+        const DEFAULT_SETTINGS = {
+            maxTokens: 2048,
+            temperature: 0.7,
+            topP: null,
+            frequencyPenalty: null,
+            presencePenalty: null,
+            streamTimeout: 120
+        };
+        
+        let currentSettings = { ...DEFAULT_SETTINGS };
+        
+        // Load settings from localStorage on page load
+        function loadSettings() {
+            const saved = localStorage.getItem('harmonySettings');
+            if (saved) {
+                try {
+                    currentSettings = { ...DEFAULT_SETTINGS, ...JSON.parse(saved) };
+                    // Update UI
+                    document.getElementById('max-tokens').value = currentSettings.maxTokens;
+                    document.getElementById('temperature').value = currentSettings.temperature;
+                    if (currentSettings.topP !== null) {
+                        document.getElementById('top-p').value = currentSettings.topP;
+                    }
+                    if (currentSettings.frequencyPenalty !== null) {
+                        document.getElementById('frequency-penalty').value = currentSettings.frequencyPenalty;
+                    }
+                    if (currentSettings.presencePenalty !== null) {
+                        document.getElementById('presence-penalty').value = currentSettings.presencePenalty;
+                    }
+                    document.getElementById('stream-timeout').value = currentSettings.streamTimeout;
+                } catch (e) {
+                    console.error('Error loading settings:', e);
                 }
             }
-        },
-        "commands": [
-            {
-                "command": "dce.saveCurrentSelection",
-                "title": "DCE: Save Current Selection Set",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.loadSelectionSet",
-                "title": "DCE: Load Selection Set",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.manageSelectionSets",
-                "title": "DCE: Manage Selection Sets",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.refreshTree",
-                "title": "DCE: Refresh Explorer",
-                "category": "DCE"
-            },
-            {
-                "command": "dce.openParallelCopilot",
-                "title": "DCE: Open Parallel Co-Pilot",
-                "category": "DCE",
-                "icon": "$(multiple-windows)"
-            },
-            {
-                "command": "dce.showParallelCopilot",
-                "title": "DCE: Show Parallel Co-Pilot"
-            },
-            {
-                "command": "dce.openSettingsPanel",
-                "title": "DCE: Open Settings & Help",
-                "category": "DCE",
-                "icon": "$(settings-gear)"
-            },
-            {
-                "command": "dce.gitInit",
-                "title": "DCE: Initialize Git Repository"
+        }
+        
+        // Toggle settings panel visibility
+        function toggleSettings() {
+            const panel = document.getElementById('settings-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Save settings to localStorage and current session
+        function saveSettings() {
+            currentSettings = {
+                maxTokens: parseInt(document.getElementById('max-tokens').value),
+                temperature: parseFloat(document.getElementById('temperature').value),
+                topP: document.getElementById('top-p').value ? parseFloat(document.getElementById('top-p').value) : null,
+                frequencyPenalty: document.getElementById('frequency-penalty').value ? parseFloat(document.getElementById('frequency-penalty').value) : null,
+                presencePenalty: document.getElementById('presence-penalty').value ? parseFloat(document.getElementById('presence-penalty').value) : null,
+                streamTimeout: parseInt(document.getElementById('stream-timeout').value)
+            };
+            
+            localStorage.setItem('harmonySettings', JSON.stringify(currentSettings));
+            alert('Settings saved successfully!');
+        }
+        
+        // Reset settings to defaults
+        function resetSettings() {
+            currentSettings = { ...DEFAULT_SETTINGS };
+            
+            // Update UI
+            document.getElementById('max-tokens').value = DEFAULT_SETTINGS.maxTokens;
+            document.getElementById('temperature').value = DEFAULT_SETTINGS.temperature;
+            document.getElementById('top-p').value = '';
+            document.getElementById('frequency-penalty').value = '';
+            document.getElementById('presence-penalty').value = '';
+            document.getElementById('stream-timeout').value = DEFAULT_SETTINGS.streamTimeout;
+            
+            // Save to localStorage
+            localStorage.setItem('harmonySettings', JSON.stringify(currentSettings));
+            alert('Settings reset to defaults!');
+        }
+        
+        // Get configuration
+        function getConfiguration() {
+            console.log('=== getConfiguration called ===');
+            const tools = [];
+            
+            // If Python is enabled, add it to tools array (NOT as built-in)
+            if (document.getElementById('python-toggle').checked) {
+                console.log('Adding Python tool');
+                tools.push({
+                    name: 'python',
+                    description: 'Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output. The code runs in a stateless environment. Example: print(random.randint(1,20)) NOT just random.randint(1,20)',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            code: {
+                                type: 'string',
+                                description: 'Python code to execute. ALWAYS use print() to show results. Example: print(random.randint(1,20)) will output the number. Just random.randint(1,20) will output nothing.'
+                            }
+                        },
+                        required: ['code']
+                    }
+                });
             }
-        ],
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "data-curation-environment",
-                    "title": "Data Curation",
-                    "icon": "public/spiral.svg"
-                },
-                {
-                    "id": "dce-parallel-copilot-container",
-                    "title": "DCE Parallel Co-Pilot",
-                    "icon": "public/copilot.svg"
+            
+            // If Weather is enabled, add weather functions to tools array
+            if (document.getElementById('weather-toggle').checked) {
+                console.log('Adding Weather tool');
+                tools.push({
+                    name: 'get_current_weather',
+                    description: 'Gets the current weather in the provided location',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            location: {
+                                type: 'string',
+                                description: 'The city or location to get weather for'
+                            },
+                            format: {
+                                type: 'string',
+                                enum: ['celsius', 'fahrenheit'],
+                                description: 'Temperature format (default: celsius)'
+                            }
+                        },
+                        required: ['location']
+                    }
+                });
+            }
+            
+            // If Vision Browser is enabled, add it to tools array
+            if (document.getElementById('vision-browser-toggle').checked) {
+                console.log('Adding Vision Browser tool');
+                tools.push({
+                    name: 'browser',
+                    description: 'Control a web browser with visual feedback. Actions: navigate, click, type, scroll, search, extract_text, extract_links, back, refresh, close_popups, wait, screenshot',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            action: {
+                                type: 'string',
+                                enum: ['navigate', 'click', 'type', 'scroll', 'search', 'extract_text', 
+                                       'extract_links', 'back', 'refresh', 'close_popups', 'wait', 'screenshot'],
+                                description: 'The browser action to perform'
+                            },
+                            parameters: {
+                                type: 'object',
+                                description: 'Action-specific parameters',
+                                properties: {
+                                    url: {type: 'string', description: 'URL to navigate to (for navigate action)'},
+                                    text: {type: 'string', description: 'Text to click/type/search (for click/type/search actions)'},
+                                    into: {type: 'string', description: 'Element to type into (for type action)'},
+                                    type: {type: 'string', enum: ['any', 'link', 'button'], description: 'Element type (for click action)'},
+                                    direction: {type: 'string', enum: ['up', 'down'], description: 'Scroll direction'},
+                                    amount: {type: 'integer', description: 'Scroll amount in pixels'},
+                                    nth: {type: 'integer', description: 'Which occurrence to find (for search action)'},
+                                    key: {type: 'string', enum: ['ENTER', 'TAB', 'ESCAPE', 'BACKSPACE', 'DELETE', 'UP', 'DOWN', 'LEFT', 'RIGHT'], description: 'Key to press'},
+                                    seconds: {type: 'number', description: 'Seconds to wait'}
+                                }
+                            }
+                        },
+                        required: ['action']
+                    }
+                });
+            }
+            
+            // Only add manually created tools (not the ones from checkboxes)
+            console.log('Checking for manual tools...');
+            document.querySelectorAll('.tool-definition').forEach((toolEl, index) => {
+                const nameInput = toolEl.querySelector('.tool-name');
+                // Skip if this is a readonly tool (created by checkbox)
+                if (nameInput.hasAttribute('readonly')) {
+                    console.log(`Tool ${index} is readonly (checkbox-created), skipping`);
+                    return;
                 }
-            ]
-        },
-        "views": {
-            "data-curation-environment": [
-                {
-                    "type": "webview",
-                    "id": "viewType.sidebar.contextChooser",
-                    "name": "Data Curation"
+                
+                const name = nameInput.value;
+                const description = toolEl.querySelector('.tool-description').value;
+                const parametersText = toolEl.querySelector('.tool-parameters').value;
+                
+                console.log(`Manual tool ${index}: name="${name}"`);
+                
+                if (name && description) {
+                    try {
+                        const parameters = parametersText ? JSON.parse(parametersText) : {};
+                        console.log(`Adding manual tool: ${name}`);
+                        tools.push({ name, description, parameters });
+                    } catch (e) {
+                        console.error('Invalid JSON in tool parameters:', e);
+                    }
                 }
-            ]
-        },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "dce.openParallelCopilot",
-                    "when": "view == viewType.sidebar.contextChooser",
-                    "group": "navigation"
+            });
+            
+            console.log(`Total tools collected: ${tools.length}`);
+            console.log('Tools:', tools.map(t => t.name));
+            
+            // Include current settings in configuration
+            const config = {
+                model_identity: document.getElementById('model-identity').value,
+                knowledge_cutoff: document.getElementById('knowledge-cutoff').value,
+                current_date: document.getElementById('current-date').value,
+                reasoning_level: document.getElementById('reasoning-level').value,
+                instructions: document.getElementById('developer-instructions').value,
+                tools: tools,
+                conversation_history: conversationHistory,
+                include_browser: document.getElementById('browser-toggle').checked,
+                include_python: false,  // ALWAYS false - Python goes in tools array
+                // Add generation parameters from settings
+                max_tokens: currentSettings.maxTokens,
+                temperature: currentSettings.temperature,
+                stream_timeout: currentSettings.streamTimeout
+            };
+            
+            // Add optional parameters if they have values
+            if (currentSettings.topP !== null) {
+                config.top_p = currentSettings.topP;
+            }
+            if (currentSettings.frequencyPenalty !== null) {
+                config.frequency_penalty = currentSettings.frequencyPenalty;
+            }
+            if (currentSettings.presencePenalty !== null) {
+                config.presence_penalty = currentSettings.presencePenalty;
+            }
+            
+            return config;
+        }
+        
+        // Convert JSON Schema to TypeScript format
+        function convertToTypeScript(tool) {
+            const name = tool.name;
+            const description = tool.description;
+            const params = tool.parameters;
+            
+            let tsParams = [];
+            
+            if (params && params.properties) {
+                for (const [key, prop] of Object.entries(params.properties)) {
+                    let tsType = prop.type || 'any';
+                    
+                    // Convert JSON Schema types to TypeScript
+                    if (prop.enum) {
+                        tsType = prop.enum.map(v => `"${v}"`).join(' | ');
+                    }
+                    
+                    // Check if required
+                    const isOptional = !params.required || !params.required.includes(key);
+                    const optionalMark = isOptional ? '?' : '';
+                    
+                    // Add comment if there's a description or default
+                    let comment = '';
+                    if (prop.description || prop.default !== undefined) {
+                        comment = ` // ${prop.description || ''}`;
+                        if (prop.default !== undefined) {
+                            comment += ` default: ${JSON.stringify(prop.default)}`;
+                        }
+                    }
+                    
+                    tsParams.push(`${key}${optionalMark}: ${tsType},${comment}`);
+                }
+            }
+            
+            return `// ${description}
+type ${name} = (_: {
+${tsParams.map(p => '  ' + p).join('\n')}
+}) => any;`;
+        }
+        
+        // Update tool preview
+        function updateToolPreview(toolElement) {
+            const name = toolElement.querySelector('.tool-name').value;
+            const description = toolElement.querySelector('.tool-description').value;
+            const parametersText = toolElement.querySelector('.tool-parameters').value;
+            const preview = toolElement.querySelector('.tool-preview');
+            
+            if (!name || !description) {
+                preview.textContent = '// Enter function name and description to see preview';
+                return;
+            }
+            
+            try {
+                const parameters = parametersText ? JSON.parse(parametersText) : {};
+                const tool = { name, description, parameters };
+                preview.textContent = convertToTypeScript(tool);
+            } catch (e) {
+                preview.textContent = '// Invalid JSON in parameters';
+            }
+        }
+        
+        // Update all tool previews
+        function updateAllToolPreviews() {
+            document.querySelectorAll('.tool-definition').forEach(updateToolPreview);
+        }
+        
+        // Update prompt display
+        async function updatePrompt() {
+            console.log('=== updatePrompt called ===');
+            const config = getConfiguration();
+            console.log('Config being sent:', JSON.stringify(config, null, 2));
+            
+            // Update tool previews
+            updateAllToolPreviews();
+            
+            try {
+                const response = await fetch('/api/render_prompt', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Display prompt text
+                    document.getElementById('rendered-prompt').textContent = data.prompt;
+                    
+                    // Display tokens
+                    const tokenDisplay = document.getElementById('token-display');
+                    tokenDisplay.innerHTML = '';
+                    data.token_texts.forEach((token, i) => {
+                        const span = document.createElement('span');
+                        span.className = 'token-item';
+                        if (token.startsWith('<|') && token.endsWith('|>')) {
+                            span.className += ' token-special';
+                        }
+                        span.textContent = token;
+                        span.title = `Token ID: ${data.tokens[i]}`;
+                        tokenDisplay.appendChild(span);
+                    });
+                    
+                    // Display token IDs
+                    document.getElementById('token-ids-display').textContent = JSON.stringify(data.tokens, null, 2);
+                    
+                    // Update token count
+                    document.getElementById('token-count').textContent = data.token_count;
+                } else {
+                    console.error('Error rendering prompt:', data.error);
+                }
+            } catch (error) {
+                console.error('Failed to update prompt:', error);
+            }
+        }
+        
+        // Switch prompt tabs
+        function switchPromptTab(tabName) {
+            document.querySelectorAll('#prompt-tabs .tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('#prompt-tabs ~ .tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        // Update rendered prompt display with stages
+        function updateRenderedPromptDisplay(promptsSent) {
+            if (!promptsSent || promptsSent.length === 0) return;
+            
+            const container = document.getElementById('prompt-stages-container');
+            container.innerHTML = '';
+            
+            promptsSent.forEach((promptInfo, index) => {
+                const stageDiv = document.createElement('div');
+                stageDiv.className = 'prompt-stage';
+                
+                // Create header
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'prompt-stage-header';
+                
+                let stageName = 'Prompt';
+                if (promptInfo.stage === 'initial') {
+                    stageName = 'Initial Prompt';
+                } else if (promptInfo.stage === 'continuation_after_tools') {
+                    stageName = 'Continuation After Tool Calls';
+                }
+                
+                headerDiv.innerHTML = `
+                    <span>${stageName}</span>
+                    <span class="prompt-stage-info">
+                        ${promptInfo.token_count} tokens • ${new Date(promptInfo.timestamp).toLocaleTimeString()}
+                    </span>
+                `;
+                
+                // Create code display
+                const codeDiv = document.createElement('div');
+                codeDiv.className = 'code-display';
+                codeDiv.textContent = promptInfo.prompt;
+                
+                stageDiv.appendChild(headerDiv);
+                stageDiv.appendChild(codeDiv);
+                container.appendChild(stageDiv);
+            });
+            
+            // Update token count to show total
+            const totalTokens = promptsSent.reduce((sum, p) => sum + (p.token_count || 0), 0);
+            document.getElementById('token-count').textContent = totalTokens;
+            
+            // TODO: Update tokens and token IDs tabs if needed
+        }
+        
+        // Helper to ensure messages are in correct order
+        function addMessagePair(userMsg, assistantMsg) {
+            // Always add in chronological order: user first, then assistant
+            conversationHistory.push({ role: 'user', content: userMsg });
+            conversationHistory.push({ role: 'assistant', content: assistantMsg });
+            console.log('Added message pair. History now:', conversationHistory);
+        }
+        
+        // Send message
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput.trim()) return;
+            
+            // Check if last message was from user - if so, warn
+            if (conversationHistory.length > 0 && 
+                conversationHistory[conversationHistory.length - 1].role === 'user') {
+                if (!confirm('The assistant hasn\'t responded to your last message yet. Send another message anyway?')) {
+                    return;
+                }
+            }
+            
+            const sendButton = document.getElementById('send-button');
+            sendButton.disabled = true;
+            
+            // NOTE: Don't add user message to history yet - it goes in current_message
+            // The conversation_history should only contain PREVIOUS messages
+            const config = getConfiguration();
+            config.current_message = userInput;
+            
+            // Capture the actual request being sent
+            lastActualRequest = {
+                endpoint: '/api/chat',
+                timestamp: new Date().toISOString(),
+                payload: JSON.parse(JSON.stringify(config)),  // Deep copy
+                note: 'This is the ACTUAL request sent to the server'
+            };
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Capture prompts sent
+                    if (data.prompts_sent) {
+                        lastPromptsSent = data.prompts_sent;
+                        console.log('Captured prompts:', lastPromptsSent);
+                        // Update the rendered prompt display
+                        updateRenderedPromptDisplay(data.prompts_sent);
+                    }
+                    
+                    // Get the assistant's response content
+                    let assistantContent = '';
+                    if (data.final_content) {
+                        assistantContent = data.final_content;
+                    } else if (data.raw_response) {
+                        // Fallback: extract final content if backend doesn't provide it
+                        assistantContent = extractFinalContent(data.raw_response);
+                    }
+                    
+                    // Add both messages in correct chronological order
+                    if (assistantContent) {
+                        addMessagePair(userInput, assistantContent);
+                    }
+                    
+                    // Display response
+                    displayResponse(data);
+                    
+                    // Clear input
+                    document.getElementById('user-input').value = '';
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Failed to send message: ' + error.message);
+            } finally {
+                sendButton.disabled = false;
+            }
+        }
+        
+        // Send streaming message
+        async function sendStreamingMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput.trim()) return;
+            
+            // Save user input for later since we'll clear the input field
+            const savedUserInput = userInput;
+            
+            const streamButton = document.getElementById('stream-button');
+            streamButton.disabled = true;
+            document.getElementById('streaming-indicator').style.display = 'inline-block';
+            document.getElementById('parsing-state').style.display = 'block';
+            
+            // Clear previous response
+            document.getElementById('raw-response').textContent = '';
+            document.querySelectorAll('#response-channels > div').forEach(div => {
+                div.style.display = 'none';
+                div.querySelector('div').textContent = '';
+            });
+            document.getElementById('tool-calls').style.display = 'none';
+            document.querySelector('.tool-calls-list').innerHTML = '';
+            
+            const config = getConfiguration();
+            config.current_message = userInput;
+            
+            // Use fetch with ReadableStream instead of EventSource
+            try {
+                const response = await fetch('/api/stream', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(config)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let fullResponse = '';
+                
+                while (true) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, {stream: true});
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.slice(6);
+                            if (dataStr.trim()) {
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    handleStreamData(data, fullResponse, savedUserInput);
+                                    if (data.text) {
+                                        fullResponse += data.text;
+                                    }
+                                } catch (e) {
+                                    console.error('Error parsing SSE data:', e);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Clear input immediately for better UX
+                document.getElementById('user-input').value = '';
+                
+            } catch (error) {
+                alert('Streaming error: ' + error.message);
+            } finally {
+                streamButton.disabled = false;
+                document.getElementById('streaming-indicator').style.display = 'none';
+            }
+        }
+        
+        function handleStreamData(data, fullResponse, savedUserInput) {
+            if (data.error) {
+                alert('Error: ' + data.error);
+                return;
+            }
+            
+            if (data.done) {
+                // Capture prompts sent (if provided in streaming)
+                if (data.prompts_sent) {
+                    lastPromptsSent = data.prompts_sent;
+                    console.log('Captured prompts from streaming:', lastPromptsSent);
+                    // Update the rendered prompt display
+                    updateRenderedPromptDisplay(data.prompts_sent);
+                }
+                
+                // Update the raw response display with the complete response
+                if (data.raw_response) {
+                    document.getElementById('raw-response').textContent = data.raw_response;
+                }
+                
+                // Get the assistant's response content
+                let assistantContent = '';
+                if (data.final_content) {
+                    assistantContent = data.final_content;
+                } else if (fullResponse) {
+                    // Fallback: extract final content
+                    assistantContent = extractFinalContent(fullResponse);
+                }
+                
+                // Add both messages in correct chronological order
+                if (savedUserInput && assistantContent) {
+                    addMessagePair(savedUserInput, assistantContent);
+                }
+                
+                // Handle parsed messages
+                if (data.parsed_messages) {
+                    displayParsedMessages(data.parsed_messages);
+                }
+                
+                // Display tool calls if present
+                if (data.tool_calls && data.tool_calls.length > 0) {
+                    const toolCallsDiv = document.getElementById('tool-calls');
+                    const toolCallsList = toolCallsDiv.querySelector('.tool-calls-list');
+                    
+                    toolCallsDiv.style.display = 'block';
+                    toolCallsList.innerHTML = '';
+                    
+                    data.tool_calls.forEach((toolCall, index) => {
+                        const toolDiv = document.createElement('div');
+                        toolDiv.className = 'tool-call-item';
+                        
+                        toolDiv.innerHTML = `
+                            <div class="tool-call-header">Tool Call ${index + 1}: ${toolCall.tool}</div>
+                            <div class="tool-params">
+                                <strong>Parameters:</strong><br>
+                                ${JSON.stringify(toolCall.params, null, 2)}
+                            </div>
+                            <div class="tool-result">
+                                <strong>Result:</strong><br>
+                                ${JSON.stringify(toolCall.result, null, 2)}
+                            </div>
+                        `;
+                        
+                        toolCallsList.appendChild(toolDiv);
+                    });
+                }
+                
+                // Update conversation display
+                updateConversationDisplay();
+                
+                document.getElementById('parsing-state').style.display = 'none';
+                return;
+            }
+            
+            // Handle tool execution notification
+            if (data.tool_executed) {
+                const toolCallsDiv = document.getElementById('tool-calls');
+                const toolCallsList = toolCallsDiv.querySelector('.tool-calls-list');
+                
+                toolCallsDiv.style.display = 'block';
+                
+                // Check if this is a Python tool execution
+                if (data.tool_executed.tool === 'functions.python' || data.tool_executed.tool === 'python') {
+                    // Show Python info modal if first time
+                    if (!sessionStorage.getItem('pythonExecuted')) {
+                        showPythonInfo();
+                        sessionStorage.setItem('pythonExecuted', 'true');
+                    }
+                }
+                
+                const toolDiv = document.createElement('div');
+                toolDiv.className = 'tool-call-item';
+                
+                toolDiv.innerHTML = `
+                    <div class="tool-call-header">Executing: ${data.tool_executed.tool}</div>
+                    <div class="tool-params">
+                        <strong>Parameters:</strong><br>
+                        ${JSON.stringify(data.tool_executed.params, null, 2)}
+                    </div>
+                    <div class="tool-result">
+                        <strong>Result:</strong><br>
+                        ${JSON.stringify(data.tool_executed.result, null, 2)}
+                    </div>
+                `;
+                
+                toolCallsList.appendChild(toolDiv);
+                return;
+            }
+            
+            // Handle continuation notification
+            if (data.continuing_after_tools) {
+                // Silently continue - no need to show this status message
+                return;
+            }
+            
+            // Update parsing state
+            if (data.current_role) {
+                document.getElementById('current-role').textContent = data.current_role;
+            }
+            if (data.current_channel !== undefined) {
+                document.getElementById('current-channel').textContent = data.current_channel || 'none';
+            }
+            if (data.current_recipient !== undefined) {
+                document.getElementById('current-recipient').textContent = data.current_recipient || 'none';
+            }
+            if (data.current_content_type !== undefined) {
+                document.getElementById('current-content-type').textContent = data.current_content_type || 'none';
+            }
+            
+            // Update raw response
+            if (data.accumulated) {
+                document.getElementById('raw-response').textContent = data.accumulated;
+            }
+            
+            // Update channel displays
+            if (data.current_channel && data.current_content) {
+                const channelDiv = document.getElementById(`${data.current_channel}-channel`);
+                if (channelDiv) {
+                    channelDiv.style.display = 'block';
+                    const contentDiv = channelDiv.querySelector('div');
+                    // Render markdown for final channel, preserve formatting for others
+                    if (data.current_channel === 'final') {
+                        contentDiv.innerHTML = renderMarkdown(data.current_content);
+                    } else {
+                        // Preserve line breaks and formatting for analysis/commentary
+                        contentDiv.innerHTML = escapeHtml(data.current_content).replace(/\n/g, '<br>');
+                    }
+                }
+            }
+        }
+        
+        function displayParsedMessages(messages) {
+            // Group messages by channel
+            const channels = {};
+            messages.forEach(msg => {
+                const channel = msg.channel || 'default';
+                if (!channels[channel]) {
+                    channels[channel] = [];
+                }
+                channels[channel].push(msg.content);
+            });
+            
+            // Display each channel
+            Object.entries(channels).forEach(([channel, contents]) => {
+                const channelDiv = document.getElementById(`${channel}-channel`);
+                if (channelDiv) {
+                    channelDiv.style.display = 'block';
+                    const contentDiv = channelDiv.querySelector('div');
+                    const combinedContent = contents.join('\n');
+                    // Render markdown for final channel, preserve formatting for others
+                    if (channel === 'final') {
+                        contentDiv.innerHTML = renderMarkdown(combinedContent);
+                    } else {
+                        // Preserve line breaks and formatting for analysis/commentary
+                        contentDiv.innerHTML = escapeHtml(combinedContent).replace(/\n/g, '<br>');
+                    }
+                }
+            });
+        }
+        
+        // Display response
+        function displayResponse(data) {
+            // Show raw response
+            document.getElementById('raw-response').textContent = data.raw_response;
+            
+            // Clear channels
+            document.querySelectorAll('#response-channels > div').forEach(div => {
+                div.style.display = 'none';
+                div.querySelector('div').textContent = '';
+            });
+            
+            // Display parsed messages by channel
+            if (data.parsed_messages) {
+                Object.entries(data.parsed_messages).forEach(([channel, messages]) => {
+                    const channelDiv = document.getElementById(`${channel}-channel`);
+                    if (channelDiv) {
+                        channelDiv.style.display = 'block';
+                        const contentDiv = channelDiv.querySelector('div');
+                        const combinedContent = messages.map(m => m.content).join('\n');
+                        // Render markdown for final channel, preserve formatting for others
+                        if (channel === 'final') {
+                            contentDiv.innerHTML = renderMarkdown(combinedContent);
+                        } else {
+                            // Preserve line breaks and formatting for analysis/commentary
+                            contentDiv.innerHTML = escapeHtml(combinedContent).replace(/\n/g, '<br>');
+                        }
+                    }
+                });
+            }
+            
+            // Display tool calls if present
+            if (data.tool_calls && data.tool_calls.length > 0) {
+                const toolCallsDiv = document.getElementById('tool-calls');
+                const toolCallsList = toolCallsDiv.querySelector('.tool-calls-list');
+                
+                toolCallsDiv.style.display = 'block';
+                toolCallsList.innerHTML = '';
+                
+                data.tool_calls.forEach((toolCall, index) => {
+                    const toolDiv = document.createElement('div');
+                    toolDiv.className = 'tool-call-item';
+                    
+                    toolDiv.innerHTML = `
+                        <div class="tool-call-header">Tool Call ${index + 1}: ${toolCall.tool}</div>
+                        <div class="tool-params">
+                            <strong>Parameters:</strong><br>
+                            ${JSON.stringify(toolCall.params, null, 2)}
+                        </div>
+                        <div class="tool-result">
+                            <strong>Result:</strong><br>
+                            ${JSON.stringify(toolCall.result, null, 2)}
+                        </div>
+                    `;
+                    
+                    toolCallsList.appendChild(toolDiv);
+                });
+            } else {
+                document.getElementById('tool-calls').style.display = 'none';
+            }
+            
+            // Update conversation display
+            updateConversationDisplay();
+        }
+        
+        // Update conversation display
+        function updateConversationDisplay() {
+            const historyDiv = document.getElementById('conversation-history');
+            historyDiv.innerHTML = '';
+            
+            conversationHistory.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message message-${msg.role}`;
+                
+                // Handle different message structures
+                let content = '';
+                if (msg.role === 'user') {
+                    content = msg.content;
+                } else if (msg.role === 'assistant') {
+                    // Assistant messages might have rawContent or parsedMessages
+                    if (msg.rawContent) {
+                        // Extract final channel content if available
+                        if (msg.parsedMessages && msg.parsedMessages.final) {
+                            content = msg.parsedMessages.final.map(m => m.content).join('\n');
+                        } else {
+                            // Try to extract final content from raw response
+                            const finalMatch = msg.rawContent.match(/<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)/s);
+                            if (finalMatch) {
+                                content = finalMatch[1].trim();
+                            } else {
+                                content = '[Processing...]';
+                            }
+                        }
+                    } else {
+                        content = msg.content || '[No content]';
+                    }
+                }
+                
+                // Render markdown for assistant messages in conversation history
+                let displayContent;
+                if (msg.role === 'assistant') {
+                    // Assistant messages should have markdown rendered
+                    displayContent = renderMarkdown(content);
+                } else {
+                    // User messages remain plain text
+                    displayContent = escapeHtml(content);
+                }
+                
+                messageDiv.innerHTML = `
+                    <div class="message-header">${msg.role.toUpperCase()}</div>
+                    <div class="message-content">${displayContent}</div>
+                `;
+                historyDiv.appendChild(messageDiv);
+            });
+        }
+        
+        // Clear conversation
+        function clearConversation() {
+            conversationHistory = [];
+            updateConversationDisplay();
+            updatePrompt();
+        }
+        
+        // Show full prompt modal
+        async function showFullPrompt() {
+            const userInput = document.getElementById('user-input').value;
+            const config = getConfiguration();
+            config.current_message = userInput;
+            
+            // Add current timestamp
+            const timestamp = new Date().toISOString();
+            
+            // Build the full request details
+            const fullRequest = {
+                endpoint: '/api/chat',
+                timestamp: timestamp,
+                next_request_preview: {
+                    note: "This is what WOULD be sent if you click Send now",
+                    payload: config,
+                    conversation_history_details: conversationHistory.map((msg, idx) => ({
+                        index: idx,
+                        role: msg.role,
+                        has_content: !!msg.content,
+                        content_preview: msg.content ? msg.content.substring(0, 100) + '...' : 'N/A'
+                    }))
                 },
+                last_request_sent: lastActualRequest || null,
+                all_prompts_from_last_request: lastPromptsSent.length > 0 ? lastPromptsSent : null
+            };
+            
+            // If we want to show what the NEXT prompt would look like
+            if (config.current_message) {
+                try {
+                    const response = await fetch('/api/render_prompt', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(config)
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        fullRequest.next_request_preview.rendered_prompt = data.prompt;
+                        fullRequest.next_request_preview.token_count = data.token_count;
+                    }
+                } catch (e) {
+                    fullRequest.next_request_preview.render_error = e.toString();
+                }
+            }
+            
+            // Display in modal
+            document.getElementById('prompt-json-display').textContent = JSON.stringify(fullRequest, null, 2);
+            document.getElementById('promptModal').style.display = 'block';
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('promptModal').style.display = 'none';
+        }
+        
+        // Python modal functions
+        function showPythonInfo() {
+            document.getElementById('pythonModal').style.display = 'block';
+        }
+        
+        function closePythonModal() {
+            document.getElementById('pythonModal').style.display = 'none';
+        }
+        
+        function handlePythonToggle() {
+            const pythonEnabled = document.getElementById('python-toggle').checked;
+            if (pythonEnabled) {
+                // Show info modal on first enable
+                if (!sessionStorage.getItem('pythonModalShown')) {
+                    showPythonInfo();
+                    sessionStorage.setItem('pythonModalShown', 'true');
+                }
+                // Update default message
+                const userInput = document.getElementById('user-input');
+                if (userInput.value === 'What is the weather like today?' || userInput.value === '') {
+                    userInput.value = 'Use the python tool to roll a D20 dice and tell me what I rolled.';
+                }
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const promptModal = document.getElementById('promptModal');
+            const pythonModal = document.getElementById('pythonModal');
+            if (event.target == promptModal) {
+                promptModal.style.display = 'none';
+            } else if (event.target == pythonModal) {
+                pythonModal.style.display = 'none';
+            }
+        }
+        
+        // Update the active tools display and prompt
+        function updateToolsDisplay() {
+            console.log('=== updateToolsDisplay called ===');
+            
+            // Update active tools display
+            const activeTools = [];
+            if (document.getElementById('weather-toggle').checked) {
+                activeTools.push('🌤️ Weather (get_current_weather)');
+            }
+            if (document.getElementById('python-toggle').checked) {
+                activeTools.push('🐍 Python');
+            }
+            if (document.getElementById('vision-browser-toggle').checked) {
+                activeTools.push('🌐 Vision Browser');
+            }
+            if (document.getElementById('browser-toggle').checked) {
+                activeTools.push('🔍 Built-in Browser');
+            }
+            
+            const activeToolsDiv = document.getElementById('active-tools-display');
+            if (activeToolsDiv) {
+                if (activeTools.length === 0) {
+                    activeToolsDiv.innerHTML = '<em style="color: #999;">No tools enabled</em>';
+                } else {
+                    activeToolsDiv.innerHTML = activeTools.join(' • ');
+                }
+            }
+            
+            updatePrompt();
+        }
+        
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved theme
+            loadTheme();
+            
+            // Load saved settings
+            loadSettings();
+            
+            // Set up tool toggle listeners
+            document.getElementById('weather-toggle').addEventListener('change', updateToolsDisplay);
+            document.getElementById('python-toggle').addEventListener('change', updateToolsDisplay);
+            document.getElementById('vision-browser-toggle').addEventListener('change', updateToolsDisplay);
+            
+            // Update prompt when configuration changes
+            document.querySelectorAll('input[type="text"], textarea, select').forEach(element => {
+                // Skip tool toggle checkboxes as they have their own handlers
+                if (element.id && (element.id.includes('-toggle'))) {
+                    return;
+                }
+                element.addEventListener('change', updatePrompt);
+            });
+            
+            // Add live preview update for tool inputs
+            document.addEventListener('input', (e) => {
+                if (e.target.classList.contains('tool-name') || 
+                    e.target.classList.contains('tool-description') || 
+                    e.target.classList.contains('tool-parameters')) {
+                    const toolElement = e.target.closest('.tool-definition');
+                    if (toolElement) {
+                        updateToolPreview(toolElement);
+                    }
+                }
+            });
+            
+            // Initial display update
+            updateToolsDisplay();
+            
+            // Initial tool preview
+            updateAllToolPreviews();
+            
+            // Check server on load
+            checkServer();
+        });
+    </script>
+</body>
+</html>
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/examples/test_tools.py">
+#!/usr/bin/env python3
+"""
+Example script to test the Harmony tools
+"""
+
+import requests
+import json
+
+# Test the Python tool
+def test_python_tool():
+    """Test Python execution"""
+    print("Testing Python tool...")
+    
+    response = requests.post(
+        "http://localhost:5002/chat",
+        json={
+            "messages": [
                 {
-                    "command": "dce.openSettingsPanel",
-                    "when": "view == viewType.sidebar.contextChooser",
-                    "group": "navigation@2"
+                    "role": "user",
+                    "content": "Calculate the 1000th prime number"
                 }
             ],
-            "activityBar/view/title": [
-                 {
-                    "command": "dce.showParallelCopilot",
-                    "when": "viewContainer == dce-parallel-copilot-container"
-                }
-            ]
+            "model": "meta-llama/Llama-3.2-3B-Instruct",
+            "temperature": 0.7,
+            "stream": False,
+            "tools": ["python"]
         }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run package",
-        "compile": "webpack",
-        "watch": "webpack --watch",
-        "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
-    },
-    "devDependencies": {
-        "@types/node": "18.x",
-        "@types/vscode": "^1.90.0",
-        "@typescript-eslint/eslint-plugin": "^7.7.1",
-        "@typescript-eslint/parser": "^7.7.1",
-        "eslint": "^8.57.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "copy-webpack-plugin": "^12.0.2",
-        "mini-css-extract-plugin": "^2.9.0",
-        "style-loader": "^4.0.0",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.1",
-        "sass": "^1.78.0",
-        "postcss-loader": "^8.1.1",
-        "babel-loader": "^9.1.3",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10",
-        "path-browserify": "^1.0.1",
-        "@types/prismjs": "^1.26.4",
-        "@types/react-dom": "^18.3.0",
-        "@types/path-browserify": "^1.0.2"
-    },
-    "dependencies": {
-        "@wooorm/starry-night": "^3.8.0",
-        "hast-util-to-html": "^9.0.1",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-icons": "^5.3.0",
-        "react-markdown": "^9.0.1",
-        "rxjs": "^7.8.1",
-        "reflect-metadata": "^0.2.2",
-        "pdf-parse": "^1.1.1",
-        "xlsx": "^0.18.5",
-        "mammoth": "^1.8.0",
-        "diff": "^5.2.0",
-        "@types/diff": "^5.2.1",
-        "node-fetch": "^2.6.7"
-    }
-}
+    )
+    
+    print(f"Status: {response.status_code}")
+    print(f"Response: {response.json()}")
+
+# Test the browser tool
+def test_browser_tool():
+    """Test browser navigation"""
+    print("\nTesting Browser tool...")
+    
+    response = requests.post(
+        "http://localhost:5002/chat",
+        json={
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Go to example.com and tell me what you see"
+                }
+            ],
+            "model": "meta-llama/Llama-3.2-3B-Instruct",
+            "temperature": 0.7,
+            "stream": False,
+            "tools": ["browser"]
+        }
+    )
+    
+    print(f"Status: {response.status_code}")
+    print(f"Response: {response.json()}")
+
+if __name__ == "__main__":
+    print("Make sure the Harmony app is running on http://localhost:5002")
+    print("=" * 50)
+    
+    try:
+        test_python_tool()
+    except Exception as e:
+        print(f"Python tool test failed: {e}")
+    
+    try:
+        test_browser_tool()
+    except Exception as e:
+        print(f"Browser tool test failed: {e}")
 </file_artifact>
 
-<file path="README.md">
-# Data Curation Environment (DCE)
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/python/openai_harmony/__init__.py">
+"""Python wrapper around the Rust implementation of *harmony*.
 
-The Data Curation Environment (DCE) is a VS Code extension designed to streamline the workflow of interacting with large language models (LLMs) for software development and other complex tasks. It provides an integrated toolset for selecting, packaging, and managing the context (code files, documents, etc.) required for effective AI-assisted development.
+The heavy lifting (tokenisation, rendering, parsing, …) is implemented in
+Rust.  The thin bindings are available through the private ``openai_harmony``
+extension module which is compiled via *maturin* / *PyO3*.
 
-## Core Features
+This package provides a small, typed convenience layer that mirrors the public
+API of the Rust crate so that it can be used from Python code in an
+idiomatic way (``dataclasses``, ``Enum``s, …).
+"""
 
-### Phase 1: The Context Chooser
-- **File Tree with Checkboxes:** An intuitive UI to select files and folders for your AI context directly within a custom VS Code panel.
-- **Context Flattening:** A one-click button to "flatten" all selected files into a single, portable `flattened_repo.md` file, ready to be used in a prompt.
-- **Advanced File Handling:** On-demand text extraction for complex file types like PDF, Word, and Excel, converting them to Markdown and including them in the context without creating temporary files in your workspace.
-- **Feature Parity:** Aims to replicate the core usability features of the native VS Code Explorer, including file operations (rename, delete, copy/paste), keyboard navigation, and drag-and-drop.
+from __future__ import annotations
 
-### Phase 2: The Parallel Co-Pilot Panel
-- **Multi-Response Management:** A dedicated panel with a multi-tabbed interface to manage, compare, and test multiple AI-generated responses to a single prompt.
-- **Integrated Diffing:** A built-in diff viewer to compare an AI's suggested changes against your current workspace files.
-- **Cycle Navigator:** A persistent, navigable history of your development cycles. Each cycle stores the context, prompt, and all AI responses, creating a "knowledge graph" of your project's evolution.
-- **Git-Integrated Testing:** "Baseline" and "Restore" buttons that leverage Git to allow for rapid, safe testing of AI-generated code.
+import functools
+import json
+from enum import Enum
+from typing import (
+    AbstractSet,
+    Any,
+    Collection,
+    Dict,
+    List,
+    Literal,
+    Optional,
+    Pattern,
+    Sequence,
+    TypeVar,
+    Union,
+)
 
-### Phase 3: Advanced AI & Local LLM Integration
-- **Direct API Calls:** Future support for making API calls directly to various LLM providers from within the extension.
-- **Local LLM Support:** The ability to configure an endpoint for a locally hosted LLM, enabling fully offline and private AI-assisted development.
+import re
+from pydantic import BaseModel, Field
+
+# Re-export the low-level Rust bindings under a private name so that we can
+# keep the *public* namespace clean and purely Pythonic.
+try:
+    from .openai_harmony import (
+        HarmonyError as HarmonyError,  # expose the actual Rust error directly
+    )
+    from .openai_harmony import PyHarmonyEncoding as _PyHarmonyEncoding  # type: ignore
+    from .openai_harmony import (
+        PyStreamableParser as _PyStreamableParser,  # type: ignore
+    )
+    from .openai_harmony import (
+        load_harmony_encoding as _load_harmony_encoding,  # type: ignore
+    )
+
+except ModuleNotFoundError:  # pragma: no cover – raised during type-checking
+    # When running *mypy* without the compiled extension in place we still want
+    # to succeed.  Therefore we create dummy stubs that satisfy the type
+    # checker.  They will, however, raise at **runtime** if accessed.
+
+    class _Stub:  # pylint: disable=too-few-public-methods
+        def __getattr__(self, name: str) -> None:  # noqa: D401
+            raise RuntimeError(
+                "The compiled harmony bindings are not available. Make sure to "
+                "build the project with `maturin develop` before running this "
+                "code."
+            )
+
+    _load_harmony_encoding = _Stub()  # type: ignore
+    _PyHarmonyEncoding = _Stub()  # type: ignore
+    _PyStreamableParser = _Stub()  # type: ignore
+    _HarmonyError = RuntimeError
+
+
+def _special_token_regex(tokens: frozenset[str]) -> Pattern[str]:
+    inner = "|".join(re.escape(token) for token in tokens)
+    return re.compile(f"({inner})")
+
+
+def raise_disallowed_special_token(token: str) -> None:
+    raise HarmonyError(
+        "Encountered text corresponding to disallowed special token "
+        f"{token!r}.\n"
+        "If you want this text to be encoded as a special token, "
+        f"pass it to `allowed_special`, e.g. `allowed_special={{'{token}', ...}}`.\n"
+        "If you want this text to be encoded as normal text, disable the check for this token "
+        f"by passing `disallowed_special=(enc.special_tokens_set - {{'{token}'}})`.\n"
+        "To disable this check for all special tokens, pass `disallowed_special=()`.\n"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Chat-related data-structures (mirroring ``src/chat.rs``)
+# ---------------------------------------------------------------------------
+
+
+class Role(str, Enum):
+    """The role of a message author (mirrors ``chat::Role``)."""
+
+    USER = "user"
+    ASSISTANT = "assistant"
+    SYSTEM = "system"
+    DEVELOPER = "developer"
+    TOOL = "tool"
+
+    @classmethod
+    def _missing_(cls, value: object) -> "Role":  # type: ignore[override]
+        raise ValueError(f"Unknown role: {value!r}")
+
+
+class Author(BaseModel):
+    role: Role
+    name: Optional[str] = None
+
+    @classmethod
+    def new(cls, role: Role, name: str) -> "Author":  # noqa: D401 – keep parity with Rust API
+        return cls(role=role, name=name)
+
+
+# Content hierarchy ---------------------------------------------------------
+
+
+T = TypeVar("T")
+
+
+class Content(BaseModel):  # noqa: D101 – simple wrapper
+    def to_dict(self) -> Dict[str, Any]:
+        raise NotImplementedError
+
+
+class TextContent(Content):
+    text: str
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {"type": "text", "text": self.text}
+
+
+class ToolDescription(BaseModel):
+    name: str
+    description: str
+    parameters: Optional[dict] = None
+
+    @classmethod
+    def new(
+        cls, name: str, description: str, parameters: Optional[dict] = None
+    ) -> "ToolDescription":  # noqa: D401
+        return cls(name=name, description=description, parameters=parameters)
+
+
+class ReasoningEffort(str, Enum):
+    LOW = "Low"
+    MEDIUM = "Medium"
+    HIGH = "High"
+
+
+class ChannelConfig(BaseModel):
+    valid_channels: List[str]
+    channel_required: bool
+
+    @classmethod
+    def require_channels(cls, channels: List[str]) -> "ChannelConfig":  # noqa: D401
+        return cls(valid_channels=channels, channel_required=True)
+
+
+class ToolNamespaceConfig(BaseModel):
+    name: str
+    description: Optional[str] = None
+    tools: List[ToolDescription]
+
+    @staticmethod
+    def browser() -> "ToolNamespaceConfig":
+        from .openai_harmony import (
+            get_tool_namespace_config as _get_tool_namespace_config,
+        )
+
+        cfg = _get_tool_namespace_config("browser")
+        return ToolNamespaceConfig(**cfg)
+
+    @staticmethod
+    def python() -> "ToolNamespaceConfig":
+        from .openai_harmony import (
+            get_tool_namespace_config as _get_tool_namespace_config,
+        )
+
+        cfg = _get_tool_namespace_config("python")
+        return ToolNamespaceConfig(**cfg)
+
+
+class SystemContent(Content):
+    model_identity: Optional[str] = (
+        "You are ChatGPT, a large language model trained by OpenAI."
+    )
+    reasoning_effort: Optional[ReasoningEffort] = ReasoningEffort.MEDIUM
+    conversation_start_date: Optional[str] = None
+    knowledge_cutoff: Optional[str] = "2024-06"
+    channel_config: Optional[ChannelConfig] = Field(
+        default_factory=lambda: ChannelConfig.require_channels(
+            ["analysis", "commentary", "final"]
+        )
+    )
+    tools: Optional[dict[str, ToolNamespaceConfig]] = None
+
+    @classmethod
+    def new(cls) -> "SystemContent":
+        return cls()
+
+    # Fluent interface ------------------------------------------------------
+
+    def with_model_identity(self, model_identity: str) -> "SystemContent":
+        self.model_identity = model_identity
+        return self
+
+    def with_reasoning_effort(
+        self, reasoning_effort: ReasoningEffort
+    ) -> "SystemContent":
+        self.reasoning_effort = reasoning_effort
+        return self
+
+    def with_conversation_start_date(
+        self, conversation_start_date: str
+    ) -> "SystemContent":
+        self.conversation_start_date = conversation_start_date
+        return self
+
+    def with_knowledge_cutoff(self, knowledge_cutoff: str) -> "SystemContent":
+        self.knowledge_cutoff = knowledge_cutoff
+        return self
+
+    def with_channel_config(self, channel_config: ChannelConfig) -> "SystemContent":
+        self.channel_config = channel_config
+        return self
+
+    def with_required_channels(self, channels: list[str]) -> "SystemContent":
+        self.channel_config = ChannelConfig.require_channels(channels)
+        return self
+
+    def with_tools(self, ns_config: ToolNamespaceConfig) -> "SystemContent":
+        if self.tools is None:
+            self.tools = {}
+        self.tools[ns_config.name] = ns_config
+        return self
+
+    def with_browser_tool(self) -> "SystemContent":
+        return self.with_tools(ToolNamespaceConfig.browser())
+
+    def with_python_tool(self) -> "SystemContent":
+        return self.with_tools(ToolNamespaceConfig.python())
+
+    def to_dict(self) -> dict:
+        out = self.model_dump(exclude_none=True)
+        out["type"] = "system_content"
+        return out
+
+    @classmethod
+    def from_dict(cls, raw: dict) -> "SystemContent":
+        return cls(**raw)
+
+
+class DeveloperContent(Content):
+    instructions: Optional[str] = None
+    tools: Optional[dict[str, ToolNamespaceConfig]] = None
+
+    @classmethod
+    def new(cls) -> "DeveloperContent":
+        return cls()
+
+    def with_instructions(self, instructions: str) -> "DeveloperContent":
+        self.instructions = instructions
+        return self
+
+    def with_tools(self, ns_config: ToolNamespaceConfig) -> "DeveloperContent":
+        if self.tools is None:
+            self.tools = {}
+        self.tools[ns_config.name] = ns_config
+        return self
+
+    def with_function_tools(
+        self, tools: Sequence[ToolDescription]
+    ) -> "DeveloperContent":
+        return self.with_tools(
+            ToolNamespaceConfig(name="functions", description=None, tools=list(tools))
+        )
+
+    def to_dict(self) -> dict:
+        out = self.model_dump(exclude_none=True)
+        out["type"] = "developer_content"
+        return out
+
+    @classmethod
+    def from_dict(cls, raw: dict) -> "DeveloperContent":
+        return cls(**raw)
+
+
+# Message & Conversation -----------------------------------------------------
+
+
+class Message(BaseModel):
+    author: Author
+    content: List[Content] = Field(default_factory=list)
+    channel: Optional[str] = None
+    recipient: Optional[str] = None
+    content_type: Optional[str] = None
+
+    # ------------------------------------------------------------------
+    # Convenience constructors (mirroring the Rust API)
+    # ------------------------------------------------------------------
+
+    @classmethod
+    def from_author_and_content(
+        cls, author: Author, content: Union[str, Content]
+    ) -> "Message":
+        if isinstance(content, str):
+            content = TextContent(text=content)
+        return cls(author=author, content=[content])
+
+    @classmethod
+    def from_role_and_content(
+        cls, role: Role, content: Union[str, Content]
+    ) -> "Message":  # noqa: D401 – parity with Rust API
+        return cls.from_author_and_content(Author(role=role), content)
+
+    @classmethod
+    def from_role_and_contents(
+        cls, role: Role, contents: Sequence[Content]
+    ) -> "Message":
+        return cls(author=Author(role=role), content=list(contents))
+
+    # ------------------------------------------------------------------
+    # Builder helpers
+    # ------------------------------------------------------------------
+
+    def adding_content(self, content: Union[str, Content]) -> "Message":
+        if isinstance(content, str):
+            content = TextContent(text=content)
+        self.content.append(content)
+        return self
+
+    def with_channel(self, channel: str) -> "Message":
+        self.channel = channel
+        return self
+
+    def with_recipient(self, recipient: str) -> "Message":
+        self.recipient = recipient
+        return self
+
+    def with_content_type(self, content_type: str) -> "Message":
+        self.content_type = content_type
+        return self
+
+    # ------------------------------------------------------------------
+    # Serialisation helpers
+    # ------------------------------------------------------------------
+
+    def to_dict(self) -> Dict[str, Any]:  # noqa: D401 – simple mapper
+        out: Dict[str, Any] = {
+            **self.author.model_dump(),
+            "content": [c.to_dict() for c in self.content],
+        }
+        if self.channel is not None:
+            out["channel"] = self.channel
+        if self.recipient is not None:
+            out["recipient"] = self.recipient
+        if self.content_type is not None:
+            out["content_type"] = self.content_type
+        return out
+
+    def to_json(self) -> str:  # noqa: D401
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "Message":
+        # Simple, sufficient implementation for test-roundtrip purposes.
+        role = Role(data["role"])
+        author = Author(role=role, name=data.get("name"))
+
+        contents: List[Content] = []
+
+        raw_content = data["content"]
+
+        # The Rust side serialises *single* text contents as a **plain string**
+        # for convenience.  Detect this shortcut and normalise it to the list
+        # representation that the rest of the Python code expects.
+        if isinstance(raw_content, str):
+            raw_content = [{"type": "text", "text": raw_content}]
+
+        for raw in raw_content:
+            if raw.get("type") == "text":
+                contents.append(TextContent(**raw))
+            elif raw.get("type") == "system_content":
+                contents.append(SystemContent(**raw))
+            elif raw.get("type") == "developer_content":
+                contents.append(DeveloperContent(**raw))
+            else:  # pragma: no cover – unknown variant
+                raise ValueError(f"Unknown content variant: {raw}")
+
+        msg = cls(author=author, content=contents)
+        msg.channel = data.get("channel")
+        msg.recipient = data.get("recipient")
+        msg.content_type = data.get("content_type")
+        return msg
+
+
+class Conversation(BaseModel):
+    messages: List[Message] = Field(default_factory=list)
+
+    @classmethod
+    def from_messages(cls, messages: Sequence[Message]) -> "Conversation":  # noqa: D401
+        return cls(messages=list(messages))
+
+    def __iter__(self):
+        return iter(self.messages)
+
+    # Serialisation helpers -------------------------------------------------
+
+    def to_dict(self) -> Dict[str, Any]:  # noqa: D401
+        return {"messages": [m.to_dict() for m in self.messages]}
+
+    def to_json(self) -> str:  # noqa: D401
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, payload: str) -> "Conversation":  # noqa: D401
+        data = json.loads(payload)
+        return cls(messages=[Message.from_dict(m) for m in data["messages"]])
+
+
+# ---------------------------------------------------------------------------
+# Encoding interaction (thin wrappers around the Rust bindings)
+# ---------------------------------------------------------------------------
+
+
+class RenderConversationConfig(BaseModel):
+    auto_drop_analysis: bool = True
+
+
+class RenderOptions(BaseModel):
+    conversation_has_function_tools: bool = False
+
+
+class HarmonyEncoding:
+    """High-level wrapper around the Rust ``PyHarmonyEncoding`` class."""
+
+    def __init__(self, inner: _PyHarmonyEncoding):
+        self._inner = inner
+
+    # ------------------------------------------------------------------
+    # Delegated helpers
+    # ------------------------------------------------------------------
+
+    @property
+    def name(self) -> str:  # noqa: D401
+        return self._inner.name  # type: ignore[attr-defined]
+
+    @functools.cached_property
+    def special_tokens_set(self) -> set[str]:
+        return set(self._inner.special_tokens())
+
+    # -- Rendering -----------------------------------------------------
+
+    def render_conversation_for_completion(
+        self,
+        conversation: Conversation,
+        next_turn_role: Role,
+        config: Optional[RenderConversationConfig] = None,
+    ) -> List[int]:
+        """
+        Render a conversation for completion.
+        Args:
+            conversation: Conversation object
+            next_turn_role: Role for the next turn
+            config: Optional RenderConversationConfig (default auto_drop_analysis=True)
+        """
+        if config is None:
+            config_dict = {"auto_drop_analysis": True}
+        else:
+            config_dict = {"auto_drop_analysis": config.auto_drop_analysis}
+        return self._inner.render_conversation_for_completion(
+            conversation_json=conversation.to_json(),
+            next_turn_role=str(next_turn_role.value),
+            config=config_dict,
+        )
+
+    def render_conversation(
+        self,
+        conversation: Conversation,
+        config: Optional[RenderConversationConfig] = None,
+    ) -> List[int]:
+        """Render a conversation without appending a new role."""
+        if config is None:
+            config_dict = {"auto_drop_analysis": True}
+        else:
+            config_dict = {"auto_drop_analysis": config.auto_drop_analysis}
+        return self._inner.render_conversation(
+            conversation_json=conversation.to_json(),
+            config=config_dict,
+        )
+
+    def render_conversation_for_training(
+        self,
+        conversation: Conversation,
+        config: Optional[RenderConversationConfig] = None,
+    ) -> List[int]:
+        """Render a conversation for training."""
+        if config is None:
+            config_dict = {"auto_drop_analysis": True}
+        else:
+            config_dict = {"auto_drop_analysis": config.auto_drop_analysis}
+        return self._inner.render_conversation_for_training(
+            conversation_json=conversation.to_json(),
+            config=config_dict,
+        )
+
+    def render(
+        self, message: Message, render_options: Optional[RenderOptions] = None
+    ) -> List[int]:
+        """Render a single message into tokens."""
+        if render_options is None:
+            render_options_dict = {"conversation_has_function_tools": False}
+        else:
+            render_options_dict = {
+                "conversation_has_function_tools": render_options.conversation_has_function_tools
+            }
+
+        return self._inner.render(
+            message_json=message.to_json(), render_options=render_options_dict
+        )
+
+    # -- Parsing -------------------------------------------------------
+
+    def parse_messages_from_completion_tokens(
+        self, tokens: Sequence[int], role: Optional[Role] | None = None
+    ) -> List[Message]:
+        raw_json: str = self._inner.parse_messages_from_completion_tokens(
+            list(tokens), None if role is None else str(role.value)
+        )
+        return [Message.from_dict(m) for m in json.loads(raw_json)]
+
+    # -- Token decoding ------------------------------------------------
+
+    def decode_utf8(self, tokens: Sequence[int]) -> str:
+        """Decode a list of tokens into a UTF-8 string. Will raise an error if the tokens result in invalid UTF-8. Use decode if you want to replace invalid UTF-8 with the unicode replacement character."""
+        return self._inner.decode_utf8(list(tokens))
+
+    def encode(
+        self,
+        text: str,
+        *,
+        allowed_special: Literal["all"] | AbstractSet[str] = set(),
+        disallowed_special: Literal["all"] | Collection[str] = "all",
+    ) -> list[int]:
+        """Encodes a string into tokens.
+
+        Special tokens are artificial tokens used to unlock capabilities from a model,
+        such as fill-in-the-middle. So we want to be careful about accidentally encoding special
+        tokens, since they can be used to trick a model into doing something we don't want it to do.
+
+        Hence, by default, encode will raise an error if it encounters text that corresponds
+        to a special token. This can be controlled on a per-token level using the `allowed_special`
+        and `disallowed_special` parameters. In particular:
+        - Setting `disallowed_special` to () will prevent this function from raising errors and
+          cause all text corresponding to special tokens to be encoded as natural text.
+        - Setting `allowed_special` to "all" will cause this function to treat all text
+          corresponding to special tokens to be encoded as special tokens.
+
+        ```
+        >>> enc.encode("hello world")
+        [31373, 995]
+        >>> enc.encode("<|endoftext|>", allowed_special={"<|endoftext|>"})
+        [50256]
+        >>> enc.encode("<|endoftext|>", allowed_special="all")
+        [50256]
+        >>> enc.encode("<|endoftext|>")
+        # Raises ValueError
+        >>> enc.encode("<|endoftext|>", disallowed_special=())
+        [27, 91, 437, 1659, 5239, 91, 29]
+        ```
+        """
+        if allowed_special == "all":
+            allowed_special = self.special_tokens_set
+        if disallowed_special == "all":
+            disallowed_special = self.special_tokens_set - set(allowed_special)
+        if disallowed_special:
+            if not isinstance(disallowed_special, frozenset):
+                disallowed_special = frozenset(disallowed_special)
+            if match := _special_token_regex(disallowed_special).search(text):
+                raise_disallowed_special_token(match.group())
+
+        try:
+            return self._inner.encode(text, list(allowed_special))
+        except UnicodeEncodeError:
+            text = text.encode("utf-16", "surrogatepass").decode("utf-16", "replace")
+            return self._inner.encode(text, list(allowed_special))
+
+    def decode(self, tokens: Sequence[int], errors: str = "replace") -> str:
+        """Decodes a list of tokens into a string.
+
+        WARNING: the default behaviour of this function is lossy, since decoded bytes are not
+        guaranteed to be valid UTF-8. You can use `decode_utf8` if you want to raise an error on invalid UTF-8.
+
+        ```
+        >>> enc.decode([31373, 995])
+        'hello world'
+        ```
+        """
+        data = bytes(self._inner.decode_bytes(list(tokens)))
+        return data.decode("utf-8", errors=errors)
+
+    def is_special_token(self, token: int) -> bool:
+        """Returns if an individual token is a special token"""
+        return self._inner.is_special_token(token)
+
+    # -- Stop tokens --------------------------------------------------
+
+    def stop_tokens(self) -> List[int]:
+        return self._inner.stop_tokens()
+
+    def stop_tokens_for_assistant_actions(self) -> List[int]:
+        return self._inner.stop_tokens_for_assistant_actions()
+
+
+class StreamState(Enum):
+    EXPECT_START = "ExpectStart"
+    HEADER = "Header"
+    CONTENT = "Content"
+
+
+class StreamableParser:
+    """Incremental parser over completion tokens."""
+
+    def __init__(self, encoding: HarmonyEncoding, role: Role | None):
+        role_str = str(role.value) if role is not None else None
+        self._inner = _PyStreamableParser(encoding._inner, role_str)
+
+    def process(self, token: int) -> "StreamableParser":
+        self._inner.process(token)
+        return self
+
+    def process_eos(self) -> "StreamableParser":
+        self._inner.process_eos()
+        return self
+
+    @property
+    def current_content(self) -> str:
+        return self._inner.current_content
+
+    @property
+    def current_role(self) -> Optional[Role]:
+        raw = self._inner.current_role
+        return Role(raw) if raw is not None else None
+
+    @property
+    def current_content_type(self) -> Optional[str]:
+        return self._inner.current_content_type
+
+    @property
+    def last_content_delta(self) -> Optional[str]:
+        return self._inner.last_content_delta
+
+    @property
+    def messages(self) -> List[Message]:
+        raw = self._inner.messages
+        return [Message.from_dict(m) for m in json.loads(raw)]
+
+    @property
+    def tokens(self) -> List[int]:
+        return self._inner.tokens
+
+    @property
+    def state_data(self) -> Dict[str, Any]:
+        """Return a JSON string representing the parser's internal state."""
+        return json.loads(self._inner.state)
+
+    @property
+    def state(self) -> StreamState:
+        data = self.state_data
+        return StreamState(data["state"])
+
+    @property
+    def current_recipient(self) -> Optional[str]:
+        return self._inner.current_recipient
+
+    @property
+    def current_channel(self) -> Optional[str]:
+        return self._inner.current_channel
+
+
+# Public helper --------------------------------------------------------------
+
+
+def load_harmony_encoding(name: str | "HarmonyEncodingName") -> HarmonyEncoding:  # type: ignore[name-defined]
+    """Load an encoding by *name* (delegates to the Rust implementation)."""
+
+    # Allow both strings and enum values.
+    if not isinstance(name, str):
+        name = str(name)
+
+    inner: _PyHarmonyEncoding = _load_harmony_encoding(name)
+    return HarmonyEncoding(inner)
+
+
+# For *mypy* we expose a minimal stub of the `HarmonyEncodingName` enum.  At
+# **runtime** the user is expected to pass the *string* names because the Rust
+# side only operates on strings anyway.
+
+
+class HarmonyEncodingName(str, Enum):  # noqa: D101 – simple enum stub
+    HARMONY_GPT_OSS = "HarmonyGptOss"
+
+    def __str__(self) -> str:  # noqa: D401
+        return str(self.value)
+
+
+# What should be re-exported when the user does ``from harmony import *``?
+__all__ = [
+    "Role",
+    "Author",
+    "Content",
+    "TextContent",
+    "DeveloperContent",
+    "ToolDescription",
+    "SystemContent",
+    "Message",
+    "Conversation",
+    "HarmonyEncoding",
+    "HarmonyEncodingName",
+    "load_harmony_encoding",
+    "StreamableParser",
+    "StreamState",
+    "HarmonyError",
+]
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/harmony_vllm_app.py">
+#!/usr/bin/env python3
+"""
+HARMONY vLLM Demo Application
+Uses OpenAI's official harmony renderer library to properly format prompts
+"""
+
+from flask import Flask, render_template, request, jsonify, Response, send_from_directory
+import json
+import requests
+from typing import List, Dict, Any, Optional
+import logging
+from dataclasses import dataclass, asdict
+from datetime import datetime
+import random
+import re
+import asyncio
+# from browser_tool_wrapper import browser_tool_wrapper  # Removed old browser
+# from custom_browser_instruction import BROWSER_INSTRUCTION  # Removed old browser
+from python_tool_wrapper import python_tool_wrapper
+from python_function_wrapper import PythonFunctionTool
+from custom_python_instruction import PYTHON_INSTRUCTION
+from official_python_instruction import OFFICIAL_PYTHON_INSTRUCTION
+# from official_browser_instruction import OFFICIAL_BROWSER_INSTRUCTION  # Removed old browser
+from builtin_tool_instructions import get_builtin_tools_instruction
+
+# Import harmony components
+from openai_harmony import (
+    Author,
+    Conversation,
+    DeveloperContent,
+    HarmonyEncodingName,
+    Message,
+    Role,
+    SystemContent,
+    ToolDescription,
+    load_harmony_encoding,
+    ReasoningEffort,
+    StreamableParser
+)
+
+app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+
+# vLLM server configuration
+VLLM_BASE_URL = "http://localhost:8000"
+MODEL_NAME = "openai/gpt-oss-20b"
+
+# Load harmony encoding
+try:
+    encoding = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+    logging.info("Harmony encoding loaded successfully")
+    
+    # Debug: Check available attributes
+    logging.info(f"Encoding attributes: {dir(encoding)}")
+    
+    # Try to get special tokens
+    if hasattr(encoding, 'special_tokens'):
+        logging.info(f"Has special_tokens method")
+    elif hasattr(encoding, 'special_tokens_set'):
+        logging.info(f"Has special_tokens_set attribute")
+    else:
+        logging.warning("No special tokens attribute found")
+        
+except Exception as e:
+    logging.error(f"Failed to load harmony encoding: {e}")
+    encoding = None
+
+@dataclass
+class ConversationState:
+    """Maintains conversation state"""
+    messages: List[Message]
+    system_config: Dict[str, Any]
+    developer_config: Dict[str, Any]
+    
+conversation_state = ConversationState(messages=[], system_config={}, developer_config={})
+
+# Vision browser instance will be created on demand
+_vision_browser_instance = None
+
+
+# Removed old browser system message function
+
+
+def create_system_message_with_builtin_tools(data: Dict[str, Any]) -> str:
+    """Create system message with built-in tools in the correct format"""
+    model_identity = data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.')
+    knowledge_cutoff = data.get('knowledge_cutoff', '2024-06')
+    current_date = data.get('current_date', datetime.now().strftime("%Y-%m-%d"))
+    reasoning_level = data.get('reasoning_level', 'HIGH')
+    
+    # Build the system message parts
+    system_parts = []
+    system_parts.append(model_identity)
+    system_parts.append(f"\nKnowledge cutoff: {knowledge_cutoff}")
+    system_parts.append(f"\nCurrent date: {current_date}")
+    
+    # Add reasoning level only if not "o1" (default)
+    if reasoning_level and reasoning_level.upper() != "O1":
+        system_parts.append(f"\nReasoning: {reasoning_level.lower()}")
+    
+    # Add valid channels line
+    system_parts.append("\n\n# Valid channels: analysis, commentary, final. Channel must be included for every message.")
+    
+    # Add the tools line if there are function tools
+    tools = data.get('tools', [])
+    if tools:
+        system_parts.append("\nCalls to these tools must go to the commentary channel: 'functions'.")
+    
+    return "".join(system_parts)
+
+# Update Python timeout constant
+PYTHON_TIMEOUT = 120  # 120 seconds as per spec
+
+# Fake weather database
+WEATHER_DATA = {
+    "San Francisco, CA": {"temp_c": 18, "temp_f": 64, "condition": "foggy", "humidity": 75, "wind_speed": 15},
+    "New York, NY": {"temp_c": 22, "temp_f": 72, "condition": "partly cloudy", "humidity": 60, "wind_speed": 10},
+    "Tokyo": {"temp_c": 26, "temp_f": 79, "condition": "sunny", "humidity": 55, "wind_speed": 8},
+    "London": {"temp_c": 16, "temp_f": 61, "condition": "rainy", "humidity": 85, "wind_speed": 20},
+    "Paris": {"temp_c": 20, "temp_f": 68, "condition": "cloudy", "humidity": 65, "wind_speed": 12},
+    "Sydney": {"temp_c": 24, "temp_f": 75, "condition": "sunny", "humidity": 50, "wind_speed": 18},
+}
+
+def get_fake_weather(location: str, format: str = "celsius") -> Dict[str, Any]:
+    """Get fake weather data for a location"""
+    # Normalize location
+    location = location.strip()
+    
+    # Check if we have data for this location
+    if location in WEATHER_DATA:
+        data = WEATHER_DATA[location]
+    else:
+        # Generate random weather for unknown locations
+        data = {
+            "temp_c": random.randint(10, 35),
+            "temp_f": random.randint(50, 95),
+            "condition": random.choice(["sunny", "cloudy", "rainy", "foggy", "partly cloudy"]),
+            "humidity": random.randint(30, 90),
+            "wind_speed": random.randint(5, 25),
+        }
+    
+    # Format response based on requested format
+    if format == "fahrenheit":
+        return {
+            "temperature": data["temp_f"],
+            "unit": "fahrenheit",
+            "condition": data["condition"],
+            "humidity": data["humidity"],
+            "wind_speed": data["wind_speed"],
+            "location": location
+        }
+    else:
+        return {
+            "temperature": data["temp_c"],
+            "unit": "celsius",
+            "condition": data["condition"],
+            "humidity": data["humidity"],
+            "wind_speed": data["wind_speed"],
+            "location": location
+        }
+
+def validate_weather_params(params: Dict[str, Any]) -> tuple[bool, Optional[str]]:
+    """Validate weather API parameters"""
+    if not isinstance(params, dict):
+        return False, "Parameters must be a JSON object"
+    
+    if "location" not in params:
+        return False, "Missing required parameter: location"
+    
+    if not isinstance(params["location"], str):
+        return False, "Location must be a string"
+    
+    if "format" in params and params["format"] not in ["celsius", "fahrenheit"]:
+        return False, f"Invalid format: {params['format']}. Must be 'celsius' or 'fahrenheit'"
+    
+    return True, None
+
+# Removed old browser tool execution function
+
+def execute_tool_call(tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """Execute a tool call and return the result"""
+    
+    # Handle Python tool (built-in)
+    if tool_name == "python":
+        script = params.get("script", params.get("code", ""))
+        if not script:
+            return {"error": "Python tool requires 'script' parameter"}
+        
+        # Run async function in sync context
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            result = loop.run_until_complete(
+                python_tool_wrapper.execute(script)
+            )
+            return {"output": result}
+        finally:
+            loop.close()
+    
+    # Handle Python as a function tool
+    elif tool_name == "functions.python":
+        python_func_tool = PythonFunctionTool()
+        return python_func_tool.handle_tool_call(params)
+    
+    # Handle vision browser tool
+    elif tool_name == "functions.browser":
+        try:
+            from vision_browser_wrapper import VisionBrowserWrapper
+            # Use a global instance to maintain browser state
+            global _vision_browser_instance
+            if _vision_browser_instance is None:
+                _vision_browser_instance = VisionBrowserWrapper(mock_mode=False)  # Use real browser
+            return _vision_browser_instance.execute(params)
+        except ImportError:
+            return {"error": "Vision browser tool not available. Install with: pip install selenium helium pillow"}
+    
+    # Handle weather functions
+    elif tool_name == "functions.get_current_weather":
+        valid, error = validate_weather_params(params)
+        if not valid:
+            return {"error": error}
+        
+        location = params["location"]
+        format = params.get("format", "celsius")
+        return get_fake_weather(location, format)
+    
+    elif tool_name == "functions.get_location":
+        # Fake user location
+        return {"location": "San Francisco, CA", "country": "United States"}
+    
+    elif tool_name == "functions.get_multiple_weathers":
+        if "locations" not in params:
+            return {"error": "Missing required parameter: locations"}
+        
+        if not isinstance(params["locations"], list):
+            return {"error": "Locations must be an array"}
+        
+        format = params.get("format", "celsius")
+        results = []
+        for location in params["locations"]:
+            if isinstance(location, str):
+                results.append(get_fake_weather(location, format))
+            else:
+                results.append({"error": f"Invalid location: {location}"})
+        
+        return {"locations": results}
+    
+    # Removed old browser tool calls
+    
+    else:
+        return {"error": f"Unknown tool: {tool_name}"}
+
+def extract_tool_calls(text: str) -> List[Dict[str, Any]]:
+    """Extract tool calls from model output"""
+    tool_calls = []
+    
+    # Pattern for commentary channel (functions.*)
+    # More lenient - capture everything after <|message|> until we hit another <|start|> or end
+    commentary_pattern = r'<\|channel\|>commentary\s+to=([\w\.]+).*?<\|message\|>(.*?)(?:<\|call\|>|<\|end\|>|<\|start\|>|$)'
+    
+    # Pattern for analysis channel (browser.*)
+    analysis_pattern = r'<\|channel\|>analysis\s+to=([\w\.]+).*?<\|message\|>(.*?)(?:<\|call\|>|<\|end\|>|<\|start\|>|$)'
+    
+    # Find all matches for both patterns
+    all_matches = []
+    
+    # Commentary channel matches
+    matches = re.findall(commentary_pattern, text, re.DOTALL)
+    for recipient, content in matches:
+        all_matches.append((recipient, content, "commentary"))
+    
+    # Analysis channel matches
+    matches = re.findall(analysis_pattern, text, re.DOTALL)
+    for recipient, content in matches:
+        all_matches.append((recipient, content, "analysis"))
+    
+    for recipient, content, channel in all_matches:
+        content = content.strip()
+        
+        # Special handling for Python tool - it takes raw code, not JSON
+        if recipient == "python":
+            tool_calls.append({
+                "tool": recipient,
+                "params": {"script": content},
+                "raw_content": content,
+                "channel": channel
+            })
+            continue
+        
+        # Clean up content - sometimes it includes extra protocol text
+        # Try to extract JSON - look for balanced braces
+        brace_count = 0
+        json_start = -1
+        json_end = -1
+        
+        for i, char in enumerate(content):
+            if char == '{':
+                if json_start == -1:
+                    json_start = i
+                brace_count += 1
+            elif char == '}':
+                brace_count -= 1
+                if brace_count == 0 and json_start != -1:
+                    json_end = i + 1
+                    break
+        
+        if json_start != -1 and json_end != -1:
+            json_content = content[json_start:json_end]
+            try:
+                params = json.loads(json_content)
+                tool_calls.append({
+                    "tool": recipient,
+                    "params": params,
+                    "raw_content": content,
+                    "channel": channel
+                })
+                continue
+            except json.JSONDecodeError:
+                pass
+        
+        # If not valid JSON, skip this tool call
+        logging.warning(f"Skipping invalid tool call for {recipient}: {content[:100]}...")
+    
+    logging.info(f"Extracted {len(tool_calls)} tool calls from text")
+    if tool_calls:
+        logging.info(f"Tool calls: {tool_calls}")
+    return tool_calls
+
+def extract_final_content(raw_response: str) -> str:
+    """Extract only the final channel content from raw HARMONY response"""
+    # First try to find content in final channel
+    pattern = r'<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)'
+    matches = re.findall(pattern, raw_response, re.DOTALL)
+    if matches:
+        return matches[-1].strip()
+    
+    # If no final channel, check if this is a continuation response
+    # Look for content after the last <|end|>
+    if '<|end|>' in raw_response:
+        parts = raw_response.split('<|end|>')
+        # Get the last non-empty part
+        for part in reversed(parts):
+            clean_part = part.strip()
+            # Skip if it's empty or starts with special tokens
+            if clean_part and not clean_part.startswith('<|') and not clean_part.startswith('{'):
+                # This is likely the final user-facing message
+                return clean_part
+    
+    return ""
+
+def filter_cot_from_content(content: str) -> str:
+    """Remove analysis channel content from assistant messages for conversation history"""
+    # Remove everything between <|channel|>analysis and <|channel|>final
+    pattern = r'<\|channel\|>analysis.*?(?=<\|channel\|>final)'
+    filtered = re.sub(pattern, '', content, flags=re.DOTALL)
+    
+    # Also remove standalone analysis blocks
+    pattern2 = r'<\|channel\|>analysis.*?<\|end\|>'
+    filtered = re.sub(pattern2, '', filtered, flags=re.DOTALL)
+    
+    return filtered.strip()
+
+def normalize_stop_token(response: str) -> str:
+    """Normalize stop tokens - convert <|return|> to <|end|>"""
+    return response.replace('<|return|>', '<|end|>')
+
+@app.route('/')
+def index():
+    """Serve the main HTML interface"""
+    return render_template('harmony_demo.html')
+
+@app.route('/test')
+def test():
+    """Serve the test page"""
+    return send_from_directory('.', 'test_tools.html')
+
+@app.route('/test2')
+def test2():
+    """Serve the frontend test page"""
+    return send_from_directory('.', 'test_frontend.html')
+
+@app.route('/demos/d20')
+def d20_demo():
+    """Serve the D20 demo"""
+    return send_from_directory('.', 'd20_demo.html')
+
+@app.route('/demos/d20-detailed')
+def d20_demo_detailed():
+    """Serve the detailed D20 demo"""
+    return send_from_directory('.', 'd20_demo_detailed.html')
+
+@app.route('/demos/compare')
+def serve_compare():
+    """Serve the comparison HTML"""
+    return send_from_directory('.', 'compare_approaches.html')
+
+@app.route('/demos/d20-cycling')
+def serve_d20_cycling():
+    """Serve the D20 demo with cycling examples"""
+    return send_from_directory('.', 'd20_demo_cycling.html')
+
+@app.route('/api/check_server', methods=['GET'])
+def check_server():
+    """Check if vLLM server is accessible"""
+    try:
+        response = requests.get(f"{VLLM_BASE_URL}/v1/models")
+        return jsonify({
+            "status": "connected",
+            "models": response.json()
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "error": str(e)
+        }), 500
+
+@app.route('/api/tokenize', methods=['POST'])
+def tokenize():
+    """Tokenize text using harmony encoding"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    try:
+        text = request.json.get('text', '')
+        # Try different methods to encode with special tokens
+        try:
+            # Try the encode method with allowed_special parameter
+            tokens = list(encoding.encode(text, allowed_special="all"))
+        except:
+            try:
+                # Try just encode without parameters
+                tokens = list(encoding.encode(text))
+            except Exception as e:
+                return jsonify({"error": f"Failed to encode text: {str(e)}"}), 500
+        
+        token_texts = [encoding.decode([t]) for t in tokens]
+        
+        # Get special tokens if available
+        special_tokens = {}
+        if hasattr(encoding, 'special_tokens'):
+            try:
+                special_tokens = {k: v for k, v in encoding.special_tokens().items()}
+            except:
+                special_tokens = list(encoding.special_tokens) if hasattr(encoding.special_tokens, '__iter__') else {}
+        elif hasattr(encoding, 'special_tokens_set'):
+            # It's a set, not a dict
+            special_tokens = list(encoding.special_tokens_set)
+        
+        return jsonify({
+            "tokens": tokens,
+            "token_texts": token_texts,
+            "special_tokens": special_tokens
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+def safe_json_serialize(obj):
+    """Convert objects to JSON-serializable format"""
+    if hasattr(obj, '__dict__'):
+        return obj.__dict__
+    elif hasattr(obj, '_asdict'):
+        return obj._asdict()
+    else:
+        return str(obj)
+
+@app.route('/api/render_prompt', methods=['POST'])
+def render_prompt():
+    """Render the full prompt using harmony"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    try:
+        data = request.json
+        
+        # Check if built-in tools are enabled
+        include_python = data.get('include_python', False)
+        include_browser = data.get('include_browser', False)
+        
+        if include_python or include_browser:
+            # Use custom system message with built-in tools
+            system_text = create_system_message_with_builtin_tools(data)
+            system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+        else:
+            # Use standard system message
+            system_message = (
+                SystemContent.new()
+                .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                .with_required_channels(["analysis", "commentary", "final"])
+            )
+        
+        # Create developer message
+        developer_message = DeveloperContent.new()
+        
+        # Add regular instructions
+        instructions_parts = []
+        if data.get('instructions'):
+            instructions_parts.append(data['instructions'])
+        
+        # Add built-in tool instructions if enabled
+        if include_python or include_browser:
+            from builtin_tool_instructions import get_builtin_tools_instruction
+            builtin_instructions = get_builtin_tools_instruction(
+                include_python=include_python,
+                include_browser=include_browser
+            )
+            if builtin_instructions:
+                instructions_parts.append(builtin_instructions)
+        
+        # Combine all instructions
+        if instructions_parts:
+            combined_instructions = '\n\n'.join(instructions_parts)
+            developer_message = developer_message.with_instructions(combined_instructions)
+        
+        # Get function tool descriptions for developer message
+        tools = data.get('tools', [])
+        
+        tool_descriptions = []
+        for tool in tools:
+            td = ToolDescription.new(
+                tool['name'],
+                tool['description'],
+                parameters=tool.get('parameters', {})
+            )
+            tool_descriptions.append(td)
+        
+        # Add function tools to developer message if any are available
+        if tool_descriptions:
+            # Try different method names
+            try:
+                developer_message = developer_message.with_function_tools(tool_descriptions)
+            except AttributeError:
+                try:
+                    developer_message = developer_message.with_tools(tool_descriptions)
+                except AttributeError:
+                    logging.warning("Could not add tools to developer message")
+        
+        # Build conversation
+        if include_python or include_browser:
+            # system_message is already a Message object
+            messages = [
+                system_message,
+                Message.from_role_and_content(Role.DEVELOPER, developer_message)
+            ]
+        else:
+            messages = [
+                Message.from_role_and_content(Role.SYSTEM, system_message),
+                Message.from_role_and_content(Role.DEVELOPER, developer_message)
+            ]
+        
+        # Add conversation history with CoT filtering
+        for msg in data.get('conversation_history', []):
+            if msg['role'] == 'user':
+                messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+            elif msg['role'] == 'assistant':
+                # Filter out CoT from assistant messages
+                filtered_content = filter_cot_from_content(msg['content'])
+                if filtered_content:  # Only add if there's content after filtering
+                    assistant_msg = Message.from_role_and_content(Role.ASSISTANT, filtered_content)
+                    if 'channel' in msg:
+                        assistant_msg = assistant_msg.with_channel(msg['channel'])
+                    if 'recipient' in msg:
+                        assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                    if 'content_type' in msg:
+                        assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                    messages.append(assistant_msg)
+            elif msg['role'] == 'tool':
+                # Handle tool messages
+                tool_msg = Message.from_author_and_content(
+                    Author.new(Role.TOOL, msg.get('name', 'tool')),
+                    msg['content']
+                )
+                if 'recipient' in msg:
+                    tool_msg = tool_msg.with_recipient(msg['recipient'])
+                if 'channel' in msg:
+                    tool_msg = tool_msg.with_channel(msg['channel'])
+                messages.append(tool_msg)
+        
+        # Add current user message or messages array
+        if data.get('current_message'):
+            messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+        elif data.get('messages'):
+            # Handle messages array format
+            for msg in data['messages']:
+                if msg['role'] == 'user':
+                    messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+        
+        # Create conversation
+        conversation = Conversation.from_messages(messages)
+        
+        # Render to tokens
+        tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+        
+        # Convert tokens to text for display
+        prompt_text = encoding.decode(tokens)
+        
+        # Don't add constrain token - we want the model to use channel format, not JSON
+        
+        # Also get token details
+        token_texts = [encoding.decode([t]) for t in tokens]
+        
+        # Ensure everything is JSON serializable
+        response_data = {
+            "prompt": prompt_text,
+            "tokens": [int(t) for t in tokens],  # Ensure tokens are ints
+            "token_texts": token_texts,
+            "token_count": len(tokens)
+        }
+        
+        return jsonify(response_data)
+        
+    except Exception as e:
+        logging.error(f"Error rendering prompt: {e}")
+        logging.error(f"Error type: {type(e)}")
+        import traceback
+        logging.error(f"Traceback: {traceback.format_exc()}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/execute_tool', methods=['POST'])
+def execute_tool():
+    """Execute a tool call"""
+    try:
+        data = request.json
+        tool_name = data.get('tool')
+        params = data.get('params', {})
+        
+        if not tool_name:
+            return jsonify({"error": "Missing tool name"}), 400
+        
+        result = execute_tool_call(tool_name, params)
+        
+        return jsonify({
+            "tool": tool_name,
+            "params": params,
+            "result": result
+        })
+    except Exception as e:
+        logging.error(f"Error executing tool: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    """Send chat request to vLLM server with harmony formatting"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    # Track all prompts sent during this request
+    prompts_sent = []
+    
+    try:
+        data = request.json
+        
+        # Don't call render_prompt() directly as it creates a Flask response
+        # Instead, inline the rendering logic here
+        try:
+            # Check if built-in tools are enabled
+            include_python = data.get('include_python', False)
+            include_browser = data.get('include_browser', False)
+            
+            if include_python or include_browser:
+                # Use custom system message with built-in tools
+                system_text = create_system_message_with_builtin_tools(data)
+                system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+            else:
+                # Use standard system message
+                system_message = (
+                    SystemContent.new()
+                    .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                    .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                    .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                    .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                    .with_required_channels(["analysis", "commentary", "final"])
+                )
+            
+            # Create developer message
+            developer_message = DeveloperContent.new()
+            if data.get('instructions'):
+                developer_message = developer_message.with_instructions(data['instructions'])
+            
+            # Get function tool descriptions
+            tools = data.get('tools', [])
+            
+            # Add vision browser to tools if include_browser is True
+            if include_browser:
+                # Add vision browser to tools list if not already present
+                if not any(t.get('name') == 'browser' for t in tools):
+                    from vision_browser_wrapper import VisionBrowserWrapper
+                    wrapper = VisionBrowserWrapper(mock_mode=False)  # Use real browser
+                    browser_def = wrapper.get_tool_definition()
+                    tools.append(browser_def)
+            
+            tool_descriptions = []
+            for tool in tools:
+                td = ToolDescription.new(
+                    tool['name'],
+                    tool['description'],
+                    parameters=tool.get('parameters', {})
+                )
+                tool_descriptions.append(td)
+            
+            # Add function tools to developer message if any are available
+            if tool_descriptions:
+                try:
+                    developer_message = developer_message.with_function_tools(tool_descriptions)
+                except AttributeError:
+                    try:
+                        developer_message = developer_message.with_tools(tool_descriptions)
+                    except AttributeError:
+                        logging.warning("Could not add tools to developer message")
+            
+            # Build conversation
+            if include_python or include_browser:
+                # system_message is already a Message object
+                messages = [
+                    system_message,
+                    Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                ]
+            else:
+                messages = [
+                    Message.from_role_and_content(Role.SYSTEM, system_message),
+                    Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                ]
+            
+            # Add conversation history with CoT filtering
+            for msg in data.get('conversation_history', []):
+                if msg['role'] == 'user':
+                    messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+                elif msg['role'] == 'assistant':
+                    # Filter out CoT from assistant messages
+                    filtered_content = filter_cot_from_content(msg['content'])
+                    if filtered_content:  # Only add if there's content after filtering
+                        assistant_msg = Message.from_role_and_content(Role.ASSISTANT, filtered_content)
+                        if 'channel' in msg:
+                            assistant_msg = assistant_msg.with_channel(msg['channel'])
+                        if 'recipient' in msg:
+                            assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                        if 'content_type' in msg:
+                            assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                        messages.append(assistant_msg)
+                elif msg['role'] == 'tool':
+                    tool_msg = Message.from_author_and_content(
+                        Author.new(Role.TOOL, msg.get('name', 'tool')),
+                        msg['content']
+                    )
+                    if 'recipient' in msg:
+                        tool_msg = tool_msg.with_recipient(msg['recipient'])
+                    if 'channel' in msg:
+                        tool_msg = tool_msg.with_channel(msg['channel'])
+                    messages.append(tool_msg)
+            
+            # Add current user message or messages array
+            if data.get('current_message'):
+                messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+            elif data.get('messages'):
+                # Handle messages array format
+                for msg in data['messages']:
+                    if msg['role'] == 'user':
+                        messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+            
+            # Create conversation and render
+            conversation = Conversation.from_messages(messages)
+            tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+            prompt = encoding.decode(tokens)
+            
+            # Don't add constrain token - we want the model to use channel format, not JSON
+            
+        except Exception as e:
+            logging.error(f"Error rendering prompt in chat: {e}")
+            return jsonify({"error": f"Failed to render prompt: {str(e)}"}), 500
+        
+        # Track this initial prompt (will add response later)
+        initial_prompt_info = {
+            "stage": "initial",
+            "prompt": prompt,
+            "token_count": len(tokens),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        # Send to vLLM
+        vllm_response = requests.post(
+            f"{VLLM_BASE_URL}/v1/completions",
+            json={
+                "model": MODEL_NAME,
+                "prompt": prompt,
+                "max_tokens": data.get('max_tokens', 2048),
+                "temperature": data.get('temperature', 0.7),
+                "stop": ["<|return|>", "<|call|>"],
+                "stream": False,
+                "skip_special_tokens": False,
+                "logprobs": 1
+            }
+        )
+        
+        if vllm_response.status_code != 200:
+            return jsonify({"error": f"vLLM error: {vllm_response.text}"}), 500
+        
+        vllm_data = vllm_response.json()
+        response_text = vllm_data['choices'][0]['text']
+        finish_reason = vllm_data['choices'][0].get('finish_reason', 'unknown')
+        
+        logging.info(f"vLLM finish_reason: {finish_reason}")
+        logging.info(f"Response length: {len(response_text)}")
+        logging.info(f"Response ends with: {response_text[-50:] if len(response_text) > 50 else response_text}")
+        
+        # Check if response contains tool calls
+        tool_calls = extract_tool_calls(response_text)
+        logging.info(f"Initial response extracted {len(tool_calls)} tool calls: {tool_calls}")
+        logging.info(f"Initial response text ends with: ...{repr(response_text[-200:])}")
+        
+        # If stopped because of <|call|>, append it
+        if finish_reason == 'stop' and not response_text.endswith('<|call|>'):
+            response_text += '<|call|>'
+            logging.info("Appended <|call|> because finish_reason was 'stop'")
+        
+        # Add response to initial prompt info and track it
+        initial_prompt_info['response'] = response_text
+        prompts_sent.append(initial_prompt_info)
+        
+        # Handle multiple rounds of tool calls
+        all_tool_responses = []
+        current_prompt = prompt
+        current_response = response_text
+        max_rounds = 3  # Prevent infinite loops - reduced from 10
+        round_count = 0
+        
+        while tool_calls and round_count < max_rounds:
+            round_count += 1
+            logging.info(f"Processing tool calls round {round_count}: {len(tool_calls)} calls")
+            
+            # Execute tool calls for this round
+            tool_responses = []
+            
+            for tool_call in tool_calls:
+                tool_name = tool_call['tool']
+                params = tool_call['params']
+                channel = tool_call.get('channel', 'commentary')
+                
+                logging.info(f"Executing tool: {tool_name} with params: {params}")
+                
+                # Execute the tool
+                result = execute_tool_call(tool_name, params)
+                
+                # Format tool response in HARMONY format
+                # Use the same channel as the request (analysis for browser, commentary for others)
+                # Built-in tools (python, browser) return raw output, functions return JSON
+                if tool_name in ['python', 'browser']:
+                    # Built-in tools return raw output
+                    tool_response = f'<|return|>{result}<|end|>'
+                else:
+                    # Function tools return JSON
+                    tool_response = f'<|return|>{json.dumps(result)}<|end|>'
+                tool_responses.append({
+                    'tool': tool_name,
+                    'params': params,
+                    'result': result,
+                    'formatted_response': tool_response
+                })
+            
+            all_tool_responses.extend(tool_responses)
+            
+            # Append tool responses to the conversation and continue
+            continued_prompt = current_prompt + current_response
+            for tr in tool_responses:
+                continued_prompt += tr['formatted_response']
+            continued_prompt += '<|start|>assistant<|message|>'
+            
+            # Prepare continuation prompt info (will add response later)
+            continuation_prompt_info = {
+                "stage": f"continuation_round_{round_count}",
+                "prompt": continued_prompt,
+                "token_count": len(list(encoding.encode(continued_prompt, allowed_special="all"))),
+                "timestamp": datetime.now().isoformat(),
+                "tool_calls": tool_calls
+            }
+            
+            # Make another request to vLLM to continue after tool execution
+            continue_response = requests.post(
+                f"{VLLM_BASE_URL}/v1/completions",
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": continued_prompt,
+                    "max_tokens": data.get('max_tokens', 2048),
+                    "temperature": data.get('temperature', 0.7),
+                    "stop": ["<|return|>", "<|call|>", "<|end|>"],  # Stop on return, call, or end
+                    "stream": False,
+                    "skip_special_tokens": False,
+                    "logprobs": 1
+                }
+            )
+            
+            if continue_response.status_code == 200:
+                continue_data = continue_response.json()
+                continued_text = continue_data['choices'][0]['text']
+                finish_reason = continue_data['choices'][0].get('finish_reason', 'unknown')
+                
+                logging.info(f"Round {round_count} finish_reason: {finish_reason}")
+                logging.info(f"Round {round_count} response ends with: {continued_text[-50:] if len(continued_text) > 50 else continued_text}")
+                
+                # Check if we have an incomplete tool call at the end
+                if finish_reason == 'stop' and not continued_text.endswith('<|call|>'):
+                    # Check for tool call patterns
+                    if any(pattern in continued_text[-150:] for pattern in ['to=browser.', 'to=functions.']):
+                        continued_text += '<|call|>'
+                        logging.info("Appended <|call|> to incomplete tool call")
+                
+                # Add response to continuation prompt info and track it
+                continuation_prompt_info['response'] = continued_text
+                prompts_sent.append(continuation_prompt_info)
+                
+                # Update for next iteration
+                current_prompt = continued_prompt
+                current_response = continued_text
+                
+                # Check for more tool calls in the continued response
+                tool_calls = extract_tool_calls(continued_text)
+                logging.info(f"Round {round_count} found {len(tool_calls)} new tool calls")
+                logging.info(f"Round {round_count} continued text: {continued_text}")
+                
+                # If no more tool calls, we're done
+                if not tool_calls:
+                    break
+            else:
+                logging.error(f"Failed to continue after tool execution: {continue_response.text}")
+                # Still track the failed continuation
+                continuation_prompt_info['response'] = f"[Error: {continue_response.status_code}]"
+                continuation_prompt_info['error'] = continue_response.text
+                prompts_sent.append(continuation_prompt_info)
+                break
+        
+        # Build the complete response from all rounds
+        full_response = response_text
+        for tr in all_tool_responses:
+            full_response += tr['formatted_response']
+        if round_count > 0:  # If we did any continuations
+            full_response += current_response
+        
+        # Parse the complete response
+        try:
+            response_tokens = list(encoding.encode(full_response, allowed_special="all"))
+        except:
+            response_tokens = list(encoding.encode(full_response))
+        
+        try:
+            parsed_messages = encoding.parse_messages_from_completion_tokens(response_tokens, Role.ASSISTANT)
+        except Exception as e:
+            logging.warning(f"Failed to parse messages: {e}")
+            parsed_messages = []
+        
+        # Extract structured information
+        channels = {}
+        for msg in parsed_messages:
+            channel = getattr(msg, 'channel', 'default')
+            
+            # Skip tool messages - we don't want to display these in the channels
+            if hasattr(msg, 'author') and hasattr(msg.author, 'role') and msg.author.role == Role.TOOL:
+                continue
+                
+            if channel not in channels:
+                channels[channel] = []
+            
+            # Extract content as string
+            content_str = ""
+            if hasattr(msg, 'content'):
+                if isinstance(msg.content, str):
+                    content_str = msg.content
+                elif isinstance(msg.content, list):
+                    # Extract text from TextContent objects
+                    for item in msg.content:
+                        if hasattr(item, 'text'):
+                            content_str += item.text
+                        else:
+                            content_str += str(item)
+                else:
+                    content_str = str(msg.content)
+            else:
+                content_str = str(msg)
+            
+            # Skip if this is a code/JSON message (tool call)
+            recipient = getattr(msg, 'recipient', None)
+            content_type = getattr(msg, 'content_type', None)
+            
+            # Filter out JSON tool calls from display
+            if recipient and '.' in str(recipient) and content_type == 'code':
+                # This is a tool call, skip it
+                continue
+                
+            channels[channel].append({
+                'content': content_str,
+                'recipient': recipient,
+                'content_type': content_type
+            })
+        
+        # Extract final content for conversation history
+        final_content = extract_final_content(full_response)
+        
+        logging.info(f"Sending response with {len(full_response)} chars, {round_count} rounds, {len(all_tool_responses)} tool calls")
+        logging.info(f"Full response ends with: {repr(full_response[-100:])}")
+        
+        return jsonify({
+            "raw_response": full_response,
+            "final_content": final_content,
+            "tokens": response_tokens,
+            "parsed_messages": channels,
+            "tool_calls": all_tool_responses,
+            "prompts_sent": prompts_sent,
+            "rounds": round_count,
+            "logprobs": vllm_data['choices'][0].get('logprobs', {})
+        })
+        
+    except Exception as e:
+        logging.error(f"Error in chat: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/stream', methods=['POST'])
+def stream():
+    """Stream chat responses with live parsing"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    # Get data before entering the generator
+    data = request.get_json()
+    
+    # Track all prompts sent during this streaming request
+    prompts_sent = []
+    
+    def generate(data):
+        try:
+            
+            # Inline prompt rendering (same as in chat endpoint)
+            try:
+                # Check if built-in tools are enabled
+                include_python = data.get('include_python', False)
+                include_browser = data.get('include_browser', False)
+                
+                if include_python or include_browser:
+                    # Use custom system message with built-in tools
+                    system_text = create_system_message_with_builtin_tools(data)
+                    system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+                else:
+                    # Use standard system message
+                    system_message = (
+                        SystemContent.new()
+                        .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                        .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                        .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                        .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                        .with_required_channels(["analysis", "commentary", "final"])
+                    )
+                
+                # Create developer message
+                developer_message = DeveloperContent.new()
+                
+                # Add regular instructions
+                instructions_parts = []
+                if data.get('instructions'):
+                    instructions_parts.append(data['instructions'])
+                
+                # Add built-in tool instructions if enabled
+                if include_python or include_browser:
+                    from builtin_tool_instructions import get_builtin_tools_instruction
+                    builtin_instructions = get_builtin_tools_instruction(
+                        include_python=include_python,
+                        include_browser=include_browser
+                    )
+                    if builtin_instructions:
+                        instructions_parts.append(builtin_instructions)
+                
+                # Combine all instructions
+                if instructions_parts:
+                    combined_instructions = '\n\n'.join(instructions_parts)
+                    developer_message = developer_message.with_instructions(combined_instructions)
+                
+                # Get function tool descriptions
+                tools = data.get('tools', [])
+                
+                tool_descriptions = []
+                for tool in tools:
+                    td = ToolDescription.new(
+                        tool['name'],
+                        tool['description'],
+                        parameters=tool.get('parameters', {})
+                    )
+                    tool_descriptions.append(td)
+                
+                # Add function tools to developer message if any are available
+                if tool_descriptions:
+                    try:
+                        developer_message = developer_message.with_function_tools(tool_descriptions)
+                    except AttributeError:
+                        try:
+                            developer_message = developer_message.with_tools(tool_descriptions)
+                        except AttributeError:
+                            logging.warning("Could not add tools to developer message")
+                
+                # Build conversation
+                if include_python or include_browser:
+                    # system_message is already a Message object
+                    messages = [
+                        system_message,
+                        Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                    ]
+                else:
+                    messages = [
+                        Message.from_role_and_content(Role.SYSTEM, system_message),
+                        Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                    ]
+                
+                # Add conversation history - properly handle raw content
+                for msg in data.get('conversation_history', []):
+                    if msg['role'] == 'user':
+                        messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+                    elif msg['role'] == 'assistant':
+                        # If we have raw content, just append it directly to prompt
+                        if 'rawContent' in msg:
+                            # We'll handle this differently - store for later
+                            pass
+                        else:
+                            # Old format compatibility
+                            assistant_msg = Message.from_role_and_content(Role.ASSISTANT, msg.get('content', ''))
+                            if 'channel' in msg:
+                                assistant_msg = assistant_msg.with_channel(msg['channel'])
+                            if 'recipient' in msg:
+                                assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                            if 'content_type' in msg:
+                                assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                            messages.append(assistant_msg)
+                    elif msg['role'] == 'tool':
+                        tool_msg = Message.from_author_and_content(
+                            Author.new(Role.TOOL, msg.get('name', 'tool')),
+                            msg['content']
+                        )
+                        if 'recipient' in msg:
+                            tool_msg = tool_msg.with_recipient(msg['recipient'])
+                        if 'channel' in msg:
+                            tool_msg = tool_msg.with_channel(msg['channel'])
+                        messages.append(tool_msg)
+                
+                # Add current user message
+                messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+                
+                # Create conversation and render
+                conversation = Conversation.from_messages(messages)
+                tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+                prompt = encoding.decode(tokens)
+                
+            except Exception as e:
+                yield f"data: {json.dumps({'error': f'Failed to render prompt: {str(e)}'})}\n\n"
+                return
+            
+            # Track the initial prompt (will add response later)
+            initial_prompt_info = {
+                "stage": "initial",
+                "prompt": prompt,
+                "token_count": len(tokens),
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # Create streaming parser
+            parser = StreamableParser(encoding, role=Role.ASSISTANT)
+            accumulated_text = ""  # Accumulate text to handle partial special tokens
+            
+            # Send streaming request to vLLM
+            with requests.post(
+                f"{VLLM_BASE_URL}/v1/completions",
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": prompt,
+                    "max_tokens": data.get('max_tokens', 2048),
+                    "temperature": data.get('temperature', 0.7),
+                    "stop": ["<|return|>"],
+                    "stream": True,
+                    "skip_special_tokens": False,
+                    "logprobs": 1
+                },
+                stream=True
+            ) as response:
+                
+                for line in response.iter_lines():
+                    if line:
+                        line = line.decode('utf-8')
+                        if line.startswith('data: '):
+                            chunk_data = line[6:]
+                            if chunk_data == '[DONE]':
+                                break
+                            
+                            try:
+                                chunk = json.loads(chunk_data)
+                                if 'choices' in chunk and chunk['choices']:
+                                    text = chunk['choices'][0].get('text', '')
+                                    
+                                    if text:
+                                        accumulated_text += text
+                                        
+                                        # Send update with accumulated text
+                                        yield f"data: {json.dumps({
+                                            'text': text,
+                                            'accumulated': accumulated_text,
+                                            'current_role': 'assistant',
+                                            'current_channel': None,
+                                            'last_content_delta': text,
+                                            'current_content': accumulated_text,
+                                            'current_recipient': None,
+                                            'current_content_type': None
+                                        })}\n\n"
+                                        
+                            except json.JSONDecodeError:
+                                continue
+                
+                # Add initial response to prompt info
+                initial_prompt_info['response'] = accumulated_text
+                prompts_sent.append(initial_prompt_info)
+                
+                # Check if response contains tool calls
+                tool_calls = extract_tool_calls(accumulated_text)
+                
+                # If the stream stopped but we have a tool call pattern, append <|call|>
+                if tool_calls and not accumulated_text.endswith('<|call|>'):
+                    for tc in tool_calls:
+                        if tc['tool'] and tc['params']:
+                            accumulated_text += '<|call|>'
+                            logging.info("Appended <|call|> to streaming response")
+                            break
+                
+                if tool_calls and '<|call|>' in accumulated_text:
+                    # Execute tool calls and continue the conversation
+                    tool_responses = []
+                    
+                    for tool_call in tool_calls:
+                        tool_name = tool_call['tool']
+                        params = tool_call['params']
+                        channel = tool_call.get('channel', 'commentary')
+                        
+                        # Execute the tool
+                        result = execute_tool_call(tool_name, params)
+                        
+                        # Format tool response
+                        # Use the same channel as the request (analysis for browser, commentary for others)
+                        tool_response = f'<|start|>{tool_name} to=assistant<|channel|>{channel}<|message|>{json.dumps(result)}<|end|>'
+                        tool_responses.append({
+                            'tool': tool_name,
+                            'params': params,
+                            'result': result,
+                            'formatted_response': tool_response
+                        })
+                        
+                        # Send tool execution info
+                        yield f"data: {json.dumps({
+                            'tool_executed': {
+                                'tool': tool_name,
+                                'params': params,
+                                'result': result
+                            }
+                        })}\n\n"
+                    
+                    # Continue the conversation with tool responses
+                    continued_prompt = prompt + accumulated_text
+                    for tr in tool_responses:
+                        continued_prompt += tr['formatted_response']
+                    continued_prompt += '<|start|>assistant<|message|>'
+                    
+                    # Prepare continuation prompt info (will add response later)
+                    continuation_prompt_info = {
+                        "stage": "continuation_after_tools",
+                        "prompt": continued_prompt,
+                        "token_count": len(list(encoding.encode(continued_prompt, allowed_special="all"))),
+                        "timestamp": datetime.now().isoformat(),
+                        "tool_calls": tool_calls
+                    }
+                    
+                    # Add tool responses to accumulated text for complete raw response
+                    for tr in tool_responses:
+                        accumulated_text += tr['formatted_response']
+                    
+                    # Stream the continuation
+                    yield f"data: {json.dumps({'continuing_after_tools': True})}\n\n"
+                    
+                    with requests.post(
+                        f"{VLLM_BASE_URL}/v1/completions",
+                        json={
+                            "model": MODEL_NAME,
+                            "prompt": continued_prompt,
+                            "max_tokens": data.get('max_tokens', 2048),
+                            "temperature": data.get('temperature', 0.7),
+                            "stop": ["<|return|>"],
+                            "stream": True,
+                            "skip_special_tokens": False,
+                            "logprobs": 1
+                        },
+                        stream=True
+                    ) as continue_response:
+                        
+                        for line in continue_response.iter_lines():
+                            if line:
+                                line = line.decode('utf-8')
+                                if line.startswith('data: '):
+                                    chunk_data = line[6:]
+                                    if chunk_data == '[DONE]':
+                                        break
+                                    
+                                    try:
+                                        chunk = json.loads(chunk_data)
+                                        if 'choices' in chunk and chunk['choices']:
+                                            text = chunk['choices'][0].get('text', '')
+                                            
+                                            if text:
+                                                accumulated_text += text
+                                                
+                                                yield f"data: {json.dumps({
+                                                    'text': text,
+                                                    'accumulated': accumulated_text,
+                                                    'is_continuation': True
+                                                })}\n\n"
+                                                
+                                    except json.JSONDecodeError:
+                                        continue
+                        
+                        # Add continuation response to prompt info
+                        if 'continuation_prompt_info' in locals():
+                            # Get the continuation response text by finding what was added after the prompt
+                            continuation_start = len(continuation_prompt_info['prompt'])
+                            continuation_response = accumulated_text[continuation_start:] if len(accumulated_text) > continuation_start else accumulated_text
+                            continuation_prompt_info['response'] = continuation_response
+                            prompts_sent.append(continuation_prompt_info)
+                
+                # Parse the complete accumulated text
+                if accumulated_text:
+                    # Extract all content manually
+                    parsed_messages = []
+                    
+                    # Extract channel content using regex
+                    import re
+                    
+                    # Find all analysis messages
+                    for match in re.finditer(r'<\|channel\|>analysis<\|message\|>(.*?)(?=<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'analysis',
+                            'content': match.group(1).strip(),
+                            'recipient': None,
+                            'content_type': None
+                        })
+                    
+                    # Find all commentary/tool calls
+                    for match in re.finditer(r'<\|channel\|>commentary(?:\s+to=([\w\.]+))?.*?<\|message\|>(.*?)(?=<\|call\|>|<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'commentary',
+                            'content': match.group(2).strip() if match.group(2) else '',
+                            'recipient': match.group(1) if match.group(1) else None,
+                            'content_type': None
+                        })
+                    
+                    # Find all final messages
+                    for match in re.finditer(r'<\|channel\|>final<\|message\|>(.*?)(?=<\|return\|>|<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'final',
+                            'content': match.group(1).strip(),
+                            'recipient': None,
+                            'content_type': None
+                        })
+                else:
+                    parsed_messages = []
+                
+                # Build the complete raw response including tool responses
+                if 'tool_responses' in locals() and tool_responses:
+                    # We had tool calls, so build the full response
+                    full_raw_response = accumulated_text
+                    # Note: accumulated_text already includes everything because we accumulated
+                    # from both the initial response AND the continuation after tools
+                else:
+                    # No tool calls, just the direct response
+                    full_raw_response = accumulated_text
+                
+                # Extract final content for conversation history
+                final_content = extract_final_content(full_raw_response) if full_raw_response else ""
+                
+                # Send final parsed messages with tool info and all prompts
+                yield f"data: {json.dumps({
+                    'done': True,
+                    'raw_response': full_raw_response,  # Include the complete raw response
+                    'final_content': final_content,  # Add clean content for frontend
+                    'parsed_messages': parsed_messages,
+                    'tool_calls': tool_responses if 'tool_responses' in locals() else [],
+                    'prompts_sent': prompts_sent  # All prompts sent during streaming
+                })}\n\n"
+                
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+    
+    return Response(generate(data), mimetype='text/event-stream')
+
+if __name__ == '__main__':
+    app.run(debug=False, port=5000)
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/README.md">
+# Harmony VLLM App
+
+A Flask web application that demonstrates the OpenAI Harmony format with VLLM backend, featuring browser automation and sandboxed Python execution.
+
+## Features
+
+- **OpenAI Harmony Format**: Implements the Harmony prompt format for tool use
+- **VLLM Integration**: Uses VLLM for fast local LLM inference
+- **Vision Browser Tool**: Selenium-based browser automation with screenshot capabilities
+- **Sandboxed Python Tool**: Docker-sandboxed Python execution for safety
+- **Real-time Streaming**: Server-sent events for streaming responses
+- **Dark Mode UI**: Modern interface with dark mode support
+
+## Prerequisites
+
+- Python 3.11+
+- Docker (for sandboxed Python execution)
+- Chrome/Chromium browser (for browser tool)
+- VLLM-compatible GPU (for local inference)
+
+## Installation
+
+Clone the repository
+
+Install dependencies:
+
+Install ChromeDriver:
+```bash
+# On Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install chromium-chromedriver
+
+# On macOS with Homebrew
+brew install chromedriver
+
+# Or download manually from https://chromedriver.chromium.org/
+```
+
+Pull Docker Python image (for sandboxed execution):
+```bash
+docker pull python:3.11-slim
+```
+
+## Configuration
+
+1. Set up your OpenAI API key (if using OpenAI backend):
+```bash
+export OPENAI_API_KEY="your-api-key-here"
+```
+
+2. For VLLM backend, ensure your model is loaded:
+```bash
+# Example for loading a model with VLLM
+python -m vllm.entrypoints.openai.api_server \
+  --model meta-llama/Llama-3.2-3B-Instruct \
+  --port 5001
+```
+
+## Usage
+
+1. Start the Flask application:
+```bash
+python harmony_vllm_app.py
+```
+
+2. Open your browser to `http://localhost:5002`
+
+3. Select your desired tools:
+   - **Vision Browser Tool**: For web browsing and screenshots
+   - **Python Tool**: For calculations and data processing
+
+4. Start chatting! The AI will use the enabled tools to help with your requests.
+
+## Tool Details
+
+### Vision Browser Tool
+- Uses Selenium WebDriver for browser automation
+- Captures screenshots for visual analysis
+- Extracts text content from web pages
+- **Note**: Many sites have anti-bot protection (Cloudflare, etc.)
+
+### Python Tool
+- Executes Python code in Docker containers
+- Security restrictions:
+  - No network access
+  - 512MB memory limit
+  - 50% CPU limit
+  - Read-only filesystem (except /tmp)
+- Falls back to subprocess if Docker unavailable
+
+## Security Considerations
+
+1. **Python Execution**: Always runs in sandboxed environment
+2. **Browser Tool**: Uses separate browser profile, no access to personal data
+3. **API Keys**: Never commit API keys to repository
+4. **Docker**: Ensure Docker daemon is properly secured
+
+## Architecture
+
+- `harmony_vllm_app.py`: Main Flask application
+- `vision_browser_wrapper.py`: Browser tool wrapper
+- `python_tool_wrapper.py`: Python execution wrapper
+- `templates/harmony_demo.html`: Frontend UI
+- `python/openai_harmony/`: Harmony format types
 
 ## Development
 
-To run the extension locally for development:
-1.  Run `npm install` to install dependencies.
-2.  Run `npm run watch` to start the Webpack compiler in watch mode.
-3.  Press `F5` in VS Code to launch the **Extension Development Host**, a new VS Code window with the DCE extension installed and running.
-</file_artifact>
-
-<file path="tsconfig.json">
-{
-    "compilerOptions": {
-        "module": "esnext",
-        "moduleResolution": "bundler",
-        "target": "ESNext",
-        "lib": ["ES2022", "DOM"],
-        "jsx": "react",
-        "sourceMap": true,
-        "rootDir": "src",
-        "strict": false,
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx"
-    ],
-    "exclude": [
-        "node_modules",
-        ".vscode-test",
-        "The-Creator-AI-main"
-    ]
-}
-</file_artifact>
-
-<file path="webpack.config.js">
-const path = require('path');
-const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-/** @type {import('webpack').Configuration} */
-const baseConfig = {
-    mode: 'none',
-    resolve: {
-        extensions: ['.ts', '.js', '.tsx', '.jsx'],
-        alias: {
-            "@": path.resolve(__dirname, 'src'),
-        }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: [{ loader: 'ts-loader' }]
-            },
-            {
-                test: /\.?ts.?(x)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-react', '@babel/preset-typescript']
-                    }
-                }
-            },
-        ]
-    },
-    devtool: 'nosources-source-map',
-    infrastructureLogging: {
-        level: "log",
-    },
-};
-
-/** @type {import('webpack').Configuration} */
-const extensionConfig = {
-    ...baseConfig,
-    target: 'node',
-    entry: {
-        extension: './src/extension.ts',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'extension.js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: {
-        vscode: 'commonjs vscode',
-    },
-};
-
-/** @type {import('webpack').Configuration} */
-const webviewConfig = {
-    ...baseConfig,
-    target: 'web',
-    entry: {
-        contextChooserView: './src/client/views/context-chooser.view/view.tsx',
-        parallelCopilotView: './src/client/views/parallel-copilot.view/view.tsx',
-        settingsView: './src/client/views/settings.view/view.tsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'commonjs2',
-    },
-    module: {
-        ...baseConfig.module,
-        rules: [
-            ...baseConfig.module.rules,
-            {
-                test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-            },
-			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader']
-			},
-			{
-				test: /\.ttf$/,
-				type: 'asset/resource'
-			}
-        ]
-    },
-    resolve: {
-        ...baseConfig.resolve,
-        fallback: {
-            "path": require.resolve("path-browserify")
-        }
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css'
-        }),
-        new CopyPlugin({
-            patterns: [
-                { from: "public", to: "public" },
-                { from: "node_modules/@wooorm/starry-night/style/both.css", to: "starry-night.css" },
-                { from: "src/Artifacts", to: "Artifacts" }
-            ],
-        }),
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-        }),
-    ],
-};
-
-module.exports = [extensionConfig, webviewConfig];
-</file_artifact>
-
-<file path="src/Artifacts/A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md">
-# Artifact A86: DCE - PCPP Workflow Centralization and UI Persistence Plan
-# Date Created: C19
-# Author: AI Model & Curator
-# Updated on: C21 (Re-add requirement for Select All buttons)
-
-- **Key/Value for A0:**
-- **Description:** A plan to centralize the main workflow buttons in the PCPP, make the animated workflow highlight persistent, and fix the broken cost calculation.
-- **Tags:** feature plan, ui, ux, workflow, refactor, bug fix
-
-## 1. Overview & Goal
-
-User feedback from Cycle 19 identified three key areas for improvement in the Parallel Co-Pilot Panel (PCPP):
-1.  **Scattered UI:** The buttons for the core workflow are located in different places, making the process unintuitive.
-2.  **Ephemeral UI State:** The animated highlight that guides the user disappears if they switch away from the PCPP tab.
-3.  **Broken Metric:** The total estimated cost calculation is non-functional.
-
-The goal of this plan is to address all three issues to create a more intuitive, robust, and functional user experience.
-
-## 2. The User Workflow Articulated
-
-To centralize the buttons effectively, we must first define the ideal user workflow as a sequence of steps.
-
-1.  **Paste & Parse:** User pastes responses into tabs. Clicks **`Parse All`**.
-2.  **Sort & Select:** User reviews metadata. Clicks **`Sort`** to order responses. Clicks **`Select This Response`** on the most promising one.
-3.  **Baseline (Optional):** User may click **`Baseline (Commit)`** to save the current state before testing.
-4.  **Accept:** User checks files in the "Associated Files" list and clicks **`Accept Selected`**.
-5.  **Test & Restore (Loop):** User tests the applied changes. If they fail, the user clicks **`Restore Baseline`** and returns to Step 4 to test a different set of files or a different response.
-6.  **Finalize & Proceed:** Once satisfied, the user provides a cycle title/context and clicks **`Generate prompt.md`** and then **`+`** to start the next cycle.
-
-## 3. Button Centralization Plan
-
-### 3.1. ASCII Mockup of New Toolbar
-
-The new, centralized toolbar will be located directly below the response tabs, making it the central point of interaction.
-
-```
-|=================================================================================================|
-| [ Resp 1 (5 files, 2.1K tk) ] [ Resp 2 (4 files, 1.8K tk) ] [ Resp 3 ] [ Resp 4 ]      [ Sort ] |
-|-------------------------------------------------------------------------------------------------|
-|                                                                                                 |
-|   +-----------------------------------------------------------------------------------------+   |
-|   | [ Parse All ] [ Select This Resp ] [ Baseline ] [ Restore ] [ Accept Selected ]         |   |
-|   +-----------------------------------------------------------------------------------------+   |
-|                                                                                                 |
-| | [v] Associated Files (5) [Select All] [Deselect All Across Responses]                     | | |
-| |-------------------------------------------------------------------------------------------| | |
-| | [✓] [ ] src/Artifacts/A86. ... .md                                                        | | |
-| | [✓] [ ] src/client/views/.../view.tsx                                                     | | |
-| | ...                                                                                       | | |
-|-------------------------------------------------------------------------------------------------|```
-
-### 3.2. Technical Implementation
--   A new component, `src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx`, will be created.
--   It will contain all the buttons related to the main workflow.
--   **(C21 Update):** The "Select All" and "Deselect All Across Responses" buttons, which were lost in a previous refactor, will be re-added to the toolbar to provide critical batch selection functionality for associated files.
--   The main `view.tsx` will manage the state for enabling/disabling these buttons and pass the state and `onClick` handlers down as props.
--   The buttons will be removed from their old locations (the main header and the `ParsedView` header). The "Select This Response" button will now act on the currently active tab.
-
-## 4. Persistent Animation Plan
-
--   **Problem:** The `workflowStep` state is currently a local `useState` in `view.tsx`, which is lost when the webview is hidden and shown again.
--   **Solution:** The `workflowStep` will be elevated to become part of the persisted cycle state.
-    1.  **Type Definition:** Add `activeWorkflowStep?: string;` to the `PcppCycle` interface in `src/common/types/pcpp.types.ts`.
-    2.  **State Management:** The `saveCurrentCycleState` function in `view.tsx` will now also update the main `PcppCycle` object with the current `workflowStep`.
-    3.  **Restoration:** When a cycle is loaded, the `activeWorkflowStep` from the loaded data will be used to initialize the state, ensuring the highlight is correctly re-applied.
-
-## 5. Cost Calculation Fix Plan
-
--   **Problem:** The total estimated cost always shows `$0.00`.
--   **Investigation:** The cost is calculated based on a `totalPromptTokens` state, which is populated by a message from the backend. The request for this calculation is debounced and triggered by changes to the cycle context or title. It appears this request is not being triggered on the initial load of a cycle.
--   **Solution:**
-    1.  In `view.tsx`, locate the `useEffect` hook that handles the `SendInitialCycleData` and `SendCycleData` messages.
-    2.  Inside this hook, after the component's state is updated with the new cycle data, add a direct call to the `requestCostEstimation()` function.
-    3.  This will ensure that a cost estimation is requested from the backend every time a cycle is loaded, fixing the bug and displaying an accurate cost.
-</file_artifact>
-
-<file path="src/Artifacts/A76. DCE - Word Wrap Line Numbering Challenges.md">
-# Artifact A76: DCE - Word Wrap Line Numbering Challenges
-# Date Created: C181
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Explains the technical complexity of implementing line numbers that accurately reflect visual word wrapping in a textarea component.
-- **Tags:** documentation, technical debt, ui, ux, word wrap, line numbers
-
-## 1. Problem Statement
-
-The user has requested that the line numbers in the `NumberedTextarea` component should respect word wrapping. Currently, the component counts lines based on newline characters (`\n`). This means a single logical line that visually wraps into three lines in the UI still only receives one line number. The user correctly points out that this is not ideal.
-
-This document explains why this seemingly simple feature is technically complex to implement in a standard HTML `<textarea>` and outlines potential solutions.
-
-## 2. The Core Challenge: Logical vs. Visual Lines
-
-The fundamental issue is the difference between how a `<textarea>` handles content versus how the browser renders it.
-
-*   **Logical Lines:** The `<textarea>` element's `value` is a simple string. The only concept of a "line" it has is the presence of a newline character (`\n`). When we split the string by `\n`, we are counting these logical lines. This is what our current implementation does, and it's fast and simple.
-
-*   **Visual Lines:** Word wrapping is a purely visual phenomenon handled by the browser's rendering engine. The browser calculates how many words fit on a line based on the element's width, font size, font family, letter spacing, and word spacing. It then visually breaks the line and renders the overflow text below. **Crucially, the browser does not expose a simple API to ask, "How many visual lines are you currently rendering for this text?"**
-
-Because we cannot directly query the rendered line count, we must resort to indirect methods to calculate it.
-
-## 3. Potential Solutions & Their Complexity
-
-Here are the common approaches to solving this problem, each with its own trade-offs.
-
-### Solution A: The Hidden `div` Measurement Technique
-
-This is the most common and reliable method.
-
-1.  **How it Works:**
-    *   Create a hidden `div` element off-screen or with `visibility: hidden`.
-    *   Apply the *exact same* CSS styles to this `div` as the `<textarea>` (width, font, padding, etc.).
-    *   Copy the content of the `<textarea>` into the `innerHTML` of the hidden `div`.
-    *   Calculate the number of visual lines by dividing the `scrollHeight` of the hidden `div` by its `line-height`.
-
-2.  **Complexity & Downsides:**
-    *   **Performance:** This calculation must be run on every single keystroke, as any character change could affect word wrapping. Copying large amounts of text into the DOM and forcing a browser re-layout on every key press can be performance-intensive and may cause input lag.
-    *   **Fragility:** The CSS styles must be perfectly synchronized. Any discrepancy in padding, border, font-size, etc., will result in an incorrect calculation.
-    *   **Implementation:** Requires careful DOM manipulation within our React component, managing refs to both the textarea and the hidden div, and ensuring the calculation is efficient.
-
-### Solution B: Using a Full-Fledged Code Editor Component
-
-Instead of building our own, we could replace the `<textarea>` with a lightweight, embeddable code editor library.
-
-1.  **How it Works:**
-    *   Integrate a library like **CodeMirror** or **Monaco Editor** (the editor that powers VS Code itself, though it's much heavier).
-    *   These components are not simple textareas; they are complete editing surfaces that render each line individually. Because they control the rendering process, they have full knowledge of visual lines and can provide accurate line numbering out of the box.
-
-2.  **Complexity & Downsides:**
-    *   **Bundle Size:** These libraries are significantly larger than a simple React component, which would increase the extension's load time.
-    *   **Integration:** Integrating them into our existing React and VS Code Webview architecture can be complex, requiring custom wrappers and careful handling of the component's lifecycle.
-    *   **Overkill:** For a simple context input field, using a full code editor might be architectural overkill.
-
-## 4. Conclusion & Path Forward
-
-The user's request is valid and would be a great UX improvement. However, due to the performance and implementation complexities described above, this feature is considered a significant piece of technical debt that requires a dedicated cycle to solve correctly.
-
-The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
-</file_artifact>
-
-<file path="src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx">
-// src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx
-// Updated on: C21 (Re-add Select All buttons)
-import * as React from 'react';
-import { VscWand, VscCheck, VscSourceControl, VscDiscard, VscCheckAll, VscClearAll } from 'react-icons/vsc';
-
-interface WorkflowToolbarProps {
-    isParsedMode: boolean;
-    onParseToggle: () => void;
-    selectedResponseId: string | null;
-    activeTab: number;
-    onSelectResponse: () => void;
-    onBaseline: () => void;
-    onRestore: () => void;
-    onAcceptSelected: () => void;
-    onSelectAll: () => void;
-    onDeselectAll: () => void;
-    selectedFilesForReplacementCount: number;
-    workflowStep: string | null;
-}
-
-const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
-    isParsedMode,
-    onParseToggle,
-    selectedResponseId,
-    activeTab,
-    onSelectResponse,
-    onBaseline,
-    onRestore,
-    onAcceptSelected,
-    onSelectAll,
-    onDeselectAll,
-    selectedFilesForReplacementCount,
-    workflowStep
-}) => {
-    return (
-        <div className="workflow-toolbar">
-            <button
-                onClick={onParseToggle}
-                className={workflowStep === 'awaitingParse' ? 'workflow-highlight' : ''}
-                title={isParsedMode ? "Return to raw text view" : "Parse all responses into structured view"}
-            >
-                <VscWand /> {isParsedMode ? 'Un-Parse All' : 'Parse All'}
-            </button>
-            {isParsedMode && (
-                <>
-                    <button
-                        onClick={onSelectResponse}
-                        className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
-                        title="Select this response as the basis for the next cycle"
-                    >
-                        <VscCheck /> {selectedResponseId === activeTab.toString() ? 'Response Selected' : 'Select This Response'}
-                    </button>
-                    <button
-                        onClick={onBaseline}
-                        className={`git-button ${workflowStep === 'awaitingBaseline' ? 'workflow-highlight' : ''}`}
-                        title="Create a git commit with all current changes as a safe restore point"
-                    >
-                        <VscSourceControl /> Baseline (Commit)
-                    </button>
-                    <button
-                        onClick={onRestore}
-                        className="git-button"
-                        title="Restore all files in the workspace to the last baseline commit"
-                    >
-                        <VscDiscard /> Restore Baseline
-                    </button>
-                    <div className="button-separator" />
-                    <button
-                        onClick={onSelectAll}
-                        className={`styled-button ${workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}`}
-                        title="Select all files from this response"
-                    >
-                        <VscCheckAll /> Select All
-                    </button>
-                    <button
-                        onClick={onDeselectAll}
-                        className="styled-button"
-                        title="Deselect all files across all responses"
-                    >
-                        <VscClearAll /> Deselect All
-                    </button>
-                    <button
-                        onClick={onAcceptSelected}
-                        className={`styled-button ${workflowStep === 'awaitingAccept' ? 'workflow-highlight' : ''}`}
-                        disabled={selectedFilesForReplacementCount === 0}
-                        title="Accept checked files from this response into your workspace"
-                    >
-                        <VscCheckAll /> Accept Selected ({selectedFilesForReplacementCount})
-                    </button>
-                </>
-            )}
-        </div>
-    );
-};
-
-export default WorkflowToolbar;
-</file_artifact>
-
-<file path="src/Artifacts/A88. DCE - Native Diff Integration Plan.md">
-# Artifact A88: DCE - Native Diff Integration Plan
-# Date Created: C22
-# Author: AI Model & Curator
-# Updated on: C27 (Mark as In Progress)
-
-- **Key/Value for A0:**
-- **Description:** A plan to integrate VS Code's native diff viewer (`vscode.diff`) for comparing AI-generated file content against the current workspace file, leveraging a TextDocumentContentProvider for in-memory content.
-- **Tags:** feature plan, ui, ux, diff, vscode api, virtual document
-
-## 1. Overview & Goal
-
-**Status (C27): In Progress**
-
-The current integrated diff viewer is functional but lacks the native feel, performance, and rich features of VS Code's own diffing engine (e.g., syntax highlighting, minimap, inline actions). The goal of this feature is to replace our custom `DiffViewer` component with a button that triggers the built-in `vscode.diff` command.
-
-This provides a superior user experience and reduces the maintenance burden of our custom component. The primary technical challenge is that the AI-generated content exists only in the frontend's state (in-memory) and not as a file on disk. The solution is to create a **Virtual Document** using a `TextDocumentContentProvider`.
-
-## 2. User Story
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P2-DIFF-NATIVE-01 | **View Diff Natively** | As a developer, when I hover over an associated file in the PCPP, I want to click an "Open Changes" button that opens the diff in a native VS Code diff tab, so I can use all the familiar features of the editor to review the changes. | - An "Open Changes" icon appears on hover for each existing file in the "Associated Files" list. <br> - Clicking it executes the `vscode.diff` command. <br> - A new editor tab opens, showing a side-by-side diff. <br> - The right side shows the current content of the workspace file. <br> - The left side shows the AI-generated content from the response tab. |
-
-## 3. Technical Implementation Plan
-
-This implementation involves creating a new backend provider and coordinating state between the frontend and backend.
-
-### Step 1: Create a TextDocumentContentProvider
--   **New File (`src/backend/providers/ResponseContentProvider.ts`):** A new class will be created that implements `vscode.TextDocumentContentProvider`.
--   **State Cache:** This provider will need a simple in-memory cache (e.g., a `Map<string, string>`) to store the AI-generated content. The key will be a unique identifier (like the URI itself), and the value will be the file content string.
--   **`provideTextDocumentContent` method:** This is the core method. When VS Code needs to open a virtual document (e.g., `dce-response:path/to/file.ts?cycle=22&resp=1`), this method will be called with the URI. It will look up the content in its cache using the URI as the key and return it.
-
-### Step 2: Register the Provider and Command
--   **`extension.ts`:** In the `activate` function, the new provider will be registered with a custom URI scheme: `vscode.workspace.registerTextDocumentContentProvider('dce-response', responseContentProvider);`.
-
-### Step 3: Implement the Frontend-to-Backend Workflow
--   **UI (`ParsedView.tsx`):** An "Open Changes" button will be added to each associated file item, visible on hover.
--   **IPC Channel (`RequestNativeDiff`):** A new IPC channel will be created. Its payload will be `{ originalPath: string; modifiedContent: string; title: string; }`.
--   **Backend Handler (`file-operation.service.ts`):**
-    1.  A new `handleNativeDiffRequest` method will be implemented.
-    2.  When it receives a request, it will generate a unique URI for the virtual document, incorporating the file path and potentially cycle/response IDs to ensure uniqueness (e.g., `dce-response:${originalPath}?cycle=${cycleId}&resp=${respId}&ts=${Date.now()}`).
-    3.  It will store the `modifiedContent` in the `ResponseContentProvider`'s cache, keyed by this unique URI.
-    4.  It will then execute the command: `vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(originalAbsolutePath), vscode.Uri.parse(virtualUri), title);`.
-</file_artifact>
-
-<file path="src/backend/providers/ResponseContentProvider.ts">
-// src/backend/providers/ResponseContentProvider.ts
-// New file in C27
-import * as vscode from 'vscode';
-import { Services } from '../services/services';
-
-export class ResponseContentProvider implements vscode.TextDocumentContentProvider {
-    public readonly onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
-    public readonly onDidChange = this.onDidChangeEmitter.event;
-
-    // A simple cache to hold the in-memory content of AI responses
-    private contentCache = new Map<string, string>();
-
-    public provideTextDocumentContent(uri: vscode.Uri): string {
-        Services.loggerService.log(`[ResponseContentProvider] Providing content for URI: ${uri.toString()}`);
-        return this.contentCache.get(uri.toString()) || '// Content not found for this response.';
-    }
-
-    public cacheContent(uri: vscode.Uri, content: string): void {
-        Services.loggerService.log(`[ResponseContentProvider] Caching content for URI: ${uri.toString()}`);
-        this.contentCache.set(uri.toString(), content);
-        // Notify VS Code that the content for this URI has changed (or is now available)
-        this.onDidChangeEmitter.fire(uri);
-    }
-}
-</file_artifact>
-
-<file path="src/Artifacts/A89. DCE - vLLM Integration and API Proxy Plan.md">
-# Artifact A89: DCE - vLLM Integration and API Proxy Plan
-# Date Created: C29
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Details the end-to-end plan for integrating the DCE with a remote vLLM instance via a secure proxy server, enabling high-throughput, parallelized AI responses.
-- **Tags:** feature plan, vllm, llm, proxy, api, integration, performance
-
-## 1. Vision & Goal
-
-The goal of this integration is to unlock a new level of performance for the Data Curation Environment (DCE) by connecting its parallel response UI to a high-throughput vLLM backend. This will enable users to generate multiple, simultaneous AI responses with extremely low latency, dramatically accelerating the iterative development workflow.
-
-To achieve this securely and flexibly, we will use the curator's existing `aiascent.game` server as a proxy, which will receive requests from the DCE extension and forward them to a dedicated vLLM instance.
-
-## 2. End-to-End Architecture
-
-The data will flow through three distinct components:
-
-```
-+---------------+      +---------------------------+      +----------------------+
-| DCE Extension |----->|   aiascent.game (Proxy)   |----->|   vLLM Server        |
-| (VS Code)     |      | (Node.js/Express Server)  |      | (Python Instance)    |
-+---------------+      +---------------------------+      +----------------------+
-```
-
-1.  **DCE Extension (The Client):**
-    *   The user will configure a "Model Card" in the DCE settings pointing to the proxy server's endpoint: `https://aiascent.game/api/dce/proxy`.
-    *   When the user sends a prompt, the extension will make a `POST` request to this endpoint, sending the prompt data in the request body.
-    *   It will be configured to handle a streaming response.
-
-2.  **aiascent.game (The Proxy Server):**
-    *   This server acts as a secure intermediary.
-    *   A new API endpoint, `/api/dce/proxy`, will be added to `server.ts`.
-    *   This endpoint will receive the request from the DCE extension.
-    *   It will then create a new request to the internal vLLM server, whose address will be stored in an environment variable (e.g., `VLLM_URL=http://localhost:8000`).
-    *   It will stream the response from the vLLM server back to the DCE extension client.
-
-3.  **vLLM Server (The Inference Engine):**
-    *   This is a dedicated Python process running the vLLM library.
-    *   It will be configured to serve a specific model (e.g., `unsloth/gpt-oss-20b`) and will expose an OpenAI-compatible API endpoint.
-    *   Its primary job is to handle the computationally intensive task of model inference with high efficiency through continuous batching.
-
-## 3. Implementation Details
-
-### 3.1. `server.ts` Modifications
-A new route will be added to handle the proxy request. This route will use `node-fetch` or a similar library to make a server-to-server request to the vLLM instance and pipe the streaming response back.
-
-**See Artifact `A90` for the proposed code.**
-
-### 3.2. `Caddyfile` Configuration
-The existing `Caddyfile` is already configured to reverse proxy all traffic to the Node.js server on port 3001. This configuration is sufficient and automatically handles HTTPS termination and header forwarding, so no changes are required.
-
-**See Artifact `A91` for the full file and analysis.**
-
-### 3.3. DCE Extension Configuration
-The user will configure the connection in the DCE settings panel as follows:
--   **Model Card Name:** `Remote vLLM via AI Ascent`
--   **Endpoint URL:** `https://aiascent.game/api/dce/proxy`
--   **API Key:** (None required, as the proxy handles authentication if needed)
-
-This architecture provides a secure, scalable, and highly performant solution for integrating the DCE with vLLM.
-</file_artifact>
-
-<file path="src/Artifacts/A87. VCPG - vLLM High-Throughput Inference Plan.md">
-# Artifact A87: VCPG - vLLM High-Throughput Inference Plan
-
-# Date Created: C78
-# Author: AI Model
-# Updated on: C29 (Add API Proxy Server architecture)
-
-- **Key/Value for A0:**
-- **Description:** A research and planning document analyzing the potential of using vLLM for high-throughput, low-latency inference, and detailing the architecture for connecting to it via a secure proxy server.
-- **Tags:** guide, research, planning, ai, llm, vllm, inference, performance, proxy
-
-## 1. Vision & Goal
-
-The goal is to investigate and plan the migration of our AI inference backend from the current LM Studio setup to a more performant and scalable solution using **vLLM**. As described by the curator's research, vLLM offers significant performance gains through techniques like continuous batching, which could enable more advanced AI capabilities, such as near-real-time analysis of multiple data streams or providing concurrent, low-latency AI assistance to every user of the DCE extension.
-
-## 2. Analysis of vLLM
-
-Research and community reports highlight several key advantages of vLLM:
--   **High Throughput:** Demonstrations show massive performance increases (e.g., 10,000+ tokens/second on a single high-end GPU).
--   **Continuous Batching:** vLLM's core innovation is its ability to dynamically batch incoming requests. This is highly efficient for serving multiple requests simultaneously, which is key to our goal of generating 10+ parallel responses.
--   **Low Latency:** Sub-100ms time-to-first-token (TTFT) is achievable, which is critical for a responsive user experience.
--   **OpenAI-Compatible Server:** vLLM includes a built-in server that mimics the OpenAI API protocol. This is a critical feature, as it allows our extension and proxy to interact with it using a standard, well-documented interface.
-
-## 3. Proposed Architecture: Secure API Proxy
-
-To securely connect the DCE extension to a powerful vLLM instance, we will use a backend proxy server. This architecture prevents exposing the vLLM server directly to the public internet and gives us a central point of control.
-
-```
-+---------------+      +-------------------------+      +----------------------+
-| DCE Extension |----->| aiascent.game (Proxy)   |----->|   vLLM Server        |
-| (VS Code)     |      | (Node.js/Express)       |      | (Python)             |
-+---------------+      +-------------------------+      +----------------------+
-```
-
-### 3.1. vLLM Server Setup
--   **Deployment:** The vLLM server will be a dedicated Python application, likely in a Docker container for easy management.
--   **Model:** It can be configured to serve any Hugging Face model compatible with vLLM.
--   **Interface:** It will run the built-in OpenAI-compatible server, listening on a local port (e.g., `8000`).
-
-### 3.2. AI Ascent Proxy Server (`server.ts`)
--   **Role:** The existing `aiascent.game` server will be enhanced to act as a secure proxy.
--   **New Endpoint:** A new API endpoint, `/api/dce/proxy`, will be created.
--   **Logic:**
-    1.  This endpoint will receive requests from authenticated DCE extension users.
-    2.  It will read the prompt data from the request body.
-    3.  It will make a new `fetch` request to the internal vLLM server (e.g., `http://localhost:8000/v1/chat/completions`), forwarding the prompt.
-    4.  Crucially, it will **stream** the response from vLLM back to the DCE extension client, providing the low-latency experience we need.
-
-### 3.3. Caddyfile Configuration
--   The existing `Caddyfile` is already configured with a `reverse_proxy` directive that forwards all traffic to the Node.js server. This configuration is sufficient and automatically handles WebSocket upgrades and necessary headers, so no changes are required.
-
-## 4. Implementation Plan (Future Cycle)
-
-1.  **Setup vLLM Server:** Install vLLM and its dependencies, download a model, and run the OpenAI-compatible server.
-2.  **Update `server.ts`:** Add the new `/api/dce/proxy` route with the streaming logic.
-3.  **Configure DCE:** Update the DCE settings (via a Model Card) to point to the new `https://aiascent.game/api/dce/proxy` endpoint.
-4.  **Test:** Send a prompt from the DCE and verify that the response is streamed back from the vLLM server through the proxy.
-</file_artifact>
-
-<file path="src/Artifacts/A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md">
-# Artifact A89: DCE - Phase 3 - Hosted LLM & vLLM Integration Plan
-# Date Created: C29
-# Author: AI Model & Curator
-# Updated on: C45 (Add guidance for "Model not found" error)
-
-- **Key/Value for A0:**
-- **Description:** Outlines the architecture and roadmap for integrating the DCE extension with a remote, high-throughput vLLM backend via a secure proxy server.
-- **Tags:** feature plan, phase 3, llm, vllm, inference, performance, architecture, proxy
-
-## 1. Vision & Goal
-(No change)
-
-## 2. Proposed Architecture
-(No change)
-
-## 3. Security & Encryption
-(No change)
-
-## 4. User Stories
-(No change)
-
-## 5. Troubleshooting Connectivity
-
-(No change to Step 1: Test the Proxy Server from Your Laptop)
-
-### Step 2: Interpret the Results
-
--   **(No change to `ETIMEDOUT` or `5xx` error sections)**
-
--   **If `curl` returns a `404 Not Found` error from the *Proxy Server* (e.g., response body is `Cannot POST /api/dce/proxy`):** This means you have successfully connected to the proxy server, but the server's application logic (in `server.ts`) doesn't have a route defined for `/api/dce/proxy`.
-    -   **Solution:** Check your `server.ts` file and ensure the route is correct. After making changes, you **must restart** the Node.js server process.
-
--   **If `curl` returns a `404 Not Found` error from the *vLLM Server* (e.g., response body contains `{"error":{"message":"The model ... does not exist."}}`):** This is a different, more specific error. It means the proxy successfully forwarded your request, but the vLLM server rejected it.
-    -   **Root Cause:** The `model` parameter in the JSON request body does not match the model identifier that the vLLM server was started with.
-    -   **Solution:**
-        1.  Check your vLLM startup command (see `A92`) and copy the exact model name (e.g., `unsloth/mistral-7b-instruct-v0.2-bnb-4bit`).
-        2.  Open your proxy's `server.ts` file.
-        3.  Find the `fetch` call to the vLLM endpoint.
-        4.  Change the value of the `model` field in the JSON `body` to be the exact name you copied.
-        5.  **Restart your proxy server.**
-
--   **(No change to "If `curl` succeeds" section)**
-
-## 6. Technical Implementation Plan
-(No change)
-</file_artifact>
-
-<file path="src/Artifacts/A90. AI Ascent - server.ts (Reference).md">
-# Artifact A90: AI Ascent - server.ts (Reference)
-# Date Created: C29
-# Author: AI Model & Curator
-# Updated on: C44 (Remove hardcoded stop token)
-
-- **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The hardcoded `stop` parameter has been removed to fix response truncation.
-- **Tags:** reference, source code, backend, nodejs, express
-
-## 1. Overview
-
-This artifact contains the literal source code of the `server.ts` file. The key change is in the `app.post('/api/dce/proxy', ...)` route. The hardcoded `stop` parameter has been removed from the request body sent to the vLLM endpoint. The proxy will now pass through any `stop` parameter sent by the client but will not add its own, resolving the issue of premature response truncation.
-
-## 2. Source Code (with corrected route)
-
-```typescript
-// Updated on: C1384 (Correct import path for generateSpeech from llmService.)
-// Updated on: C1383 (Add /api/tts/generate route handler.)
-// Updated on: C1355 (Add /api/report/vote route handler.)
-// Updated on: C41 (DCE Integration: Correct route to /api/dce/proxy)
-import dotenv from 'dotenv';
-dotenv.config();
-
-import express from 'express';
-import http from 'http';
-import { Server as SocketIOServer } from 'socket.io';
-import NextAuth from 'next-auth';
-import { authOptions } from './pages/api/auth/[...nextauth]';
-import cors from 'cors';
-import { logInfo, logError, logWarn } from './logger';
-import cookieParser from 'cookie-parser';
-import path from 'path';
-import fs from 'fs';
-import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
-import type { Founder } from './state';
-import { CompetitionSystem } from './game/systems/CompetitionSystem';
-import { PvpSystem } from './game/systems/PvpSystem';
-import { PoetryBattleSystem } from './game/systems/PoetryBattleSystem';
-import { handleAscentiaStream, handleAscentiaWelcome, loadAscentiaKnowledgeBase, loadReportKnowledgeBase, handleReportAscentiaStream } from './server/api/ascentiaHandler';
-import { handlePlayerProductStream, handlePlayerProductRequest, generateSpeech } from './server/llmService';
-import updateProfileHandler from './server/api/userProfileHandler';
-import { handleReportVote } from './server/api/reportHandler';
-import threadsHandler from './pages/api/bbs/threads';
-import postsHandler from './pages/api/bbs/posts';
-import voteHandler from './pages/api/bbs/vote';
-import tagsHandler from './pages/api/bbs/tags';
-import leaderboardHandler from './pages/api/leaderboard';
-import leaderboardUpdateHandler from './pages/api/leaderboard/update';
-import playersListHandler from './pages/api/players/list';
-import playerProfileHandler from './pages/api/players/[userId]';
-import prisma from './lib/prisma';
-import { Readable } from 'stream';
-
-const app = express();
-const server = http.createServer(app);
-const port = process.env.PORT || 3001;
-const isProduction = process.env.NODE_ENV === 'production';
-
-// --- DCE/vLLM Integration Configuration ---
-const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/completions';
-const DCE_API_KEY = process.env.DCE_API_KEY; // A secret key to authenticate requests from the extension
-
-let clientOrigin = 'http://localhost:8867';
-if (process.env.NEXTAUTH_URL) {
-    try {
-        const url = new URL(process.env.NEXTAUTH_URL);
-        clientOrigin = url.origin;
-    } catch (e) {
-        logError('[SERVER]', `Invalid NEXTAUTH_URL format: ${process.env.NEXTAUTH_URL}. Falling back to default localhost.`);
-    }
-} else {
-    logWarn('[SERVER]', 'NEXTAUTH_URL environment variable is not set. CORS may fail in production.');
-}
-
-logInfo('[SERVER]', `Server starting... Client Origin for CORS: ${clientOrigin}, Production: ${isProduction}`);
-logInfo('[DCE]', `vLLM proxy endpoint configured for: ${VLLM_ENDPOINT}`);
-if (!DCE_API_KEY) {
-    logWarn('[DCE]', 'DCE_API_KEY is not set. The /api/dce/proxy endpoint will be unsecured.');
-}
-
-// Instantiate systems
-const competitionSystem = new CompetitionSystem();
-const io = new SocketIOServer(server, {
-    path: "/api/socket.io",
-    cors: {
-        origin: [clientOrigin, 'vscode-webview://*'], // Allow requests from VS Code webviews
-        methods: ["GET", "POST"]
-    },
-    connectTimeout: 90000,
-    pingTimeout: 90000,
-    pingInterval: 25000,
-});
-const pvpSystem = new PvpSystem(competitionSystem, io);
-const poetryBattleSystem = new PoetryBattleSystem(io);
-(global as any).world = { poetryBattleSystem };
-
-app.use(cors({
-    origin: [clientOrigin, 'vscode-webview://*'], // Also apply CORS for standard HTTP requests
-    credentials: true,
-}));
-
-logInfo('[SERVER]', 'Socket.IO server initialized.');
-
-export interface PlayerState {
-    id: string; // socket.id
-    userId: string;
-    x: number;
-    y: number;
-    direction: PlayerDirection;
-    isMoving: boolean;
-    displayName: string;
-    founderKey: Founder;
-    countryCode: string | null;
-}
-const players: Record<string, PlayerState> = {};
-
-// --- Socket.IO Connection Handling ---
-io.on('connection', (socket) => {
-    logInfo('[SOCKET.IO]', `Player connected: ${socket.id}`);
-    (socket as any).playerState = {};
-    socket.on('identify', (data) => {
-        logInfo('[SOCKET.IO]', `Player identified: ${socket.id} as ${data.displayName} (User ID: ${data.userId})`);
-        const playerState: PlayerState = {
-            id: socket.id,
-            userId: data.userId,
-            x: data.x,
-            y: data.y,
-            direction: data.direction,
-            isMoving: false,
-            displayName: data.displayName,
-            founderKey: data.founderKey,
-            countryCode: data.countryCode,
-        };
-        players[socket.id] = playerState;
-        (socket as any).playerState = playerState;
-        socket.emit('playersUpdate', Object.values(players));
-        socket.broadcast.emit('playerJoined', players[socket.id]);
-        pvpSystem.handleRejoin(data.userId, socket.id);
-    });
-    socket.on('playerMove', (data) => {
-        if (players[socket.id]) {
-            players[socket.id] = { ...players[socket.id], ...data };
-            socket.broadcast.emit('playerMoved', players[socket.id]);
-        }
-    });
-    // --- Delegate Handlers ---
-    socket.on('get_ascentia_welcome', (payload) => handleAscentiaWelcome(socket, players, payload));
-    socket.on('start_ascentia_stream', (payload) => handleAscentiaStream(io, socket, players, payload));
-    socket.on('start_report_ascentia_stream', (payload) => handleReportAscentiaStream(io, socket, players, payload));
-    socket.on('start_chatbot_stream', (payload) => handlePlayerProductStream(socket, players, payload));
-    // --- PvP Handlers (Delegated to PvpSystem) ---
-    socket.on('send_pvp_challenge', (payload) => pvpSystem.handleChallenge(socket, players, payload));
-    socket.on('accept_pvp_challenge', (payload) => pvpSystem.handleAcceptChallenge(socket, players, payload));
-    socket.on('decline_pvp_challenge', (payload) => pvpSystem.handleDeclineChallenge(socket, players, payload));
-    socket.on('claim_pvp_rewards', (payload) => pvpSystem.claimRewards(players[socket.id]?.userId, payload.matchId));
-    socket.on('change_pvp_speed', (payload) => pvpSystem.handleChangeSpeed(players[socket.id]?.userId, payload.matchId, payload.requestedSpeed));
-    socket.on('send_poetry_battle_challenge', (payload) => {
-        const challenger = players[socket.id];
-        const target = players[payload.targetSocketId];
-        logInfo('[[SERVER]]', `Received 'send_poetry_battle_challenge' from ${challenger?.displayName ?? 'Unknown'} to ${target?.displayName ?? 'Unknown'} (socketId: ${payload.targetSocketId})`);
-        pvpSystem.handlePoetryBattleChallenge(socket, players, payload);
-    });
-    socket.on('accept_poetry_battle_challenge', (payload) => pvpSystem.handleAcceptPoetryBattleChallenge(socket, players, payload));
-    socket.on('decline_poetry_battle_challenge', (payload) => pvpSystem.handleDeclinePoetryBattleChallenge(socket, players, payload));
-    socket.on('poetry_battle_submit_move', (payload) => poetryBattleSystem.handlePlayerMove(socket, payload));
-    socket.on('submit_poetry_chatbot_data', (payload: { matchId: string, chatbotData: PoetryBattleChatbotData | null }) => {
-        pvpSystem.handleSubmitPoetryChatbotData(socket, players, payload);
-    });
-    socket.on('send_pvp_match_message', async (payload) => {
-        const logPrefix = '[SocketHandler:send_pvp_match_message]';
-        const senderState = players[socket.id];
-        if (!senderState) {
-            logWarn(logPrefix, `Received message from unidentified socket ${socket.id}`);
-            return;
-        }
-        try {
-            const senderDb = await prisma.leaderboardEntry.findUnique({
-                where: { userId: senderState.userId },
-                include: { user: { select: { displayName: true, countryCode: true } } }
-            });
-            if (!senderDb || !senderDb.user) {
-                logError(logPrefix, `Could not find DB entry for sender ${senderState.userId}`);
-                return;
-            }
-            const senderProfile: PlayerProfile = {
-                userId: senderState.userId,
-                displayName: senderDb.user.displayName ?? 'Player',
-                companyName: senderDb.companyName ?? 'Company',
-                agentName: senderDb.gameAiAgentName ?? 'Agent',
-                elo: senderDb.highestGameAIElo,
-                countryCode: senderDb.user.countryCode,
-                socketId: senderState.id,
-            };
-            pvpSystem.handleMatchChatMessage(senderState.userId, payload.matchId, payload.message, senderProfile);
-        } catch (error) {
-            logError(logPrefix, `Error constructing sender profile for chat message.`, error);
-        }
-    });
-
-    socket.on('sendMessage', (payload) => pvpSystem.handleLobbyChatMessage(io, socket, players, payload));
-
-    socket.on('disconnect', (reason) => {
-        logInfo('[SOCKET.IO]', `Player disconnected: ${socket.id}. Reason: ${reason}`);
-        pvpSystem.handleDisconnect(socket.id, players);
-        delete players[socket.id];
-        io.emit('playerLeft', { id: socket.id });
-    });
-});
-
-// --- PvpSystem Global Timer ---
-setInterval(() => {
-    pvpSystem.tickMatches(1); // Tick every 1 second
-}, 1000);
-// --- Middleware and API Routes ---
-app.use(cookieParser());
-app.use(express.json({ limit: '50mb' })); // Increase limit for large prompts
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-
-app.use((req, res, next) => {
-    (req as any).io = io;
-    (req as any).players = players;
-    next();
-});
-
-app.all('/api/auth/*', (req, res) => {
-    if (!(req.query as any).nextauth) {
-      const nextauth = req.path.split('/').slice(3);
-      (req.query as any).nextauth = nextauth;
-      logInfo('[SERVER:Auth]', `Manually setting req.query.nextauth to:`, nextauth);
-    }
-    return NextAuth(req as any, res as any, authOptions);
-});
-
-// --- API Routes ---
-app.get('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.post('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.put('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.delete('/api/bbs/threads', (req, res) => threadsHandler(req as any, res as any));
-app.get('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
-app.post('/api/bbs/posts', (req, res) => postsHandler(req as any, res as any));
-app.post('/api/bbs/vote', (req, res) => voteHandler(req as any, res as any));
-app.get('/api/bbs/tags', (req, res) => tagsHandler(req as any, res as any));
-app.get('/api/leaderboard', (req, res) => leaderboardHandler(req as any, res as any));
-app.post('/api/leaderboard/update', (req, res) => leaderboardUpdateHandler(req as any, res as any));
-app.get('/api/players/list', (req, res) => playersListHandler(req as any, res as any));
-app.get('/api/players/:userId', (req, res) => playerProfileHandler(req as any, res as any));
-app.post('/api/user/updateProfile', (req, res) => updateProfileHandler(req as any, res as any));
-app.post('/api/llm/proxy', (req, res) => handlePlayerProductRequest(req as any, res as any));
-app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as any));
-
-// CORRECTED: DCE vLLM Proxy Route
-app.post('/api/dce/proxy', async (req, res) => {
-    logInfo('[DCE]', 'Received request on /api/dce/proxy');
-
-    if (DCE_API_KEY) {
-        const authHeader = req.headers.authorization;
-        if (!authHeader || authHeader !== `Bearer ${DCE_API_KEY}`) {
-            logWarn('[DCE]', 'Unauthorized request: Missing or invalid API key.');
-            return res.status(401).json({ error: 'Unauthorized' });
-        }
-    }
-
-    // C44 FIX: Remove hardcoded `stop` parameter.
-    // It will now correctly use the `stop` parameter if the client provides it,
-    // or use the vLLM server's default if it's not provided.
-    const { prompt, n = 10, max_tokens = 131000, ...rest } = req.body;
-
-    if (!prompt) {
-        logError('[DCE]', 'Bad request: Missing prompt content.');
-        return res.status(400).json({ error: 'Prompt content is required' });
-    }
-
-    logInfo('[DCE]', `Proxying prompt to vLLM. Requesting ${n} parallel responses.`);
-
-    try {
-        const vllmResponse = await fetch(VLLM_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                prompt,
-                n,
-                max_tokens,
-                ...rest, // Pass through any other parameters from the client (like stop, temperature, etc.)
-                temperature: rest.temperature || 0.7, 
-            }),
-        });
-
-        if (!vllmResponse.ok) {
-            const errorBody = await vllmResponse.text();
-            throw new Error(`vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText} - ${errorBody}`);
-        }
-
-        const data = await vllmResponse.json();
-        const responses = data.choices.map((choice: any) => choice.text);
-        
-        logInfo('[DCE]', `Successfully received ${responses.length} responses from vLLM.`);
-        res.status(200).json({ responses });
-
-    } catch (error: any) {
-        logError('[DCE]', 'Error proxying request to vLLM:', error.message);
-        res.status(500).json({ error: 'Failed to get responses from vLLM backend.' });
-    }
-});
-
-
-// NEW: TTS Proxy Route
-app.post('/api/tts/generate', async (req, res) => {
-    try {
-        const { text } = req.body;
-        if (!text || typeof text !== 'string') {
-            return res.status(400).send('Invalid request: "text" field is required.');
-        }
-        const audioStream = await generateSpeech(text);
-        if (audioStream) {
-            res.setHeader('Content-Type', 'audio/wav');
-            audioStream.pipe(res);
-        } else {
-            res.status(500).send('Failed to generate speech.');
-        }
-    } catch (error) {
-        logError('[API:TTS]', 'Error in TTS generation route', error);
-        res.status(500).send('Internal server error during TTS generation.');
-    }
-});
-
-
-// --- Static File Serving (Production Only) ---
-if (isProduction) {
-    const buildPath = path.join(__dirname);
-    logInfo('[SERVER]', `Production mode detected. Serving static files from: ${buildPath}`);
-    app.use(express.static(buildPath));
-
-    app.get('*', (req, res) => {
-        const indexPath = path.join(buildPath, 'index.html');
-        if (fs.existsSync(indexPath)) {
-            res.sendFile(indexPath);
-        } else {
-            res.status(404).send(`'index.html' not found.`);
-        }
-    });
-}
-
-// --- Server Startup ---
-server.listen(port, () => {
-    logInfo('[SERVER]', `Server listening on http://localhost:${port}`);
-    const publicPath = isProduction ? __dirname : path.join(__dirname, '..', 'public');
-    loadAscentiaKnowledgeBase(publicPath);
-    loadReportKnowledgeBase(publicPath);
-});
-
-process.on('SIGINT', () => {
-    logInfo('[SERVER]', 'Shutting down...');
-    io.close();
-    server.close(() => process.exit(0));
-});
-```
-</file_artifact>
-
-<file path="src/Artifacts/A91. AI Ascent - Caddyfile (Reference).md">
-# Artifact A91: AI Ascent - Caddyfile (Reference)
-# Date Created: C29
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A reference copy of the `Caddyfile` from the `aiascent.game` project, used for configuring the web server proxy.
-- **Tags:** reference, configuration, caddy, proxy
-
-## 1. Overview
-
-This artifact contains the literal source code of the `Caddyfile` from the `aiascent.game` project, as provided in Cycle 29. Caddy is a powerful, modern web server that automatically handles HTTPS. This configuration shows how it's used as a reverse proxy to route all traffic for `aiascent.game` to the backend Node.js server running on port 3001.
-
-This configuration is a good reference for setting up a production environment. No changes are needed to it to support the new DCE LLM proxy endpoint, as the existing `reverse_proxy` directive is a catch-all that will correctly forward the new API routes.
-
-## 2. Source Code
-
-```caddy
-# Artifact 146: Caddyfile (Production)
-# Date Created: Cycle 1188
-# Author: AI Model
-# Updated on: C1268 (Refactor for production static file serving.)
-
-# This Caddyfile provides a robust configuration for running AI Ascent in a production
-# environment. It automatically handles HTTPS, serves the static client application,
-# and correctly routes API and WebSocket traffic to the backend Node.js server.
-
-aiascent.game {
-    # Caddy will automatically provision and renew a free SSL certificate from Let's Encrypt.
-    
-    # Enable gzip and zstd compression for better performance.
-    encode zstd gzip
-
-    # Log all requests and errors.
-    log {
-        output file aiascent_caddy.log
-    }
-
-    # Reverse proxy ALL incoming requests to the backend Node.js server,
-    # which is now responsible for handling API, WebSockets, and serving static files.
-    # The `header_up` directives ensure WebSocket connections can be established correctly.
-    reverse_proxy localhost:3001 {
-        header_up Host {host}
-        header_up X-Real-IP {remote_ip}
-        header_up X-Forwarded-For {remote_ip}
-        header_up X-Forwarded-Proto {scheme}
-        header_up Connection {>Connection}
-        header_up Upgrade {>Upgrade}
-    }
-}
-
-# Optional: Redirect www to the main domain
-www.aiascent.game {
-    redir https://aiascent.game{uri} permanent
-}
-</file_artifact>
-
-<file path="src/Artifacts/A92. DCE - vLLM Setup Guide.md">
-# Artifact A92: DCE - vLLM Setup Guide
-# Date Created: C30
-# Author: AI Model & Curator
-# Updated on: C45 (Add note about matching model name in proxy)
-
-- **Key/Value for A0:**
-- **Description:** A step-by-step guide for setting up the vLLM inference server with an OpenAI-compatible API endpoint for use with the DCE.
-- **Tags:** guide, setup, vllm, llm, inference, performance, openai
-
-## 1. Overview & Goal
-
-This guide provides the necessary steps to install `vLLM` and run a large language model with a high-throughput, OpenAI-compatible API server. This will allow the Data Curation Environment (DCE) to connect to a powerful local or remote inference engine.
-
-## 2. Prerequisites
-
-*   **OS:** Linux or Windows with WSL2 (Windows Subsystem for Linux).
-*   **Python:** Version 3.9 - 3.12.
-*   **GPU:** An NVIDIA GPU with CUDA drivers installed. Compute capability 7.0 or higher is recommended (e.g., V100, T4, RTX 20-series or newer).
-*   **Package Manager:** `pip` is required. Using a virtual environment manager like `venv` or `conda` is highly recommended.
-
-## 3. Recommended Method for Windows: Using WSL2
-
-
-The vLLM server has a dependency on `uvloop`, a library that is not compatible with native Windows. The most reliable and performant way to run vLLM on a Windows machine is within a WSL2 environment.
-
-### Step 1: Install or Verify WSL2
-Open PowerShell and check your WSL status.
-```powershell
-wsl --status
-```
-If WSL is not installed, run the following command and then restart your machine.
-```powershell
-wsl --install
-```
-
-### Step 2: Set up Python in WSL
-Open your WSL terminal (e.g., by typing `wsl` in the Start Menu). Update your package lists and install the necessary Python tools.
+Run tests:
 ```bash
-sudo apt update
-sudo apt install python3-venv python3-pip -y
+pytest
 ```
 
-### Step 3: Create and Activate a Virtual Environment in WSL
-It is crucial to install `vLLM` and its dependencies in an isolated environment *inside WSL*.
-
+Format code:
 ```bash
-# Create a directory for your project
-mkdir -p ~/projects/vLLM
-cd ~/projects/vLLM
-
-# Create the virtual environment
-python3 -m venv vllm-env
-
-# Activate the environment
-source vllm-env/bin/activate
+black .
 ```
-Your terminal prompt should now be prefixed with `(vllm-env)`.
 
-### Step 4: Install vLLM and uvloop
-With the virtual environment activated inside WSL, you can now install `vLLM` and its required dependency `uvloop`.
+Lint code:
 ```bash
-pip install vllm uvloop
+flake8 .
 ```
 
-### Step 5: Launch the OpenAI-Compatible Server
-This command will download the specified model and start the server.
-```bash
-python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b"
-```
-The server will start on `http://localhost:8000` *inside* the WSL environment.
+## Troubleshooting
 
-### Step 6: Accessing the Server from Windows
-WSL2 automatically forwards network ports to your Windows host machine. This means you can access the vLLM server from your Windows applications (like the DCE extension or your browser) by navigating to **`http://localhost:8000`**.
+### Browser Tool Issues
+- Ensure ChromeDriver is installed and in PATH
+- Check Chrome/Chromium version compatibility
+- Some sites block automated browsers
 
-### Step 7: Verifying the API Endpoint
-When you navigate to `http://localhost:8000` in a web browser, you will see a `404 Not Found` error. This is expected and correct. The server is an API endpoint and is not designed to serve a webpage.
+### Python Tool Issues
+- Verify Docker is installed: `docker --version`
+- Check Docker permissions: `docker ps`
+- Ensure python:3.11-slim image is pulled
 
-To verify that the API is working, run the following `curl` command from your **WSL terminal** (the same one where the server is running). This sends a test prompt to the completions endpoint.
+### VLLM Issues
+- Check GPU availability: `nvidia-smi`
+- Verify VLLM server is running on correct port
+- Monitor memory usage for large models
 
-```bash
-curl http://localhost:8000/v1/completions \
--H "Content-Type: application/json" \
--d '{
-    "model": "unsloth/gpt-oss-20b",
-    "prompt": "San Francisco is a",
-    "max_tokens": 7,
-    "temperature": 0
-}'
-```
+## Contributing
 
-A successful response will be a JSON object that looks something like this:
-```json
-{"id":"cmpl-a1b2c3d4e5f6","object":"text_completion","created":1677652288,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"text":" city in Northern California,","logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"total_tokens":12,"completion_tokens":7}}
-```
-If you receive this JSON response, your vLLM server is running correctly.
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-### Step 8: Connecting the DCE Extension
-Once you have verified the API is running, you are ready to connect the DCE extension to it.
+## License
 
-For detailed instructions, please refer to the next guide: **`A94. DCE - Connecting to a Local LLM Guide.md`**.
-</file_artifact>
+This project is licensed under the MIT License - see LICENSE file for details.
 
-<file path="src/Artifacts/A93. DCE - vLLM Encryption in Transit Guide.md">
-# Artifact A93: DCE - vLLM Encryption in Transit Guide
-# Date Created: C32
-# Author: AI Model & Curator
+## Acknowledgments
 
-- **Key/Value for A0:**
-- **Description:** Explains the standard architectural pattern of using a reverse proxy to provide HTTPS encryption for the vLLM API endpoint.
-- **Tags:** guide, security, encryption, https, proxy, caddy, vllm
-
-## 1. The Challenge: Securing LLM Traffic
-
-When the Data Curation Environment (DCE) extension communicates with a remote vLLM server, the data (which includes source code and prompts) must be encrypted in transit to prevent eavesdropping. The vLLM OpenAI-compatible server runs on plain `http` by default, which is unencrypted. Connecting to an `http` endpoint over the public internet is insecure.
-
-The goal is to provide a secure `https` endpoint for the DCE extension while allowing the vLLM server to run in its default, simple configuration.
-
-## 2. The Solution: The Reverse Proxy Pattern
-
-The standard and most robust solution is to place a **reverse proxy** in front of the vLLM server. The reverse proxy acts as a secure, public-facing gateway.
-
-### 2.1. How It Works
-
-The data flow is as follows:
-
-```
-+---------------+      +----------------------+      +----------------------+
-| DCE Extension |----->|  Reverse Proxy       |----->|   vLLM Server        |
-| (Client)      |      |  (e.g., Caddy/Nginx) |      | (Internal Service)   |
-|               |      |                      |      |                      |
-| (HTTPS Request)      |  (Handles TLS/SSL)   |      |  (HTTP Request)      |
-+---------------+      +----------------------+      +----------------------+
-```
-
-1.  **Encrypted Connection:** The DCE extension makes a request to a secure URL, like `https://my-llm-server.com`. This connection is encrypted using HTTPS.
-2.  **HTTPS Termination:** The reverse proxy server (e.g., Caddy) receives this encrypted request. Its primary job is to handle the complexity of TLS/SSL certificates. It decrypts the request.
-3.  **Forwarding:** After decrypting the request, the proxy forwards it to the internal vLLM server over a trusted local network (e.g., to `http://localhost:8000`). Since this traffic never leaves the secure server environment, it does not need to be re-encrypted.
-4.  **Response:** The vLLM server processes the request and sends its `http` response back to the proxy, which then encrypts it and sends it back to the DCE extension over `https`.
-
-### 2.2. Benefits of this Architecture
-
--   **Security:** All traffic over the public internet is encrypted.
--   **Simplicity:** The vLLM server itself does not need to be configured with complex SSL certificates. Tools like Caddy can automatically provision and renew free Let's Encrypt certificates, making setup very easy.
--   **Flexibility:** The proxy can also handle load balancing, caching, and routing to multiple backend services if needed in the future.
-
-## 3. Implementation Example with Caddy
-
-Caddy is a modern web server that makes this process extremely simple.
-
--   **Prerequisites:** You need a server with a public IP address and a domain name pointing to it.
--   **Example `Caddyfile`:**
-    ```caddy
-    # Your domain name
-    my-llm-server.com {
-        # Caddy will automatically handle HTTPS for this domain
-        
-        # Log all requests for debugging
-        log {
-            output file /var/log/caddy/vllm.log
-        }
-
-        # Reverse proxy all requests to the vLLM server running on port 8000
-        reverse_proxy localhost:8000
-    }
-    ```
--   **Reference:** For a more detailed example of a production `Caddyfile` used in a similar project, see **`A91. AI Ascent - Caddyfile (Reference).md`**.
-
-This architecture is the industry standard for securing web services and is the recommended approach for deploying the vLLM server for use with the DCE.
-</file_artifact>
-
-<file path="src/Artifacts/A94. DCE - Connecting to a Local LLM Guide.md">
-# Artifact A94: DCE - Connecting to a Local LLM Guide
-# Date Created: C35
-# Author: AI Model & Curator
-# Updated on: C36 (Align with new multi-modal settings UI)
-
-- **Key/Value for A0:**
-- **Description:** A step-by-step guide on how to configure the DCE extension to use a local LLM with an OpenAI-compatible API via the new settings panel.
-- **Tags:** guide, setup, llm, vllm, configuration, local
-
-## 1. Overview & Goal
-
-This guide explains how to configure the Data Curation Environment (DCE) extension to communicate with a locally hosted Large Language Model (LLM), such as the one set up via the `A92. DCE - vLLM Setup Guide`.
-
-The goal is to switch the extension from its default "Manual" mode to one of the automated modes that can make API calls directly to your local model, streamlining the development workflow.
-
-## 2. Step-by-Step Configuration
-
-### Step 1: Open the Settings Panel
-- Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
-- Run the command: **`DCE: Open Settings & Help`**. This will open the settings panel in a new editor tab.
-
-### Step 2: Navigate to the Settings Section
-- In the settings panel, find and expand the **"Settings"** section.
-
-### Step 3: Select Your Connection Mode
-You will see a list of connection modes. Choose the one that matches your setup.
-
-#### Option A: Demo Mode (Recommended for `aiascent.game` users)
-This is the simplest option if you are using the pre-configured `aiascent.game` proxy.
--   Select the radio button for **"Demo Mode (Local vLLM via `aiascent.game`)"**.
--   The endpoint is pre-configured. No other steps are needed.
-
-#### Option B: API Mode (URL)
-Use this option if you are running your own vLLM server (or another OpenAI-compatible service) and want to connect to it directly without a proxy.
--   Select the radio button for **"API (URL)"**.
--   An input field will appear. Enter the full API endpoint URL. For a standard vLLM server, this will be `http://localhost:8000/v1`.
-    -   **Important:** If your LLM server is on a different machine, replace `localhost` with that machine's local network IP address (e.g., `http://192.168.1.100:8000/v1`).
--   Save the settings.
-
-## 4. Next Steps
-
-The DCE extension is now configured to send its API requests to your local LLM server. You can now use the "Generate Responses" button (once implemented) in the Parallel Co-Pilot Panel to automatically populate the response tabs, completing the automated workflow. To switch back to the manual copy/paste method, simply re-open the settings and select **"Free Mode (Manual Copy/Paste)"**.
-</file_artifact>
-
-<file path="src/Artifacts/A95. DCE - LLM Connection Modes Plan.md">
-# Artifact A95: DCE - LLM Connection Modes Plan
-# Date Created: C36
-# Author: AI Model & Curator
-# Updated on: C42 (Refine "Generate Responses" workflow to create a new cycle first)
-
-- **Key/Value for A0:**
-- **Description:** Outlines the plan for a multi-modal settings UI and the associated workflow changes, allowing users to switch between manual copy/paste, a pre-configured demo mode, and user-provided API URLs or Keys.
-- **Tags:** feature plan, settings, ui, ux, llm, configuration, api, streaming
-
-## 1. Overview & Goal
-
-To maximize the utility and accessibility of the DCE extension, users need a flexible way to connect to different LLM backends. This plan details the implementation of a multi-modal settings UI and the corresponding changes to the main workflow. This will allow users to seamlessly switch between different connection methods, from a simple manual workflow to advanced, automated API integrations.
-
-This plan refines and supersedes `A85. DCE - Model Card Management Plan.md` by focusing on a more user-friendly, mode-based approach.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P3-CM-01 | **Use Manual Mode** | As a new user, I want the extension to default to a "Free (Manual)" mode, so I can use the core features by copying and pasting without any setup. | - The default setting is "Free Mode". <br> - In this mode, a "Generate prompt.md" button is shown. |
-| P3-CM-02 | **Use Demo Mode** | As a demo user, I want to select a "Demo Mode" that connects to a local vLLM endpoint, so I can experience the full automated workflow. | - A "Demo Mode" option is available. <br> - When selected, the "Generate prompt.md" button is replaced with a "Generate responses" button. |
-| P3-CM-03 | **Generate Into New Cycle** | As a user in an automated mode, when I click "Generate responses" on Cycle `N`, I want the extension to automatically create a new Cycle `N+1` and place the generated responses there, so my new results are cleanly separated from the prompt that created them. | - Clicking "Generate responses" initiates a process that creates a new cycle. <br> - The generated responses from the LLM populate the tabs of the new cycle. <br> - The UI automatically navigates to the new cycle upon completion. |
-| P3-CM-04 | **Monitor Generation Speed** | As a user generating responses, I want to see a live "tokens per second" metric, so I have feedback on the generation performance. | - A "Tokens/sec" display appears near the "Generate responses" button during generation. <br> - It updates in real-time as token data streams in. |
-| P3-CM-05 | **Persistent Settings** | As a user, I want my selected connection mode to be saved, so I don't have to re-configure it every time I open VS Code. | - The selected connection mode and any associated URL/Key is persisted in the workspace settings. |
-
-## 3. UI/UX Design
-
-(No changes from C37)
-
-## 4. Technical Implementation Plan
-
-### 4.1. Settings Persistence
-(No changes from C37)
-
-### 4.2. "Generate Responses" Workflow (C42 Update)
-The workflow is now designed to be more robust and atomic, with the backend handling the creation of the new cycle.
-
-1.  **Frontend (`view.tsx`):**
-    *   The `handleGenerateResponses` `onClick` handler will gather the *current* cycle's data (`PcppCycle` object for Cycle `N`) and send it to the backend via a `RequestBatchGeneration` message.
-2.  **Backend (`on-message.ts`):**
-    *   The handler for `RequestBatchGeneration` receives the full data for Cycle `N`.
-    *   It first calls `prompt.service.ts` to generate the prompt string from Cycle `N`'s data.
-    *   It then calls `llm.service.ts` to get the array of response strings from the vLLM.
-    *   It then calls a new method in `history.service.ts`, `createNewCycleWithResponses`, passing in the array of responses.
-    *   The `history.service.ts` creates the new cycle (`N+1`), populates its response tabs, and saves the entire updated history.
-    *   Finally, the backend sends a `SendBatchGenerationComplete` message to the frontend, containing the `newCycleId`.
-3.  **Frontend (`view.tsx`):**
-    *   A new message handler for `SendBatchGenerationComplete` receives the ID of the new cycle.
-    *   It then calls the existing `handleCycleChange` logic to navigate the UI to this new cycle, which now contains all the generated responses.
-
-### 4.3. Streaming & Metrics (Future Cycle)
--   The backend `llm.service.ts` will be updated to handle streaming responses.
--   New IPC channels (`StreamResponseChunk`, `StreamResponseEnd`) will be created.
--   The frontend in `view.tsx` will be updated to handle these streaming messages, append content to the tabs in real-time, and calculate the tokens/second metric.
-</file_artifact>
-
-<file path="src/backend/services/llm.service.ts">
-// src/backend/services/llm.service.ts
-// Updated on: C48 (Remove hardcoded max_tokens)
-import { Services } from './services';
-import fetch from 'node-fetch';
-import { PcppCycle } from '@/common/types/pcpp.types';
-
-export class LlmService {
-    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
-        const settings = await Services.settingsService.getSettings();
-        let endpointUrl = '';
-
-        switch (settings.connectionMode) {
-            case 'demo':
-                endpointUrl = 'https://aiascent.game/api/dce/proxy'; // Pre-configured
-                break;
-            case 'url':
-                endpointUrl = settings.apiUrl || '';
-                break;
-            default:
-                Services.loggerService.error("Attempted to call LLM in manual mode.");
-                return [];
-        }
-
-        if (!endpointUrl) {
-            Services.loggerService.error("LLM endpoint URL is not configured.");
-            return [];
-        }
-
-        try {
-            Services.loggerService.log(`Sending batch request for ${count} responses to: ${endpointUrl}`);
-            
-            const response = await fetch(endpointUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: "unsloth/gpt-oss-20b",
-                    prompt: prompt,
-                    n: count,
-                    // max_tokens is removed to let the server use its default.
-                    // This prevents errors where prompt_tokens + max_tokens > context_window.
-                    stream: false
-                }),
-            });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
-            }
-
-            const responseData = await response.json() as any;
-            
-            if (responseData.responses && Array.isArray(responseData.responses)) {
-                const results = responseData.responses;
-                Services.loggerService.log(`Received ${results.length} responses from LLM.`);
-                return results;
-            } else {
-                throw new Error("Invalid response structure from LLM endpoint.");
-            }
-
-        } catch (error: any) {
-            Services.loggerService.error(`Failed to generate batch responses: ${error.message}`);
-            // Return an empty array of the correct size to create an empty cycle for inspection
-            return Array(count).fill('');
-        }
-    }
-}
-</file_artifact>
-
-<file path="src/backend/services/settings.service.ts">
-// src/backend/services/settings.service.ts
-// New file in C37
-import * as vscode from 'vscode';
-import { getContext } from '@/extension';
-import { Services } from './services';
-
-const CONNECTION_MODE_KEY = 'dce.connectionMode';
-const API_URL_KEY = 'dce.apiUrl';
-// API_KEY would be stored in SecretStorage
-
-export type ConnectionMode = 'manual' | 'demo' | 'url' | 'key';
-
-export interface DceSettings {
-    connectionMode: ConnectionMode;
-    apiUrl?: string;
-}
-
-export class SettingsService {
-    
-    private get context(): vscode.ExtensionContext {
-        return getContext();
-    }
-
-    public async getSettings(): Promise<DceSettings> {
-        const config = vscode.workspace.getConfiguration();
-        const connectionMode = config.get<ConnectionMode>(CONNECTION_MODE_KEY, 'manual');
-        const apiUrl = config.get<string>(API_URL_KEY);
-        
-        return { connectionMode, apiUrl };
-    }
-
-    public async saveSettings(settings: DceSettings): Promise<void> {
-        const config = vscode.workspace.getConfiguration();
-        try {
-            await config.update(CONNECTION_MODE_KEY, settings.connectionMode, vscode.ConfigurationTarget.Workspace);
-            await config.update(API_URL_KEY, settings.apiUrl, vscode.ConfigurationTarget.Workspace);
-            Services.loggerService.log(`Settings saved: Mode=${settings.connectionMode}, URL=${settings.apiUrl}`);
-            vscode.window.showInformationMessage("DCE settings saved.");
-        } catch (error: any) {
-            Services.loggerService.error(`Failed to save settings: ${error.message}`);
-            vscode.window.showErrorMessage("Failed to save DCE settings.");
-        }
-    }
-}
-</file_artifact>
-
-<file path="src/Artifacts/A96. DCE - Harmony-Aligned Response Schema Plan.md">
-# Artifact A96: DCE - Harmony-Aligned Response Schema Plan
-# Date Created: C45
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** An analysis of the `openai_harmony` library and a proposed plan for migrating the DCE's vLLM interaction schema from XML tags to a more robust, token-based structured format.
-- **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony
-
-## 1. Overview & Goal
-
-The current interaction schema (`A52.2`) relies on parsing XML-like tags (`<file>`, `<summary>`) and markdown headers from the LLM's free-text response. While functional, this approach is brittle. It is susceptible to minor formatting errors from the model and requires complex, string-based `stop` tokens that can prematurely truncate responses, as seen in Cycle 44.
-
-The `GPT-OSS` repository introduces a more advanced approach, "Harmony," which uses a vocabulary of special control tokens (e.g., `<|start|>`, `<|channel|>`, `<|message|>`, `<|end|>`) to guide the model's generation into a structured, machine-readable format. This is a significantly more robust and powerful way to handle structured data generation with LLMs.
-
-The goal of this plan is to outline a phased migration from our current XML-based schema to a Harmony-aligned schema for all communication with the vLLM backend.
-
-## 2. Analysis of the Harmony Approach
-
-The `openai_harmony` library and `harmony_vllm_app.py` demonstrate a sophisticated workflow:
-
-1.  **Structured Prompt Rendering:** Instead of a single block of text, the prompt is constructed as a series of messages, each with a `role` (system, user, assistant), and potentially a `channel` (analysis, commentary, final). This entire structure is "rendered" into a sequence of tokens that includes the special control tokens.
-2.  **Guided Generation:** The model is trained or fine-tuned to understand these control tokens. It learns to "speak" in this format, for example, by placing its internal monologue in an `analysis` channel and its final answer in a `final` channel.
-3.  **Robust Parsing:** The response from the model is not just a block of text; it's a stream of tokens that can be parsed deterministically using the same control tokens. A `StreamableParser` can listen to the token stream and identify when the model is opening a new message, writing to a specific channel, or finishing its turn.
-
-This is fundamentally superior to our current regex-based parsing.
-
-## 3. Proposed Migration Plan
-
-This is a major architectural change and should be implemented in phases.
-
-### Phase 1: Adopt Harmony for File Formatting (Immediate)
-
--   **Goal:** Replace the `<file path="...">` and `
-</file_artifact>
-
-<file path="src/Artifacts/A97. DCE - vLLM Response Progress UI Plan.md">
-# Artifact A97: DCE - vLLM Response Progress UI Plan
-# Date Created: C48
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
-- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
-
-## 1. Vision & Goal
-
-When a user clicks "Generate responses," the extension communicates with a potentially remote vLLM server. This process can take anywhere from a few seconds to over a minute, depending on the model and prompt size. Currently, the UI provides no feedback during this time, which can make the application feel unresponsive or broken.
-
-The goal is to provide clear, real-time feedback to the user about the status of their request. This will be achieved with a new, non-modal UI element that appears during generation, showing the progress for each requested response and displaying a live tokens-per-second metric.
-
-## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P3-PROG-01 | **See Generation Progress** | As a user, after I click "Generate responses," I want to see a visual indicator that the request is in progress, so I know the application is working. | - A progress display area appears in the UI (e.g., in the header) after "Generate responses" is clicked. <br> - This display shows one progress bar for each response being generated (e.g., 4 bars if 4 responses were requested). |
-| P3-PROG-02 | **Monitor Performance** | As a user, I want to see a live tokens-per-second (tok/s) metric, so I can gauge the performance of the LLM backend. | - The progress display includes a "Tokens/sec" counter. <br> - This counter updates in real-time as response data streams in from the backend. |
-| P3-PROG-03 | **View Streaming Responses** | As a user, I want to see the text of the responses appear in the tabs as they are being generated, so I can see the results immediately without waiting for all responses to be complete. | - As tokens are generated by the LLM, they are streamed to the appropriate response tab in the newly created cycle. |
-
-## 3. UI Mockup (Textual Description)
-
-The progress display will be a new element that appears within the main header (`pc-header`) of the Parallel Co-Pilot Panel, to the right of the "Generate responses" button.
-
-**State: Before Generation**
-```
-| [ Project Plan ] [ Generate responses ] [ 4 ] [ Log State ]                                       |
-```
-
-**State: During Generation**
-```
-| [ Project Plan ] [ Generating... (Disabled) ] [ 4 ] [ Abort ]                                     |
-|-------------------------------------------------------------------------------------------------|
-|  Tokens/sec: [ 1,234 ]                                                                          |
-|  Resp 1: [||||||||||||||||||||||||------------------] 50%                                          |
-|  Resp 2: [||||||||||||||||||||||||------------------] 50%                                          |
-|  Resp 3: [||||||||||||||||||------------------------] 40%                                          |
-|  Resp 4: [||||||||||--------------------------------] 30%                                          |
-|-------------------------------------------------------------------------------------------------|```
-
-### 3.1. Components Breakdown
-
--   **Generate Button:** The button's text changes to "Generating..." and it becomes disabled.
--   **Abort Button:** A new "Abort" button appears, allowing the user to cancel the request.
--   **Tokens/sec Display:** A live counter showing the aggregate generation speed.
--   **Progress Bars:**
-    -   One progress bar for each requested response.
-    -   The progress is based on the `max_tokens` requested vs. tokens received. If `max_tokens` isn't specified, it could be an indeterminate progress bar until the `finish_reason` is received.
-
-## 4. Technical Implementation Plan (High-Level)
-
-This feature depends on **streaming** responses from the vLLM server.
-
-1.  **Backend (`llm.service.ts`):**
-    *   The `generateBatch` method must be updated to handle `stream: true`.
-    *   It will need to process Server-Sent Events (SSE) from the vLLM response stream.
-2.  **IPC Channels:**
-    *   New channels will be needed to stream data to the frontend:
-        *   `StreamResponseChunk(payload: { responseId: number; chunk: string; })`
-        *   `StreamResponseEnd(payload: { responseId: number; finish_reason: string; })`
-        *   `UpdateTpsMetric(payload: { tps: number; })`
-3.  **Frontend (`view.tsx`):**
-    *   New state variables will be needed to manage the progress of each response and the TPS metric.
-    *   The UI will be updated to render the progress display conditionally.
-    *   New message handlers will listen for the streaming IPC events and update the state in real-time, appending text to the response tabs and updating the progress bars.
+- OpenAI for the Harmony format specification
+- VLLM team for the inference engine
+- Selenium project for browser automation
 </file_artifact>
 
 
