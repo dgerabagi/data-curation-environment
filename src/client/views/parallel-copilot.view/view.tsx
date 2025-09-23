@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C50 (Add logic to show progress UI from onboarding)
+// Updated on: C51 (Add isGenerating state to show progress UI)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -325,6 +325,9 @@ const App = () => {
     };
 
     const renderHeaderButtons = () => {
+        if (isGenerating) {
+            return <button disabled><VscLoading className="saving"/> Generating...</button>;
+        }
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {

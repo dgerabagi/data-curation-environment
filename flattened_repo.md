@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-23T22:04:54.978Z
+  Date Generated: 2025-09-23T22:44:30.760Z
   ---
   Total Files: 192
-  Approx. Tokens: 507146
+  Approx. Tokens: 506715
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (9531 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9563 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (5861 tokens)
@@ -133,11 +133,11 @@
 111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
 112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
 113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
-114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
+114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 37 - Chars: 2999 - Tokens: 750
 115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
-116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
+116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 105 - Chars: 4665 - Tokens: 1167
 117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
-118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
+118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 92 - Chars: 3806 - Tokens: 952
 119. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
 120. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
 121. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
@@ -166,7 +166,7 @@
 144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-147. src\client\utils\response-parser.ts - Lines: 107 - Chars: 4817 - Tokens: 1205
+147. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
 148. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 149. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 150. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
@@ -181,10 +181,10 @@
 159. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 160. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 161. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6813 - Tokens: 1704
-162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6435 - Tokens: 1609
+162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
 163. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 23444 - Tokens: 5861
 164. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-165. src\client\views\parallel-copilot.view\view.tsx - Lines: 374 - Chars: 38122 - Tokens: 9531
+165. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38250 - Tokens: 9563
 166. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 167. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 168. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -208,7 +208,7 @@
 186. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 187. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
 188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
-189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 33 - Chars: 4404 - Tokens: 1101
+189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3018 - Tokens: 755
 190. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 191. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 192. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
@@ -16371,11 +16371,6 @@ This document provides a clear, step-by-step roadmap for the implementation of *
 </file_artifact>
 
 <file path="src/Artifacts/T12. Template - Competitive Analysis.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file_artifact> tags.
--->
 # Artifact T12: [Project Name] - Competitive Analysis Template
 # Date Created: C152
 # Author: AI Model & Curator
@@ -16469,11 +16464,6 @@ The monolithic file/class will be broken down into the following smaller, more f
 </file_artifact>
 
 <file path="src/Artifacts/T14. Template - GitHub Repository Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file_artifact> tags.
--->
 # Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
 # Date Created: C152
 # Author: AI Model & Curator
@@ -16621,11 +16611,6 @@ Once a working pattern is identified in a test component:
 </file_artifact>
 
 <file path="src/Artifacts/T16. Template - Developer Environment Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file_artifact> tags.
--->
 # Artifact T16: [Project Name] - Developer Environment Setup Guide Template
 # Date Created: C158
 # Author: AI Model & Curator
@@ -18587,7 +18572,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C50 (Add response_format for JSON output in demo mode)
+// Updated on: C51 (Add response_format for JSON output in demo mode)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -20555,7 +20540,7 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C50 (Add JSON parsing logic)
+// Updated on: C51 (Implement JSON-first parsing with regex fallback)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -20575,9 +20560,11 @@ export function parseResponse(rawText: string): ParsedResponse {
                 tokenCount: Math.ceil((f.content || '').length / 4),
             }));
 
-            const courseOfAction = jsonResponse.course_of_action
-                .map((step: any) => `**Step ${step.step}:** ${step.description}`)
-                .join('\n');
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+                : jsonResponse.course_of_action; // Handle if it's already a string
 
             return {
                 summary: jsonResponse.summary,
@@ -20589,7 +20576,7 @@ export function parseResponse(rawText: string): ParsedResponse {
             };
         }
     } catch (e) {
-        // Not a valid JSON, proceed with regex parsing
+        // Not a valid JSON object that matches our schema, proceed with regex parsing
     }
 
     // Fallback to existing regex-based parsing
@@ -20607,8 +20594,8 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
-    if (tagMatches.length === 0 && processedText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or valid JSON. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
@@ -22374,7 +22361,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C50 (Show progress UI on generate)
+// Updated on: C51 (Call onStartGeneration prop)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -23568,7 +23555,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C50 (Add logic to show progress UI from onboarding)
+// Updated on: C51 (Add isGenerating state to show progress UI)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23894,6 +23881,9 @@ const App = () => {
     };
 
     const renderHeaderButtons = () => {
+        if (isGenerating) {
+            return <button disabled><VscLoading className="saving"/> Generating...</button>;
+        }
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
@@ -30312,35 +30302,72 @@ This project is licensed under the MIT License - see LICENSE file for details.
 # Artifact A52.3: DCE - Harmony Interaction Schema Source
 # Date Created: C49
 # Author: AI Model & Curator
+# Updated on: C51 (Migrate to JSON Output Schema)
 
 - **Key/Value for A0:**
-- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active.
-- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss
+- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active and instructs the model to produce a structured JSON output.
+- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss, json
 
 ## Interaction Schema Text
 
-1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. **The closing tag must be exactly `</file_artifact>`.** Do not use the file path in the closing tag (e.g., `</file path="...">` is incorrect). Do not write the closing tag as `</file>` or `</file_path>`. Only `</file_artifact>` will parse successfully.
+1.  **CRITICAL: Your entire response must be a single, valid JSON object.** Do not include any text before or after the JSON structure. The extension will parse your output using `JSON.parse()`.
 
-2. To guarantee successful parsing, every response **must** follow this structure:
-2.1.  **Summary:** Your high-level analysis and plan must be enclosed in `<summary>...</summary>` tags.
-2.2.  **Course of Action:** Your point-by-point plan must be enclosed in `<course_of_action>...</course_of_action>` tags.
-2.3. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response.
+2.  **JSON Schema:** Your output must conform to the following TypeScript interface:
+    ```typescript
+    interface HarmonyFile {
+      path: string;      // Relative path to the file from the workspace root.
+      content: string;   // The complete and full content of the file.
+    }
 
-3.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
+    interface CourseOfActionStep {
+      step: number;
+      description: string; // A description of the action for this step.
+    }
 
-4. `flattened_repo_v2.txt` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.
+    interface HarmonyJsonResponse {
+      summary: string;
+      course_of_action: CourseOfActionStep[];
+      curator_activity?: string; // Optional: For instructions to the human.
+      files: HarmonyFile[];
+    }
+    ```
 
-5.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.
+3.  **Example Output:**
+    ```json
+    {
+      "summary": "I have analyzed the request and will update the main application component and its corresponding service.",
+      "course_of_action": [
+        {
+          "step": 1,
+          "description": "Update `src/App.tsx`: Add a new state variable and a button to trigger the new functionality."
+        },
+        {
+          "step": 2,
+          "description": "Update `src/services/api.ts`: Create a new function to fetch the required data from the backend."
+        }
+      ],
+      "curator_activity": "Please ensure the backend API endpoint `GET /api/newdata` is running and accessible.",
+      "files": [
+        {
+          "path": "src/App.tsx",
+          "content": "// Full content of the updated App.tsx file..."
+        },
+        {
+          "path": "src/services/api.ts",
+          "content": "// Full content of the updated api.ts file..."
+        }
+      ]
+    }
+    ```
 
-6.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.
+4.  **Content Rules:**
+    *   Always output complete files. Do not use placeholders or omit code.
+    *   Update documentation artifacts before updating code artifacts.
+    *   If you need the human curator to perform an action (e.g., delete a file, run a command), describe it in the optional `curator_activity` field.
 
-7. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).
+5.  Our Document Artifacts serve as our `Source of Truth`. As issues occur, or code repeatedly regresses, seek to align our `Source of Truth` documents to codify the root cause and prevent future regressions.
 
-8. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
-
-9. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
-
-10. when creating a new documentation artifact, also just update the master artifacts list itself.
+6.  If you are deciding where to place a new function, and multiple files are suitable candidates, choose the smaller file (in tokens).
 </file_artifact>
 
 <file path="src/Artifacts/A78. DCE - Whitepaper - Process as Asset.md">

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 51 - continue implementation of harmony/vllm/gpt-oss
+Current Cycle 52 - still no response progress UI appearing
+Cycle 51 - continue implementation of harmony/vllm/gpt-oss
 Cycle 50 - continue refinement of harmony/gpt-oss
 Cycle 49 - continue refinement of `Demo Mode` process logic
 Cycle 48 - continue vllm integration, super cool progress
@@ -781,6 +782,149 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 52>
+<Cycle Context>
+okay again still when i go to click Generate Initial Responses, i still do not switch to to the response progress UI. here are what the console logs look like while im wiating for the responses to come back (ephemeral). have you swapped the vllm to be streaming? that would be a pre-req, right? i see you were looking to make some isGenerating trigger, either theres evidence of it in the logs, or not, make sure the logs are helping figure out why the UI progress bar is not appearing when generating.
+
+additionally, we are not yet reaching parsing parity, or like 99% parsing success. currently the parsing is almost always failing in some form or manner.
+
+so far the logs right now are looking very clear and orderly, please keep that orderliness while also enhancing the logs to reveal if/when a parsing fails. try to create a case study in the logs about it, by capturing the data near where the parsing failure happened. do whatever you can to help reveal the cause of the failure so we can keep fine tuning our solution to increase our ability to accurately display these responses from this new model to the user.
+
+i do not yet see the regenerate button appear when hovering over a response tab.
+
+currently the `Regenerate` button doesnt regenerate under either of the two conditions/manners requested. 
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [5:33:21 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [5:33:21 PM] Services initializing...
+[INFO] [5:33:21 PM] Services initialized successfully.
+[INFO] [5:33:21 PM] Registering 7 commands.
+[INFO] [5:33:21 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [5:33:21 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [5:33:21 PM] Starry Night syntax highlighter initialized.
+[INFO] [5:33:21 PM] Context Chooser view message handler initialized.
+[INFO] [5:33:21 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [5:33:21 PM] [SelectionService] No last selection found in state.
+[INFO] [5:33:21 PM] Persisted current selection of 0 items.
+[INFO] [5:33:22 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [5:33:26 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [5:33:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [5:33:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [5:33:29 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [5:33:35 PM] Executing dce.openSettingsPanel command.
+[INFO] [5:33:35 PM] Settings view message handler initialized.
+[INFO] [5:33:36 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [5:33:36 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [5:33:37 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [5:33:37 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [5:33:38 PM] Settings saved: Mode=demo, URL=undefined
+[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [5:33:39 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [5:33:47 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [5:33:49 PM] Generating Cycle 0 prompt.md file...
+[INFO] [5:33:49 PM] Onboarding complete. Requesting 4 initial responses from LLM.
+[INFO] [5:33:49 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
+[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [5:33:49 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense2/src","c:/Projects/TowerDefense2/src/Artifacts","c:/Projects/TowerDefense2/src/Artifacts/DCE_README.md"]
+[INFO] [5:33:49 PM] [SelectionService] No last selection found in state.
+[INFO] [5:33:49 PM] Persisted current selection of 3 items.
+[INFO] [5:33:49 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [5:33:49 PM] Persisted current selection of 3 items.
+[INFO] [5:33:51 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [5:37:21 PM] Received 4 responses from LLM.
+[INFO] [5:37:21 PM] Created new cycle 1 with 4 responses.
+[INFO] [5:37:21 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [5:37:21 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [5:37:21 PM] [CostCalc] Found 3 selected files.
+[INFO] [5:37:21 PM] [CostCalc] In-memory flattened content generated (797 tokens).
+[INFO] [5:37:21 PM] [Comparison] Received request for: ...
+[INFO] [5:37:21 PM] [Comparison] Received request for: src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md
+[INFO] [5:37:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: plaintext, id: ...::. That includes double quotes. We need to escape them as \". Also newline after >? We can keep newline as \n.
+
+Let's build the content string for A14.
+
+I'll produce the string with \n and escaped double quotes.
+
+Need to be careful.
+
+Also we might need to escape backticks? Not necessary.
+
+Let's start writing JSON.
+
+Will produce something like:
+
+{
+  "summary": "...",
+  "course_of_action": [...],
+  "curator_activity": "...",
+  "files": [
+    {"path":"src/Artifacts/A1. TowerDefense - Master Artifact List.md","content":"..."},
+    ...
+  ]
+}
+
+Now we need to create content strings with \n and escape double quotes.
+
+Let's write content for A1.
+
+I'll produce it as:
+
+"# Artifact T1: Master Artifact List\n# Date Created: C140\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.\n\n## 2. Formatting Rules for Parsing\n\n*   Lines beginning with `#` are comments and are ignored.\n*   `##` denotes a major category header and is ignored.\n*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.\n*   Lines beginning with `- **Description:**` provide context for the project.\n*   Lines beginning with `- **Tags:**` provide keywords for Inference.\n\n## 3. Example Structure\n\n## I. Project Planning & Design\n\n### A1. TowerDefense - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plan.\n- **Tags:** project vision, goals, scope, planning\n\n### A2. TowerDefense - Phase 1 - Technical Scaffolding Plan\n- **Description:** Defines the initial technical architecture and file structure for the project.\n- **Tags:** technical plan, architecture, scaffolding\n\n### A3. TowerDefense - Development and Testing Guide\n- **Description:** Standard procedures for running, debugging, and testing the application locally.\n- **Tags:** development workflow, testing, debugging\n\n### A4. TowerDefense - GitHub Repository Setup Guide\n- **Description:** Steps to initialize Git, link to GitHub, and sample workflow.\n- **Tags:** git, github, version control, workflow"
+
+We need to escape double quotes inside string. In this content, there are double quotes inside the phrase "Source of Truth". We need to escape them as \". Also we have double quotes inside JSON string for the tags? Actually the tags line contains no double quotes. The only double quotes are inside the text. We'll escape them.
+
+Also we have the backticks around `#`, etc. Those are fine.
+
+Now content for A2, A4, A7 similarly.
+
+Also for A14, we need to include <file path="src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"> ...
+[WARN] [5:37:21 PM] [WARN] No Starry Night scope found for language: plaintext
+[INFO] [5:37:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md::...
+[INFO] [5:37:21 PM] [File Existence] Received request to check paths: ["...","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
+[INFO] [5:37:21 PM] [File Existence] Received request to check paths: ["...","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
+[ERROR] [5:37:21 PM] [Comparison] Failed for ...: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\...'
+[ERROR] [5:37:21 PM] [Comparison] Failed for src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\A14. TowerDefense - GitHub Repository Setup Guide.md'
+[INFO] [5:37:21 PM] [CostCalc] Calculating breakdown:
+[INFO] [5:37:21 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [5:37:21 PM]   - M2 Cycle Overview: 30 tokens
+[INFO] [5:37:21 PM]   - M3 Interaction Schema: 768 tokens
+[INFO] [5:37:21 PM]   - M4 Project Scope: 24 tokens
+[INFO] [5:37:21 PM]   - M5 Artifact List: 30 tokens
+[INFO] [5:37:21 PM]   - M6 Cycles: 11128 tokens
+[INFO] [5:37:21 PM]   - M7 Flattened Repo: 808 tokens
+[INFO] [5:37:21 PM] [CostCalc] Total Tokens: 12836, Estimated Cost: $0.016045
+[INFO] [5:37:21 PM] [CostCalc] Sending estimation to client.
+
+</Ephemeral Context>
+<Previous Cycle 51 Summary of Actions>
+This is an excellent set of requests that pushes the project toward a more robust, user-friendly, and intelligent workflow. My analysis confirms that your ideas—especially leveraging structured JSON output from Harmony/vLLM and providing better UI feedback—are not only feasible but represent a significant architectural improvement.
+
+My course of action is to first create the planning artifacts for these new features. I will then implement the fixes and enhancements, prioritizing the user-facing UI feedback for onboarding, correcting the interaction schema logic, and finally, beginning the migration to a structured JSON parsing model. This approach ensures our documentation remains the source of truth while we deliver tangible improvements.
+
+1.  **Documentation First (Planning New Features):**
+    *   I will create a new artifact, **`A98. DCE - Harmony JSON Output Schema Plan.md`**, to formally define the target JSON structure for responses from Harmony-based models. This plan will be based on your ephemeral context example and will include fields for `summary`, `course_of_action`, `curator_activity`, and an array of `files`.
+    *   I will create another new artifact, **`A99. DCE - Response Regeneration Workflow Plan.md`**, to detail the user stories and technical logic for the "Regenerate" button. This will cover both use cases (regenerating empty tabs vs. all tabs) and will also incorporate your excellent suggestion for a per-tab refresh button.
+    *   I will update the **`A0. DCE Master Artifact List.md`** to include these two new planning documents.
+
+2.  **Fix Interaction Schema for Demo Mode (`prompt.service.ts`):**
+    *   I will modify the `getPromptParts` method. It will now check the `connectionMode` from the settings. If the mode is `'demo'`, it will *only* include the content from `A52.3 DCE - Harmony Interaction Schema Source.md` and will explicitly exclude `A52.1 DCE - Parser Logic and AI Guidance.md`. This corrects the prompt for gpt-oss.
+
+3.  **Implement Onboarding Progress UI (`OnboardingView.tsx` & `view.tsx`):**
+    *   I will refactor the `OnboardingView.tsx` component. When the "Generate Initial Responses" button is clicked in "Demo Mode," it will now trigger a state change that hides the onboarding UI and displays the `GenerationProgressDisplay` component. This provides immediate visual feedback to the user that the long-running task has started. This leverages the existing VS Code progress indicator patterns.
+
+4.  **Implement Harmony JSON Output Schema:**
+    *   **Backend (`llm.service.ts`):** I will update the `generateBatch` method. When `connectionMode` is `'demo'`, I will add `response_format: { "type": "json_object" }` to the request body sent to the vLLM proxy. This instructs the model to return a JSON object.
+    *   **Frontend (`response-parser.ts`):** I will enhance the `parseResponse` function to be "bilingual." It will first attempt to parse the `rawText` as JSON. If successful, it will map the JSON object's properties directly to our `ParsedResponse` type. If `JSON.parse` fails, it will fall back to the existing regex-based parsing logic. This provides a robust migration path and maintains compatibility with non-JSON responses.
+
+5.  **Update Files Updated List:** I will include a list of all artifacts and files that have been created or modified in this cycle.
+</Previous Cycle 51 Summary of Actions>
+</Cycle 52>
 
 <Cycle 51>
 <Cycle Context>
@@ -3465,17 +3609,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-23T22:04:54.978Z
+  Date Generated: 2025-09-23T22:44:30.760Z
   ---
   Total Files: 192
-  Approx. Tokens: 507146
+  Approx. Tokens: 506715
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (9531 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9563 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (5861 tokens)
@@ -3597,11 +3741,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
 112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
 113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
-114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
+114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 37 - Chars: 2999 - Tokens: 750
 115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
-116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
+116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 105 - Chars: 4665 - Tokens: 1167
 117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
-118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
+118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 92 - Chars: 3806 - Tokens: 952
 119. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
 120. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
 121. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
@@ -3630,7 +3774,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-147. src\client\utils\response-parser.ts - Lines: 107 - Chars: 4817 - Tokens: 1205
+147. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
 148. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 149. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 150. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
@@ -3645,10 +3789,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 159. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 160. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 161. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6813 - Tokens: 1704
-162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6435 - Tokens: 1609
+162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
 163. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 23444 - Tokens: 5861
 164. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-165. src\client\views\parallel-copilot.view\view.tsx - Lines: 374 - Chars: 38122 - Tokens: 9531
+165. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38250 - Tokens: 9563
 166. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 167. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 168. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -3672,7 +3816,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 186. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 187. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
 188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
-189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 33 - Chars: 4404 - Tokens: 1101
+189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3018 - Tokens: 755
 190. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 191. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 192. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
@@ -19835,11 +19979,6 @@ This document provides a clear, step-by-step roadmap for the implementation of *
 </file_artifact>
 
 <file path="src/Artifacts/T12. Template - Competitive Analysis.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A12. [Project Name] - Competitive Analysis.md">...</file_artifact> tags.
--->
 # Artifact T12: [Project Name] - Competitive Analysis Template
 # Date Created: C152
 # Author: AI Model & Curator
@@ -19933,11 +20072,6 @@ The monolithic file/class will be broken down into the following smaller, more f
 </file_artifact>
 
 <file path="src/Artifacts/T14. Template - GitHub Repository Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A14. [Project Name] - GitHub Repository Setup Guide.md">...</file_artifact> tags.
--->
 # Artifact T14: [Project Name] - GitHub Repository Setup Guide Template
 # Date Created: C152
 # Author: AI Model & Curator
@@ -20085,11 +20219,6 @@ Once a working pattern is identified in a test component:
 </file_artifact>
 
 <file path="src/Artifacts/T16. Template - Developer Environment Setup Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/A16. [Project Name] - Developer Environment Setup Guide.md">...</file_artifact> tags.
--->
 # Artifact T16: [Project Name] - Developer Environment Setup Guide Template
 # Date Created: C158
 # Author: AI Model & Curator
@@ -22051,7 +22180,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C50 (Add response_format for JSON output in demo mode)
+// Updated on: C51 (Add response_format for JSON output in demo mode)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -24019,7 +24148,7 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C50 (Add JSON parsing logic)
+// Updated on: C51 (Implement JSON-first parsing with regex fallback)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -24039,9 +24168,11 @@ export function parseResponse(rawText: string): ParsedResponse {
                 tokenCount: Math.ceil((f.content || '').length / 4),
             }));
 
-            const courseOfAction = jsonResponse.course_of_action
-                .map((step: any) => `**Step ${step.step}:** ${step.description}`)
-                .join('\n');
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+                : jsonResponse.course_of_action; // Handle if it's already a string
 
             return {
                 summary: jsonResponse.summary,
@@ -24053,7 +24184,7 @@ export function parseResponse(rawText: string): ParsedResponse {
             };
         }
     } catch (e) {
-        // Not a valid JSON, proceed with regex parsing
+        // Not a valid JSON object that matches our schema, proceed with regex parsing
     }
 
     // Fallback to existing regex-based parsing
@@ -24071,8 +24202,8 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
-    if (tagMatches.length === 0 && processedText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or valid JSON. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
@@ -25838,7 +25969,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C50 (Show progress UI on generate)
+// Updated on: C51 (Call onStartGeneration prop)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -27032,7 +27163,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C50 (Add logic to show progress UI from onboarding)
+// Updated on: C51 (Add isGenerating state to show progress UI)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -27358,6 +27489,9 @@ const App = () => {
     };
 
     const renderHeaderButtons = () => {
+        if (isGenerating) {
+            return <button disabled><VscLoading className="saving"/> Generating...</button>;
+        }
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
@@ -33776,35 +33910,72 @@ This project is licensed under the MIT License - see LICENSE file for details.
 # Artifact A52.3: DCE - Harmony Interaction Schema Source
 # Date Created: C49
 # Author: AI Model & Curator
+# Updated on: C51 (Migrate to JSON Output Schema)
 
 - **Key/Value for A0:**
-- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active.
-- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss
+- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active and instructs the model to produce a structured JSON output.
+- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss, json
 
 ## Interaction Schema Text
 
-1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. **The closing tag must be exactly `</file_artifact>`.** Do not use the file path in the closing tag (e.g., `</file path="...">` is incorrect). Do not write the closing tag as `</file>` or `</file_path>`. Only `</file_artifact>` will parse successfully.
+1.  **CRITICAL: Your entire response must be a single, valid JSON object.** Do not include any text before or after the JSON structure. The extension will parse your output using `JSON.parse()`.
 
-2. To guarantee successful parsing, every response **must** follow this structure:
-2.1.  **Summary:** Your high-level analysis and plan must be enclosed in `<summary>...</summary>` tags.
-2.2.  **Course of Action:** Your point-by-point plan must be enclosed in `<course_of_action>...</course_of_action>` tags.
-2.3. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response.
+2.  **JSON Schema:** Your output must conform to the following TypeScript interface:
+    ```typescript
+    interface HarmonyFile {
+      path: string;      // Relative path to the file from the workspace root.
+      content: string;   // The complete and full content of the file.
+    }
 
-3.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
+    interface CourseOfActionStep {
+      step: number;
+      description: string; // A description of the action for this step.
+    }
 
-4. `flattened_repo_v2.txt` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.
+    interface HarmonyJsonResponse {
+      summary: string;
+      course_of_action: CourseOfActionStep[];
+      curator_activity?: string; // Optional: For instructions to the human.
+      files: HarmonyFile[];
+    }
+    ```
 
-5.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.
+3.  **Example Output:**
+    ```json
+    {
+      "summary": "I have analyzed the request and will update the main application component and its corresponding service.",
+      "course_of_action": [
+        {
+          "step": 1,
+          "description": "Update `src/App.tsx`: Add a new state variable and a button to trigger the new functionality."
+        },
+        {
+          "step": 2,
+          "description": "Update `src/services/api.ts`: Create a new function to fetch the required data from the backend."
+        }
+      ],
+      "curator_activity": "Please ensure the backend API endpoint `GET /api/newdata` is running and accessible.",
+      "files": [
+        {
+          "path": "src/App.tsx",
+          "content": "// Full content of the updated App.tsx file..."
+        },
+        {
+          "path": "src/services/api.ts",
+          "content": "// Full content of the updated api.ts file..."
+        }
+      ]
+    }
+    ```
 
-6.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.
+4.  **Content Rules:**
+    *   Always output complete files. Do not use placeholders or omit code.
+    *   Update documentation artifacts before updating code artifacts.
+    *   If you need the human curator to perform an action (e.g., delete a file, run a command), describe it in the optional `curator_activity` field.
 
-7. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).
+5.  Our Document Artifacts serve as our `Source of Truth`. As issues occur, or code repeatedly regresses, seek to align our `Source of Truth` documents to codify the root cause and prevent future regressions.
 
-8. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
-
-9. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
-
-10. when creating a new documentation artifact, also just update the master artifacts list itself.
+6.  If you are deciding where to place a new function, and multiple files are suitable candidates, choose the smaller file (in tokens).
 </file_artifact>
 
 <file path="src/Artifacts/A78. DCE - Whitepaper - Process as Asset.md">

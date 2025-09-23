@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C50 (Add JSON parsing logic)
+// Updated on: C51 (Implement JSON-first parsing with regex fallback)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -19,9 +19,11 @@ export function parseResponse(rawText: string): ParsedResponse {
                 tokenCount: Math.ceil((f.content || '').length / 4),
             }));
 
-            const courseOfAction = jsonResponse.course_of_action
-                .map((step: any) => `**Step ${step.step}:** ${step.description}`)
-                .join('\n');
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+                : jsonResponse.course_of_action; // Handle if it's already a string
 
             return {
                 summary: jsonResponse.summary,
@@ -33,7 +35,7 @@ export function parseResponse(rawText: string): ParsedResponse {
             };
         }
     } catch (e) {
-        // Not a valid JSON, proceed with regex parsing
+        // Not a valid JSON object that matches our schema, proceed with regex parsing
     }
 
     // Fallback to existing regex-based parsing
@@ -51,8 +53,8 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
-    if (tagMatches.length === 0 && processedText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or valid JSON. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
