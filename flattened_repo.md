@@ -1,26 +1,26 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-23T21:32:42.878Z
+  Date Generated: 2025-09-23T22:04:54.978Z
   ---
-  Total Files: 190
-  Approx. Tokens: 505162
+  Total Files: 192
+  Approx. Tokens: 507146
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (9517 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (8800 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9531 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (5861 tokens)
-8. src\backend\services\prompt.service.ts (4996 tokens)
+8. src\backend\services\prompt.service.ts (5055 tokens)
 9. src\backend\services\file-operation.service.ts (4526 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 516 - Chars: 35197 - Tokens: 8800
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 524 - Chars: 35841 - Tokens: 8961
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -122,21 +122,21 @@
 100. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 101. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
 102. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-103. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1725 - Tokens: 432
-104. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1977 - Tokens: 495
-105. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1885 - Tokens: 472
-106. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2189 - Tokens: 548
-107. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1063 - Tokens: 266
-108. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2602 - Tokens: 651
-109. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1747 - Tokens: 437
-110. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1980 - Tokens: 495
-111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2599 - Tokens: 650
-112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2701 - Tokens: 676
-113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2896 - Tokens: 724
+103. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
+104. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
+105. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
+106. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
+107. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
+108. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 58 - Chars: 2375 - Tokens: 594
+109. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
+110. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
+111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
+112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
+113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
 114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
-115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2626 - Tokens: 657
+115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
 116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
-117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
+117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
 118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
 119. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
 120. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
@@ -150,9 +150,9 @@
 128. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 129. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 130. src\backend\services\history.service.ts - Lines: 296 - Chars: 11897 - Tokens: 2975
-131. src\backend\services\llm.service.ts - Lines: 65 - Chars: 2514 - Tokens: 629
+131. src\backend\services\llm.service.ts - Lines: 75 - Chars: 2972 - Tokens: 743
 132. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-133. src\backend\services\prompt.service.ts - Lines: 354 - Chars: 19982 - Tokens: 4996
+133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20219 - Tokens: 5055
 134. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 135. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 136. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
@@ -166,7 +166,7 @@
 144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-147. src\client\utils\response-parser.ts - Lines: 81 - Chars: 3832 - Tokens: 958
+147. src\client\utils\response-parser.ts - Lines: 107 - Chars: 4817 - Tokens: 1205
 148. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
 149. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
 150. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
@@ -181,10 +181,10 @@
 159. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 160. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 161. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6813 - Tokens: 1704
-162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 124 - Chars: 6259 - Tokens: 1565
+162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6435 - Tokens: 1609
 163. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 23444 - Tokens: 5861
 164. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-165. src\client\views\parallel-copilot.view\view.tsx - Lines: 374 - Chars: 38066 - Tokens: 9517
+165. src\client\views\parallel-copilot.view\view.tsx - Lines: 374 - Chars: 38122 - Tokens: 9531
 166. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 167. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 168. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -210,12 +210,14 @@
 188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
 189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 33 - Chars: 4404 - Tokens: 1101
 190. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+191. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+192. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C49 (Add A52.3)
+# Updated on: C50 (Add A98, A99)
 
 ## 1. Purpose
 
@@ -644,6 +646,14 @@
 ### A97. DCE - vLLM Response Progress UI Plan
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
 - **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
+
+### A98. DCE - Harmony JSON Output Schema Plan
+- **Description:** A plan to migrate the vLLM interaction schema from XML-based parsing to a structured JSON object output, leveraging the `response_format` parameter in OpenAI-compatible APIs.
+- **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony, json
+
+### A99. DCE - Response Regeneration Workflow Plan
+- **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature.
+- **Tags:** feature plan, ui, ux, workflow, regeneration
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -15905,11 +15915,6 @@ This structured, iterative process helps maintain project quality and ensures th
 </file_artifact>
 
 <file path="src/Artifacts/T1. Template - Master Artifact List.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A0-Master-Artifact-List.md"></file_artifact> tags.
--->
 # Artifact T1: Template - Master Artifact List
 # Date Created: C139
 # Author: AI Model & Curator
@@ -15944,11 +15949,6 @@ This file serves as the definitive, parseable list of all documentation artifact
 </file_artifact>
 
 <file path="src/Artifacts/T2. Template - Project Vision and Goals.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A1-Project-Vision-and-Goals.md"></file_artifact> tags.
--->
 # Artifact T2: Template - Project Vision and Goals
 # Date Created: C139
 # Author: AI Model & Curator
@@ -15985,11 +15985,6 @@ This phase focuses on refining the product, improving performance, and ensuring 
 </file_artifact>
 
 <file path="src/Artifacts/T3. Template - Phase 1 Requirements & Design.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A2-Phase1-Requirements.md"></file_artifact> tags.
--->
 # Artifact T3: Template - Phase 1 Requirements & Design
 # Date Created: C139
 # Author: AI Model & Curator
@@ -16025,11 +16020,6 @@ The implementation of Phase 1 will involve the following components:
 </file_artifact>
 
 <file path="src/Artifacts/T4. Template - Technical Scaffolding Plan.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A3-Technical-Scaffolding-Plan.md"></file_artifact> tags.
--->
 # Artifact T4: Template - Technical Scaffolding Plan
 # Date Created: C139
 # Author: AI Model & Curator
@@ -16082,11 +16072,6 @@ The project will adhere to a standard, feature-driven directory structure:
 </file_artifact>
 
 <file path="src/Artifacts/T5. Template - Target File Structure.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A5-Target-File-Structure.md"></file_artifact> tags.
--->
 # Artifact T5: Template - Target File Structure
 # Date Created: C139
 # Author: AI Model & Curator
@@ -16120,11 +16105,6 @@ This document provides a visual representation of the file structure that the `T
 </file_artifact>
 
 <file path="src/Artifacts/T6. Template - Initial Scaffolding Deployment Script.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A6-Scaffolding-Script.md"></file_artifact> tags.
--->
 # Artifact T6: Template - Initial Scaffolding Deployment Script (DEPRECATED)
 # Date Created: C139
 # Author: AI Model & Curator
@@ -16186,11 +16166,6 @@ deployScaffold();
 </file_artifact>
 
 <file path="src/Artifacts/T7. Template - Development and Testing Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A7-Dev-and-Testing-Guide.md"></file_artifact> tags.
--->
 # Artifact T7: Template - Development and Testing Guide
 # Date Created: C139
 # Author: AI Model & Curator
@@ -16237,11 +16212,6 @@ This will execute all test files located in the project and report the results t
 </file_artifact>
 
 <file path="src/Artifacts/T8. Template - Regression Case Studies.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A8-Regression-Case-Studies.md"></file_artifact> tags.
--->
 # Artifact T8: Template - Regression Case Studies
 # Date Created: C141
 # Author: AI Model & Curator
@@ -16271,11 +16241,6 @@ This document serves as a living record of persistent or complex bugs that have 
 </file_artifact>
 
 <file path="src/Artifacts/T9. Template - Logging and Debugging Guide.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A9-Logging-and-Debugging.md"></file_artifact> tags.
--->
 # Artifact T9: Template - Logging and Debugging Guide
 # Date Created: C141
 # Author: AI Model & Curator
@@ -16323,11 +16288,6 @@ By following the logs through this chain, you can identify exactly where the dat
 </file_artifact>
 
 <file path="src/Artifacts/T10. Template - Feature Plan Example.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A10-Feature-Plan-Example.md"></file_artifact> tags.
--->
 # Artifact T10: Template - Feature Plan Example
 # Date Created: C141
 # Author: AI Model & Curator
@@ -16358,11 +16318,6 @@ This document outlines the plan for implementing a standard right-click context 
 </file_artifact>
 
 <file path="src/Artifacts/T11. Template - Implementation Roadmap.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A11-Implementation-Roadmap.md"></file_artifact> tags.
--->
 # Artifact T11: Template - Implementation Roadmap
 # Date Created: C152
 # Author: AI Model & Curator
@@ -16461,11 +16416,6 @@ Based on the analysis, here are potential features and strategic opportunities f
 </file_artifact>
 
 <file path="src/Artifacts/T13. Template - Refactoring Plan.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A13-Refactoring-Plan.md"></file_artifact> tags.
--->
 # Artifact T13: Template - Refactoring Plan
 # Date Created: C152
 # Author: AI Model & Curator
@@ -16632,11 +16582,6 @@ This iterative loop of `accept -> test -> restore` allows you to rapidly auditio
 </file_artifact>
 
 <file path="src/Artifacts/T15. Template - A-B-C Testing Strategy for UI Bugs.md">
-<!-- 
-  IMPORTANT AI INSTRUCTION:
-  When generating a file based on this template, you MUST wrap the entire file's content 
-  in <file path="src/Artifacts/[ProjectName]-A15-ABC-Testing-Strategy.md"></file_artifact> tags.
--->
 # Artifact T15: Template - A-B-C Testing Strategy for UI Bugs
 # Date Created: C154
 # Author: AI Model & Curator
@@ -18642,7 +18587,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C48 (Remove hardcoded max_tokens)
+// Updated on: C50 (Add response_format for JSON output in demo mode)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -18651,13 +18596,29 @@ export class LlmService {
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
         const settings = await Services.settingsService.getSettings();
         let endpointUrl = '';
+        let requestBody: any = {};
 
         switch (settings.connectionMode) {
             case 'demo':
                 endpointUrl = 'https://aiascent.game/api/dce/proxy'; // Pre-configured
+                requestBody = {
+                    model: "unsloth/gpt-oss-20b",
+                    prompt: prompt,
+                    n: count,
+                    max_tokens: 8192,
+                    stream: false,
+                    response_format: { "type": "json_object" } // Request JSON output
+                };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
+                requestBody = {
+                    model: "local-model", // A generic name for user-provided URLs
+                    prompt: prompt,
+                    n: count,
+                    max_tokens: 8192,
+                    stream: false
+                };
                 break;
             default:
                 Services.loggerService.error("Attempted to call LLM in manual mode.");
@@ -18675,13 +18636,7 @@ export class LlmService {
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: "unsloth/gpt-oss-20b",
-                    prompt: prompt,
-                    n: count,
-                    max_tokens: 8192,
-                    stream: false
-                }),
+                body: JSON.stringify(requestBody),
             });
 
             if (!response.ok) {
@@ -18750,7 +18705,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C49 (Add logic to select interaction schema based on connection mode)
+// Updated on: C50 (Conditionally exclude A52.1 in Demo Mode)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -18919,14 +18874,21 @@ ${staticContext.trim()}
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
-        // C49: Select interaction schema based on connection mode
         const settings = await Services.settingsService.getSettings();
-        const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
-        const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
-
-        const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+        const isDemoMode = settings.connectionMode === 'demo';
+        
+        const schemaArtifact = isDemoMode ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
+        const schemaError = isDemoMode ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
         const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
-        const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+
+        let interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n`;
+        
+        if (!isDemoMode) {
+            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+            interactionSchemaContent += `\n${a52_1_Content}\n`;
+        }
+        
+        interactionSchemaContent += '</M3. Interaction Schema>';
 
         const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
         const m5Content = `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`;
@@ -19070,9 +19032,13 @@ ${staticContext.trim()}
             const settings = await Services.settingsService.getSettings();
             const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
             const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
-            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
             const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
-            const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+            let interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n`;
+            if (settings.connectionMode !== 'demo') {
+                const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+                interactionSchemaContent += `\n${a52_1_Content}\n`;
+            }
+            interactionSchemaContent += '</M3. Interaction Schema>';
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
@@ -20589,7 +20555,7 @@ export const logger = {
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C48 (Add handling for 'assistantfinal' marker)
+// Updated on: C50 (Add JSON parsing logic)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -20599,24 +20565,50 @@ const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
+    // Attempt to parse as JSON first for Harmony structured output
+    try {
+        const jsonResponse = JSON.parse(rawText);
+        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                path: f.path || '',
+                content: f.content || '',
+                tokenCount: Math.ceil((f.content || '').length / 4),
+            }));
+
+            const courseOfAction = jsonResponse.course_of_action
+                .map((step: any) => `**Step ${step.step}:** ${step.description}`)
+                .join('\n');
+
+            return {
+                summary: jsonResponse.summary,
+                courseOfAction: courseOfAction,
+                curatorActivity: jsonResponse.curator_activity || '',
+                filesUpdated: files.map(f => f.path),
+                files: files,
+                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+            };
+        }
+    } catch (e) {
+        // Not a valid JSON, proceed with regex parsing
+    }
+
+    // Fallback to existing regex-based parsing
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    let processedText = rawText.replace(/\</g, '<').replace(/\>/g, '>').replace(/\_/g, '_');
+    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
 
-    // C48 Fix: Ignore model chatter before the final response marker
     const finalResponseMarker = 'assistantfinal';
     const markerIndex = processedText.indexOf(finalResponseMarker);
     if (markerIndex !== -1) {
         processedText = processedText.substring(markerIndex + finalResponseMarker.length);
-        // Also remove any leading characters like > or ] that might follow the marker
         processedText = processedText.replace(/^.>/, '').trim();
     }
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
     if (tagMatches.length === 0 && processedText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` (or similar) tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or valid JSON. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
@@ -22382,7 +22374,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C49 (Add response count input)
+// Updated on: C50 (Show progress UI on generate)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -22397,6 +22389,7 @@ interface OnboardingViewProps {
     workflowStep: string | null;
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
+    onStartGeneration: () => void; // New prop to trigger progress UI
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -22411,7 +22404,7 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const [responseCount, setResponseCount] = React.useState(4);
@@ -22425,6 +22418,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
             
             if (connectionMode === 'demo') {
                 logger.log(`Sending request to generate initial artifacts AND ${responseCount} responses.`);
+                onStartGeneration(); // Trigger the parent to show the progress UI
                 clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
             } else {
                 logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
@@ -23574,7 +23568,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C49 (Add regenerate button and progress UI)
+// Updated on: C50 (Add logic to show progress UI from onboarding)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23882,7 +23876,7 @@ const App = () => {
 
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} />;
+    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} onStartGeneration={() => setIsGenerating(true)} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
@@ -30458,5 +30452,137 @@ A government agency needs to rapidly update a specialized technical training lab
 The Data Curation Environment is more than just a developer tool; it is a strategic framework for operationalizing AI in complex environments. By addressing the critical bottlenecks of context curation, collaboration, and iteration, the DCE transforms the human-AI interaction workflow into a structured, persistent, and valuable organizational asset.
 
 For organizations facing an ever-increasing list of priorities and a need to accelerate the development of specialized content, the DCE provides the necessary infrastructure to scale expertise, ensure quality, and achieve the mission faster.
+</file_artifact>
+
+<file path="src/Artifacts/A98. DCE - Harmony JSON Output Schema Plan.md">
+# Artifact A98: DCE - Harmony JSON Output Schema Plan
+# Date Created: C50
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to migrate the vLLM interaction schema from XML-based parsing to a structured JSON object output, leveraging the `response_format` parameter in OpenAI-compatible APIs.
+- **Tags:** plan, architecture, interaction schema, parsing, llm, vllm, harmony, json
+
+## 1. Vision & Goal
+
+The current method of parsing AI responses relies on a set of regular expressions to extract content from within custom XML tags (`<summary>`, `<file>`, etc.). While functional, this approach is brittle and can fail if the model produces even slightly malformed output.
+
+Modern OpenAI-compatible APIs, including the one provided by vLLM, support a `response_format` parameter that can instruct the model to return its output as a guaranteed-valid JSON object. The goal of this plan is to leverage this feature to create a more robust, reliable, and maintainable parsing pipeline. We will define a clear JSON schema and update our extension to request and parse this structured format, moving away from fragile regex-based text processing.
+
+## 2. The Proposed JSON Schema
+
+Based on the example provided in the ephemeral context of Cycle 50, the target JSON schema for an AI response will be as follows:
+
+```typescript
+interface HarmonyFile {
+  path: string;
+  content: string;
+}
+
+interface CourseOfActionStep {
+  step: number;
+  description: string;
+}
+
+interface HarmonyJsonResponse {
+  summary: string;
+  course_of_action: CourseOfActionStep[];
+  files_updated?: string[]; // Optional, can be derived from `files`
+  curator_activity?: string; // Optional
+  files: HarmonyFile[];
+}
+```
+
+### Example JSON Output:
+```json
+{
+  "summary": "I have analyzed the request and will update the main application component and its corresponding service.",
+  "course_of_action": [
+    {
+      "step": 1,
+      "description": "Update `src/App.tsx`: Add a new state variable and a button to trigger the new functionality."
+    },
+    {
+      "step": 2,
+      "description": "Update `src/services/api.ts`: Create a new function to fetch the required data from the backend."
+    }
+  ],
+  "curator_activity": "Please ensure the backend API endpoint `GET /api/newdata` is running and accessible.",
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "content": "// Full content of the updated App.tsx file..."
+    },
+    {
+      "path": "src/services/api.ts",
+      "content": "// Full content of the updated api.ts file..."
+    }
+  ]
+}
+```
+
+## 3. Technical Implementation Plan
+
+1.  **Backend (`llm.service.ts`):**
+    *   The `generateBatch` method will be updated.
+    *   When the `connectionMode` is set to `'demo'`, it will add `response_format: { "type": "json_object" }` to the JSON body of the `fetch` request sent to the vLLM proxy. This instructs the model to generate a JSON response.
+
+2.  **Frontend (`response-parser.ts`):**
+    *   The `parseResponse` function will be refactored to be "bilingual."
+    *   It will first attempt to parse the `rawText` as JSON using a `try...catch` block.
+    *   **If `JSON.parse` succeeds:**
+        *   It will validate that the parsed object contains the required keys (`summary`, `course_of_action`, `files`).
+        *   It will map the data from the JSON object to the `ParsedResponse` type.
+            *   The `course_of_action` array will be formatted into a numbered markdown list.
+            *   The `files` array will be directly mapped to the `ParsedFile` array.
+    *   **If `JSON.parse` fails:**
+        *   It will fall back to the existing regex-based parsing logic. This ensures backward compatibility with the manual copy/paste mode and any models that do not support JSON output mode.
+
+3.  **Interaction Schema (`A52.3`):**
+    *   The `A52.3 DCE - Harmony Interaction Schema Source.md` will be updated.
+    *   It will now instruct the AI to produce its output in the specified JSON format, providing the schema definition as an example. The instructions for using XML tags will be preserved as a fallback for the model.
+
+This migration to a structured JSON format will significantly improve the reliability of the extension's core parsing logic.
+</file_artifact>
+
+<file path="src/Artifacts/A99. DCE - Response Regeneration Workflow Plan.md">
+# Artifact A99: DCE - Response Regeneration Workflow Plan
+# Date Created: C50
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature.
+- **Tags:** feature plan, ui, ux, workflow, regeneration
+
+## 1. Vision & Goal
+
+The workflow for generating AI responses needs to be more flexible. Users may decide they need more responses after the initial batch, or a single response might fail to parse or be of low quality. The goal of this feature is to provide intuitive controls for regenerating responses, both globally and individually, without forcing the user to start a new cycle.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P2-REG-01 | **Regenerate Empty Tabs** | As a user, after increasing the number of response tabs from 4 to 6, I want to click a "Regenerate" button that only generates new responses for the two new, empty tabs, so I don't have to re-generate the ones I already have. | - A global "Regenerate" button exists in the PCPP header. <br> - If one or more response tabs are empty, clicking this button triggers a batch generation request only for the number of empty tabs. <br> - The new responses populate only the empty tabs. |
+| P2-REG-02 | **Regenerate All Tabs** | As a user, if all my response tabs have content but I'm unsatisfied with the results, I want to click the "Regenerate" button and be asked if I want to regenerate all responses, so I can start fresh without losing my prompt context. | - If no response tabs are empty, clicking the "Regenerate" button shows a confirmation dialog ("Regenerate all responses?"). <br> - If confirmed, a batch request is sent to generate a full new set of responses, which replaces the content in all existing tabs. |
+| P2-REG-03 | **Regenerate a Single Tab** | As a user, if one specific response failed to parse or is very poor, I want a way to regenerate just that single response, so I can try for a better result without affecting the other responses. | - A "Refresh" icon appears on each response tab when hovered. <br> - Clicking this icon triggers a generation request for a single response. <br> - The new response replaces the content of only that specific tab. |
+
+## 3. Technical Implementation Plan
+
+1.  **IPC Channels:**
+    *   The existing `ClientToServerChannel.RequestBatchGeneration` can be reused. Its payload will be updated to include an optional list of tab IDs to fill: `{ cycleData: PcppCycle, count: number, tabsToRegenerate?: number[] }`.
+
+2.  **Frontend UI & Logic (`view.tsx`, `ResponseTabs.tsx`):**
+    *   **Global "Regenerate" Button (`view.tsx`):**
+        *   The `handleRegenerateResponses` function will be implemented.
+        *   It will first scan the `tabs` state to find the indices of all empty tabs.
+        *   **If empty tabs exist:** It will call the `RequestBatchGeneration` IPC with a `count` equal to the number of empty tabs and a `tabsToRegenerate` array containing their indices.
+        *   **If no empty tabs exist:** It will use `vscode.window.showInformationMessage` with "Yes" and "No" options to prompt the user. If "Yes", it will call the IPC with a `count` equal to the total `tabCount`.
+    *   **Per-Tab "Refresh" Button (`ResponseTabs.tsx`):**
+        *   A new "Refresh" icon button will be added to the tab component, visible on hover.
+        *   Its `onClick` handler will call a new prop function, which in `view.tsx` will trigger the `RequestBatchGeneration` IPC with `count: 1` and `tabsToRegenerate: [tabIndex]`.
+
+3.  **Backend Logic (`llm.service.ts`, `history.service.ts`):**
+    *   The backend handlers will need to be updated to accommodate the new `tabsToRegenerate` payload.
+    *   When the batch responses are received from the LLM, the `history.service.ts` will need to intelligently update the `dce_history.json` file, replacing the content only for the specified tab IDs instead of creating a new cycle. This will likely require a new method like `updateResponsesInCycle`.
 </file_artifact>
 

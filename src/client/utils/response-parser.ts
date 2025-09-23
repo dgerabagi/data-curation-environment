@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C48 (Add handling for 'assistantfinal' marker)
+// Updated on: C50 (Add JSON parsing logic)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -9,24 +9,50 @@ const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
+    // Attempt to parse as JSON first for Harmony structured output
+    try {
+        const jsonResponse = JSON.parse(rawText);
+        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                path: f.path || '',
+                content: f.content || '',
+                tokenCount: Math.ceil((f.content || '').length / 4),
+            }));
+
+            const courseOfAction = jsonResponse.course_of_action
+                .map((step: any) => `**Step ${step.step}:** ${step.description}`)
+                .join('\n');
+
+            return {
+                summary: jsonResponse.summary,
+                courseOfAction: courseOfAction,
+                curatorActivity: jsonResponse.curator_activity || '',
+                filesUpdated: files.map(f => f.path),
+                files: files,
+                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+            };
+        }
+    } catch (e) {
+        // Not a valid JSON, proceed with regex parsing
+    }
+
+    // Fallback to existing regex-based parsing
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    let processedText = rawText.replace(/\</g, '<').replace(/\>/g, '>').replace(/\_/g, '_');
+    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
 
-    // C48 Fix: Ignore model chatter before the final response marker
     const finalResponseMarker = 'assistantfinal';
     const markerIndex = processedText.indexOf(finalResponseMarker);
     if (markerIndex !== -1) {
         processedText = processedText.substring(markerIndex + finalResponseMarker.length);
-        // Also remove any leading characters like > or ] that might follow the marker
         processedText = processedText.replace(/^.>/, '').trim();
     }
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
 
     if (tagMatches.length === 0 && processedText.includes('<file path')) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` (or similar) tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or valid JSON. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 

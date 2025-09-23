@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C48 (Remove hardcoded max_tokens)
+// Updated on: C50 (Add response_format for JSON output in demo mode)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -8,13 +8,29 @@ export class LlmService {
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
         const settings = await Services.settingsService.getSettings();
         let endpointUrl = '';
+        let requestBody: any = {};
 
         switch (settings.connectionMode) {
             case 'demo':
                 endpointUrl = 'https://aiascent.game/api/dce/proxy'; // Pre-configured
+                requestBody = {
+                    model: "unsloth/gpt-oss-20b",
+                    prompt: prompt,
+                    n: count,
+                    max_tokens: 8192,
+                    stream: false,
+                    response_format: { "type": "json_object" } // Request JSON output
+                };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
+                requestBody = {
+                    model: "local-model", // A generic name for user-provided URLs
+                    prompt: prompt,
+                    n: count,
+                    max_tokens: 8192,
+                    stream: false
+                };
                 break;
             default:
                 Services.loggerService.error("Attempted to call LLM in manual mode.");
@@ -32,13 +48,7 @@ export class LlmService {
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: "unsloth/gpt-oss-20b",
-                    prompt: prompt,
-                    n: count,
-                    max_tokens: 8192,
-                    stream: false
-                }),
+                body: JSON.stringify(requestBody),
             });
 
             if (!response.ok) {

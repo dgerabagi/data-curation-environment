@@ -1,4 +1,4 @@
-// Updated on: C49 (Add logic to select interaction schema based on connection mode)
+// Updated on: C50 (Conditionally exclude A52.1 in Demo Mode)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -167,14 +167,21 @@ ${staticContext.trim()}
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
-        // C49: Select interaction schema based on connection mode
         const settings = await Services.settingsService.getSettings();
-        const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
-        const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
-
-        const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+        const isDemoMode = settings.connectionMode === 'demo';
+        
+        const schemaArtifact = isDemoMode ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
+        const schemaError = isDemoMode ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
         const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
-        const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+
+        let interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n`;
+        
+        if (!isDemoMode) {
+            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+            interactionSchemaContent += `\n${a52_1_Content}\n`;
+        }
+        
+        interactionSchemaContent += '</M3. Interaction Schema>';
 
         const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
         const m5Content = `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`;
@@ -318,9 +325,13 @@ ${staticContext.trim()}
             const settings = await Services.settingsService.getSettings();
             const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
             const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
-            const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
             const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
-            const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+            let interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n`;
+            if (settings.connectionMode !== 'demo') {
+                const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
+                interactionSchemaContent += `\n${a52_1_Content}\n`;
+            }
+            interactionSchemaContent += '</M3. Interaction Schema>';
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
