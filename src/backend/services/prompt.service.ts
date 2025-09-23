@@ -1,4 +1,4 @@
-// Updated on: C46 (Remove spammy log message)
+// Updated on: C49 (Add logic to select interaction schema based on connection mode)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -167,9 +167,14 @@ ${staticContext.trim()}
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
+        // C49: Select interaction schema based on connection mode
+        const settings = await Services.settingsService.getSettings();
+        const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
+        const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
+
         const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-        const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
-        const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+        const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
+        const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
         const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
         const m5Content = `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`;
@@ -235,12 +240,8 @@ ${staticContext.trim()}
     public async generateStateLog(currentState: PcppCycle, costState: any, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            // Log the frontend state as it was received
             Services.loggerService.log(`\n========================= FRONTEND STATE DUMP =========================\n${JSON.stringify({ FRONTEND_COST_STATE: costState }, null, 2)}\n======================================================================`);
-            
-            // Perform a full dry run of the cost calculation and log it
             await this.handlePromptCostBreakdownRequest(currentState, serverIpc);
-
             Services.loggerService.show();
             vscode.window.showInformationMessage("State and cost calculation logged to 'Data Curation Environment' output channel.");
         } catch (error: any) {
@@ -299,7 +300,7 @@ ${staticContext.trim()}
         }
     }
 
-    public async generateCycle0Prompt(projectScope: string, serverIpc: ServerPostMessageManager) {
+    public async generateInitialArtifactsAndResponses(projectScope: string, responseCount: number, serverIpc: ServerPostMessageManager) {
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -312,60 +313,42 @@ ${staticContext.trim()}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
+            // ... (rest of the prompt generation logic from generateCycle0Prompt)
             const cycle0Content = await this._generateCycle0Content();
-            
+            const settings = await Services.settingsService.getSettings();
+            const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
+            const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
             const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-            const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
-            const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
-
+            const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
+            const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
-
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-            Services.loggerService.log("Created src/Artifacts/DCE_README.md for the new project.");
-            
             const readmeFileContent = `<file path="src/Artifacts/DCE_README.md">\n${readmeContent}\n</file_artifact>`;
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
-
-            const promptParts = [
-                this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent
-            ];
+            const promptParts = [ this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent ];
             const promptContent = promptParts.join('\n\n');
             const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
-
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
-            Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/DCE_README.md`);
+            // Now, generate responses
+            Services.loggerService.log(`Onboarding complete. Requesting ${responseCount} initial responses from LLM.`);
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: responseCount };
+            const responses = await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
             
-            const filesToOpen = [vscode.Uri.file(promptMdPath), readmeUri];
-            for (const fileUri of filesToOpen) {
-                const document = await vscode.workspace.openTextDocument(fileUri);
-                await vscode.window.showTextDocument(document, { preview: false });
-            }
+            // Create Cycle 1 with the new responses
+            const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responses, responseCount, projectScope);
+            
+            vscode.window.showInformationMessage(`Successfully generated initial artifacts and received ${responses.length} responses.`);
 
-            const cycle1Data: PcppCycle = {
-                cycleId: 1,
-                timestamp: new Date().toISOString(),
-                title: 'New Cycle',
-                cycleContext: '',
-                ephemeralContext: '',
-                responses: { "1": { content: "" } },
-                isParsedMode: false,
-                leftPaneWidth: 33,
-                selectedResponseId: null,
-                selectedFilesForReplacement: [],
-                tabCount: 4
-            };
-
-            await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: cycle1Data, projectScope });
+            // Tell the frontend to navigate to the new cycle
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
 
         } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
-            Services.loggerService.error(`Failed to generate Cycle 0 prompt: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to generate initial artifacts: ${error.message}`);
+            Services.loggerService.error(`Failed to generate initial artifacts: ${error.message}`);
         }
     }
 }

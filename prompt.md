@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 49 - continue refinement of `Demo Mode` process logic
+Current Cycle 50 - continue refinement of harmony/gpt-oss
+Cycle 49 - continue refinement of `Demo Mode` process logic
 Cycle 48 - continue vllm integration, super cool progress
 Cycle 47 - issue resolved via rollback
 Cycle 46 - responses came in! little buggy though
@@ -255,7 +256,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C48 (Add A97)
+# Updated on: C49 (Add A52.3)
 
 ## 1. Purpose
 
@@ -500,6 +501,10 @@ No project scope defined.
 ### A52.2 DCE - Interaction Schema Source
 - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
 - **Tags:** documentation, process, interaction schema, source of truth
+
+### A52.3 DCE - Harmony Interaction Schema Source
+- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active.
+- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss
 
 ### A53. DCE - Phase 2 - Token Count and Similarity Analysis
 - **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
@@ -767,6 +772,79 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 50>
+<Cycle Context>
+incredible work! okay it seems we are still passing in the `A52.1: DCE - Parser Logic and AI Guidance` in when `Demo Mode` is selected. im trying to reduce the complexity that we add to the request to gpt-oss as it is a smaller model and as it has the harmony structure we do not need to reverse-engineer the parsing so hard anymore, we are instead trying to leverage/lean in to the harmony structure.
+
+oh, does harmony support some type of structured output? i could have sworn i had one saved, one day a response at the end gave me back what looked like a perfect structured output format for my very own prompts. i thought i saved it.
+
+ah okay, i found it. i placed it in ephemeral. looking at it now, i dont know if we need to make the course of action individual steps, i imagine simple markdown output can be turned into such a list, but ill leave that decision to you. looking at this, if there is a structured output mechanism with harmony/gpt-oss that we can tap in to, then what ive got in ephemeral is just missing the curator_activity as well as the actual files themselves. with those two additions, i believe we could completely overhaul our gimmicky parsing raw output approach with a structured json output approach. what do you think? can you create a planning artifact for this one and then deliver on it?
+
+when initiating a new project in `Demo Mode`, once clicking the `Generate Initial Responses` button, the user should go ahead and get presented with the pcpp/the response progress UI. currently, the button changes to `Generating...` and the user must wait without feedback as to if the program has frozen or halted. once the LLM response completions finish, it does however at least swap to the pcpp cycle 1 with the responses populated and parsed
+
+lets create a new artifact for the regenerate responses button. when i click the `Regenerate` button, i would like for it to prompt the user and ask them if they want to regenerate Resp # where # is the response that they have currently selected. for example, i just got back four responses, and one of the four failed in the parsing and shows 0 files when the others show 5. i would like it if, when i hovered over that response tab, i saw a refresh button that allowed me to regenerate this response. the Regenerate button needs to do one of two things, either it generates empty responses, so the use case being a user adds more response tabs while already having responses and needs just the new tabs generated, they could easily click that button and it would intelligently just generate the empty reponse tabs. if in the case that there are no empty response tabs when the button is clicked, then we would want to prompt the user to ask them if they wish to regenerate all responses, yes or no. if yes, then regenerate all responses for the user.
+</Cycle Context>
+<Ephemeral Context>
+{
+  "summary": "I have analyzed the feedback from Cycle 73, which includes a critical simulator crash, several high-value UI/UX improvements, and gameplay design suggestions. My course of action is to first fix the critical crash to restore the scenario's functionality. Then, I will implement all the requested UI enhancements for the UAV and Base status windows. Finally, I will update our documentation to incorporate the more complex hijack countermeasure you've designed.\n\nThe simulator crash is caused by a `TypeError` in `uav_simulator.py`, where `random.choice()` is called without any options. I will fix this by providing a list of possible jamming frequencies for it to select from.\n\nFor the UI, I will overhaul the UAV tracking window to create a cleaner, more organized layout and remove the non-thematic data fields. I will also refactor the Base Status window into a single, combined view that displays the health of both friendly and enemy bases simultaneously, making better use of the screen space as you suggested.\n\nI will then codify your excellent suggestion for a more complex hijack countermeasure by updating the relevant documentation (`A77` and `A62`). The numbered trainee feature is a significant architectural change outlined in `A73` and will be prioritized for a subsequent cycle.",
+  "course_of_action": [
+    {
+      "step": 1,
+      "description": "Fix Simulator Crash: In `infrastructure/scenarios/s003-ghost-fleet/configuration/uav_simulator.py`, I will define a list of possible jamming frequencies and modify the `update_adversary_events` function to use `random.choice()` correctly, resolving the fatal `TypeError`."
+    },
+    {
+      "step": 2,
+      "description": "Improve Thematic Naming: In the same `uav_simulator.py` file, I will rename the lane identifiers from `top`, `mid`, `bot` to the more thematically appropriate `north`, `central`, and `south`."
+    },
+    {
+      "step": 3,
+      "description": "Overhaul UAV Tracking Window: In `apps/client/src/features/scenario/ite/UavTrackingWindow.tsx`, I will refactor the display to present the data in a cleaner, more readable key/value format and filter out the unnecessary, non-thematic fields (`spawn_protection_until`, `engagement_timer`, `event_timer`, etc.)."
+    },
+    {
+      "step": 4,
+      "description": "Combine Base Status Windows:\nI will refactor `apps/client/src/features/scenario/ite/BaseStatusWindow.tsx` to remove the `baseId` prop and instead display the status of *both* the friendly and enemy bases from the `telemetryData` prop.\nIn `apps/client/src/features/scenario/ite/TacticalMap.tsx`, I will update the `onClick` handlers for the bases to open this single, unified status window.\nIn `apps/client/src/store/useWindowManagerStore.ts`, I will ensure the `BASE_STATUS` window type is treated as a singleton, so only one instance can be open."
+    },
+    {
+      "step": 5,
+      "description": "Update Hijack Countermeasure Documentation:\nI will update `src/Artifacts/A77. VCPG - Scenario Countermeasures Guide.md` to replace the simple hijack countermeasure with the new, more complex multi-step process (e.g., local key generation, secure transmission, and rotation).\nI will update `src/Artifacts/A62. VCPG - S003 Ghost Fleet - Narrative and Event Flow.md` to align with this more sophisticated user workflow."
+    },
+    {
+      "step": 6,
+      "description": "Review Intel Chip Creation: I will re-verify the existing implementation in `App.tsx` and `ContextMenu.tsx` that enables intel chip creation via a left-click on selected text."
+    }
+  ],
+  "files_updated": [
+    "infrastructure/scenarios/s003-ghost-fleet/configuration/uav_simulator.py",
+    "apps/client/src/features/scenario/ite/UavTrackingWindow.tsx",
+    "apps/client/src/features/scenario/ite/BaseStatusWindow.tsx",
+    "apps/client/src/features/scenario/ite/TacticalMap.tsx",
+    "apps/client/src/store/useWindowManagerStore.ts",
+    "src/Artifacts/A77. VCPG - Scenario Countermeasures Guide.md"
+  ]
+}
+</Ephemeral Context>
+<Previous Cycle 49 Summary of Actions>
+I have analyzed the successful vLLM integration and the three issues you've raised in Cycle 48. My course of action is to fix the two critical bugs related to parsing and navigation, and to provide a clear, documented plan for implementing the streaming progress UI as you've requested.
+
+The parsing issue is a simple fix; I will adjust the parser to ignore the model's preliminary chatter. The navigation failure is a regression caused by the rollback in Cycle 47, which removed a necessary state update from the frontend. I will reinstate this fix to restore the automatic navigation. Finally, I will update our planning artifact for the progress UI with a detailed technical breakdown of how to implement streaming, which directly answers your question.
+
+1.  **Documentation (Codify Fixes & Plans):**
+    *   I will add a new case study to **`A11.1 DCE - New Regression Case Studies.md`** named "Navigation Fails After View Rollback." This will document the root cause (a stale `maxCycle` state on the frontend) and codify the solution: the backend must always provide the new `maxCycle` count after creating a new cycle, and the frontend must update its state with this value *before* attempting to navigate.
+    *   I will significantly update **`A97. DCE - vLLM Response Progress UI Plan.md`**. The "Technical Implementation Plan" will be expanded with a detailed, step-by-step guide for refactoring the backend to handle streaming Server-Sent Events (SSE) from vLLM and for creating the new IPC channels (`StreamResponseChunk`, `UpdateTpsMetric`, `StreamResponseEnd`) needed to send real-time progress to the frontend. This directly answers your question about how this feature can be serviced.
+
+2.  **Fix Parsing Noise (`response-parser.ts`):**
+    *   I will modify the `parseResponse` function in **`src/client/utils/response-parser.ts`**.
+    *   At the beginning of the function, I will add logic to search for the string `assistantfinal`. If found, the input text will be sliced so that only the content *after* this marker is processed by the existing regexes. This will cleanly ignore the model's preliminary chatter and prevent parsing errors.
+
+3.  **Fix Auto-Navigation Bug (`view.tsx`):**
+    *   This is a direct re-implementation of the fix from Cycle 44 that was lost during the rollback.
+    *   I will update the message handler for `ServerToClientChannel.SendBatchGenerationComplete` in **`src/client/views/parallel-copilot.view/view.tsx`**.
+    *   The handler will be updated to accept a payload of `{ newCycleId, newMaxCycle }`.
+    *   It will first call `setMaxCycle(newMaxCycle)` to update the component's state with the new maximum cycle count.
+    *   Immediately after, it will call `handleCycleChange(null, newCycleId)` to navigate to the new cycle. This ensures the navigation logic has the correct state and will succeed.
+</Previous Cycle 49 Summary of Actions>
+</Cycle 50>
 
 <Cycle 49>
 <Cycle Context>
@@ -3381,26 +3459,26 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-22T23:05:48.196Z
+  Date Generated: 2025-09-23T21:32:42.878Z
   ---
-  Total Files: 189
-  Approx. Tokens: 502925
+  Total Files: 190
+  Approx. Tokens: 505162
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (9296 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (8714 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9517 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (8800 tokens)
 6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (5575 tokens)
-8. src\backend\services\prompt.service.ts (4895 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (5861 tokens)
+8. src\backend\services\prompt.service.ts (4996 tokens)
 9. src\backend\services\file-operation.service.ts (4526 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 512 - Chars: 34855 - Tokens: 8714
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 516 - Chars: 35197 - Tokens: 8800
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -3479,122 +3557,123 @@ This file-centric approach helps in planning and prioritizing work, especially i
 77. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
 78. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
 79. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-80. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-81. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-82. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-83. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-84. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-85. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
-86. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-87. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-88. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-89. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
-90. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
-91. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-92. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
-93. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-94. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
-95. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-96. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-97. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-98. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-99. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 4955 - Tokens: 1239
-100. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-101. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-102. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-103. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-104. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1725 - Tokens: 432
-105. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1977 - Tokens: 495
-106. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1885 - Tokens: 472
-107. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2189 - Tokens: 548
-108. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1063 - Tokens: 266
-109. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2602 - Tokens: 651
-110. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1747 - Tokens: 437
-111. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1980 - Tokens: 495
-112. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2599 - Tokens: 650
-113. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2701 - Tokens: 676
-114. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2896 - Tokens: 724
-115. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
-116. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2626 - Tokens: 657
-117. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
-118. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
-119. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
-120. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-121. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-122. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-123. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-124. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-125. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-126. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
-127. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
-128. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
-129. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-130. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-131. src\backend\services\history.service.ts - Lines: 294 - Chars: 11873 - Tokens: 2969
-132. src\backend\services\llm.service.ts - Lines: 65 - Chars: 2514 - Tokens: 629
-133. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-134. src\backend\services\prompt.service.ts - Lines: 371 - Chars: 19579 - Tokens: 4895
-135. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-136. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-137. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
-138. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-139. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-140. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
-141. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-142. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-143. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-144. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-145. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-146. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-147. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-148. src\client\utils\response-parser.ts - Lines: 81 - Chars: 3832 - Tokens: 958
-149. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-150. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-151. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-152. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-153. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-154. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-155. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-156. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-157. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-158. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-159. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-160. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-161. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-162. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6775 - Tokens: 1694
-163. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 100 - Chars: 5002 - Tokens: 1251
-164. src\client\views\parallel-copilot.view\view.scss - Lines: 996 - Chars: 22300 - Tokens: 5575
-165. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-166. src\client\views\parallel-copilot.view\view.tsx - Lines: 354 - Chars: 37181 - Tokens: 9296
-167. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-168. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-169. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-170. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
-171. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-172. src\common\ipc\channels.enum.ts - Lines: 104 - Chars: 5689 - Tokens: 1423
-173. src\common\ipc\channels.type.ts - Lines: 106 - Chars: 8324 - Tokens: 2081
-174. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-175. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-176. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-177. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-178. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-179. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-180. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-181. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-182. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-183. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-184. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-185. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
-186. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
-187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
-188. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
-189. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
+80. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+81. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+82. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+83. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+84. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
+85. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+86. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+87. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+88. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+89. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
+90. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+91. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
+92. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+93. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
+94. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+95. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+96. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
+97. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+98. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 4955 - Tokens: 1239
+99. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+100. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+101. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
+102. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+103. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 36 - Chars: 1725 - Tokens: 432
+104. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 38 - Chars: 1977 - Tokens: 495
+105. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 37 - Chars: 1885 - Tokens: 472
+106. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 54 - Chars: 2189 - Tokens: 548
+107. src\Artifacts\T5. Template - Target File Structure.md - Lines: 35 - Chars: 1063 - Tokens: 266
+108. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 63 - Chars: 2602 - Tokens: 651
+109. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 48 - Chars: 1747 - Tokens: 437
+110. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 31 - Chars: 1980 - Tokens: 495
+111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 49 - Chars: 2599 - Tokens: 650
+112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 32 - Chars: 2701 - Tokens: 676
+113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 55 - Chars: 2896 - Tokens: 724
+114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 42 - Chars: 3236 - Tokens: 809
+115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 55 - Chars: 2626 - Tokens: 657
+116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 110 - Chars: 4911 - Tokens: 1228
+117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 41 - Chars: 3009 - Tokens: 753
+118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 97 - Chars: 4056 - Tokens: 1014
+119. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
+120. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+121. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+122. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+123. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+124. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+125. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+126. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+127. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+128. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+129. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+130. src\backend\services\history.service.ts - Lines: 296 - Chars: 11897 - Tokens: 2975
+131. src\backend\services\llm.service.ts - Lines: 65 - Chars: 2514 - Tokens: 629
+132. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+133. src\backend\services\prompt.service.ts - Lines: 354 - Chars: 19982 - Tokens: 4996
+134. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+135. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+136. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
+137. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+138. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+139. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
+140. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+141. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+142. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+143. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+147. src\client\utils\response-parser.ts - Lines: 81 - Chars: 3832 - Tokens: 958
+148. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+149. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+150. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+151. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+152. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+153. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+154. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+155. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+156. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+157. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+158. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+159. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+160. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+161. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6813 - Tokens: 1704
+162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 124 - Chars: 6259 - Tokens: 1565
+163. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 23444 - Tokens: 5861
+164. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+165. src\client\views\parallel-copilot.view\view.tsx - Lines: 374 - Chars: 38066 - Tokens: 9517
+166. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+167. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+168. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+169. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
+170. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+171. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
+172. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8600 - Tokens: 2150
+173. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+174. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+175. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+176. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+177. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+178. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+179. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+180. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+181. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+182. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+183. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+184. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
+185. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
+186. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
+187. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
+189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 33 - Chars: 4404 - Tokens: 1101
+190. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C48 (Add A97)
+# Updated on: C49 (Add A52.3)
 
 ## 1. Purpose
 
@@ -3839,6 +3918,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A52.2 DCE - Interaction Schema Source
 - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
 - **Tags:** documentation, process, interaction schema, source of truth
+
+### A52.3 DCE - Harmony Interaction Schema Source
+- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active.
+- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss
 
 ### A53. DCE - Phase 2 - Token Count and Similarity Analysis
 - **Description:** Details the plan to implement token counting for raw and parsed responses, and to calculate a similarity score between AI-generated files and their workspace originals.
@@ -8667,117 +8750,6 @@ The-Creator-AI-main/
         *   Add a log at the very beginning of the `onFileChange` handler to see every single file path the watcher detects, before any exclusion logic is applied.
     2.  **Strengthen Exclusions:** The exclusion logic in `file-tree.service.ts` must be made more robust to explicitly ignore build artifacts and internal state files under all conditions.
     3.  **Dampen Event Listener:** The `repo.state.onDidChange` listener should be heavily debounced via the `triggerFullRefresh` function to prevent a storm of events from causing a storm of UI updates. A longer-term solution would be to find a more specific Git API event to listen to, if one exists.
-</file_artifact>
-
-<file path="src/Artifacts/A78. DCE - Whitepaper - Process as Asset.md">
-# Artifact A78: DCE - Whitepaper - Process as Asset
-
-# Date Created: C182
-
-# Author: AI Model & Curator
-
-  - **Key/Value for A0:**
-  - **Description:** A whitepaper targeted at high-level stakeholders (NSA, UKILRN) explaining the strategic value of the DCE by focusing on how it transforms the human-AI interaction process into a persistent, shareable asset that accelerates specialized content creation.
-  - **Tags:** whitepaper, documentation, strategy, process, acceleration, human-ai collaboration
-
------
-
-# Process as Asset: Accelerating Specialized Content Creation through Structured Human-AI Collaboration
-
-**A Whitepaper on the Data Curation Environment (DCE)**
-
-**Date:** September 4, 2025
-**Audience:** High-Level Stakeholders (NSA, UKILRN, Naval Operations)
-
------
-
-## 1\. Executive Summary
-
-Organizations tasked with developing highly specialized content—such as technical training materials, intelligence reports, or complex software documentation—face a constant bottleneck: the time and expertise required to curate accurate data, collaborate effectively, and rapidly iterate on feedback. Traditional workflows, even those augmented by Artificial Intelligence (AI), are often ad-hoc, opaque, and inefficient.
-
-This whitepaper introduces the Data Curation Environment (DCE), a framework and toolset integrated into the standard developer environment (Visual Studio Code) that transforms the content creation process itself into a valuable organizational asset. The DCE provides a structured, human-in-the-loop methodology that enables rapid dataset curation, seamless sharing of curated contexts between colleagues, and instant iteration on feedback.
-
-By capturing the entire workflow as a persistent, auditable knowledge graph, the DCE doesn't just help teams build content faster; it provides the infrastructure necessary to scale expertise, ensure quality, and accelerate the entire organizational mission.
-
-## 2\. The Challenge: The Bottleneck of Ad-Hoc AI Interaction
-
-The integration of Large Language Models (LLMs) into organizational workflows promises significant acceleration. However, the way most organizations interact with these models remains unstructured and inefficient, creating several critical bottlenecks:
-
-1.  **The Context Problem:** The quality of an LLM's output is entirely dependent on the quality of its input context. Manually selecting, copying, and pasting relevant data (code, documents, reports) into a chat interface is time-consuming, error-prone, and often results in incomplete or bloated context.
-2.  **The Collaboration Gap:** When a task is handed off, the context is lost. A colleague must manually reconstruct the previous operator's dataset and understand their intent, leading to significant delays and duplication of effort.
-3.  **The Iteration Overhead:** When feedback requires changes to a complex dataset, operators often resort to manual edits because re-prompting the AI requires reconstructing the entire context again. This negates the efficiency gains of using AI in the first place.
-4.  **The Auditability Vacuum:** The iterative process of human-AI interaction—the prompts, the AI's suggestions, and the human's decisions—is a valuable record of the work, yet it is rarely captured in a structured, reusable format.
-
-These challenges prevent organizations from fully realizing the potential of AI. They are forced to choose between the speed of AI and the rigor of a structured process.
-
-## 3\. The Solution: The Data Curation Environment (DCE)
-
-The Data Curation Environment (DCE) is designed to eliminate these bottlenecks by providing a structured framework for human-AI collaboration directly within the operator's working environment. It moves beyond the limitations of simple chat interfaces by introducing three core capabilities:
-
-### 3.1. Precision Context Curation
-
-The DCE replaces manual copy-pasting with an intuitive, integrated file management interface. Operators can precisely select the exact files, folders, or documents required for a task with simple checkboxes. The DCE intelligently handles various file types—including code, PDFs, Word documents, and Excel spreadsheets—extracting the relevant textual content automatically.
-
-This ensures that the AI receives the highest fidelity context possible, maximizing the quality of its output while minimizing operator effort.
-
-### 3.2. Parallel AI Scrutiny and Integrated Testing
-
-The DCE recognizes that relying on a single AI response is risky. The "Parallel Co-Pilot Panel" allows operators to manage, compare, and test multiple AI-generated solutions simultaneously.
-
-Integrated diffing tools provide immediate visualization of proposed changes. Crucially, the DCE offers a one-click "Accept" mechanism, integrated with Git version control, allowing operators to instantly apply an AI's suggestion to the live workspace, test it, and revert it if necessary. This creates a rapid, low-risk loop for evaluating multiple AI approaches.
-
-### 3.3. The Cycle Navigator and Persistent Knowledge Graph
-
-Every interaction within the DCE is captured as a "Cycle." A cycle includes the curated context, the operator's instructions, all AI-generated responses, and the operator's final decision. This history is saved as a structured, persistent Knowledge Graph.
-
-The "Cycle Navigator" allows operators to step back through the history, review past decisions, and understand the evolution of the project.
-
-## 4\. Transforming the Process into an Asset
-
-The true power of the DCE lies in how these capabilities combine to transform the workflow itself into a persistent organizational asset.
-
-### 4.1. The Curated Context as a Shareable Asset
-
-In the DCE workflow, the curated context (the "Selection Set") is not ephemeral; it is a saved, versioned asset. When a task is handed off, the new operator doesn't just receive the files; they receive the exact context and the complete history of the previous operator's interactions.
-
-This seamless handoff eliminates the "collaboration gap," allowing teams to work asynchronously and efficiently on complex datasets without duplication of effort.
-
-### 4.2. Accelerating Iteration and Maintenance
-
-The DCE dramatically reduces the overhead associated with feedback and maintenance. Because the context is already curated and saved, operators can rapidly iterate on complex datasets without manual reconstruction.
-
-If feedback requires changes, the operator simply loads the curated context and issues a targeted instruction to the AI. The AI performs the edits against the precise context, completing the update in a single, efficient cycle. This enables organizations to maintain complex systems and content with unprecedented speed.
-
-### 4.3. Scaling Expertise and Ensuring Auditability
-
-The Knowledge Graph generated by the DCE serves as a detailed, auditable record of the entire development process. This is invaluable for:
-
-  * **Training and Onboarding:** New personnel can review the cycle history to understand complex decision-making processes and best practices.
-  * **After-Action Reviews:** The graph provides a precise record of what was known, what was instructed, and how the AI responded, enabling rigorous analysis.
-  * **Accountability:** In mission-critical environments, the DCE provides a transparent and traceable record of human-AI interaction.
-
-## 5\. Use Case Spotlight: Rapid Development of Training Materials
-
-A government agency needs to rapidly update a specialized technical training lab based on new operational feedback. The feedback indicates that in the existing exam questions, "the correct answer is too often the longest answer choice," creating a pattern that undermines the assessment's validity.
-
-### The Traditional Workflow (Weeks)
-
-1.  **Identify Affected Files:** An analyst manually searches the repository to find all relevant question files (days).
-2.  **Manual Editing:** The analyst manually edits each file, attempting to rewrite the "distractor" answers to be longer and more plausible without changing the technical meaning (weeks).
-3.  **Review and Rework:** The changes are reviewed, often leading to further manual edits (days).
-
-### The DCE Workflow (Hours)
-
-1.  **Curate Context (Minutes):** The analyst uses the DCE interface to quickly select the folder containing all exam questions. This creates a precise, curated dataset.
-2.  **Instruct the AI (Minutes):** The analyst loads the curated context into the Parallel Co-Pilot Panel and provides a targeted instruction: "Review the following exam questions. For any question where the correct answer is significantly longer than the distractors, rewrite the distractors to include more meaningful but ultimately fluffy language to camouflage the length difference, without changing the technical accuracy."
-3.  **Review and Accept (Hours):** The AI generates several proposed solutions. The analyst uses the integrated diff viewer to compare the options. They select the best solution and "Accept" the changes with a single click.
-4.  **Verification:** The updated lab is immediately ready for final verification.
-
-## 6\. Conclusion
-
-The Data Curation Environment is more than just a developer tool; it is a strategic framework for operationalizing AI in complex environments. By addressing the critical bottlenecks of context curation, collaboration, and iteration, the DCE transforms the human-AI interaction workflow into a structured, persistent, and valuable organizational asset.
-
-For organizations facing an ever-increasing list of priorities and a need to accelerate the development of specialized content, the DCE provides the necessary infrastructure to scale expertise, ensure quality, and achieve the mission faster.
 </file_artifact>
 
 <file path="src/Artifacts/A79. DCE - Autosave and Navigation Locking Plan.md">
@@ -21829,7 +21801,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C48 (Add isParsedMode to new cycle, return newMaxCycle)
+// Updated on: C49 (Add projectScope to new cycle creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -21927,7 +21899,8 @@ export class HistoryService {
         }
 
         if (history.cycles.length === 0) {
-            await this.saveCycleData(defaultCycle);
+            const newHistory = { ...history, cycles: [defaultCycle] };
+            await this._writeHistoryFile(newHistory);
             return defaultCycle;
         }
 
@@ -21989,9 +21962,11 @@ export class HistoryService {
         }
     }
 
-    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<{ newCycleId: number; newMaxCycle: number; }> {
+    public async createNewCycleWithResponses(responses: string[], tabCount: number, projectScope?: string): Promise<{ newCycleId: number; newMaxCycle: number; }> {
         const history = await this._readHistoryFile();
-        const newCycleId = (history.cycles.reduce((maxId, cycle) => Math.max(maxId, cycle.cycleId), 0)) + 1;
+        history.projectScope = projectScope; // Save the scope with the new history
+        
+        const newCycleId = 1; // Onboarding always creates cycle 1
         
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
@@ -22001,20 +21976,19 @@ export class HistoryService {
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'Generated Responses',
-            cycleContext: '', // Should be inherited from previous cycle in a future version
+            title: 'Initial Artifacts',
+            cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
             tabCount: tabCount,
             isParsedMode: true, // Default to parsed view for new responses
         };
 
-        history.cycles.push(newCycle);
+        history.cycles = [newCycle]; // Replace any existing history
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
         
-        const newMaxCycle = Math.max(newCycleId, ...history.cycles.map(c => c.cycleId));
-        return { newCycleId, newMaxCycle };
+        return { newCycleId, newMaxCycle: newCycleId };
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {
@@ -22234,7 +22208,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C46 (Remove spammy log message)
+// Updated on: C49 (Add logic to select interaction schema based on connection mode)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -22403,9 +22377,14 @@ ${staticContext.trim()}
             a0Content = Buffer.from(contentBuffer).toString('utf-8');
         }
         
+        // C49: Select interaction schema based on connection mode
+        const settings = await Services.settingsService.getSettings();
+        const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
+        const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
+
         const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-        const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
-        const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
+        const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
+        const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
 
         const projectScope = `<M4. current project scope>\n${fullHistoryFile.projectScope || 'No project scope defined.'}\n</M4. current project scope>`;
         const m5Content = `<M5. organized artifacts list>\n${a0Content}\n</M5. organized artifacts list>`;
@@ -22471,12 +22450,8 @@ ${staticContext.trim()}
     public async generateStateLog(currentState: PcppCycle, costState: any, serverIpc: ServerPostMessageManager) {
         Services.loggerService.log("--- GENERATING STATE LOG ---");
         try {
-            // Log the frontend state as it was received
             Services.loggerService.log(`\n========================= FRONTEND STATE DUMP =========================\n${JSON.stringify({ FRONTEND_COST_STATE: costState }, null, 2)}\n======================================================================`);
-            
-            // Perform a full dry run of the cost calculation and log it
             await this.handlePromptCostBreakdownRequest(currentState, serverIpc);
-
             Services.loggerService.show();
             vscode.window.showInformationMessage("State and cost calculation logged to 'Data Curation Environment' output channel.");
         } catch (error: any) {
@@ -22535,7 +22510,7 @@ ${staticContext.trim()}
         }
     }
 
-    public async generateCycle0Prompt(projectScope: string, serverIpc: ServerPostMessageManager) {
+    public async generateInitialArtifactsAndResponses(projectScope: string, responseCount: number, serverIpc: ServerPostMessageManager) {
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -22548,60 +22523,42 @@ ${staticContext.trim()}
             Services.loggerService.log("Generating Cycle 0 prompt.md file...");
             await Services.historyService.saveProjectScope(projectScope);
 
+            // ... (rest of the prompt generation logic from generateCycle0Prompt)
             const cycle0Content = await this._generateCycle0Content();
-            
+            const settings = await Services.settingsService.getSettings();
+            const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
+            const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
             const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-            const a52_2_Content = await this.getArtifactContent('A52.2 DCE - Interaction Schema Source.md', '<!-- A52.2 Interaction Schema Source not found -->');
-            const interactionSchemaContent = `<M3. Interaction Schema>\n${a52_2_Content}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
-
+            const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
+            const interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n\n${a52_1_Content}\n</M3. Interaction Schema>`;
             const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
-
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
             const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-            Services.loggerService.log("Created src/Artifacts/DCE_README.md for the new project.");
-            
             const readmeFileContent = `<file path="src/Artifacts/DCE_README.md">\n${readmeContent}\n</file_artifact>`;
             const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
-
-            const promptParts = [
-                this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent
-            ];
+            const promptParts = [ this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent ];
             const promptContent = promptParts.join('\n\n');
             const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
-
             await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
-            Services.loggerService.log("Successfully generated Cycle 0 prompt.md file.");
             
-            vscode.window.showInformationMessage(`Successfully generated initial prompt.md and created src/Artifacts/DCE_README.md`);
+            // Now, generate responses
+            Services.loggerService.log(`Onboarding complete. Requesting ${responseCount} initial responses from LLM.`);
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: responseCount };
+            const responses = await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
             
-            const filesToOpen = [vscode.Uri.file(promptMdPath), readmeUri];
-            for (const fileUri of filesToOpen) {
-                const document = await vscode.workspace.openTextDocument(fileUri);
-                await vscode.window.showTextDocument(document, { preview: false });
-            }
+            // Create Cycle 1 with the new responses
+            const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responses, responseCount, projectScope);
+            
+            vscode.window.showInformationMessage(`Successfully generated initial artifacts and received ${responses.length} responses.`);
 
-            const cycle1Data: PcppCycle = {
-                cycleId: 1,
-                timestamp: new Date().toISOString(),
-                title: 'New Cycle',
-                cycleContext: '',
-                ephemeralContext: '',
-                responses: { "1": { content: "" } },
-                isParsedMode: false,
-                leftPaneWidth: 33,
-                selectedResponseId: null,
-                selectedFilesForReplacement: [],
-                tabCount: 4
-            };
-
-            await Services.historyService.saveCycleData(cycle1Data);
-            serverIpc.sendToClient(ServerToClientChannel.SendInitialCycleData, { cycleData: cycle1Data, projectScope });
+            // Tell the frontend to navigate to the new cycle
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
 
         } catch (error: any) {
-            vscode.window.showErrorMessage(`Failed to generate Cycle 0 prompt: ${error.message}`);
-            Services.loggerService.error(`Failed to generate Cycle 0 prompt: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to generate initial artifacts: ${error.message}`);
+            Services.loggerService.error(`Failed to generate initial artifacts: ${error.message}`);
         }
     }
 }
@@ -25742,7 +25699,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C48 (Pass newMaxCycle to SendBatchGenerationComplete)
+// Updated on: C49 (Add handler for new onboarding channel)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -25763,6 +25720,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
+        promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
         const settings = await settingsService.getSettings();
         serverIpc.sendToClient(ServerToClientChannel.SendSettings, { settings });
@@ -25770,10 +25731,6 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     
     serverIpc.onClientMessage(ClientToServerChannel.SaveSettings, (data) => {
         settingsService.saveSettings(data.settings);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
-        promptService.generateCycle0Prompt(data.projectScope, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
@@ -25883,7 +25840,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C21 (Add title and save status indicator)
+// Updated on: C49 (Add response count input)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -25897,6 +25854,7 @@ interface OnboardingViewProps {
     latestCycleId: number;
     workflowStep: string | null;
     saveStatus: 'saved' | 'saving' | 'unsaved';
+    connectionMode: string;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -25911,9 +25869,10 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
+    const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
@@ -25921,12 +25880,18 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     const handleGenerate = () => {
         if (projectScope.trim()) {
             setIsGenerating(true);
-            logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-            clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
-            setTimeout(() => {
-                setIsGenerating(false);
-                setPromptGenerated(true);
-            }, 1500); 
+            
+            if (connectionMode === 'demo') {
+                logger.log(`Sending request to generate initial artifacts AND ${responseCount} responses.`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
+            } else {
+                logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
+                clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle: 'Initial Artifacts', currentCycle: 0, selectedFiles: [] });
+                setTimeout(() => {
+                    setIsGenerating(false);
+                    setPromptGenerated(true);
+                }, 1500);
+            }
         }
     };
 
@@ -25934,6 +25899,8 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
         logger.log("Returning to latest cycle from Project Plan view.");
         onNavigateToCycle(latestCycleId);
     };
+
+    const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
 
     return (
         <div className="onboarding-container">
@@ -25962,16 +25929,30 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     <VscArrowRight /> Return to Cycle {latestCycleId}
                 </button>
             ) : !promptGenerated ? (
-                <button 
-                    className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
-                    onClick={handleGenerate} 
-                    disabled={!projectScope.trim() || isGenerating}
-                >
-                    <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
-                </button>
+                <div className="onboarding-actions">
+                    {connectionMode === 'demo' && (
+                         <div className="response-count-input">
+                            <label htmlFor="onboarding-response-count">Responses:</label>
+                            <input 
+                                type="number" 
+                                id="onboarding-response-count" 
+                                min="1" max="20" 
+                                value={responseCount} 
+                                onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                            />
+                        </div>
+                    )}
+                    <button 
+                        className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
+                        onClick={handleGenerate} 
+                        disabled={!projectScope.trim() || isGenerating}
+                    >
+                        <VscRocket /> {isGenerating ? 'Generating...' : buttonText}
+                    </button>
+                </div>
             ) : (
                 <div className="onboarding-success">
-                    <p>✅ Initial `prompt.md` and `README.md` have been generated in your workspace!</p>
+                    <p>✅ Initial `prompt.md` and `DCE_README.md` have been generated in your workspace!</p>
                     <button className="styled-button" onClick={() => onNavigateToCycle(1)}>
                         Continue to Cycle 1 <VscArrowRight />
                     </button>
@@ -25986,7 +25967,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C38 (Add styles for generation controls)
+// Updated on: C49 (Add styles for onboarding actions and progress display)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -26110,6 +26091,28 @@ body {
     margin-bottom: 4px;
 }
 
+.onboarding-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.response-count-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    
+    input {
+        width: 50px;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        text-align: center;
+        border-radius: 2px;
+    }
+}
+
 
 .onboarding-success {
     display: flex;
@@ -26205,7 +26208,38 @@ body {
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
+    flex-wrap: wrap; // Allow wrapping for progress UI
 }
+
+.generation-progress-display {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    background-color: var(--vscode-sideBar-background);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+
+    .progress-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+    }
+
+    .progress-bar-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        
+        progress {
+            width: 100%;
+        }
+    }
+}
+
 
 .generation-controls {
     display: flex;
@@ -26998,11 +27032,11 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C48 (Re-implement navigation fix)
+// Updated on: C49 (Add regenerate button and progress UI)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
-import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning } from 'react-icons/vsc';
+import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscSync } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
@@ -27073,6 +27107,8 @@ const App = () => {
     const [associatedFileMenu, setAssociatedFileMenu] = React.useState<{ x: number; y: number; path: string } | null>(null);
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
     const [responseCount, setResponseCount] = React.useState(4);
+    const [isGenerating, setIsGenerating] = React.useState(false);
+    const [generationProgress, setGenerationProgress] = React.useState<any[]>([]);
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
@@ -27232,9 +27268,9 @@ const App = () => {
     
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
-        // C48 Fix: Re-implement C44 navigation fix
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
             logger.log(`[NavFix] Received SendBatchGenerationComplete. New Cycle: ${newCycleId}, New Max: ${newMaxCycle}`);
+            setIsGenerating(false); // Stop showing progress UI
             setMaxCycle(newMaxCycle);
             handleCycleChange(null, newCycleId);
         });
@@ -27252,11 +27288,17 @@ const App = () => {
         if (currentCycle === null) return;
         const cycleData = getCurrentCycleData();
         if (cycleData) {
+            setIsGenerating(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
                 cycleData: cycleData as PcppCycle,
                 count: responseCount,
             });
         }
+    };
+
+    const handleRegenerateResponses = () => {
+        // Placeholder for future logic
+        window.alert("Regenerate functionality coming soon!");
     };
 
     // ... (rest of handlers and component return)
@@ -27298,7 +27340,7 @@ const App = () => {
 
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} />;
+    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
@@ -27321,10 +27363,8 @@ const App = () => {
         } else {
             return (
                 <div className="generation-controls">
-                    <button onClick={handleGenerateResponses} title="Generate responses from local LLM"><VscWand /> Generate responses</button>
-                    <input type="number" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10))} min="1" max="20" />
-                    {/* Placeholder for tokens/sec display */}
-                    <span className="tokens-per-sec-display">Tokens/sec: --</span>
+                    <button onClick={handleGenerateResponses} disabled={isGenerating} title="Generate responses from local LLM"><VscWand /> Generate responses</button>
+                    <button onClick={handleRegenerateResponses} disabled={isGenerating} title="Regenerate empty or all responses"><VscSync /> Regenerate</button>
                 </div>
             );
         }
@@ -27332,6 +27372,20 @@ const App = () => {
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        {isGenerating && (
+            <div className="generation-progress-display">
+                <div className="progress-header">
+                    <span>Generating Responses...</span>
+                    <span>Tokens/sec: --</span>
+                </div>
+                {[...Array(responseCount)].map((_, i) => (
+                     <div key={i} className="progress-bar-container">
+                        <span>Resp {i + 1}:</span>
+                        <progress value="0" max="100"></progress>
+                    </div>
+                ))}
+            </div>
+        )}
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
@@ -27725,7 +27779,8 @@ export enum ClientToServerChannel {
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
     RequestBatchGeneration = "clientToServer.requestBatchGeneration",
-    RequestCreateCycle0Prompt = "clientToServer.requestCreateCycle0Prompt",
+    RequestInitialArtifactsAndGeneration = "clientToServer.requestInitialArtifactsAndGeneration",
+    RequestRegenerateResponses = "clientToServer.requestRegenerateResponses",
     RequestFileExistence = "clientToServer.requestFileExistence",
     RequestSyntaxHighlight = "clientToServer.requestSyntaxHighlight",
     RequestHighlightContext = "clientToServer.requestHighlightContext", 
@@ -27781,11 +27836,12 @@ export enum ServerToClientChannel {
     SendSettings = "serverToClient.sendSettings",
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
     SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
+    UpdateGenerationProgress = "serverToClient.updateGenerationProgress",
 }
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C43 (Update SendBatchGenerationComplete payload)
+// Updated on: C49 (Update channels for Demo Mode)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -27839,7 +27895,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
     T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number } :
-    T extends ClientToServerChannel.RequestCreateCycle0Prompt ? { projectScope: string } :
+    T extends ClientToServerChannel.RequestInitialArtifactsAndGeneration ? { projectScope: string, responseCount: number } :
+    T extends ClientToServerChannel.RequestRegenerateResponses ? { cycleData: PcppCycle, tabsToRegenerate: number[] } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
     T extends ClientToServerChannel.RequestSyntaxHighlight ? { code: string; lang: string, id: string } :
     T extends ClientToServerChannel.RequestHighlightContext ? { context: string; id: string } :
@@ -27890,6 +27947,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
+    T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: { responseId: number, progress: number, tps: number }[] } :
     never;
 </file_artifact>
 
@@ -33712,6 +33770,152 @@ This project is licensed under the MIT License - see LICENSE file for details.
 - OpenAI for the Harmony format specification
 - VLLM team for the inference engine
 - Selenium project for browser automation
+</file_artifact>
+
+<file path="src/Artifacts/A52.3 DCE - Harmony Interaction Schema Source.md">
+# Artifact A52.3: DCE - Harmony Interaction Schema Source
+# Date Created: C49
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active.
+- **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss
+
+## Interaction Schema Text
+
+1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. **The closing tag must be exactly `</file_artifact>`.** Do not use the file path in the closing tag (e.g., `</file path="...">` is incorrect). Do not write the closing tag as `</file>` or `</file_path>`. Only `</file_artifact>` will parse successfully.
+
+2. To guarantee successful parsing, every response **must** follow this structure:
+2.1.  **Summary:** Your high-level analysis and plan must be enclosed in `<summary>...</summary>` tags.
+2.2.  **Course of Action:** Your point-by-point plan must be enclosed in `<course_of_action>...</course_of_action>` tags.
+2.3. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response.
+
+3.  Our Document Artifacts serve as our `Source of Truth` throughout multiple cycles. As such, over time, as issues occur, or code repeatedly regresses in the same way, seek to align our `Source of Truth` such that the Root Cause of such occurances is codified so that it can be avoided on subsequent cycles visits to those Code artifacts.
+
+4. `flattened_repo_v2.txt` is a copy of the codebase, generated by a script; assume its an accurate representation of the existing codebase, but not necessarily a 'source of truth' like we treat our documents as, our codebase is a living artifact, documents, while we can update them, should be considered less transient.
+
+5.  remember to output complete artifacts without placeholders, im taking your output, putting it in winmerge, and confirming we arent losing data in the update. when you provide placeholders, my cursory review turns into a meticulous file parsing, taking me from what is 5 seconds per artifact to upwards of 5 minutes, only to realize that the output is actually un-parseable, due to the nature of relativity, as the theory of relativity also applies to code. if you give me a code snippet, and do not give me the code surrounding that snippet, i do not know where that code should go. by providing the complete file, on the other hand, i can put it in a diff, see easily what was altered, and if anything was accidentally omitted or lost, i can be sure that it's retained.
+
+6.  **Update documentation before writing code.** document artifacts are like our project readme files, our source of truth. they are our blueprints. they guide the code we write. when we realize we need to alter our approach or invent new game mechanics, we update the source of truth first, cause english is easy and flexible, then we codify that.
+
+7. If you are deciding where to put a particular piece of code or function, and due to its nature, there are one or more candidate files that it could be placed in, choose the smaller file (in tokens).
+
+8. basically, you should not worry about brevity, because when you go too long, your response gets interrupted by the system anyway. its better that the products you do deliver are all complete except for the last one, rather than you delivering all incomplete products, including the last one. does that make sense?
+
+9. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
+
+10. when creating a new documentation artifact, also just update the master artifacts list itself.
+</file_artifact>
+
+<file path="src/Artifacts/A78. DCE - Whitepaper - Process as Asset.md">
+# Artifact A78: DCE - Whitepaper - Process as Asset
+
+# Date Created: C182
+
+# Author: AI Model & Curator
+
+  - **Key/Value for A0:**
+  - **Description:** A whitepaper targeted at high-level stakeholders (NSA, UKILRN) explaining the strategic value of the DCE by focusing on how it transforms the human-AI interaction process into a persistent, shareable asset that accelerates specialized content creation.
+  - **Tags:** whitepaper, documentation, strategy, process, acceleration, human-ai collaboration
+
+-----
+
+# Process as Asset: Accelerating Specialized Content Creation through Structured Human-AI Collaboration
+
+**A Whitepaper on the Data Curation Environment (DCE)**
+
+**Date:** September 4, 2025
+**Audience:** High-Level Stakeholders (NSA, UKILRN, Naval Operations)
+
+-----
+
+## 1\. Executive Summary
+
+Organizations tasked with developing highly specialized content—such as technical training materials, intelligence reports, or complex software documentation—face a constant bottleneck: the time and expertise required to curate accurate data, collaborate effectively, and rapidly iterate on feedback. Traditional workflows, even those augmented by Artificial Intelligence (AI), are often ad-hoc, opaque, and inefficient.
+
+This whitepaper introduces the Data Curation Environment (DCE), a framework and toolset integrated into the standard developer environment (Visual Studio Code) that transforms the content creation process itself into a valuable organizational asset. The DCE provides a structured, human-in-the-loop methodology that enables rapid dataset curation, seamless sharing of curated contexts between colleagues, and instant iteration on feedback.
+
+By capturing the entire workflow as a persistent, auditable knowledge graph, the DCE doesn't just help teams build content faster; it provides the infrastructure necessary to scale expertise, ensure quality, and accelerate the entire organizational mission.
+
+## 2\. The Challenge: The Bottleneck of Ad-Hoc AI Interaction
+
+The integration of Large Language Models (LLMs) into organizational workflows promises significant acceleration. However, the way most organizations interact with these models remains unstructured and inefficient, creating several critical bottlenecks:
+
+1.  **The Context Problem:** The quality of an LLM's output is entirely dependent on the quality of its input context. Manually selecting, copying, and pasting relevant data (code, documents, reports) into a chat interface is time-consuming, error-prone, and often results in incomplete or bloated context.
+2.  **The Collaboration Gap:** When a task is handed off, the context is lost. A colleague must manually reconstruct the previous operator's dataset and understand their intent, leading to significant delays and duplication of effort.
+3.  **The Iteration Overhead:** When feedback requires changes to a complex dataset, operators often resort to manual edits because re-prompting the AI requires reconstructing the entire context again. This negates the efficiency gains of using AI in the first place.
+4.  **The Auditability Vacuum:** The iterative process of human-AI interaction—the prompts, the AI's suggestions, and the human's decisions—is a valuable record of the work, yet it is rarely captured in a structured, reusable format.
+
+These challenges prevent organizations from fully realizing the potential of AI. They are forced to choose between the speed of AI and the rigor of a structured process.
+
+## 3\. The Solution: The Data Curation Environment (DCE)
+
+The Data Curation Environment (DCE) is designed to eliminate these bottlenecks by providing a structured framework for human-AI collaboration directly within the operator's working environment. It moves beyond the limitations of simple chat interfaces by introducing three core capabilities:
+
+### 3.1. Precision Context Curation
+
+The DCE replaces manual copy-pasting with an intuitive, integrated file management interface. Operators can precisely select the exact files, folders, or documents required for a task with simple checkboxes. The DCE intelligently handles various file types—including code, PDFs, Word documents, and Excel spreadsheets—extracting the relevant textual content automatically.
+
+This ensures that the AI receives the highest fidelity context possible, maximizing the quality of its output while minimizing operator effort.
+
+### 3.2. Parallel AI Scrutiny and Integrated Testing
+
+The DCE recognizes that relying on a single AI response is risky. The "Parallel Co-Pilot Panel" allows operators to manage, compare, and test multiple AI-generated solutions simultaneously.
+
+Integrated diffing tools provide immediate visualization of proposed changes. Crucially, the DCE offers a one-click "Accept" mechanism, integrated with Git version control, allowing operators to instantly apply an AI's suggestion to the live workspace, test it, and revert it if necessary. This creates a rapid, low-risk loop for evaluating multiple AI approaches.
+
+### 3.3. The Cycle Navigator and Persistent Knowledge Graph
+
+Every interaction within the DCE is captured as a "Cycle." A cycle includes the curated context, the operator's instructions, all AI-generated responses, and the operator's final decision. This history is saved as a structured, persistent Knowledge Graph.
+
+The "Cycle Navigator" allows operators to step back through the history, review past decisions, and understand the evolution of the project.
+
+## 4\. Transforming the Process into an Asset
+
+The true power of the DCE lies in how these capabilities combine to transform the workflow itself into a persistent organizational asset.
+
+### 4.1. The Curated Context as a Shareable Asset
+
+In the DCE workflow, the curated context (the "Selection Set") is not ephemeral; it is a saved, versioned asset. When a task is handed off, the new operator doesn't just receive the files; they receive the exact context and the complete history of the previous operator's interactions.
+
+This seamless handoff eliminates the "collaboration gap," allowing teams to work asynchronously and efficiently on complex datasets without duplication of effort.
+
+### 4.2. Accelerating Iteration and Maintenance
+
+The DCE dramatically reduces the overhead associated with feedback and maintenance. Because the context is already curated and saved, operators can rapidly iterate on complex datasets without manual reconstruction.
+
+If feedback requires changes, the operator simply loads the curated context and issues a targeted instruction to the AI. The AI performs the edits against the precise context, completing the update in a single, efficient cycle. This enables organizations to maintain complex systems and content with unprecedented speed.
+
+### 4.3. Scaling Expertise and Ensuring Auditability
+
+The Knowledge Graph generated by the DCE serves as a detailed, auditable record of the entire development process. This is invaluable for:
+
+  * **Training and Onboarding:** New personnel can review the cycle history to understand complex decision-making processes and best practices.
+  * **After-Action Reviews:** The graph provides a precise record of what was known, what was instructed, and how the AI responded, enabling rigorous analysis.
+  * **Accountability:** In mission-critical environments, the DCE provides a transparent and traceable record of human-AI interaction.
+
+## 5\. Use Case Spotlight: Rapid Development of Training Materials
+
+A government agency needs to rapidly update a specialized technical training lab based on new operational feedback. The feedback indicates that in the existing exam questions, "the correct answer is too often the longest answer choice," creating a pattern that undermines the assessment's validity.
+
+### The Traditional Workflow (Weeks)
+
+1.  **Identify Affected Files:** An analyst manually searches the repository to find all relevant question files (days).
+2.  **Manual Editing:** The analyst manually edits each file, attempting to rewrite the "distractor" answers to be longer and more plausible without changing the technical meaning (weeks).
+3.  **Review and Rework:** The changes are reviewed, often leading to further manual edits (days).
+
+### The DCE Workflow (Hours)
+
+1.  **Curate Context (Minutes):** The analyst uses the DCE interface to quickly select the folder containing all exam questions. This creates a precise, curated dataset.
+2.  **Instruct the AI (Minutes):** The analyst loads the curated context into the Parallel Co-Pilot Panel and provides a targeted instruction: "Review the following exam questions. For any question where the correct answer is significantly longer than the distractors, rewrite the distractors to include more meaningful but ultimately fluffy language to camouflage the length difference, without changing the technical accuracy."
+3.  **Review and Accept (Hours):** The AI generates several proposed solutions. The analyst uses the integrated diff viewer to compare the options. They select the best solution and "Accept" the changes with a single click.
+4.  **Verification:** The updated lab is immediately ready for final verification.
+
+## 6\. Conclusion
+
+The Data Curation Environment is more than just a developer tool; it is a strategic framework for operationalizing AI in complex environments. By addressing the critical bottlenecks of context curation, collaboration, and iteration, the DCE transforms the human-AI interaction workflow into a structured, persistent, and valuable organizational asset.
+
+For organizations facing an ever-increasing list of priorities and a need to accelerate the development of specialized content, the DCE provides the necessary infrastructure to scale expertise, ensure quality, and achieve the mission faster.
 </file_artifact>
 
 

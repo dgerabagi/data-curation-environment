@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C48 (Add isParsedMode to new cycle, return newMaxCycle)
+// Updated on: C49 (Add projectScope to new cycle creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -97,7 +97,8 @@ export class HistoryService {
         }
 
         if (history.cycles.length === 0) {
-            await this.saveCycleData(defaultCycle);
+            const newHistory = { ...history, cycles: [defaultCycle] };
+            await this._writeHistoryFile(newHistory);
             return defaultCycle;
         }
 
@@ -159,9 +160,11 @@ export class HistoryService {
         }
     }
 
-    public async createNewCycleWithResponses(responses: string[], tabCount: number): Promise<{ newCycleId: number; newMaxCycle: number; }> {
+    public async createNewCycleWithResponses(responses: string[], tabCount: number, projectScope?: string): Promise<{ newCycleId: number; newMaxCycle: number; }> {
         const history = await this._readHistoryFile();
-        const newCycleId = (history.cycles.reduce((maxId, cycle) => Math.max(maxId, cycle.cycleId), 0)) + 1;
+        history.projectScope = projectScope; // Save the scope with the new history
+        
+        const newCycleId = 1; // Onboarding always creates cycle 1
         
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
@@ -171,20 +174,19 @@ export class HistoryService {
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'Generated Responses',
-            cycleContext: '', // Should be inherited from previous cycle in a future version
+            title: 'Initial Artifacts',
+            cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
             tabCount: tabCount,
             isParsedMode: true, // Default to parsed view for new responses
         };
 
-        history.cycles.push(newCycle);
+        history.cycles = [newCycle]; // Replace any existing history
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
         
-        const newMaxCycle = Math.max(newCycleId, ...history.cycles.map(c => c.cycleId));
-        return { newCycleId, newMaxCycle };
+        return { newCycleId, newMaxCycle: newCycleId };
     }
 
     public async deleteCycle(cycleId: number): Promise<number> {

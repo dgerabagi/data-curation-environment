@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C21 (Add title and save status indicator)
+// Updated on: C49 (Add response count input)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -13,6 +13,7 @@ interface OnboardingViewProps {
     latestCycleId: number;
     workflowStep: string | null;
     saveStatus: 'saved' | 'saving' | 'unsaved';
+    connectionMode: string;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -27,9 +28,10 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode }) => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
+    const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
@@ -37,12 +39,18 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     const handleGenerate = () => {
         if (projectScope.trim()) {
             setIsGenerating(true);
-            logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-            clientIpc.sendToServer(ClientToServerChannel.RequestCreateCycle0Prompt, { projectScope });
-            setTimeout(() => {
-                setIsGenerating(false);
-                setPromptGenerated(true);
-            }, 1500); 
+            
+            if (connectionMode === 'demo') {
+                logger.log(`Sending request to generate initial artifacts AND ${responseCount} responses.`);
+                clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
+            } else {
+                logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
+                clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle: 'Initial Artifacts', currentCycle: 0, selectedFiles: [] });
+                setTimeout(() => {
+                    setIsGenerating(false);
+                    setPromptGenerated(true);
+                }, 1500);
+            }
         }
     };
 
@@ -50,6 +58,8 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
         logger.log("Returning to latest cycle from Project Plan view.");
         onNavigateToCycle(latestCycleId);
     };
+
+    const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
 
     return (
         <div className="onboarding-container">
@@ -78,16 +88,30 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     <VscArrowRight /> Return to Cycle {latestCycleId}
                 </button>
             ) : !promptGenerated ? (
-                <button 
-                    className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
-                    onClick={handleGenerate} 
-                    disabled={!projectScope.trim() || isGenerating}
-                >
-                    <VscRocket /> {isGenerating ? 'Generating...' : 'Generate Initial Artifacts Prompt'}
-                </button>
+                <div className="onboarding-actions">
+                    {connectionMode === 'demo' && (
+                         <div className="response-count-input">
+                            <label htmlFor="onboarding-response-count">Responses:</label>
+                            <input 
+                                type="number" 
+                                id="onboarding-response-count" 
+                                min="1" max="20" 
+                                value={responseCount} 
+                                onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                            />
+                        </div>
+                    )}
+                    <button 
+                        className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
+                        onClick={handleGenerate} 
+                        disabled={!projectScope.trim() || isGenerating}
+                    >
+                        <VscRocket /> {isGenerating ? 'Generating...' : buttonText}
+                    </button>
+                </div>
             ) : (
                 <div className="onboarding-success">
-                    <p>✅ Initial `prompt.md` and `README.md` have been generated in your workspace!</p>
+                    <p>✅ Initial `prompt.md` and `DCE_README.md` have been generated in your workspace!</p>
                     <button className="styled-button" onClick={() => onNavigateToCycle(1)}>
                         Continue to Cycle 1 <VscArrowRight />
                     </button>

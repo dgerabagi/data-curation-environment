@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C38 (Add styles for generation controls)
+// Updated on: C49 (Add styles for onboarding actions and progress display)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -123,6 +123,28 @@ body {
     margin-bottom: 4px;
 }
 
+.onboarding-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.response-count-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    
+    input {
+        width: 50px;
+        background-color: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        border: 1px solid var(--vscode-input-border);
+        text-align: center;
+        border-radius: 2px;
+    }
+}
+
 
 .onboarding-success {
     display: flex;
@@ -218,7 +240,38 @@ body {
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
+    flex-wrap: wrap; // Allow wrapping for progress UI
 }
+
+.generation-progress-display {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    background-color: var(--vscode-sideBar-background);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+
+    .progress-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+    }
+
+    .progress-bar-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        
+        progress {
+            width: 100%;
+        }
+    }
+}
+
 
 .generation-controls {
     display: flex;

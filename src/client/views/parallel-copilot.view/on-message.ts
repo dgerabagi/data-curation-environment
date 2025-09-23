@@ -1,4 +1,4 @@
-// Updated on: C48 (Pass newMaxCycle to SendBatchGenerationComplete)
+// Updated on: C49 (Add handler for new onboarding channel)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -19,6 +19,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
     });
 
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
+        promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
+    });
+
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
         const settings = await settingsService.getSettings();
         serverIpc.sendToClient(ServerToClientChannel.SendSettings, { settings });
@@ -26,10 +30,6 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     
     serverIpc.onClientMessage(ClientToServerChannel.SaveSettings, (data) => {
         settingsService.saveSettings(data.settings);
-    });
-
-    serverIpc.onClientMessage(ClientToServerChannel.RequestCreateCycle0Prompt, (data) => {
-        promptService.generateCycle0Prompt(data.projectScope, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileExistence, (data) => {
