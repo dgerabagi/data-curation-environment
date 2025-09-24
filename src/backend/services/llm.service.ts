@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C54 (Implement streaming client)
+// Updated on: C56 (Implement correct multi-response SSE stream parsing)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -8,6 +8,7 @@ import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
+import { logger } from '@/client/utils/logger';
 
 const MAX_TOKENS_PER_RESPONSE = 8192;
 
@@ -29,7 +30,7 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
-                    response_format: { "type": "json_object" }
+                    // response_format: { "type": "json_object" } // Cannot be used with streaming
                 };
                 break;
             case 'url':
@@ -69,8 +70,32 @@ export class LlmService {
             let buffer = '';
             let lastTpsUpdateTime = Date.now();
             let tokensSinceLastUpdate = 0;
+            
             const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({ responseId: i + 1, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE }));
-            const responseContents: { [key: number]: string } = {};
+            const responseContents: string[] = Array(count).fill('');
+            const finishedResponses: boolean[] = Array(count).fill(false);
+            let totalFinished = 0;
+
+            const sendProgressUpdate = () => {
+                const now = Date.now();
+                const elapsed = (now - lastTpsUpdateTime) / 1000;
+                if (elapsed > 0) {
+                    const tps = tokensSinceLastUpdate / elapsed;
+                    const chunks: { [key: number]: string } = {};
+                    responseContents.forEach((content, i) => {
+                        chunks[i + 1] = content;
+                    });
+
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, {
+                        progress: progressData,
+                        tps: Math.round(tps),
+                        chunks,
+                    });
+                    tokensSinceLastUpdate = 0;
+                    lastTpsUpdateTime = now;
+                }
+            };
+            const throttledSendProgress = this.throttle(sendProgressUpdate, 200);
 
             stream.on('data', (chunk) => {
                 buffer += chunk.toString();
@@ -85,43 +110,54 @@ export class LlmService {
                         try {
                             const data = JSON.parse(dataStr);
                             const choice = data.choices;
-                            if (choice && choice.delta && choice.delta.content) {
-                                const responseId = choice.index + 1;
-                                const contentChunk = choice.delta.content;
-                                
-                                responseContents[responseId] = (responseContents[responseId] || '') + contentChunk;
-                                tokensSinceLastUpdate += 1; // Approx 1 token per chunk
-                                progressData[choice.index].currentTokens += 1; // Rough approximation
+                            if (choice) {
+                                const responseIndex = choice.index;
+                                if (choice.finish_reason !== null) {
+                                    if (!finishedResponses[responseIndex]) {
+                                        finishedResponses[responseIndex] = true;
+                                        totalFinished++;
+                                    }
+                                } else if (choice.delta && choice.delta.content) {
+                                    const contentChunk = choice.delta.content;
+                                    responseContents[responseIndex] += contentChunk;
+                                    
+                                    // Simple token approximation
+                                    tokensSinceLastUpdate++;
+                                    progressData[responseIndex].currentTokens++;
+                                }
                             }
                         } catch (e) {
                             Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`);
                         }
                     }
                 }
-
-                const now = Date.now();
-                const elapsed = (now - lastTpsUpdateTime) / 1000;
-                if (elapsed >= 0.2) { // Update 5 times per second
-                    const tps = tokensSinceLastUpdate / elapsed;
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, {
-                        progress: progressData,
-                        tps: Math.round(tps),
-                        chunks: responseContents,
-                    });
-                    tokensSinceLastUpdate = 0;
-                    lastTpsUpdateTime = now;
-                }
+                throttledSendProgress();
             });
 
             stream.on('end', async () => {
-                Services.loggerService.log('LLM stream ended.');
-                const finalResponses = Object.values(responseContents);
-                const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(finalResponses, cycleData.tabCount || 4, cycleData.cycleContext);
+                Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
+                
+                // Final update
+                sendProgressUpdate();
+
+                const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responseContents, cycleData.tabCount || 4, cycleData.cycleContext);
                 serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
             });
 
         } catch (error: any) {
             Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
         }
+    }
+
+    private throttle(func: (...args: any[]) => void, limit: number) {
+        let inThrottle: boolean;
+        return function(this: any, ...args: any[]) {
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
     }
 }

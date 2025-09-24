@@ -1,4 +1,4 @@
-// Updated on: C54 (Add UpdateGenerationProgress channel)
+// Updated on: C56 (Add chunks to UpdateGenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";

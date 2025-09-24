@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C54 (Add handler for streaming progress)
+// Updated on: C56 (Pass tabs to GenerationProgressDisplay)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -328,6 +328,10 @@ const App = () => {
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
+    if (isGenerating) {
+        return <GenerationProgressDisplay progressData={generationProgress} tps={tps} tabs={tabs} />;
+    }
+
     if (currentCycle === 0) {
         return (
             <div className={`onboarding-split-view ${isGenerating ? 'active' : ''}`}>
@@ -342,7 +346,6 @@ const App = () => {
                     onStartGeneration={handleStartGeneration}
                     isGenerating={isGenerating}
                 />
-                {isGenerating && <GenerationProgressDisplay progressData={generationProgress} tps={tps} />}
             </div>
         );
     }

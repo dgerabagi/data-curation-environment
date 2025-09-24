@@ -1,7 +1,8 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// New file in C54
+// Updated on: C56 (Add partial text preview)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
+import { TabState } from '../view';
 
 export interface GenerationProgress {
     responseId: number;
@@ -12,9 +13,10 @@ export interface GenerationProgress {
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
+    tabs: { [key: string]: TabState };
 }
 
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps }) => {
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
     const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
 
     return (
@@ -35,6 +37,9 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     <span className="token-count-text">
                         ({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
                     </span>
+                    <div className="partial-text-preview">
+                        <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
+                    </div>
                 </div>
             ))}
         </div>
