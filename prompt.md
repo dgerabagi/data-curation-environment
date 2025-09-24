@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 57 - still no stream
+Current Cycle 58 - okay dce is receiving a signal, but its invalid syntax
+Cycle 57 - still no stream
 Cycle 56 - streaming is closer...
 Cycle 55 - continue streaming implementation
 Cycle 54 - still no feedback from vllm in dce
@@ -788,122 +789,54 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 58>
+<Cycle Context>
+okay!!! i can tell that we are receiving! but its invalid. this is what i see:
+
+the request for the 4 responses is going all the way to and and then back from the vllm because i see this spam: `[WARN] [4:42:01 PM] Received chunk with invalid index: undefined`, and in the ephemeral i placed what the stream looks like coming from the vllm into the proxy. i think we are very close!!!
+</Cycle Context>
+<Ephemeral Context>
+
+data: {"id":"chatcmpl-0dfa93e74d784256aadb4066c076c1dd","object":"chat.completion.chunk","created":1758750048,"model":"unsloth/gpt-oss-20b","choices":[{"index":3,"delta":{"content":" multi"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[INFO] [[DCE PROXY STREAM]] Piping chunk to client: data: {"id":"chatcmpl-0dfa93e74d784256aadb4066c076c1dd","object":"chat.completion.chunk","created":1758750048,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+
+data: {"id":"chatcmpl-0dfa93e74d784256aadb4066c076c1dd","object":"chat.completion.chunk","created":1758750048,"model":"unsloth/gpt-oss-20b","choices":[{"index":1,"delta":{"content":" **"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+
+data: {"id":"chatcmpl-0dfa93e74d784256aadb4066c076c1dd","object":"chat.completion.chunk","created":1758750048,"model":"unsloth/gpt-oss-20b","choices":[{"index":2,"delta":{"content":"   "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+
+data: {"id":"chatcmpl-0dfa93e74d784256aadb4066c076c1dd","object":"chat.completion.chunk","created":1758750048,"model":"unsloth/gpt-oss-20b","choices":[{"index":3,"delta":{"content":"‑"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[INFO] [[DCE PROXY STREAM]] Piping chunk to client: data: {"id":"chatcmpl-0dfa93e74d784256aadb4066c076c1dd","object":"chat.completion.chunk","created":1758750048,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"content":"\\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+</Ephemeral Context>
+<Previous Cycle 57 Summary of Actions>
+I have analyzed the logs and your report. You are correct; the streaming implementation has two critical flaws. First, the backend is not correctly parsing the Server-Sent Events (SSE) stream from the vLLM proxy, which is why no progress data is being displayed. Second, it's prematurely ending the operation when the first of the parallel responses completes, causing the UI to switch away before all responses are received.
+
+My course of action is to completely refactor the stream handling logic in the backend `llm.service.ts`. The new implementation will correctly parse the SSE protocol, manage the state of all four parallel responses, and only conclude the operation once all streams are finished. I will also enhance the frontend to display the partial text as it is being generated.
+
+1.  **Documentation (`A97`):** I will update **`A97. DCE - vLLM Response Progress UI Plan.md`** with a revised technical plan that details the new, correct architecture for handling SSE streams containing multiple, interleaved responses. This will codify the solution.
+
+2.  **Refactor Backend Streaming Logic (`llm.service.ts`):**
+    *   I will rewrite the `generateBatch` method to properly consume and parse an SSE stream from `node-fetch`.
+    *   It will initialize arrays to store the aggregated content and token counts for each of the four parallel responses.
+    *   The `stream.on('data')` handler will be updated to correctly parse `data: {...}` lines from the stream.
+    *   It will use the `index` field from the JSON payload in each chunk to update the content and token count for the correct response.
+    *   I will implement a completion-tracking mechanism. The `stream.on('end')` logic will only be triggered after all four responses have finished generating.
+    *   A throttled function will periodically send `UpdateGenerationProgress` IPC messages to the frontend.
+
+3.  **Enhance IPC Payload (`channels.type.ts`):**
+    *   I will add a new `chunks` property to the `UpdateGenerationProgress` payload. This will be an object mapping a response ID to its currently generated (partial) text content.
+
+4.  **Update Frontend to Display Live Text:**
+    *   **`view.tsx`:** The message handler for `UpdateGenerationProgress` will now also receive the `chunks` object and update the `tabs` state with the partial content.
+    *   **`GenerationProgressDisplay.tsx`:** I will add a new section to this component that receives the `tabs` data and renders a small, read-only preview of the text as it is being generated for each response, providing real-time feedback to the user.
+</Previous Cycle 57 Summary of Actions>
+</Cycle 58>
+
 <Cycle 57>
 <Cycle Context>
 okay, still the same thing. exact same. in the <dce logs> i see it requesting 4 initial responses... then in <proxy logs> they show responses received, proxy says it starts stream... <vllm logs> show generation of 4 responses...
 
 when all responses complete, i switch to the pcpp pane but there are no responses in the response tabs; they're empty. again, i ask you, are we sure we are receiving the stream back in dce? are we sure we're streaming from vllm? can we get logs to appear in server.ts to reveal if its receiving a stream and if so what? otherwise we cant troubleshoot...
 </Cycle Context>
-<Ephemeral Context>
-<dce logs>
-[INFO] [4:15:03 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [4:15:03 PM] Services initializing...
-[INFO] [4:15:03 PM] Services initialized successfully.
-[INFO] [4:15:03 PM] Registering 7 commands.
-[INFO] [4:15:03 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [4:15:03 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [4:15:03 PM] Starry Night syntax highlighter initialized.
-[INFO] [4:15:03 PM] Context Chooser view message handler initialized.
-[INFO] [4:15:03 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [4:15:03 PM] [SelectionService] No last selection found in state.
-[INFO] [4:15:03 PM] Persisted current selection of 0 items.
-[INFO] [4:15:03 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:15:09 PM] Executing dce.openSettingsPanel command.
-[INFO] [4:15:09 PM] Settings view message handler initialized.
-[INFO] [4:15:09 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [4:15:09 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [4:15:11 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [4:15:11 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:15:11 PM] Settings saved: Mode=demo, URL=undefined
-[INFO] [4:15:12 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [4:15:13 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [4:15:13 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:15:14 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [4:15:14 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [4:15:14 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:15:56 PM] Generating Cycle 0 prompt.md file...
-[INFO] [4:15:56 PM] Onboarding complete. Requesting 4 initial responses from LLM.
-[INFO] [4:15:56 PM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [4:15:56 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [4:15:56 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [4:15:56 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [4:15:56 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [4:15:56 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense16/src","c:/Projects/TowerDefense16/src/Artifacts","c:/Projects/TowerDefense16/src/Artifacts/DCE_README.md"]
-[INFO] [4:15:56 PM] [SelectionService] No last selection found in state.
-[INFO] [4:15:56 PM] Persisted current selection of 3 items.
-[INFO] [4:15:56 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [4:15:56 PM] Persisted current selection of 3 items.
-[INFO] [4:15:57 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [4:18:13 PM] LLM stream ended. Total finished responses: 1/4
-[INFO] [4:18:13 PM] Created new cycle 1 with 4 responses.
-[INFO] [4:18:13 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [4:18:13 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [4:18:13 PM] [CostCalc] Found 3 selected files.
-[INFO] [4:18:13 PM] [CostCalc] In-memory flattened content generated (797 tokens).
-[INFO] [4:18:13 PM] [CostCalc] Calculating breakdown:
-[INFO] [4:18:13 PM]   - M1 Artifact Schema: 48 tokens
-[INFO] [4:18:13 PM]   - M2 Cycle Overview: 30 tokens
-[INFO] [4:18:13 PM]   - M3 Interaction Schema: 842 tokens
-[INFO] [4:18:13 PM]   - M4 Project Scope: 24 tokens
-[INFO] [4:18:13 PM]   - M5 Artifact List: 30 tokens
-[INFO] [4:18:13 PM]   - M6 Cycles: 10962 tokens
-[INFO] [4:18:13 PM]   - M7 Flattened Repo: 808 tokens
-[INFO] [4:18:13 PM] [CostCalc] Total Tokens: 12744, Estimated Cost: $0.01593
-[INFO] [4:18:13 PM] [CostCalc] Sending estimation to client.
-
-</dce logs>
-
-<proxy logs>
-PS C:\Projects\ai-ascent> npm run start
-
-> ai-ascent-game@1.0.0 start
-> cross-env NODE_ENV=production node dist/server.js
-
-[INFO] [[researchDataUtils]] Starting research node map creation. Total Nodes expected: 246
-[INFO] [[researchDataUtils]] Finished map creation. Map size: 246. Duplicate IDs found: false
-[ERROR] [data:feature:merge] Collision detected! Feature ID "chain_of_thought_reasoning_feature" from source "chatbotServiceFeatures" already exists. Skipping definition. undefined
-[ERROR] [data:feature:merge] Found 1 duplicate feature IDs during merge! Check category files. undefined
-[INFO] [componentData:init] Initialized component data hub. Total Components: 145. Lookup Size: 188
-[INFO] [[SERVER]] Server starting... Client Origin for CORS: https://aiascent.game, Production: true
-[INFO] [[DCE]] vLLM proxy endpoint configured for: http://127.0.0.1:8000/v1/chat/completions
-[WARN] [[DCE]] DCE_API_KEY is not set. The /api/dce/proxy endpoint will be unsecured.
-[INFO] [system:competition] CompetitionSystem instantiated
-[WARN] [system:competition] ComputeSystem reference not found during CompetitionSystem construction.
-[INFO] [system:pvp] PvpSystem instantiated.
-[INFO] [system:poetry_battle] PoetryBattleSystem instantiated
-[INFO] [[SERVER]] Socket.IO server initialized.
-[INFO] [[SERVER]] Production mode detected. Serving static files from: C:\Projects\ai-ascent\dist
-[INFO] [[SERVER]] Server listening on http://localhost:3001
-[INFO] [[AscentiaKB]] Loading GAME FAISS index and chunk data...
-[INFO] [[AscentiaKB]] Successfully loaded GAME FAISS index with function ntotal() { [native code] } vectors and 618 chunks.
-[INFO] [[ReportKB]] Loading REPORT FAISS index and chunk data...
-[INFO] [[ReportKB]] Successfully loaded REPORT FAISS index with function ntotal() { [native code] } vectors and 275 chunks.
-[INFO] [[DCE]] Received request on /api/dce/proxy
-[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
-[INFO] [[DCE]] Successfully established stream from vLLM to client.
-
-</proxy logs>
-
-<vllm logs>
-(APIServer pid=439) INFO:     127.0.0.1:57852 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=439) INFO 09-24 16:15:59 [loggers.py:123] Engine 000: Avg prompt throughput: 4776.0 tokens/s, Avg generation throughput: 62.9 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.0%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:16:09 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 166.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.6%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:16:19 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 162.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.3%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:16:29 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 164.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.9%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:16:39 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 159.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.5%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:16:49 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 160.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.1%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:16:59 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 160.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.7%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:17:09 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 160.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.3%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:17:19 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 145.6 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.6%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:17:29 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 117.0 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.0%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:17:39 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 118.5 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.5%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:17:49 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 113.4 tokens/s, Running: 2 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.2%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:17:59 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 110.8 tokens/s, Running: 2 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.6%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:18:09 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 80.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.9%, Prefix cache hit rate: 90.8%
-(APIServer pid=439) INFO 09-24 16:18:19 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.5 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 90.8%
-
-</vllm logs>
-</Ephemeral Context>
 <Previous Cycle 56 Summary of Actions>
 I have analyzed the error logs from Cycle 55, and the root cause of the streaming failure is a clear API contract mismatch between the DCE extension and the `aiascent.game` proxy server.
 
@@ -3745,22 +3678,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T21:19:42.009Z
+  Date Generated: 2025-09-24T21:44:33.953Z
   ---
   Total Files: 185
-  Approx. Tokens: 466347
+  Approx. Tokens: 466776
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md (11673 tokens)
+2. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (11673 tokens)
 3. src\client\views\parallel-copilot.view\view.tsx (9806 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (6192 tokens)
 6. src\backend\services\prompt.service.ts (5042 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4071 tokens)
+9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4249 tokens)
 10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
@@ -3849,14 +3782,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 83. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 84. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 85. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 359 - Chars: 16283 - Tokens: 4071
+86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16993 - Tokens: 4249
 87. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 88. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 89. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 48 - Chars: 3364 - Tokens: 841
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 49 - Chars: 3336 - Tokens: 834
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -3889,7 +3822,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 125. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-126. src\backend\services\llm.service.ts - Lines: 163 - Chars: 7104 - Tokens: 1776
+126. src\backend\services\llm.service.ts - Lines: 183 - Chars: 8133 - Tokens: 2034
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 128. src\backend\services\prompt.service.ts - Lines: 359 - Chars: 20168 - Tokens: 5042
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -3946,9 +3879,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
 182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
-183. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md - Lines: 393 - Chars: 46690 - Tokens: 11673
-184. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-185. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 49 - Chars: 2036 - Tokens: 509
+183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 49 - Chars: 2036 - Tokens: 509
+185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 393 - Chars: 46690 - Tokens: 11673
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -9406,7 +9339,7 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C55 (Fix proxy to handle OpenAI `messages` format)
+# Updated on: C57 (Add chunk logging for debugging)
 
 - **Key/Value for A0:**
 - **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The proxy route has been corrected to handle the modern OpenAI `messages` format instead of the legacy `prompt` format.
@@ -9414,9 +9347,9 @@ This architecture provides a secure, scalable, and highly performant solution fo
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected to fix a critical bug. It was previously expecting a `{ "prompt": "..." }` field in the request body, but the DCE extension sends the modern OpenAI format, `{ "messages": [...] }`. The code now correctly handles the `messages` array, resolving the `400 Bad Request` error.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected to fix a critical bug. It was previously expecting a `{ "prompt": "..." }` field in the request body, but the DCE extension sends the modern OpenAI format, `{ "messages": [...] }`. The code now correctly handles the `messages` array, resolving the `400 Bad Request` error. **Logging has been added to the stream to aid in debugging client-side consumption issues.**
 
-## 2. Source Code (with corrected route)
+## 2. Source Code (with corrected route and logging)
 
 ```typescript
 // Updated on: C1384 (Correct import path for generateSpeech from llmService.)
@@ -9701,7 +9634,25 @@ app.post('/api/dce/proxy', async (req, res) => {
         res.setHeader('Connection', 'keep-alive');
 
         const stream = vllmResponse.body;
-        Readable.fromWeb(stream as any).pipe(res);
+        
+        // C57 DEBUG: Add logging for each chunk
+        const loggingStream = new Readable({
+            read() {}
+        });
+
+        const reader = stream.getReader();
+        reader.read().then(function processText({ done, value }): any {
+            if (done) {
+                loggingStream.push(null); // End the stream
+                return;
+            }
+            const chunkString = new TextDecoder().decode(value);
+            logInfo('[DCE PROXY STREAM]', `Piping chunk to client: ${chunkString.trim()}`);
+            loggingStream.push(value);
+            return reader.read().then(processText);
+        });
+
+        loggingStream.pipe(res);
         logInfo('[DCE]', 'Successfully established stream from vLLM to client.');
 
     } catch (error: any) {
@@ -10134,7 +10085,7 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C56 (Codify correct SSE parsing architecture for multiple streams)
+# Updated on: C57 (Codify correct multi-stream SSE parsing)
 
 - **Key/Value for A0:**
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric. This has been updated to reflect the final, correct streaming architecture.
@@ -10149,13 +10100,13 @@ This is a major architectural change and should be implemented in phases.
 ## 3. UI Mockup (Textual Description)
 (No change)
 
-## 4. Technical Implementation Plan (C56 Revision)
+## 4. Technical Implementation Plan (C57 Revision)
 
 This feature is critically dependent on a correctly implemented end-to-end streaming architecture using Server-Sent Events (SSE).
 
 1.  **vLLM Server:**
     *   Must be started with the OpenAI-compatible API endpoint.
-    *   When a request includes `"stream": true`, it will send an SSE stream containing interleaved JSON objects for each of the `n` parallel responses. Each object includes an `index` field to identify which response it belongs to.
+    *   When a request includes `"stream": true` and `n > 1`, it will send an SSE stream containing JSON objects for each of the `n` parallel responses. Each object includes an `index` field to identify which response it belongs to.
 
 2.  **Proxy Server (`A90 server.ts`):**
     *   Must make its request to the vLLM with `"stream": true"`.
@@ -10170,15 +10121,16 @@ This feature is critically dependent on a correctly implemented end-to-end strea
         *   Parse the JSON string following `data: `.
         *   Use the `index` property from the parsed JSON object to identify which response the chunk belongs to.
         *   Append the `content` delta to the correct response's aggregated content string and update its token count.
-    *   A throttled or debounced function will periodically send an `UpdateGenerationProgress` IPC message to the frontend. This message will contain the complete, up-to-date progress array and the partial content chunks for each response.
-    *   The stream processing will only be considered "ended" after all `n` responses have been fully received.
+        *   It will individually track the `finish_reason` for each response index.
+    *   **The stream processing will only be considered "ended" after a `finish_reason` has been received for all `n` responses.** This is the critical fix to the premature termination bug.
+    *   A throttled function will periodically send an `UpdateGenerationProgress` IPC message to the frontend with the latest metrics and partial content.
 
 4.  **IPC Channels (`channels.type.ts`):**
-    *   The `ServerToClientChannel.UpdateGenerationProgress` payload is updated to include the partial content: `{ progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } }`.
+    *   The `ServerToClientChannel.UpdateGenerationProgress` payload will contain the progress data for each response and the overall tokens-per-second.
 
 5.  **Frontend (`view.tsx`, `GenerationProgressDisplay.tsx`):**
-    *   The message handler for `UpdateGenerationProgress` will update the state for `generationProgress`, `tps`, and now also the `tabs` content with the received partial chunks.
-    *   The `GenerationProgressDisplay` component will be updated to receive the `tabs` data and render a small, read-only preview of the generating text for each response, providing live feedback.
+    *   The message handler for `UpdateGenerationProgress` will update the state for `generationProgress`, `tps`, and the `tabs` content with the received partial chunks.
+    *   The `GenerationProgressDisplay` component will render a progress bar and a small, read-only preview of the generating text for each response, providing live feedback.
 </file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -22085,7 +22037,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C56 (Implement correct multi-response SSE stream parsing)
+// Updated on: C57 (Implement correct multi-response SSE stream parsing)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -22116,7 +22068,6 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
-                    // response_format: { "type": "json_object" } // Cannot be used with streaming
                 };
                 break;
             case 'url':
@@ -22191,23 +22142,31 @@ export class LlmService {
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
                         const dataStr = line.substring(6);
-                        if (dataStr === '[DONE]') continue;
+                        if (dataStr.trim() === '[DONE]') {
+                            // This is tricky. A single [DONE] might be sent. We rely on finish_reason.
+                            continue;
+                        }
                         
                         try {
                             const data = JSON.parse(dataStr);
-                            const choice = data.choices;
+                            const choice = data.choices; // vLLM sends one choice object per SSE message
                             if (choice) {
                                 const responseIndex = choice.index;
+                                
+                                if (responseIndex === undefined || responseIndex >= count) {
+                                    Services.loggerService.warn(`Received chunk with invalid index: ${responseIndex}`);
+                                    continue;
+                                }
+
                                 if (choice.finish_reason !== null) {
                                     if (!finishedResponses[responseIndex]) {
+                                        Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
                                         finishedResponses[responseIndex] = true;
                                         totalFinished++;
                                     }
                                 } else if (choice.delta && choice.delta.content) {
                                     const contentChunk = choice.delta.content;
                                     responseContents[responseIndex] += contentChunk;
-                                    
-                                    // Simple token approximation
                                     tokensSinceLastUpdate++;
                                     progressData[responseIndex].currentTokens++;
                                 }
@@ -22223,8 +22182,11 @@ export class LlmService {
             stream.on('end', async () => {
                 Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
                 
-                // Final update
-                sendProgressUpdate();
+                sendProgressUpdate(); // Final update
+
+                if (totalFinished < count) {
+                    Services.loggerService.warn(`Stream ended but only ${totalFinished}/${count} responses were marked as finished.`);
+                }
 
                 const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responseContents, cycleData.tabCount || 4, cycleData.cycleContext);
                 serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
@@ -22237,12 +22199,22 @@ export class LlmService {
 
     private throttle(func: (...args: any[]) => void, limit: number) {
         let inThrottle: boolean;
+        let lastFunc: NodeJS.Timeout;
+        let lastRan: number;
         return function(this: any, ...args: any[]) {
             const context = this;
             if (!inThrottle) {
                 func.apply(context, args);
+                lastRan = Date.now();
                 inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
+            } else {
+                clearTimeout(lastFunc);
+                lastFunc = setTimeout(function() {
+                    if ((Date.now() - lastRan) >= limit) {
+                        func.apply(context, args);
+                        lastRan = Date.now();
+                    }
+                }, limit - (Date.now() - lastRan));
             }
         };
     }
@@ -29082,7 +29054,82 @@ export function parseResponse(rawText: string): ParsedResponse {
 }
 </file_artifact>
 
-<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies - REFERENCE.md">
+<file path="src/Artifacts/A11. DCE - Regression Case Studies - WORKING.md">
+# Artifact A11: DCE - Regression Case Studies
+# Date Created: C16
+# Author: AI Model & Curator
+# Updated on: C44 (Add vLLM Truncation case)
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+**This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
+
+## 2. Case Studies
+
+---
+
+### Case Study 039: vLLM Responses Truncated at Stop Token
+
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C44
+-   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
+</file_artifact>
+
+<file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
+// src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
+// Updated on: C56 (Add partial text preview)
+import * as React from 'react';
+import { formatLargeNumber } from '../../../../common/utils/formatting';
+import { TabState } from '../view';
+
+export interface GenerationProgress {
+    responseId: number;
+    currentTokens: number;
+    totalTokens: number;
+}
+
+interface GenerationProgressDisplayProps {
+    progressData: GenerationProgress[];
+    tps: number;
+    tabs: { [key: string]: TabState };
+}
+
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
+
+    return (
+        <div className="generation-progress-display">
+            <div className="progress-header">
+                <span>Generating Responses...</span>
+                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
+            </div>
+            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
+            
+            {progressData.map(p => (
+                <div key={p.responseId} className="progress-bar-container">
+                    <div className='progress-bar-row'>
+                        <span>Resp {p.responseId}:</span>
+                        <progress value={p.currentTokens} max={p.totalTokens}></progress>
+                        <span>{p.totalTokens > 0 ? ((p.currentTokens / p.totalTokens) * 100).toFixed(0) : 0}%</span>
+                    </div>
+                    <span className="token-count-text">
+                        ({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                    </span>
+                    <div className="partial-text-preview">
+                        <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default GenerationProgressDisplay;
+</file_artifact>
+
+<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies - READ-ONLY.md">
 # Artifact A11.1: DCE - New Regression Case Studies
 # Date Created: C1
 # Author: AI Model & Curator
@@ -29476,81 +29523,6 @@ Add new Case Studies to A11, not to this artifact. Thats the point of splitting 
     1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
     2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
     3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
-</file_artifact>
-
-<file path="src/Artifacts/A11. DCE - Regression Case Studies - WORKING.md">
-# Artifact A11: DCE - Regression Case Studies
-# Date Created: C16
-# Author: AI Model & Curator
-# Updated on: C44 (Add vLLM Truncation case)
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-**This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
-
-## 2. Case Studies
-
----
-
-### Case Study 039: vLLM Responses Truncated at Stop Token
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C44
--   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
-</file_artifact>
-
-<file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
-// src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C56 (Add partial text preview)
-import * as React from 'react';
-import { formatLargeNumber } from '../../../../common/utils/formatting';
-import { TabState } from '../view';
-
-export interface GenerationProgress {
-    responseId: number;
-    currentTokens: number;
-    totalTokens: number;
-}
-
-interface GenerationProgressDisplayProps {
-    progressData: GenerationProgress[];
-    tps: number;
-    tabs: { [key: string]: TabState };
-}
-
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
-
-    return (
-        <div className="generation-progress-display">
-            <div className="progress-header">
-                <span>Generating Responses...</span>
-                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
-            </div>
-            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
-            
-            {progressData.map(p => (
-                <div key={p.responseId} className="progress-bar-container">
-                    <div className='progress-bar-row'>
-                        <span>Resp {p.responseId}:</span>
-                        <progress value={p.currentTokens} max={p.totalTokens}></progress>
-                        <span>{p.totalTokens > 0 ? ((p.currentTokens / p.totalTokens) * 100).toFixed(0) : 0}%</span>
-                    </div>
-                    <span className="token-count-text">
-                        ({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
-                    </span>
-                    <div className="partial-text-preview">
-                        <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-export default GenerationProgressDisplay;
 </file_artifact>
 
 

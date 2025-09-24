@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C56 (Implement correct multi-response SSE stream parsing)
+// Updated on: C57 (Implement correct multi-response SSE stream parsing)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -30,7 +30,6 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
-                    // response_format: { "type": "json_object" } // Cannot be used with streaming
                 };
                 break;
             case 'url':
@@ -105,23 +104,31 @@ export class LlmService {
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
                         const dataStr = line.substring(6);
-                        if (dataStr === '[DONE]') continue;
+                        if (dataStr.trim() === '[DONE]') {
+                            // This is tricky. A single [DONE] might be sent. We rely on finish_reason.
+                            continue;
+                        }
                         
                         try {
                             const data = JSON.parse(dataStr);
-                            const choice = data.choices;
+                            const choice = data.choices; // vLLM sends one choice object per SSE message
                             if (choice) {
                                 const responseIndex = choice.index;
+                                
+                                if (responseIndex === undefined || responseIndex >= count) {
+                                    Services.loggerService.warn(`Received chunk with invalid index: ${responseIndex}`);
+                                    continue;
+                                }
+
                                 if (choice.finish_reason !== null) {
                                     if (!finishedResponses[responseIndex]) {
+                                        Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
                                         finishedResponses[responseIndex] = true;
                                         totalFinished++;
                                     }
                                 } else if (choice.delta && choice.delta.content) {
                                     const contentChunk = choice.delta.content;
                                     responseContents[responseIndex] += contentChunk;
-                                    
-                                    // Simple token approximation
                                     tokensSinceLastUpdate++;
                                     progressData[responseIndex].currentTokens++;
                                 }
@@ -137,8 +144,11 @@ export class LlmService {
             stream.on('end', async () => {
                 Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
                 
-                // Final update
-                sendProgressUpdate();
+                sendProgressUpdate(); // Final update
+
+                if (totalFinished < count) {
+                    Services.loggerService.warn(`Stream ended but only ${totalFinished}/${count} responses were marked as finished.`);
+                }
 
                 const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responseContents, cycleData.tabCount || 4, cycleData.cycleContext);
                 serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
@@ -151,12 +161,22 @@ export class LlmService {
 
     private throttle(func: (...args: any[]) => void, limit: number) {
         let inThrottle: boolean;
+        let lastFunc: NodeJS.Timeout;
+        let lastRan: number;
         return function(this: any, ...args: any[]) {
             const context = this;
             if (!inThrottle) {
                 func.apply(context, args);
+                lastRan = Date.now();
                 inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
+            } else {
+                clearTimeout(lastFunc);
+                lastFunc = setTimeout(function() {
+                    if ((Date.now() - lastRan) >= limit) {
+                        func.apply(context, args);
+                        lastRan = Date.now();
+                    }
+                }, limit - (Date.now() - lastRan));
             }
         };
     }
