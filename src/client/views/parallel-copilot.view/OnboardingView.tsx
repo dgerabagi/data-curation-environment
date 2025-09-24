@@ -1,4 +1,5 @@
-// src/client/views/parallel-copilot.view/OnboardingView.tsx/// Updated on: C52 (Ensure onStartGeneration is called correctly)
+// src/client/views/parallel-copilot.view/OnboardingView.tsx
+// Updated on: C52 (Ensure onStartGeneration is called correctly)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -13,7 +14,7 @@ interface OnboardingViewProps {
     workflowStep: string | null;
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
-    onStartGeneration: () => void;
+    onStartGeneration: (projectScope: string, responseCount: number) => void;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -39,8 +40,8 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     const handleGenerate = () => {
         if (projectScope.trim()) {
             if (connectionMode === 'demo') {
-                logger.log(`Sending request to generate initial artifacts AND ${responseCount} responses.`);
-                onStartGeneration(); // C52 Fix: This is the critical call to the parent
+                logger.log(`OnboardingView: Generate button clicked. Calling onStartGeneration prop with ${responseCount} responses.`);
+                onStartGeneration(projectScope, responseCount);
             } else {
                 setIsGeneratingLocal(true);
                 logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
@@ -59,7 +60,6 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     };
 
     const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
-    const isGenerating = connectionMode === 'demo' ? false : isGeneratingLocal; // Parent handles 'isGenerating' for demo mode
 
     return (
         <div className="onboarding-container">
@@ -80,7 +80,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                     value={projectScope}
                     onChange={(e) => onScopeChange(e.target.value)}
-                    disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
+                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack)}
                 />
             </div>
             {isNavigatingBack ? (
@@ -104,9 +104,9 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     <button 
                         className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
                         onClick={handleGenerate} 
-                        disabled={!projectScope.trim() || isGenerating}
+                        disabled={!projectScope.trim() || isGeneratingLocal}
                     >
-                        <VscRocket /> {isGenerating ? 'Generating...' : buttonText}
+                        <VscRocket /> {isGeneratingLocal ? 'Generating...' : buttonText}
                     </button>
                 </div>
             ) : (

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 52 - still no response progress UI appearing
+Current Cycle 53 - i see response ui!
+Cycle 52 - still no response progress UI appearing
 Cycle 51 - continue implementation of harmony/vllm/gpt-oss
 Cycle 50 - continue refinement of harmony/gpt-oss
 Cycle 49 - continue refinement of `Demo Mode` process logic
@@ -783,117 +784,119 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 53>
+<Cycle Context>
+nice, okay i see the responses. now that i see them i can speak to them easier.
+
+currently, once the user clicks generate from onboarding, it switches from onboarding_screen -> response_ui. instead, can we simply cut the onboarding text field in half and then place in the response ui? its less disjointed that way, then, once the responses complete, we can switch to the main pcpp pane with the cycles/responses.
+
+next, the resposne ui was not accurately representing the generation. we can consider the 100% complete to be that which whatever is the max set as. you see what i mean? so i think right now we have it set to 8,192. if we make this a variable, which we should because itll change depending on the model in use, then we can just get our percent progress fraction that way. we can show total tokens for each response and total tokens. i want metrics! also how will we make vllm stream this info to the extension?
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [6:33:11 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [6:33:11 AM] Starry Night syntax highlighter initialized.
+[INFO] [6:33:11 AM] Services initializing...
+[INFO] [6:33:11 AM] Services initialized successfully.
+[INFO] [6:33:11 AM] Registering 7 commands.
+[INFO] [6:33:11 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [6:33:11 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [6:33:11 AM] Context Chooser view message handler initialized.
+[INFO] [6:33:13 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:33:14 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [6:33:14 AM] [SelectionService] No last selection found in state.
+[INFO] [6:33:14 AM] Persisted current selection of 0 items.
+[INFO] [6:33:21 AM] Generating Cycle 0 prompt.md file...
+[INFO] [6:33:21 AM] Onboarding complete. Requesting 4 initial responses from LLM.
+[INFO] [6:33:21 AM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
+[INFO] [6:33:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [6:33:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [6:33:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [6:33:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [6:33:22 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense3/src","c:/Projects/TowerDefense3/src/Artifacts","c:/Projects/TowerDefense3/src/Artifacts/DCE_README.md"]
+[INFO] [6:33:22 AM] [SelectionService] No last selection found in state.
+[INFO] [6:33:22 AM] Persisted current selection of 3 items.
+[INFO] [6:33:22 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [6:33:22 AM] Persisted current selection of 3 items.
+[INFO] [6:33:23 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [6:38:03 AM] Received 4 responses from LLM.
+[INFO] [6:38:03 AM] Created new cycle 1 with 4 responses.
+[INFO] [6:38:03 AM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [6:38:03 AM] [SelectionService] Returning 3 valid paths.
+[INFO] [6:38:03 AM] [CostCalc] Found 3 selected files.
+[INFO] [6:38:03 AM] [CostCalc] In-memory flattened content generated (797 tokens).
+[INFO] [6:38:03 AM] [CostCalc] Calculating breakdown:
+[INFO] [6:38:03 AM]   - M1 Artifact Schema: 48 tokens
+[INFO] [6:38:03 AM]   - M2 Cycle Overview: 30 tokens
+[INFO] [6:38:03 AM]   - M3 Interaction Schema: 842 tokens
+[INFO] [6:38:03 AM]   - M4 Project Scope: 24 tokens
+[INFO] [6:38:03 AM]   - M5 Artifact List: 30 tokens
+[INFO] [6:38:03 AM]   - M6 Cycles: 10945 tokens
+[INFO] [6:38:03 AM]   - M7 Flattened Repo: 808 tokens
+[INFO] [6:38:03 AM] [CostCalc] Total Tokens: 12727, Estimated Cost: $0.015908750000000003
+[INFO] [6:38:03 AM] [CostCalc] Sending estimation to client.
+============================================================
+(APIServer pid=439) INFO 09-24 06:33:30 [loggers.py:123] Engine 000: Avg prompt throughput: 4748.7 tokens/s, Avg generation throughput: 55.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.0%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:33:40 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 129.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.5%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:33:50 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 97.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:34:00 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 120.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.3%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:34:10 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 120.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.7%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:34:20 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 117.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.2%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:34:30 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 118.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.6%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:34:40 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 114.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.1%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:34:50 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 116.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.5%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:35:00 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 114.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.0%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:35:10 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 115.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.4%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:35:20 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 112.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:35:30 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 100.5 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:35:40 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 88.2 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.2%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:35:50 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 87.0 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.5%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:36:00 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 88.5 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 9.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:36:10 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 85.8 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 10.1%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:36:20 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 87.0 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 10.5%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:36:30 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 87.6 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 10.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:36:40 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 86.4 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 11.1%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:36:50 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 86.4 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 11.5%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:37:00 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 87.0 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 11.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:37:10 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 82.5 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 12.1%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:37:20 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 83.7 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 12.4%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:37:30 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 83.7 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 12.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:37:40 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 82.2 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 13.1%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:37:50 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 75.7 tokens/s, Running: 2 reqs, Waiting: 0 reqs, GPU KV cache usage: 10.5%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:38:00 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 77.0 tokens/s, Running: 2 reqs, Waiting: 0 reqs, GPU KV cache usage: 10.8%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO:     127.0.0.1:60198 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=439) INFO 09-24 06:38:10 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.8 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 89.6%
+(APIServer pid=439) INFO 09-24 06:38:20 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 89.6%
+
+</Ephemeral Context>
+<Previous Cycle 52 Summary of Actions>
+I have analyzed your requests. The three core issues are the non-functional response progress UI, the outdated Harmony interaction schema (`A52.3`), and the parser's continued reliance on XML tags instead of the planned JSON format. My course of action is to address all three points, prioritizing the transition to the more robust JSON-based workflow.
+
+First, I will update the documentation to align our "source of truth" with the new JSON schema. Next, I will implement the necessary backend and frontend code to request, receive, and parse these structured JSON responses. Finally, I will ensure the response progress UI is correctly triggered during the initial response generation, providing the user with the expected visual feedback.
+
+1.  **Documentation (Update `A52.3`):** I will rewrite the `A52.3 DCE - Harmony Interaction Schema Source.md` artifact. The old instructions referencing XML tags will be removed. The new content will instruct the model to generate a valid JSON object, providing the schema from `A98` as a clear example. This aligns our documentation with the new strategy.
+
+2.  **Request JSON from LLM (`llm.service.ts`):** To enable the new workflow, the backend must explicitly ask for a JSON response. I will modify the `generateBatch` method in `src/backend/services/llm.service.ts`. When in "demo" mode, the request body sent to the vLLM proxy will now include the `response_format: { "type": "json_object" }` parameter.
+
+3.  **Implement JSON-First Parsing (`response-parser.ts`):** I will refactor the `parseResponse` function in `src/client/utils/response-parser.ts`.
+    *   It will first attempt to parse the entire raw response string using `JSON.parse()`.
+    *   If successful, it will map the fields from the parsed JSON object to our internal `ParsedResponse` type.
+    *   If `JSON.parse()` fails, it will catch the error and fall back to the existing regex-based logic for parsing XML tags. This ensures backward compatibility with the manual copy/paste workflow.
+
+4.  **Trigger Progress UI (`OnboardingView.tsx`, `view.tsx`):** The user is not seeing the progress UI because the `isGenerating` state is not being correctly set in the parent component.
+    *   I will add a new prop, `onStartGeneration`, to the `OnboardingView` component.
+    *   In `OnboardingView.tsx`, the `handleGenerate` function (for "Demo Mode") will now call this new prop.
+    *   In the main `view.tsx`, I will pass a function to this prop that sets a new `isGenerating` state to `true`.
+    *   The main `render` function in `view.tsx` will be updated to conditionally display the `.generation-progress-display` UI (scaffolded in Cycle 50) whenever `isGenerating` is `true`.
+    *   The existing `SendBatchGenerationComplete` message handler will be updated to set `isGenerating` back to `false`, hiding the progress UI once the operation is complete. This provides the expected visual feedback loop.
+</Previous Cycle 52 Summary of Actions>
+</Cycle 53>
+
 <Cycle 52>
 <Cycle Context>
 okay again still when i go to click Generate Initial Responses, i still do not switch to to the response progress UI. here are what the console logs look like while im wiating for the responses to come back (ephemeral). have you swapped the vllm to be streaming? that would be a pre-req, right? i see you were looking to make some isGenerating trigger, either theres evidence of it in the logs, or not, make sure the logs are helping figure out why the UI progress bar is not appearing when generating.
+
+additionally, we are not yet reaching parsing parity, or like 99% parsing success. currently the parsing is almost always failing in some form or manner. i think that if you get good logging we can iteratively fine-tune until we get good results. im going to see how the logs are now, so far the logs right now are looking very clear and orderly, please keep that orderliness while also enhancing the logs to reveal if/when a parsing fails. try to create a case study in the logs about it, by capturing the data near where the parsing failure happened. do whatever you can to help reveal the cause of the failure so we can keep fine tuning our solution to increase our ability to accurately display these responses from this new model to the user.
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [5:33:21 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [5:33:21 PM] Services initializing...
-[INFO] [5:33:21 PM] Services initialized successfully.
-[INFO] [5:33:21 PM] Registering 7 commands.
-[INFO] [5:33:21 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [5:33:21 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [5:33:21 PM] Starry Night syntax highlighter initialized.
-[INFO] [5:33:21 PM] Context Chooser view message handler initialized.
-[INFO] [5:33:21 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [5:33:21 PM] [SelectionService] No last selection found in state.
-[INFO] [5:33:21 PM] Persisted current selection of 0 items.
-[INFO] [5:33:22 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:33:26 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [5:33:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:33:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [5:33:29 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:33:35 PM] Executing dce.openSettingsPanel command.
-[INFO] [5:33:35 PM] Settings view message handler initialized.
-[INFO] [5:33:36 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [5:33:36 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [5:33:37 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:37 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:38 PM] Settings saved: Mode=demo, URL=undefined
-[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:39 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:33:47 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:33:49 PM] Generating Cycle 0 prompt.md file...
-[INFO] [5:33:49 PM] Onboarding complete. Requesting 4 initial responses from LLM.
-[INFO] [5:33:49 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [5:33:49 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense2/src","c:/Projects/TowerDefense2/src/Artifacts","c:/Projects/TowerDefense2/src/Artifacts/DCE_README.md"]
-[INFO] [5:33:49 PM] [SelectionService] No last selection found in state.
-[INFO] [5:33:49 PM] Persisted current selection of 3 items.
-[INFO] [5:33:49 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [5:33:49 PM] Persisted current selection of 3 items.
-[INFO] [5:33:51 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:37:21 PM] Received 4 responses from LLM.
-[INFO] [5:37:21 PM] Created new cycle 1 with 4 responses.
-[INFO] [5:37:21 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [5:37:21 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [5:37:21 PM] [CostCalc] Found 3 selected files.
-[INFO] [5:37:21 PM] [CostCalc] In-memory flattened content generated (797 tokens).
-[INFO] [5:37:21 PM] [Comparison] Received request for: ...
-[INFO] [5:37:21 PM] [Comparison] Received request for: src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md
-[INFO] [5:37:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: plaintext, id: ...::. That includes double quotes. We need to escape them as \". Also newline after >? We can keep newline as \n.
-
-Let's build the content string for A14.
-
-I'll produce the string with \n and escaped double quotes.
-
-Need to be careful.
-
-Also we might need to escape backticks? Not necessary.
-
-Let's start writing JSON.
-
-Will produce something like:
-
-{
-  "summary": "...",
-  "course_of_action": [...],
-  "curator_activity": "...",
-  "files": [
-    {"path":"src/Artifacts/A1. TowerDefense - Master Artifact List.md","content":"..."},
-    ...
-  ]
-}
-
-Now we need to create content strings with \n and escape double quotes.
-
-Let's write content for A1.
-
-I'll produce it as:
-
-"# Artifact T1: Master Artifact List\n# Date Created: C140\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.\n\n## 2. Formatting Rules for Parsing\n\n*   Lines beginning with `#` are comments and are ignored.\n*   `##` denotes a major category header and is ignored.\n*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.\n*   Lines beginning with `- **Description:**` provide context for the project.\n*   Lines beginning with `- **Tags:**` provide keywords for Inference.\n\n## 3. Example Structure\n\n## I. Project Planning & Design\n\n### A1. TowerDefense - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plan.\n- **Tags:** project vision, goals, scope, planning\n\n### A2. TowerDefense - Phase 1 - Technical Scaffolding Plan\n- **Description:** Defines the initial technical architecture and file structure for the project.\n- **Tags:** technical plan, architecture, scaffolding\n\n### A3. TowerDefense - Development and Testing Guide\n- **Description:** Standard procedures for running, debugging, and testing the application locally.\n- **Tags:** development workflow, testing, debugging\n\n### A4. TowerDefense - GitHub Repository Setup Guide\n- **Description:** Steps to initialize Git, link to GitHub, and sample workflow.\n- **Tags:** git, github, version control, workflow"
-
-We need to escape double quotes inside string. In this content, there are double quotes inside the phrase "Source of Truth". We need to escape them as \". Also we have double quotes inside JSON string for the tags? Actually the tags line contains no double quotes. The only double quotes are inside the text. We'll escape them.
-
-Also we have the backticks around `#`, etc. Those are fine.
-
-Now content for A2, A4, A7 similarly.
-
-Also for A14, we need to include <file path="src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"> ...
-[WARN] [5:37:21 PM] [WARN] No Starry Night scope found for language: plaintext
-[INFO] [5:37:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md::...
-[INFO] [5:37:21 PM] [File Existence] Received request to check paths: ["...","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
-[INFO] [5:37:21 PM] [File Existence] Received request to check paths: ["...","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
-[ERROR] [5:37:21 PM] [Comparison] Failed for ...: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\...'
-[ERROR] [5:37:21 PM] [Comparison] Failed for src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\A14. TowerDefense - GitHub Repository Setup Guide.md'
-[INFO] [5:37:21 PM] [CostCalc] Calculating breakdown:
-[INFO] [5:37:21 PM]   - M1 Artifact Schema: 48 tokens
-[INFO] [5:37:21 PM]   - M2 Cycle Overview: 30 tokens
-[INFO] [5:37:21 PM]   - M3 Interaction Schema: 768 tokens
-[INFO] [5:37:21 PM]   - M4 Project Scope: 24 tokens
-[INFO] [5:37:21 PM]   - M5 Artifact List: 30 tokens
-[INFO] [5:37:21 PM]   - M6 Cycles: 11128 tokens
-[INFO] [5:37:21 PM]   - M7 Flattened Repo: 808 tokens
-[INFO] [5:37:21 PM] [CostCalc] Total Tokens: 12836, Estimated Cost: $0.016045
-[INFO] [5:37:21 PM] [CostCalc] Sending estimation to client.
-
-</Ephemeral Context>
 <Previous Cycle 51 Summary of Actions>
 This is an excellent set of requests that pushes the project toward a more robust, user-friendly, and intelligent workflow. My analysis confirms that your ideas—especially leveraging structured JSON output from Harmony/vLLM and providing better UI feedback—are not only feasible but represent a significant architectural improvement.
 
@@ -3601,16 +3604,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T11:23:06.025Z
+  Date Generated: 2025-09-24T11:45:13.769Z
   ---
   Total Files: 187
-  Approx. Tokens: 467057
+  Approx. Tokens: 467182
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\Artifacts\A11.1 DCE - New Regression Case Studies.md (11673 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (9490 tokens)
+2. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md (11673 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (9574 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (6123 tokens)
 6. src\backend\services\prompt.service.ts (5146 tokens)
@@ -3630,183 +3633,183 @@ This file-centric approach helps in planning and prioritizing work, especially i
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
-12. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 393 - Chars: 46690 - Tokens: 11673
-13. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
-14. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
-15. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
-16. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
-17. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
-18. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
-19. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
-20. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
-21. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
-22. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
-23. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
-24. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
-25. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
-26. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 48 - Chars: 5004 - Tokens: 1251
-27. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
-28. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 55 - Chars: 5701 - Tokens: 1426
-29. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
-30. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
-31. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
-32. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
-33. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
-34. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
-35. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
-36. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
-37. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
-38. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
-39. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
-40. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
-41. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
-42. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
-43. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
-44. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
-45. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
-46. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
-47. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
-48. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
-49. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
-50. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
-51. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
-52. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
-53. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 42 - Chars: 4285 - Tokens: 1072
-54. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
-55. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
-56. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
-57. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 123 - Chars: 5850 - Tokens: 1463
-58. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
-59. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
-60. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-61. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
-62. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
-63. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
-64. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
-65. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
-66. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-67. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-68. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-69. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-70. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
-71. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-72. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
-73. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-74. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-75. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-76. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-77. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
-78. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
-79. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-80. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-81. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-82. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-83. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-84. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
-85. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-86. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-87. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-88. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
-89. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
-90. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-91. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
-92. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-93. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
-94. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-95. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-96. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-97. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-98. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 5021 - Tokens: 1256
-99. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-100. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-101. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-102. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-103. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
-104. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
-105. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
-106. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
-107. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
-108. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 58 - Chars: 2375 - Tokens: 594
-109. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
-110. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
-111. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
-112. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
-113. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
-114. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 37 - Chars: 2999 - Tokens: 750
-115. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
-116. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 105 - Chars: 4665 - Tokens: 1167
-117. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
-118. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 92 - Chars: 3806 - Tokens: 952
-119. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-120. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-121. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-122. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-123. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-124. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-125. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
-126. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
-127. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
-128. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-129. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-130. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-131. src\backend\services\llm.service.ts - Lines: 75 - Chars: 3046 - Tokens: 762
-132. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
-134. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-135. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-136. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
-137. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-138. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-139. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
-140. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-141. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-142. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-143. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-147. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-148. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-149. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-150. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-151. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-152. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-153. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-154. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-155. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-156. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-157. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-158. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-159. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-160. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
-161. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 124 - Chars: 6427 - Tokens: 1607
-162. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 24492 - Tokens: 6123
-163. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-164. src\client\views\parallel-copilot.view\view.tsx - Lines: 372 - Chars: 37960 - Tokens: 9490
-165. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-166. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-167. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-168. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
-169. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-170. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5968 - Tokens: 1492
-171. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
-172. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-173. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-174. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-175. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-176. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-177. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-178. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-179. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-180. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-181. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-182. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-183. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3086 - Tokens: 772
-184. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-185. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-186. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
-187. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
+11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
+12. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
+13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
+14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
+15. src\Artifacts\A16. DCE - Phase 1 - UI & UX Refinements Plan.md - Lines: 24 - Chars: 4349 - Tokens: 1088
+16. src\Artifacts\A17. DCE - Phase 1 - Advanced Tree View Features.md - Lines: 47 - Chars: 3888 - Tokens: 972
+17. src\Artifacts\A18. DCE - Phase 1 - Active File Sync Feature Plan.md - Lines: 46 - Chars: 4548 - Tokens: 1137
+18. src\Artifacts\A19. DCE - Phase 1 - Double-Click & Quick-Remove Feature Plan.md - Lines: 42 - Chars: 4603 - Tokens: 1151
+19. src\Artifacts\A20. DCE - Phase 1 - Advanced UX & Automation Plan.md - Lines: 47 - Chars: 7268 - Tokens: 1817
+20. src\Artifacts\A21. DCE - Phase 1 - Feature Drift Analysis vs. VS Code Explorer.md - Lines: 48 - Chars: 7385 - Tokens: 1847
+21. src\Artifacts\A22. DCE - Phase 1 - Search & Filter Feature Plan.md - Lines: 58 - Chars: 3663 - Tokens: 916
+22. src\Artifacts\A23. DCE - Phase 1 - Advanced Interactions (Keyboard & Drag-Drop) Plan.md - Lines: 37 - Chars: 5504 - Tokens: 1376
+23. src\Artifacts\A24. DCE - Selection Paradigm Terminology.md - Lines: 57 - Chars: 3330 - Tokens: 833
+24. src\Artifacts\A25. DCE - Phase 1 - Git & Problems Integration Plan.md - Lines: 48 - Chars: 5004 - Tokens: 1251
+25. src\Artifacts\A26. DCE - Phase 1 - File System Traversal & Caching Strategy.md - Lines: 42 - Chars: 3593 - Tokens: 899
+26. src\Artifacts\A27. DCE - Phase 1 - Undo-Redo Feature Plan.md - Lines: 55 - Chars: 5701 - Tokens: 1426
+27. src\Artifacts\A28. DCE - Packaging and Distribution Guide.md - Lines: 95 - Chars: 4366 - Tokens: 1092
+28. src\Artifacts\A29. DCE - Phase 1 - Binary and Image File Handling Strategy.md - Lines: 81 - Chars: 4217 - Tokens: 1055
+29. src\Artifacts\A30. DCE - Phase 1 - PDF Handling and Virtualization Strategy.md - Lines: 44 - Chars: 4431 - Tokens: 1108
+30. src\Artifacts\A31. DCE - Phase 2 - Multimodal Content Extraction (PDF Images).md - Lines: 44 - Chars: 4035 - Tokens: 1009
+31. src\Artifacts\A32. DCE - Phase 1 - Excel and CSV Handling Strategy.md - Lines: 44 - Chars: 4295 - Tokens: 1074
+32. src\Artifacts\A33. DCE - Phase 1 - Copy-Paste Feature Plan.md - Lines: 42 - Chars: 4456 - Tokens: 1114
+33. src\Artifacts\A34. DCE - Phase 2 - Parallel Co-Pilot Panel - Vision & Requirements.md - Lines: 45 - Chars: 6849 - Tokens: 1713
+34. src\Artifacts\A35. DCE - Phase 2 - UI Mockups and Flow.md - Lines: 54 - Chars: 3584 - Tokens: 896
+35. src\Artifacts\A36. DCE - Phase 2 - Technical Implementation Plan.md - Lines: 56 - Chars: 3621 - Tokens: 906
+36. src\Artifacts\A37. DCE - Phase 2 - Cycle Navigator & Knowledge Graph - Vision.md - Lines: 28 - Chars: 3242 - Tokens: 811
+37. src\Artifacts\A38. DCE - Phase 2 - Cycle Navigator - UI Mockup.md - Lines: 69 - Chars: 4621 - Tokens: 1156
+38. src\Artifacts\A39. DCE - Phase 2 - Cycle Navigator - Technical Plan.md - Lines: 84 - Chars: 4595 - Tokens: 1149
+39. src\Artifacts\A40. DCE - Phase 2 - Parallel Co-Pilot - Target File Structure.md - Lines: 66 - Chars: 3659 - Tokens: 915
+40. src\Artifacts\A40.1. DCE - Phase 2 - Competitive Analysis & Feature Ideas.md - Lines: 43 - Chars: 4784 - Tokens: 1196
+41. src\Artifacts\A41. DCE - Phase 2 - API Key Management - Feature Plan.md - Lines: 47 - Chars: 4542 - Tokens: 1136
+42. src\Artifacts\A41.1. DCE - Phase 2 - Advanced Features & Integrations Plan.md - Lines: 44 - Chars: 3946 - Tokens: 987
+43. src\Artifacts\A41.2. DCE - Phase 2 - Feature Ideation & Competitive Analysis.md - Lines: 40 - Chars: 4566 - Tokens: 1142
+44. src\Artifacts\A42. DCE - Phase 2 - Initial Scaffolding Deployment Script.md - Lines: 246 - Chars: 8264 - Tokens: 2066
+45. src\Artifacts\A43. DCE - Phase 2 - Implementation Roadmap.md - Lines: 69 - Chars: 4694 - Tokens: 1174
+46. src\Artifacts\A44. DCE - Phase 1 - Word Document Handling Strategy.md - Lines: 45 - Chars: 4626 - Tokens: 1157
+47. src\Artifacts\A45. DCE - Phase 2 - Pop-out Co-Pilot Window - Feature Plan.md - Lines: 49 - Chars: 4156 - Tokens: 1039
+48. src\Artifacts\A46. DCE - Phase 2 - Paste and Parse Response - Feature Plan.md - Lines: 38 - Chars: 3587 - Tokens: 897
+49. src\Artifacts\A47. DCE - Phase 2 - Prompt Amalgamation Feature Plan.md - Lines: 42 - Chars: 3499 - Tokens: 875
+50. src\Artifacts\A48. DCE - Phase 2 - Advanced Syntax Highlighting Plan.md - Lines: 49 - Chars: 4044 - Tokens: 1011
+51. src\Artifacts\A49. DCE - Phase 2 - File Association & Diffing Plan.md - Lines: 42 - Chars: 4285 - Tokens: 1072
+52. src\Artifacts\A50. DCE - Phase 2 - UI Component Plan (Resizable Panes & Inner Editors).md - Lines: 51 - Chars: 5128 - Tokens: 1282
+53. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
+54. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
+55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 123 - Chars: 5850 - Tokens: 1463
+56. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
+57. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
+58. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
+59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
+61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
+62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
+63. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
+64. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
+65. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
+66. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
+67. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+68. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
+69. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+70. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
+71. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+72. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+73. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+74. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+75. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
+76. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
+77. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+78. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+79. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+80. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+81. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+82. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
+83. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+84. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+85. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+86. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+87. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
+88. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+89. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
+90. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+91. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
+92. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+93. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+94. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
+95. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 5021 - Tokens: 1256
+97. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+98. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+99. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
+100. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+101. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
+102. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
+103. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
+104. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
+105. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
+106. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 58 - Chars: 2375 - Tokens: 594
+107. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
+108. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
+109. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
+110. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
+111. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
+112. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 37 - Chars: 2999 - Tokens: 750
+113. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
+114. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 105 - Chars: 4665 - Tokens: 1167
+115. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
+116. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 92 - Chars: 3806 - Tokens: 952
+117. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
+118. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+119. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+120. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+121. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+122. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+123. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+124. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+125. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+126. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+127. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+128. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
+129. src\backend\services\llm.service.ts - Lines: 75 - Chars: 3046 - Tokens: 762
+130. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+131. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
+132. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+133. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+134. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
+135. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+136. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+137. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
+138. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+139. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+140. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+141. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+142. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+143. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+144. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+145. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+146. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+147. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+148. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+149. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+150. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+151. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+152. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+153. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+154. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+155. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+156. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
+159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 124 - Chars: 6360 - Tokens: 1590
+160. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 24492 - Tokens: 6123
+161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+162. src\client\views\parallel-copilot.view\view.tsx - Lines: 378 - Chars: 38295 - Tokens: 9574
+163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+164. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+165. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+166. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
+167. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+168. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5968 - Tokens: 1492
+169. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
+170. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+171. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+172. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+173. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+174. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+175. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+176. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+177. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+178. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+179. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+180. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+181. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 71 - Chars: 3317 - Tokens: 830
+182. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+183. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+184. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+185. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
+186. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md - Lines: 393 - Chars: 46690 - Tokens: 11673
+187. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1090 - Tokens: 273
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -4852,425 +4855,6 @@ To enhance the data curation process, it is critical for the user to have immedi
     *   The `useMemo` hook that calculates the summary will be updated to correctly sum the total number of files and total tokens from the selected items. It will continue to ignore image sizes for the token total to avoid mixing units.
     *   The rendered output will use the new formatting utilities and icons.
     *   **(C40)** The label and title attribute will be updated for clarity.
-</file_artifact>
-
-<file path="src/Artifacts/A11. DCE - Regression Case Studies.md">
-# Artifact A11: DCE - Regression Case Studies
-# Date Created: C16
-# Author: AI Model & Curator
-# Updated on: C44 (Add vLLM Truncation case)
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-**This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
-
-## 2. Case Studies
-
----
-
-### Case Study 039: vLLM Responses Truncated at Stop Token
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C44
--   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
-</file_artifact>
-
-<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies.md">
-# Artifact A11.1: DCE - New Regression Case Studies
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C187 (Clarify role as the historical archive)
-
-- **Key/Value for A0:**
-- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-Add new Case Studies to A11, not to this artifact. Thats the point of splitting in the first place.
-
-**This artifact is the historical archive for older case studies.** New, active issues should be logged in `A11. DCE - Regression Case Studies.md`. This separation keeps the primary document focused and manageable in size.
-
-## 2. Case Studies
-
----
-
-### Case Study 001: PCPP Context Textarea Instability
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
--   **Cycles Observed:** C1, C2, C3, C167, C174, C1, C5
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered, especially when scrolling or word-wrapping is involved. The cursor's visual position desynchronizes from the actual text insertion point. The cursor may appear on the correct wrapped line, but typed characters will continue to render on a previous line, off-screen. This makes editing content impossible.
--   **Root Cause Analysis (RCA):** This bug has recurred with multiple implementations (`NumberedTextarea`, `react-simple-code-editor`). The root cause is the architectural choice of using an overlay approach to render line numbers or syntax highlighting. This involves rendering a `div` or `<pre>` block with the styled content behind a transparent `<textarea>`. The instability is caused by a synchronization failure:
-    1.  **Performance:** Re-calculating syntax highlighting and re-rendering the DOM on every single keystroke is computationally expensive for large blocks of text, causing severe input lag.
-    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`, `word-spacing`, etc.) and the browser's rendering engine between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows and wraps. This leads to the cursor and text selection bugs.
--   **Codified Solution & Best Practice:**
-    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or real-time syntax highlighting.
-    2.  **Simplify:** The complex overlay-based editor component in `ContextInputs.tsx` must be replaced with a standard, native `<textarea>` element.
-    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of a feature, it fixes a critical usability bug. A more robust implementation of a custom code editor (e.g., using Monaco or CodeMirror) can be planned for a future cycle, but the default should always be a stable, native component.
-
----
-
-### Case Study 002: FTV Flashing on PCPP Auto-Save
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C1, C4, C1
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
--   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` in `file-tree.service.ts` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. The initial fix was to add `.vscode` to a general exclusion pattern, but this was not specific enough.
--   **Codified Solution & Best Practice:**
-    1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
-    2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
-    
----
-
-### Case Study 023: FTV Flashing on PCPP Auto-Save
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`, `src/client/views/context-chooser.view/view.tsx`
--   **Cycles Observed:** C1, C4, C1, C179, C182, C183, C184
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads, especially in the packaged version of the extension. Logs show a storm of `git state change` events.
--   **Root Cause Analysis (RCA):** The definitive root cause is the `repo.state.onDidChange` event listener in `file-tree.service.ts`. This listener is extremely sensitive and fires for almost any change in the repository, including internal state changes and writes to files listed in `.gitignore` (like `.vscode/dce_history.json`). The original implementation treated this event as a structural change, triggering a full, expensive rebuild of the entire file tree. This created a refresh storm that made the UI unusable.
--   **Codified Solution & Best Practice:** The architectural solution is to **decouple structural refreshes from decoration refreshes**.
-    1.  **Structural Changes:** The `FileSystemWatcher` is the source of truth for structural changes (files created, deleted, renamed). It should be the only trigger for a full tree rebuild (`triggerFullRefresh`).
-    2.  **Decoration Changes:** The `repo.state.onDidChange` event should only trigger a lightweight update. This involves creating a new `triggerDecorationsUpdate` method that solely re-calculates the Git status and problem maps and sends them to the frontend via a dedicated IPC channel.
-    3.  **Frontend State:** The frontend no longer receives Git status as part of the `FileNode` tree structure. Instead, it maintains a separate state map for Git statuses. When it receives a decoration update, it updates this map, causing a cheap re-render that applies the new styles without rebuilding the entire tree. This approach eliminates the flashing by making the most frequent update operation lightweight and non-disruptive.
-
----
-
-### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
--   **Cycles Observed:** C8, C9, C10, C11, C12
--   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
--   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. After an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was still failing. The most likely cause is a **stale closure**. The `useEffect` hook that registers the message listener captures the `workflowStep` state at the time it's created. When the message arrives later, the handler's logic checks against this old, stale state (`'awaitingResponseSelect'`), not the current state (`'awaitingBaseline'`), causing the condition to fail and the state transition to be missed.
--   **Codified Solution & Best Practice:**
-    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
-    2.  **Frontend (`view.tsx`):** The message listener for `NotifyGitOperationResult` must be made resilient to stale closures. The state update logic should use the **functional update form** of the state setter (e.g., `setWorkflowStep(prevStep => { ... })`). This guarantees the logic inside the setter is executed with the most recent state, allowing the condition `if (prevStep === 'awaitingBaseline')` to pass correctly and reliably transition the workflow to the next step (`'awaitingFileSelect'`).
-    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> `Generate prompt.md` -> `+`) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state as defined in `A69`.
-
----
-
-### Case Study 022: Missing `git init` Error Popup
-
--   **Artifacts Affected:** `src/backend/services/git.service.ts`
--   **Cycles Observed:** C9
--   **Symptom:** When a user opens a new project that is not a Git repository and clicks the "Baseline" button, the operation fails silently. An error is logged to the debug channel, but no UI notification is shown to the user to explain what happened or how to fix it. This is a regression from a previous version that did provide a helpful pop-up.
--   **Root Cause Analysis (RCA):** The `git.service.ts` was refactored in C183 to return a result object (`{ success, message }`) to the frontend instead of directly showing UI notifications. While this is a good pattern for general success/failure communication that the frontend state machine needs to know about, it removed the direct, user-facing error handling for a very common and specific user error (forgetting to run `git init`). The frontend was not updated to take the error message from the returned object and display it in a `showErrorMessage` dialog.
--   **Codified Solution & Best Practice:** For critical, common, and actionable user errors, it is better for the responsible backend service to show the error notification directly.
-    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be modified. A `try...catch` block will be used. Inside the `catch`, it will inspect the error message.
-    2.  If the error contains `fatal: not a git repository`, the service will directly call `vscode.window.showErrorMessage`.
-    3.  This message will be user-friendly ("This is not a Git repository...") and will include an action button ("Open README Guide") that programmatically opens the relevant documentation to guide the user.
-    4.  For all other success or failure cases, the service can continue to use the `NotifyGitOperationResult` IPC channel to communicate with the frontend's state machine.
-
----
-
-### Case Study 020: Animated Highlighting Stuck on Response Tabs
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C6
--   **Symptom:** In the animated workflow, after the user generates the initial `prompt.md` file, the `Resp 1` tab is correctly highlighted. However, after pasting content into `Resp 1`, the highlight does not advance to `Resp 2`. The animation remains stuck on `Resp 1`.
--   **Root Cause Analysis (RCA):** The `useEffect` hook responsible for advancing the workflow state was flawed. Its logic was too complex or had an incorrect dependency array, preventing it from reliably detecting changes to the `tabs` state object. A robust state machine should rely on simple, direct checks of the current state to determine the next step.
--   **Codified Solution & Best Practice:** The solution is to refactor the `useEffect` hook that manages the `workflowStep`. The new logic should be a simple, clean state machine that directly checks the `rawContent` of each tab in sequence. For example, when the `workflowStep` is `'awaitingResponsePaste_1'`, the effect should check if `tabs['1'].rawContent` has content. If it does, it should immediately transition the state to `'awaitingResponsePaste_2'`, and so on. This makes the logic declarative and removes dependencies on complex, intermediate states, making the workflow transitions reliable.
-
----
-
-### Case Study 019: Single Character Input Bug in Text Area
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
--   **Cycles Observed:** C4
--   **Symptom:** When typing into the Cycle Context or Ephemeral Context text areas, the user can only input one character at a time. After each character, the input field loses focus, forcing the user to click it again to type the next character, making it unusable.
--   **Root Cause Analysis (RCA):** This is a classic React focus management bug. The `onChange` event handler updates the state in the parent component (`view.tsx`), which triggers a re-render. If the `NumberedTextarea` component or its props are not correctly memoized, it re-renders unnecessarily. If the underlying `<textarea>` element is re-created during this render (e.g., due to an unstable `key` prop or other rendering logic), it loses focus. The solution requires ensuring the component and its event handlers are stable across renders.
--   **Codified Solution & Best Practice:**
-    1.  **Memoize Component:** The `NumberedTextarea` component must be wrapped in `React.memo` to prevent it from re-rendering if its props have not changed.
-    2.  **Memoize Handlers:** The `onChange` event handlers passed down from the parent (`view.tsx`) must be wrapped in `useCallback` with a correct dependency array. This prevents a new function instance from being created on every parent render, which would otherwise break the memoization of the child component.
-    3.  **Stable Keys:** Ensure any `key` or `id` prop passed to the component is stable and does not change on unrelated state updates.
-
----
-
-### Case Study 018: Stuck on Cycle Creation After Deletion
-
--   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C4
--   **Symptom:** The user creates cycles up to C5. They then delete C5. The UI correctly navigates back to C4. However, the `+` (New Cycle) button is now disabled, and the user is permanently stuck, unable to re-create C5.
--   **Root Cause Analysis (RCA):** The frontend (`view.tsx`) maintained its own `maxCycle` state variable. When a cycle was deleted, the backend `history.service.ts` correctly removed it from the `dce_history.json` file. However, there was no mechanism to inform the frontend that the maximum cycle number had changed. The frontend state still believed `maxCycle` was 5, while `currentCycle` was 4. The condition to enable the `+` button (`currentCycle === maxCycle`) was therefore false, disabling the button permanently.
--   **Codified Solution & Best Practice:** The backend service responsible for the data mutation must return the new, correct state to the client. The `deleteCycle` method in `history.service.ts` must be updated to, after deleting the cycle, re-read the history file, determine the new maximum `cycleId`, and return it. The frontend's event handler must then use this returned value to update its local `maxCycle` state, ensuring the UI is perfectly synchronized with the backend data.
-
----
-
-### Case Study 017: FTV Flashing on Save (DEPRECATED - See 023)
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C1, C4
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
--   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. This created a distracting and unnecessary UI flash.
--   **Codified Solution & Best Practice:** The solution is to make the file watcher more specific about what it ignores. The `.vscode` directory, which is intended for editor-specific metadata and should not be considered part of the user's source code context, must be added to the watcher's exclusion list. This prevents the watcher from reacting to internal state changes of the extension itself.
-
----
-
-### Case Study 016: `NumberedTextarea` Scrolling & Alignment Failure
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/view.scss`
--   **Cycles Observed:** C1, C2, C3, C167, C174
--   **Symptom:** The text areas used for "Cycle Context" and "Ephemeral Context" are functionally unusable. The line numbers in the left gutter do not scroll in sync with the text content. As the user types and the text wraps or scrolls, the cursor position becomes misaligned with the actual text insertion point, and text selection highlighting is inaccurate.
--   **Root Cause Analysis (RCA):** The component attempted to render a line number gutter and a text area side-by-side. This approach is fundamentally flawed because the two elements have independent scrolling mechanisms. The `textarea` scrolls its internal content, while the line number `div` scrolls as part of the page flow. Furthermore, minor differences in padding, font metrics, or line-height between the visible highlighted `div` and the invisible `textarea` caused a "drift" in cursor alignment over multiple lines.
--   **Codified Solution & Best Practice:**
-    1.  **Architectural Fix:** The component must be re-architected to use an overlay approach. A container element should use relative positioning. Inside it, both the `div` that displays the syntax-highlighted text and the transparent `textarea` used for input must be absolutely positioned to fill the container, ensuring they are perfectly on top of each other.
-    2.  **Synchronized Scrolling:** A single `onScroll` event handler on the `textarea` must programmatically update the `scrollTop` property of both the highlighted `div` and the line number gutter `div`. This ensures all three elements scroll in perfect unison.
-    3.  **Pixel-Perfect Styling:** All font properties (`font-family`, `font-size`, `line-height`), padding, and `box-sizing` must be identical between the `textarea` and the highlighted `div` to guarantee that the text lines up perfectly and the cursor position is always accurate.
-
----
-
-### Case Study 015: PCPP State Loss on Window Move
-
--   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
--   **Cycles Observed:** 146
--   **Symptom:** In the Parallel Co-Pilot Panel, the user changes a piece of UI state that is not directly part of the response content (e.g., increases the number of response tabs from 4 to 8). When the user moves the PCPP panel (e.g., from a separate window back into the main VS Code window), the webview re-initializes, and the UI state reverts to its default (e.g., 4 tabs).
--   **Root Cause Analysis (RCA):** The state in question (`tabCount`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object. When the panel was moved, the webview was destroyed and recreated, causing it to load the latest cycle data from the backend. Since `tabCount` was not part of that persisted data, it was re-initialized to its default value, losing the user's change.
--   **Codified Solution & Best Practice:**
-    1.  **Extend Data Model:** Add a new optional property, `tabCount?: number`, to the `PcppCycle` interface in `pcpp.types.ts`.
-    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include the `tabCount` in the data payload sent to the backend for persistence.
-    3.  **Restore State:** The logic in `view.tsx` that loads cycle data must be updated to read the `tabCount` property from the incoming cycle data and use it to initialize the `tabCount` state.
-    4.  **Best Practice:** Any UI configuration that a user can change and would reasonably expect to persist (like the number of visible tabs, pane widths, etc.) must be included in the persisted data model for that view.
-
----
-
-### Case Study 014: Associated File Selection Not Persisting Across Cycles
-
--   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
--   **Cycles Observed:** 137
--   **Symptom:** In the Parallel Co-Pilot Panel, a user checks files in the "Associated Files" list for replacement. When they then navigate to a different cycle and then return, the checkboxes are no longer checked.
--   **Root Cause Analysis (RCA):** The state managing the set of files checked for replacement (`selectedFilesForReplacement`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object when the user navigated away. When the user returned to the cycle, the state was re-initialized to an empty set, losing their previous selections. This is the same root cause as "PCPP Selection State Persistence Failure" (Case Study 010), but for a different piece of state.
--   **Codified Solution & Best Practice:**
-    1.  **Extend Data Model:** Add a new optional property, `selectedFilesForReplacement?: string[]`, to the `PcppCycle` interface in `pcpp.types.ts`.
-    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include `Array.from(selectedFilesForReplacement)` in the data payload sent to the backend for persistence.
-    3.  **Restore State:** The `loadCycleData` function in `view.tsx` must be updated to read the `selectedFilesForReplacement` array from the incoming cycle data and use it to initialize the `selectedFilesForReplacement` state `Set`.
-    4.  **Best Practice:** Any user selection or input that should be remembered within a specific context (like a cycle) must be part of that context's persisted data model. State that is not explicitly saved will be lost on re-render or navigation.
-
----
-
-### Case Study 013: UI State Desynchronization After File Creation
-
--   **Artifacts Affected:** `file-operation.service.ts`, `parallel-copilot.view/on-message.ts`, `parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 135
--   **Symptom:** In the Parallel Co-Pilot Panel, the "Associated Files" list shows a file that doesn't exist with a red `✗`. The user accepts this file into the workspace. The file is correctly created on the disk, but the UI in the PCPP does not update, and the icon remains a red `✗`.
--   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-pilot* view.
--   **Codified Solution & Best Practice:**
-    1.  **Implement a Targeted Notification:** A new IPC channel, `ServerToClientChannel.FilesWritten`, was created.
-    2.  **Backend Acknowledgment:** After the `file-operation.service` successfully writes files, it returns the list of affected paths to the `on-message.ts` handler.
-    3.  **Frontend Update:** The `on-message.ts` handler then immediately sends the `FilesWritten` message back to the PCPP frontend. The frontend listens for this message and updates its local `fileExistenceMap` state, setting the received paths to `true`.
-    4.  **Best Practice:** When a frontend action triggers a backend process that changes a state the frontend is displaying, the backend must explicitly notify the frontend of the change's completion and result. Relying on global refreshes can be inefficient and may not work across separate webview panels.
-
----
-
-### Case Study 012: Cross-Cycle State Bleeding
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 134
--   **Symptom:** When a user checks files for replacement in a response (e.g., in Cycle 1), and then navigates to a new or different cycle (e.g., Cycle 2), the same files are already checked in the new cycle's responses if they happen to share the same file path. This is incorrect behavior, as each cycle should be a clean slate for review.
--   **Root Cause Analysis (RCA):** The React state variable responsible for tracking the set of checked files for replacement (`selectedFilesForReplacement`) was not being reset when the cycle changed. The component would load the new cycle's data, but the old selection state from the previous cycle would persist, leading to the UI incorrectly showing checkmarks for files that the user had not yet reviewed in the new context.
--   **Codified Solution & Best Practice:**
-    1.  **Explicit State Reset:** The event handlers responsible for changing the cycle (`handleCycleChange` and `handleNewCycle`) must be updated to explicitly reset the selection state.
-    2.  **Implementation:** Inside these functions, a call to `setSelectedFilesForReplacement(new Set())` must be added. This ensures that any time the user navigates away from the current cycle, the set of files checked for replacement is cleared.
-    3.  **Best Practice:** When designing components with complex, multi-layered state (like a view that manages both a "current item" and "selections within that item"), always identify which pieces of state are local to the "current item." Ensure that these local states are explicitly reset whenever the "current item" (in this case, the cycle) changes.
-
----
-
-### Case Study 011: PCPP Metadata Regression
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/utils/response-parser.ts`
--   **Cycles Observed:** 133
--   **Symptom:** The Parallel Co-Pilot Panel UI stopped displaying response-level metadata (total token count) and file-level metadata (token count, similarity score) that was previously functional.
--   **Root Cause Analysis (RCA):** During a series of rapid refactors focused on other features (like the diff viewer and state management), the logic responsible for calculating and rendering this metadata was inadvertently removed or commented out. The `ParsedResponse` type may have lost fields, or the UI components were simplified and the props for displaying the data were removed. This is a classic regression where functionality is lost during unrelated code changes.
--   **Codified Solution & Best Practice:**
-    1.  **Re-implement Calculation:** The logic to calculate token counts for the entire response and for each individual file must be re-added to `response-parser.ts`.
-    2.  **Restore UI Components:** The JSX in `view.tsx` responsible for displaying this metadata in the response header and file viewer header must be restored.
-    3.  **Verify Data Flow:** Ensure that the `ParsedResponse` object correctly holds the metadata and that it is passed as props to the relevant UI components.
-    4.  **Best Practice:** Before committing significant refactors, a quick check against the documented UI mockups (`A35`) and feature plans (`A53`) should be performed to ensure that no existing, documented features have been accidentally removed.
-
----
-
-### Case Study 010: PCPP Selection State Persistence Failure
-
--   **Artifacts Affected:** `src/common/types/pcpp.types.ts`, `src/backend/services/history.service.ts`, `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 133
--   **Symptom:** A user selects a response in the PCPP. When they perform an action that causes the view to re-read its state (like generating a `prompt.md` file or reloading the window), the selected response becomes un-selected. This constitutes a critical data loss and workflow interruption.
--   **Root Cause Analysis (RCA):** The state variable tracking the user's selected response was a transient, frontend-only state (`useState`). It was not being included in the `PcppCycle` data object that was periodically saved to the `dce_history.json` file on the backend. When the view reloaded or another service read the history, there was no record of which response had been selected, so the UI defaulted back to no selection.
--   **Codified Solution & Best Practice:**
-    1.  **Extend Data Model:** The `PcppCycle` interface in `src/common/types/pcpp.types.ts` must be extended to include a persistent field, such as `selectedResponseId: string | null`.
-    2.  **Save the State:** The `saveCurrentCycleState` function in `view.tsx` must be updated to include this new `selectedResponseId` in the payload it sends to the backend.
-    3.  **Load the State:** The logic in `view.tsx` that loads cycle data from the backend must use the incoming `selectedResponseId` to correctly initialize its selection state.
-    4.  **Update Dependent Services:** Services that rely on this selection, like `prompt.service.ts`, must be updated to read the `selectedResponseId` from the history file to access the correct response data, rather than relying on a transient state.
-    5.  **Best Practice:** Any piece of UI state that represents a significant user decision and needs to survive a reload or be accessed by other parts of the extension **must** be included in the backend persistence model.
-
----
-
-### Case Study 009: TypeScript Type Inference with RegExp Results
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** 130
--   **Symptom:** TypeScript build fails with errors like `TS2339: Property 'trim' does not exist on type 'RegExpMatchArray'`. This occurs when trying to access a capture group from the result of `String.prototype.match()` or `RegExp.prototype.exec()`.
--   **Root Cause Analysis (RCA):** The TypeScript compiler, in some complex scenarios, can have difficulty inferring the precise type of a capture group within a `RegExpMatchArray` or `RegExpExecArray`. While the developer knows that `match[1]` should be a `string`, the compiler may infer a wider, incorrect type for the array element itself, leading to the erroneous belief that methods like `.trim()` or `.split()` do not exist.
--   **Codified Solution & Best Practice:**
-    1.  **Use `matchAll` for Multiple Matches:** For global regular expressions, `String.prototype.matchAll()` is superior to a `while(regex.exec())` loop. It returns an iterator of `RegExpMatchArray` objects, and its type definitions are generally more robust and modern, making it easier for TypeScript to infer the correct types for capture groups.
-    2.  **Use Optional Chaining and Nullish Coalescing:** For single matches (`String.prototype.match()`), the safest way to access a capture group is with optional chaining (`?.[]`) and the nullish coalescing operator (`??`). This pattern is both safe and clear to the TypeScript compiler.
--   **Example of Flawed Logic (Conceptual):**
-    ```typescript
-    const match = myString.match(/.../);
-    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
-    ```
--   **Example of Correct Logic (Conceptual):**
-    ```typescript
-    const match = myString.match(/.../);
-    const value = (match?.[1] ?? '').trim(); // This is type-safe and robust
-    ```
-
----
-
-### Case Study 008: PCPP Parse/Un-Parse State Instability
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** 124, 126
--   **Symptom:** The "Parse All" button exhibits unstable behavior.
-    1.  Clicking it toggles the UI to the "Un-Parse All" state but immediately reverts to "Parse All". A second click is required for the state to stick.
-    2.  When the UI is in the "Un-Parse All" state, selecting a file from the "Associated Files" list incorrectly toggles the mode back to "Parse All", making it impossible to view files.
--   **Root Cause Analysis (RCA):** The bug is caused by a dependency cycle in the React component's state management. The `parseAllTabs` function, which was wrapped in a `useCallback`, had a dependency on the `tabs` state. Inside the function, it called `setTabs`. This created a loop where the `useEffect` hook responsible for parsing would run, call `parseAllTabs`, which would update the `tabs` state, which would create a new `parseAllTabs` function on re-render, which would re-trigger the `useEffect`. This loop caused rapid, unpredictable state changes, leading to the observed UI flickering and instability.
--   **Codified Solution & Best Practice:**
-    1.  **Break Dependency Cycle:** The `useCallback` hook for the `parseAllTabs` function was refactored. It now uses the functional update form of its `setTabs` call (e.g., `setTabs(prevTabs => ...)`).
-    2.  This removes the need for the `tabs` state to be in the `useCallback` dependency array. The function is now stable across re-renders.
-    3.  **Refine `useEffect`:** The `useEffect` that triggers the parsing logic can now safely depend on `parseAllTabs` without causing a loop. Its dependency array should be limited to `isParsedMode` and the raw content of the tabs, preventing it from running on unrelated UI state changes like file selection.
-    4.  **Best Practice:** When a memoized callback (`useCallback`) needs to update a state that it also depends on, always use the functional update form to break the dependency cycle.
-
----
-
-### Case Study 007: Corrupted or Unsupported Document Files
--   **Artifacts Affected:** `src/backend/services/content-extraction.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
--   **Cycles Observed:** 81
--   **Symptom:** Some `.docx` files fail to process with a `Can't find end of central directory` error in the logs, while legacy `.doc` files show an "Unsupported format" message in the UI.
--   **Root Cause Analysis (RCA):** This is not a bug, but rather the system correctly handling invalid inputs.
-    1.  **Corrupted `.docx`:** The `.docx` format is a standard zip archive. The parsing library (`mammoth`, which uses `jszip`) throws the "central directory" error when a file is not a valid zip archive. This indicates the source file itself is corrupted or was saved incorrectly.
-    2.  **Legacy `.doc`:** The `mammoth` library does not support the old binary `.doc` format. Our documented strategy in `A44` is to explicitly reject these files.
--   **Codified Solution & Best Practice:**
-    1.  The error handling in `content-extraction.service.ts` is working as intended.
-    2.  The `catch` block in `handleWordToTextRequest` should be enhanced to check for the specific "central directory" error message.
-    3.  When this specific error is caught, a more user-friendly message like "File appears to be corrupted or is not a valid .docx format" should be sent to the frontend.
-    4.  The system should continue to correctly identify `.doc` files and send the "Legacy .doc format not supported" message. This confirms the system is robust against invalid user inputs.
-
----
-
-### Case Study 006: Special File Type Caching Fails on Initialization
--   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`
--   **Cycles Observed:** 65, 66, 75, 76, 78, 79, 80, 81
--   **Symptom:** When the extension loads and restores the previous selection, special file types (`.pdf`, `.xlsx`, `.docx`) have a token count of 0. When "Flatten Context" is clicked, the output shows `<!-- content not processed or cached -->`. The caching only works if the user manually un-checks and re-checks the file.
--   **Root Cause Analysis (RCA):** The frontend logic for "pre-warming" the cache was flawed. It was attempting to find the file nodes for the restored selection paths *before* the main file tree had been loaded from the backend. This race condition meant it found no files to process, so the cache was never populated on startup.
--   **Codified Solution & Best Practice:**
-    1.  **Decouple and Defer Pre-warming:** The logic must be architected to handle asynchronous data arrival gracefully.
-    2.  **Use a Trigger State:** In `view.tsx`, the `ApplySelectionSet` message handler should do nothing more than set two state variables: one for the `checkedFiles` (for the UI) and a separate "trigger" state (e.g., `selectionToPrewarm: string[]`).
-    3.  **Use a Multi-Dependency `useEffect`:** A dedicated `useEffect` hook must be created to perform the pre-warming logic. Its dependency array **must** include both the trigger state and the file tree state (e.g., `[selectionToPrewarm, files]`).
-    4.  This ensures the pre-warming code only executes when both the selection and the file tree data are guaranteed to be present, eliminating the race condition. After executing, the trigger state should be reset to `null` to prevent re-runs.
-
----
-
-### Case Study 005: Spacebar De-selects Wrong Parent Folder
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
--   **Cycles Observed:** 61, 68
--   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a deeply nested descendant file (e.g., `src/components/menus/file.ts`) and pressing the spacebar causes a mid-level parent folder (e.g., `src/components`) to be de-selected instead of just the single focused file.
--   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" in `addRemovePathInSelectedFiles` was flawed. It correctly identified the selected ancestor (e.g., `src`) but then attempted to re-add only its *direct children*, failing to handle nested structures. It would incorrectly identify which direct child to exclude based on the deep file path, leading to the removal of an entire subdirectory from the selection.
--   **Codified Solution & Best Practice:**
-    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
-    2.  The new logic is more explicit and reliable:
-        *   Remove the high-level ancestor path (e.g., `src`) from the selection set.
-        *   Get a list of **all descendant files** of that ancestor.
-        *   Add all of these descendant files to the selection set, **except for the specific file that was the target of the uncheck action**.
-    3.  This correctly translates the selection from a single high-level path (`src`) into many individual file paths, minus the one the user explicitly removed, preserving their intent perfectly.
-
----
-
-### Case Study 004: Spacebar De-selects Parent Folder Instead of File
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
--   **Cycles Observed:** 61
--   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a descendant file (e.g., `src/components/file.ts`) and pressing the spacebar causes the entire sub-folder (`src/components`) to be removed from the selection, rather than just the single file.
--   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" was flawed. When attempting to uncheck a child of an already-selected parent, the utility function would correctly remove the parent from the selection set but would then re-add the parent's *direct children* except for the one containing the target file. This was too aggressive and did not correctly represent the user's intent to remove only a single file.
--   **Codified Solution & Best Practice:**
-    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
-    2.  The new logic is more explicit:
-        *   Remove the ancestor path (e.g., `src`) from the selection.
-        *   Get a list of **all descendant files** of that ancestor.
-        *   Add all descendant files to the selection, **except for the specific file that was unchecked**.
-    3.  This correctly translates the selection from a single high-level path (`src`) into many individual low-level paths, minus the one the user removed, preserving their intent.
-
----
-
-### Case Study 003: Incorrect File Count in Flatten Success Message
-
--   **Artifacts Affected:** `src/backend/services/flattener.service.ts`
--   **Cycles Observed:** 61
--   **Symptom:** The success message after flattening (e.g., "Successfully flattened X files...") shows an incorrect count of files, often higher than what was actually selected and written.
--   **Root Cause Analysis (RCA):** The `flattener.service` was using the count of all unique file paths it was *initially given* for the success message. This list could include paths that were later filtered out (e.g., binary files before metadata handling was implemented) or files that failed to be read. The message did not reflect the final count of files successfully processed and written to the output file.
--   **Codified Solution & Best Practice:**
-    1.  The `generateOutputContent` function is responsible for creating the final string to be written to disk. It already has access to the array of successfully processed file results.
-    2.  The `vscode.window.showInformationMessage` call inside the `flatten` method was modified to use the `length` of this final, validated list of results (`validResults.length`) instead of the initial input list. This ensures the user is always shown the exact number of files included in the output.
-
----
-
-### Case Study 002: Checkbox State Management in File Tree
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/components/file-tree/FileTree.tsx`
--   **Cycles Observed:** 14, 15, 16
--   **Symptom:** Checkbox functionality in the file tree is erratic. Only the root checkbox works as expected, but individual files or sub-folders cannot be checked or unchecked correctly. Clicking a checkbox on a child of an already-selected folder fails to deselect it.
--   **Root Cause Analysis (RCA):**
-    The core issue was overly complex and flawed state management logic within the `addRemovePathInSelectedFiles` utility function. The logic attempted to handle the "unchecking a child of a selected parent" case by removing the parent and re-adding all of its other children (the "siblings"). This approach was brittle and failed to correctly calculate the new state, leading to a UI that did not update correctly. The complexity made the function difficult to debug and maintain.
-
--   **Codified Solution & Best Practice:**
-    1.  **Simplify State Logic:** The state management logic was rewritten to be more direct and declarative, using a `Set` for efficient manipulation of selected paths.
-    2.  **Handle Cases Explicitly:** The new function explicitly handles the three primary user actions:
-        *   **CHECK:** When a node is checked, any of its descendants that are already in the selection are removed, and the node's own path is added. This ensures the most senior selected path is always the one stored in state.
-        *   **UNCHECK (Direct):** When a node that is explicitly in the selection list is unchecked, its path and the paths of all its descendants are removed.
-        *   **UNCHECK (Subtractive):** When a node is unchecked because its parent was checked, the parent is removed from the selection. Then, all of the parent's direct children *except for the one that was clicked* are added to the selection. This correctly "subtracts" the item from the parent's group selection without complex traversals.
-    3.  **Robust Event Handling:** Ensure the checkbox `onChange` handler in the React component uses `event.stopPropagation()` to prevent the click event from bubbling up and triggering other actions, such as folder expansion.
-
--   **Example of Flawed Logic (Conceptual):**
-    ```typescript
-    // OLD LOGIC
-    if (unchecking a child of a selected parent) {
-      // 1. Remove parent from selected list.
-      // 2. Traverse the entire tree from the parent.
-      // 3. Add every descendant of the parent back, EXCEPT the clicked child.
-      // This was inefficient and error-prone.
-    }
-    ```
-
--   **Example of Correct Logic (Conceptual):**
-    ```typescript
-    // NEW LOGIC
-    if (unchecking a child of a selected parent) {
-      // 1. Remove the parent from the selection set.
-      const parentNode = findParentNode(clickedPath);
-      // 2. Add all of the parent's *direct children* to the selection set,
-      //    except for the clicked child itself.
-      parentNode.children.forEach(child => {
-        if (child.path !== clickedPath) {
-          selectionSet.add(child.path);
-        }
-      });
-    }
-    ```
-
----
-
-### Case Study 001: `path.sep` Usage in Frontend Components
-
--   **Artifacts Affected:** `src/client/components/file-tree/FileTree.tsx`
--   **Cycles Observed:** 13, 14, 16
--   **Symptom:** The webpack build process fails with TypeScript errors similar to `TS2339: Property 'sep' does not exist on type 'string'`.
--   **Root Cause Analysis (RCA):**
-    The error occurs when frontend code (React components running in a webview) attempts to use `path.sep`. The `path` module is a core part of the Node.js runtime, but it does not exist in the browser-like context of a webview.
--   **Codified Solution & Best Practice:**
-    1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
-    2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
-    3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
 </file_artifact>
 
 <file path="src/Artifacts/A12. DCE - Logging and Debugging Guide.md">
@@ -26192,7 +25776,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
-// src/client/views/parallel-copilot.view/OnboardingView.tsx/// Updated on: C52 (Ensure onStartGeneration is called correctly)
+// src/client/views/parallel-copilot.view/OnboardingView.tsx
+// Updated on: C52 (Ensure onStartGeneration is called correctly)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -26207,7 +25792,7 @@ interface OnboardingViewProps {
     workflowStep: string | null;
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
-    onStartGeneration: () => void;
+    onStartGeneration: (projectScope: string, responseCount: number) => void;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -26233,8 +25818,8 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     const handleGenerate = () => {
         if (projectScope.trim()) {
             if (connectionMode === 'demo') {
-                logger.log(`Sending request to generate initial artifacts AND ${responseCount} responses.`);
-                onStartGeneration(); // C52 Fix: This is the critical call to the parent
+                logger.log(`OnboardingView: Generate button clicked. Calling onStartGeneration prop with ${responseCount} responses.`);
+                onStartGeneration(projectScope, responseCount);
             } else {
                 setIsGeneratingLocal(true);
                 logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
@@ -26253,7 +25838,6 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     };
 
     const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
-    const isGenerating = connectionMode === 'demo' ? false : isGeneratingLocal; // Parent handles 'isGenerating' for demo mode
 
     return (
         <div className="onboarding-container">
@@ -26274,7 +25858,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
                     value={projectScope}
                     onChange={(e) => onScopeChange(e.target.value)}
-                    disabled={isGenerating || (promptGenerated && !isNavigatingBack)}
+                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack)}
                 />
             </div>
             {isNavigatingBack ? (
@@ -26298,9 +25882,9 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     <button 
                         className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
                         onClick={handleGenerate} 
-                        disabled={!projectScope.trim() || isGenerating}
+                        disabled={!projectScope.trim() || isGeneratingLocal}
                     >
-                        <VscRocket /> {isGenerating ? 'Generating...' : buttonText}
+                        <VscRocket /> {isGeneratingLocal ? 'Generating...' : buttonText}
                     </button>
                 </div>
             ) : (
@@ -27632,7 +27216,7 @@ const App = () => {
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
-            logger.log(`[NavFix] Received SendBatchGenerationComplete. New Cycle: ${newCycleId}, New Max: ${newMaxCycle}`);
+            logger.log(`view.tsx: Batch generation complete. Setting isGenerating to false.`);
             setIsGenerating(false);
             setMaxCycle(newMaxCycle);
             handleCycleChange(null, newCycleId);
@@ -27645,18 +27229,25 @@ const App = () => {
 
     const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
 
-    const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle, selectedFiles: Array.from(selectedFilesForReplacement) }); setWorkflowStep('readyForNewCycle'); };
+    const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle, selectedFiles: [] }); setWorkflowStep('readyForNewCycle'); };
     
     const handleGenerateResponses = () => {
         if (currentCycle === null) return;
         const cycleData = getCurrentCycleData();
         if (cycleData) {
+            logger.log('view.tsx: handleGenerateResponses called. Setting isGenerating to true.');
             setIsGenerating(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
                 cycleData: cycleData as PcppCycle,
                 count: responseCount,
             });
         }
+    };
+
+    const handleStartGeneration = (projectScope: string, responseCount: number) => {
+        logger.log('view.tsx: handleStartGeneration called. Setting isGenerating to true.');
+        setIsGenerating(true);
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
 
     const handleRegenerateResponses = () => { window.alert("Regenerate functionality coming soon!"); };
@@ -27697,7 +27288,12 @@ const App = () => {
 
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} onStartGeneration={() => setIsGenerating(true)} />;
+    
+    logger.log(`view.tsx: Rendering. isGenerating: ${isGenerating}, currentCycle: ${currentCycle}`);
+    if (isGenerating) {
+        return <GenerationProgressDisplay responseCount={responseCount} />;
+    }
+    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} onStartGeneration={handleStartGeneration} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
@@ -27715,9 +27311,6 @@ const App = () => {
     };
 
     const renderHeaderButtons = () => {
-        if (isGenerating) {
-            return <button disabled><VscLoading className="saving"/> Generating...</button>;
-        }
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
@@ -27731,15 +27324,12 @@ const App = () => {
     };
 
     return <div className="pc-view-container">
-        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={tabCount} onChange={e => {setTabCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => {setResponseCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         
-        {isGenerating ? 
-            <GenerationProgressDisplay responseCount={responseCount} /> :
-            <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
-                <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
-                <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
-            </CollapsibleSection>
-        }
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
+        </CollapsibleSection>
 
         <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} />
         <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
@@ -28910,7 +28500,7 @@ export function deactivate() {}
 # Artifact A52.3: DCE - Harmony Interaction Schema Source
 # Date Created: C49
 # Author: AI Model & Curator
-# Updated on: C51 (Migrate to JSON Output Schema)
+# Updated on: C52 (Migrate to JSON Output Schema)
 
 - **Key/Value for A0:**
 - **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active and instructs the model to produce a structured JSON output.
@@ -28918,24 +28508,25 @@ export function deactivate() {}
 
 ## Interaction Schema Text
 
-1.  **CRITICAL: Your entire response must be a single, valid JSON object.** Do not include any text before or after the JSON structure. The extension will parse your output using `JSON.parse()`.
+1.  **CRITICAL: Your entire response must be a single, valid JSON object.** Do not include any text, thoughts, or markdown before or after the JSON structure. The extension will parse your output directly using `JSON.parse()`.
 
-2.  **JSON Schema:** Your output must conform to the following TypeScript interface:
+2.  **JSON Schema:** Your output must conform to the following TypeScript interface. Pay close attention to the data types.
+
     ```typescript
     interface HarmonyFile {
-      path: string;      // Relative path to the file from the workspace root.
+      path: string;      // The relative path to the file from the workspace root.
       content: string;   // The complete and full content of the file.
     }
 
     interface CourseOfActionStep {
-      step: number;
+      step: number;      // The step number, starting from 1.
       description: string; // A description of the action for this step.
     }
 
     interface HarmonyJsonResponse {
       summary: string;
       course_of_action: CourseOfActionStep[];
-      curator_activity?: string; // Optional: For instructions to the human.
+      curator_activity?: string; // Optional: For instructions to the human curator.
       files: HarmonyFile[];
     }
     ```
@@ -28958,18 +28549,19 @@ export function deactivate() {}
       "files": [
         {
           "path": "src/App.tsx",
-          "content": "// Full content of the updated App.tsx file..."
+          "content": "// Full content of the updated App.tsx file...\n"
         },
         {
           "path": "src/services/api.ts",
-          "content": "// Full content of the updated api.ts file..."
+          "content": "// Full content of the updated api.ts file...\n"
         }
       ]
     }
     ```
 
 4.  **Content Rules:**
-    *   Always output complete files. Do not use placeholders or omit code.
+    *   Always output complete files inside the `content` string. Do not use placeholders or omit code.
+    *   Ensure the `content` string correctly escapes characters as needed for a valid JSON string (e.g., newlines as `\n`, quotes as `\"`).
     *   Update documentation artifacts before updating code artifacts.
     *   If you need the human curator to perform an action (e.g., delete a file, run a command), describe it in the optional `curator_activity` field.
 
@@ -29331,6 +28923,425 @@ export function parseResponse(rawText: string): ParsedResponse {
         totalTokens,
     };
 }
+</file_artifact>
+
+<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies - REFERENCE.md">
+# Artifact A11.1: DCE - New Regression Case Studies
+# Date Created: C1
+# Author: AI Model & Curator
+# Updated on: C187 (Clarify role as the historical archive)
+
+- **Key/Value for A0:**
+- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+Add new Case Studies to A11, not to this artifact. Thats the point of splitting in the first place.
+
+**This artifact is the historical archive for older case studies.** New, active issues should be logged in `A11. DCE - Regression Case Studies.md`. This separation keeps the primary document focused and manageable in size.
+
+## 2. Case Studies
+
+---
+
+### Case Study 001: PCPP Context Textarea Instability
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
+-   **Cycles Observed:** C1, C2, C3, C167, C174, C1, C5
+-   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered, especially when scrolling or word-wrapping is involved. The cursor's visual position desynchronizes from the actual text insertion point. The cursor may appear on the correct wrapped line, but typed characters will continue to render on a previous line, off-screen. This makes editing content impossible.
+-   **Root Cause Analysis (RCA):** This bug has recurred with multiple implementations (`NumberedTextarea`, `react-simple-code-editor`). The root cause is the architectural choice of using an overlay approach to render line numbers or syntax highlighting. This involves rendering a `div` or `<pre>` block with the styled content behind a transparent `<textarea>`. The instability is caused by a synchronization failure:
+    1.  **Performance:** Re-calculating syntax highlighting and re-rendering the DOM on every single keystroke is computationally expensive for large blocks of text, causing severe input lag.
+    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`, `word-spacing`, etc.) and the browser's rendering engine between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows and wraps. This leads to the cursor and text selection bugs.
+-   **Codified Solution & Best Practice:**
+    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or real-time syntax highlighting.
+    2.  **Simplify:** The complex overlay-based editor component in `ContextInputs.tsx` must be replaced with a standard, native `<textarea>` element.
+    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of a feature, it fixes a critical usability bug. A more robust implementation of a custom code editor (e.g., using Monaco or CodeMirror) can be planned for a future cycle, but the default should always be a stable, native component.
+
+---
+
+### Case Study 002: FTV Flashing on PCPP Auto-Save
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
+-   **Cycles Observed:** C1, C4, C1
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
+-   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` in `file-tree.service.ts` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. The initial fix was to add `.vscode` to a general exclusion pattern, but this was not specific enough.
+-   **Codified Solution & Best Practice:**
+    1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
+    2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
+    
+---
+
+### Case Study 023: FTV Flashing on PCPP Auto-Save
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`, `src/client/views/context-chooser.view/view.tsx`
+-   **Cycles Observed:** C1, C4, C1, C179, C182, C183, C184
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads, especially in the packaged version of the extension. Logs show a storm of `git state change` events.
+-   **Root Cause Analysis (RCA):** The definitive root cause is the `repo.state.onDidChange` event listener in `file-tree.service.ts`. This listener is extremely sensitive and fires for almost any change in the repository, including internal state changes and writes to files listed in `.gitignore` (like `.vscode/dce_history.json`). The original implementation treated this event as a structural change, triggering a full, expensive rebuild of the entire file tree. This created a refresh storm that made the UI unusable.
+-   **Codified Solution & Best Practice:** The architectural solution is to **decouple structural refreshes from decoration refreshes**.
+    1.  **Structural Changes:** The `FileSystemWatcher` is the source of truth for structural changes (files created, deleted, renamed). It should be the only trigger for a full tree rebuild (`triggerFullRefresh`).
+    2.  **Decoration Changes:** The `repo.state.onDidChange` event should only trigger a lightweight update. This involves creating a new `triggerDecorationsUpdate` method that solely re-calculates the Git status and problem maps and sends them to the frontend via a dedicated IPC channel.
+    3.  **Frontend State:** The frontend no longer receives Git status as part of the `FileNode` tree structure. Instead, it maintains a separate state map for Git statuses. When it receives a decoration update, it updates this map, causing a cheap re-render that applies the new styles without rebuilding the entire tree. This approach eliminates the flashing by making the most frequent update operation lightweight and non-disruptive.
+
+---
+
+### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C8, C9, C10, C11, C12
+-   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
+-   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. After an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was still failing. The most likely cause is a **stale closure**. The `useEffect` hook that registers the message listener captures the `workflowStep` state at the time it's created. When the message arrives later, the handler's logic checks against this old, stale state (`'awaitingResponseSelect'`), not the current state (`'awaitingBaseline'`), causing the condition to fail and the state transition to be missed.
+-   **Codified Solution & Best Practice:**
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
+    2.  **Frontend (`view.tsx`):** The message listener for `NotifyGitOperationResult` must be made resilient to stale closures. The state update logic should use the **functional update form** of the state setter (e.g., `setWorkflowStep(prevStep => { ... })`). This guarantees the logic inside the setter is executed with the most recent state, allowing the condition `if (prevStep === 'awaitingBaseline')` to pass correctly and reliably transition the workflow to the next step (`'awaitingFileSelect'`).
+    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> `Generate prompt.md` -> `+`) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state as defined in `A69`.
+
+---
+
+### Case Study 022: Missing `git init` Error Popup
+
+-   **Artifacts Affected:** `src/backend/services/git.service.ts`
+-   **Cycles Observed:** C9
+-   **Symptom:** When a user opens a new project that is not a Git repository and clicks the "Baseline" button, the operation fails silently. An error is logged to the debug channel, but no UI notification is shown to the user to explain what happened or how to fix it. This is a regression from a previous version that did provide a helpful pop-up.
+-   **Root Cause Analysis (RCA):** The `git.service.ts` was refactored in C183 to return a result object (`{ success, message }`) to the frontend instead of directly showing UI notifications. While this is a good pattern for general success/failure communication that the frontend state machine needs to know about, it removed the direct, user-facing error handling for a very common and specific user error (forgetting to run `git init`). The frontend was not updated to take the error message from the returned object and display it in a `showErrorMessage` dialog.
+-   **Codified Solution & Best Practice:** For critical, common, and actionable user errors, it is better for the responsible backend service to show the error notification directly.
+    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must be modified. A `try...catch` block will be used. Inside the `catch`, it will inspect the error message.
+    2.  If the error contains `fatal: not a git repository`, the service will directly call `vscode.window.showErrorMessage`.
+    3.  This message will be user-friendly ("This is not a Git repository...") and will include an action button ("Open README Guide") that programmatically opens the relevant documentation to guide the user.
+    4.  For all other success or failure cases, the service can continue to use the `NotifyGitOperationResult` IPC channel to communicate with the frontend's state machine.
+
+---
+
+### Case Study 020: Animated Highlighting Stuck on Response Tabs
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C6
+-   **Symptom:** In the animated workflow, after the user generates the initial `prompt.md` file, the `Resp 1` tab is correctly highlighted. However, after pasting content into `Resp 1`, the highlight does not advance to `Resp 2`. The animation remains stuck on `Resp 1`.
+-   **Root Cause Analysis (RCA):** The `useEffect` hook responsible for advancing the workflow state was flawed. Its logic was too complex or had an incorrect dependency array, preventing it from reliably detecting changes to the `tabs` state object. A robust state machine should rely on simple, direct checks of the current state to determine the next step.
+-   **Codified Solution & Best Practice:** The solution is to refactor the `useEffect` hook that manages the `workflowStep`. The new logic should be a simple, clean state machine that directly checks the `rawContent` of each tab in sequence. For example, when the `workflowStep` is `'awaitingResponsePaste_1'`, the effect should check if `tabs['1'].rawContent` has content. If it does, it should immediately transition the state to `'awaitingResponsePaste_2'`, and so on. This makes the logic declarative and removes dependencies on complex, intermediate states, making the workflow transitions reliable.
+
+---
+
+### Case Study 019: Single Character Input Bug in Text Area
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`
+-   **Cycles Observed:** C4
+-   **Symptom:** When typing into the Cycle Context or Ephemeral Context text areas, the user can only input one character at a time. After each character, the input field loses focus, forcing the user to click it again to type the next character, making it unusable.
+-   **Root Cause Analysis (RCA):** This is a classic React focus management bug. The `onChange` event handler updates the state in the parent component (`view.tsx`), which triggers a re-render. If the `NumberedTextarea` component or its props are not correctly memoized, it re-renders unnecessarily. If the underlying `<textarea>` element is re-created during this render (e.g., due to an unstable `key` prop or other rendering logic), it loses focus. The solution requires ensuring the component and its event handlers are stable across renders.
+-   **Codified Solution & Best Practice:**
+    1.  **Memoize Component:** The `NumberedTextarea` component must be wrapped in `React.memo` to prevent it from re-rendering if its props have not changed.
+    2.  **Memoize Handlers:** The `onChange` event handlers passed down from the parent (`view.tsx`) must be wrapped in `useCallback` with a correct dependency array. This prevents a new function instance from being created on every parent render, which would otherwise break the memoization of the child component.
+    3.  **Stable Keys:** Ensure any `key` or `id` prop passed to the component is stable and does not change on unrelated state updates.
+
+---
+
+### Case Study 018: Stuck on Cycle Creation After Deletion
+
+-   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C4
+-   **Symptom:** The user creates cycles up to C5. They then delete C5. The UI correctly navigates back to C4. However, the `+` (New Cycle) button is now disabled, and the user is permanently stuck, unable to re-create C5.
+-   **Root Cause Analysis (RCA):** The frontend (`view.tsx`) maintained its own `maxCycle` state variable. When a cycle was deleted, the backend `history.service.ts` correctly removed it from the `dce_history.json` file. However, there was no mechanism to inform the frontend that the maximum cycle number had changed. The frontend state still believed `maxCycle` was 5, while `currentCycle` was 4. The condition to enable the `+` button (`currentCycle === maxCycle`) was therefore false, disabling the button permanently.
+-   **Codified Solution & Best Practice:** The backend service responsible for the data mutation must return the new, correct state to the client. The `deleteCycle` method in `history.service.ts` must be updated to, after deleting the cycle, re-read the history file, determine the new maximum `cycleId`, and return it. The frontend's event handler must then use this returned value to update its local `maxCycle` state, ensuring the UI is perfectly synchronized with the backend data.
+
+---
+
+### Case Study 017: FTV Flashing on Save (DEPRECATED - See 023)
+
+-   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
+-   **Cycles Observed:** C1, C4
+-   **Symptom:** The entire Data Curation file tree view (FTV) flashes or reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
+-   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. This created a distracting and unnecessary UI flash.
+-   **Codified Solution & Best Practice:** The solution is to make the file watcher more specific about what it ignores. The `.vscode` directory, which is intended for editor-specific metadata and should not be considered part of the user's source code context, must be added to the watcher's exclusion list. This prevents the watcher from reacting to internal state changes of the extension itself.
+
+---
+
+### Case Study 016: `NumberedTextarea` Scrolling & Alignment Failure
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/view.scss`
+-   **Cycles Observed:** C1, C2, C3, C167, C174
+-   **Symptom:** The text areas used for "Cycle Context" and "Ephemeral Context" are functionally unusable. The line numbers in the left gutter do not scroll in sync with the text content. As the user types and the text wraps or scrolls, the cursor position becomes misaligned with the actual text insertion point, and text selection highlighting is inaccurate.
+-   **Root Cause Analysis (RCA):** The component attempted to render a line number gutter and a text area side-by-side. This approach is fundamentally flawed because the two elements have independent scrolling mechanisms. The `textarea` scrolls its internal content, while the line number `div` scrolls as part of the page flow. Furthermore, minor differences in padding, font metrics, or line-height between the visible highlighted `div` and the invisible `textarea` caused a "drift" in cursor alignment over multiple lines.
+-   **Codified Solution & Best Practice:**
+    1.  **Architectural Fix:** The component must be re-architected to use an overlay approach. A container element should use relative positioning. Inside it, both the `div` that displays the syntax-highlighted text and the transparent `textarea` used for input must be absolutely positioned to fill the container, ensuring they are perfectly on top of each other.
+    2.  **Synchronized Scrolling:** A single `onScroll` event handler on the `textarea` must programmatically update the `scrollTop` property of both the highlighted `div` and the line number gutter `div`. This ensures all three elements scroll in perfect unison.
+    3.  **Pixel-Perfect Styling:** All font properties (`font-family`, `font-size`, `line-height`), padding, and `box-sizing` must be identical between the `textarea` and the highlighted `div` to guarantee that the text lines up perfectly and the cursor position is always accurate.
+
+---
+
+### Case Study 015: PCPP State Loss on Window Move
+
+-   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
+-   **Cycles Observed:** 146
+-   **Symptom:** In the Parallel Co-Pilot Panel, the user changes a piece of UI state that is not directly part of the response content (e.g., increases the number of response tabs from 4 to 8). When the user moves the PCPP panel (e.g., from a separate window back into the main VS Code window), the webview re-initializes, and the UI state reverts to its default (e.g., 4 tabs).
+-   **Root Cause Analysis (RCA):** The state in question (`tabCount`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object. When the panel was moved, the webview was destroyed and recreated, causing it to load the latest cycle data from the backend. Since `tabCount` was not part of that persisted data, it was re-initialized to its default value, losing the user's change.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** Add a new optional property, `tabCount?: number`, to the `PcppCycle` interface in `pcpp.types.ts`.
+    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include the `tabCount` in the data payload sent to the backend for persistence.
+    3.  **Restore State:** The logic in `view.tsx` that loads cycle data must be updated to read the `tabCount` property from the incoming cycle data and use it to initialize the `tabCount` state.
+    4.  **Best Practice:** Any UI configuration that a user can change and would reasonably expect to persist (like the number of visible tabs, pane widths, etc.) must be included in the persisted data model for that view.
+
+---
+
+### Case Study 014: Associated File Selection Not Persisting Across Cycles
+
+-   **Artifacts Affected:** `pcpp.types.ts`, `history.service.ts`, `view.tsx`
+-   **Cycles Observed:** 137
+-   **Symptom:** In the Parallel Co-Pilot Panel, a user checks files in the "Associated Files" list for replacement. When they then navigate to a different cycle and then return, the checkboxes are no longer checked.
+-   **Root Cause Analysis (RCA):** The state managing the set of files checked for replacement (`selectedFilesForReplacement`) was a transient, local UI state within the `view.tsx` component. It was not being saved as part of the `PcppCycle` data object when the user navigated away. When the user returned to the cycle, the state was re-initialized to an empty set, losing their previous selections. This is the same root cause as "PCPP Selection State Persistence Failure" (Case Study 010), but for a different piece of state.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** Add a new optional property, `selectedFilesForReplacement?: string[]`, to the `PcppCycle` interface in `pcpp.types.ts`.
+    2.  **Persist State:** In `view.tsx`, the `saveCurrentCycleState` function must be updated to include `Array.from(selectedFilesForReplacement)` in the data payload sent to the backend for persistence.
+    3.  **Restore State:** The `loadCycleData` function in `view.tsx` must be updated to read the `selectedFilesForReplacement` array from the incoming cycle data and use it to initialize the `selectedFilesForReplacement` state `Set`.
+    4.  **Best Practice:** Any user selection or input that should be remembered within a specific context (like a cycle) must be part of that context's persisted data model. State that is not explicitly saved will be lost on re-render or navigation.
+
+---
+
+### Case Study 013: UI State Desynchronization After File Creation
+
+-   **Artifacts Affected:** `file-operation.service.ts`, `parallel-copilot.view/on-message.ts`, `parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 135
+-   **Symptom:** In the Parallel Co-Pilot Panel, the "Associated Files" list shows a file that doesn't exist with a red `✗`. The user accepts this file into the workspace. The file is correctly created on the disk, but the UI in the PCPP does not update, and the icon remains a red `✗`.
+-   **Root Cause Analysis (RCA):** The `fileExistenceMap` state, which controls the `✓`/`✗` icons, is only populated when the panel is parsed. The file write operation happens on the backend, and there was no mechanism to inform the PCPP frontend that the state of the file system (which it was displaying) had changed as a result of its own action. The file watcher correctly triggers a refresh for the *Context Chooser* view, but this does not affect the state of the separate *Parallel Co-pilot* view.
+-   **Codified Solution & Best Practice:**
+    1.  **Implement a Targeted Notification:** A new IPC channel, `ServerToClientChannel.FilesWritten`, was created.
+    2.  **Backend Acknowledgment:** After the `file-operation.service` successfully writes files, it returns the list of affected paths to the `on-message.ts` handler.
+    3.  **Frontend Update:** The `on-message.ts` handler then immediately sends the `FilesWritten` message back to the PCPP frontend. The frontend listens for this message and updates its local `fileExistenceMap` state, setting the received paths to `true`.
+    4.  **Best Practice:** When a frontend action triggers a backend process that changes a state the frontend is displaying, the backend must explicitly notify the frontend of the change's completion and result. Relying on global refreshes can be inefficient and may not work across separate webview panels.
+
+---
+
+### Case Study 012: Cross-Cycle State Bleeding
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 134
+-   **Symptom:** When a user checks files for replacement in a response (e.g., in Cycle 1), and then navigates to a new or different cycle (e.g., Cycle 2), the same files are already checked in the new cycle's responses if they happen to share the same file path. This is incorrect behavior, as each cycle should be a clean slate for review.
+-   **Root Cause Analysis (RCA):** The React state variable responsible for tracking the set of checked files for replacement (`selectedFilesForReplacement`) was not being reset when the cycle changed. The component would load the new cycle's data, but the old selection state from the previous cycle would persist, leading to the UI incorrectly showing checkmarks for files that the user had not yet reviewed in the new context.
+-   **Codified Solution & Best Practice:**
+    1.  **Explicit State Reset:** The event handlers responsible for changing the cycle (`handleCycleChange` and `handleNewCycle`) must be updated to explicitly reset the selection state.
+    2.  **Implementation:** Inside these functions, a call to `setSelectedFilesForReplacement(new Set())` must be added. This ensures that any time the user navigates away from the current cycle, the set of files checked for replacement is cleared.
+    3.  **Best Practice:** When designing components with complex, multi-layered state (like a view that manages both a "current item" and "selections within that item"), always identify which pieces of state are local to the "current item." Ensure that these local states are explicitly reset whenever the "current item" (in this case, the cycle) changes.
+
+---
+
+### Case Study 011: PCPP Metadata Regression
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** 133
+-   **Symptom:** The Parallel Co-Pilot Panel UI stopped displaying response-level metadata (total token count) and file-level metadata (token count, similarity score) that was previously functional.
+-   **Root Cause Analysis (RCA):** During a series of rapid refactors focused on other features (like the diff viewer and state management), the logic responsible for calculating and rendering this metadata was inadvertently removed or commented out. The `ParsedResponse` type may have lost fields, or the UI components were simplified and the props for displaying the data were removed. This is a classic regression where functionality is lost during unrelated code changes.
+-   **Codified Solution & Best Practice:**
+    1.  **Re-implement Calculation:** The logic to calculate token counts for the entire response and for each individual file must be re-added to `response-parser.ts`.
+    2.  **Restore UI Components:** The JSX in `view.tsx` responsible for displaying this metadata in the response header and file viewer header must be restored.
+    3.  **Verify Data Flow:** Ensure that the `ParsedResponse` object correctly holds the metadata and that it is passed as props to the relevant UI components.
+    4.  **Best Practice:** Before committing significant refactors, a quick check against the documented UI mockups (`A35`) and feature plans (`A53`) should be performed to ensure that no existing, documented features have been accidentally removed.
+
+---
+
+### Case Study 010: PCPP Selection State Persistence Failure
+
+-   **Artifacts Affected:** `src/common/types/pcpp.types.ts`, `src/backend/services/history.service.ts`, `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 133
+-   **Symptom:** A user selects a response in the PCPP. When they perform an action that causes the view to re-read its state (like generating a `prompt.md` file or reloading the window), the selected response becomes un-selected. This constitutes a critical data loss and workflow interruption.
+-   **Root Cause Analysis (RCA):** The state variable tracking the user's selected response was a transient, frontend-only state (`useState`). It was not being included in the `PcppCycle` data object that was periodically saved to the `dce_history.json` file on the backend. When the view reloaded or another service read the history, there was no record of which response had been selected, so the UI defaulted back to no selection.
+-   **Codified Solution & Best Practice:**
+    1.  **Extend Data Model:** The `PcppCycle` interface in `src/common/types/pcpp.types.ts` must be extended to include a persistent field, such as `selectedResponseId: string | null`.
+    2.  **Save the State:** The `saveCurrentCycleState` function in `view.tsx` must be updated to include this new `selectedResponseId` in the payload it sends to the backend.
+    3.  **Load the State:** The logic in `view.tsx` that loads cycle data from the backend must use the incoming `selectedResponseId` to correctly initialize its selection state.
+    4.  **Update Dependent Services:** Services that rely on this selection, like `prompt.service.ts`, must be updated to read the `selectedResponseId` from the history file to access the correct response data, rather than relying on a transient state.
+    5.  **Best Practice:** Any piece of UI state that represents a significant user decision and needs to survive a reload or be accessed by other parts of the extension **must** be included in the backend persistence model.
+
+---
+
+### Case Study 009: TypeScript Type Inference with RegExp Results
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** 130
+-   **Symptom:** TypeScript build fails with errors like `TS2339: Property 'trim' does not exist on type 'RegExpMatchArray'`. This occurs when trying to access a capture group from the result of `String.prototype.match()` or `RegExp.prototype.exec()`.
+-   **Root Cause Analysis (RCA):** The TypeScript compiler, in some complex scenarios, can have difficulty inferring the precise type of a capture group within a `RegExpMatchArray` or `RegExpExecArray`. While the developer knows that `match[1]` should be a `string`, the compiler may infer a wider, incorrect type for the array element itself, leading to the erroneous belief that methods like `.trim()` or `.split()` do not exist.
+-   **Codified Solution & Best Practice:**
+    1.  **Use `matchAll` for Multiple Matches:** For global regular expressions, `String.prototype.matchAll()` is superior to a `while(regex.exec())` loop. It returns an iterator of `RegExpMatchArray` objects, and its type definitions are generally more robust and modern, making it easier for TypeScript to infer the correct types for capture groups.
+    2.  **Use Optional Chaining and Nullish Coalescing:** For single matches (`String.prototype.match()`), the safest way to access a capture group is with optional chaining (`?.[]`) and the nullish coalescing operator (`??`). This pattern is both safe and clear to the TypeScript compiler.
+-   **Example of Flawed Logic (Conceptual):**
+    ```typescript
+    const match = myString.match(/.../);
+    const value = match ? match.trim() : ''; // This can fail if TS inference is poor
+    ```
+-   **Example of Correct Logic (Conceptual):**
+    ```typescript
+    const match = myString.match(/.../);
+    const value = (match?.[1] ?? '').trim(); // This is type-safe and robust
+    ```
+
+---
+
+### Case Study 008: PCPP Parse/Un-Parse State Instability
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** 124, 126
+-   **Symptom:** The "Parse All" button exhibits unstable behavior.
+    1.  Clicking it toggles the UI to the "Un-Parse All" state but immediately reverts to "Parse All". A second click is required for the state to stick.
+    2.  When the UI is in the "Un-Parse All" state, selecting a file from the "Associated Files" list incorrectly toggles the mode back to "Parse All", making it impossible to view files.
+-   **Root Cause Analysis (RCA):** The bug is caused by a dependency cycle in the React component's state management. The `parseAllTabs` function, which was wrapped in a `useCallback`, had a dependency on the `tabs` state. Inside the function, it called `setTabs`. This created a loop where the `useEffect` hook responsible for parsing would run, call `parseAllTabs`, which would update the `tabs` state, which would create a new `parseAllTabs` function on re-render, which would re-trigger the `useEffect`. This loop caused rapid, unpredictable state changes, leading to the observed UI flickering and instability.
+-   **Codified Solution & Best Practice:**
+    1.  **Break Dependency Cycle:** The `useCallback` hook for the `parseAllTabs` function was refactored. It now uses the functional update form of its `setTabs` call (e.g., `setTabs(prevTabs => ...)`).
+    2.  This removes the need for the `tabs` state to be in the `useCallback` dependency array. The function is now stable across re-renders.
+    3.  **Refine `useEffect`:** The `useEffect` that triggers the parsing logic can now safely depend on `parseAllTabs` without causing a loop. Its dependency array should be limited to `isParsedMode` and the raw content of the tabs, preventing it from running on unrelated UI state changes like file selection.
+    4.  **Best Practice:** When a memoized callback (`useCallback`) needs to update a state that it also depends on, always use the functional update form to break the dependency cycle.
+
+---
+
+### Case Study 007: Corrupted or Unsupported Document Files
+-   **Artifacts Affected:** `src/backend/services/content-extraction.service.ts`, `A44. DCE - Phase 1 - Word Document Handling Strategy.md`
+-   **Cycles Observed:** 81
+-   **Symptom:** Some `.docx` files fail to process with a `Can't find end of central directory` error in the logs, while legacy `.doc` files show an "Unsupported format" message in the UI.
+-   **Root Cause Analysis (RCA):** This is not a bug, but rather the system correctly handling invalid inputs.
+    1.  **Corrupted `.docx`:** The `.docx` format is a standard zip archive. The parsing library (`mammoth`, which uses `jszip`) throws the "central directory" error when a file is not a valid zip archive. This indicates the source file itself is corrupted or was saved incorrectly.
+    2.  **Legacy `.doc`:** The `mammoth` library does not support the old binary `.doc` format. Our documented strategy in `A44` is to explicitly reject these files.
+-   **Codified Solution & Best Practice:**
+    1.  The error handling in `content-extraction.service.ts` is working as intended.
+    2.  The `catch` block in `handleWordToTextRequest` should be enhanced to check for the specific "central directory" error message.
+    3.  When this specific error is caught, a more user-friendly message like "File appears to be corrupted or is not a valid .docx format" should be sent to the frontend.
+    4.  The system should continue to correctly identify `.doc` files and send the "Legacy .doc format not supported" message. This confirms the system is robust against invalid user inputs.
+
+---
+
+### Case Study 006: Special File Type Caching Fails on Initialization
+-   **Artifacts Affected:** `src/client/views/context-chooser.view/view.tsx`
+-   **Cycles Observed:** 65, 66, 75, 76, 78, 79, 80, 81
+-   **Symptom:** When the extension loads and restores the previous selection, special file types (`.pdf`, `.xlsx`, `.docx`) have a token count of 0. When "Flatten Context" is clicked, the output shows `<!-- content not processed or cached -->`. The caching only works if the user manually un-checks and re-checks the file.
+-   **Root Cause Analysis (RCA):** The frontend logic for "pre-warming" the cache was flawed. It was attempting to find the file nodes for the restored selection paths *before* the main file tree had been loaded from the backend. This race condition meant it found no files to process, so the cache was never populated on startup.
+-   **Codified Solution & Best Practice:**
+    1.  **Decouple and Defer Pre-warming:** The logic must be architected to handle asynchronous data arrival gracefully.
+    2.  **Use a Trigger State:** In `view.tsx`, the `ApplySelectionSet` message handler should do nothing more than set two state variables: one for the `checkedFiles` (for the UI) and a separate "trigger" state (e.g., `selectionToPrewarm: string[]`).
+    3.  **Use a Multi-Dependency `useEffect`:** A dedicated `useEffect` hook must be created to perform the pre-warming logic. Its dependency array **must** include both the trigger state and the file tree state (e.g., `[selectionToPrewarm, files]`).
+    4.  This ensures the pre-warming code only executes when both the selection and the file tree data are guaranteed to be present, eliminating the race condition. After executing, the trigger state should be reset to `null` to prevent re-runs.
+
+---
+
+### Case Study 005: Spacebar De-selects Wrong Parent Folder
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
+-   **Cycles Observed:** 61, 68
+-   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a deeply nested descendant file (e.g., `src/components/menus/file.ts`) and pressing the spacebar causes a mid-level parent folder (e.g., `src/components`) to be de-selected instead of just the single focused file.
+-   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" in `addRemovePathInSelectedFiles` was flawed. It correctly identified the selected ancestor (e.g., `src`) but then attempted to re-add only its *direct children*, failing to handle nested structures. It would incorrectly identify which direct child to exclude based on the deep file path, leading to the removal of an entire subdirectory from the selection.
+-   **Codified Solution & Best Practice:**
+    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
+    2.  The new logic is more explicit and reliable:
+        *   Remove the high-level ancestor path (e.g., `src`) from the selection set.
+        *   Get a list of **all descendant files** of that ancestor.
+        *   Add all of these descendant files to the selection set, **except for the specific file that was the target of the uncheck action**.
+    3.  This correctly translates the selection from a single high-level path (`src`) into many individual file paths, minus the one the user explicitly removed, preserving their intent perfectly.
+
+---
+
+### Case Study 004: Spacebar De-selects Parent Folder Instead of File
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`
+-   **Cycles Observed:** 61
+-   **Symptom:** When a parent folder (e.g., `src`) is checked, focusing on a descendant file (e.g., `src/components/file.ts`) and pressing the spacebar causes the entire sub-folder (`src/components`) to be removed from the selection, rather than just the single file.
+-   **Root Cause Analysis (RCA):** The logic for a "subtractive uncheck" was flawed. When attempting to uncheck a child of an already-selected parent, the utility function would correctly remove the parent from the selection set but would then re-add the parent's *direct children* except for the one containing the target file. This was too aggressive and did not correctly represent the user's intent to remove only a single file.
+-   **Codified Solution & Best Practice:**
+    1.  The `addRemovePathInSelectedFiles` function was refactored for the "subtractive uncheck" case.
+    2.  The new logic is more explicit:
+        *   Remove the ancestor path (e.g., `src`) from the selection.
+        *   Get a list of **all descendant files** of that ancestor.
+        *   Add all descendant files to the selection, **except for the specific file that was unchecked**.
+    3.  This correctly translates the selection from a single high-level path (`src`) into many individual low-level paths, minus the one the user removed, preserving their intent.
+
+---
+
+### Case Study 003: Incorrect File Count in Flatten Success Message
+
+-   **Artifacts Affected:** `src/backend/services/flattener.service.ts`
+-   **Cycles Observed:** 61
+-   **Symptom:** The success message after flattening (e.g., "Successfully flattened X files...") shows an incorrect count of files, often higher than what was actually selected and written.
+-   **Root Cause Analysis (RCA):** The `flattener.service` was using the count of all unique file paths it was *initially given* for the success message. This list could include paths that were later filtered out (e.g., binary files before metadata handling was implemented) or files that failed to be read. The message did not reflect the final count of files successfully processed and written to the output file.
+-   **Codified Solution & Best Practice:**
+    1.  The `generateOutputContent` function is responsible for creating the final string to be written to disk. It already has access to the array of successfully processed file results.
+    2.  The `vscode.window.showInformationMessage` call inside the `flatten` method was modified to use the `length` of this final, validated list of results (`validResults.length`) instead of the initial input list. This ensures the user is always shown the exact number of files included in the output.
+
+---
+
+### Case Study 002: Checkbox State Management in File Tree
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.utils.ts`, `src/client/components/file-tree/FileTree.tsx`
+-   **Cycles Observed:** 14, 15, 16
+-   **Symptom:** Checkbox functionality in the file tree is erratic. Only the root checkbox works as expected, but individual files or sub-folders cannot be checked or unchecked correctly. Clicking a checkbox on a child of an already-selected folder fails to deselect it.
+-   **Root Cause Analysis (RCA):**
+    The core issue was overly complex and flawed state management logic within the `addRemovePathInSelectedFiles` utility function. The logic attempted to handle the "unchecking a child of a selected parent" case by removing the parent and re-adding all of its other children (the "siblings"). This approach was brittle and failed to correctly calculate the new state, leading to a UI that did not update correctly. The complexity made the function difficult to debug and maintain.
+
+-   **Codified Solution & Best Practice:**
+    1.  **Simplify State Logic:** The state management logic was rewritten to be more direct and declarative, using a `Set` for efficient manipulation of selected paths.
+    2.  **Handle Cases Explicitly:** The new function explicitly handles the three primary user actions:
+        *   **CHECK:** When a node is checked, any of its descendants that are already in the selection are removed, and the node's own path is added. This ensures the most senior selected path is always the one stored in state.
+        *   **UNCHECK (Direct):** When a node that is explicitly in the selection list is unchecked, its path and the paths of all its descendants are removed.
+        *   **UNCHECK (Subtractive):** When a node is unchecked because its parent was checked, the parent is removed from the selection. Then, all of the parent's direct children *except for the one that was clicked* are added to the selection. This correctly "subtracts" the item from the parent's group selection without complex traversals.
+    3.  **Robust Event Handling:** Ensure the checkbox `onChange` handler in the React component uses `event.stopPropagation()` to prevent the click event from bubbling up and triggering other actions, such as folder expansion.
+
+-   **Example of Flawed Logic (Conceptual):**
+    ```typescript
+    // OLD LOGIC
+    if (unchecking a child of a selected parent) {
+      // 1. Remove parent from selected list.
+      // 2. Traverse the entire tree from the parent.
+      // 3. Add every descendant of the parent back, EXCEPT the clicked child.
+      // This was inefficient and error-prone.
+    }
+    ```
+
+-   **Example of Correct Logic (Conceptual):**
+    ```typescript
+    // NEW LOGIC
+    if (unchecking a child of a selected parent) {
+      // 1. Remove the parent from the selection set.
+      const parentNode = findParentNode(clickedPath);
+      // 2. Add all of the parent's *direct children* to the selection set,
+      //    except for the clicked child itself.
+      parentNode.children.forEach(child => {
+        if (child.path !== clickedPath) {
+          selectionSet.add(child.path);
+        }
+      });
+    }
+    ```
+
+---
+
+### Case Study 001: `path.sep` Usage in Frontend Components
+
+-   **Artifacts Affected:** `src/client/components/file-tree/FileTree.tsx`
+-   **Cycles Observed:** 13, 14, 16
+-   **Symptom:** The webpack build process fails with TypeScript errors similar to `TS2339: Property 'sep' does not exist on type 'string'`.
+-   **Root Cause Analysis (RCA):**
+    The error occurs when frontend code (React components running in a webview) attempts to use `path.sep`. The `path` module is a core part of the Node.js runtime, but it does not exist in the browser-like context of a webview.
+-   **Codified Solution & Best Practice:**
+    1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
+    2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
+    3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
+</file_artifact>
+
+<file path="src/Artifacts/A11. DCE - Regression Case Studies - WORKING.md">
+# Artifact A11: DCE - Regression Case Studies
+# Date Created: C16
+# Author: AI Model & Curator
+# Updated on: C44 (Add vLLM Truncation case)
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+**This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
+
+## 2. Case Studies
+
+---
+
+### Case Study 039: vLLM Responses Truncated at Stop Token
+
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C44
+-   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
 </file_artifact>
 
 
