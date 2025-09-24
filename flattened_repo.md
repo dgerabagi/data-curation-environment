@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T12:15:27.826Z
+  Date Generated: 2025-09-24T12:48:49.177Z
   ---
-  Total Files: 187
-  Approx. Tokens: 467985
+  Total Files: 188
+  Approx. Tokens: 468690
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md (11673 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (9910 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (10013 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (6095 tokens)
 6. src\backend\services\prompt.service.ts (5146 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4045 tokens)
+9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4134 tokens)
 10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
@@ -30,7 +30,7 @@
 8. src\Artifacts\A8. DCE - Phase 1 - Selection Sets Feature Plan.md - Lines: 65 - Chars: 6043 - Tokens: 1511
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
-11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
+11. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5766 - Tokens: 1442
 12. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 13. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
 14. src\Artifacts\A15. DCE - Phase 1 - Multi-Select & Sorting Feature Plan.md - Lines: 43 - Chars: 7263 - Tokens: 1816
@@ -108,14 +108,14 @@
 86. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 87. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
 88. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-89. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16178 - Tokens: 4045
+89. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16535 - Tokens: 4134
 90. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 91. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 92. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 93. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 94. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 95. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 80 - Chars: 6626 - Tokens: 1657
+96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 80 - Chars: 6705 - Tokens: 1677
 97. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 98. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 99. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -178,10 +178,10 @@
 156. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
-159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6575 - Tokens: 1644
+159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
 160. src\client\views\parallel-copilot.view\view.scss - Lines: 1093 - Chars: 24378 - Tokens: 6095
 161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-162. src\client\views\parallel-copilot.view\view.tsx - Lines: 413 - Chars: 39639 - Tokens: 9910
+162. src\client\views\parallel-copilot.view\view.tsx - Lines: 413 - Chars: 40051 - Tokens: 10013
 163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 164. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 165. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -206,7 +206,8 @@
 184. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
 185. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
 186. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md - Lines: 393 - Chars: 46690 - Tokens: 11673
-187. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1090 - Tokens: 273
+187. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
+188. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 44 - Chars: 1744 - Tokens: 436
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -25834,5 +25835,52 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
 -   **Cycles Observed:** C44
 -   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
+</file_artifact>
+
+<file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
+// src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
+// New file in C54
+import * as React from 'react';
+import { formatLargeNumber } from '../../../../common/utils/formatting';
+
+export interface GenerationProgress {
+    responseId: number;
+    currentTokens: number;
+    totalTokens: number;
+}
+
+interface GenerationProgressDisplayProps {
+    progressData: GenerationProgress[];
+    tps: number;
+}
+
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps }) => {
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
+
+    return (
+        <div className="generation-progress-display">
+            <div className="progress-header">
+                <span>Generating Responses...</span>
+                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
+            </div>
+            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
+            
+            {progressData.map(p => (
+                <div key={p.responseId} className="progress-bar-container">
+                    <div className='progress-bar-row'>
+                        <span>Resp {p.responseId}:</span>
+                        <progress value={p.currentTokens} max={p.totalTokens}></progress>
+                        <span>{p.totalTokens > 0 ? ((p.currentTokens / p.totalTokens) * 100).toFixed(0) : 0}%</span>
+                    </div>
+                    <span className="token-count-text">
+                        ({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                    </span>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default GenerationProgressDisplay;
 </file_artifact>
 
