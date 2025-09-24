@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C52 (Implement conditional rendering for progress UI)
+// Updated on: C53 (Implement split-view layout for generation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -20,6 +20,8 @@ import WorkflowToolbar from './components/WorkflowToolbar';
 import { logger } from '../../utils/logger';
 import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
 
+const MAX_TOKENS_PER_RESPONSE = 8192; // Configurable constant
+
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
     const debouncedFunction = React.useCallback((...args: any[]) => { if (timeoutRef.current) clearTimeout(timeoutRef.current); timeoutRef.current = setTimeout(() => callback(...args), delay); }, [callback, delay]);
@@ -31,20 +33,32 @@ export interface TabState {
     parsedContent: ParsedResponse | null;
 }
 
-const GenerationProgressDisplay: React.FC<{ responseCount: number }> = ({ responseCount }) => (
-    <div className="generation-progress-display">
-        <div className="progress-header">
-            <span>Generating Responses...</span>
-            <span>Tokens/sec: --</span>
-        </div>
-        {[...Array(responseCount)].map((_, i) => (
-            <div key={i} className="progress-bar-container">
-                <span>Resp {i + 1}:</span>
-                <progress></progress> {/* Indeterminate progress bar */}
+interface GenerationProgress {
+    responseId: number;
+    currentTokens: number;
+    totalTokens: number;
+}
+
+const GenerationProgressDisplay: React.FC<{ progressData: GenerationProgress[], tps: number }> = ({ progressData, tps }) => {
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
+    return (
+        <div className="generation-progress-display">
+            <div className="progress-header">
+                <span>Generating Responses...</span>
+                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
             </div>
-        ))}
-    </div>
-);
+            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
+            {progressData.map(p => (
+                <div key={p.responseId} className="progress-bar-container">
+                    <span>Resp {p.responseId}:</span>
+                    <progress value={p.currentTokens} max={p.totalTokens}></progress>
+                    <span>{((p.currentTokens / p.totalTokens) * 100).toFixed(0)}%</span>
+                    <span className="token-count-text">({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)</span>
+                </div>
+            ))}
+        </div>
+    );
+};
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -90,6 +104,9 @@ const App = () => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
     const [responseCount, setResponseCount] = React.useState(4);
     const [isGenerating, setIsGenerating] = React.useState(false);
+    const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
+    const [tps, setTps] = React.useState(0);
+
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
@@ -277,6 +294,11 @@ const App = () => {
     const handleStartGeneration = (projectScope: string, responseCount: number) => {
         logger.log('view.tsx: handleStartGeneration called. Setting isGenerating to true.');
         setIsGenerating(true);
+        setGenerationProgress([...Array(responseCount)].map((_, i) => ({
+            responseId: i + 1,
+            currentTokens: 0,
+            totalTokens: MAX_TOKENS_PER_RESPONSE
+        })));
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
 
@@ -319,11 +341,24 @@ const App = () => {
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
-    logger.log(`view.tsx: Rendering. isGenerating: ${isGenerating}, currentCycle: ${currentCycle}`);
-    if (isGenerating) {
-        return <GenerationProgressDisplay responseCount={responseCount} />;
+    if (currentCycle === 0) {
+        return (
+            <div className={`onboarding-split-view ${isGenerating ? 'active' : ''}`}>
+                <OnboardingView 
+                    projectScope={projectScope || ''} 
+                    onScopeChange={onScopeChange} 
+                    onNavigateToCycle={(id) => handleCycleChange(null, id)} 
+                    latestCycleId={maxCycle} 
+                    workflowStep={workflowStep} 
+                    saveStatus={saveStatus} 
+                    connectionMode={connectionMode} 
+                    onStartGeneration={handleStartGeneration}
+                    isGenerating={isGenerating}
+                />
+                {isGenerating && <GenerationProgressDisplay progressData={generationProgress} tps={tps} />}
+            </div>
+        );
     }
-    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} onStartGeneration={handleStartGeneration} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );

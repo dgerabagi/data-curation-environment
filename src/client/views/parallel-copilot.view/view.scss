@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C49 (Add styles for onboarding actions and progress display)
+// Updated on: C53 (Add styles for split-view onboarding)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -91,14 +91,36 @@ body {
     }
 }
 
+.onboarding-split-view {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    &.active {
+        .onboarding-container {
+            flex-basis: 50%;
+            border-right: 1px solid var(--vscode-panel-border);
+        }
+        .generation-progress-display {
+            flex-basis: 50%;
+        }
+    }
+}
+
 .onboarding-container {
     padding: 16px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     gap: 16px;
     box-sizing: border-box;
+    overflow-y: auto;
     
+    &.generating {
+        // Styles for when it's part of the split view
+        flex-grow: 1;
+        min-width: 0;
+    }
+
     h1 {
         font-size: 1.5em;
         font-weight: bold;
@@ -113,7 +135,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    min-height: 0;
+    min-height: 200px; // Ensure it has a minimum height
 }
 
 .onboarding-header {
@@ -245,29 +267,51 @@ body {
 
 .generation-progress-display {
     width: 100%;
-    padding: 8px;
-    border: 1px solid var(--vscode-panel-border);
+    padding: 16px;
     border-radius: 4px;
     background-color: var(--vscode-sideBar-background);
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-size: 11px;
+    gap: 8px;
+    font-size: 12px;
     color: var(--vscode-descriptionForeground);
+    flex-grow: 1;
+    min-width: 0;
+    overflow-y: auto;
 
     .progress-header {
         display: flex;
         justify-content: space-between;
         font-weight: bold;
+        font-size: 13px;
+        color: var(--vscode-editor-foreground);
+    }
+    
+    .progress-total {
+        font-weight: bold;
     }
 
     .progress-bar-container {
         display: flex;
-        align-items: center;
-        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding-top: 8px;
         
+        .progress-bar-row {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: 8px;
+        }
+
         progress {
             width: 100%;
+        }
+
+        .token-count-text {
+            font-size: 11px;
+            font-style: italic;
         }
     }
 }

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C52 (Ensure onStartGeneration is called correctly)
+// Updated on: C53 (Adjust layout for split view)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -15,6 +15,7 @@ interface OnboardingViewProps {
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
     onStartGeneration: (projectScope: string, responseCount: number) => void;
+    isGenerating: boolean; // New prop to control layout
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -29,7 +30,7 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration, isGenerating }) => {
     const [isGeneratingLocal, setIsGeneratingLocal] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const [responseCount, setResponseCount] = React.useState(4);
@@ -61,8 +62,9 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
 
     const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
 
+    // When generating, the view stays visible but might have a different layout controlled by the parent
     return (
-        <div className="onboarding-container">
+        <div className={`onboarding-container ${isGenerating ? 'generating' : ''}`}>
             <h1>{isNavigatingBack ? 'Edit Project Plan' : 'Welcome to the Data Curation Environment!'}</h1>
             <p>
                 {isNavigatingBack 
@@ -77,10 +79,10 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                 </div>
                 <textarea
                     className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
-                    placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
+                    placeholder="e.g., I want to build a web application that allows users to track their daily habits..."
                     value={projectScope}
                     onChange={(e) => onScopeChange(e.target.value)}
-                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack)}
+                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack) || isGenerating}
                 />
             </div>
             {isNavigatingBack ? (
@@ -98,15 +100,16 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                                 min="1" max="20" 
                                 value={responseCount} 
                                 onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                                disabled={isGenerating}
                             />
                         </div>
                     )}
                     <button 
                         className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
                         onClick={handleGenerate} 
-                        disabled={!projectScope.trim() || isGeneratingLocal}
+                        disabled={!projectScope.trim() || isGeneratingLocal || isGenerating}
                     >
-                        <VscRocket /> {isGeneratingLocal ? 'Generating...' : buttonText}
+                        <VscRocket /> {isGeneratingLocal || isGenerating ? 'Generating...' : buttonText}
                     </button>
                 </div>
             ) : (

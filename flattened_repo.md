@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T11:45:13.769Z
+  Date Generated: 2025-09-24T12:15:27.826Z
   ---
   Total Files: 187
-  Approx. Tokens: 467182
+  Approx. Tokens: 467985
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md (11673 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (9574 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (9910 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
-5. src\client\views\parallel-copilot.view\view.scss (6123 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (6095 tokens)
 6. src\backend\services\prompt.service.ts (5146 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -115,7 +115,7 @@
 93. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 94. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 95. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 5021 - Tokens: 1256
+96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 80 - Chars: 6626 - Tokens: 1657
 97. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 98. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 99. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -153,7 +153,7 @@
 131. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
 132. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 133. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-134. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
+134. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
 135. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 136. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
 137. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
@@ -178,14 +178,14 @@
 156. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
-159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 124 - Chars: 6360 - Tokens: 1590
-160. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 24492 - Tokens: 6123
+159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6575 - Tokens: 1644
+160. src\client\views\parallel-copilot.view\view.scss - Lines: 1093 - Chars: 24378 - Tokens: 6095
 161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-162. src\client\views\parallel-copilot.view\view.tsx - Lines: 378 - Chars: 38295 - Tokens: 9574
+162. src\client\views\parallel-copilot.view\view.tsx - Lines: 413 - Chars: 39639 - Tokens: 9910
 163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 164. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 165. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-166. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
+166. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 167. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 168. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5968 - Tokens: 1492
 169. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
@@ -6527,70 +6527,83 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
+# Updated on: C53 (Expand technical plan for streaming)
 
 - **Key/Value for A0:**
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
-- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics
+- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics, streaming
 
 ## 1. Vision & Goal
 
-When a user clicks "Generate responses," the extension communicates with a potentially remote vLLM server. This process can take anywhere from a few seconds to over a minute, depending on the model and prompt size. Currently, the UI provides no feedback during this time, which can make the application feel unresponsive or broken.
+When a user clicks "Generate responses," the extension communicates with a potentially remote vLLM server. This process can take anywhere from a few seconds to over a minute. Currently, the UI provides no feedback during this time, which can make the application feel unresponsive or broken.
 
-The goal is to provide clear, real-time feedback to the user about the status of their request. This will be achieved with a new, non-modal UI element that appears during generation, showing the progress for each requested response and displaying a live tokens-per-second metric.
+The goal is to provide clear, real-time feedback to the user about the status of their request. This will be achieved with a new UI element that appears during generation, showing the progress for each requested response and displaying a live tokens-per-second metric.
 
 ## 2. User Stories
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P3-PROG-01 | **See Generation Progress** | As a user, after I click "Generate responses," I want to see a visual indicator that the request is in progress, so I know the application is working. | - A progress display area appears in the UI (e.g., in the header) after "Generate responses" is clicked. <br> - This display shows one progress bar for each response being generated (e.g., 4 bars if 4 responses were requested). |
-| P3-PROG-02 | **Monitor Performance** | As a user, I want to see a live tokens-per-second (tok/s) metric, so I can gauge the performance of the LLM backend. | - The progress display includes a "Tokens/sec" counter. <br> - This counter updates in real-time as response data streams in from the backend. |
-| P3-PROG-03 | **View Streaming Responses** | As a user, I want to see the text of the responses appear in the tabs as they are being generated, so I can see the results immediately without waiting for all responses to be complete. | - As tokens are generated by the LLM, they are streamed to the appropriate response tab in the newly created cycle. |
+| P3-PROG-01 | **See Generation Progress** | As a user, after I click "Generate responses," I want to see a visual indicator that the request is in progress, so I know the application is working. | - A progress display area appears in the UI after "Generate responses" is clicked. <br> - This display shows one progress bar for each response being generated. |
+| P3-PROG-02 | **Monitor Performance** | As a user, I want to see a live tokens-per-second (tok/s) metric, so I can gauge the performance of the LLM backend. | - The progress display includes a "Tokens/sec" counter that updates in real-time. |
+| P3-PROG-03 | **View Streaming Responses** | As a user, I want to see the text of the responses appear in the tabs as they are being generated, so I can see the results immediately. | - As tokens are generated by the LLM, they are streamed to the appropriate response tab in the newly created cycle. |
+| P3-PROG-04 | **Accurate Progress Metrics** | As a user, I want the progress bar to accurately reflect the generation progress based on the maximum tokens requested, and to see the current token count for each response. | - The progress bar's value is calculated as `currentTokens / maxTokens`. <br> - A text display shows the current and total tokens for each response (e.g., "4096 / 8192 tokens"). <br> - A grand total of all generated tokens is also displayed. |
 
 ## 3. UI Mockup (Textual Description)
 
-The progress display will be a new element that appears within the main header (`pc-header`) of the Parallel Co-Pilot Panel, to the right of the "Generate responses" button.
+The progress display will appear in a split-view layout during the onboarding generation. The left side will contain the user's project scope, and the right side will contain the progress UI.
 
-**State: Before Generation**
 ```
-| [ Project Plan ] [ Generate responses ] [ 4 ] [ Log State ]                                       |
-```
-
-**State: During Generation**
-```
-| [ Project Plan ] [ Generating... (Disabled) ] [ 4 ] [ Abort ]                                     |
 |-------------------------------------------------------------------------------------------------|
-|  Tokens/sec: [ 1,234 ]                                                                          |
-|  Resp 1: [||||||||||||||||||||||||------------------] 50%                                          |
-|  Resp 2: [||||||||||||||||||||||||------------------] 50%                                          |
-|  Resp 3: [||||||||||||||||||------------------------] 40%                                          |
-|  Resp 4: [||||||||||--------------------------------] 30%                                          |
-|-------------------------------------------------------------------------------------------------|```
+| [Project Scope Text Area...]                                  | [Generation Progress Display]   |
+|                                                               |  Tokens/sec: [ 1,234 ]          |
+|                                                               |  Total Tokens: [ 12,345 ]       |
+|                                                               |  -----------------------------  |
+|                                                               |  Resp 1: [|||||||||||--] 80%    |
+|                                                               |   (6553 / 8192 tokens)          |
+|                                                               |  Resp 2: [|||||||||||--] 80%    |
+|                                                               |   (6553 / 8192 tokens)          |
+|                                                               |  Resp 3: [|||||||----] 60%      |
+|                                                               |   (4915 / 8192 tokens)          |
+|                                                               |  Resp 4: [|||||------] 40%      |
+|                                                               |   (3276 / 8192 tokens)          |
+|-------------------------------------------------------------------------------------------------|
+```
 
-### 3.1. Components Breakdown
+## 4. Technical Implementation Plan (Expanded for Streaming)
 
--   **Generate Button:** The button's text changes to "Generating..." and it becomes disabled.
--   **Abort Button:** A new "Abort" button appears, allowing the user to cancel the request.
--   **Tokens/sec Display:** A live counter showing the aggregate generation speed.
--   **Progress Bars:**
-    -   One progress bar for each requested response.
-    -   The progress is based on the `max_tokens` requested vs. tokens received. If `max_tokens` isn't specified, it could be an indeterminate progress bar until the `finish_reason` is received.
-
-## 4. Technical Implementation Plan (High-Level)
-
-This feature depends on **streaming** responses from the vLLM server.
+This feature is critically dependent on **streaming** responses from the vLLM server.
 
 1.  **Backend (`llm.service.ts`):**
-    *   The `generateBatch` method must be updated to handle `stream: true`.
-    *   It will need to process Server-Sent Events (SSE) from the vLLM response stream.
+    *   The `generateBatch` method must be refactored to handle a streaming connection.
+    *   The `fetch` request to the vLLM proxy must include `stream: true` in its body.
+    *   The response from `fetch` will be a stream of Server-Sent Events (SSE). The service will need to read this stream chunk by chunk.
+    *   Each chunk will contain a JSON object with a token delta. The service will parse these chunks, aggregate the text for each response, and calculate performance metrics (tokens per second).
+
 2.  **IPC Channels:**
-    *   New channels will be needed to stream data to the frontend:
-        *   `StreamResponseChunk(payload: { responseId: number; chunk: string; })`
-        *   `StreamResponseEnd(payload: { responseId: number; finish_reason: string; })`
-        *   `UpdateTpsMetric(payload: { tps: number; })`
+    *   New, dedicated IPC channels are required to push real-time updates from the backend to the frontend.
+        *   `ServerToClientChannel.UpdateGenerationProgress`: This message will be sent frequently (e.g., every 200ms).
+        *   **Payload:** An array of progress objects, e.g., `[{ responseId: 1, currentTokens: 1024, totalTokens: 8192, chunk: "new text..." }, ...]`. It will also include the overall `tokensPerSecond` metric.
+        *   `ServerToClientChannel.SendBatchGenerationComplete`: This existing channel will be used to signal that all response streams have finished.
+
 3.  **Frontend (`view.tsx`):**
-    *   New state variables will be needed to manage the progress of each response and the TPS metric.
-    *   The UI will be updated to render the progress display conditionally.
-    *   New message handlers will listen for the streaming IPC events and update the state in real-time, appending text to the response tabs and updating the progress bars.
+    *   **State Management:** New state variables will be required to hold the progress data for each response:
+        ```typescript
+        interface GenerationProgress {
+          responseId: number;
+          currentTokens: number;
+          totalTokens: number;
+          content: string;
+        }
+        const [progress, setProgress] = useState<GenerationProgress[]>([]);
+        const [tps, setTps] = useState(0);
+        ```
+    *   **Message Handler:** A new message handler will listen for the `UpdateGenerationProgress` IPC message.
+        *   When a message is received, it will update the `progress` state with the new token counts and append the `chunk` to the appropriate response tab's content.
+        *   It will also update the `tps` state.
+    *   The `GenerationProgressDisplay` component will be driven by this state, causing the progress bars and token counters to update in real-time.
+
+4.  **Configuration:**
+    *   A constant, `MAX_TOKENS_PER_RESPONSE`, will be defined (e.g., `8192`). This will be used by both the backend when making the request and the frontend for calculating progress percentages. In the future, this could be made a configurable setting.
 </file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -22174,7 +22187,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C52 (Ensure onStartGeneration is called correctly)
+// Updated on: C53 (Adjust layout for split view)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -22190,6 +22203,7 @@ interface OnboardingViewProps {
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
     onStartGeneration: (projectScope: string, responseCount: number) => void;
+    isGenerating: boolean; // New prop to control layout
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -22204,7 +22218,7 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration, isGenerating }) => {
     const [isGeneratingLocal, setIsGeneratingLocal] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const [responseCount, setResponseCount] = React.useState(4);
@@ -22236,8 +22250,9 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
 
     const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
 
+    // When generating, the view stays visible but might have a different layout controlled by the parent
     return (
-        <div className="onboarding-container">
+        <div className={`onboarding-container ${isGenerating ? 'generating' : ''}`}>
             <h1>{isNavigatingBack ? 'Edit Project Plan' : 'Welcome to the Data Curation Environment!'}</h1>
             <p>
                 {isNavigatingBack 
@@ -22252,10 +22267,10 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                 </div>
                 <textarea
                     className={`onboarding-textarea ${workflowStep === 'awaitingProjectScope' ? 'workflow-highlight' : ''}`}
-                    placeholder="e.g., I want to build a web application that allows users to track their daily habits. It should have a simple UI, user authentication, and a dashboard to visualize progress..."
+                    placeholder="e.g., I want to build a web application that allows users to track their daily habits..."
                     value={projectScope}
                     onChange={(e) => onScopeChange(e.target.value)}
-                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack)}
+                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack) || isGenerating}
                 />
             </div>
             {isNavigatingBack ? (
@@ -22273,15 +22288,16 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                                 min="1" max="20" 
                                 value={responseCount} 
                                 onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                                disabled={isGenerating}
                             />
                         </div>
                     )}
                     <button 
                         className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
                         onClick={handleGenerate} 
-                        disabled={!projectScope.trim() || isGeneratingLocal}
+                        disabled={!projectScope.trim() || isGeneratingLocal || isGenerating}
                     >
-                        <VscRocket /> {isGeneratingLocal ? 'Generating...' : buttonText}
+                        <VscRocket /> {isGeneratingLocal || isGenerating ? 'Generating...' : buttonText}
                     </button>
                 </div>
             ) : (
@@ -22301,7 +22317,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C49 (Add styles for onboarding actions and progress display)
+// Updated on: C53 (Add styles for split-view onboarding)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -22393,14 +22409,36 @@ body {
     }
 }
 
+.onboarding-split-view {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    &.active {
+        .onboarding-container {
+            flex-basis: 50%;
+            border-right: 1px solid var(--vscode-panel-border);
+        }
+        .generation-progress-display {
+            flex-basis: 50%;
+        }
+    }
+}
+
 .onboarding-container {
     padding: 16px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     gap: 16px;
     box-sizing: border-box;
+    overflow-y: auto;
     
+    &.generating {
+        // Styles for when it's part of the split view
+        flex-grow: 1;
+        min-width: 0;
+    }
+
     h1 {
         font-size: 1.5em;
         font-weight: bold;
@@ -22415,7 +22453,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    min-height: 0;
+    min-height: 200px; // Ensure it has a minimum height
 }
 
 .onboarding-header {
@@ -22547,29 +22585,51 @@ body {
 
 .generation-progress-display {
     width: 100%;
-    padding: 8px;
-    border: 1px solid var(--vscode-panel-border);
+    padding: 16px;
     border-radius: 4px;
     background-color: var(--vscode-sideBar-background);
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-size: 11px;
+    gap: 8px;
+    font-size: 12px;
     color: var(--vscode-descriptionForeground);
+    flex-grow: 1;
+    min-width: 0;
+    overflow-y: auto;
 
     .progress-header {
         display: flex;
         justify-content: space-between;
         font-weight: bold;
+        font-size: 13px;
+        color: var(--vscode-editor-foreground);
+    }
+    
+    .progress-total {
+        font-weight: bold;
     }
 
     .progress-bar-container {
         display: flex;
-        align-items: center;
-        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding-top: 8px;
         
+        .progress-bar-row {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: 8px;
+        }
+
         progress {
             width: 100%;
+        }
+
+        .token-count-text {
+            font-size: 11px;
+            font-style: italic;
         }
     }
 }
@@ -23366,7 +23426,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C52 (Implement conditional rendering for progress UI)
+// Updated on: C53 (Implement split-view layout for generation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23387,6 +23447,8 @@ import WorkflowToolbar from './components/WorkflowToolbar';
 import { logger } from '../../utils/logger';
 import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
 
+const MAX_TOKENS_PER_RESPONSE = 8192; // Configurable constant
+
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
     const debouncedFunction = React.useCallback((...args: any[]) => { if (timeoutRef.current) clearTimeout(timeoutRef.current); timeoutRef.current = setTimeout(() => callback(...args), delay); }, [callback, delay]);
@@ -23398,20 +23460,32 @@ export interface TabState {
     parsedContent: ParsedResponse | null;
 }
 
-const GenerationProgressDisplay: React.FC<{ responseCount: number }> = ({ responseCount }) => (
-    <div className="generation-progress-display">
-        <div className="progress-header">
-            <span>Generating Responses...</span>
-            <span>Tokens/sec: --</span>
-        </div>
-        {[...Array(responseCount)].map((_, i) => (
-            <div key={i} className="progress-bar-container">
-                <span>Resp {i + 1}:</span>
-                <progress></progress> {/* Indeterminate progress bar */}
+interface GenerationProgress {
+    responseId: number;
+    currentTokens: number;
+    totalTokens: number;
+}
+
+const GenerationProgressDisplay: React.FC<{ progressData: GenerationProgress[], tps: number }> = ({ progressData, tps }) => {
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
+    return (
+        <div className="generation-progress-display">
+            <div className="progress-header">
+                <span>Generating Responses...</span>
+                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
             </div>
-        ))}
-    </div>
-);
+            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
+            {progressData.map(p => (
+                <div key={p.responseId} className="progress-bar-container">
+                    <span>Resp {p.responseId}:</span>
+                    <progress value={p.currentTokens} max={p.totalTokens}></progress>
+                    <span>{((p.currentTokens / p.totalTokens) * 100).toFixed(0)}%</span>
+                    <span className="token-count-text">({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)</span>
+                </div>
+            ))}
+        </div>
+    );
+};
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -23457,6 +23531,9 @@ const App = () => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
     const [responseCount, setResponseCount] = React.useState(4);
     const [isGenerating, setIsGenerating] = React.useState(false);
+    const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
+    const [tps, setTps] = React.useState(0);
+
 
     const clientIpc = ClientPostMessageManager.getInstance();
     
@@ -23644,6 +23721,11 @@ const App = () => {
     const handleStartGeneration = (projectScope: string, responseCount: number) => {
         logger.log('view.tsx: handleStartGeneration called. Setting isGenerating to true.');
         setIsGenerating(true);
+        setGenerationProgress([...Array(responseCount)].map((_, i) => ({
+            responseId: i + 1,
+            currentTokens: 0,
+            totalTokens: MAX_TOKENS_PER_RESPONSE
+        })));
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
 
@@ -23686,11 +23768,24 @@ const App = () => {
     if (currentCycle === null) return <div>Loading...</div>;
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
-    logger.log(`view.tsx: Rendering. isGenerating: ${isGenerating}, currentCycle: ${currentCycle}`);
-    if (isGenerating) {
-        return <GenerationProgressDisplay responseCount={responseCount} />;
+    if (currentCycle === 0) {
+        return (
+            <div className={`onboarding-split-view ${isGenerating ? 'active' : ''}`}>
+                <OnboardingView 
+                    projectScope={projectScope || ''} 
+                    onScopeChange={onScopeChange} 
+                    onNavigateToCycle={(id) => handleCycleChange(null, id)} 
+                    latestCycleId={maxCycle} 
+                    workflowStep={workflowStep} 
+                    saveStatus={saveStatus} 
+                    connectionMode={connectionMode} 
+                    onStartGeneration={handleStartGeneration}
+                    isGenerating={isGenerating}
+                />
+                {isGenerating && <GenerationProgressDisplay progressData={generationProgress} tps={tps} />}
+            </div>
+        );
     }
-    if (currentCycle === 0) return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} onStartGeneration={handleStartGeneration} />;
     
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle - 1)} disabled={currentCycle <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle}</span><button onClick={(e) => handleCycleChange(e, currentCycle + 1)} disabled={currentCycle >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
