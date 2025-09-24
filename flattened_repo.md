@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-23T22:44:30.760Z
+  Date Generated: 2025-09-24T00:41:28.463Z
   ---
   Total Files: 192
-  Approx. Tokens: 506715
+  Approx. Tokens: 507351
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (9563 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9657 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (5861 tokens)
-8. src\backend\services\prompt.service.ts (5055 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (6123 tokens)
+8. src\backend\services\prompt.service.ts (5146 tokens)
 9. src\backend\services\file-operation.service.ts (4526 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
@@ -31,7 +31,7 @@
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
-12. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3700 - Tokens: 925
+12. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3743 - Tokens: 936
 13. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 14. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 15. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -149,10 +149,10 @@
 127. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 128. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 129. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-130. src\backend\services\history.service.ts - Lines: 296 - Chars: 11897 - Tokens: 2975
+130. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
 131. src\backend\services\llm.service.ts - Lines: 75 - Chars: 2972 - Tokens: 743
 132. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20219 - Tokens: 5055
+133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
 134. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 135. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 136. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
@@ -166,52 +166,52 @@
 144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-147. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
-148. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-149. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-150. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-151. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-152. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-153. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-154. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-155. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-156. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-157. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-158. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-159. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-160. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-161. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6813 - Tokens: 1704
-162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
-163. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 23444 - Tokens: 5861
-164. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-165. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38250 - Tokens: 9563
-166. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-167. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-168. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-169. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
-170. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-171. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-172. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8600 - Tokens: 2150
-173. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-174. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-175. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-176. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-177. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-178. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-179. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-180. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-181. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-182. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-183. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-184. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
-185. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
-186. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
-187. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
-188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
-189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3018 - Tokens: 755
-190. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-191. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-192. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+147. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+148. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+149. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+150. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+151. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+152. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+153. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+154. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+155. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+156. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+157. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+158. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+159. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+160. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
+161. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
+162. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 24492 - Tokens: 6123
+163. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+164. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38626 - Tokens: 9657
+165. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+166. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+167. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+168. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
+169. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+170. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
+171. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
+172. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+173. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+174. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+175. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+176. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+177. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+178. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+179. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+180. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+181. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+182. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+183. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
+184. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
+185. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
+186. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+187. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
+188. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3086 - Tokens: 772
+189. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+190. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+191. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+192. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5188 - Tokens: 1297
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -20538,118 +20538,6 @@ export const logger = {
 };
 </file_artifact>
 
-<file path="src/client/utils/response-parser.ts">
-// src/client/utils/response-parser.ts
-// Updated on: C51 (Implement JSON-first parsing with regex fallback)
-import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
-
-const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
-const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
-const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
-
-export function parseResponse(rawText: string): ParsedResponse {
-    // Attempt to parse as JSON first for Harmony structured output
-    try {
-        const jsonResponse = JSON.parse(rawText);
-        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: f.content || '',
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
-
-            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
-                ? jsonResponse.course_of_action
-                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
-                    .join('\n')
-                : jsonResponse.course_of_action; // Handle if it's already a string
-
-            return {
-                summary: jsonResponse.summary,
-                courseOfAction: courseOfAction,
-                curatorActivity: jsonResponse.curator_activity || '',
-                filesUpdated: files.map(f => f.path),
-                files: files,
-                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
-            };
-        }
-    } catch (e) {
-        // Not a valid JSON object that matches our schema, proceed with regex parsing
-    }
-
-    // Fallback to existing regex-based parsing
-    const fileMap = new Map<string, ParsedFile>();
-    let totalTokens = 0;
-
-    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
-
-    const finalResponseMarker = 'assistantfinal';
-    const markerIndex = processedText.indexOf(finalResponseMarker);
-    if (markerIndex !== -1) {
-        processedText = processedText.substring(markerIndex + finalResponseMarker.length);
-        processedText = processedText.replace(/^.>/, '').trim();
-    }
-
-    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
-
-    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
-        return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
-    }
-
-    for (const match of tagMatches) {
-        const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '');
-
-        if (path) {
-            content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
-            let changed = true;
-            while(changed) {
-                const originalContent = content;
-                for (const pattern of patternsToRemove) {
-                    if (content.trim().endsWith(pattern)) {
-                        content = content.trim().slice(0, -pattern.length);
-                    }
-                }
-                if (content === originalContent) { changed = false; }
-            }
-            content = content.trim();
-            const tokenCount = Math.ceil(content.length / 4);
-            fileMap.set(path, { path, content, tokenCount });
-        }
-    }
-
-    const finalFiles = Array.from(fileMap.values());
-    totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
-
-    const summaryMatch = processedText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
-    const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);
-
-    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
-    const curatorActivity = (curatorActivityMatch?.[1] ?? '').trim();
-    
-    const filesUpdatedList = finalFiles.map(f => f.path);
-
-    if (finalFiles.length === 0 && !summaryMatch && !courseOfActionMatch && !curatorActivityMatch) {
-        return { summary: processedText, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
-    }
-
-    return {
-        summary,
-        courseOfAction,
-        curatorActivity,
-        filesUpdated: [...new Set(filesUpdatedList)],
-        files: finalFiles,
-        totalTokens,
-    };
-}
-</file_artifact>
-
 <file path="src/client/views/context-chooser.view/index.ts">
 import { onMessage } from "./on-message";
 
@@ -30611,5 +30499,117 @@ The workflow for generating AI responses needs to be more flexible. Users may de
 3.  **Backend Logic (`llm.service.ts`, `history.service.ts`):**
     *   The backend handlers will need to be updated to accommodate the new `tabsToRegenerate` payload.
     *   When the batch responses are received from the LLM, the `history.service.ts` will need to intelligently update the `dce_history.json` file, replacing the content only for the specified tab IDs instead of creating a new cycle. This will likely require a new method like `updateResponsesInCycle`.
+</file_artifact>
+
+<file path="src/client/utils/response-parser.ts">
+// src/client/utils/response-parser.ts
+// Updated on: C51 (Implement JSON-first parsing with regex fallback)
+import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
+
+const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
+const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
+const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
+const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
+
+export function parseResponse(rawText: string): ParsedResponse {
+    // Attempt to parse as JSON first for Harmony structured output
+    try {
+        const jsonResponse = JSON.parse(rawText);
+        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                path: f.path || '',
+                content: f.content || '',
+                tokenCount: Math.ceil((f.content || '').length / 4),
+            }));
+
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+                : jsonResponse.course_of_action; // Handle if it's already a string
+
+            return {
+                summary: jsonResponse.summary,
+                courseOfAction: courseOfAction,
+                curatorActivity: jsonResponse.curator_activity || '',
+                filesUpdated: files.map(f => f.path),
+                files: files,
+                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+            };
+        }
+    } catch (e) {
+        // Not a valid JSON object that matches our schema, proceed with regex parsing
+    }
+
+    // Fallback to existing regex-based parsing
+    const fileMap = new Map<string, ParsedFile>();
+    let totalTokens = 0;
+
+    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
+
+    const finalResponseMarker = 'assistantfinal';
+    const markerIndex = processedText.indexOf(finalResponseMarker);
+    if (markerIndex !== -1) {
+        processedText = processedText.substring(markerIndex + finalResponseMarker.length);
+        processedText = processedText.replace(/^.>/, '').trim();
+    }
+
+    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
+
+    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
+    }
+
+    for (const match of tagMatches) {
+        const path = (match?.[1] ?? '').trim();
+        let content = (match?.[2] ?? '');
+
+        if (path) {
+            content = content.replace(CODE_FENCE_START_REGEX, '');
+            const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
+            let changed = true;
+            while(changed) {
+                const originalContent = content;
+                for (const pattern of patternsToRemove) {
+                    if (content.trim().endsWith(pattern)) {
+                        content = content.trim().slice(0, -pattern.length);
+                    }
+                }
+                if (content === originalContent) { changed = false; }
+            }
+            content = content.trim();
+            const tokenCount = Math.ceil(content.length / 4);
+            fileMap.set(path, { path, content, tokenCount });
+        }
+    }
+
+    const finalFiles = Array.from(fileMap.values());
+    totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
+
+    const summaryMatch = processedText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
+    const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);
+
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
+    const curatorActivity = (curatorActivityMatch?.[1] ?? '').trim();
+    
+    const filesUpdatedList = finalFiles.map(f => f.path);
+
+    if (finalFiles.length === 0 && !summaryMatch && !courseOfActionMatch && !curatorActivityMatch) {
+        return { summary: processedText, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
+    }
+
+    return {
+        summary,
+        courseOfAction,
+        curatorActivity,
+        filesUpdated: [...new Set(filesUpdatedList)],
+        files: finalFiles,
+        totalTokens,
+    };
+}
 </file_artifact>
 

@@ -787,120 +787,1335 @@ No project scope defined.
 <Cycle Context>
 okay again still when i go to click Generate Initial Responses, i still do not switch to to the response progress UI. here are what the console logs look like while im wiating for the responses to come back (ephemeral). have you swapped the vllm to be streaming? that would be a pre-req, right? i see you were looking to make some isGenerating trigger, either theres evidence of it in the logs, or not, make sure the logs are helping figure out why the UI progress bar is not appearing when generating.
 
-additionally, we are not yet reaching parsing parity, or like 99% parsing success. currently the parsing is almost always failing in some form or manner.
+additionally, we are not yet reaching parsing parity, or like 99% parsing success. currently the parsing is almost always failing in some form or manner. i think that if you get good logging we can iteratively fine-tune until we get good results. im going to see how the logs are now, so far the logs right now are looking very clear and orderly, please keep that orderliness while also enhancing the logs to reveal if/when a parsing fails. try to create a case study in the logs about it, by capturing the data near where the parsing failure happened. do whatever you can to help reveal the cause of the failure so we can keep fine tuning our solution to increase our ability to accurately display these responses from this new model to the user.
 
-so far the logs right now are looking very clear and orderly, please keep that orderliness while also enhancing the logs to reveal if/when a parsing fails. try to create a case study in the logs about it, by capturing the data near where the parsing failure happened. do whatever you can to help reveal the cause of the failure so we can keep fine tuning our solution to increase our ability to accurately display these responses from this new model to the user.
-
-i do not yet see the regenerate button appear when hovering over a response tab.
-
-currently the `Regenerate` button doesnt regenerate under either of the two conditions/manners requested. 
+in ephemeral, ive captured logs from both the dce output and the webview from my test of trying to see the UI response progress bar when initiating a new project
 </Cycle Context>
 <Ephemeral Context>
-[INFO] [5:33:21 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [5:33:21 PM] Services initializing...
-[INFO] [5:33:21 PM] Services initialized successfully.
-[INFO] [5:33:21 PM] Registering 7 commands.
-[INFO] [5:33:21 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [5:33:21 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [5:33:21 PM] Starry Night syntax highlighter initialized.
-[INFO] [5:33:21 PM] Context Chooser view message handler initialized.
-[INFO] [5:33:21 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [5:33:21 PM] [SelectionService] No last selection found in state.
-[INFO] [5:33:21 PM] Persisted current selection of 0 items.
-[INFO] [5:33:22 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:33:26 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [5:33:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:33:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [5:33:29 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:33:35 PM] Executing dce.openSettingsPanel command.
-[INFO] [5:33:35 PM] Settings view message handler initialized.
-[INFO] [5:33:36 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [5:33:36 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [5:33:37 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:37 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:38 PM] Settings saved: Mode=demo, URL=undefined
-[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:38 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [5:33:39 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:33:47 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:33:49 PM] Generating Cycle 0 prompt.md file...
-[INFO] [5:33:49 PM] Onboarding complete. Requesting 4 initial responses from LLM.
-[INFO] [5:33:49 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [5:33:49 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [5:33:49 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense2/src","c:/Projects/TowerDefense2/src/Artifacts","c:/Projects/TowerDefense2/src/Artifacts/DCE_README.md"]
-[INFO] [5:33:49 PM] [SelectionService] No last selection found in state.
-[INFO] [5:33:49 PM] Persisted current selection of 3 items.
-[INFO] [5:33:49 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [5:33:49 PM] Persisted current selection of 3 items.
-[INFO] [5:33:51 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [5:37:21 PM] Received 4 responses from LLM.
-[INFO] [5:37:21 PM] Created new cycle 1 with 4 responses.
-[INFO] [5:37:21 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [5:37:21 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [5:37:21 PM] [CostCalc] Found 3 selected files.
-[INFO] [5:37:21 PM] [CostCalc] In-memory flattened content generated (797 tokens).
-[INFO] [5:37:21 PM] [Comparison] Received request for: ...
-[INFO] [5:37:21 PM] [Comparison] Received request for: src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md
-[INFO] [5:37:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: plaintext, id: ...::. That includes double quotes. We need to escape them as \". Also newline after >? We can keep newline as \n.
+<webview logs>
+log.ts:440  INFO ChatSessionStore: Migrating 0 chat sessions from storage service to file system
+localProcessExtensionHost.ts:350 [Extension Host] STOPPED on first line for debugging on port 53980
+F @ localProcessExtensionHost.ts:350
+await in F
+E @ localProcessExtensionHost.ts:187
+start @ localProcessExtensionHost.ts:178
+sAe @ extensionHostManager.ts:117
+o @ instantiationService.ts:169
+createInstance @ instantiationService.ts:135
+xb @ abstractExtensionService.ts:827
+wb @ abstractExtensionService.ts:806
+vb @ abstractExtensionService.ts:792
+kb @ abstractExtensionService.ts:459
+(anonymous) @ nativeExtensionService.ts:140
+requestIdleCallback
+eG @ async.ts:1464
+Uv @ dom.ts:244
+(anonymous) @ nativeExtensionService.ts:139
+Promise.then
+gxt @ nativeExtensionService.ts:137
+o @ instantiationService.ts:169
+x @ instantiationService.ts:302
+w @ instantiationService.ts:291
+v @ instantiationService.ts:280
+u @ instantiationService.ts:213
+s @ instantiationService.ts:197
+get @ instantiationService.ts:102
+(anonymous) @ workbench.ts:138
+invokeFunction @ instantiationService.ts:116
+startup @ workbench.ts:133
+open @ desktop.main.ts:137
+await in open
+_fn @ desktop.main.ts:421
+(anonymous) @ workbench.ts:532
+await in (anonymous)
+(anonymous) @ workbench.ts:533
+log.ts:440  INFO Started local extension host with pid 29700.
+log.ts:440  INFO Loading development extension at c:\Projects\DCE
+languagesAssociations.ts:73 Overwriting extension <<copilot-instructions.md>> to now point to mime <<text/x-instructions>>
+(anonymous) @ languagesAssociations.ts:73
+aei @ languagesAssociations.ts:67
+Dme @ languagesAssociations.ts:42
+u @ languagesRegistry.ts:201
+t @ languagesRegistry.ts:175
+_registerLanguages @ languagesRegistry.ts:129
+s @ languagesRegistry.ts:119
+setDynamicLanguages @ languagesRegistry.ts:108
+(anonymous) @ languageService.ts:273
+d @ extensionsRegistry.ts:154
+acceptUsers @ extensionsRegistry.ts:145
+Kb @ abstractExtensionService.ts:1173
+Hb @ abstractExtensionService.ts:1103
+lb @ abstractExtensionService.ts:537
+await in lb
+kb @ abstractExtensionService.ts:463
+await in kb
+(anonymous) @ nativeExtensionService.ts:140
+requestIdleCallback
+eG @ async.ts:1464
+Uv @ dom.ts:244
+(anonymous) @ nativeExtensionService.ts:139
+Promise.then
+gxt @ nativeExtensionService.ts:137
+o @ instantiationService.ts:169
+x @ instantiationService.ts:302
+w @ instantiationService.ts:291
+v @ instantiationService.ts:280
+u @ instantiationService.ts:213
+s @ instantiationService.ts:197
+get @ instantiationService.ts:102
+(anonymous) @ workbench.ts:138
+invokeFunction @ instantiationService.ts:116
+startup @ workbench.ts:133
+open @ desktop.main.ts:137
+await in open
+_fn @ desktop.main.ts:421
+(anonymous) @ workbench.ts:532
+await in (anonymous)
+(anonymous) @ workbench.ts:533
+languagesAssociations.ts:73 Overwriting extension <<.log>> to now point to mime <<log>>
+(anonymous) @ languagesAssociations.ts:73
+aei @ languagesAssociations.ts:67
+Dme @ languagesAssociations.ts:42
+u @ languagesRegistry.ts:201
+t @ languagesRegistry.ts:175
+_registerLanguages @ languagesRegistry.ts:129
+s @ languagesRegistry.ts:119
+setDynamicLanguages @ languagesRegistry.ts:108
+(anonymous) @ languageService.ts:273
+d @ extensionsRegistry.ts:154
+acceptUsers @ extensionsRegistry.ts:145
+Kb @ abstractExtensionService.ts:1173
+Hb @ abstractExtensionService.ts:1103
+lb @ abstractExtensionService.ts:537
+await in lb
+kb @ abstractExtensionService.ts:463
+await in kb
+(anonymous) @ nativeExtensionService.ts:140
+requestIdleCallback
+eG @ async.ts:1464
+Uv @ dom.ts:244
+(anonymous) @ nativeExtensionService.ts:139
+Promise.then
+gxt @ nativeExtensionService.ts:137
+o @ instantiationService.ts:169
+x @ instantiationService.ts:302
+w @ instantiationService.ts:291
+v @ instantiationService.ts:280
+u @ instantiationService.ts:213
+s @ instantiationService.ts:197
+get @ instantiationService.ts:102
+(anonymous) @ workbench.ts:138
+invokeFunction @ instantiationService.ts:116
+startup @ workbench.ts:133
+open @ desktop.main.ts:137
+await in open
+_fn @ desktop.main.ts:421
+(anonymous) @ workbench.ts:532
+await in (anonymous)
+(anonymous) @ workbench.ts:533
+log.ts:440  INFO [google.geminicodeassist]: Command `geminicodeassist.sdlcagents.agentBoard` already registered by Gemini Code Assist (google.geminicodeassist)
+localProcessExtensionHost.ts:280 Extension Host
+localProcessExtensionHost.ts:281 Debugger attached.
+log.ts:450  WARN No search provider registered for scheme: file, waiting
+warn @ log.ts:450
+warn @ log.ts:559
+warn @ logService.ts:47
+(anonymous) @ searchService.ts:297
+I @ searchService.ts:281
+(anonymous) @ searchService.ts:202
+await in (anonymous)
+C @ searchService.ts:219
+fileSearch @ searchService.ts:166
+U_e @ workspaceContains.ts:128
+(anonymous) @ gettingStartedService.ts:409
+invokeFunction @ instantiationService.ts:116
+(anonymous) @ gettingStartedService.ts:409
+await in (anonymous)
+Y @ gettingStartedService.ts:321
+(anonymous) @ gettingStartedService.ts:233
+(anonymous) @ gettingStartedService.ts:233
+d @ extensionsRegistry.ts:154
+setHandler @ extensionsRegistry.ts:133
+W @ gettingStartedService.ts:232
+uyt @ gettingStartedService.ts:178
+o @ instantiationService.ts:169
+(anonymous) @ instantiationService.ts:323
+TMt.g @ async.ts:1492
+get value @ async.ts:1509
+get @ instantiationService.ts:373
+gH @ gettingStarted.ts:213
+o @ instantiationService.ts:169
+createInstance @ instantiationService.ts:135
+instantiate @ editor.ts:78
+Q @ editorPanes.ts:403
+P @ editorPanes.ts:363
+O @ editorPanes.ts:334
+L @ editorPanes.ts:253
+openEditor @ editorPanes.ts:136
+(anonymous) @ editorGroupView.ts:1259
+Lb @ editorGroupView.ts:1283
+Kb @ editorGroupView.ts:1241
+openEditor @ editorGroupView.ts:1145
+openEditor @ editorService.ts:582
+await in openEditor
+C @ startupPage.ts:211
+w @ startupPage.ts:143
+await in w
+mMe @ startupPage.ts:99
+o @ instantiationService.ts:169
+createInstance @ instantiationService.ts:135
+F @ contributions.ts:381
+l @ contributions.ts:349
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+l @ contributions.ts:352
+requestIdleCallback
+eG @ async.ts:1464
+eF @ async.ts:1477
+D @ contributions.ts:366
+C @ contributions.ts:332
+(anonymous) @ contributions.ts:292
+Promise.then
+z @ contributions.ts:292
+start @ contributions.ts:260
+(anonymous) @ workbench.ts:151
+invokeFunction @ instantiationService.ts:116
+startup @ workbench.ts:133
+open @ desktop.main.ts:137
+await in open
+_fn @ desktop.main.ts:421
+(anonymous) @ workbench.ts:532
+await in (anonymous)
+(anonymous) @ workbench.ts:533
+log.ts:440  INFO Settings Sync: Account status changed from uninitialized to unavailable
+requestImpl.ts:33  GET https://marketplace.visualstudio.com/_apis/public/gallery/vscode/dce-developer/data-curation-environment/latest 404 (Not Found)
+bgn @ requestImpl.ts:33
+(anonymous) @ requestService.ts:38
+c @ request.ts:81
+request @ requestService.ts:38
+O @ extensionGalleryService.ts:1478
+await in O
+N @ extensionGalleryService.ts:1404
+D @ extensionGalleryService.ts:776
+(anonymous) @ extensionGalleryService.ts:719
+C @ extensionGalleryService.ts:716
+getExtensions @ extensionGalleryService.ts:599
+await in getExtensions
+checkForUpdates @ extensionsWorkbenchService.ts:1939
+await in checkForUpdates
+(anonymous) @ extensionsWorkbenchService.ts:2082
+queue @ async.ts:266
+(anonymous) @ async.ts:462
+(anonymous) @ async.ts:403
+Promise.then
+trigger @ async.ts:397
+trigger @ async.ts:462
+Rb @ extensionsWorkbenchService.ts:2080
+tb @ extensionsWorkbenchService.ts:1158
+sb @ extensionsWorkbenchService.ts:1104
+await in sb
+ndt @ extensionsWorkbenchService.ts:1087
+o @ instantiationService.ts:169
+x @ instantiationService.ts:302
+w @ instantiationService.ts:291
+v @ instantiationService.ts:280
+u @ instantiationService.ts:213
+s @ instantiationService.ts:197
+o @ instantiationService.ts:147
+createInstance @ instantiationService.ts:135
+F @ contributions.ts:381
+C @ contributions.ts:311
+z @ contributions.ts:287
+start @ contributions.ts:260
+(anonymous) @ workbench.ts:151
+invokeFunction @ instantiationService.ts:116
+startup @ workbench.ts:133
+open @ desktop.main.ts:137
+await in open
+_fn @ desktop.main.ts:421
+(anonymous) @ workbench.ts:532
+await in (anonymous)
+(anonymous) @ workbench.ts:533
+log.ts:440  INFO [perf] Render performance baseline is 36ms
+log.ts:460   ERR [Extension Host] (node:29700) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `Code --trace-warnings ...` to show where the warning was created)
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+kvs @ remoteConsoleUtil.ts:58
+$logExtensionHostMessage @ mainThreadConsole.ts:38
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+console.ts:137 [Extension Host] (node:29700) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `Code --trace-warnings ...` to show where the warning was created) (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+Cvs @ console.ts:137
+$logExtensionHostMessage @ mainThreadConsole.ts:39
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:440  INFO Extension host (LocalProcess pid: 29700) is unresponsive.
+localProcessExtensionHost.ts:280 Extension Host
+localProcessExtensionHost.ts:281 Debugger attached.
+log.ts:440  INFO UNRESPONSIVE extension host: starting to profile NOW
+log.ts:460   ERR [Extension Host] (node:29700) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+kvs @ remoteConsoleUtil.ts:58
+$logExtensionHostMessage @ mainThreadConsole.ts:38
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+console.ts:137 [Extension Host] (node:29700) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead. (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+Cvs @ console.ts:137
+$logExtensionHostMessage @ mainThreadConsole.ts:39
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:450  WARN Failed to update in-progress status for chat session type 'claude-code': Error: Can not find provider for claude-code
+    at CCt.provideChatSessionItems (chatSessions.contribution.ts:431:10)
+    at async CCt.C (chatSessions.contribution.ts:193:18)
+warn @ log.ts:450
+warn @ log.ts:559
+warn @ logService.ts:47
+C @ chatSessions.contribution.ts:197
+await in C
+registerChatSessionItemProvider @ chatSessions.contribution.ts:454
+$registerChatSessionItemProvider @ mainThreadChatSessions.ts:339
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:440  INFO Extension host (LocalProcess pid: 29700) is responsive.
+log.ts:440  INFO UNRESPONSIVE extension host: received responsive event and cancelling profiling session
+log.ts:450  WARN UNRESPONSIVE extension host: 'google.geminicodeassist' took 67.4148420378122% of 1021.558ms, saved PROFILE here: 'file:///c%3A/Users/dgera/AppData/Local/Temp/exthost-fd91e6.cpuprofile'
+warn @ log.ts:450
+warn @ log.ts:559
+warn @ logService.ts:47
+r @ extensionsAutoProfiler.ts:181
+await in r
+q @ extensionsAutoProfiler.ts:120
+await in q
+C @ event.ts:1201
+fire @ event.ts:1232
+(anonymous) @ abstractExtensionService.ts:811
+C @ event.ts:1201
+fire @ event.ts:1232
+(anonymous) @ extensionHostManager.ts:255
+C @ event.ts:1201
+fire @ event.ts:1232
+I @ rpcProtocol.ts:229
+H @ rpcProtocol.ts:216
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+H @ rpcProtocol.ts:219
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+H @ rpcProtocol.ts:219
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+F @ rpcProtocol.ts:192
+U @ rpcProtocol.ts:491
+n.<computed>.r.charCodeAt.n.<computed> @ rpcProtocol.ts:256
+(anonymous) @ mainThreadFileSystemEventService.ts:53
+C @ event.ts:1201
+D @ event.ts:1212
+fire @ event.ts:1236
+(anonymous) @ fileService.ts:74
+C @ event.ts:1201
+D @ event.ts:1212
+fire @ event.ts:1236
+(anonymous) @ diskFileSystemProvider.ts:141
+(anonymous) @ diskFileSystemProvider.ts:148
+(anonymous) @ watcher.ts:218
+C @ event.ts:1201
+fire @ event.ts:1232
+C @ event.ts:1201
+fire @ event.ts:1232
+l @ ipc.ts:688
+t @ ipc.ts:756
+s @ ipc.ts:745
+(anonymous) @ ipc.ts:547
+C @ event.ts:1201
+D @ event.ts:1212
+fire @ event.ts:1236
+we @ event.ts:591
+log.ts:440  INFO Extension host (LocalProcess pid: 29700) is unresponsive.
+localProcessExtensionHost.ts:280 Extension Host
+localProcessExtensionHost.ts:281 Debugger attached.
+log.ts:440  INFO UNRESPONSIVE extension host: starting to profile NOW
+console.ts:137 [Extension Host] Gemini CodeAssist version 2.50.0 (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Handling content exclusion file changes and firing event... (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Reading AI content exclusion file: .aiexclude (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+log.ts:440  INFO Extension host (LocalProcess pid: 29700) is responsive.
+log.ts:440  INFO UNRESPONSIVE extension host: received responsive event and cancelling profiling session
+console.ts:137 [Extension Host] AI content exclusion file setting is set, but the file is not found: .aiexclude (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Reading AI content exclusion file: .gitignore (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+log.ts:450  WARN UNRESPONSIVE extension host: 'github.copilot' took 97.06921882863415% of 1004.912ms, saved PROFILE here: 'file:///c%3A/Users/dgera/AppData/Local/Temp/exthost-4dfd5a.cpuprofile'
+warn @ log.ts:450
+warn @ log.ts:559
+warn @ logService.ts:47
+r @ extensionsAutoProfiler.ts:181
+await in r
+q @ extensionsAutoProfiler.ts:120
+await in q
+C @ event.ts:1201
+fire @ event.ts:1232
+(anonymous) @ abstractExtensionService.ts:811
+C @ event.ts:1201
+fire @ event.ts:1232
+(anonymous) @ extensionHostManager.ts:255
+C @ event.ts:1201
+fire @ event.ts:1232
+I @ rpcProtocol.ts:229
+H @ rpcProtocol.ts:216
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+H @ rpcProtocol.ts:219
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+H @ rpcProtocol.ts:219
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+H @ rpcProtocol.ts:219
+(anonymous) @ rpcProtocol.ts:160
+h @ async.ts:1157
+g @ async.ts:1152
+setTimeout
+e.setTimeout @ window.ts:120
+schedule @ async.ts:1124
+F @ rpcProtocol.ts:192
+U @ rpcProtocol.ts:491
+n.<computed>.r.charCodeAt.n.<computed> @ rpcProtocol.ts:256
+activateByEvent @ mainThreadExtensionService.ts:212
+I @ extensionHostManager.ts:354
+await in I
+activateByEvent @ extensionHostManager.ts:329
+(anonymous) @ abstractExtensionService.ts:977
+(anonymous) @ abstractExtensionService.ts:1309
+map @ abstractExtensionService.ts:1309
+Eb @ abstractExtensionService.ts:977
+activateByEvent @ abstractExtensionService.ts:959
+(anonymous) @ languageModels.ts:433
+resolveLanguageModels @ languageModels.ts:433
+registerLanguageModelProvider @ languageModels.ts:501
+$registerLanguageModelProvider @ mainThreadLanguageModels.ts:59
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+console.ts:137 [Extension Host] AI content exclusion file setting is set, but the file is not found: .gitignore (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Content exclusion file changes handled and event fired. (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] AIExcludeProvider initialized. (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Error parsing credentials file: SyntaxError: Unexpected non-whitespace character after JSON at position 2024 (line 1 column 2025) (at warn (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974))
+Cvs @ console.ts:137
+$logExtensionHostMessage @ mainThreadConsole.ts:39
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+console.ts:137 [Extension Host] Activating plugin Gemini Code Assist (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Activating plugin SDLC Agents (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Skipping activation of SDLC Agents, it is not enabled (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Activating plugin Code Documentation (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Activating plugin Local agent (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Activating plugin MCP Server (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Done activating plugin SDLC Agents, took 22.467500000002474ms (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Done activating plugin Code Documentation, took 20.20390000000043ms (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Done activating plugin Local agent, took 19.088900000002468ms (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Done activating plugin MCP Server, took 8.312000000001717ms (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+console.ts:137 [Extension Host] Done activating plugin Gemini Code Assist, took 56.737199999999575ms (at file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:30974)
+webviewElement.ts:489 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+mountTo @ webviewElement.ts:489
+P @ overlayWebview.ts:250
+claim @ overlayWebview.ts:136
+oc @ webviewViewPane.ts:161
+(anonymous) @ webviewViewPane.ts:92
+C @ event.ts:1201
+D @ event.ts:1212
+fire @ event.ts:1236
+setVisible @ viewPane.ts:409
+(anonymous) @ viewPaneContainer.ts:675
+setVisible @ viewPaneContainer.ts:675
+setVisible @ panecomposite.ts:53
+Fb @ compositePart.ts:282
+Fb @ paneCompositePart.ts:235
+Db @ compositePart.ts:159
+Cb @ compositePart.ts:123
+Cc @ paneCompositePart.ts:538
+openPaneComposite @ paneCompositePart.ts:506
+run @ paneCompositeBar.ts:836
+u @ actions.ts:194
+run @ actions.ts:185
+onClick @ actionViewItems.ts:177
+(anonymous) @ actionViewItems.ts:157
+webviewElement.ts:489 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+mountTo @ webviewElement.ts:489
+P @ overlayWebview.ts:250
+claim @ overlayWebview.ts:136
+claim @ webviewEditorInput.ts:138
+hb @ webviewEditor.ts:172
+setInput @ webviewEditor.ts:163
+await in setInput
+S @ editorPanes.ts:464
+L @ editorPanes.ts:259
+openEditor @ editorPanes.ts:136
+(anonymous) @ editorGroupView.ts:1259
+Lb @ editorGroupView.ts:1283
+Kb @ editorGroupView.ts:1241
+openEditor @ editorGroupView.ts:1145
+openEditor @ editorService.ts:582
+openWebview @ webviewWorkbenchService.ts:293
+$createWebviewPanel @ mainThreadWebviewPanels.ts:167
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+contextChooserView.js:58550 Uncaught ReferenceError: module is not defined
+    at contextChooserView.js:58550:1
+    at contextChooserView.js:58551:12
+(anonymous) @ contextChooserView.js:58550
+(anonymous) @ contextChooserView.js:58551
+contextChooserView.js:37159 [FTV] Received ApplySelectionSet with 0 paths.
+contextChooserView.js:37159 [FTV] Received SendWorkspaceFiles with 1 root nodes.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:460   ERR An unknown error occurred. Please consult the log for more details.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+oc @ workbench.ts:121
+(anonymous) @ workbench.ts:102
+onUnexpectedError @ errors.ts:65
+bt @ errors.ts:110
+$onUnexpectedError @ mainThreadErrors.ts:21
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+parallelCopilotView.js:62407 Uncaught ReferenceError: module is not defined
+    at parallelCopilotView.js:62407:1
+    at parallelCopilotView.js:62408:12
+(anonymous) @ parallelCopilotView.js:62407
+(anonymous) @ parallelCopilotView.js:62408
+contextChooserView.js:37159 [FTV] Received ForceRefresh. Reason: fileOp.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:460   ERR An unknown error occurred. Please consult the log for more details.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+oc @ workbench.ts:121
+(anonymous) @ workbench.ts:102
+onUnexpectedError @ errors.ts:65
+bt @ errors.ts:110
+$onUnexpectedError @ mainThreadErrors.ts:21
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+contextChooserView.js:37159 [FTV] Received SendWorkspaceFiles with 1 root nodes.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+webviewElement.ts:489 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+mountTo @ webviewElement.ts:489
+P @ overlayWebview.ts:250
+claim @ overlayWebview.ts:136
+claim @ webviewEditorInput.ts:138
+hb @ webviewEditor.ts:172
+setInput @ webviewEditor.ts:163
+await in setInput
+S @ editorPanes.ts:464
+L @ editorPanes.ts:259
+openEditor @ editorPanes.ts:136
+(anonymous) @ editorGroupView.ts:1259
+Lb @ editorGroupView.ts:1283
+Kb @ editorGroupView.ts:1241
+openEditor @ editorGroupView.ts:1145
+openEditor @ editorService.ts:582
+openWebview @ webviewWorkbenchService.ts:293
+$createWebviewPanel @ mainThreadWebviewPanels.ts:167
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+settingsView.js:60002 Uncaught ReferenceError: module is not defined
+    at settingsView.js:60002:1
+    at settingsView.js:60003:12
+(anonymous) @ settingsView.js:60002
+(anonymous) @ settingsView.js:60003
+contextChooserView.js:37159 [FTV] Received ForceRefresh. Reason: fileOp.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:460   ERR An unknown error occurred. Please consult the log for more details.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+oc @ workbench.ts:121
+(anonymous) @ workbench.ts:102
+onUnexpectedError @ errors.ts:65
+bt @ errors.ts:110
+$onUnexpectedError @ mainThreadErrors.ts:21
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+contextChooserView.js:37159 [FTV] Received SendWorkspaceFiles with 1 root nodes.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+webviewElement.ts:489 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+mountTo @ webviewElement.ts:489
+P @ overlayWebview.ts:250
+claim @ overlayWebview.ts:136
+claim @ webviewEditorInput.ts:138
+hb @ webviewEditor.ts:172
+setInput @ webviewEditor.ts:163
+await in setInput
+S @ editorPanes.ts:464
+L @ editorPanes.ts:259
+openEditor @ editorPanes.ts:136
+(anonymous) @ editorGroupView.ts:1259
+Lb @ editorGroupView.ts:1283
+Kb @ editorGroupView.ts:1241
+openEditor @ editorGroupView.ts:1145
+o @ multiEditorTabsControl.ts:932
+(anonymous) @ multiEditorTabsControl.ts:947
+parallelCopilotView.js:62407 Uncaught ReferenceError: module is not defined
+    at parallelCopilotView.js:62407:1
+    at parallelCopilotView.js:62408:12
+(anonymous) @ parallelCopilotView.js:62407
+(anonymous) @ parallelCopilotView.js:62408
+contextChooserView.js:37159 [FTV] Received ForceRefresh. Reason: fileOp.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:460   ERR An unknown error occurred. Please consult the log for more details.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+oc @ workbench.ts:121
+(anonymous) @ workbench.ts:102
+onUnexpectedError @ errors.ts:65
+bt @ errors.ts:110
+$onUnexpectedError @ mainThreadErrors.ts:21
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+contextChooserView.js:37159 [FTV] Received SendWorkspaceFiles with 1 root nodes.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+parallelCopilotView.js:36412 Sending request to generate initial artifacts AND 4 responses.
+contextChooserView.js:37159 [FTV] Received ApplySelectionSet with 3 paths.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:460   ERR An unknown error occurred. Please consult the log for more details.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+oc @ workbench.ts:121
+(anonymous) @ workbench.ts:102
+onUnexpectedError @ errors.ts:65
+bt @ errors.ts:110
+$onUnexpectedError @ mainThreadErrors.ts:21
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+contextChooserView.js:37159 [FTV] Received ForceRefresh. Reason: fileOp.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+log.ts:460   ERR An unknown error occurred. Please consult the log for more details.
+error @ log.ts:460
+error @ log.ts:565
+error @ logService.ts:51
+oc @ workbench.ts:121
+(anonymous) @ workbench.ts:102
+onUnexpectedError @ errors.ts:65
+bt @ errors.ts:110
+$onUnexpectedError @ mainThreadErrors.ts:21
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+contextChooserView.js:37159 [FTV] Received SendWorkspaceFiles with 1 root nodes.
+mainThreadExtensionService.ts:78 [DCE-Developer.data-curation-environment]loggerService[data.level] is not a function
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:78
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
+mainThreadExtensionService.ts:79 TypeError: loggerService[data.level] is not a function
+    at Object.callback (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\client\views\context-chooser.view\on-message.ts:37:34)
+    at c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:19:30
+    at Array.forEach (<anonymous>)
+    at od.value (c:\Projects\DCE\dist\webpack:\data-curation-environment\src\common\ipc\server-ipc.ts:17:29)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at xV.$onMessage (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:140:92344)
+    at j4.S (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:120180)
+    at j4.Q (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119960)
+    at j4.M (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:119049)
+    at j4.L (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118287)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116951)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at od.value (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:8617)
+    at $.C (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2373)
+    at $.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:27:2591)
+    at vo.fire (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:9458)
+    at MessagePortMain.<anonymous> (file:///c:/Users/dgera/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:391:6909)
+    at MessagePortMain.emit (node:events:518:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+$onExtensionRuntimeError @ mainThreadExtensionService.ts:79
+S @ rpcProtocol.ts:458
+Q @ rpcProtocol.ts:443
+M @ rpcProtocol.ts:373
+L @ rpcProtocol.ts:299
+(anonymous) @ rpcProtocol.ts:161
+C @ event.ts:1201
+fire @ event.ts:1232
+fire @ ipc.net.ts:652
+l.onmessage @ localProcessExtensionHost.ts:383
 
-Let's build the content string for A14.
+</webview logs>
 
-I'll produce the string with \n and escaped double quotes.
+<output logs>
+[INFO] [7:40:08 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [7:40:08 PM] Services initializing...
+[INFO] [7:40:08 PM] Services initialized successfully.
+[INFO] [7:40:08 PM] Registering 7 commands.
+[INFO] [7:40:08 PM] Starry Night syntax highlighter initialized.
+[INFO] [7:40:08 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [7:40:08 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [7:40:08 PM] Context Chooser view message handler initialized.
+[INFO] [7:40:09 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [7:40:09 PM] [SelectionService] No last selection found in state.
+[INFO] [7:40:09 PM] Persisted current selection of 0 items.
+[INFO] [7:40:09 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:40:13 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [7:40:13 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [7:40:15 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [7:40:17 PM] Executing dce.openSettingsPanel command.
+[INFO] [7:40:17 PM] Settings view message handler initialized.
+[INFO] [7:40:18 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [7:40:18 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [7:40:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [7:40:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [7:40:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [7:40:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [7:40:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [7:40:20 PM] Settings saved: Mode=demo, URL=undefined
+[INFO] [7:40:21 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [7:40:23 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [7:40:24 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:40:25 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [7:40:28 PM] Generating Cycle 0 prompt.md file...
+[INFO] [7:40:28 PM] Onboarding complete. Requesting 4 initial responses from LLM.
+[INFO] [7:40:28 PM] Sending batch request for 4 responses to: https://aiascent.game/api/dce/proxy
+[INFO] [7:40:29 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [7:40:29 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [7:40:29 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [7:40:29 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [7:40:29 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense4/src","c:/Projects/TowerDefense4/src/Artifacts","c:/Projects/TowerDefense4/src/Artifacts/DCE_README.md"]
+[INFO] [7:40:29 PM] [SelectionService] No last selection found in state.
+[INFO] [7:40:29 PM] Persisted current selection of 3 items.
+[INFO] [7:40:29 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [7:40:29 PM] Persisted current selection of 3 items.
+[INFO] [7:40:30 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
 
-Need to be careful.
-
-Also we might need to escape backticks? Not necessary.
-
-Let's start writing JSON.
-
-Will produce something like:
-
-{
-  "summary": "...",
-  "course_of_action": [...],
-  "curator_activity": "...",
-  "files": [
-    {"path":"src/Artifacts/A1. TowerDefense - Master Artifact List.md","content":"..."},
-    ...
-  ]
-}
-
-Now we need to create content strings with \n and escape double quotes.
-
-Let's write content for A1.
-
-I'll produce it as:
-
-"# Artifact T1: Master Artifact List\n# Date Created: C140\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.\n\n## 2. Formatting Rules for Parsing\n\n*   Lines beginning with `#` are comments and are ignored.\n*   `##` denotes a major category header and is ignored.\n*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.\n*   Lines beginning with `- **Description:**` provide context for the project.\n*   Lines beginning with `- **Tags:**` provide keywords for Inference.\n\n## 3. Example Structure\n\n## I. Project Planning & Design\n\n### A1. TowerDefense - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plan.\n- **Tags:** project vision, goals, scope, planning\n\n### A2. TowerDefense - Phase 1 - Technical Scaffolding Plan\n- **Description:** Defines the initial technical architecture and file structure for the project.\n- **Tags:** technical plan, architecture, scaffolding\n\n### A3. TowerDefense - Development and Testing Guide\n- **Description:** Standard procedures for running, debugging, and testing the application locally.\n- **Tags:** development workflow, testing, debugging\n\n### A4. TowerDefense - GitHub Repository Setup Guide\n- **Description:** Steps to initialize Git, link to GitHub, and sample workflow.\n- **Tags:** git, github, version control, workflow"
-
-We need to escape double quotes inside string. In this content, there are double quotes inside the phrase "Source of Truth". We need to escape them as \". Also we have double quotes inside JSON string for the tags? Actually the tags line contains no double quotes. The only double quotes are inside the text. We'll escape them.
-
-Also we have the backticks around `#`, etc. Those are fine.
-
-Now content for A2, A4, A7 similarly.
-
-Also for A14, we need to include <file path="src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"> ...
-[WARN] [5:37:21 PM] [WARN] No Starry Night scope found for language: plaintext
-[INFO] [5:37:21 PM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md::...
-[INFO] [5:37:21 PM] [File Existence] Received request to check paths: ["...","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
-[INFO] [5:37:21 PM] [File Existence] Received request to check paths: ["...","src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md"]
-[ERROR] [5:37:21 PM] [Comparison] Failed for ...: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\...'
-[ERROR] [5:37:21 PM] [Comparison] Failed for src/Artifacts/A14. TowerDefense - GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense2\src\Artifacts\A14. TowerDefense - GitHub Repository Setup Guide.md'
-[INFO] [5:37:21 PM] [CostCalc] Calculating breakdown:
-[INFO] [5:37:21 PM]   - M1 Artifact Schema: 48 tokens
-[INFO] [5:37:21 PM]   - M2 Cycle Overview: 30 tokens
-[INFO] [5:37:21 PM]   - M3 Interaction Schema: 768 tokens
-[INFO] [5:37:21 PM]   - M4 Project Scope: 24 tokens
-[INFO] [5:37:21 PM]   - M5 Artifact List: 30 tokens
-[INFO] [5:37:21 PM]   - M6 Cycles: 11128 tokens
-[INFO] [5:37:21 PM]   - M7 Flattened Repo: 808 tokens
-[INFO] [5:37:21 PM] [CostCalc] Total Tokens: 12836, Estimated Cost: $0.016045
-[INFO] [5:37:21 PM] [CostCalc] Sending estimation to client.
-
+</output logs>
 </Ephemeral Context>
 <Previous Cycle 51 Summary of Actions>
 This is an excellent set of requests that pushes the project toward a more robust, user-friendly, and intelligent workflow. My analysis confirms that your ideas—especially leveraging structured JSON output from Harmony/vLLM and providing better UI feedback—are not only feasible but represent a significant architectural improvement.
@@ -3609,21 +4824,21 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-23T22:44:30.760Z
+  Date Generated: 2025-09-24T00:41:28.463Z
   ---
   Total Files: 192
-  Approx. Tokens: 506715
+  Approx. Tokens: 507351
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\client\views\parallel-copilot.view\view.tsx (9563 tokens)
+4. src\client\views\parallel-copilot.view\view.tsx (9657 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 6. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (5861 tokens)
-8. src\backend\services\prompt.service.ts (5055 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (6123 tokens)
+8. src\backend\services\prompt.service.ts (5146 tokens)
 9. src\backend\services\file-operation.service.ts (4526 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
@@ -3639,7 +4854,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 9. src\Artifacts\A9. DCE - GitHub Repository Setup Guide.md - Lines: 88 - Chars: 4916 - Tokens: 1229
 10. src\Artifacts\A10. DCE - Metadata and Statistics Display.md - Lines: 53 - Chars: 7286 - Tokens: 1822
 11. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 20 - Chars: 1090 - Tokens: 273
-12. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3700 - Tokens: 925
+12. src\Artifacts\A11.1 DCE - New Regression Case Studies.md - Lines: 44 - Chars: 3743 - Tokens: 936
 13. src\Artifacts\A12. DCE - Logging and Debugging Guide.md - Lines: 80 - Chars: 5687 - Tokens: 1422
 14. src\Artifacts\A13. DCE - Phase 1 - Right-Click Context Menu.md - Lines: 45 - Chars: 6068 - Tokens: 1517
 15. src\Artifacts\A14. DCE - Ongoing Development Issues.md - Lines: 64 - Chars: 4324 - Tokens: 1081
@@ -3757,10 +4972,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 127. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 128. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 129. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-130. src\backend\services\history.service.ts - Lines: 296 - Chars: 11897 - Tokens: 2975
+130. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
 131. src\backend\services\llm.service.ts - Lines: 75 - Chars: 2972 - Tokens: 743
 132. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20219 - Tokens: 5055
+133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
 134. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 135. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 136. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1670 - Tokens: 418
@@ -3774,52 +4989,52 @@ This file-centric approach helps in planning and prioritizing work, especially i
 144. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
 145. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
 146. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-147. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
-148. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-149. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-150. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-151. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-152. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-153. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-154. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-155. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-156. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-157. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-158. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-159. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-160. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-161. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6813 - Tokens: 1704
-162. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
-163. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 23444 - Tokens: 5861
-164. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-165. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38250 - Tokens: 9563
-166. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-167. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-168. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-169. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
-170. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-171. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-172. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8600 - Tokens: 2150
-173. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-174. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-175. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-176. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-177. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-178. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-179. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-180. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-181. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-182. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-183. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-184. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
-185. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
-186. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
-187. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
-188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
-189. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3018 - Tokens: 755
-190. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-191. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-192. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+147. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+148. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+149. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+150. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+151. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+152. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+153. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+154. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+155. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+156. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+157. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+158. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+159. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+160. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
+161. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
+162. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 24492 - Tokens: 6123
+163. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+164. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38626 - Tokens: 9657
+165. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+166. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+167. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+168. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
+169. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+170. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
+171. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
+172. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+173. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+174. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+175. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+176. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+177. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+178. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+179. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+180. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+181. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+182. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+183. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
+184. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
+185. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
+186. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+187. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
+188. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 69 - Chars: 3086 - Tokens: 772
+189. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+190. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+191. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+192. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5188 - Tokens: 1297
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -24146,118 +25361,6 @@ export const logger = {
 };
 </file_artifact>
 
-<file path="src/client/utils/response-parser.ts">
-// src/client/utils/response-parser.ts
-// Updated on: C51 (Implement JSON-first parsing with regex fallback)
-import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
-
-const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
-const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
-const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
-const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
-const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
-
-export function parseResponse(rawText: string): ParsedResponse {
-    // Attempt to parse as JSON first for Harmony structured output
-    try {
-        const jsonResponse = JSON.parse(rawText);
-        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: f.content || '',
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
-
-            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
-                ? jsonResponse.course_of_action
-                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
-                    .join('\n')
-                : jsonResponse.course_of_action; // Handle if it's already a string
-
-            return {
-                summary: jsonResponse.summary,
-                courseOfAction: courseOfAction,
-                curatorActivity: jsonResponse.curator_activity || '',
-                filesUpdated: files.map(f => f.path),
-                files: files,
-                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
-            };
-        }
-    } catch (e) {
-        // Not a valid JSON object that matches our schema, proceed with regex parsing
-    }
-
-    // Fallback to existing regex-based parsing
-    const fileMap = new Map<string, ParsedFile>();
-    let totalTokens = 0;
-
-    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
-
-    const finalResponseMarker = 'assistantfinal';
-    const markerIndex = processedText.indexOf(finalResponseMarker);
-    if (markerIndex !== -1) {
-        processedText = processedText.substring(markerIndex + finalResponseMarker.length);
-        processedText = processedText.replace(/^.>/, '').trim();
-    }
-
-    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
-
-    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
-        return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
-    }
-
-    for (const match of tagMatches) {
-        const path = (match?.[1] ?? '').trim();
-        let content = (match?.[2] ?? '');
-
-        if (path) {
-            content = content.replace(CODE_FENCE_START_REGEX, '');
-            const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
-            let changed = true;
-            while(changed) {
-                const originalContent = content;
-                for (const pattern of patternsToRemove) {
-                    if (content.trim().endsWith(pattern)) {
-                        content = content.trim().slice(0, -pattern.length);
-                    }
-                }
-                if (content === originalContent) { changed = false; }
-            }
-            content = content.trim();
-            const tokenCount = Math.ceil(content.length / 4);
-            fileMap.set(path, { path, content, tokenCount });
-        }
-    }
-
-    const finalFiles = Array.from(fileMap.values());
-    totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
-
-    const summaryMatch = processedText.match(SUMMARY_REGEX);
-    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
-    const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);
-
-    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
-    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
-    const curatorActivity = (curatorActivityMatch?.[1] ?? '').trim();
-    
-    const filesUpdatedList = finalFiles.map(f => f.path);
-
-    if (finalFiles.length === 0 && !summaryMatch && !courseOfActionMatch && !curatorActivityMatch) {
-        return { summary: processedText, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
-    }
-
-    return {
-        summary,
-        courseOfAction,
-        curatorActivity,
-        filesUpdated: [...new Set(filesUpdatedList)],
-        files: finalFiles,
-        totalTokens,
-    };
-}
-</file_artifact>
-
 <file path="src/client/views/context-chooser.view/index.ts">
 import { onMessage } from "./on-message";
 
@@ -34219,6 +35322,118 @@ The workflow for generating AI responses needs to be more flexible. Users may de
 3.  **Backend Logic (`llm.service.ts`, `history.service.ts`):**
     *   The backend handlers will need to be updated to accommodate the new `tabsToRegenerate` payload.
     *   When the batch responses are received from the LLM, the `history.service.ts` will need to intelligently update the `dce_history.json` file, replacing the content only for the specified tab IDs instead of creating a new cycle. This will likely require a new method like `updateResponsesInCycle`.
+</file_artifact>
+
+<file path="src/client/utils/response-parser.ts">
+// src/client/utils/response-parser.ts
+// Updated on: C51 (Implement JSON-first parsing with regex fallback)
+import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
+
+const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
+const COURSE_OF_ACTION_REGEX = /<course_of_action>([\s\S]*?)<\/course_of_action>/;
+const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>/;
+const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
+const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
+
+export function parseResponse(rawText: string): ParsedResponse {
+    // Attempt to parse as JSON first for Harmony structured output
+    try {
+        const jsonResponse = JSON.parse(rawText);
+        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                path: f.path || '',
+                content: f.content || '',
+                tokenCount: Math.ceil((f.content || '').length / 4),
+            }));
+
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+                : jsonResponse.course_of_action; // Handle if it's already a string
+
+            return {
+                summary: jsonResponse.summary,
+                courseOfAction: courseOfAction,
+                curatorActivity: jsonResponse.curator_activity || '',
+                filesUpdated: files.map(f => f.path),
+                files: files,
+                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+            };
+        }
+    } catch (e) {
+        // Not a valid JSON object that matches our schema, proceed with regex parsing
+    }
+
+    // Fallback to existing regex-based parsing
+    const fileMap = new Map<string, ParsedFile>();
+    let totalTokens = 0;
+
+    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
+
+    const finalResponseMarker = 'assistantfinal';
+    const markerIndex = processedText.indexOf(finalResponseMarker);
+    if (markerIndex !== -1) {
+        processedText = processedText.substring(markerIndex + finalResponseMarker.length);
+        processedText = processedText.replace(/^.>/, '').trim();
+    }
+
+    const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
+
+    if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
+        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
+    }
+
+    for (const match of tagMatches) {
+        const path = (match?.[1] ?? '').trim();
+        let content = (match?.[2] ?? '');
+
+        if (path) {
+            content = content.replace(CODE_FENCE_START_REGEX, '');
+            const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
+            let changed = true;
+            while(changed) {
+                const originalContent = content;
+                for (const pattern of patternsToRemove) {
+                    if (content.trim().endsWith(pattern)) {
+                        content = content.trim().slice(0, -pattern.length);
+                    }
+                }
+                if (content === originalContent) { changed = false; }
+            }
+            content = content.trim();
+            const tokenCount = Math.ceil(content.length / 4);
+            fileMap.set(path, { path, content, tokenCount });
+        }
+    }
+
+    const finalFiles = Array.from(fileMap.values());
+    totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
+
+    const summaryMatch = processedText.match(SUMMARY_REGEX);
+    const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
+    const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);
+
+    const summary = (summaryMatch?.[1] ?? 'Could not parse summary.').trim();
+    const courseOfAction = (courseOfActionMatch?.[1] ?? 'Could not parse course of action.').trim();
+    const curatorActivity = (curatorActivityMatch?.[1] ?? '').trim();
+    
+    const filesUpdatedList = finalFiles.map(f => f.path);
+
+    if (finalFiles.length === 0 && !summaryMatch && !courseOfActionMatch && !curatorActivityMatch) {
+        return { summary: processedText, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
+    }
+
+    return {
+        summary,
+        courseOfAction,
+        curatorActivity,
+        filesUpdated: [...new Set(filesUpdatedList)],
+        files: finalFiles,
+        totalTokens,
+    };
+}
 </file_artifact>
 
 
