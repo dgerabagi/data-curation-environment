@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T00:41:28.463Z
+  Date Generated: 2025-09-24T01:14:28.315Z
   ---
   Total Files: 192
-  Approx. Tokens: 507351
+  Approx. Tokens: 507427
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -150,7 +150,7 @@
 128. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 129. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 130. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-131. src\backend\services\llm.service.ts - Lines: 75 - Chars: 2972 - Tokens: 743
+131. src\backend\services\llm.service.ts - Lines: 75 - Chars: 3046 - Tokens: 762
 132. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 133. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
 134. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -180,7 +180,7 @@
 158. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 159. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 160. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
-161. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6434 - Tokens: 1609
+161. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 126 - Chars: 6559 - Tokens: 1640
 162. src\client\views\parallel-copilot.view\view.scss - Lines: 1049 - Chars: 24492 - Tokens: 6123
 163. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 164. src\client\views\parallel-copilot.view\view.tsx - Lines: 377 - Chars: 38626 - Tokens: 9657
@@ -189,7 +189,7 @@
 167. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 168. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6337 - Tokens: 1585
 169. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-170. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
+170. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5968 - Tokens: 1492
 171. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
 172. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 173. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
