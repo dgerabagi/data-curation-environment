@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C57 (Implement correct multi-response SSE stream parsing)
+// Updated on: C58 (Correct SSE index parsing)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -105,32 +105,34 @@ export class LlmService {
                     if (line.startsWith('data: ')) {
                         const dataStr = line.substring(6);
                         if (dataStr.trim() === '[DONE]') {
-                            // This is tricky. A single [DONE] might be sent. We rely on finish_reason.
                             continue;
                         }
                         
                         try {
                             const data = JSON.parse(dataStr);
-                            const choice = data.choices; // vLLM sends one choice object per SSE message
-                            if (choice) {
-                                const responseIndex = choice.index;
-                                
-                                if (responseIndex === undefined || responseIndex >= count) {
-                                    Services.loggerService.warn(`Received chunk with invalid index: ${responseIndex}`);
-                                    continue;
-                                }
-
-                                if (choice.finish_reason !== null) {
-                                    if (!finishedResponses[responseIndex]) {
-                                        Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
-                                        finishedResponses[responseIndex] = true;
-                                        totalFinished++;
+                            // FIX C58: Correctly access the nested index property
+                            const choices = data.choices;
+                            if (Array.isArray(choices)) {
+                                for (const choice of choices) {
+                                    const responseIndex = choice.index;
+                                    
+                                    if (responseIndex === undefined || responseIndex >= count) {
+                                        Services.loggerService.warn(`Received chunk with invalid index: ${responseIndex}`);
+                                        continue;
                                     }
-                                } else if (choice.delta && choice.delta.content) {
-                                    const contentChunk = choice.delta.content;
-                                    responseContents[responseIndex] += contentChunk;
-                                    tokensSinceLastUpdate++;
-                                    progressData[responseIndex].currentTokens++;
+
+                                    if (choice.finish_reason !== null) {
+                                        if (!finishedResponses[responseIndex]) {
+                                            Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
+                                            finishedResponses[responseIndex] = true;
+                                            totalFinished++;
+                                        }
+                                    } else if (choice.delta && choice.delta.content) {
+                                        const contentChunk = choice.delta.content;
+                                        responseContents[responseIndex] += contentChunk;
+                                        tokensSinceLastUpdate++;
+                                        progressData[responseIndex].currentTokens++;
+                                    }
                                 }
                             }
                         } catch (e) {
