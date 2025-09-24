@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 55 - continue streaming implementation
+Current Cycle 56 - streaming is closer...
+Cycle 55 - continue streaming implementation
 Cycle 54 - still no feedback from vllm in dce
 Cycle 53 - i see response ui!
 Cycle 52 - still no response progress UI appearing
@@ -786,58 +787,118 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 56>
+<Cycle Context>
+okay, i just sent a new test request... i see it the <proxy logs> say it received 4 parallel responses and established a stream... i check the <vllm logs> and it seems to be performing as expected... however, it appears that after the first llm stream ended, (the others are still going) the DCE panel detected that one and swapped to the pcpp pane, thereby closing the response panel before all responses have come in.
+
+additionally, when i check the <dce logs>, not only does the dce never display any response completion progress, the dce never represented any progress in the progress bar for any of the 4 responses. it just showed `- / 8192 tokens` and it showed 0% progress, despite seeing clear progress in <vllm logs>. are we sure the dce is indeed receiving a stream?
+</Cycle Context>
+<Ephemeral Context>
+<proxy logs>
+[INFO] [[ReportKB]] Successfully loaded REPORT FAISS index with function ntotal() { [native code] } vectors and 275 chunks.
+[INFO] [[DCE]] Received request on /api/dce/proxy
+[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
+[INFO] [[DCE]] Successfully established stream from vLLM to client.
+</proxy logs>
+<vllm logs>
+(APIServer pid=439) INFO:     127.0.0.1:55146 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=439) INFO 09-24 15:38:39 [loggers.py:123] Engine 000: Avg prompt throughput: 4776.0 tokens/s, Avg generation throughput: 74.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.0%, Prefix cache hit rate: 90.4%
+(APIServer pid=439) INFO 09-24 15:38:49 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 121.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.5%, Prefix cache hit rate: 90.4%
+(APIServer pid=439) INFO 09-24 15:38:59 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 136.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.0%, Prefix cache hit rate: 90.4%
+(APIServer pid=439) INFO 09-24 15:39:09 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 147.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.6%, Prefix cache hit rate: 90.4%
+(APIServer pid=439) INFO 09-24 15:39:19 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 137.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.1%, Prefix cache hit rate: 90.4%
+(APIServer pid=439) INFO 09-24 15:39:29 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 144.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.7%, Prefix cache hit rate: 90.4%
+(APIServer pid=439) INFO 09-24 15:39:39 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 152.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.3%, Prefix cache hit rate: 90.4%
+</vllm logs>
+
+<dce logs>
+[INFO] [3:38:11 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [3:38:11 PM] Services initializing...
+[INFO] [3:38:11 PM] Services initialized successfully.
+[INFO] [3:38:11 PM] Registering 7 commands.
+[INFO] [3:38:11 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [3:38:11 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [3:38:11 PM] Context Chooser view message handler initialized.
+[INFO] [3:38:11 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [3:38:11 PM] Starry Night syntax highlighter initialized.
+[INFO] [3:38:11 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [3:38:11 PM] [SelectionService] No last selection found in state.
+[INFO] [3:38:11 PM] Persisted current selection of 0 items.
+[INFO] [3:38:15 PM] Executing dce.openSettingsPanel command.
+[INFO] [3:38:15 PM] Settings view message handler initialized.
+[INFO] [3:38:15 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [3:38:15 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [3:38:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [3:38:17 PM] Settings saved: Mode=demo, URL=undefined
+[INFO] [3:38:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [3:38:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [3:38:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [3:38:18 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
+[INFO] [3:38:18 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [3:38:19 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:38:27 PM] Generating Cycle 0 prompt.md file...
+[INFO] [3:38:28 PM] Onboarding complete. Requesting 4 initial responses from LLM.
+[INFO] [3:38:28 PM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
+[INFO] [3:38:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [3:38:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [3:38:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [3:38:28 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [3:38:28 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense11/src","c:/Projects/TowerDefense11/src/Artifacts","c:/Projects/TowerDefense11/src/Artifacts/DCE_README.md"]
+[INFO] [3:38:28 PM] [SelectionService] No last selection found in state.
+[INFO] [3:38:28 PM] Persisted current selection of 3 items.
+[INFO] [3:38:28 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [3:38:28 PM] Persisted current selection of 3 items.
+[INFO] [3:38:29 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:40:17 PM] LLM stream ended.
+[INFO] [3:40:17 PM] Created new cycle 1 with 0 responses.
+[INFO] [3:40:17 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [3:40:17 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [3:40:17 PM] [CostCalc] Found 3 selected files.
+[INFO] [3:40:17 PM] [CostCalc] In-memory flattened content generated (797 tokens).
+[INFO] [3:40:17 PM] [CostCalc] Calculating breakdown:
+[INFO] [3:40:17 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [3:40:17 PM]   - M2 Cycle Overview: 30 tokens
+[INFO] [3:40:17 PM]   - M3 Interaction Schema: 842 tokens
+[INFO] [3:40:17 PM]   - M4 Project Scope: 24 tokens
+[INFO] [3:40:17 PM]   - M5 Artifact List: 30 tokens
+[INFO] [3:40:17 PM]   - M6 Cycles: 10962 tokens
+[INFO] [3:40:17 PM]   - M7 Flattened Repo: 808 tokens
+[INFO] [3:40:17 PM] [CostCalc] Total Tokens: 12744, Estimated Cost: $0.01593
+[INFO] [3:40:17 PM] [CostCalc] Sending estimation to client.
+
+</dce logs>
+</Ephemeral Context>
+<Previous Cycle 55 Summary of Actions>
+I have analyzed your report, and you are absolutely correct to question the data pipeline. The reason the progress metrics are not displaying is that my previous implementation had a critical flaw in its streaming logic. Specifically, the reverse proxy server (`A90`) was incorrectly buffering the entire response from vLLM before sending it back, completely defeating the purpose of streaming. The vLLM server *is* sending telemetry, but the proxy was blocking it.
+
+My course of action is to implement a true end-to-end streaming solution. I will refactor both the proxy server and the extension's backend LLM service to correctly handle Server-Sent Events (SSE). I will also inject detailed logging at every step of the pipeline so we can clearly see the data flowing from vLLM to the UI.
+
+1.  **Fix Proxy Server Streaming (`A90`):**
+    *   I will provide a completely rewritten version of the `/api/dce/proxy` route in `A90. AI Ascent - server.ts (Reference).md`.
+    *   The new logic will no longer use `await response.json()`. Instead, it will get the readable stream from the vLLM response (`vllmResponse.body`) and pipe it directly to the client response (`res`). This is the critical fix that ensures telemetry chunks are forwarded immediately as they are received.
+
+2.  **Implement Backend Streaming Client (`llm.service.ts`):**
+    *   I will refactor the `generateBatch` method in `src/backend/services/llm.service.ts`.
+    *   It will now be designed to consume a streaming response from the proxy. It will read the incoming data chunk by chunk, parse the SSE events, aggregate the token counts for each parallel response, and calculate a live tokens-per-second metric.
+    *   It will periodically send a new `UpdateGenerationProgress` IPC message to the frontend with the latest metrics.
+
+3.  **Update IPC Channels:**
+    *   I will create the `UpdateGenerationProgress` channel in `channels.enum.ts` and `channels.type.ts`. Its payload will contain the progress data for each response and the overall tokens-per-second.
+
+4.  **Implement Frontend State Update (`view.tsx`):**
+    *   I will add a new message handler to listen for the `UpdateGenerationProgress` message.
+    *   This handler will update the `generationProgress` and `tps` state variables, which will cause the `GenerationProgressDisplay` component to re-render with the live data.
+    *   I will add a log statement to this handler to provide clear confirmation in the logs that the frontend is receiving the streaming updates.
+
+5.  **Update Documentation:**
+    *   I will update `A97. DCE - vLLM Response Progress UI Plan.md` with the detailed technical implementation plan for this new, correct streaming architecture.
+</Previous Cycle 55 Summary of Actions>
+</Cycle 56>
+
 <Cycle 55>
 <Cycle Context>
 okay i believe we've converted to streaming but its not fully working. when i attempted to generate a new initial project via the onboarding with demo mode, i got the generating responses window to appear, and i see in my `server.ts` <reverse-proxy console> the following (ephemeral). ill also provide the <dce extension log output>.
 </Cycle Context>
-<Ephemeral Context>
-<reverse-proxy console>
-[INFO] [[DCE]] Received request on /api/dce/proxy
-[ERROR] [[DCE]] Bad request: Missing prompt content. undefined
-</reverse-proxy console>
-<dce extension log output>
-[INFO] [8:12:57 AM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [8:12:57 AM] Services initializing...
-[INFO] [8:12:57 AM] Services initialized successfully.
-[INFO] [8:12:57 AM] Registering 7 commands.
-[INFO] [8:12:58 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [8:12:58 AM] Parallel Co-Pilot view message handler initialized.
-[INFO] [8:12:58 AM] Starry Night syntax highlighter initialized.
-[INFO] [8:12:58 AM] Context Chooser view message handler initialized.
-[INFO] [8:12:58 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [8:12:58 AM] [SelectionService] No last selection found in state.
-[INFO] [8:12:58 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [8:12:58 AM] Persisted current selection of 0 items.
-[INFO] [8:13:00 AM] Executing dce.openSettingsPanel command.
-[INFO] [8:13:00 AM] Settings view message handler initialized.
-[INFO] [8:13:00 AM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [8:13:00 AM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [8:13:02 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [8:13:02 AM] Settings saved: Mode=demo, URL=undefined
-[INFO] [8:13:02 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [8:13:04 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [8:13:04 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [8:13:04 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [8:13:05 AM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [8:13:05 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [8:13:06 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [8:13:17 AM] Generating Cycle 0 prompt.md file...
-[INFO] [8:13:17 AM] Onboarding complete. Requesting 4 initial responses from LLM.
-[INFO] [8:13:17 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[ERROR] [8:13:17 AM] Failed to generate batch responses via stream: API request failed with status 400: {"error":"Prompt content is required"}
-[INFO] [8:13:17 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [8:13:17 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [8:13:17 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [8:13:17 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [8:13:18 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense10/src","c:/Projects/TowerDefense10/src/Artifacts","c:/Projects/TowerDefense10/src/Artifacts/DCE_README.md"]
-[INFO] [8:13:18 AM] [SelectionService] No last selection found in state.
-[INFO] [8:13:18 AM] Persisted current selection of 3 items.
-[INFO] [8:13:18 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [8:13:18 AM] Persisted current selection of 3 items.
-[INFO] [8:13:19 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-
-</dce extension log output>
-</Ephemeral Context>
 <Previous Cycle 54 Summary of Actions>
 I have analyzed your request. The core tasks are to redesign the onboarding workflow for a less disjointed user experience, enhance the response progress UI with detailed metrics, and plan for a streaming data implementation from the vLLM backend. This is an excellent set of refinements that will significantly improve the extension's usability and performance.
 
@@ -3629,10 +3690,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T13:18:14.160Z
+  Date Generated: 2025-09-24T20:45:31.571Z
   ---
-  Total Files: 188
-  Approx. Tokens: 467955
+  Total Files: 185
+  Approx. Tokens: 465706
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -3644,7 +3705,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 6. src\backend\services\prompt.service.ts (5042 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4086 tokens)
+9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4071 tokens)
 10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
@@ -3722,120 +3783,117 @@ This file-centric approach helps in planning and prioritizing work, especially i
 72. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
 73. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
 74. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-75. src\Artifacts\A77. DCE - Monaco Editor Replacement Plan.md - Lines: 42 - Chars: 3610 - Tokens: 903
-76. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
-77. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-78. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-79. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-80. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-81. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-82. src\Artifacts\A85. DCE - Model Card Management Plan.md - Lines: 40 - Chars: 3127 - Tokens: 782
-83. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-84. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-85. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-86. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
-87. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
-88. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-89. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 361 - Chars: 16344 - Tokens: 4086
-90. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-91. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
-92. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-93. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-94. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-95. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 47 - Chars: 2933 - Tokens: 734
-97. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-98. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-99. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
-100. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-101. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
-102. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
-103. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
-104. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
-105. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
-106. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 58 - Chars: 2375 - Tokens: 594
-107. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
-108. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
-109. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
-110. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
-111. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
-112. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 37 - Chars: 2999 - Tokens: 750
-113. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
-114. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 105 - Chars: 4665 - Tokens: 1167
-115. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
-116. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 92 - Chars: 3806 - Tokens: 952
-117. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
-118. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-119. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-120. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-121. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-122. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-123. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
-124. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
-125. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
-126. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-127. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-128. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-129. src\backend\services\llm.service.ts - Lines: 127 - Chars: 5677 - Tokens: 1420
-130. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-131. src\backend\services\prompt.service.ts - Lines: 359 - Chars: 20168 - Tokens: 5042
-132. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-133. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-134. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
-135. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-136. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-137. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
-138. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-139. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-140. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-141. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-142. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-143. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-144. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-145. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-146. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-147. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-148. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-149. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-150. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
-151. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-152. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-153. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-154. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-155. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
-156. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
-159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
-160. src\client\views\parallel-copilot.view\view.scss - Lines: 1093 - Chars: 24378 - Tokens: 6095
-161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-162. src\client\views\parallel-copilot.view\view.tsx - Lines: 400 - Chars: 39192 - Tokens: 9798
-163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-164. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-165. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-166. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
-167. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-168. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-169. src\common\ipc\channels.type.ts - Lines: 115 - Chars: 8745 - Tokens: 2187
-170. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-171. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-172. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-173. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-174. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
-175. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
-176. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-177. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-178. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-179. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-180. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-181. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 71 - Chars: 3317 - Tokens: 830
-182. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-183. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-184. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
-185. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
-186. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md - Lines: 393 - Chars: 46690 - Tokens: 11673
-187. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-188. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 44 - Chars: 1744 - Tokens: 436
+75. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
+76. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+77. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+78. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+79. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+80. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+81. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+82. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+83. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+84. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+85. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 359 - Chars: 16283 - Tokens: 4071
+87. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+88. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
+89. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
+92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 47 - Chars: 2933 - Tokens: 734
+94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
+97. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+98. src\Artifacts\T1. Template - Master Artifact List.md - Lines: 31 - Chars: 1496 - Tokens: 374
+99. src\Artifacts\T2. Template - Project Vision and Goals.md - Lines: 33 - Chars: 1744 - Tokens: 436
+100. src\Artifacts\T3. Template - Phase 1 Requirements & Design.md - Lines: 32 - Chars: 1657 - Tokens: 415
+101. src\Artifacts\T4. Template - Technical Scaffolding Plan.md - Lines: 49 - Chars: 1954 - Tokens: 489
+102. src\Artifacts\T5. Template - Target File Structure.md - Lines: 30 - Chars: 833 - Tokens: 209
+103. src\Artifacts\T6. Template - Initial Scaffolding Deployment Script.md - Lines: 58 - Chars: 2375 - Tokens: 594
+104. src\Artifacts\T7. Template - Development and Testing Guide.md - Lines: 43 - Chars: 1517 - Tokens: 380
+105. src\Artifacts\T8. Template - Regression Case Studies.md - Lines: 26 - Chars: 1748 - Tokens: 437
+106. src\Artifacts\T9. Template - Logging and Debugging Guide.md - Lines: 44 - Chars: 2369 - Tokens: 593
+107. src\Artifacts\T10. Template - Feature Plan Example.md - Lines: 27 - Chars: 2471 - Tokens: 618
+108. src\Artifacts\T11. Template - Implementation Roadmap.md - Lines: 50 - Chars: 2664 - Tokens: 666
+109. src\Artifacts\T12. Template - Competitive Analysis.md - Lines: 37 - Chars: 2999 - Tokens: 750
+110. src\Artifacts\T13. Template - Refactoring Plan.md - Lines: 50 - Chars: 2400 - Tokens: 600
+111. src\Artifacts\T14. Template - GitHub Repository Setup Guide.md - Lines: 105 - Chars: 4665 - Tokens: 1167
+112. src\Artifacts\T15. Template - A-B-C Testing Strategy for UI Bugs.md - Lines: 36 - Chars: 2779 - Tokens: 695
+113. src\Artifacts\T16. Template - Developer Environment Setup Guide.md - Lines: 92 - Chars: 3806 - Tokens: 952
+114. src\Artifacts\T17. Template - Universal Task Checklist.md - Lines: 55 - Chars: 3473 - Tokens: 869
+115. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+116. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+117. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+118. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+119. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+120. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+121. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+122. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+125. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
+126. src\backend\services\llm.service.ts - Lines: 127 - Chars: 5677 - Tokens: 1420
+127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+128. src\backend\services\prompt.service.ts - Lines: 359 - Chars: 20168 - Tokens: 5042
+129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+130. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+131. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
+132. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+133. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+134. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
+135. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+136. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+137. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+138. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+139. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+140. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+141. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+142. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+143. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+144. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+145. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+146. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+147. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 55 - Chars: 1970 - Tokens: 493
+148. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+149. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+150. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+151. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
+152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
+156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1093 - Chars: 24378 - Tokens: 6095
+158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 400 - Chars: 39192 - Tokens: 9798
+160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
+164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+165. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
+166. src\common\ipc\channels.type.ts - Lines: 115 - Chars: 8745 - Tokens: 2187
+167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+170. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+171. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+172. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
+173. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+174. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+175. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+176. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+177. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+178. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 71 - Chars: 3317 - Tokens: 830
+179. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
+183. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md - Lines: 393 - Chars: 46690 - Tokens: 11673
+184. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
+185. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 44 - Chars: 1744 - Tokens: 436
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8683,51 +8741,6 @@ The user's request is valid and would be a great UX improvement. However, due to
 The current priority is to fix the more critical usability bugs like scrolling, focus management, and highlighting. Once the component is stable, we can revisit this challenge and dedicate a future cycle to implementing one of the more advanced solutions above.
 </file_artifact>
 
-<file path="src/Artifacts/A77. DCE - Monaco Editor Replacement Plan.md">
-# Artifact A77: DCE - Monaco Editor Replacement Plan
-# Date Created: C182
-# Author: AI Model & Curator
-# Updated on: C183 (Reflect correct implementation with prism-react-renderer)
-
-- **Key/Value for A0:**
-- **Description:** Documents the failure of the Monaco Editor integration and the new plan to switch to a lighter-weight, non-worker-based editor component.
-- **Tags:** plan, refactor, ui, ux, monaco, codemirror, technical debt, react-simple-code-editor, prism-react-renderer
-
-## 1. Problem Statement
-
-The attempt to integrate the Monaco Editor (`@monaco-editor/react`) into the Parallel Co-Pilot Panel's context panes (Cycles C179-C182) was a failure. Despite multiple attempts to configure the Webpack plugin and adjust the Content Security Policy (CSP), the editor component remained stuck in a perpetual "Loading..." state.
-
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" panes displayed a "Loading..." message and were completely non-functional.
--   **Root Cause Analysis (RCA):** The Monaco Editor is a complex component that relies heavily on web workers for its performance and features. The VS Code webview environment has a strict security model (CSP) that makes the setup and bundling of these web workers exceptionally difficult. The "Loading..." state was a direct result of the webview blocking the editor's worker scripts from loading, even with a relaxed CSP. This indicates a fundamental incompatibility between the editor's architecture and the webview's security constraints.
-
-## 2. The Pivot: Prioritizing Stability and Simplicity
-
-A feature-rich but non-functional editor is useless. The new strategy is to pivot away from complex, worker-based editors like Monaco (and likely CodeMirror, which would face similar issues) and adopt a more lightweight and reliable solution that is known to work well within restricted environments.
-
-The new chosen stack is:
-1.  **`react-simple-code-editor`**: A very lightweight library that provides the core functionality of a code editor (maintaining indentation, etc.) using a simple `<textarea>` and a `<pre>` overlay. It does not use web workers, completely avoiding the CSP issues.
-2.  **`prism-react-renderer`**: A popular, React-focused wrapper around `prismjs`. It provides high-quality syntax highlighting and is designed to be integrated with components like `react-simple-code-editor`.
-
-## 3. Technical Implementation Plan (C183)
-
-1.  **Dependencies (`package.json`):**
-    *   **Remove:** `@monaco-editor/react`, `monaco-editor-webpack-plugin`.
-    *   **Add:** `react-simple-code-editor`, `prism-react-renderer`, `prismjs`, and `@types/prismjs`.
-
-2.  **Build Configuration (`webpack.config.js`):**
-    *   Remove the `MonacoWebpackPlugin` entirely.
-
-3.  **CSP Reversion (`common/utils/view-html.ts`):**
-    *   Revert the Content Security Policy to a stricter version, as `worker-src 'blob:'` is no longer needed.
-
-4.  **Component Implementation (`ContextInputs.tsx`):**
-    *   The `<Editor>` component from `@monaco-editor/react` will be replaced with the `<Editor>` component from `react-simple-code-editor`.
-    *   The `highlight` prop of the new editor will be wired to a function that uses the `<Highlight>` component from `prism-react-renderer`. This is the correct pattern for combining these two libraries.
-    *   The component will be configured to use a standard theme (e.g., `themes.vsDark`) and the `markdown` language grammar.
-
-This approach provides the desired Markdown syntax highlighting in a stable, performant, and lightweight component that is compatible with the VS Code webview's security model.
-</file_artifact>
-
 <file path="src/Artifacts/A77. DCE - Whitepaper Generation Plan.md">
 # Artifact A77: DCE - Whitepaper Generation Plan
 
@@ -9032,49 +9045,6 @@ The goal of this feature is to allow users to right-click any file or folder in 
 This approach leverages VS Code's built-in settings infrastructure, making the exclusions persistent and easily manageable for the user.
 </file_artifact>
 
-<file path="src/Artifacts/A85. DCE - Model Card Management Plan.md">
-# Artifact A85: DCE - Model Card Management Plan
-# Date Created: C18
-# Author: AI Model & Curator
-# Updated on: C36 (Refined into a multi-modal connection plan)
-
-- **Key/Value for A0:**
-- **Description:** A plan for an enhanced settings panel where users can manage different LLM connection modes, including manual, a pre-configured demo, and user-provided API URLs or keys.
-- **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
-
-## 1. Overview & Goal
-
-As the DCE project moves towards direct API integration (Phase 3), users will need a flexible way to manage configurations for different Large Language Models (LLMs). A single placeholder for a local API URL is insufficient.
-
-The goal is to design an enhanced settings panel where users can select from several connection "modes." This will allow users to easily switch between the default manual workflow, a pre-configured "Demo Mode" for local vLLM, and advanced modes for connecting to their own custom endpoints or cloud services. This approach supersedes the original "Model Card" concept with a more user-friendly, mode-based interface.
-
-**For the full, detailed implementation plan, see `A95. DCE - LLM Connection Modes Plan.md`.**
-
-## 2. Connection Modes
-
-### 1. Free Mode (Manual Copy/Paste)
-- **Description:** The default behavior of the extension. The user is responsible for generating responses externally and pasting them into the PCPP.
-- **UI:** This is the default selection. No additional configuration fields are shown.
-
-### 2. Demo Mode (Local vLLM via `aiascent.game`)
-- **Description:** A pre-configured mode for a free, high-performance demo. It's designed to connect to a local vLLM instance that is being proxied through the `aiascent.game` server.
-- **UI:** When selected, it displays read-only information about the pre-configured endpoint (`https://aiascent.game/api/dce/proxy`).
-
-### 3. API Mode (URL)
-- **Description:** For users who host their own OpenAI-compatible LLM and want to connect to it directly.
-- **UI:** When selected, it displays a text input field for the user to enter their API endpoint URL.
-
-### 4. API Mode (KEY)
-- **Description:** For users who want to use a cloud-based service that requires an API key (e.g., OpenAI, Anthropic).
-- **UI:** When selected, it displays a dropdown to select the provider and a secure input field for the API key.
-
-## 3. High-Level Technical Plan
-
--   **UI (`settings.view.tsx`):** The settings panel will be redesigned with a radio button group to select the active mode. Conditional rendering will be used to show the appropriate input fields for each mode.
--   **Backend (`SettingsService`):** A new service will be responsible for storing and retrieving these settings. It will use `vscode.workspace.getConfiguration` for non-sensitive data (like the selected mode and URL) and `vscode.SecretStorage` for securely storing API keys.
--   **Backend (`LlmService`):** A new service will be created to handle the actual API calls. It will read the active configuration from the `SettingsService` and construct the appropriate `fetch` request based on the selected mode.
-</file_artifact>
-
 <file path="src/Artifacts/A85. DCE - Phase 3 - Model Cards Feature Plan.md">
 # Artifact A85: DCE - Phase 3 - Model Cards Feature Plan
 # Date Created: C17
@@ -9313,54 +9283,6 @@ This implementation involves creating a new backend provider and coordinating st
     4.  It will then execute the command: `vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(originalAbsolutePath), vscode.Uri.parse(virtualUri), title);`.
 </file_artifact>
 
-<file path="src/Artifacts/A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md">
-# Artifact A89: DCE - Phase 3 - Hosted LLM & vLLM Integration Plan
-# Date Created: C29
-# Author: AI Model & Curator
-# Updated on: C45 (Add guidance for "Model not found" error)
-
-- **Key/Value for A0:**
-- **Description:** Outlines the architecture and roadmap for integrating the DCE extension with a remote, high-throughput vLLM backend via a secure proxy server.
-- **Tags:** feature plan, phase 3, llm, vllm, inference, performance, architecture, proxy
-
-## 1. Vision & Goal
-(No change)
-
-## 2. Proposed Architecture
-(No change)
-
-## 3. Security & Encryption
-(No change)
-
-## 4. User Stories
-(No change)
-
-## 5. Troubleshooting Connectivity
-
-(No change to Step 1: Test the Proxy Server from Your Laptop)
-
-### Step 2: Interpret the Results
-
--   **(No change to `ETIMEDOUT` or `5xx` error sections)**
-
--   **If `curl` returns a `404 Not Found` error from the *Proxy Server* (e.g., response body is `Cannot POST /api/dce/proxy`):** This means you have successfully connected to the proxy server, but the server's application logic (in `server.ts`) doesn't have a route defined for `/api/dce/proxy`.
-    -   **Solution:** Check your `server.ts` file and ensure the route is correct. After making changes, you **must restart** the Node.js server process.
-
--   **If `curl` returns a `404 Not Found` error from the *vLLM Server* (e.g., response body contains `{"error":{"message":"The model ... does not exist."}}`):** This is a different, more specific error. It means the proxy successfully forwarded your request, but the vLLM server rejected it.
-    -   **Root Cause:** The `model` parameter in the JSON request body does not match the model identifier that the vLLM server was started with.
-    -   **Solution:**
-        1.  Check your vLLM startup command (see `A92`) and copy the exact model name (e.g., `unsloth/mistral-7b-instruct-v0.2-bnb-4bit`).
-        2.  Open your proxy's `server.ts` file.
-        3.  Find the `fetch` call to the vLLM endpoint.
-        4.  Change the value of the `model` field in the JSON `body` to be the exact name you copied.
-        5.  **Restart your proxy server.**
-
--   **(No change to "If `curl` succeeds" section)**
-
-## 6. Technical Implementation Plan
-(No change)
-</file_artifact>
-
 <file path="src/Artifacts/A89. DCE - vLLM Integration and API Proxy Plan.md">
 # Artifact A89: DCE - vLLM Integration and API Proxy Plan
 # Date Created: C29
@@ -9429,15 +9351,15 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C54 (Implement true streaming)
+# Updated on: C55 (Fix proxy to handle OpenAI `messages` format)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The proxy route has been refactored to support true end-to-end streaming of SSE events from vLLM.
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The proxy route has been corrected to handle the modern OpenAI `messages` format instead of the legacy `prompt` format.
 - **Tags:** reference, source code, backend, nodejs, express, streaming, sse
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been completely rewritten to handle streaming responses correctly. It no longer buffers the response with `await response.json()`. Instead, it gets the readable stream from the vLLM server and pipes it directly to the client, enabling real-time progress updates in the DCE extension.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected to fix a critical bug. It was previously expecting a `{ "prompt": "..." }` field in the request body, but the DCE extension sends the modern OpenAI format, `{ "messages": [...] }`. The code now correctly handles the `messages` array, resolving the `400 Bad Request` error.
 
 ## 2. Source Code (with corrected route)
 
@@ -9485,7 +9407,7 @@ const port = process.env.PORT || 3001;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // --- DCE/vLLM Integration Configuration ---
-const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/chat/completions'; // Changed to chat/completions for streaming
+const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/chat/completions';
 const DCE_API_KEY = process.env.DCE_API_KEY;
 
 let clientOrigin = 'http://localhost:8867';
@@ -9688,11 +9610,12 @@ app.post('/api/dce/proxy', async (req, res) => {
         }
     }
 
-    const { prompt, n = 1, max_tokens = 8192, ...rest } = req.body;
+    // FIX: Expect 'messages' array instead of 'prompt' string
+    const { messages, n = 1, ...rest } = req.body;
 
-    if (!prompt) {
-        logError('[DCE]', 'Bad request: Missing prompt content.');
-        return res.status(400).json({ error: 'Prompt content is required' });
+    if (!messages || !Array.isArray(messages) || messages.length === 0 || !messages[0].content) {
+        logError('[DCE]', `Bad request: Missing or invalid messages content.`, req.body);
+        return res.status(400).json({ error: 'Messages content is required in OpenAI chat format' });
     }
 
     logInfo('[DCE]', `Proxying streaming prompt to vLLM. Requesting ${n} parallel responses.`);
@@ -9704,13 +9627,12 @@ app.post('/api/dce/proxy', async (req, res) => {
                 'Content-Type': 'application/json',
                 'Accept': 'text/event-stream'
             },
+            // FIX: Pass the request body through, as it's already in the correct format for vLLM
             body: JSON.stringify({
-                model: "unsloth/gpt-oss-20b", // This must match the model loaded by vLLM
-                messages: [{ role: "user", content: prompt }], // Use messages format for chat endpoint
-                n,
-                max_tokens,
                 ...rest,
-                stream: true, // CRITICAL: Enable streaming from vLLM
+                messages,
+                n,
+                stream: true,
             }),
         });
 
@@ -9719,14 +9641,12 @@ app.post('/api/dce/proxy', async (req, res) => {
             throw new Error(`vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText} - ${errorBody}`);
         }
 
-        // Set headers for the client to handle SSE
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
 
-        // Pipe the stream from vLLM directly to the client response
         const stream = vllmResponse.body;
-        stream.pipe(res);
+        Readable.fromWeb(stream as any).pipe(res);
         logInfo('[DCE]', 'Successfully established stream from vLLM to client.');
 
     } catch (error: any) {
