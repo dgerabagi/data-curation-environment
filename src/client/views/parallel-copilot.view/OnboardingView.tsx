@@ -1,5 +1,4 @@
-// src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C51 (Call onStartGeneration prop)
+// src/client/views/parallel-copilot.view/OnboardingView.tsx/// Updated on: C52 (Ensure onStartGeneration is called correctly)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -14,7 +13,7 @@ interface OnboardingViewProps {
     workflowStep: string | null;
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
-    onStartGeneration: () => void; // New prop to trigger progress UI
+    onStartGeneration: () => void;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -30,7 +29,7 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
 };
 
 const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
-    const [isGenerating, setIsGenerating] = React.useState(false);
+    const [isGeneratingLocal, setIsGeneratingLocal] = React.useState(false);
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -39,17 +38,15 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
 
     const handleGenerate = () => {
         if (projectScope.trim()) {
-            setIsGenerating(true);
-            
             if (connectionMode === 'demo') {
                 logger.log(`Sending request to generate initial artifacts AND ${responseCount} responses.`);
-                onStartGeneration(); // Trigger the parent to show the progress UI
-                clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
+                onStartGeneration(); // C52 Fix: This is the critical call to the parent
             } else {
+                setIsGeneratingLocal(true);
                 logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
                 clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle: 'Initial Artifacts', currentCycle: 0, selectedFiles: [] });
                 setTimeout(() => {
-                    setIsGenerating(false);
+                    setIsGeneratingLocal(false);
                     setPromptGenerated(true);
                 }, 1500);
             }
@@ -62,6 +59,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
     };
 
     const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
+    const isGenerating = connectionMode === 'demo' ? false : isGeneratingLocal; // Parent handles 'isGenerating' for demo mode
 
     return (
         <div className="onboarding-container">
