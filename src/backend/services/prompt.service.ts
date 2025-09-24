@@ -346,16 +346,10 @@ ${staticContext.trim()}
             
             // Now, generate responses
             Services.loggerService.log(`Onboarding complete. Requesting ${responseCount} initial responses from LLM.`);
-            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: responseCount };
-            const responses = await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount };
+            await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
             
-            // Create Cycle 1 with the new responses
-            const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responses, responseCount, projectScope);
-            
-            vscode.window.showInformationMessage(`Successfully generated initial artifacts and received ${responses.length} responses.`);
-
-            // Tell the frontend to navigate to the new cycle
-            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+            vscode.window.showInformationMessage(`Successfully generated initial artifacts and sent responses for processing.`);
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate initial artifacts: ${error.message}`);

@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T12:48:49.177Z
+  Date Generated: 2025-09-24T13:18:14.160Z
   ---
   Total Files: 188
-  Approx. Tokens: 468690
+  Approx. Tokens: 467955
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A11.1 DCE - New Regression Case Studies - REFERENCE.md (11673 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (10013 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (9798 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
 5. src\client\views\parallel-copilot.view\view.scss (6095 tokens)
-6. src\backend\services\prompt.service.ts (5146 tokens)
+6. src\backend\services\prompt.service.ts (5042 tokens)
 7. src\backend\services\file-operation.service.ts (4526 tokens)
 8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4134 tokens)
+9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4086 tokens)
 10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
@@ -108,14 +108,14 @@
 86. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 87. src\Artifacts\A89. DCE - Phase 3 - Hosted LLM & vLLM Integration Plan.md - Lines: 45 - Chars: 2196 - Tokens: 549
 88. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-89. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 358 - Chars: 16535 - Tokens: 4134
+89. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 361 - Chars: 16344 - Tokens: 4086
 90. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 91. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 92. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 93. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 94. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 95. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 80 - Chars: 6705 - Tokens: 1677
+96. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 47 - Chars: 2933 - Tokens: 734
 97. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 98. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 99. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -148,9 +148,9 @@
 126. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 127. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 128. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-129. src\backend\services\llm.service.ts - Lines: 75 - Chars: 3046 - Tokens: 762
+129. src\backend\services\llm.service.ts - Lines: 127 - Chars: 5677 - Tokens: 1420
 130. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-131. src\backend\services\prompt.service.ts - Lines: 365 - Chars: 20583 - Tokens: 5146
+131. src\backend\services\prompt.service.ts - Lines: 359 - Chars: 20168 - Tokens: 5042
 132. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 133. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 134. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -177,18 +177,18 @@
 155. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
 156. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 157. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 137 - Chars: 6949 - Tokens: 1738
+158. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
 159. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
 160. src\client\views\parallel-copilot.view\view.scss - Lines: 1093 - Chars: 24378 - Tokens: 6095
 161. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-162. src\client\views\parallel-copilot.view\view.tsx - Lines: 413 - Chars: 40051 - Tokens: 10013
+162. src\client\views\parallel-copilot.view\view.tsx - Lines: 400 - Chars: 39192 - Tokens: 9798
 163. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 164. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 165. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 166. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 167. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-168. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5968 - Tokens: 1492
-169. src\common\ipc\channels.type.ts - Lines: 108 - Chars: 8707 - Tokens: 2177
+168. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
+169. src\common\ipc\channels.type.ts - Lines: 115 - Chars: 8745 - Tokens: 2187
 170. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 171. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 172. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -5801,15 +5801,15 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C44 (Remove hardcoded stop token)
+# Updated on: C54 (Implement true streaming)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The hardcoded `stop` parameter has been removed to fix response truncation.
-- **Tags:** reference, source code, backend, nodejs, express
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The proxy route has been refactored to support true end-to-end streaming of SSE events from vLLM.
+- **Tags:** reference, source code, backend, nodejs, express, streaming, sse
 
 ## 1. Overview
 
-This artifact contains the literal source code of the `server.ts` file. The key change is in the `app.post('/api/dce/proxy', ...)` route. The hardcoded `stop` parameter has been removed from the request body sent to the vLLM endpoint. The proxy will now pass through any `stop` parameter sent by the client but will not add its own, resolving the issue of premature response truncation.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been completely rewritten to handle streaming responses correctly. It no longer buffers the response with `await response.json()`. Instead, it gets the readable stream from the vLLM server and pipes it directly to the client, enabling real-time progress updates in the DCE extension.
 
 ## 2. Source Code (with corrected route)
 
@@ -5857,8 +5857,8 @@ const port = process.env.PORT || 3001;
 const isProduction = process.env.NODE_ENV === 'production';
 
 // --- DCE/vLLM Integration Configuration ---
-const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/completions';
-const DCE_API_KEY = process.env.DCE_API_KEY; // A secret key to authenticate requests from the extension
+const VLLM_ENDPOINT = process.env.VLLM_ENDPOINT || 'http://127.0.0.1:8000/v1/chat/completions'; // Changed to chat/completions for streaming
+const DCE_API_KEY = process.env.DCE_API_KEY;
 
 let clientOrigin = 'http://localhost:8867';
 if (process.env.NEXTAUTH_URL) {
@@ -6060,43 +6060,46 @@ app.post('/api/dce/proxy', async (req, res) => {
         }
     }
 
-    // C44 FIX: Remove hardcoded `stop` parameter.
-    // It will now correctly use the `stop` parameter if the client provides it,
-    // or use the vLLM server's default if it's not provided.
-    const { prompt, n = 10, max_tokens = 131000, ...rest } = req.body;
+    const { prompt, n = 1, max_tokens = 8192, ...rest } = req.body;
 
     if (!prompt) {
         logError('[DCE]', 'Bad request: Missing prompt content.');
         return res.status(400).json({ error: 'Prompt content is required' });
     }
 
-    logInfo('[DCE]', `Proxying prompt to vLLM. Requesting ${n} parallel responses.`);
+    logInfo('[DCE]', `Proxying streaming prompt to vLLM. Requesting ${n} parallel responses.`);
 
     try {
         const vllmResponse = await fetch(VLLM_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'text/event-stream'
             },
             body: JSON.stringify({
-                prompt,
+                model: "unsloth/gpt-oss-20b", // This must match the model loaded by vLLM
+                messages: [{ role: "user", content: prompt }], // Use messages format for chat endpoint
                 n,
                 max_tokens,
-                ...rest, // Pass through any other parameters from the client (like stop, temperature, etc.)
-                temperature: rest.temperature || 0.7, 
+                ...rest,
+                stream: true, // CRITICAL: Enable streaming from vLLM
             }),
         });
 
-        if (!vllmResponse.ok) {
+        if (!vllmResponse.ok || !vllmResponse.body) {
             const errorBody = await vllmResponse.text();
             throw new Error(`vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText} - ${errorBody}`);
         }
 
-        const data = await vllmResponse.json();
-        const responses = data.choices.map((choice: any) => choice.text);
-        
-        logInfo('[DCE]', `Successfully received ${responses.length} responses from vLLM.`);
-        res.status(200).json({ responses });
+        // Set headers for the client to handle SSE
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+
+        // Pipe the stream from vLLM directly to the client response
+        const stream = vllmResponse.body;
+        stream.pipe(res);
+        logInfo('[DCE]', 'Successfully established stream from vLLM to client.');
 
     } catch (error: any) {
         logError('[DCE]', 'Error proxying request to vLLM:', error.message);
@@ -6528,83 +6531,50 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C53 (Expand technical plan for streaming)
+# Updated on: C54 (Codify final streaming architecture)
 
 - **Key/Value for A0:**
-- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric.
-- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics, streaming
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric. This has been updated to reflect the final, correct streaming architecture.
+- **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics, streaming, sse
 
 ## 1. Vision & Goal
-
-When a user clicks "Generate responses," the extension communicates with a potentially remote vLLM server. This process can take anywhere from a few seconds to over a minute. Currently, the UI provides no feedback during this time, which can make the application feel unresponsive or broken.
-
-The goal is to provide clear, real-time feedback to the user about the status of their request. This will be achieved with a new UI element that appears during generation, showing the progress for each requested response and displaying a live tokens-per-second metric.
+(No change)
 
 ## 2. User Stories
-
-| ID | User Story | Acceptance Criteria |
-|---|---|---|
-| P3-PROG-01 | **See Generation Progress** | As a user, after I click "Generate responses," I want to see a visual indicator that the request is in progress, so I know the application is working. | - A progress display area appears in the UI after "Generate responses" is clicked. <br> - This display shows one progress bar for each response being generated. |
-| P3-PROG-02 | **Monitor Performance** | As a user, I want to see a live tokens-per-second (tok/s) metric, so I can gauge the performance of the LLM backend. | - The progress display includes a "Tokens/sec" counter that updates in real-time. |
-| P3-PROG-03 | **View Streaming Responses** | As a user, I want to see the text of the responses appear in the tabs as they are being generated, so I can see the results immediately. | - As tokens are generated by the LLM, they are streamed to the appropriate response tab in the newly created cycle. |
-| P3-PROG-04 | **Accurate Progress Metrics** | As a user, I want the progress bar to accurately reflect the generation progress based on the maximum tokens requested, and to see the current token count for each response. | - The progress bar's value is calculated as `currentTokens / maxTokens`. <br> - A text display shows the current and total tokens for each response (e.g., "4096 / 8192 tokens"). <br> - A grand total of all generated tokens is also displayed. |
+(No change)
 
 ## 3. UI Mockup (Textual Description)
+(No change)
 
-The progress display will appear in a split-view layout during the onboarding generation. The left side will contain the user's project scope, and the right side will contain the progress UI.
+## 4. Technical Implementation Plan (C54 Update)
 
-```
-|-------------------------------------------------------------------------------------------------|
-| [Project Scope Text Area...]                                  | [Generation Progress Display]   |
-|                                                               |  Tokens/sec: [ 1,234 ]          |
-|                                                               |  Total Tokens: [ 12,345 ]       |
-|                                                               |  -----------------------------  |
-|                                                               |  Resp 1: [|||||||||||--] 80%    |
-|                                                               |   (6553 / 8192 tokens)          |
-|                                                               |  Resp 2: [|||||||||||--] 80%    |
-|                                                               |   (6553 / 8192 tokens)          |
-|                                                               |  Resp 3: [|||||||----] 60%      |
-|                                                               |   (4915 / 8192 tokens)          |
-|                                                               |  Resp 4: [|||||------] 40%      |
-|                                                               |   (3276 / 8192 tokens)          |
-|-------------------------------------------------------------------------------------------------|
-```
+This feature is critically dependent on an end-to-end streaming architecture using Server-Sent Events (SSE).
 
-## 4. Technical Implementation Plan (Expanded for Streaming)
+1.  **vLLM Server:**
+    *   The server must be started with the OpenAI-compatible API endpoint.
+    *   It will automatically handle streaming when a request includes `"stream": true`.
 
-This feature is critically dependent on **streaming** responses from the vLLM server.
+2.  **Proxy Server (`A90 server.ts`):**
+    *   The proxy must make its request to the vLLM `/v1/chat/completions` endpoint with `"stream": true"` in the body.
+    *   It must **not** buffer the response. It will set the client response headers for SSE (`Content-Type: text/event-stream`) and pipe the response body stream from vLLM directly to the client.
 
-1.  **Backend (`llm.service.ts`):**
+3.  **Extension Backend (`llm.service.ts`):**
     *   The `generateBatch` method must be refactored to handle a streaming connection.
-    *   The `fetch` request to the vLLM proxy must include `stream: true` in its body.
-    *   The response from `fetch` will be a stream of Server-Sent Events (SSE). The service will need to read this stream chunk by chunk.
-    *   Each chunk will contain a JSON object with a token delta. The service will parse these chunks, aggregate the text for each response, and calculate performance metrics (tokens per second).
+    *   It will use a library capable of consuming SSE streams (e.g., `node-fetch` with stream handling or a dedicated SSE client library).
+    *   It will listen for `data` events on the stream. Each event will contain a JSON string (e.g., `data: {...}`).
+    *   The service will parse these JSON chunks to extract the token deltas for each parallel response.
+    *   It will aggregate token counts, calculate performance metrics (tokens per second), and periodically (e.g., every 200ms) send an `UpdateGenerationProgress` IPC message to the frontend.
 
-2.  **IPC Channels:**
-    *   New, dedicated IPC channels are required to push real-time updates from the backend to the frontend.
-        *   `ServerToClientChannel.UpdateGenerationProgress`: This message will be sent frequently (e.g., every 200ms).
-        *   **Payload:** An array of progress objects, e.g., `[{ responseId: 1, currentTokens: 1024, totalTokens: 8192, chunk: "new text..." }, ...]`. It will also include the overall `tokensPerSecond` metric.
-        *   `ServerToClientChannel.SendBatchGenerationComplete`: This existing channel will be used to signal that all response streams have finished.
+4.  **IPC Channels:**
+    *   A new channel, `ServerToClientChannel.UpdateGenerationProgress`, is required.
+    *   **Payload:** `{ progress: GenerationProgress[], tps: number }`, where `GenerationProgress` is `{ responseId: number, currentTokens: number, totalTokens: number }`.
 
-3.  **Frontend (`view.tsx`):**
-    *   **State Management:** New state variables will be required to hold the progress data for each response:
-        ```typescript
-        interface GenerationProgress {
-          responseId: number;
-          currentTokens: number;
-          totalTokens: number;
-          content: string;
-        }
-        const [progress, setProgress] = useState<GenerationProgress[]>([]);
-        const [tps, setTps] = useState(0);
-        ```
+5.  **Frontend (`view.tsx`):**
+    *   **State Management:** New state variables are required: `generationProgress: GenerationProgress[]` and `tps: number`.
     *   **Message Handler:** A new message handler will listen for the `UpdateGenerationProgress` IPC message.
-        *   When a message is received, it will update the `progress` state with the new token counts and append the `chunk` to the appropriate response tab's content.
-        *   It will also update the `tps` state.
-    *   The `GenerationProgressDisplay` component will be driven by this state, causing the progress bars and token counters to update in real-time.
-
-4.  **Configuration:**
-    *   A constant, `MAX_TOKENS_PER_RESPONSE`, will be defined (e.g., `8192`). This will be used by both the backend when making the request and the frontend for calculating progress percentages. In the future, this could be made a configurable setting.
+        *   When a message is received, it will update the `generationProgress` and `tps` state.
+    *   The `GenerationProgressDisplay` component will be driven by this state, causing the UI to update in real-time.
+    *   The `SendBatchGenerationComplete` message will signal that all response streams have finished, at which point the UI will navigate to the new cycle.
 </file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -18511,77 +18481,129 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C51 (Add response_format for JSON output in demo mode)
+// Updated on: C54 (Implement streaming client)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
+import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
+import { serverIPCs } from '@/client/views';
+import { VIEW_TYPES } from '@/common/view-types';
+import { ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { GenerationProgress } from '@/common/ipc/channels.type';
+
+const MAX_TOKENS_PER_RESPONSE = 8192;
 
 export class LlmService {
-    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
+    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle) {
         const settings = await Services.settingsService.getSettings();
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (!serverIpc) return;
+
         let endpointUrl = '';
         let requestBody: any = {};
 
         switch (settings.connectionMode) {
             case 'demo':
-                endpointUrl = 'https://aiascent.game/api/dce/proxy'; // Pre-configured
+                endpointUrl = 'https://aiascent.game/api/dce/proxy';
                 requestBody = {
                     model: "unsloth/gpt-oss-20b",
-                    prompt: prompt,
+                    messages: [{ role: "user", content: prompt }],
                     n: count,
-                    max_tokens: 8192,
-                    stream: false,
-                    response_format: { "type": "json_object" } // Request JSON output
+                    max_tokens: MAX_TOKENS_PER_RESPONSE,
+                    stream: true,
+                    response_format: { "type": "json_object" }
                 };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
                 requestBody = {
-                    model: "local-model", // A generic name for user-provided URLs
-                    prompt: prompt,
+                    model: "local-model",
+                    messages: [{ role: "user", content: prompt }],
                     n: count,
-                    max_tokens: 8192,
-                    stream: false
+                    max_tokens: MAX_TOKENS_PER_RESPONSE,
+                    stream: true
                 };
                 break;
             default:
                 Services.loggerService.error("Attempted to call LLM in manual mode.");
-                return [];
+                return;
         }
 
         if (!endpointUrl) {
             Services.loggerService.error("LLM endpoint URL is not configured.");
-            return [];
+            return;
         }
 
         try {
-            Services.loggerService.log(`Sending batch request for ${count} responses to: ${endpointUrl}`);
-            
+            Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
             });
 
-            if (!response.ok) {
+            if (!response.ok || !response.body) {
                 const errorBody = await response.text();
                 throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
             }
 
-            const responseData = await response.json() as any;
-            
-            if (responseData.responses && Array.isArray(responseData.responses)) {
-                const results = responseData.responses;
-                Services.loggerService.log(`Received ${results.length} responses from LLM.`);
-                return results;
-            } else {
-                throw new Error("Invalid response structure from LLM endpoint.");
-            }
+            const stream = response.body;
+            let buffer = '';
+            let lastTpsUpdateTime = Date.now();
+            let tokensSinceLastUpdate = 0;
+            const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({ responseId: i + 1, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE }));
+            const responseContents: { [key: number]: string } = {};
+
+            stream.on('data', (chunk) => {
+                buffer += chunk.toString();
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const dataStr = line.substring(6);
+                        if (dataStr === '[DONE]') continue;
+                        
+                        try {
+                            const data = JSON.parse(dataStr);
+                            const choice = data.choices;
+                            if (choice && choice.delta && choice.delta.content) {
+                                const responseId = choice.index + 1;
+                                const contentChunk = choice.delta.content;
+                                
+                                responseContents[responseId] = (responseContents[responseId] || '') + contentChunk;
+                                tokensSinceLastUpdate += 1; // Approx 1 token per chunk
+                                progressData[choice.index].currentTokens += 1; // Rough approximation
+                            }
+                        } catch (e) {
+                            Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`);
+                        }
+                    }
+                }
+
+                const now = Date.now();
+                const elapsed = (now - lastTpsUpdateTime) / 1000;
+                if (elapsed >= 0.2) { // Update 5 times per second
+                    const tps = tokensSinceLastUpdate / elapsed;
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, {
+                        progress: progressData,
+                        tps: Math.round(tps),
+                        chunks: responseContents,
+                    });
+                    tokensSinceLastUpdate = 0;
+                    lastTpsUpdateTime = now;
+                }
+            });
+
+            stream.on('end', async () => {
+                Services.loggerService.log('LLM stream ended.');
+                const finalResponses = Object.values(responseContents);
+                const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(finalResponses, cycleData.tabCount || 4, cycleData.cycleContext);
+                serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+            });
 
         } catch (error: any) {
-            Services.loggerService.error(`Failed to generate batch responses: ${error.message}`);
-            // Return an empty array of the correct size to create an empty cycle for inspection
-            return Array(count).fill('');
+            Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
         }
     }
 }
@@ -18977,16 +18999,10 @@ ${staticContext.trim()}
             
             // Now, generate responses
             Services.loggerService.log(`Onboarding complete. Requesting ${responseCount} initial responses from LLM.`);
-            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: responseCount };
-            const responses = await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount };
+            await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
             
-            // Create Cycle 1 with the new responses
-            const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responses, responseCount, projectScope);
-            
-            vscode.window.showInformationMessage(`Successfully generated initial artifacts and received ${responses.length} responses.`);
-
-            // Tell the frontend to navigate to the new cycle
-            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+            vscode.window.showInformationMessage(`Successfully generated initial artifacts and sent responses for processing.`);
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate initial artifacts: ${error.message}`);
@@ -22063,9 +22079,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
-        const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
-        const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
-        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+        await llmService.generateBatch(prompt, data.count, data.cycleData);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
@@ -23427,7 +23441,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C53 (Implement split-view layout for generation)
+// Updated on: C54 (Add handler for streaming progress)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23436,7 +23450,7 @@ import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
 import { parseResponse } from '../../../client/utils/response-parser';
-import { BatchWriteFile, ComparisonMetrics } from '../../../common/ipc/channels.type';
+import { BatchWriteFile, ComparisonMetrics, GenerationProgress } from '../../../common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '../../../common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
@@ -23447,6 +23461,7 @@ import * as path from 'path-browserify';
 import WorkflowToolbar from './components/WorkflowToolbar';
 import { logger } from '../../utils/logger';
 import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
+import GenerationProgressDisplay from './components/GenerationProgressDisplay';
 
 const MAX_TOKENS_PER_RESPONSE = 8192; // Configurable constant
 
@@ -23460,33 +23475,6 @@ export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
 }
-
-interface GenerationProgress {
-    responseId: number;
-    currentTokens: number;
-    totalTokens: number;
-}
-
-const GenerationProgressDisplay: React.FC<{ progressData: GenerationProgress[], tps: number }> = ({ progressData, tps }) => {
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
-    return (
-        <div className="generation-progress-display">
-            <div className="progress-header">
-                <span>Generating Responses...</span>
-                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
-            </div>
-            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
-            {progressData.map(p => (
-                <div key={p.responseId} className="progress-bar-container">
-                    <span>Resp {p.responseId}:</span>
-                    <progress value={p.currentTokens} max={p.totalTokens}></progress>
-                    <span>{((p.currentTokens / p.totalTokens) * 100).toFixed(0)}%</span>
-                    <span className="token-count-text">({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)</span>
-                </div>
-            ))}
-        </div>
-    );
-};
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -23690,6 +23678,19 @@ const App = () => {
     
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
+            logger.log(`[STREAM] Received progress update. TPS: ${tps}`);
+            setGenerationProgress(progress);
+            setTps(tps);
+            setTabs(prevTabs => {
+                const newTabs = { ...prevTabs };
+                Object.entries(chunks).forEach(([responseId, chunk]) => {
+                    const tabIndex = parseInt(responseId, 10);
+                    newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null }), rawContent: chunk };
+                });
+                return newTabs;
+            });
+        });
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
             logger.log(`view.tsx: Batch generation complete. Setting isGenerating to false.`);
             setIsGenerating(false);
@@ -24275,7 +24276,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C49 (Update channels for Demo Mode)
+// Updated on: C54 (Add UpdateGenerationProgress channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -24291,6 +24292,13 @@ export interface ComparisonMetrics {
     modifiedTokens: number;
     similarity: number;
 }
+
+export interface GenerationProgress {
+    responseId: number;
+    currentTokens: number;
+    totalTokens: number;
+}
+
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestInitialData ? {} :
@@ -24381,7 +24389,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
-    T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: { responseId: number, progress: number, tps: number }[] } :
+    T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
     never;
 </file_artifact>
 

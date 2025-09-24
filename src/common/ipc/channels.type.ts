@@ -1,4 +1,4 @@
-// Updated on: C49 (Update channels for Demo Mode)
+// Updated on: C54 (Add UpdateGenerationProgress channel)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -14,6 +14,13 @@ export interface ComparisonMetrics {
     modifiedTokens: number;
     similarity: number;
 }
+
+export interface GenerationProgress {
+    responseId: number;
+    currentTokens: number;
+    totalTokens: number;
+}
+
 
 export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel> =
     T extends ClientToServerChannel.RequestInitialData ? {} :
@@ -104,5 +111,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendSettings ? { settings: DceSettings } :
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
-    T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: { responseId: number, progress: number, tps: number }[] } :
+    T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
     never;

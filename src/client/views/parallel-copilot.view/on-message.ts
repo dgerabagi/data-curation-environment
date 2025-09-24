@@ -14,9 +14,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
-        const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
-        const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(responses, data.cycleData.tabCount || 4);
-        serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+        await llmService.generateBatch(prompt, data.count, data.cycleData);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
