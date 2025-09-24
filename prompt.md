@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 59 - responses streaming in!!!!
+Current Cycle 60 - continue streaming refinements
+Cycle 59 - responses streaming in!!!!
 Cycle 58 - okay dce is receiving a signal, but its invalid syntax
 Cycle 57 - still no stream
 Cycle 56 - streaming is closer...
@@ -790,6 +791,43 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 60>
+<Cycle Context>
+great work, heres the latest feedback:
+
+1. the response ui is not respecting horizontal spacing, its barely overflowing on the right side of my screen/pane/window/vscode. lookat how the spacing of the text box for the onboarding panel, we were having the same issues with that panel and we got it fixed.
+
+2. our a97 says that unused should be gray, but currently its appearing as blue. i do see a green bar that indicates response tokens accurately.
+
+2.1. still arent capturing the thinking/reasoning tokens in the progress bar. those are pretty much all the tokens before the start of the structured json. i can see we are receiving them its just we arent counting them when we do.
+
+3. we should have a status for each response as well, and when the end token is detected we should turn the gray part to a color/tone that is more definitive of a completion, gray still seems to imply theres more to come, if that makes sense.
+</Cycle Context>
+<Previous Cycle 59 Summary of Actions>
+You are absolutely correct, and your diagnosis is spot on. The stream is being received, but the `[WARN] Received chunk with invalid index: undefined` log message is the smoking gun that proves my previous implementation had a critical parsing flaw.
+
+I was incorrectly attempting to read the `index` property from the top level of the JSON data chunk. However, as your ephemeral context shows, the OpenAI-compatible streaming protocol nests this crucial piece of information inside the `choices` array. The correct path is `parsedJson.choices[0].index`.
+
+My course of action is to correct this parsing logic in the backend `llm.service.ts`. This is a surgical fix that should resolve the "invalid index" warnings and allow the frontend to correctly process and display the incoming stream.
+
+1.  **Documentation First (Codify the Bug):**
+    *   I will add a new case study to **`A11.1 DCE - New Regression Case Studies.md`**.
+        *   **Name:** "SSE Stream Parsing Fails with `invalid index: undefined`".
+        *   **Root Cause Analysis (RCA):** The SSE stream parser was incorrectly attempting to access `chunk.index` at the top level of the JSON payload. The OpenAI-compatible streaming protocol, however, nests this value at `chunk.choices[0].index`.
+        *   **Codified Solution:** The SSE stream parser in `llm.service.ts` must correctly destructure the nested `choices` array to access the `index` and `delta` properties for each chunk. It must also be robust enough to handle multiple `data:` lines arriving in a single stream buffer.
+    *   I will update **`A97. DCE - vLLM Response Progress UI Plan.md`** to be more explicit about the nested structure of the SSE payload in its technical plan, reflecting this fix.
+
+2.  **Fix Backend Stream Parsing (`llm.service.ts`):**
+    *   I will refactor the `stream.on('data')` handler in the `generateBatch` method.
+    *   It will now correctly split the incoming data chunk by newlines to handle multiple SSE messages arriving at once.
+    *   For each line that starts with `data: `, it will parse the JSON.
+    *   Crucially, it will be updated to access the nested data correctly: `const responseIndex = data.choices[0].index;` and `const contentChunk = data.choices[0].delta.content;`.
+    *   This will allow it to use the `responseIndex` to update the content and token count for the correct response buffer, fixing the bug.
+
+3.  **No Frontend Changes:** The frontend components (`view.tsx`, `GenerationProgressDisplay.tsx`) are likely implemented correctly based on the plan from Cycle 57 and are simply waiting for the properly parsed data from the backend. No changes are required on the frontend this cycle.
+</Previous Cycle 59 Summary of Actions>
+</Cycle 60>
+
 <Cycle 59>
 <Cycle Context>
 got em! we got streaming coming in to the dce now and its making the progress bars work! fantastic! now lets take some time to make this look great.
@@ -806,12 +844,6 @@ got em! we got streaming coming in to the dce now and its making the progress ba
 
 6. our response tabs are not yet correctly parsing the incoming responses. what comes back looks like perfect json, however our parsing seems to still be looking for tags. in the response summary section, i see this (see ephemeral>
 </Cycle Context>
-<Ephemeral Context>
-Summary
-PARSING FAILED: Could not find valid <file path="...">...</file_artifact> tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.
-
-{"summary":"Generated initial project documentation artifacts for TowerDefenseGame, including a Master Artifact List, Project Vision, Technical Scaffolding Plan, GitHub Repository Setup Guide, Development and Testing Guide, and Competitive Analysis.","course_of_action":[{"step":1,"description":"Create Master Artifact List (A0) detailing all core planning documents."},{"step":2,"description":"Develop Project Vision and Goals (A1) to define high-level objectives and phased roadmap."},{"step":3,"description":"Draft Technical Scaffolding Plan (A2) outlining the technology stack and file structure."},{"step":4,"description":"Prepare GitHub Repository Setup Guide (T14) customized for TowerDefenseGame."},{"step":5,"description":"Prepare Development and Testing Guide (T7) customized for TowerDefenseGame."},{"step":6,"description":"Add Competitive Analysis (A5) to identify differentiation opportunities."}],"curator_activity":"Please review and verify that all placeholder tokens such as YOUR_USERNAME were replaced in the GitHub guide, and adjust any URLs or environment-specific details as needed before proceeding.","files":[{"path":"src/Artifacts/A0_Master_Artifact_List.md","content":"# Artifact A0: Master Artifact List\n# Date Created: C200\n# Author: AI Model & Curator\n\n- Key/Value for A0:\n- Description: A definitive, parseable list of all documentation artifacts for the TowerDefenseGame project.\n- Tags: documentation, master list\n\n## 1. Project Planning & Design\n\n### A1. TowerDefenseGame - Project Vis[...]-Pilot Panel and click "Parse All".\n\n### Step 4: Accept and Test\n1. Review the responses and find one that looks promising.\n2. Select that response and use the "Accept Selected Files" button to write the AI's proposed changes to your workspace.\n3. Now, compile and test the application. Does it work? Does it have errors?\n\n### Step 5: The "Restore" Loop\nThis is where Git becomes a powerful part of the workflow.\n\n* If the changes are bad (e.g., introduce bugs, don't work as expected):\n 1. Open the terminal in VS Code.\n 2. Run the command: git restore .\n 3. This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\n 4.
-</Ephemeral Context>
 <Previous Cycle 58 Summary of Actions>
 I have analyzed the logs from all three components, and the root cause of the issue is now clear. The proxy and vLLM servers are functioning correctly, but the DCE extension's backend (`llm.service.ts`) is failing to properly handle the interleaved Server-Sent Events (SSE) stream that vLLM produces when generating multiple responses in parallel.
 
@@ -3718,10 +3750,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T22:35:50.950Z
+  Date Generated: 2025-09-24T23:17:50.908Z
   ---
   Total Files: 189
-  Approx. Tokens: 517371
+  Approx. Tokens: 517925
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -3731,9 +3763,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (11916 tokens)
 5. src\client\views\parallel-copilot.view\view.tsx (9806 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (6192 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (6414 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
-9. src\backend\services\prompt.service.ts (5042 tokens)
+9. src\backend\services\prompt.service.ts (4978 tokens)
 10. src\backend\services\file-operation.service.ts (4526 tokens)
 
 <!-- Full File List -->
@@ -3822,14 +3854,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 83. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 84. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 85. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16993 - Tokens: 4249
+86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 16280 - Tokens: 4070
 87. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 88. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 89. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 76 - Chars: 4925 - Tokens: 1232
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 59 - Chars: 5346 - Tokens: 1337
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -3862,9 +3894,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 125. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-126. src\backend\services\llm.service.ts - Lines: 185 - Chars: 8225 - Tokens: 2057
+126. src\backend\services\llm.service.ts - Lines: 191 - Chars: 8397 - Tokens: 2100
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-128. src\backend\services\prompt.service.ts - Lines: 359 - Chars: 20168 - Tokens: 5042
+128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 19910 - Tokens: 4978
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 130. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 131. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -3893,7 +3925,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
-157. src\client\views\parallel-copilot.view\view.scss - Lines: 1106 - Chars: 24768 - Tokens: 6192
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1140 - Chars: 25655 - Tokens: 6414
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 159. src\client\views\parallel-copilot.view\view.tsx - Lines: 403 - Chars: 39221 - Tokens: 9806
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
@@ -3902,7 +3934,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-166. src\common\ipc\channels.type.ts - Lines: 115 - Chars: 8747 - Tokens: 2187
+166. src\common\ipc\channels.type.ts - Lines: 117 - Chars: 8846 - Tokens: 2212
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -3918,9 +3950,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 179. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
-182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5080 - Tokens: 1270
+182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5160 - Tokens: 1290
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 49 - Chars: 2036 - Tokens: 509
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 72 - Chars: 3563 - Tokens: 891
 185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 47662 - Tokens: 11916
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
@@ -9383,7 +9415,7 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C57 (Add chunk logging for debugging)
+# Updated on: C59 (Remove stream chunk logging)
 
 - **Key/Value for A0:**
 - **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The proxy route has been corrected to handle the modern OpenAI `messages` format instead of the legacy `prompt` format.
@@ -9391,9 +9423,9 @@ This architecture provides a secure, scalable, and highly performant solution fo
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected to fix a critical bug. It was previously expecting a `{ "prompt": "..." }` field in the request body, but the DCE extension sends the modern OpenAI format, `{ "messages": [...] }`. The code now correctly handles the `messages` array, resolving the `400 Bad Request` error. **Logging has been added to the stream to aid in debugging client-side consumption issues.**
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected to fix a critical bug. It was previously expecting a `{ "prompt": "..." }` field in the request body, but the DCE extension sends the modern OpenAI format, `{ "messages": [...] }`. The code now correctly handles the `messages` array, resolving the `400 Bad Request` error. **The diagnostic chunk logging has been removed as streaming is now stable.**
 
-## 2. Source Code (with corrected route and logging)
+## 2. Source Code (with corrected route)
 
 ```typescript
 // Updated on: C1384 (Correct import path for generateSpeech from llmService.)
@@ -9431,7 +9463,6 @@ import leaderboardUpdateHandler from './pages/api/leaderboard/update';
 import playersListHandler from './pages/api/players/list';
 import playerProfileHandler from './pages/api/players/[userId]';
 import prisma from './lib/prisma';
-import { Readable } from 'stream';
 
 const app = express();
 const server = http.createServer(app);
@@ -9678,25 +9709,7 @@ app.post('/api/dce/proxy', async (req, res) => {
         res.setHeader('Connection', 'keep-alive');
 
         const stream = vllmResponse.body;
-        
-        // C57 DEBUG: Add logging for each chunk
-        const loggingStream = new Readable({
-            read() {}
-        });
-
-        const reader = stream.getReader();
-        reader.read().then(function processText({ done, value }): any {
-            if (done) {
-                loggingStream.push(null); // End the stream
-                return;
-            }
-            const chunkString = new TextDecoder().decode(value);
-            logInfo('[DCE PROXY STREAM]', `Piping chunk to client: ${chunkString.trim()}`);
-            loggingStream.push(value);
-            return reader.read().then(processText);
-        });
-
-        loggingStream.pipe(res);
+        stream.pipe(res);
         logInfo('[DCE]', 'Successfully established stream from vLLM to client.');
 
     } catch (error: any) {
@@ -9756,7 +9769,6 @@ process.on('SIGINT', () => {
     io.close();
     server.close(() => process.exit(0));
 });
-```
 </file_artifact>
 
 <file path="src/Artifacts/A91. AI Ascent - Caddyfile (Reference).md">
@@ -10129,15 +10141,15 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C58 (Codify correct multi-stream SSE parsing with nested index)
+# Updated on: C59 (Update UI mockup and technical plan for color-coding and status)
 
 - **Key/Value for A0:**
-- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including progress bars and a tokens/second metric. This has been updated to reflect the final, correct streaming architecture.
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, and a tokens/second metric.
 - **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics, streaming, sse
 
 ## 1. Vision & Goal
 
-Generating multiple, large AI responses can take a significant amount of time. To improve the user experience, it's critical to provide clear, real-time feedback that the system is working and to show the progress of the generation. The goal of this feature is to create a dedicated UI that appears during response generation, displaying progress bars and performance metrics for each parallel response being generated by vLLM.
+Generating multiple, large AI responses can take a significant amount of time. To improve the user experience, it's critical to provide clear, real-time feedback that the system is working and to show the progress of the generation. The goal of this feature is to create a dedicated UI that appears during response generation, displaying progress bars, status indicators, and performance metrics for each parallel response being generated by vLLM.
 
 ## 2. User Stories
 
@@ -10145,6 +10157,8 @@ Generating multiple, large AI responses can take a significant amount of time. T
 |---|---|---|
 | P3-PROG-01 | **See Generation Progress** | As a user, when I click "Generate responses," I want a UI to immediately appear that shows me the progress of each response being generated, so I know the system is working and not frozen. | - When generation starts, a progress display UI is shown. <br> - It contains a separate progress bar for each of the `N` requested responses. <br> - Each progress bar updates in real-time as tokens are received. |
 | P3-PROG-02 | **See Performance Metrics** | As a user, I want to see a live "tokens per second" metric during generation, so I can gauge the performance of the LLM backend. | - The progress UI displays a "Tokens/sec" value. <br> - This value is calculated and updated periodically throughout the generation process. |
+| P3-PROG-03 | **Understand Progress Bar**| As a user, I want the progress bar to be color-coded so I can understand the allocation of tokens for the prompt versus the generated response. | - The progress bar is a stacked bar with three colors. <br> - One color represents the "thinking" (prompt) tokens. <br> - A second color represents the currently generated response tokens. <br> - A third color represents the remaining, unused tokens up to the model's maximum. |
+| P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. |
 
 ## 3. UI Mockup (Textual Description)
 
@@ -10154,54 +10168,35 @@ The progress UI will be a dedicated component that is conditionally rendered in 
 +-----------------------------------------------------------------+
 | Generating Responses...                 Tokens/sec: 1234        |
 |-----------------------------------------------------------------|
-| Total Tokens: 5,120                                             |
+| Total Tokens: 18,120                                            |
 |                                                                 |
-| Resp 1: [||||||||||||||||||||||||||||||      ] 80% (6553/8192 tk)|
-| Resp 2: [||||||||||||||||||||||||||          ] 70% (5734/8192 tk)|
-| Resp 3: [|||||||||||||||||||||||||||||||     ] 85% (6963/8192 tk)|
-| Resp 4: [||||||||||||||||||||||||            ] 65% (5324/8192 tk)|
+| Resp 1: [blue|green|gray] 80% (1k+5.5k/8.1k) | Status: Generating... |
+| Resp 2: [blue|green|gray] 70% (1k+4.7k/8.1k) | Status: Generating... |
+| Resp 3: [blue|gray    ] 12% (1k+0k/8.1k)     | Status: Thinking...   |
+| Resp 4: [blue|green|gray] 100% (1k+7.1k/8.1k)| Status: Complete ✓    |
 +-----------------------------------------------------------------+
 ```
+*   **[blue|green|gray]**: Represents the stacked progress bar.
+    *   `blue`: Prompt/Thinking tokens.
+    *   `green`: Generated response tokens.
+    *   `gray`: Unused tokens up to the max.
 
 ## 4. Technical Implementation Plan (C58 Revision)
 
 This feature is critically dependent on a correctly implemented end-to-end streaming architecture using Server-Sent Events (SSE).
 
-1.  **vLLM Server:**
-    *   Must be started with the OpenAI-compatible API endpoint.
-    *   When a request includes `"stream": true` and `n > 1`, it will send an SSE stream. Each `data:` line will contain a JSON object.
-
-2.  **Proxy Server (`A90 server.ts`):**
-    *   Must make its request to the vLLM with `"stream": true"`.
-    *   It must **not** buffer the response. It must set the client response headers for SSE and pipe the `ReadableStream` from the vLLM response directly to the client.
-
-3.  **Extension Backend (`llm.service.ts`):**
-    *   The `generateBatch` method must correctly consume and parse the SSE stream.
-    *   **Data Structure of SSE Chunk:** The backend must expect a JSON object on each `data:` line with the following structure:
-        ```json
-        {
-          "choices": [
-            {
-              "index": 0, // The index of the response stream
-              "delta": { "content": "..." },
-              "finish_reason": null
-            }
-          ]
-        }
-        ```
-    *   **Parsing Logic:** The `stream.on('data')` handler must:
-        *   Split the incoming buffer by newlines to handle multiple messages at once.
-        *   For each line starting with `data: `, parse the JSON.
-        *   Correctly access the nested index via **`parsedJson.choices[0].index`**.
-        *   Use this index to update the content and token count for the correct response buffer.
-        *   Track the `finish_reason` for each index individually. The operation is only complete when all response indices have reported a finish reason.
-
-4.  **IPC Channels (`channels.type.ts`):**
-    *   The `ServerToClientChannel.UpdateGenerationProgress` payload will contain the progress data for each response and the overall tokens-per-second.
-
-5.  **Frontend (`view.tsx`, `GenerationProgressDisplay.tsx`):**
-    *   The message handler for `UpdateGenerationProgress` will update the state for `generationProgress` and `tps`.
-    *   The `GenerationProgressDisplay` component will render the progress bars and token counts based on this state.
+1.  **Backend (`prompt.service.ts`):** A new utility method will be added to calculate the token count of a given prompt string.
+2.  **Backend (`llm.service.ts`):**
+    *   Before sending the batch request, it will call the new prompt service utility to get the `promptTokens` count.
+    *   The `UpdateGenerationProgress` IPC payload will be enhanced to include `promptTokens` and a new `status` string for each response.
+    *   The service will manage the lifecycle of the `status` field: initializing it to `'thinking'`, changing it to `'generating'` when the first token delta for that response index is received, and changing it to `'complete'` when a `finish_reason` is received.
+3.  **Frontend (`GenerationProgressDisplay.tsx` & `view.scss`):**
+    *   The component will be refactored to receive the enhanced progress data.
+    *   It will render the progress bar as a container `div` with three child `div`s inside.
+    *   The `width` of each child `div` will be set as a percentage of the total `max_tokens` to create the stacked bar effect.
+    *   A new element will render the `status` string, with a CSS class applied to trigger an animation for the "Thinking" and "Generating" states.
+    *   A tooltip will be added to the TPS display.
+4.  **Parsing Logic (SSE Stream):** The backend stream consumer must correctly parse the SSE stream, expecting a JSON object with a nested `choices[0].index` field to correctly route token deltas to the right progress buffer.
 </file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -22179,7 +22174,13 @@ export class LlmService {
             let lastTpsUpdateTime = Date.now();
             let tokensSinceLastUpdate = 0;
             
-            const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({ responseId: i + 1, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE }));
+            const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
+                responseId: i + 1,
+                promptTokens: 0,
+                currentTokens: 0,
+                totalTokens: MAX_TOKENS_PER_RESPONSE,
+                status: 'pending' as unknown as GenerationProgress['status'],
+            }));
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
             let totalFinished = 0;
@@ -22336,7 +22337,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C50 (Conditionally exclude A52.1 in Demo Mode)
+// Updated on: C59 (Add getPromptTokenCount utility)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -22365,6 +22366,10 @@ M5. organized artifacts list
 M6. cycles
 M7. Flattened Repo
 </M1. artifact schema>`;
+
+    public getPromptTokenCount(prompt: string): number {
+        return Math.ceil(prompt.length / 4);
+    }
 
     private getPreviousCycleSummary(cycle: PcppCycle | undefined): string {
         if (!cycle) return '';
@@ -26017,7 +26022,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C56 (Add partial text preview styles)
+// Updated on: C59 (Add styles for stacked progress bar and status indicator)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -26290,7 +26295,7 @@ body {
     background-color: var(--vscode-sideBar-background);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     font-size: 12px;
     color: var(--vscode-descriptionForeground);
     flex-grow: 1;
@@ -26309,28 +26314,62 @@ body {
         font-weight: bold;
     }
 
-    .progress-bar-container {
+    .progress-item-container {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         gap: 4px;
-        padding-top: 8px;
+    }
+
+    .progress-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-style: italic;
         
-        .progress-bar-row {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            gap: 8px;
+        .spinner {
+            animation: spin 1.5s linear infinite;
         }
 
-        progress {
-            width: 100%;
+        &.status-complete .complete-check {
+            color: var(--vscode-testing-iconPassed);
         }
+    }
 
-        .token-count-text {
-            font-size: 11px;
-            font-style: italic;
-        }
+    .stacked-progress-bar {
+        width: 100%;
+        height: 8px;
+        display: flex;
+        background-color: var(--vscode-progressBar-background);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-segment {
+        height: 100%;
+        transition: width 0.2s ease-in-out;
+    }
+
+    .progress-segment.thinking {
+        background-color: var(--vscode-testing-iconQueued); // Blue/Purple
+    }
+    .progress-segment.generated {
+        background-color: var(--vscode-testing-iconPassed); // Green
+    }
+    .progress-segment.unused {
+        background-color: transparent;
+    }
+
+    .token-count-text {
+        font-size: 11px;
+        font-style: italic;
+        color: var(--vscode-descriptionForeground);
     }
     
     .partial-text-preview {
@@ -27977,7 +28016,7 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C56 (Add chunks to UpdateGenerationProgress)
+// Updated on: C59 (Add promptTokens and status to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -27998,6 +28037,8 @@ export interface GenerationProgress {
     responseId: number;
     currentTokens: number;
     totalTokens: number;
+    promptTokens: number;
+    status: 'thinking' | 'generating' | 'complete' | 'error';
 }
 
 
@@ -29028,30 +29069,30 @@ const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     // Attempt to parse as JSON first for Harmony structured output
-    try {
+        try {
         const jsonResponse = JSON.parse(rawText);
-        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: f.content || '',
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
+            if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+                const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                    path: f.path || '',
+                    content: f.content || '',
+                    tokenCount: Math.ceil((f.content || '').length / 4),
+                }));
 
-            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
-                ? jsonResponse.course_of_action
-                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
-                    .join('\n')
+                const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                    ? jsonResponse.course_of_action
+                        .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                        .join('\n')
                 : jsonResponse.course_of_action; // Handle if it's already a string
 
-            return {
-                summary: jsonResponse.summary,
-                courseOfAction: courseOfAction,
-                curatorActivity: jsonResponse.curator_activity || '',
-                filesUpdated: files.map(f => f.path),
-                files: files,
-                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
-            };
-        }
+                return {
+                    summary: jsonResponse.summary,
+                    courseOfAction: courseOfAction,
+                    curatorActivity: jsonResponse.curator_activity || '',
+                    filesUpdated: files.map(f => f.path),
+                    files: files,
+                    totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+                };
+            }
     } catch (e) {
         // Not a valid JSON object that matches our schema, proceed with regex parsing
     }
@@ -29152,16 +29193,12 @@ This document serves as a living record of persistent or complex bugs that have 
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C56 (Add partial text preview)
+// Updated on: C59 (Implement 3-color progress bar and status indicator)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
-
-export interface GenerationProgress {
-    responseId: number;
-    currentTokens: number;
-    totalTokens: number;
-}
+import { GenerationProgress } from '@/common/ipc/channels.type';
+import { VscLoading, VscCheck } from 'react-icons/vsc';
 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
@@ -29172,29 +29209,56 @@ interface GenerationProgressDisplayProps {
 const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
     const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
 
+    const getStatusIndicator = (status: GenerationProgress['status']) => {
+        switch (status) {
+            case 'thinking':
+                return <><VscLoading className="spinner" /> Thinking...</>;
+            case 'generating':
+                return <><VscLoading className="spinner" /> Generating...</>;
+            case 'complete':
+                return <><VscCheck className="complete-check" /> Complete</>;
+            case 'error':
+                return <>Error</>;
+            default:
+                return null;
+        }
+    };
+
     return (
         <div className="generation-progress-display">
             <div className="progress-header">
                 <span>Generating Responses...</span>
-                <span>Tokens/sec: {tps > 0 ? tps : '--'}</span>
+                <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
             </div>
-            <div className="progress-total">Total Tokens: {formatLargeNumber(totalGenerated, 0)}</div>
+            <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
             
-            {progressData.map(p => (
-                <div key={p.responseId} className="progress-bar-container">
-                    <div className='progress-bar-row'>
-                        <span>Resp {p.responseId}:</span>
-                        <progress value={p.currentTokens} max={p.totalTokens}></progress>
-                        <span>{p.totalTokens > 0 ? ((p.currentTokens / p.totalTokens) * 100).toFixed(0) : 0}%</span>
+            {progressData.map(p => {
+                const promptPct = (p.promptTokens / p.totalTokens) * 100;
+                const generatedPct = (p.currentTokens / p.totalTokens) * 100;
+                const remainingPct = 100 - promptPct - generatedPct;
+
+                return (
+                    <div key={p.responseId} className="progress-item-container">
+                        <div className='progress-item-header'>
+                            <span>Resp {p.responseId}</span>
+                            <span className={`status-indicator status-${p.status}`}>
+                                {getStatusIndicator(p.status)}
+                            </span>
+                        </div>
+                        <div className="stacked-progress-bar">
+                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Prompt: ${p.promptTokens} tk`}></div>
+                            <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
+                            <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
+                        </div>
+                        <span className="token-count-text">
+                            ({formatLargeNumber(p.promptTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                        </span>
+                        <div className="partial-text-preview">
+                            <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
+                        </div>
                     </div>
-                    <span className="token-count-text">
-                        ({formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
-                    </span>
-                    <div className="partial-text-preview">
-                        <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
-                    </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
 };

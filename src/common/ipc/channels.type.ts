@@ -1,4 +1,4 @@
-// Updated on: C56 (Add chunks to UpdateGenerationProgress)
+// Updated on: C59 (Add promptTokens and status to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -19,6 +19,8 @@ export interface GenerationProgress {
     responseId: number;
     currentTokens: number;
     totalTokens: number;
+    promptTokens: number;
+    status: 'thinking' | 'generating' | 'complete' | 'error';
 }
 
 

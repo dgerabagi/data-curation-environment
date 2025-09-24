@@ -10,30 +10,30 @@ const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
     // Attempt to parse as JSON first for Harmony structured output
-    try {
+        try {
         const jsonResponse = JSON.parse(rawText);
-        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: f.content || '',
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
+            if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+                const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                    path: f.path || '',
+                    content: f.content || '',
+                    tokenCount: Math.ceil((f.content || '').length / 4),
+                }));
 
-            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
-                ? jsonResponse.course_of_action
-                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
-                    .join('\n')
+                const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                    ? jsonResponse.course_of_action
+                        .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                        .join('\n')
                 : jsonResponse.course_of_action; // Handle if it's already a string
 
-            return {
-                summary: jsonResponse.summary,
-                courseOfAction: courseOfAction,
-                curatorActivity: jsonResponse.curator_activity || '',
-                filesUpdated: files.map(f => f.path),
-                files: files,
-                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
-            };
-        }
+                return {
+                    summary: jsonResponse.summary,
+                    courseOfAction: courseOfAction,
+                    curatorActivity: jsonResponse.curator_activity || '',
+                    filesUpdated: files.map(f => f.path),
+                    files: files,
+                    totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+                };
+            }
     } catch (e) {
         // Not a valid JSON object that matches our schema, proceed with regex parsing
     }

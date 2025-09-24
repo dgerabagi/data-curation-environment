@@ -1,4 +1,4 @@
-// Updated on: C50 (Conditionally exclude A52.1 in Demo Mode)
+// Updated on: C59 (Add getPromptTokenCount utility)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -27,6 +27,10 @@ M5. organized artifacts list
 M6. cycles
 M7. Flattened Repo
 </M1. artifact schema>`;
+
+    public getPromptTokenCount(prompt: string): number {
+        return Math.ceil(prompt.length / 4);
+    }
 
     private getPreviousCycleSummary(cycle: PcppCycle | undefined): string {
         if (!cycle) return '';

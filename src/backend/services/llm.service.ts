@@ -70,7 +70,13 @@ export class LlmService {
             let lastTpsUpdateTime = Date.now();
             let tokensSinceLastUpdate = 0;
             
-            const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({ responseId: i + 1, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE }));
+            const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
+                responseId: i + 1,
+                promptTokens: 0,
+                currentTokens: 0,
+                totalTokens: MAX_TOKENS_PER_RESPONSE,
+                status: 'pending' as unknown as GenerationProgress['status'],
+            }));
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
             let totalFinished = 0;
