@@ -1,21 +1,21 @@
 // src/client/views/settings.view/view.tsx
-// Updated on: C37 (Implement settings persistence)
+// Updated on: C64 (Implement static model card for Demo Mode)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
-import { VscChevronDown } from 'react-icons/vsc';
+import { VscChevronDown, VscVm } from 'react-icons/vsc';
 import { ConnectionMode, DceSettings } from '@/backend/services/settings.service';
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean; extraHeaderContent?: React.ReactNode }> = ({ title, children, initialCollapsed = false, extraHeaderContent }) => {
     const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
     return (
         <div className="collapsible-section">
             <div className="collapsible-header" onClick={() => setIsCollapsed(!isCollapsed)}>
-                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
-                <span>{title}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} /><span>{title}</span></div>
+                {extraHeaderContent}
             </div>
             {!isCollapsed && <div className="collapsible-content">{children}</div>}
         </div>
@@ -58,6 +58,16 @@ const App = () => {
         handleSettingsChange({ apiUrl: event.target.value });
     };
 
+    const DemoModelCard = () => (
+        <div className="model-card">
+            <h3><VscVm /> Demo Model Details</h3>
+            <p><strong>Model:</strong> unsloth/gpt-oss-20b</p>
+            <p><strong>Context Window:</strong> 16384 tokens</p>
+            <p><strong>GPU:</strong> NVIDIA RTX 3090 (24GB VRAM)</p>
+            <p className="description">This model is hosted locally for demonstration purposes.</p>
+        </div>
+    );
+
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
@@ -78,6 +88,8 @@ const App = () => {
                             <label htmlFor="mode-demo">Demo Mode (Local vLLM via `aiascent.game`)</label>
                             <span className="description">Connect to a pre-configured local vLLM instance via a proxy.</span>
                         </div>
+
+                        {settings.connectionMode === 'demo' && <DemoModelCard />}
 
                         <div className="radio-option">
                             <input type="radio" id="mode-url" name="mode" value="url" checked={settings.connectionMode === 'url'} onChange={handleModeChange} />

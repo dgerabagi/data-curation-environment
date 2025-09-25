@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C51 (Implement JSON-first parsing with regex fallback)
+// Updated on: C64 (Handle JSON wrapped in markdown code fences)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -9,31 +9,42 @@ const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
+    let textToParse = rawText.trim();
+    
+    // Handle JSON wrapped in markdown code fences
+    if (textToParse.startsWith('```json')) {
+        textToParse = textToParse.substring(7);
+        if (textToParse.endsWith('```')) {
+            textToParse = textToParse.slice(0, -3);
+        }
+        textToParse = textToParse.trim();
+    }
+
     // Attempt to parse as JSON first for Harmony structured output
-        try {
-        const jsonResponse = JSON.parse(rawText);
-            if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-                const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                    path: f.path || '',
-                    content: f.content || '',
-                    tokenCount: Math.ceil((f.content || '').length / 4),
-                }));
+    try {
+        const jsonResponse = JSON.parse(textToParse);
+        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                path: f.path || '',
+                content: f.content || '',
+                tokenCount: Math.ceil((f.content || '').length / 4),
+            }));
 
-                const courseOfAction = Array.isArray(jsonResponse.course_of_action)
-                    ? jsonResponse.course_of_action
-                        .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
-                        .join('\n')
-                : jsonResponse.course_of_action; // Handle if it's already a string
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+            : jsonResponse.course_of_action;
 
-                return {
-                    summary: jsonResponse.summary,
-                    courseOfAction: courseOfAction,
-                    curatorActivity: jsonResponse.curator_activity || '',
-                    filesUpdated: files.map(f => f.path),
-                    files: files,
-                    totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
-                };
-            }
+            return {
+                summary: jsonResponse.summary,
+                courseOfAction: courseOfAction,
+                curatorActivity: jsonResponse.curator_activity || '',
+                filesUpdated: files.map(f => f.path),
+                files: files,
+                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+            };
+        }
     } catch (e) {
         // Not a valid JSON object that matches our schema, proceed with regex parsing
     }
@@ -42,7 +53,7 @@ export function parseResponse(rawText: string): ParsedResponse {
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
+    let processedText = textToParse.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
 
     const finalResponseMarker = 'assistantfinal';
     const markerIndex = processedText.indexOf(finalResponseMarker);

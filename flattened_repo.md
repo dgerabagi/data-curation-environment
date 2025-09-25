@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-25T21:58:43.797Z
+  Date Generated: 2025-09-25T22:48:39.967Z
   ---
   Total Files: 190
-  Approx. Tokens: 522384
+  Approx. Tokens: 523694
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,9 +12,9 @@
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12017 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (10011 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (10138 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (9057 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (6767 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (7249 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 9. src\backend\services\prompt.service.ts (5068 tokens)
 10. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -171,18 +171,18 @@
 149. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 150. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 151. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 71 - Chars: 3081 - Tokens: 771
+152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 74 - Chars: 3316 - Tokens: 829
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 147 - Chars: 7218 - Tokens: 1805
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
-157. src\client\views\parallel-copilot.view\view.scss - Lines: 1197 - Chars: 27065 - Tokens: 6767
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1235 - Chars: 28996 - Tokens: 7249
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 424 - Chars: 40041 - Tokens: 10011
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 431 - Chars: 40550 - Tokens: 10138
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
+163. src\client\views\settings.view\view.tsx - Lines: 132 - Chars: 7030 - Tokens: 1758
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 108 - Chars: 6114 - Tokens: 1529
 166. src\common\ipc\channels.type.ts - Lines: 124 - Chars: 9184 - Tokens: 2296
@@ -197,19 +197,19 @@
 175. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
 176. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
 177. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-178. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 71 - Chars: 3317 - Tokens: 830
+178. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 74 - Chars: 3856 - Tokens: 964
 179. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 4742 - Tokens: 1186
-182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5160 - Tokens: 1290
+182. src\client\utils\response-parser.ts - Lines: 120 - Chars: 5385 - Tokens: 1347
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 128 - Chars: 6608 - Tokens: 1652
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 132 - Chars: 7129 - Tokens: 1783
 185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 48066 - Tokens: 12017
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 188. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
 189. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
-190. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 43 - Chars: 4476 - Tokens: 1119
+190. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5181 - Tokens: 1296
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -21888,7 +21888,7 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C63 (Move regenerate button to tab title row and style)
+// Updated on: C64 (Move regenerate button to tab title row and style)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
 import { TabState as OriginalTabState } from '../view';
@@ -21939,7 +21939,7 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                             <div className="tab-title">
                                 Resp {tabIndex}
                                 {isLoading && <VscLoading className="spinner" />}
-                                <button className="regenerate-tab-button styled-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
+                                <button className="regenerate-tab-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
                                     <VscSync />
                                 </button>
                             </div>
@@ -21953,6 +21953,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                     );
                 })}
             </div>
+            <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
+                {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
+            </button>
         </div>
     );
 };
@@ -22352,7 +22355,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C63 (Add styles for timer, footer, and relocated buttons)
+// Updated on: C64 (Style refinements for generation progress and tabs)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -22637,6 +22640,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap; /* Allow wrapping for controls */
         
         .progress-title {
             font-weight: bold;
@@ -22647,12 +22651,13 @@ body {
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px; /* Reduced gap */
         }
 
         .elapsed-timer {
             font-family: var(--vscode-editor-font-family); // Monospace for timer
             font-weight: bold;
+            margin-left: 8px; /* Add margin to separate from sort */
         }
     }
     
@@ -22675,6 +22680,24 @@ body {
             display: flex;
             align-items: center;
             gap: 4px;
+            
+            button {
+                background-color: var(--vscode-button-secondaryBackground);
+                color: var(--vscode-button-secondaryForeground);
+                border: 1px solid var(--vscode-button-border, transparent);
+                padding: 2px 6px; /* Adjusted padding */
+                font-size: 11px; /* Adjusted font size */
+                cursor: pointer;
+                border-radius: 2px;
+                
+                &:hover {
+                    background-color: var(--vscode-button-secondaryHoverBackground);
+                }
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
         }
     }
 
@@ -22960,24 +22983,28 @@ body {
 }
 
 .sort-button {
-    background: none;
+    background-color: var(--vscode-button-secondaryBackground); /* Styled like secondary button */
+    color: var(--vscode-button-secondaryForeground);
     border: 1px solid var(--vscode-button-border, transparent);
-    color: var(--vscode-icon-foreground);
+    padding: 2px 8px; /* Adjusted padding */
+    font-size: 12px; /* Adjusted font size */
     cursor: pointer;
-    padding: 4px;
-    border-radius: 3px;
+    border-radius: 2px; /* Rounded corners */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    margin-left: auto; /* Push to the right */
 
     &:hover {
-        background-color: var(--vscode-toolbar-hoverBackground);
+        background-color: var(--vscode-button-secondaryHoverBackground);
     }
     
     &.active {
-        background-color: var(--vscode-toolbar-hoverBackground);
-        outline: 1px solid var(--vscode-focusBorder);
+        background-color: var(--vscode-button-background); /* Primary button style when active */
+        color: var(--vscode-button-foreground);
+        outline: none; /* Remove default outline */
+        border-color: var(--vscode-focusBorder);
     }
 }
 
@@ -23014,12 +23041,23 @@ body {
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px; /* Reduced gap to fit regenerate button */
 }
 
 .regenerate-tab-button {
-    padding: 0 4px !important;
-    font-size: 12px !important;
+    background-color: transparent !important; /* Make it transparent */
+    border: none !important; /* No border */
+    color: var(--vscode-icon-foreground) !important; /* Icon foreground color */
+    padding: 2px !important; /* Reduced padding */
+    font-size: 14px !important; /* Larger icon */
+    position: relative; /* Allow positioning within tab title */
+    right: -4px; /* Adjust position slightly */
+    opacity: 0.7; /* Slightly transparent when not hovered */
+    
+    &:hover {
+        background-color: var(--vscode-toolbar-hoverBackground) !important;
+        opacity: 1;
+    }
 }
 
 .tab-metadata {
@@ -23083,6 +23121,7 @@ body {
     padding-right: 8px;
     flex-basis: 33%; /* Static width */
     flex-shrink: 0;
+    margin: 2px; /* C187 Fix: Add margin for animation highlight */
 }
 
 .resizer {
@@ -23370,6 +23409,8 @@ body {
     color: var(--vscode-editorLineNumber-foreground);
     text-align: right;
     user-select: none;
+    border-right: 1px solid var(--vscode-panel-border);
+    
     span { display: block; min-height: 1.5em; padding-right: 6px; }
 }
 
@@ -23565,7 +23606,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C63 (Implement timer and manual navigation)
+// Updated on: C64 (Implement UI improvements for generation progress and tabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23874,6 +23915,13 @@ const App = () => {
         }
     };
 
+    const handleRegenerateTab = (tabId: number) => {
+        if (currentCycle === null) return;
+        setTabs(prev => ({ ...prev, [tabId.toString()]: { ...prev[tabId.toString()], isLoading: true, parsedContent: null } }));
+        clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle, tabId: tabId.toString() });
+        setSaveStatus('unsaved');
+    };
+
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -23917,7 +23965,7 @@ const App = () => {
                     tps={tps} 
                     tabs={tabs} 
                     onStop={(id) => clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { responseId: id })}
-                    onRegenerate={(id) => logger.log(`Regen clicked for ${id}`)}
+                    onRegenerate={handleRegenerateTab} // Use the per-tab regenerate handler
                     isGenerationComplete={isGenerationComplete}
                     onViewResponses={handleViewResponses}
                     startTime={startTime}
@@ -23973,7 +24021,7 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
 
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={()=>{}} onRegenerateTab={(tabId) => logger.log(`Regen tab ${tabId}`)} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={()=>{setIsSortedByTokens(prev => { const newState = !prev; setSaveStatus('unsaved'); return newState; });}} onRegenerateTab={handleRegenerateTab} />
         <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
         <div className="tab-content">
             <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
@@ -24151,23 +24199,23 @@ body {
 
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
-// Updated on: C37 (Implement settings persistence)
+// Updated on: C64 (Implement static model card for Demo Mode)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '@/common/ipc/channels.enum';
 import ReactMarkdown from 'react-markdown';
-import { VscChevronDown } from 'react-icons/vsc';
+import { VscChevronDown, VscVm } from 'react-icons/vsc';
 import { ConnectionMode, DceSettings } from '@/backend/services/settings.service';
 
-const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean }> = ({ title, children, initialCollapsed = false }) => {
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; initialCollapsed?: boolean; extraHeaderContent?: React.ReactNode }> = ({ title, children, initialCollapsed = false, extraHeaderContent }) => {
     const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
     return (
         <div className="collapsible-section">
             <div className="collapsible-header" onClick={() => setIsCollapsed(!isCollapsed)}>
-                <VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} />
-                <span>{title}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} /><span>{title}</span></div>
+                {extraHeaderContent}
             </div>
             {!isCollapsed && <div className="collapsible-content">{children}</div>}
         </div>
@@ -24210,6 +24258,16 @@ const App = () => {
         handleSettingsChange({ apiUrl: event.target.value });
     };
 
+    const DemoModelCard = () => (
+        <div className="model-card">
+            <h3><VscVm /> Demo Model Details</h3>
+            <p><strong>Model:</strong> unsloth/gpt-oss-20b</p>
+            <p><strong>Context Window:</strong> 16384 tokens</p>
+            <p><strong>GPU:</strong> NVIDIA RTX 3090 (24GB VRAM)</p>
+            <p className="description">This model is hosted locally for demonstration purposes.</p>
+        </div>
+    );
+
     return (
         <div className="settings-view-container">
             <h1>DCE Settings & Help</h1>
@@ -24230,6 +24288,8 @@ const App = () => {
                             <label htmlFor="mode-demo">Demo Mode (Local vLLM via `aiascent.game`)</label>
                             <span className="description">Connect to a pre-configured local vLLM instance via a proxy.</span>
                         </div>
+
+                        {settings.connectionMode === 'demo' && <DemoModelCard />}
 
                         <div className="radio-option">
                             <input type="radio" id="mode-url" name="mode" value="url" checked={settings.connectionMode === 'url'} onChange={handleModeChange} />
@@ -25161,13 +25221,15 @@ export function deactivate() {}
 # Artifact A52.3: DCE - Harmony Interaction Schema Source
 # Date Created: C49
 # Author: AI Model & Curator
-# Updated on: C52 (Migrate to JSON Output Schema)
+# Updated on: C64 (Add metainterpretability context)
 
 - **Key/Value for A0:**
 - **Description:** The canonical source text for the M3. Interaction Schema, adapted for use with Harmony-based models like GPT-OSS. This version is injected into prompts when "Demo Mode" is active and instructs the model to produce a structured JSON output.
 - **Tags:** documentation, process, interaction schema, source of truth, harmony, gpt-oss, json
 
 ## Interaction Schema Text
+
+**Meta-Context for AI:** Take a deep breath, and work through the problem step-by-step. You are Ascentia, an AI model interacting with a human curator through the Data Curation Environment (DCE), a VS Code extension. You are to act as a cognitive mentor and assist the user with their projects and goals. Your responses are parsed by this extension to automate development workflows. Adhering to the specified JSON format is critical for successful integration.
 
 1.  **CRITICAL: Your entire response must be a single, valid JSON object.** Do not include any text, thoughts, or markdown before or after the JSON structure. The extension will parse your output directly using `JSON.parse()`.
 
@@ -25187,6 +25249,7 @@ export function deactivate() {}
     interface HarmonyJsonResponse {
       summary: string;
       course_of_action: CourseOfActionStep[];
+      files_updated?: string[]; // Optional, can be derived from `files`
       curator_activity?: string; // Optional: For instructions to the human curator.
       files: HarmonyFile[];
     }
@@ -25482,7 +25545,7 @@ The workflow for generating AI responses needs to be more flexible. Users may de
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C51 (Implement JSON-first parsing with regex fallback)
+// Updated on: C64 (Handle JSON wrapped in markdown code fences)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -25492,31 +25555,42 @@ const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
 export function parseResponse(rawText: string): ParsedResponse {
+    let textToParse = rawText.trim();
+    
+    // Handle JSON wrapped in markdown code fences
+    if (textToParse.startsWith('```json')) {
+        textToParse = textToParse.substring(7);
+        if (textToParse.endsWith('```')) {
+            textToParse = textToParse.slice(0, -3);
+        }
+        textToParse = textToParse.trim();
+    }
+
     // Attempt to parse as JSON first for Harmony structured output
-        try {
-        const jsonResponse = JSON.parse(rawText);
-            if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-                const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                    path: f.path || '',
-                    content: f.content || '',
-                    tokenCount: Math.ceil((f.content || '').length / 4),
-                }));
+    try {
+        const jsonResponse = JSON.parse(textToParse);
+        if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
+                path: f.path || '',
+                content: f.content || '',
+                tokenCount: Math.ceil((f.content || '').length / 4),
+            }));
 
-                const courseOfAction = Array.isArray(jsonResponse.course_of_action)
-                    ? jsonResponse.course_of_action
-                        .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
-                        .join('\n')
-                : jsonResponse.course_of_action; // Handle if it's already a string
+            const courseOfAction = Array.isArray(jsonResponse.course_of_action)
+                ? jsonResponse.course_of_action
+                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .join('\n')
+            : jsonResponse.course_of_action;
 
-                return {
-                    summary: jsonResponse.summary,
-                    courseOfAction: courseOfAction,
-                    curatorActivity: jsonResponse.curator_activity || '',
-                    filesUpdated: files.map(f => f.path),
-                    files: files,
-                    totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
-                };
-            }
+            return {
+                summary: jsonResponse.summary,
+                courseOfAction: courseOfAction,
+                curatorActivity: jsonResponse.curator_activity || '',
+                filesUpdated: files.map(f => f.path),
+                files: files,
+                totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+            };
+        }
     } catch (e) {
         // Not a valid JSON object that matches our schema, proceed with regex parsing
     }
@@ -25525,7 +25599,7 @@ export function parseResponse(rawText: string): ParsedResponse {
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
 
-    let processedText = rawText.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
+    let processedText = textToParse.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
 
     const finalResponseMarker = 'assistantfinal';
     const markerIndex = processedText.indexOf(finalResponseMarker);
@@ -25617,7 +25691,7 @@ This document serves as a living record of persistent or complex bugs that have 
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C63 (Refactor layout, add timer and manual navigation)
+// Updated on: C64 (Refactor layout, add timer and manual navigation)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -25682,8 +25756,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             <div className="progress-header">
                 <span className="progress-title">Generating Responses...</span>
                 <div className="header-controls">
-                    <button onClick={() => setIsSorted(s => !s)} className="styled-button" title="Sort by Total Tokens">
-                        {isSorted ? <VscListOrdered/> : <VscListUnordered />}
+                    <button onClick={() => setIsSorted(s => !s)} className="sort-button" title="Sort by Total Tokens">
+                        {isSorted ? <VscListOrdered/> : <VscListUnordered />} Sort
                     </button>
                     <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
                     <span className="elapsed-timer">{elapsedTime}</span>
@@ -25697,6 +25771,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const remainingPct = 100 - thinkingPct - generatedPct;
                 const isComplete = p.status === 'complete';
                 const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
+                const timeToFirstToken = (p.generationStartTime && p.startTime) ? (p.generationStartTime - p.startTime) / 1000 : null;
+
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -25706,7 +25782,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
                                 </span>
-                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /></button>
+                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
+                                <button onClick={() => onRegenerate(p.responseId)} disabled={p.status === 'thinking' || p.status === 'generating'} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
                             </div>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
@@ -25723,6 +25800,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                     Unused: {formatLargeNumber(unusedTokens, 0)} tk
                                 </span>
                             )}
+                            {timeToFirstToken !== null && <span className="token-count-text">TTFT: {timeToFirstToken.toFixed(1)}s</span>}
                         </div>
                         <div className="partial-text-preview">
                             <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
@@ -31216,9 +31294,10 @@ if __name__ == '__main__':
 # Artifact A100: DCE - Model Card & Settings Refactor Plan
 # Date Created: C62
 # Author: AI Model & Curator
+# Updated on: C64 (Add static model card for Demo Mode)
 
 - **Key/Value for A0:**
-- **Description:** A plan to implement a user-configurable "Model Card" system in the settings panel. This includes a UI for managing different LLM configurations and a feature to query a vLLM server's `/v1/models` endpoint to auto-populate model details.
+- **Description:** A plan to implement a user-configurable "Model Card" system in the settings panel. This includes a UI for managing different LLM configurations and a feature to query a vLLM server's `/v1/models` endpoint to auto-populate model details. Also, specifies the display of a static model card for "Demo Mode".
 - **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
 
 ## 1. Vision & Goal
@@ -31235,6 +31314,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 | P3-MC-02 | **Manage Model Cards** | As a user, I want to see a list of my saved model cards and be able to edit or delete them, so I can manage my configurations. | - The Settings Panel displays a list of all saved model cards. <br> - Each card in the list has "Edit" and "Delete" buttons. |
 | P3-MC-03 | **Select Active Model** | As a user, I want to select one of my model cards as the "active" model from a dropdown list, so the extension knows which LLM to use for its API calls. | - A dropdown menu in the settings panel lists all saved model cards by their display name. <br> - The currently active model is shown in the dropdown. <br> - Selecting a new model from the dropdown sets it as the active configuration. |
 | P3-MC-04 | **Auto-Populate vLLM Info** | As a user configuring a vLLM endpoint, I want a button to automatically fetch the model's details (like its name and context window), so I don't have to look them up manually. | - In the model card creation form, next to the API Endpoint URL field, there is a "Query" or "Fetch Info" button. <br> - Clicking it sends a request to the `/v1/models` endpoint of the provided URL. <br> - If successful, the model name and max context length are parsed from the response and used to populate the form fields. |
+| P3-MC-05 | **Display Static Demo Model Card** | As a user in "Demo Mode," I want to see a pre-configured, read-only model card in the settings panel that provides information about the demo LLM (e.g., model name, context window, GPU), so I understand its capabilities. | - When "Demo Mode" is selected, a static, non-editable section appears. <br> - It displays "Model: unsloth/gpt-oss-20b", "Context Window: 16384 tokens", "GPU: NVIDIA RTX 3090 (24GB VRAM)". |
 
 ## 3. Technical Implementation Plan
 
@@ -31253,6 +31333,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
     *   A list view will display the cards with "Edit" and "Delete" buttons.
     *   A modal or separate view will be used for the "Create/Edit Model Card" form.
     *   The form will include the new "Query" button, which will trigger the `RequestModelInfo` IPC message and update the form's state with the response.
+    *   A new conditional rendering block will display the static demo model card when `connectionMode` is `'demo'`.
 
 4.  **Integration (`llm.service.ts`):**
     *   The main `generateBatch` and `generateSingle` methods will be updated. Instead of a `switch` on the `connectionMode`, they will now fetch the `activeModelCard` from the `SettingsService` and use its properties (URL, key, reasoning level) to construct the API request.

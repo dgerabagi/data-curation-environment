@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C63 (Add styles for timer, footer, and relocated buttons)
+// Updated on: C64 (Style refinements for generation progress and tabs)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -284,6 +284,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap; /* Allow wrapping for controls */
         
         .progress-title {
             font-weight: bold;
@@ -294,12 +295,13 @@ body {
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px; /* Reduced gap */
         }
 
         .elapsed-timer {
             font-family: var(--vscode-editor-font-family); // Monospace for timer
             font-weight: bold;
+            margin-left: 8px; /* Add margin to separate from sort */
         }
     }
     
@@ -322,6 +324,24 @@ body {
             display: flex;
             align-items: center;
             gap: 4px;
+            
+            button {
+                background-color: var(--vscode-button-secondaryBackground);
+                color: var(--vscode-button-secondaryForeground);
+                border: 1px solid var(--vscode-button-border, transparent);
+                padding: 2px 6px; /* Adjusted padding */
+                font-size: 11px; /* Adjusted font size */
+                cursor: pointer;
+                border-radius: 2px;
+                
+                &:hover {
+                    background-color: var(--vscode-button-secondaryHoverBackground);
+                }
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
         }
     }
 
@@ -607,24 +627,28 @@ body {
 }
 
 .sort-button {
-    background: none;
+    background-color: var(--vscode-button-secondaryBackground); /* Styled like secondary button */
+    color: var(--vscode-button-secondaryForeground);
     border: 1px solid var(--vscode-button-border, transparent);
-    color: var(--vscode-icon-foreground);
+    padding: 2px 8px; /* Adjusted padding */
+    font-size: 12px; /* Adjusted font size */
     cursor: pointer;
-    padding: 4px;
-    border-radius: 3px;
+    border-radius: 2px; /* Rounded corners */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    margin-left: auto; /* Push to the right */
 
     &:hover {
-        background-color: var(--vscode-toolbar-hoverBackground);
+        background-color: var(--vscode-button-secondaryHoverBackground);
     }
     
     &.active {
-        background-color: var(--vscode-toolbar-hoverBackground);
-        outline: 1px solid var(--vscode-focusBorder);
+        background-color: var(--vscode-button-background); /* Primary button style when active */
+        color: var(--vscode-button-foreground);
+        outline: none; /* Remove default outline */
+        border-color: var(--vscode-focusBorder);
     }
 }
 
@@ -661,12 +685,23 @@ body {
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px; /* Reduced gap to fit regenerate button */
 }
 
 .regenerate-tab-button {
-    padding: 0 4px !important;
-    font-size: 12px !important;
+    background-color: transparent !important; /* Make it transparent */
+    border: none !important; /* No border */
+    color: var(--vscode-icon-foreground) !important; /* Icon foreground color */
+    padding: 2px !important; /* Reduced padding */
+    font-size: 14px !important; /* Larger icon */
+    position: relative; /* Allow positioning within tab title */
+    right: -4px; /* Adjust position slightly */
+    opacity: 0.7; /* Slightly transparent when not hovered */
+    
+    &:hover {
+        background-color: var(--vscode-toolbar-hoverBackground) !important;
+        opacity: 1;
+    }
 }
 
 .tab-metadata {
@@ -730,6 +765,7 @@ body {
     padding-right: 8px;
     flex-basis: 33%; /* Static width */
     flex-shrink: 0;
+    margin: 2px; /* C187 Fix: Add margin for animation highlight */
 }
 
 .resizer {
@@ -1017,6 +1053,8 @@ body {
     color: var(--vscode-editorLineNumber-foreground);
     text-align: right;
     user-select: none;
+    border-right: 1px solid var(--vscode-panel-border);
+    
     span { display: block; min-height: 1.5em; padding-right: 6px; }
 }
 

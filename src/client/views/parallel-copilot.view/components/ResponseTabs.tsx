@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C63 (Move regenerate button to tab title row and style)
+// Updated on: C64 (Move regenerate button to tab title row and style)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
 import { TabState as OriginalTabState } from '../view';
@@ -50,7 +50,7 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                             <div className="tab-title">
                                 Resp {tabIndex}
                                 {isLoading && <VscLoading className="spinner" />}
-                                <button className="regenerate-tab-button styled-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
+                                <button className="regenerate-tab-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
                                     <VscSync />
                                 </button>
                             </div>
@@ -64,6 +64,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                     );
                 })}
             </div>
+            <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
+                {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
+            </button>
         </div>
     );
 };
