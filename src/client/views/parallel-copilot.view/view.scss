@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C60 (Add styles for completed progress bar and fix layout)
+// Updated on: C61 (Add styles for thinking tokens and unused count)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -349,12 +349,24 @@ body {
         background-color: var(--vscode-input-background); // Gray for unused
     }
 
+    .token-count-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .token-count-text {
         font-size: 11px;
         font-style: italic;
         color: var(--vscode-descriptionForeground);
     }
     
+    .unused-tokens-display {
+        font-size: 11px;
+        font-weight: bold;
+        color: var(--vscode-descriptionForeground);
+    }
+
     .partial-text-preview {
         margin-top: 4px;
         background-color: var(--vscode-editor-background);

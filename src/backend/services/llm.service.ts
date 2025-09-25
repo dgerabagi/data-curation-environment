@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C60 (Implement thinking tokens and status tracking)
+// Updated on: C61 (Differentiate thinking vs response tokens in stream)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -9,7 +9,7 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 
-const MAX_TOKENS_PER_RESPONSE = 8192;
+const MAX_TOKENS_PER_RESPONSE = 16384;
 
 export class LlmService {
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle) {
@@ -71,7 +71,8 @@ export class LlmService {
             
             const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
                 responseId: i + 1,
-                promptTokens: 0,
+                promptTokens: 0, // Will be replaced by a real calculation
+                thinkingTokens: 0,
                 currentTokens: 0,
                 totalTokens: MAX_TOKENS_PER_RESPONSE,
                 status: 'pending',
@@ -79,7 +80,6 @@ export class LlmService {
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
             let totalFinished = 0;
-            let initialStreamReceived = false;
 
             const sendProgressUpdate = () => {
                 const now = Date.now();
@@ -98,20 +98,6 @@ export class LlmService {
             stream.on('data', (chunk) => {
                 buffer += chunk.toString();
                 
-                if (!initialStreamReceived) {
-                    initialStreamReceived = true;
-                    progressData.forEach(p => p.status = 'thinking');
-                }
-
-                if (!buffer.includes('data:')) {
-                    // This is "thinking" text before the SSE stream starts
-                    const thinkingTokens = Math.ceil(chunk.length / 4);
-                    progressData.forEach(p => p.promptTokens += thinkingTokens);
-                    tokensSinceLastUpdate += thinkingTokens;
-                    throttledSendProgress();
-                    return;
-                }
-
                 const lines = buffer.split('\n');
                 buffer = lines.pop() || '';
 
@@ -128,10 +114,6 @@ export class LlmService {
                                     const responseIndex = choice.index;
                                     if (responseIndex === undefined || responseIndex >= count) continue;
 
-                                    if (progressData[responseIndex].status !== 'generating' && progressData[responseIndex].status !== 'complete') {
-                                        progressData[responseIndex].status = 'generating';
-                                    }
-
                                     if (choice.finish_reason !== null) {
                                         if (!finishedResponses[responseIndex]) {
                                             Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
@@ -139,12 +121,23 @@ export class LlmService {
                                             progressData[responseIndex].status = 'complete';
                                             totalFinished++;
                                         }
-                                    } else if (choice.delta && choice.delta.content) {
-                                        const contentChunk = choice.delta.content;
-                                        responseContents[responseIndex] += contentChunk;
-                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                        tokensSinceLastUpdate += chunkTokens;
-                                        progressData[responseIndex].currentTokens += chunkTokens;
+                                    } else if (choice.delta) {
+                                        if (choice.delta.reasoning_content !== undefined) {
+                                            if (progressData[responseIndex].status !== 'thinking') progressData[responseIndex].status = 'thinking';
+                                            const contentChunk = choice.delta.reasoning_content;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            tokensSinceLastUpdate += chunkTokens;
+                                            progressData[responseIndex].thinkingTokens += chunkTokens;
+                                        }
+                                        
+                                        if (choice.delta.content !== undefined) {
+                                            if (progressData[responseIndex].status !== 'generating') progressData[responseIndex].status = 'generating';
+                                            const contentChunk = choice.delta.content;
+                                            responseContents[responseIndex] += contentChunk;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            tokensSinceLastUpdate += chunkTokens;
+                                            progressData[responseIndex].currentTokens += chunkTokens;
+                                        }
                                     }
                                 }
                             }

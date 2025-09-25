@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-25T00:00:52.401Z
+  Date Generated: 2025-09-25T12:03:21.318Z
   ---
   Total Files: 189
-  Approx. Tokens: 518530
+  Approx. Tokens: 518849
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,9 +12,9 @@
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12017 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (9806 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (9829 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (6477 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (6542 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 9. src\backend\services\prompt.service.ts (5068 tokens)
 10. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -112,7 +112,7 @@
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 63 - Chars: 6229 - Tokens: 1558
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 68 - Chars: 6484 - Tokens: 1621
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -145,7 +145,7 @@
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 125. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-126. src\backend\services\llm.service.ts - Lines: 192 - Chars: 8764 - Tokens: 2191
+126. src\backend\services\llm.service.ts - Lines: 185 - Chars: 8884 - Tokens: 2221
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 20272 - Tokens: 5068
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -176,16 +176,16 @@
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
-157. src\client\views\parallel-copilot.view\view.scss - Lines: 1146 - Chars: 25907 - Tokens: 6477
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1158 - Chars: 26167 - Tokens: 6542
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 403 - Chars: 39221 - Tokens: 9806
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 406 - Chars: 39313 - Tokens: 9829
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-166. src\common\ipc\channels.type.ts - Lines: 118 - Chars: 8893 - Tokens: 2224
+166. src\common\ipc\channels.type.ts - Lines: 119 - Chars: 8959 - Tokens: 2240
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -203,7 +203,7 @@
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
 182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5160 - Tokens: 1290
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 73 - Chars: 3671 - Tokens: 918
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 81 - Chars: 4159 - Tokens: 1040
 185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 48066 - Tokens: 12017
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
@@ -6392,7 +6392,7 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C60 (Update UI mockup and technical plan for color-coding and status)
+# Updated on: C61 (Update UI mockup and technical plan for unused token count)
 
 - **Key/Value for A0:**
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, and a tokens/second metric.
@@ -6410,6 +6410,7 @@ Generating multiple, large AI responses can take a significant amount of time. T
 | P3-PROG-02 | **See Performance Metrics** | As a user, I want to see a live "tokens per second" metric during generation, so I can gauge the performance of the LLM backend. | - The progress UI displays a "Tokens/sec" value. <br> - This value is calculated and updated periodically throughout the generation process. |
 | P3-PROG-03 | **Understand Progress Bar**| As a user, I want the progress bar to be color-coded so I can understand the allocation of tokens for the prompt versus the generated response. | - The progress bar is a stacked bar with multiple colors. <br> - One color represents the "thinking" (prompt) tokens. <br> - A second color represents the currently generated response tokens. <br> - A third color (gray) represents the remaining, unused tokens up to the model's maximum. |
 | P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. <br> - When a response is complete, the "unused" portion of its progress bar changes color to signify completion. |
+| P3-PROG-05 | **See Unused Tokens** | As a user, once a response is complete, I want to see how many tokens were left unused, so I can understand how much headroom the model had. | - After a response's status changes to "Complete", a text element appears showing the count of unused tokens. |
 
 ## 3. UI Mockup (Textual Description)
 
@@ -6421,10 +6422,14 @@ The progress UI will be a dedicated component that is conditionally rendered in 
 |----------------------------------------------------------------------|
 | Total Tokens: 18,120                                                 |
 |                                                                      |
-| Resp 1: [blue|green|gray]  80% (1k+5.5k/8.1k) | Status: Generating...|
-| Resp 2: [blue|green|gray]  70% (1k+4.7k/8.1k) | Status: Generating...|
-| Resp 3: [blue|gray      ]  12% (1k+0k/8.1k)   | Status: Thinking...  |
-| Resp 4: [blue|green|done] 100% (1k+7.1k/8.1k) | Status: Complete ✓   |
+| Resp 1: [blue|green|gray]  80% | Status: Generating...               |
+|         (1k+5.5k/8.1k tk)                                            |
+| Resp 2: [blue|green|gray]  70% | Status: Generating...               |
+|         (1k+4.7k/8.1k tk)                                            |
+| Resp 3: [blue|gray      ]  12% | Status: Thinking...                 |
+|         (1k+0k/8.1k tk)                                              |
+| Resp 4: [blue|green|done] 100% | Status: Complete ✓                  |
+|         (1k+7.1k/8.1k tk)      | Unused: 1,024 tk                    |
 +----------------------------------------------------------------------+```
 *   **[blue|green|gray/done]**: Represents the stacked progress bar.
     *   `blue`: "Thinking" tokens (pre-JSON stream).
@@ -6432,24 +6437,24 @@ The progress UI will be a dedicated component that is conditionally rendered in 
     *   `gray`: Unused tokens up to the max.
     *   `done`: A darker gray or other color indicating the response is finished and no more tokens will be generated.
 
-## 4. Technical Implementation Plan (C60 Revision)
+## 4. Technical Implementation Plan (C61 Revision)
 
 This feature is critically dependent on a correctly implemented end-to-end streaming architecture using Server-Sent Events (SSE).
 
-1.  **IPC (`channels.type.ts`):** The `GenerationProgress` interface will be updated to include `promptTokens: number` and `status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error'`.
+1.  **IPC (`channels.type.ts`):** The `GenerationProgress` interface will be updated to include `thinkingTokens: number`.
 
 2.  **Backend (`llm.service.ts`):**
     *   The `generateBatch` method will manage the lifecycle for each response.
-    *   The `stream.on('data')` handler will be enhanced to differentiate between initial unstructured "thinking" text and the structured `data: {...}` SSE messages.
-    *   The length of the initial "thinking" text will be summed and stored in the `promptTokens` field for each response.
-    *   The `status` field for each response will be updated: `pending` -> `thinking` (on first chunk) -> `generating` (on first `delta.content`) -> `complete` (on `finish_reason`).
+    *   The `stream.on('data')` handler will be enhanced to differentiate between chunks containing `delta.reasoning_content` (thinking tokens) and `delta.content` (response tokens).
+    *   The token count from `reasoning_content` will be added to the `thinkingTokens` field for each response.
+    *   The token count from `content` will be added to the `currentTokens` field.
+    *   The `status` field for each response will be updated: `pending` -> `thinking` -> `generating` -> `complete`.
     *   The `UpdateGenerationProgress` IPC message will send this complete state to the frontend.
 
 3.  **Frontend (`GenerationProgressDisplay.tsx` & `view.scss`):**
-    *   **Layout (`view.scss`):** The CSS for `.generation-progress-display` will be fixed to prevent horizontal overflow, likely by ensuring it respects flexbox/grid container constraints and does not have a hardcoded minimum width.
-    *   **Component (`GenerationProgressDisplay.tsx`):** The component will be refactored to render the new three-part stacked progress bar based on `promptTokens`, `currentTokens`, and `totalTokens`.
-    *   **Styling (`view.scss`):** The CSS will be updated with the correct colors for each segment (`.thinking`, `.generated`, `.unused`). A new class, `.completed`, will be added to change the color of the `.unused` segment when the response `status` is `'complete'`.
-    *   **Status (`GenerationProgressDisplay.tsx`):** The component will render the `status` string and an appropriate icon (e.g., a spinner for thinking/generating, a checkmark for complete).
+    *   **Component (`GenerationProgressDisplay.tsx`):** The component will be refactored to render the new three-part stacked progress bar based on `thinkingTokens`, `currentTokens`, and `totalTokens`.
+    *   **Styling (`view.scss`):** The CSS will be updated with colors for each segment (`.thinking`, `.generated`, `.unused`).
+    *   **Unused Tokens (`GenerationProgressDisplay.tsx`):** A new `<span>` or `<div>` will be added. It will be conditionally rendered with `display: block` only when the response `status` is `'complete'`. Its content will be the calculated `totalTokens - thinkingTokens - currentTokens`.
 
 4.  **Parsing Logic (SSE Stream):** The backend stream consumer must correctly parse the SSE stream, expecting a JSON object with a nested `choices[0].index` field to correctly route token deltas to the right progress buffer.
 </file_artifact>
@@ -18358,7 +18363,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C60 (Implement thinking tokens and status tracking)
+// Updated on: C61 (Differentiate thinking vs response tokens in stream)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -18368,7 +18373,7 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 
-const MAX_TOKENS_PER_RESPONSE = 8192;
+const MAX_TOKENS_PER_RESPONSE = 16384;
 
 export class LlmService {
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle) {
@@ -18430,7 +18435,8 @@ export class LlmService {
             
             const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
                 responseId: i + 1,
-                promptTokens: 0,
+                promptTokens: 0, // Will be replaced by a real calculation
+                thinkingTokens: 0,
                 currentTokens: 0,
                 totalTokens: MAX_TOKENS_PER_RESPONSE,
                 status: 'pending',
@@ -18438,7 +18444,6 @@ export class LlmService {
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
             let totalFinished = 0;
-            let initialStreamReceived = false;
 
             const sendProgressUpdate = () => {
                 const now = Date.now();
@@ -18457,20 +18462,6 @@ export class LlmService {
             stream.on('data', (chunk) => {
                 buffer += chunk.toString();
                 
-                if (!initialStreamReceived) {
-                    initialStreamReceived = true;
-                    progressData.forEach(p => p.status = 'thinking');
-                }
-
-                if (!buffer.includes('data:')) {
-                    // This is "thinking" text before the SSE stream starts
-                    const thinkingTokens = Math.ceil(chunk.length / 4);
-                    progressData.forEach(p => p.promptTokens += thinkingTokens);
-                    tokensSinceLastUpdate += thinkingTokens;
-                    throttledSendProgress();
-                    return;
-                }
-
                 const lines = buffer.split('\n');
                 buffer = lines.pop() || '';
 
@@ -18487,10 +18478,6 @@ export class LlmService {
                                     const responseIndex = choice.index;
                                     if (responseIndex === undefined || responseIndex >= count) continue;
 
-                                    if (progressData[responseIndex].status !== 'generating' && progressData[responseIndex].status !== 'complete') {
-                                        progressData[responseIndex].status = 'generating';
-                                    }
-
                                     if (choice.finish_reason !== null) {
                                         if (!finishedResponses[responseIndex]) {
                                             Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
@@ -18498,12 +18485,23 @@ export class LlmService {
                                             progressData[responseIndex].status = 'complete';
                                             totalFinished++;
                                         }
-                                    } else if (choice.delta && choice.delta.content) {
-                                        const contentChunk = choice.delta.content;
-                                        responseContents[responseIndex] += contentChunk;
-                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                        tokensSinceLastUpdate += chunkTokens;
-                                        progressData[responseIndex].currentTokens += chunkTokens;
+                                    } else if (choice.delta) {
+                                        if (choice.delta.reasoning_content !== undefined) {
+                                            if (progressData[responseIndex].status !== 'thinking') progressData[responseIndex].status = 'thinking';
+                                            const contentChunk = choice.delta.reasoning_content;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            tokensSinceLastUpdate += chunkTokens;
+                                            progressData[responseIndex].thinkingTokens += chunkTokens;
+                                        }
+                                        
+                                        if (choice.delta.content !== undefined) {
+                                            if (progressData[responseIndex].status !== 'generating') progressData[responseIndex].status = 'generating';
+                                            const contentChunk = choice.delta.content;
+                                            responseContents[responseIndex] += contentChunk;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            tokensSinceLastUpdate += chunkTokens;
+                                            progressData[responseIndex].currentTokens += chunkTokens;
+                                        }
                                     }
                                 }
                             }
@@ -22278,7 +22276,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C60 (Add styles for completed progress bar and fix layout)
+// Updated on: C61 (Add styles for thinking tokens and unused count)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -22628,12 +22626,24 @@ body {
         background-color: var(--vscode-input-background); // Gray for unused
     }
 
+    .token-count-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .token-count-text {
         font-size: 11px;
         font-style: italic;
         color: var(--vscode-descriptionForeground);
     }
     
+    .unused-tokens-display {
+        font-size: 11px;
+        font-weight: bold;
+        color: var(--vscode-descriptionForeground);
+    }
+
     .partial-text-preview {
         margin-top: 4px;
         background-color: var(--vscode-editor-background);
@@ -23462,7 +23472,7 @@ import { logger } from '../../utils/logger';
 import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
 import GenerationProgressDisplay from './components/GenerationProgressDisplay';
 
-const MAX_TOKENS_PER_RESPONSE = 8192; // Configurable constant
+const MAX_TOKENS_PER_RESPONSE = 16384; // Configurable constant
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -23724,8 +23734,11 @@ const App = () => {
         setIsGenerating(true);
         setGenerationProgress([...Array(responseCount)].map((_, i) => ({
             responseId: i + 1,
+            promptTokens: 0,
+            thinkingTokens: 0,
             currentTokens: 0,
-            totalTokens: MAX_TOKENS_PER_RESPONSE
+            totalTokens: MAX_TOKENS_PER_RESPONSE,
+            status: 'pending'
         })));
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
@@ -24279,7 +24292,7 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C60 (Add promptTokens and status to GenerationProgress)
+// Updated on: C61 (Add thinkingTokens to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -24301,6 +24314,7 @@ export interface GenerationProgress {
     currentTokens: number;
     totalTokens: number;
     promptTokens: number;
+    thinkingTokens: number; // New: To track pre-response reasoning tokens
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
 }
 
@@ -25456,7 +25470,7 @@ This document serves as a living record of persistent or complex bugs that have 
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C60 (Implement 3-color progress bar and status indicator)
+// Updated on: C61 (Add thinking tokens and unused token count)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -25470,7 +25484,7 @@ interface GenerationProgressDisplayProps {
 }
 
 const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
 
     const getStatusIndicator = (status: GenerationProgress['status']) => {
         switch (status) {
@@ -25496,10 +25510,11 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
             
             {progressData.map(p => {
-                const promptPct = (p.promptTokens / p.totalTokens) * 100;
+                const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
-                const remainingPct = 100 - promptPct - generatedPct;
+                const remainingPct = 100 - thinkingPct - generatedPct;
                 const isComplete = p.status === 'complete';
+                const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -25510,13 +25525,20 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                             </span>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
-                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Thinking: ${p.promptTokens} tk`}></div>
+                            <div className="progress-segment thinking" style={{ width: `${thinkingPct}%` }} title={`Thinking: ${p.thinkingTokens} tk`}></div>
                             <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
                             <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
                         </div>
-                        <span className="token-count-text">
-                            ({formatLargeNumber(p.promptTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
-                        </span>
+                        <div className="token-count-footer">
+                            <span className="token-count-text">
+                                ({formatLargeNumber(p.thinkingTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                            </span>
+                            {isComplete && (
+                                <span className="unused-tokens-display">
+                                    Unused: {formatLargeNumber(unusedTokens, 0)} tk
+                                </span>
+                            )}
+                        </div>
                         <div className="partial-text-preview">
                             <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
                         </div>

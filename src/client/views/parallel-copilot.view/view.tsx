@@ -21,7 +21,7 @@ import { logger } from '../../utils/logger';
 import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
 import GenerationProgressDisplay from './components/GenerationProgressDisplay';
 
-const MAX_TOKENS_PER_RESPONSE = 8192; // Configurable constant
+const MAX_TOKENS_PER_RESPONSE = 16384; // Configurable constant
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -283,8 +283,11 @@ const App = () => {
         setIsGenerating(true);
         setGenerationProgress([...Array(responseCount)].map((_, i) => ({
             responseId: i + 1,
+            promptTokens: 0,
+            thinkingTokens: 0,
             currentTokens: 0,
-            totalTokens: MAX_TOKENS_PER_RESPONSE
+            totalTokens: MAX_TOKENS_PER_RESPONSE,
+            status: 'pending'
         })));
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };

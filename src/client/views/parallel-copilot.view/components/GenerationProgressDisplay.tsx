@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C60 (Implement 3-color progress bar and status indicator)
+// Updated on: C61 (Add thinking tokens and unused token count)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -13,7 +13,7 @@ interface GenerationProgressDisplayProps {
 }
 
 const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.currentTokens, 0);
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
 
     const getStatusIndicator = (status: GenerationProgress['status']) => {
         switch (status) {
@@ -39,10 +39,11 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
             
             {progressData.map(p => {
-                const promptPct = (p.promptTokens / p.totalTokens) * 100;
+                const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
-                const remainingPct = 100 - promptPct - generatedPct;
+                const remainingPct = 100 - thinkingPct - generatedPct;
                 const isComplete = p.status === 'complete';
+                const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -53,13 +54,20 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                             </span>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
-                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Thinking: ${p.promptTokens} tk`}></div>
+                            <div className="progress-segment thinking" style={{ width: `${thinkingPct}%` }} title={`Thinking: ${p.thinkingTokens} tk`}></div>
                             <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
                             <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
                         </div>
-                        <span className="token-count-text">
-                            ({formatLargeNumber(p.promptTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
-                        </span>
+                        <div className="token-count-footer">
+                            <span className="token-count-text">
+                                ({formatLargeNumber(p.thinkingTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                            </span>
+                            {isComplete && (
+                                <span className="unused-tokens-display">
+                                    Unused: {formatLargeNumber(unusedTokens, 0)} tk
+                                </span>
+                            )}
+                        </div>
                         <div className="partial-text-preview">
                             <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
                         </div>
