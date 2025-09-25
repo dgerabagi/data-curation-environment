@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C62 (Implement new UI feedback and workflows)
+// Updated on: C63 (Implement timer and manual navigation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -81,6 +81,9 @@ const App = () => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
     const [tps, setTps] = React.useState(0);
+    const [isGenerationComplete, setIsGenerationComplete] = React.useState(false);
+    const [startTime, setStartTime] = React.useState<number | null>(null);
+    const [newlyCreatedCycleId, setNewlyCreatedCycleId] = React.useState<number | null>(null);
 
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -252,9 +255,9 @@ const App = () => {
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
             logger.log(`view.tsx: Batch generation complete. Setting isGenerating to false.`);
-            setIsGenerating(false);
+            setIsGenerationComplete(true);
+            setNewlyCreatedCycleId(newCycleId);
             setMaxCycle(newMaxCycle);
-            handleCycleChange(null, newCycleId);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
@@ -272,6 +275,8 @@ const App = () => {
         if (cycleData) {
             logger.log('view.tsx: handleGenerateResponses called. Setting isGenerating to true.');
             setGenerationProgress([]); // Clear old progress
+            setIsGenerationComplete(false);
+            setStartTime(Date.now());
             setIsGenerating(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
                 cycleData: cycleData as PcppCycle,
@@ -290,11 +295,19 @@ const App = () => {
             totalTokens: MAX_TOKENS_PER_RESPONSE,
             status: 'pending'
         })));
+        setIsGenerationComplete(false);
+        setStartTime(Date.now());
         setIsGenerating(true);
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
 
-    const handleRegenerateResponses = () => { window.alert("Regenerate functionality coming soon!"); };
+    const handleViewResponses = () => {
+        if (newlyCreatedCycleId !== null) {
+            setIsGenerating(false);
+            handleCycleChange(null, newlyCreatedCycleId);
+        }
+    };
+
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -306,7 +319,6 @@ const App = () => {
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     
     const handleContextKeyDown = React.useCallback(() => {}, []);
-    const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } setSaveStatus('unsaved'); };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); setSaveStatus('unsaved'); };
     
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); if (saveStatus !== 'saved') return; const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) newTabs[i.toString()] = { rawContent: '', parsedContent: null }; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setSaveStatus('unsaved'); };
@@ -338,8 +350,11 @@ const App = () => {
                     progressData={generationProgress} 
                     tps={tps} 
                     tabs={tabs} 
-                    onStop={(id) => logger.log(`Stop clicked for ${id}`)}
+                    onStop={(id) => clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { responseId: id })}
                     onRegenerate={(id) => logger.log(`Regen clicked for ${id}`)}
+                    isGenerationComplete={isGenerationComplete}
+                    onViewResponses={handleViewResponses}
+                    startTime={startTime}
                 />;
     }
 
@@ -380,12 +395,7 @@ const App = () => {
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
-            return (
-                <div className="generation-controls">
-                    <button onClick={handleGenerateResponses} disabled={isGenerating} title="Generate responses from local LLM"><VscWand /> Generate responses</button>
-                    <button onClick={handleRegenerateResponses} disabled={isGenerating} title="Regenerate empty or all responses"><VscSync /> Regenerate</button>
-                </div>
-            );
+            return <button onClick={handleGenerateResponses} disabled={isGenerating} title="Generate responses from local LLM"><VscWand /> Generate responses</button>;
         }
     };
 
@@ -397,7 +407,7 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
 
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} onRegenerateTab={(tabId) => logger.log(`Regen tab ${tabId}`)} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={()=>{}} onRegenerateTab={(tabId) => logger.log(`Regen tab ${tabId}`)} />
         <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
         <div className="tab-content">
             <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />

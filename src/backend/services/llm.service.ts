@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C62 (Add generateSingle and AbortController)
+// Updated on: C63 (Add timestamps to progress updates)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -35,7 +35,6 @@ export class LlmService {
         let endpointUrl = '';
         let requestBody: any = {};
         
-        // This is a placeholder for a real model card setting
         const reasoningEffort = 'medium'; 
 
         switch (settings.connectionMode) {
@@ -47,7 +46,7 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
-                    reasoning_effort: reasoningEffort, // Add reasoning effort
+                    reasoning_effort: reasoningEffort,
                 };
                 break;
             case 'url':
@@ -72,7 +71,8 @@ export class LlmService {
         }
 
         const controller = new AbortController();
-        generationControllers.set(cycleData.cycleId, controller); // Use cycleId as a unique key for the batch
+        generationControllers.set(cycleData.cycleId, controller);
+        const startTime = Date.now();
 
         try {
             Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
@@ -95,11 +95,12 @@ export class LlmService {
             
             const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
                 responseId: i + 1,
-                promptTokens: 0, // Will be replaced by a real calculation
+                promptTokens: 0,
                 thinkingTokens: 0,
                 currentTokens: 0,
                 totalTokens: MAX_TOKENS_PER_RESPONSE,
                 status: 'pending',
+                startTime: startTime,
             }));
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
@@ -147,7 +148,10 @@ export class LlmService {
                                         }
                                     } else if (choice.delta) {
                                         if (choice.delta.reasoning_content !== undefined) {
-                                            if (progressData[responseIndex].status !== 'thinking') progressData[responseIndex].status = 'thinking';
+                                            if (progressData[responseIndex].status !== 'thinking') {
+                                                progressData[responseIndex].status = 'thinking';
+                                                progressData[responseIndex].thinkingStartTime = Date.now();
+                                            }
                                             const contentChunk = choice.delta.reasoning_content;
                                             const chunkTokens = Math.ceil(contentChunk.length / 4);
                                             tokensSinceLastUpdate += chunkTokens;
@@ -155,7 +159,10 @@ export class LlmService {
                                         }
                                         
                                         if (choice.delta.content !== undefined) {
-                                            if (progressData[responseIndex].status !== 'generating') progressData[responseIndex].status = 'generating';
+                                            if (progressData[responseIndex].status !== 'generating') {
+                                                progressData[responseIndex].status = 'generating';
+                                                progressData[responseIndex].generationStartTime = Date.now();
+                                            }
                                             const contentChunk = choice.delta.content;
                                             responseContents[responseIndex] += contentChunk;
                                             const chunkTokens = Math.ceil(contentChunk.length / 4);

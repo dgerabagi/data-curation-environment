@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C62 (Add new IPC channels for regeneration)
+// Updated on: C63 (Add timestamps to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -21,8 +21,11 @@ export interface GenerationProgress {
     currentTokens: number;
     totalTokens: number;
     promptTokens: number;
-    thinkingTokens: number; // New: To track pre-response reasoning tokens
+    thinkingTokens: number;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    startTime?: number;
+    thinkingStartTime?: number;
+    generationStartTime?: number;
 }
 
 

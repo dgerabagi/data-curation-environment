@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C61 (Add styles for thinking tokens and unused count)
+// Updated on: C63 (Add styles for timer, footer, and relocated buttons)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -283,9 +283,24 @@ body {
     .progress-header {
         display: flex;
         justify-content: space-between;
-        font-weight: bold;
-        font-size: 13px;
-        color: var(--vscode-editor-foreground);
+        align-items: center;
+        
+        .progress-title {
+            font-weight: bold;
+            font-size: 13px;
+            color: var(--vscode-editor-foreground);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .elapsed-timer {
+            font-family: var(--vscode-editor-font-family); // Monospace for timer
+            font-weight: bold;
+        }
     }
     
     .progress-total {
@@ -302,6 +317,12 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .status-indicator-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
     }
 
     .status-indicator {
@@ -378,6 +399,16 @@ body {
         max-height: 100px;
         overflow-y: auto;
         white-space: pre-wrap;
+    }
+
+    .progress-footer {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--vscode-panel-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
     }
 }
 
@@ -628,6 +659,14 @@ body {
 
 .tab-title {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.regenerate-tab-button {
+    padding: 0 4px !important;
+    font-size: 12px !important;
 }
 
 .tab-metadata {

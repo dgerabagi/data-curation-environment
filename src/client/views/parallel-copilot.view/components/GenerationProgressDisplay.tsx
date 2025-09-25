@@ -1,10 +1,10 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C62 (Add sort and per-response controls)
+// Updated on: C63 (Refactor layout, add timer and manual navigation)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered } from 'react-icons/vsc';
+import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
@@ -12,12 +12,32 @@ interface GenerationProgressDisplayProps {
     tabs: { [key: string]: TabState };
     onStop: (responseId: number) => void;
     onRegenerate: (responseId: number) => void;
+    isGenerationComplete: boolean;
+    onViewResponses: () => void;
+    startTime: number | null;
 }
 
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate }) => {
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime }) => {
     const [isSorted, setIsSorted] = React.useState(false);
+    const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
+    React.useEffect(() => {
+        if (!startTime || isGenerationComplete) {
+            return;
+        }
+
+        const interval = setInterval(() => {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = (elapsed % 60).toFixed(1);
+            setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, [startTime, isGenerationComplete]);
+
     const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
+    const completedCount = progressData.filter(p => p.status === 'complete').length;
 
     const sortedProgressData = React.useMemo(() => {
         if (!isSorted) return progressData;
@@ -42,12 +62,13 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     return (
         <div className="generation-progress-display">
             <div className="progress-header">
-                <span>Generating Responses...</span>
+                <span className="progress-title">Generating Responses...</span>
                 <div className="header-controls">
-                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
                     <button onClick={() => setIsSorted(s => !s)} className="styled-button" title="Sort by Total Tokens">
                         {isSorted ? <VscListOrdered/> : <VscListUnordered />}
                     </button>
+                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
+                    <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
             <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
@@ -67,8 +88,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
                                 </span>
-                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation"><VscStopCircle /></button>
-                                <button onClick={() => onRegenerate(p.responseId)} title="Regenerate Response"><VscSync /></button>
+                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /></button>
                             </div>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
@@ -92,6 +112,15 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     </div>
                 );
             })}
+
+            {isGenerationComplete && (
+                <div className="progress-footer">
+                    <span>{completedCount}/{progressData.length} Responses Complete</span>
+                    <button onClick={onViewResponses} className="styled-button">
+                        View Responses <VscArrowRight />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

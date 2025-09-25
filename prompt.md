@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 63 - great work continue with response ui improvements
+Current Cycle 64 - so good! great work!
+Cycle 63 - great work continue with response ui improvements
 Cycle 62 - response ui feedback
 Cycle 61 - streaming thinking/reasoning tokens
 Cycle 60 - continue streaming refinements
@@ -797,6 +798,130 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 64>
+<Cycle Context>
+nice!!! okay i realized that in A52.3, we are failing to provide crucial metainterpretability. meaning, no where are we explaining to the AI that it is interacting with users via the DCE via vscode.
+
+Next, the parsing needs work. ive got four responses that seemed to all come back as JSON, but we only parse one of them correctly. in the ephemeral, ill provide the raw versions of all four responses. <Response 3> had all sections, the files, summary, course of action, and curator activity, all parse/appear correctly.
+
+so we are going to need basically a parsing solution/interaction schema for each model we use right? each model is different and if we dont handle its input we wont align the files with our parser.
+
+first, we made this extension by manually copying/pasting prompt.md <> gemini 2.5 pro via aistudio.google.com. this manual process requires A52 and A52.1 to function. then we are developing a new process, this local llm process, so that we can develop the entire phase 2 response streaming solution so that we can begin to integrate API keys. perhaps update A52 to describe this, and then update A52.3 and the response-parser accordingly to resolve any issues causing us to not parse correctly, as depicted by the responses shown in ephemeral?
+
+when selecting demo mode, lets display a static model card on the settings page. this will help me visualize model cards as well as will allow us to provide info about demo mode to the user, such as model name, context window settings, GPU, etc.
+</Cycle Context>
+<Ephemeral Context>
+<Response 1>
+```json
+{
+  "summary": "Created Master Artifact List and core planning documents (Project Vision, Technical Scaffolding, GitHub Setup, Development & Testing) for new project initialization.",
+  "course_of_action": [
+    {
+      "step": 1,
+      "description": "Prepare content for each required artifact, filling in generic template placeholders and inserting placeholder project name tags."
+    },
+    {
+      "step": 2,
+      "description": "Create the artifact files in the `src/Artifacts` directory with the prepared content."
+    }
+  ],
+  "files": [
+    {
+      "path": "src/Artifacts/A0_Master_Artifact_List.md",
+      "content": "# Artifact A0: Master Artifact List\n# Date Created: C163\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** The definitive list of all documentation artifacts for your project.\n- **Tags:** documentation, project setup, master list\n\n## 1. Purpose\n\nThis file serves as the central catalog of all artifacts that define the project's scope, design, and implementation.\n\n## 2. Artifact Catalog\n\n## I. Project Planning & Design\n\n### A1. [Your Project Name] - Project Vision and Goals\n- **Description:** High-level vision, goals, and phases.\n- **Tags:** project vision, goals, planning\n\n### A2. [Your Project Name] - Technical Scaffolding Plan\n- **Description:** File structure, technology choices, and core architecture.\n- **Tags:** technical plan, architecture, scaffolding\n\n## II. Technical Documentation\n\n### A3. [Your Project Name] - GitHub Repository Setup Guide\n- **Description:** Steps to initialize Git and connect to GitHub.\n- **Tags:** git, github, setup\n\n### A4. [Your Project Name] - Development and Testing Guide\n- **Description:** Workflow for running, debugging, and testing the application.\n- **Tags:** development, testing, workflow"
+    },
+    {
+      "path": "src/Artifacts/A1_Project_Vision_and_Goals.md",
+      "content": "# Artifact A1: [Your Project Name] - Project Vision and Goals\n# Date Created: C163\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Project Vision and Goals document.\n- **Tags:** documentation, project vision, goals\n\n## 1. Project Vision\n\nThe vision of **[Your Project Name]** is to **[State the core problem you are solving and the ultimate goal of the project]**. It aims to provide a **[brief description of the product or system]** that will **[describe the key benefit or value proposition]**.\n\n## 2. High-Level Goals & Phases\n\nThe project will be developed in distinct phases to ensure an iterative and manageable workflow.\n\n### Phase 1: Core Functionality\n\nThe goal of this phase is to establish the foundational elements of the project.\n- **Core Functionality:** [Describe the most critical feature to be built first].\n- **Outcome:** [Describe the state of the project at the end of this phase, e.g., \"A user can perform the core action of X\"].\n\n### Phase 2: Feature Expansion\n\nThis phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.\n- **Core Functionality:** [Describe the next set of important features].\n- **Outcome:** [Describe the state of the project at the end of this phase].\n\n### Phase 3: Scalability and Polish\n\nThis phase focuses on refining the project, improving performance, and ensuring it is ready for a wider audience.\n- **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].\n- **Outcome:** [Describe the final, polished state of the project]."
+    },
+    {
+      "path": "src/Artifacts/A2_Technical_Scaffolding_Plan.md",
+      "content": "# Artifact A2: [Your Project Name] - Technical Scaffolding Plan\n# Date Created: C163\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a technical scaffolding plan.\n- **Tags:** documentation, technical plan, scaffolding\n\n## 1. Overview\n\nThis document outlines the proposed technical scaffolding and file structure for **[Your Project Name]**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.\n\n## 2. Technology Stack\n\n- **Language:** [e.g., TypeScript]\n- **Framework/Library:** [e.g., React, Node.js with Express]\n- **Styling:** [e.g., SCSS, TailwindCSS]\n- **Bundler:** [e.g., Webpack, Vite]\n\n## 3. Proposed File Structure\n\nThe project will adhere to a standard, feature-driven directory structure:\n\n```\n.\n├── src/\n│   ├── components/       # Reusable UI components (e.g., Button, Modal)\n│   │\n│   ├── features/         # Feature-specific modules\n│   │   └── [feature-one]/\n│   │       ├── index.ts\n│   │       └── components/\n│   │\n│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)\n│   │\n│   ├── types/            # Shared TypeScript type definitions\n│   │\n│   └── main.ts           # Main application entry point\n│\n├── package.json          # Project manifest and dependencies\n└── tsconfig.json         # TypeScript configuration\n```\n\n## 4. Key Architectural Concepts\n\n- **Separation of Concerns:** The structure separates UI components, feature logic, and core services.\n- **Component-Based UI:** The UI will be built by composing small, reusable components.\n- **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.\n- **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience."
+    },
+    {
+      "path": "src/Artifacts/A3_GitHub_Repository_Setup_Guide.md",
+      "content": "# Artifact A3: [Your Project Name] - GitHub Repository Setup Guide\n# Date Created: C163\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\n- **Tags:** git, github, setup, source control\n\n## 1. Overview\n\nThis guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\n\n## 2. Prerequisites\n\n-   You have `git` installed on your machine.\n-   You have a GitHub account.\n\n## 3. Step-by-Step Setup\n\n### Step 1: Create a New Repository on GitHub\n\n1.  Go to **[github.com](https://github.com)** and log in.\n2.  In the top-right corner, click the `+` icon and select **\"New repository\"**.\n3.  **Repository name:** Enter a name for your project (e.g., `my-new-project`).\n4.  **Description:** (Optional) Provide a brief description of your project.\n5.  Choose **\"Private\"** or **\"Public\"**.\n6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.\n7.  Click **\"Create repository\"**.\n\nGitHub will now show you a page with command‑line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**.\n\n### Step 2: Initialize Git in Your Local Project\n\nOpen a terminal and navigate to your project's root directory. Then, run the following commands one by one.\n\n1.  **Initialize the repository:**\n    ```bash\n    git init\n    ```\n\n2.  **Add all existing files:**\n    ```bash\n    git add .\n    ```\n\n3.  **Create the first commit:**\n    ```bash\n    git commit -m \"Initial commit\"\n    ```\n\n4.  **Rename the default branch to `main`:**\n    ```bash\n    git branch -M main\n    ```\n\n### Step 3: Link and Push to GitHub\n\n1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.\n    ```bash\n    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git\n    ```\n\n2.  **Push your local `main` branch to GitHub:**\n    ```bash\n    git push -u origin main\n    ```\n\nAfter these commands complete, refresh your GitHub repository page. You should see all of your project files.\n\n## 4. Sample Development Workflow with DCE and Git\n\nGit is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\n\n### Step 1: Start with a Clean State\nBefore starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.\n\n### Step 2: Generate a Prompt and Get Responses\nUse the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\n\n### Step 3: Paste and Parse\nPaste the responses into the Parallel Co‑Pilot Panel and click \"Parse All\".\n\n### Step 4: Accept and Test\n1.  Review the responses and find one that looks promising.\n2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspace.\n3.  Now, compile and test the application. Does it work? Does it have errors?\n\n### Step 5: The \"Restore\" Loop\nThis is where Git becomes a powerful part of the workflow.\n\n-   **If the changes are bad (e.g., introduce bugs, don't work as expected):**\n    1.  Open the terminal in VS Code.\n    2.  Run the command: `git restore .`\n    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\n    4.  You are now back to a clean state and can go back to the Parallel Co‑Pilot Panel, select a *different* AI response, and click \"Accept Selected Files\" again to test the next proposed solution.\n\n-   **If the changes are good:**\n    1.  Open the Source Control panel in VS Code.\n    2.  Stage the changes (`git add .`).\n    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15\").\n    4.  Commit the changes.\n    5.  You are now ready to start the next development cycle from a new, clean state."
+    },
+    {
+      "path": "src/Artifacts/A4_Development_and_Testing_Guide.md",
+      "content": "# Artifact A4: [Your Project Name] - Development and Testing Guide\n# Date Created: C163\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a development and testing guide.\n- **Tags:** development, testing, workflow, guide\n\n## 1. Purpose\n\nThis guide provides the standard procedure for running, debugging, and testing the **[Your Project Name]** application locally.\n\n## 2. Development Workflow\n\n### Step 1: Install Dependencies\n\nEnsure all project dependencies are installed using npm.\n```bash\nnpm install\n```\n\n### Step 2: Start the Development Server\n\nTo compile the code and watch for changes, run the following command:\n```bash\nnpm run watch\n```\nThis will start the development server and automatically recompile your code when you save a file.\n\n### Step 3: Running the Application\n\n[Describe the specific steps to launch the application. For a web app, this would be opening a browser to `http://localhost:3000`.]\n\n### Step 4: Debugging\n\nYou can set breakpoints directly in your source code. [Describe how to attach a debugger.]\n\n## 3. Testing\n\nThe project is configured with a testing framework. To run the test suite, use the following command:\n```bash\nnpm run test\n```\nThis will execute all test files located in the project and report the results to the console."
+    }
+  ]
+}
+```
+</Response 1>
+<Response 2>
+{"summary":"Generated initial project documentation artifacts for setup, including GitHub repository guide, development guide, master artifact list, project vision, and technical scaffolding plan.","course_of_action":[{"step":1,"description":"Create the GitHub Repository Setup Guide (A14) with detailed steps to link local repo to GitHub."},{"step":2,"description":"Create the Development and Testing Guide (A07) outlining install, start, debugging, and test commands."},{"step":3,"description":"Create the Master Artifact List (A01) cataloguing all current planning documents."},{"step":4,"description":"Create the Project Vision and Goals document (A02) describing high-level vision, phases, and outcomes."},{"step":5,"description":"Create the Technical Scaffolding Plan (A04) specifying technology stack, file structure, and architectural principles."}],"curator_activity":"Verify that the .gitignore includes \".vscode/\" and that the project has an initial commit on the main branch before starting development cycles.","files":[{"path":"src/Artifacts/A01_Master_Artifact_List.md","content":"# Artifact A01: Master Artifact List\n# Date Created: C2025\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A definitive list of all documentation artifacts for **Sample Project**.\n\n## 1. Project Planning & Design\n### A02. Sample Project - Project Vision and Goals\n- **Description:** High-level overview of the project’s purpose and roadmap.\n- **Tags:** project vision, goals, scope, planning\n\n### A04. Sample Project - Technical Scaffolding Plan\n- **Description:** Blueprint for the project’s initial file structure and technology choices.\n- **Tags:** architecture, scaffolding, roadmap\n\n## 2. Project Setup & Workflow\n### A14. Sample Project - GitHub Repository Setup Guide\n- **Description:** Instructions for initializing Git and linking to GitHub.\n- **Tags:** git, github, setup\n\n### A07. Sample Project - Development and Testing Guide\n- **Description:** Standard procedures for running, debugging, and testing the application.\n- **Tags:** development, testing, workflow\n"}},{"path":"src/Artifacts/A02_Project_Vision_and_Goals.md","content":"# Artifact A02: Sample Project - Project Vision and Goals\n# Date Created: C2025\n# Author: AI Model & Curator\n\n## 1. Project Vision\n\nThe vision of **Sample Project** is to provide an efficient and intuitive platform for managing user‑generated content, enabling creators to publish and collaborate seamlessly.\n\n## 2. High‑Level Goals & Phases\n\n### Phase 1: Core Functionality\n* **Core Functionality:** User authentication and article creation.\n* **Outcome:** A signed‑in user can create, edit, and publish articles.\n\n### Phase 2: Collaboration Features\n* **Core Functionality:** Real‑time editing and comments.\n* **Outcome:** Multiple users can collaboratively edit articles in real time.\n\n### Phase 3: Production Readiness\n* **Core Functionality:** Performance optimization and scalability.\n* **Outcome:** Ready for deployment to a cloud platform with auto‑scaling.\n"}},{"path":"src/Artifacts/A04_Technical_Scaffolding_Plan.md","content":"# Artifact A04: Sample Project - Technical Scaffolding Plan\n# Date Created: C2025\n# Author: AI Model & Curator\n\n## 1. Overview\n\nOutline of the proposed technical scaffolding for **Sample Project**, ensuring a clean, maintainable architecture.\n\n## 2. Technology Stack\n\n- **Language:** TypeScript\n- **Framework:** Next.js (React)\n- **Styling:** TailwindCSS\n- **Bundler:** Vite\n- **Testing:** Jest + React Testing Library\n\n## 3. Proposed File Structure\n\n```\nSampleProject/\n├── public/\n├── src/\n│   ├── components/\n│   ├── features/\n│   │   └── article/\n│   │       ├── index.tsx\n│   │       └── editor.tsx\n│   ├── pages/\n│   │   ├── _app.tsx\n│   │   ├── index.tsx\n│   │   └── login.tsx\n│   ├── services/\n│   │   └── api.ts\n│   ├── styles/\n│   │   └── globals.css\n│   ├── types/\n│   │   └── index.ts\n│   └── main.ts\n├── .gitignore\n├── package.json\n├── tsconfig.json\n└── tailwind.config.js\n```\n\n## 4. Key Architectural Concepts\n\n- Separation of Concerns\n- Component‑Based UI\n- Service Layer for API\n- Strong Typing with TypeScript\n"}},{"path":"src/Artifacts/A14_GitHub_Repository_Setup_Guide.md","content":"# Artifact A14: Sample Project - GitHub Repository Setup Guide\n# Date Created: C2025\n# Author: AI Model & Curator\n\n## 1. Overview\n\nGuide to initialize Git locally, link to a new GitHub repository, and follow a sample workflow.\n\n## 2. Prerequisites\n\n- Git installed\n- GitHub account\n\n## 3. Step‑by‑Step Setup\n\n### Step 1: Create GitHub Repo\n1. Go to github.com and log in.\n2. Click `+` → New repository.\n3. Name: `sample-project`\n4. Keep unchecked “Initialize this repository with a README”.\n5. Click “Create repository”.\n\n### Step 2: Initialize Local Repo\n```bash\ncd SampleProject\ngit init\ngit add .\ngit commit -m \"Initial commit\"\ngit branch -M main\n```\n\n### Step 3: Link & Push\n```bash\ngit remote add origin https://github.com/USERNAME/sample-project.git\ngit push -u origin main\n```\n\n## 4. Sample Development Workflow with DCE and Git\n1. Keep working tree clean using `git status`.\n2. Generate prompts → parse responses → accept files → test.\n3. If bad changes: `git restore .`\n4. If good: `git add .`, commit, push.\n"}},{"path":"src/Artifacts/A07_Development_and_Testing_Guide.md","content":"# Artifact A07: Sample Project - Development and Testing Guide\n# Date Created: C2025\n# Author: AI Model & Curator\n\n## 1. Purpose\n\nStandard procedures for running, debugging, and testing **Sample Project** locally.\n\n## 2. Development Workflow\n\n### Install Dependencies\n```bash\nnpm install\n```\n\n### Start Development Server\n```bash\nnpm run dev\n```\n\n### Running the Application\nOpen `http://localhost:3000` in a browser.\n\n### Debugging\nSet breakpoints in VS Code. Launch in debug mode.\n\n## 3. Testing\nRun the test suite:\n```bash\nnpm test\n```\nAll tests located in `__tests__` will execute and report results.\n"}]}
+</Response 2>
+<Response 3>
+{"summary":"Created initial planning and documentation artifacts for a new project.","course_of_action":[{"step":1,"description":"Generate mandatory Git and Development & Testing guide artifacts, Master Artifact List, Project Vision, and Technical Scaffolding Plan."},{"step":2,"description":"Replace placeholder tokens [Your Project Name] and fill context-specific details within each artifact."},{"step":3,"description":"Commit the artifacts to the repository and verify the Git workflow per the GitHub Setup Guide."},{"step":4,"description":"Validation: Open the artifacts, ensure syntax and formatting are correct, and that the project has documented entry points for future cycles."}],"curator_activity":"Please review each artifact, replace [Your Project Name] with the actual project title, augment the placeholder sections with real goals, requirements, and technology choices, then commit these changes to the repository.","files":[{"path":"src/Artifacts/T14.md","content":"# Artifact T14: [Your Project Name] - GitHub Repository Setup Guide\n# Date Created: C152\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\n- **Tags:** template, cycle 0, git, github, version control, workflow\n\n## 1. Overview\n\nThis guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\n\n## 2. Prerequisites\n\n*   You have git installed on your machine.\n*   You have a GitHub account.\n\n## 3. Step-by-Step Setup\n\n### 3.1 Step 1: Create a New Repository on GitHub\n\n1.  Go to github.com and log in.\n2.  In the top-right corner, click the + icon and select New repository.\n3.  Repository name: Enter a name for your project (e.g., my-new-project).\n4.  Description: (Optional) Provide a brief description of your project.\n5.  Choose Private or Public.\n6.  IMPORTANT: Do not initialize the repository with a README, .gitignore, or license. We will be pushing our existing files, and this will prevent conflicts.\n7.  Click Create repository.\n\nGitHub will now show you a page with command-line instructions. We will use the section titled \"...or push an existing repository from the command line\".\n\n### 3.2 Step 2: Initialize Git in Your Local Project\n\nOpen a terminal and navigate to your project's root directory. Then, run the following commands one by one.\n\n1.  Initialize the repository:\n    ```\n    git init\n    ```\n\n2.  Add all existing files:\n    ```\n    git add .\n    ```\n\n3.  Create the first commit:\n    ```\n    git commit -m \"Initial commit\"\n    ```\n\n4.  Rename the default branch to main:\n    ```\n    git branch -M main\n    ```\n\n### 3.3 Step 3: Link and Push to GitHub\n\n1.  Add the remote repository: Replace the placeholder URL with the one from your GitHub repository page.\n    ```\n    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git\n    ```\n\n2.  Push your local main branch to GitHub:\n    ```\n    git push -u origin main\n    ```\n\nAfter these commands complete, refresh your GitHub repository page. You should see all of your project files.\n\n## 4. Sample Development Workflow with DCE and Git\n\nGit is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\n\n### 4.1 Start with a Clean State\nBefore starting a new cycle, ensure your working directory is clean. You can check this with git status. All your previous changes should be committed.\n\n### 4.2 Generate a Prompt and Get Responses\nUse the DCE to generate a prompt.md file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\n\n### 4.3 Paste and Parse\nPaste the responses into the Parallel Co-Pilot Panel and click Parse All.\n\n### 4.4 Accept and Test\n1.  Review the responses and find one that looks promising.\n2.  Select that response and use the Accept Selected Files button to write the AI's proposed changes to your workspace.\n3.  Now, compile and test the application. Does it work? Does it have errors?\n\n### 4.5 The Restore Loop\nThis is where Git becomes a powerful part of the workflow.\n\n*   If the changes are bad (e.g., introduce bugs, don't work as expected):\n    1.  Open the terminal in VS Code.\n    2.  Run the command: git restore .\n    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\n    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a different AI response, and click Accept Selected Files again to test the next proposed solution.\n*   If the changes are good:\n    1.  Open the Source Control panel in VS Code.\n    2.  Stage the changes (git add .).\n    3.  Write a commit message (e.g., Feat: Implement user login via AI suggestion C15).\n    4.  Commit the changes.\n    5.  You are now ready to start the next development cycle from a new, clean state.\n\nThis iterative loop of accept -> test -> restore allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase."},{"path":"src/Artifacts/T7.md","content":"# Artifact T7: Template - Development and Testing Guide\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a development and testing guide.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis guide provides the standard procedure for running, debugging, and testing the [Your Project Name] application locally.\n\n## 2. Development Workflow\n\n### Step 1: Install Dependencies\n\nEnsure all project dependencies are installed using npm.\n```bash\nnpm install\n```\n\n### Step 2: Start the Development Server\n\nTo compile the code and watch for changes, run the following command:\n```bash\nnpm run watch\n```\nThis will start the development server and automatically recompile your code when you save a file.\n\n### Step 3: Running the Application\n\n[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to http://localhost:3000.]\n\n### Step 4: Debugging\n\nYou can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]\n\n## 3. Testing\n\nThe project is configured with a testing framework. To run the test suite, use the following command:\n```bash\nnpm run test\n```\nThis will execute all test files located in the project and report the results to the console."},{"path":"src/Artifacts/T1.md","content":"# Artifact T1: Template - Master Artifact List\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \\\"Source of Truth\\\" documents.\n\n## 2. Formatting Rules for Parsing\n\n*   Lines beginning with # are comments and are ignored.\n*   ## denotes a major category header and is ignored.\n*   ### denotes an artifact entry. The text following it is the artifact's full name and ID.\n*   Lines beginning with - **Description:** provide context for the project.\n*   Lines beginning with - **Tags:** provide keywords for Inference.\n\n## 3. Artifact List\n\n## I. Project Planning & Design\n\n### A1. [Your Project Name] - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plan.\n- **Tags:** project vision, goals, scope, planning\n\n### A2. [Your Project Name] - Phase 1 - Requirements & Design\n- **Description:** Detailed functional and technical requirements for the first phase of the project.\n- **Tags:** requirements, design, phase 1, features\n\n### A3. [Your Project Name] - Technical Scaffolding Plan\n- **Description:** Technical scaffolding and file structure for the project.\n- **Tags:** technical, scaffold, architecture\n\n### A4. [Your Project Name] - Development and Testing Guide\n- **Description:** Development workflow, testing and debugging guide.\n- **Tags:** development, testing, debugging\n\n### A5. [Your Project Name] - GitHub Repository Setup Guide\n- **Description:** Instructions for initializing Git and linking to GitHub.\n- **Tags:** git, repository, workflow"},{"path":"src/Artifacts/T2.md","content":"# Artifact T2: Template - Project Vision and Goals\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Project Vision and Goals document.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Project Vision\n\nThe vision of **[Your Project Name]** is to **[State the core problem you are solving and the ultimate goal of the project]**. It aims to provide a **[brief description of the product or system]** that will **[describe the key benefit or value proposition]**.\n\n## 2. High-Level Goals & Phases\n\nThe project will be developed in distinct phases to ensure an iterative and manageable workflow.\n\n### Phase 1: [Name of Phase 1, e.g., Core Functionality]\n\nThe goal of this phase is to establish the foundational elements of the project.\n-   **Core Functionality:** [Describe the most critical feature to be built first].\n-   **Outcome:** [Describe the state of the project at the end of this phase, e.g., \\\"A user can perform the core action of X\\\"][possible].\n\n### Phase 2: [Name of Phase 2, e.g., Feature Expansion]\n\nThis phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.\n-   **Core Functionality:** [Describe the next set of important features].\n-   **Outcome:** [Describe the state of the project at the end of this phase].\n\n### Phase 3: [Name of Phase 3, e.g., Scalability and Polish]\n\nThis phase focuses on refining the product, improving performance, and ensuring it is ready for a wider audience.\n-   **Core Functionality:** [Describe features related to performance, security, or advanced user interactions].\n-   **Outcome:** [Describe the final, polished state of the project]."},{"path":"src/Artifacts/T4.md","content":"# Artifact T4: Template - Technical Scaffolding Plan\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a technical scaffolding plan.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Overview\n\nThis document outlines the proposed technical scaffolding and file structure for **[Your Project Name]**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.\n\n## 2. Technology Stack\n\n-   **Language:** [e.g., TypeScript]\n-   **Framework/Library:** [e.g., React, Node.js with Express]\n-   **Styling:** [e.g., SCSS, TailwindCSS]\n-   **Bundler:** [e.g., Webpack, Vite]\n\n## 3. Proposed File Structure\n\nThe project will adhere to a standard, feature-driven directory structure:\n\n```\n.\n├── src/\n│   ├── components/       # Reusable UI components (e.g., Button, Modal)\n│   │\n│   ├── features/         # Feature-specific modules\n│   │   └── [feature-one]/\n│   │       ├── index.ts\n│   │       └── components/\n│   │\n│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)\n│   │\n│   ├── types/            # Shared TypeScript type definitions\n│   │\n│   └── main.ts           # Main application entry point\n│\n├── package.json          # Project manifest and dependencies\n└── tsconfig.json         # TypeScript configuration\n```\n\n## 4. Key Architectural Concepts\n\n-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.\n-   **Component-Based UI:** The UI will be built by composing small, reusable components.\n-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.\n-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience."}]}
+</Response 3>
+<Response 4>
+```json
+{
+  "summary": "Initial planning artifacts created: Master Artifact List, Project Vision, Technical Scaffolding Plan, GitHub Repository Setup Guide, and Development & Testing Guide.",
+  "course_of_action": [],
+  "files": [
+    {
+      "path": "src/Artifacts/T1_MasterArtifactList.md",
+      "content": "# Artifact T1: Master Artifact List\n# Date Created: C200\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A definitive list of all documentation artifacts for the **MyProject**.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\nThis file serves as the definitive, parseable list of all documentation artifacts for your project. It is used to keep both humans and AI assistants aligned on the source of truth for each document.\n\n## 2. Artifact List\n\n## I. Project Planning & Design\n\n### A1. MyProject - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plan.\n- **Tags:** project vision, goals, scope, planning\n\n### A2. MyProject - Phase 1 - Requirements & Design\n- **Description:** Detailed functional and technical requirements for the first phase.\n- **Tags:** requirements, design, phase 1, features\n\n### A3. MyProject - Technical Scaffolding Plan\n- **Description:** Blueprint for the initial file structure and technology stack.\n- **Tags:** technical, scaffolding, architecture\n\n## II. Project Implementation Guides\n\n### A4. MyProject - GitHub Repository Setup Guide\n- **Description:** Instructions to initialize Git and link to GitHub.\n- **Tags:** git, github, version control\n\n### A5. MyProject - Development and Testing Guide\n- **Description:** Standard procedure for running, debugging, and testing the application.\n- **Tags:** development, testing, workflow"
+    },
+    {
+      "path": "src/Artifacts/T2_ProjectVisionAndGoals.md",
+      "content": "# Artifact T2: Project Vision and Goals\n# Date Created: C200\n# Author: AI Model & Curator\n\n- **Key/Value for A1:**\n- **Description:** The vision and high‑level goals for **MyProject**.\n- **Tags:** project vision, goals, scope, planning\n\n## 1. Project Vision\nThe vision of **MyProject** is to simplify project onboarding by providing a unified, documentation‑first workflow that seamlessly integrates AI assistants with Git-based iteration. It aims to deliver a fully documented, AI‑augmented development process that reduces friction and ensures consistent quality.\n\n## 2. High‑Level Goals & Phases\nThe project will be developed in distinct phases to ensure an iterative and manageable workflow.\n\n### Phase 1: Core Infrastructure\n- **Core Functionality:** Establish the artifact directory, DCE integration, and example guidance.\n- **Outcome:** A project skeleton that supports Git, AI prompt handling, and a minimal set of documentation artifacts.\n\n### Phase 2: Development Workflow\n- **Core Functionality:** Implement the `prompt.md` and response loop, enable basic parsing, and provide a simple CLI for accepting AI suggestions.\n- **Outcome:** A functional development cycle that can generate, accept, and test code changes.\n\n### Phase 3: Testing & Polish\n- **Core Functionality:** Add testing frameworks, documentation generation, and CI integration.\n- **Outcome:** A production‑ready artifact‑driven workflow with automated tests and documentation."
+    },
+    {
+      "path": "src/Artifacts/T3_PlaceholderRequirementsAndDesign.md",
+      "content": "# Artifact T3: Phase 1 Requirements & Design\n# Date Created: C200\n# Author: AI Model & Curator\n\n- **Key/Value for A2:**\n- **Description:** Detailed functional and design requirements for Phase 1 of **MyProject**.\n- **Tags:** requirements, design, phase 1, features\n\n## 1. Overview\nThis document outlines the detailed requirements for Phase 1 of **MyProject**. The primary goal of this phase is to implement the core infrastructure and validation workflow.\n\n## 2. Functional Requirements\n| ID | Requirement | User Story | Acceptance Criteria |\n|---|---|---|---|\n| FR-01 | Artifact Directory Creation | As a developer, I want a dedicated `src/Artifacts` folder where all project documentation lives, so I can track the source of truth. | - The folder `src/Artifacts` exists.\n- It contains `README.md` and empty placeholder artifact files.\n| FR-02 | DCE Prompt Loop | As a user, I want to submit a `prompt.md` and receive a single JSON response containing updated artifacts, so I can iterate quickly. | - The system parses `prompt.md`.\n- The AI returns a JSON with `summary`, `files`, etc.\n- Artifacts are written to disk.\n| FR-03 | Git Initialization Guidance | As a new contributor, I want a step‑by‑step guide to initialize Git and link GitHub, so I can share code securely. | - The guide covers `git init`, adding files, and pushing to remote.\n- `.vscode/` is ignored.\n\n## 3. Non‑Functional Requirements\n| ID | Requirement | Description |\n|---|---|---|\n| NFR-01 | Documentation First | All code changes must be preceded by an updated artifact describing intent. |\n| NFR-02 | Auto‑Completion | The extension auto‑suggests artifact paths in prompts based on the Master Artifact List. |\n\n## 4. High‑Level Design\n- **Directory Structure:** `src/Artifacts/` holds all artifacts.\n- **Artifact Parsing:** The extension reads the Master Artifact List to validate new artifact names.\n- **Version Control:** Core Git commands are scripted in the GitHub Setup Guide.\n"
+    },
+    {
+      "path": "src/Artifacts/T4_TechnicalScaffoldingPlan.md",
+      "content": "# Artifact T4: Technical Scaffolding Plan\n# Date Created: C200\n# Author: AI Model & Curator\n\n- **Key/Value for A3:**\n- **Description:** Proposed technical scaffolding and file structure for **MyProject**.\n- **Tags:** technical, scaffolding, architecture\n\n## 1. Overview\nThis document outlines the proposed technical scaffolding and file structure for **MyProject**. It serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture.\n\n## 2. Technology Stack\n- **Language:** TypeScript\n- **Framework:** Node.js with Express (for a lightweight server)\n- **Bundler:** Vite (for rapid dev server)\n- **Testing:** Jest + ts-jest\n- **Linting/Formatting:** ESLint + Prettier\n\n## 3. Proposed File Structure\n\n```\n.\n├── src/\n│   ├── artifacts/          # Documentation artifacts\n│   │   ├── T1_MasterArtifactList.md\n│   │   ├── T2_ProjectVisionAndGoals.md\n│   │   ├── T3_PlaceholderRequirementsAndDesign.md\n│   │   ├── T4_TechnicalScaffoldingPlan.md\n│   │   ├── T14_GitHubRepoSetupGuide.md\n│   │   └── T7_DevelopmentAndTestingGuide.md\n│   └── server/\n│       ├── index.ts        # Server entry point\n│       ├── routes/\n│       │   └── unity.*\n│       └── services/\n│           └── artifactService.ts\n├── .env.example\n├── .gitignore\n├── package.json\n├── tsconfig.json\n└── vite.config.ts\n```\n\n### Directory Responsibilities\n- **`src/artifacts/`** holds all documentation artifacts.\n- **`src/server/`** contains the minimal Express server used to serve artifact files and handle prompt responses.\n\n## 4. Key Architectural Concepts\n- **Separation of Concerns:** Documentation, server logic, and data services are isolated into distinct folders.\n- **Type Safety:** TypeScript enforces strict typing across the platform, simplifying integration with AI APIs.\n- **Extensibility:** The file structure allows easy addition of new modules (e.g., UI, CLI) without affecting core logic.\n"
+    },
+    {
+      "path": "src/Artifacts/T14_GitHubRepoSetupGuide.md",
+      "content": "# Artifact T14: MyProject - GitHub Repository Setup Guide\n# Date Created: C200\n# Author: AI Model & Curator\n\n- **Key/Value for A4:**\n- **Description:** A guide to initialize a Git repository, link to GitHub, and outline a workflow.\n- **Tags:** git, github, setup\n\n## 1. Overview\nThis guide explains how to turn your local project folder into a Git repository, link it to a new GitHub repository, and adopt a sample workflow that integrates with the Data Curation Environment (DCE).\n\n## 2. Prerequisites\n- **Git** installed.\n- **GitHub** account.\n\n## 3. Step‑by‑Step Setup\n### Step 1: Create a New Repository on GitHub\n1. Go to https://github.com and log in.\n2. Click the `+` icon and select **\"New repository\"**.\n3. Name the repo *MyProject*.\n4. Leave **Default branch** as `main`.\n5. *Do not* initialize with README, .gitignore, or License.\n6. Click **Create repository**.\n\n### Step 2: Initialize Git in Your Local Project\n```bash\ncd path/to/MyProject\n\ngit init\n\ngit add .\n\ngit commit -m \"Initial commit\"\n\ngit branch -M main\n```\n\n### Step 3: Link & Push to GitHub\n```bash\n# Replace <USERNAME> with your GitHub username\n# Replace <REPO> with your repository name\n\ngit remote add origin https://github.com/<USERNAME>/MyProject.git\n\ngit push -u origin main\n```\n\nAfter pushing, refresh the GitHub page to confirm all files are present.\n\n## 4. Sample Development Workflow\n1. **Clean Working State:** Ensure `git status` shows no uncommitted changes.\n2. **Generate Prompt:** Use DCE to create `prompt.md` and get AI responses.\n3. **Parse:** Accept the best response via the Parallel Co‑Pilot panel.\n4. **Commit Changes:** If accepted, `git add . && git commit -m \"Feat: ...\"`.\n5. **Push:** `git push`.\n6. **Rollback:** If a change is bad, `git restore .` or `git checkout HEAD~1`.\n\nThis loop keeps the repository in a clean state, enabling quick iteration and safe rollbacks."
+    },
+    {
+      "path": "src/Artifacts/T7_DevelopmentAndTestingGuide.md",
+      "content": "# Artifact T7: Development and Testing Guide\n# Date Created: C200\n# Author: AI Model & Curator\n\n- **Key/Value for A5:**\n- **Description:** A guide for running, debugging, and testing **MyProject**.\n- **Tags:** development, testing, workflow\n\n## 1. Purpose\nThis guide provides the standard procedure for running, debugging, and testing the **MyProject** application locally.\n\n## 2. Development Workflow\n### Step 1: Install Dependencies\n```bash\nnpm install\n```\n\n### Step 2: Start the Development Server\n```bash\nnpm run dev\n```\nThe server will start on `http://localhost:5173` (Vite default). Open this URL to interact with the app.\n\n### Step 3: Running the Application\n- For this project, the UI is a minimal Express endpoint that serves static files.\n- Access `http://localhost:5173` to see the default page.\n\n### Step 4: Debugging\n- Use console logs or the browser’s developer tools.\n- The server logs are printed in the terminal where `npm run dev` was started.\n\n## 3. Testing\nThe project uses Jest for unit tests.\n\n```bash\nnpm run test\n```\nAll test files are located in `tests/` and follow the pattern `*.test.ts`.\n\n## 4. Continuous Integration\n- A basic GitHub Actions workflow is included in `.github/workflows/ci.yml`.\n- It runs lint, test, and builds on every pull request.\n"
+    }
+  ]
+}
+```
+</Response 4>
+</Ephemeral Context>
+<Previous Cycle 63 Summary of Actions>
+This is an excellent and comprehensive set of feedback that will significantly polish the user experience of the response generation UI. My course of action is to address all seven points, starting with the highest-impact UI fixes and workflow improvements, and then creating the necessary planning artifacts for the more complex features like Model Cards.
+
+Based on my research, the `gpt-oss` model family indeed supports a configurable reasoning effort (low, medium, high) which can be adjusted in the API call. Additionally, I can query the vLLM server's `/v1/models` endpoint to retrieve information about the currently running model, which will help in building the Model Card feature.
+
+1.  **Documentation First (Planning for Model Cards):**
+    *   I will create a new artifact, **`A100. DCE - Model Card & Settings Refactor Plan.md`**. This plan will detail the UI and backend logic for creating, managing, and selecting "model cards." It will specify the parameters to be captured (Display Name, API Endpoint, Context Window, Reasoning Level) and include a feature to query the `/v1/models` endpoint of a vLLM server to auto-populate some of this information.
+    *   I will update **`A99. DCE - Response Regeneration Workflow Plan.md`** to include the new user story for a per-tab "Regenerate" button.
+    *   I will update **`A57. DCE - Phase 2 - Cycle Management Plan.md`** to refine the "Reset All History" workflow, explicitly stating that it should return the user to the Cycle 0/Onboarding view.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include the new `A100` artifact.
+
+2.  **Implement High-Impact UI Fixes & Features:**
+    *   **Fix Stale Progress Bars (`view.tsx`):** I will modify the `handleGenerateResponses` function. When a new generation is initiated, it will immediately reset the `generationProgress` state array, clearing the old progress bars from the UI.
+    *   **Fix "Reset History" Workflow (`history.service.ts`, `view.tsx`):** I will modify the `resetHistory` method in the backend to also clear the `lastViewedCycleId` from the workspace state. The frontend handler will be updated to navigate to `cycleId: 0` upon a successful reset.
+    *   **Add Sort Button (`GenerationProgressDisplay.tsx`):** I will add a "Sort by Tokens" button and the necessary state management to sort the `progressData` array before rendering.
+    *   **Add Per-Tab Regenerate Button (`ResponseTabs.tsx`, `view.tsx`):**
+        *   I will add a "Refresh" icon button to each tab in `ResponseTabs.tsx`, visible on hover.
+        *   Its `onClick` handler will trigger a new `RequestSingleRegeneration` IPC message, passing the `cycleId` and `tabId`.
+        *   I will add a `isLoading` property to the `TabState` to track the regeneration status and display a loading indicator.
+    *   **Add Global Generation Controls (`GenerationProgressDisplay.tsx`):** I will add the "Stop Generation" and "Regenerate" buttons next to the status display.
+
+3.  **Implement Backend Logic for New Features:**
+    *   **Per-Tab Regeneration (`history.service.ts`, `llm.service.ts`, `on-message.ts`):**
+        *   I will create a new `updateSingleResponseInCycle` method in `history.service.ts`.
+        *   I will create a new `generateSingle` method in `llm.service.ts` to handle the API call.
+        *   I will add the necessary IPC handler in `on-message.ts` to orchestrate this process.
+    *   **Stop Generation (`llm.service.ts`):** I will refactor the `generateBatch` method to use an `AbortController`, allowing the `fetch` request to be cancelled via a new `RequestStopGeneration` IPC message.
+    *   **Enhanced Reasoning (`llm.service.ts`):** I will add a `reasoning_effort: 'high'` parameter to the request body sent to the vLLM proxy when in "Demo Mode" to leverage the model's highest reasoning setting.
+</Previous Cycle 63 Summary of Actions>
+</Cycle 64>
 
 <Cycle 63>
 <Cycle Context>
@@ -3868,10 +3993,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-25T13:11:52.256Z
+  Date Generated: 2025-09-25T21:58:43.797Z
   ---
   Total Files: 190
-  Approx. Tokens: 521628
+  Approx. Tokens: 522384
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -3879,9 +4004,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12017 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (9945 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (10011 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (9057 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (6542 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (6767 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 9. src\backend\services\prompt.service.ts (5068 tokens)
 10. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -3979,7 +4104,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 72 - Chars: 7148 - Tokens: 1787
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 69 - Chars: 7506 - Tokens: 1877
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -4012,7 +4137,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 125. src\backend\services\history.service.ts - Lines: 313 - Chars: 12719 - Tokens: 3180
-126. src\backend\services\llm.service.ts - Lines: 215 - Chars: 10217 - Tokens: 2555
+126. src\backend\services\llm.service.ts - Lines: 222 - Chars: 10525 - Tokens: 2632
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 20272 - Tokens: 5068
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -4038,21 +4163,21 @@ This file-centric approach helps in planning and prioritizing work, especially i
 149. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 150. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 151. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3484 - Tokens: 871
+152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 71 - Chars: 3081 - Tokens: 771
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 147 - Chars: 7072 - Tokens: 1768
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 147 - Chars: 7218 - Tokens: 1805
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
-157. src\client\views\parallel-copilot.view\view.scss - Lines: 1158 - Chars: 26167 - Tokens: 6542
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1197 - Chars: 27065 - Tokens: 6767
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 414 - Chars: 39779 - Tokens: 9945
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 424 - Chars: 40041 - Tokens: 10011
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-165. src\common\ipc\channels.enum.ts - Lines: 108 - Chars: 6007 - Tokens: 1502
-166. src\common\ipc\channels.type.ts - Lines: 121 - Chars: 9142 - Tokens: 2286
+165. src\common\ipc\channels.enum.ts - Lines: 108 - Chars: 6114 - Tokens: 1529
+166. src\common\ipc\channels.type.ts - Lines: 124 - Chars: 9184 - Tokens: 2296
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -4067,10 +4192,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 178. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 71 - Chars: 3317 - Tokens: 830
 179. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 4699 - Tokens: 1175
+181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 4742 - Tokens: 1186
 182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5160 - Tokens: 1290
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 99 - Chars: 5355 - Tokens: 1339
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 128 - Chars: 6608 - Tokens: 1652
 185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 48066 - Tokens: 12017
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
@@ -10266,15 +10391,15 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C62 (Add Sort, Stop, and Regenerate controls to mockup)
+# Updated on: C63 (Incorporate new UI feedback: timers, button placement, manual navigation)
 
 - **Key/Value for A0:**
-- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, and a tokens/second metric.
+- **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, timers, and a manual "View Responses" button.
 - **Tags:** feature plan, ui, ux, vllm, progress indicator, metrics, streaming, sse
 
 ## 1. Vision & Goal
 
-Generating multiple, large AI responses can take a significant amount of time. To improve the user experience, it's critical to provide clear, real-time feedback that the system is working and to show the progress of the generation. The goal of this feature is to create a dedicated UI that appears during response generation, displaying progress bars, status indicators, and performance metrics for each parallel response being generated by vLLM.
+Generating multiple, large AI responses can take a significant amount of time. To improve the user experience, it's critical to provide clear, real-time feedback that the system is working and to show the progress of the generation. The goal of this feature is to create a dedicated UI that appears during response generation, displaying progress bars, status indicators, performance metrics, and timing information for each parallel response.
 
 ## 2. User Stories
 
@@ -10286,55 +10411,52 @@ Generating multiple, large AI responses can take a significant amount of time. T
 | P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. <br> - When a response is complete, the "unused" portion of its progress bar changes color to signify completion. |
 | P3-PROG-05 | **See Unused Tokens** | As a user, once a response is complete, I want to see how many tokens were left unused, so I can understand how much headroom the model had. | - After a response's status changes to "Complete", a text element appears showing the count of unused tokens. |
 | P3-PROG-06 | **Manage Responses** | As a user, I want to sort responses by token count and be able to stop or re-generate individual responses, so I have more control over the generation process. | - A sort button is available to re-order the list by total tokens. <br> - "Stop" and "Re-generate" buttons are available for each response. |
+| P3-PROG-07 | **See Elapsed Time** | As a user, I want to see a timer showing the total elapsed time for the generation, so I can understand how long the process is taking. | - A master timer is displayed in the header. <br> - Each response can display its own timing information (e.g., time to first token). |
+| P3-PROG-08 | **Review Metrics Before Navigating** | As a user, after all responses are complete, I want to stay on the progress screen to review the final metrics, and then click a button to navigate to the new cycle, so I am in control of the workflow. | - When generation finishes, the UI does not automatically navigate away. <br> - A "View Responses" button appears. <br> - A completion counter (e.g., "4/4 Responses Complete") is displayed. |
 
-## 3. UI Mockup (Textual Description)
+## 3. UI Mockup (Textual Description - C63 Update)
 
 The progress UI will be a dedicated component that is conditionally rendered in the PCPP view when `isGenerating` is true.
 
 ```
 +----------------------------------------------------------------------+
-| Generating Responses...                  Tokens/sec: 1234            |
-|                                          [Sort by Total Tokens]      |
+| Generating Responses... [Sort by Tokens] Tokens/sec: 1234 | 00:45.3  |
 |----------------------------------------------------------------------|
 | Total Tokens: 18,120                                                 |
 |                                                                      |
 | Resp 1: [blue|green|gray]  80% | Status: Generating... [Stop] [Re-gen]|
-|         (1k+5.5k/8.1k tk)                                            |
+|         (1k+5.5k/8.1k tk)      | TTFT: 1.2s                           |
 | Resp 2: [blue|green|gray]  70% | Status: Generating... [Stop] [Re-gen]|
-|         (1k+4.7k/8.1k tk)                                            |
+|         (1k+4.7k/8.1k tk)      | TTFT: 1.5s                           |
 | Resp 3: [blue|gray      ]  12% | Status: Thinking...   [Stop] [Re-gen]|
-|         (1k+0k/8.1k tk)                                              |
+|         (1k+0k/8.1k tk)        |                                      |
 | Resp 4: [blue|green|done] 100% | Status: Complete ✓    [     ] [Re-gen]|
-|         (1k+7.1k/8.1k tk)      | Unused: 1,024 tk                    |
-+----------------------------------------------------------------------+```
-*   **[blue|green|gray/done]**: Represents the stacked progress bar.
-    *   `blue`: "Thinking" tokens (pre-JSON stream).
-    *   `green`: Generated response tokens.
-    *   `gray`: Unused tokens up to the max.
-    *   `done`: A darker gray or other color indicating the response is finished and no more tokens will be generated.
-*   **Controls**: New buttons for sorting and per-response actions.
+|         (1k+7.1k/8.1k tk)      | Unused: 1,024 tk | Total Time: 35.8s |
+|----------------------------------------------------------------------|
+| [ 4/4 Responses Complete ]           [ View Responses ]              |
++----------------------------------------------------------------------+
+```
+*   **Header:** The "Sort" button is now co-located with the TPS metric. A master elapsed timer is on the far right.
+*   **Per-Response:**
+    *   Stop/Regen buttons are on the same row as the status.
+    *   A "Time to First Token" (TTFT) or other phase timer is displayed.
+*   **Footer:** Appears only when generation is complete. Shows a completion counter and the button to navigate to the new cycle.
 
-## 4. Technical Implementation Plan (C61 Revision)
+## 4. Technical Implementation Plan (C63 Revision)
 
-This feature is critically dependent on a correctly implemented end-to-end streaming architecture using Server-Sent Events (SSE).
-
-1.  **IPC (`channels.type.ts`):** The `GenerationProgress` interface will be updated to include `thinkingTokens: number`.
+1.  **IPC (`channels.type.ts`):** The `GenerationProgress` interface will be updated to include timing information, such as `startTime`, `firstTokenTime`, and `endTime` (as timestamps).
 
 2.  **Backend (`llm.service.ts`):**
-    *   The `generateBatch` method will manage the lifecycle for each response.
-    *   The `stream.on('data')` handler will be enhanced to differentiate between chunks containing `delta.reasoning_content` (thinking tokens) and `delta.content` (response tokens).
-    *   The token count from `reasoning_content` will be added to the `thinkingTokens` field for each response.
-    *   The token count from `content` will be added to the `currentTokens` field.
-    *   The `status` field for each response will be updated: `pending` -> `thinking` -> `generating` -> `complete`.
-    *   The `UpdateGenerationProgress` IPC message will send this complete state to the frontend.
+    *   The `generateBatch` method will be updated to record timestamps at each stage of the streaming process and include them in the `UpdateGenerationProgress` payload.
 
 3.  **Frontend (`GenerationProgressDisplay.tsx` & `view.scss`):**
-    *   **Component (`GenerationProgressDisplay.tsx`):** The component will be refactored to render the new three-part stacked progress bar based on `thinkingTokens`, `currentTokens`, and `totalTokens`.
-    *   **Styling (`view.scss`):** The CSS will be updated with colors for each segment (`.thinking`, `.generated`, `.unused`).
-    *   **Unused Tokens (`GenerationProgressDisplay.tsx`):** A new `<span>` or `<div>` will be added. It will be conditionally rendered with `display: block` only when the response `status` is `'complete'`. Its content will be the calculated `totalTokens - thinkingTokens - currentTokens`.
-    *   **Controls (`GenerationProgressDisplay.tsx`):** Add new buttons and their corresponding `onClick` handlers to trigger new IPC messages for sorting, stopping, and re-generating.
+    *   **Layout:** The JSX will be refactored to move the "Sort," "Stop," and "Regenerate" buttons to their new locations. All buttons will receive a consistent style class.
+    *   **Timer Logic:** The component will receive the timestamps from the backend. A `useEffect` hook with a `setInterval` will be used to calculate and display the main elapsed timer. Other timers (like TTFT) will be calculated and displayed once the relevant timestamps are received.
+    *   **Completion State:** The component will receive an `isGenerationComplete` prop. When true, it will render the new footer with the completion counter and the "View Responses" button.
 
-4.  **Parsing Logic (SSE Stream):** The backend stream consumer must correctly parse the SSE stream, expecting a JSON object with a nested `choices[0].index` field to correctly route token deltas to the right progress buffer.
+4.  **Frontend (`view.tsx`):**
+    *   The message handler for `SendBatchGenerationComplete` will no longer trigger navigation. Instead, it will set an `isGenerationComplete` state variable to `true`.
+    *   A new handler function for the "View Responses" button will be created. This function will be passed as a prop to `GenerationProgressDisplay` and will contain the logic to navigate to the new cycle.
 </file_artifact>
 
 <file path="src/Artifacts/A149. Local LLM Integration Plan.md">
@@ -22258,7 +22380,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C62 (Add generateSingle and AbortController)
+// Updated on: C63 (Add timestamps to progress updates)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -22294,7 +22416,6 @@ export class LlmService {
         let endpointUrl = '';
         let requestBody: any = {};
         
-        // This is a placeholder for a real model card setting
         const reasoningEffort = 'medium'; 
 
         switch (settings.connectionMode) {
@@ -22306,7 +22427,7 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
-                    reasoning_effort: reasoningEffort, // Add reasoning effort
+                    reasoning_effort: reasoningEffort,
                 };
                 break;
             case 'url':
@@ -22331,7 +22452,8 @@ export class LlmService {
         }
 
         const controller = new AbortController();
-        generationControllers.set(cycleData.cycleId, controller); // Use cycleId as a unique key for the batch
+        generationControllers.set(cycleData.cycleId, controller);
+        const startTime = Date.now();
 
         try {
             Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
@@ -22354,11 +22476,12 @@ export class LlmService {
             
             const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
                 responseId: i + 1,
-                promptTokens: 0, // Will be replaced by a real calculation
+                promptTokens: 0,
                 thinkingTokens: 0,
                 currentTokens: 0,
                 totalTokens: MAX_TOKENS_PER_RESPONSE,
                 status: 'pending',
+                startTime: startTime,
             }));
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
@@ -22406,7 +22529,10 @@ export class LlmService {
                                         }
                                     } else if (choice.delta) {
                                         if (choice.delta.reasoning_content !== undefined) {
-                                            if (progressData[responseIndex].status !== 'thinking') progressData[responseIndex].status = 'thinking';
+                                            if (progressData[responseIndex].status !== 'thinking') {
+                                                progressData[responseIndex].status = 'thinking';
+                                                progressData[responseIndex].thinkingStartTime = Date.now();
+                                            }
                                             const contentChunk = choice.delta.reasoning_content;
                                             const chunkTokens = Math.ceil(contentChunk.length / 4);
                                             tokensSinceLastUpdate += chunkTokens;
@@ -22414,7 +22540,10 @@ export class LlmService {
                                         }
                                         
                                         if (choice.delta.content !== undefined) {
-                                            if (progressData[responseIndex].status !== 'generating') progressData[responseIndex].status = 'generating';
+                                            if (progressData[responseIndex].status !== 'generating') {
+                                                progressData[responseIndex].status = 'generating';
+                                                progressData[responseIndex].generationStartTime = Date.now();
+                                            }
                                             const contentChunk = choice.delta.content;
                                             responseContents[responseIndex] += contentChunk;
                                             const chunkTokens = Math.ceil(contentChunk.length / 4);
@@ -25751,7 +25880,7 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C62 (Add per-tab regenerate button)
+// Updated on: C63 (Move regenerate button to tab title row and style)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
 import { TabState as OriginalTabState } from '../view';
@@ -25802,6 +25931,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                             <div className="tab-title">
                                 Resp {tabIndex}
                                 {isLoading && <VscLoading className="spinner" />}
+                                <button className="regenerate-tab-button styled-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
+                                    <VscSync />
+                                </button>
                             </div>
                             {isParsedMode && parsedData && (
                                 <div className="tab-metadata">
@@ -25809,22 +25941,10 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                                     <span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span>
                                 </div>
                             )}
-                             <button className="regenerate-tab-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
-                                <VscSync />
-                            </button>
                         </div>
                     );
                 })}
             </div>
-            {isParsedMode && (
-                <button
-                    onClick={onSortToggle}
-                    className={`sort-button ${isSortedByTokens ? 'active' : ''} ${workflowStep === 'awaitingSort' ? 'workflow-highlight' : ''}`}
-                    title="Sort responses by token count"
-                >
-                    {isSortedByTokens ? <VscListOrdered /> : <VscListUnordered />} Sort
-                </button>
-            )}
         </div>
     );
 };
@@ -26224,7 +26344,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C61 (Add styles for thinking tokens and unused count)
+// Updated on: C63 (Add styles for timer, footer, and relocated buttons)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -26508,9 +26628,24 @@ body {
     .progress-header {
         display: flex;
         justify-content: space-between;
-        font-weight: bold;
-        font-size: 13px;
-        color: var(--vscode-editor-foreground);
+        align-items: center;
+        
+        .progress-title {
+            font-weight: bold;
+            font-size: 13px;
+            color: var(--vscode-editor-foreground);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .elapsed-timer {
+            font-family: var(--vscode-editor-font-family); // Monospace for timer
+            font-weight: bold;
+        }
     }
     
     .progress-total {
@@ -26527,6 +26662,12 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .status-indicator-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
     }
 
     .status-indicator {
@@ -26603,6 +26744,16 @@ body {
         max-height: 100px;
         overflow-y: auto;
         white-space: pre-wrap;
+    }
+
+    .progress-footer {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--vscode-panel-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
     }
 }
 
@@ -26853,6 +27004,14 @@ body {
 
 .tab-title {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.regenerate-tab-button {
+    padding: 0 4px !important;
+    font-size: 12px !important;
 }
 
 .tab-metadata {
@@ -27398,7 +27557,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C62 (Implement new UI feedback and workflows)
+// Updated on: C63 (Implement timer and manual navigation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -27480,6 +27639,9 @@ const App = () => {
     const [isGenerating, setIsGenerating] = React.useState(false);
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
     const [tps, setTps] = React.useState(0);
+    const [isGenerationComplete, setIsGenerationComplete] = React.useState(false);
+    const [startTime, setStartTime] = React.useState<number | null>(null);
+    const [newlyCreatedCycleId, setNewlyCreatedCycleId] = React.useState<number | null>(null);
 
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -27651,9 +27813,9 @@ const App = () => {
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
             logger.log(`view.tsx: Batch generation complete. Setting isGenerating to false.`);
-            setIsGenerating(false);
+            setIsGenerationComplete(true);
+            setNewlyCreatedCycleId(newCycleId);
             setMaxCycle(newMaxCycle);
-            handleCycleChange(null, newCycleId);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); 
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
@@ -27671,6 +27833,8 @@ const App = () => {
         if (cycleData) {
             logger.log('view.tsx: handleGenerateResponses called. Setting isGenerating to true.');
             setGenerationProgress([]); // Clear old progress
+            setIsGenerationComplete(false);
+            setStartTime(Date.now());
             setIsGenerating(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
                 cycleData: cycleData as PcppCycle,
@@ -27689,11 +27853,19 @@ const App = () => {
             totalTokens: MAX_TOKENS_PER_RESPONSE,
             status: 'pending'
         })));
+        setIsGenerationComplete(false);
+        setStartTime(Date.now());
         setIsGenerating(true);
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
 
-    const handleRegenerateResponses = () => { window.alert("Regenerate functionality coming soon!"); };
+    const handleViewResponses = () => {
+        if (newlyCreatedCycleId !== null) {
+            setIsGenerating(false);
+            handleCycleChange(null, newlyCreatedCycleId);
+        }
+    };
+
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -27705,7 +27877,6 @@ const App = () => {
     const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
     
     const handleContextKeyDown = React.useCallback(() => {}, []);
-    const handleSortToggle = () => { if (workflowStep === 'awaitingSort') { setIsSortedByTokens(true); } else { setIsSortedByTokens(p => !p); } setSaveStatus('unsaved'); };
     const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); setSaveStatus('unsaved'); };
     
     const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); if (saveStatus !== 'saved') return; const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) newTabs[i.toString()] = { rawContent: '', parsedContent: null }; setMaxCycle(newCycleId); setCurrentCycle(newCycleId); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setSaveStatus('unsaved'); };
@@ -27737,8 +27908,11 @@ const App = () => {
                     progressData={generationProgress} 
                     tps={tps} 
                     tabs={tabs} 
-                    onStop={(id) => logger.log(`Stop clicked for ${id}`)}
+                    onStop={(id) => clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { responseId: id })}
                     onRegenerate={(id) => logger.log(`Regen clicked for ${id}`)}
+                    isGenerationComplete={isGenerationComplete}
+                    onViewResponses={handleViewResponses}
+                    startTime={startTime}
                 />;
     }
 
@@ -27779,12 +27953,7 @@ const App = () => {
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
-            return (
-                <div className="generation-controls">
-                    <button onClick={handleGenerateResponses} disabled={isGenerating} title="Generate responses from local LLM"><VscWand /> Generate responses</button>
-                    <button onClick={handleRegenerateResponses} disabled={isGenerating} title="Regenerate empty or all responses"><VscSync /> Regenerate</button>
-                </div>
-            );
+            return <button onClick={handleGenerateResponses} disabled={isGenerating} title="Generate responses from local LLM"><VscWand /> Generate responses</button>;
         }
     };
 
@@ -27796,7 +27965,7 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
 
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} onRegenerateTab={(tabId) => logger.log(`Regen tab ${tabId}`)} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={()=>{}} onRegenerateTab={(tabId) => logger.log(`Regen tab ${tabId}`)} />
         <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
         <div className="tab-content">
             <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
@@ -28250,7 +28419,7 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C62 (Add new IPC channels for regeneration)
+// Updated on: C63 (Add timestamps to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -28272,8 +28441,11 @@ export interface GenerationProgress {
     currentTokens: number;
     totalTokens: number;
     promptTokens: number;
-    thinkingTokens: number; // New: To track pre-response reasoning tokens
+    thinkingTokens: number;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    startTime?: number;
+    thinkingStartTime?: number;
+    generationStartTime?: number;
 }
 
 
@@ -29437,12 +29609,12 @@ This document serves as a living record of persistent or complex bugs that have 
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C62 (Add sort and per-response controls)
+// Updated on: C63 (Refactor layout, add timer and manual navigation)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered } from 'react-icons/vsc';
+import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
@@ -29450,12 +29622,32 @@ interface GenerationProgressDisplayProps {
     tabs: { [key: string]: TabState };
     onStop: (responseId: number) => void;
     onRegenerate: (responseId: number) => void;
+    isGenerationComplete: boolean;
+    onViewResponses: () => void;
+    startTime: number | null;
 }
 
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate }) => {
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime }) => {
     const [isSorted, setIsSorted] = React.useState(false);
+    const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
+    React.useEffect(() => {
+        if (!startTime || isGenerationComplete) {
+            return;
+        }
+
+        const interval = setInterval(() => {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = (elapsed % 60).toFixed(1);
+            setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, [startTime, isGenerationComplete]);
+
     const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
+    const completedCount = progressData.filter(p => p.status === 'complete').length;
 
     const sortedProgressData = React.useMemo(() => {
         if (!isSorted) return progressData;
@@ -29480,12 +29672,13 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     return (
         <div className="generation-progress-display">
             <div className="progress-header">
-                <span>Generating Responses...</span>
+                <span className="progress-title">Generating Responses...</span>
                 <div className="header-controls">
-                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
                     <button onClick={() => setIsSorted(s => !s)} className="styled-button" title="Sort by Total Tokens">
                         {isSorted ? <VscListOrdered/> : <VscListUnordered />}
                     </button>
+                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
+                    <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
             <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
@@ -29505,8 +29698,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
                                 </span>
-                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation"><VscStopCircle /></button>
-                                <button onClick={() => onRegenerate(p.responseId)} title="Regenerate Response"><VscSync /></button>
+                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /></button>
                             </div>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
@@ -29530,6 +29722,15 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     </div>
                 );
             })}
+
+            {isGenerationComplete && (
+                <div className="progress-footer">
+                    <span>{completedCount}/{progressData.length} Responses Complete</span>
+                    <button onClick={onViewResponses} className="styled-button">
+                        View Responses <VscArrowRight />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
