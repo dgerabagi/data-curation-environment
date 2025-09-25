@@ -1,22 +1,22 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-24T23:17:50.908Z
+  Date Generated: 2025-09-25T00:00:52.401Z
   ---
   Total Files: 189
-  Approx. Tokens: 517925
+  Approx. Tokens: 518530
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (11916 tokens)
+4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12017 tokens)
 5. src\client\views\parallel-copilot.view\view.tsx (9806 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
-7. src\client\views\parallel-copilot.view\view.scss (6414 tokens)
+7. src\client\views\parallel-copilot.view\view.scss (6477 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
-9. src\backend\services\prompt.service.ts (4978 tokens)
+9. src\backend\services\prompt.service.ts (5068 tokens)
 10. src\backend\services\file-operation.service.ts (4526 tokens)
 
 <!-- Full File List -->
@@ -112,7 +112,7 @@
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 59 - Chars: 5346 - Tokens: 1337
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 63 - Chars: 6229 - Tokens: 1558
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -145,9 +145,9 @@
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 125. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-126. src\backend\services\llm.service.ts - Lines: 191 - Chars: 8397 - Tokens: 2100
+126. src\backend\services\llm.service.ts - Lines: 192 - Chars: 8764 - Tokens: 2191
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 19910 - Tokens: 4978
+128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 20272 - Tokens: 5068
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 130. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 131. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -176,7 +176,7 @@
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
-157. src\client\views\parallel-copilot.view\view.scss - Lines: 1140 - Chars: 25655 - Tokens: 6414
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1146 - Chars: 25907 - Tokens: 6477
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
 159. src\client\views\parallel-copilot.view\view.tsx - Lines: 403 - Chars: 39221 - Tokens: 9806
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
@@ -185,7 +185,7 @@
 163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-166. src\common\ipc\channels.type.ts - Lines: 117 - Chars: 8846 - Tokens: 2212
+166. src\common\ipc\channels.type.ts - Lines: 118 - Chars: 8893 - Tokens: 2224
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -203,8 +203,8 @@
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
 182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5160 - Tokens: 1290
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 72 - Chars: 3563 - Tokens: 891
-185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 47662 - Tokens: 11916
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 73 - Chars: 3671 - Tokens: 918
+185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 48066 - Tokens: 12017
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 188. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
@@ -6392,7 +6392,7 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C59 (Update UI mockup and technical plan for color-coding and status)
+# Updated on: C60 (Update UI mockup and technical plan for color-coding and status)
 
 - **Key/Value for A0:**
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, and a tokens/second metric.
@@ -6408,45 +6408,49 @@ Generating multiple, large AI responses can take a significant amount of time. T
 |---|---|---|
 | P3-PROG-01 | **See Generation Progress** | As a user, when I click "Generate responses," I want a UI to immediately appear that shows me the progress of each response being generated, so I know the system is working and not frozen. | - When generation starts, a progress display UI is shown. <br> - It contains a separate progress bar for each of the `N` requested responses. <br> - Each progress bar updates in real-time as tokens are received. |
 | P3-PROG-02 | **See Performance Metrics** | As a user, I want to see a live "tokens per second" metric during generation, so I can gauge the performance of the LLM backend. | - The progress UI displays a "Tokens/sec" value. <br> - This value is calculated and updated periodically throughout the generation process. |
-| P3-PROG-03 | **Understand Progress Bar**| As a user, I want the progress bar to be color-coded so I can understand the allocation of tokens for the prompt versus the generated response. | - The progress bar is a stacked bar with three colors. <br> - One color represents the "thinking" (prompt) tokens. <br> - A second color represents the currently generated response tokens. <br> - A third color represents the remaining, unused tokens up to the model's maximum. |
-| P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. |
+| P3-PROG-03 | **Understand Progress Bar**| As a user, I want the progress bar to be color-coded so I can understand the allocation of tokens for the prompt versus the generated response. | - The progress bar is a stacked bar with multiple colors. <br> - One color represents the "thinking" (prompt) tokens. <br> - A second color represents the currently generated response tokens. <br> - A third color (gray) represents the remaining, unused tokens up to the model's maximum. |
+| P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. <br> - When a response is complete, the "unused" portion of its progress bar changes color to signify completion. |
 
 ## 3. UI Mockup (Textual Description)
 
 The progress UI will be a dedicated component that is conditionally rendered in the PCPP view when `isGenerating` is true.
 
 ```
-+-----------------------------------------------------------------+
-| Generating Responses...                 Tokens/sec: 1234        |
-|-----------------------------------------------------------------|
-| Total Tokens: 18,120                                            |
-|                                                                 |
-| Resp 1: [blue|green|gray] 80% (1k+5.5k/8.1k) | Status: Generating... |
-| Resp 2: [blue|green|gray] 70% (1k+4.7k/8.1k) | Status: Generating... |
-| Resp 3: [blue|gray    ] 12% (1k+0k/8.1k)     | Status: Thinking...   |
-| Resp 4: [blue|green|gray] 100% (1k+7.1k/8.1k)| Status: Complete ✓    |
-+-----------------------------------------------------------------+
-```
-*   **[blue|green|gray]**: Represents the stacked progress bar.
-    *   `blue`: Prompt/Thinking tokens.
++----------------------------------------------------------------------+
+| Generating Responses...                  Tokens/sec: 1234            |
+|----------------------------------------------------------------------|
+| Total Tokens: 18,120                                                 |
+|                                                                      |
+| Resp 1: [blue|green|gray]  80% (1k+5.5k/8.1k) | Status: Generating...|
+| Resp 2: [blue|green|gray]  70% (1k+4.7k/8.1k) | Status: Generating...|
+| Resp 3: [blue|gray      ]  12% (1k+0k/8.1k)   | Status: Thinking...  |
+| Resp 4: [blue|green|done] 100% (1k+7.1k/8.1k) | Status: Complete ✓   |
++----------------------------------------------------------------------+```
+*   **[blue|green|gray/done]**: Represents the stacked progress bar.
+    *   `blue`: "Thinking" tokens (pre-JSON stream).
     *   `green`: Generated response tokens.
     *   `gray`: Unused tokens up to the max.
+    *   `done`: A darker gray or other color indicating the response is finished and no more tokens will be generated.
 
-## 4. Technical Implementation Plan (C58 Revision)
+## 4. Technical Implementation Plan (C60 Revision)
 
 This feature is critically dependent on a correctly implemented end-to-end streaming architecture using Server-Sent Events (SSE).
 
-1.  **Backend (`prompt.service.ts`):** A new utility method will be added to calculate the token count of a given prompt string.
+1.  **IPC (`channels.type.ts`):** The `GenerationProgress` interface will be updated to include `promptTokens: number` and `status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error'`.
+
 2.  **Backend (`llm.service.ts`):**
-    *   Before sending the batch request, it will call the new prompt service utility to get the `promptTokens` count.
-    *   The `UpdateGenerationProgress` IPC payload will be enhanced to include `promptTokens` and a new `status` string for each response.
-    *   The service will manage the lifecycle of the `status` field: initializing it to `'thinking'`, changing it to `'generating'` when the first token delta for that response index is received, and changing it to `'complete'` when a `finish_reason` is received.
+    *   The `generateBatch` method will manage the lifecycle for each response.
+    *   The `stream.on('data')` handler will be enhanced to differentiate between initial unstructured "thinking" text and the structured `data: {...}` SSE messages.
+    *   The length of the initial "thinking" text will be summed and stored in the `promptTokens` field for each response.
+    *   The `status` field for each response will be updated: `pending` -> `thinking` (on first chunk) -> `generating` (on first `delta.content`) -> `complete` (on `finish_reason`).
+    *   The `UpdateGenerationProgress` IPC message will send this complete state to the frontend.
+
 3.  **Frontend (`GenerationProgressDisplay.tsx` & `view.scss`):**
-    *   The component will be refactored to receive the enhanced progress data.
-    *   It will render the progress bar as a container `div` with three child `div`s inside.
-    *   The `width` of each child `div` will be set as a percentage of the total `max_tokens` to create the stacked bar effect.
-    *   A new element will render the `status` string, with a CSS class applied to trigger an animation for the "Thinking" and "Generating" states.
-    *   A tooltip will be added to the TPS display.
+    *   **Layout (`view.scss`):** The CSS for `.generation-progress-display` will be fixed to prevent horizontal overflow, likely by ensuring it respects flexbox/grid container constraints and does not have a hardcoded minimum width.
+    *   **Component (`GenerationProgressDisplay.tsx`):** The component will be refactored to render the new three-part stacked progress bar based on `promptTokens`, `currentTokens`, and `totalTokens`.
+    *   **Styling (`view.scss`):** The CSS will be updated with the correct colors for each segment (`.thinking`, `.generated`, `.unused`). A new class, `.completed`, will be added to change the color of the `.unused` segment when the response `status` is `'complete'`.
+    *   **Status (`GenerationProgressDisplay.tsx`):** The component will render the `status` string and an appropriate icon (e.g., a spinner for thinking/generating, a checkmark for complete).
+
 4.  **Parsing Logic (SSE Stream):** The backend stream consumer must correctly parse the SSE stream, expecting a JSON object with a nested `choices[0].index` field to correctly route token deltas to the right progress buffer.
 </file_artifact>
 
@@ -18354,7 +18358,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C58 (Correct SSE index parsing)
+// Updated on: C60 (Implement thinking tokens and status tracking)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -18363,7 +18367,6 @@ import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { logger } from '@/client/utils/logger';
 
 const MAX_TOKENS_PER_RESPONSE = 8192;
 
@@ -18430,11 +18433,12 @@ export class LlmService {
                 promptTokens: 0,
                 currentTokens: 0,
                 totalTokens: MAX_TOKENS_PER_RESPONSE,
-                status: 'pending' as unknown as GenerationProgress['status'],
+                status: 'pending',
             }));
             const responseContents: string[] = Array(count).fill('');
             const finishedResponses: boolean[] = Array(count).fill(false);
             let totalFinished = 0;
+            let initialStreamReceived = false;
 
             const sendProgressUpdate = () => {
                 const now = Date.now();
@@ -18442,15 +18446,8 @@ export class LlmService {
                 if (elapsed > 0) {
                     const tps = tokensSinceLastUpdate / elapsed;
                     const chunks: { [key: number]: string } = {};
-                    responseContents.forEach((content, i) => {
-                        chunks[i + 1] = content;
-                    });
-
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, {
-                        progress: progressData,
-                        tps: Math.round(tps),
-                        chunks,
-                    });
+                    responseContents.forEach((content, i) => { chunks[i + 1] = content; });
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, { progress: progressData, tps: Math.round(tps), chunks });
                     tokensSinceLastUpdate = 0;
                     lastTpsUpdateTime = now;
                 }
@@ -18459,40 +18456,54 @@ export class LlmService {
 
             stream.on('data', (chunk) => {
                 buffer += chunk.toString();
+                
+                if (!initialStreamReceived) {
+                    initialStreamReceived = true;
+                    progressData.forEach(p => p.status = 'thinking');
+                }
+
+                if (!buffer.includes('data:')) {
+                    // This is "thinking" text before the SSE stream starts
+                    const thinkingTokens = Math.ceil(chunk.length / 4);
+                    progressData.forEach(p => p.promptTokens += thinkingTokens);
+                    tokensSinceLastUpdate += thinkingTokens;
+                    throttledSendProgress();
+                    return;
+                }
+
                 const lines = buffer.split('\n');
                 buffer = lines.pop() || '';
 
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
                         const dataStr = line.substring(6);
-                        if (dataStr.trim() === '[DONE]') {
-                            continue;
-                        }
+                        if (dataStr.trim() === '[DONE]') continue;
                         
                         try {
                             const data = JSON.parse(dataStr);
-                            // FIX C58: Correctly access the nested index property
                             const choices = data.choices;
                             if (Array.isArray(choices)) {
                                 for (const choice of choices) {
                                     const responseIndex = choice.index;
-                                    
-                                    if (responseIndex === undefined || responseIndex >= count) {
-                                        Services.loggerService.warn(`Received chunk with invalid index: ${responseIndex}`);
-                                        continue;
+                                    if (responseIndex === undefined || responseIndex >= count) continue;
+
+                                    if (progressData[responseIndex].status !== 'generating' && progressData[responseIndex].status !== 'complete') {
+                                        progressData[responseIndex].status = 'generating';
                                     }
 
                                     if (choice.finish_reason !== null) {
                                         if (!finishedResponses[responseIndex]) {
                                             Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
                                             finishedResponses[responseIndex] = true;
+                                            progressData[responseIndex].status = 'complete';
                                             totalFinished++;
                                         }
                                     } else if (choice.delta && choice.delta.content) {
                                         const contentChunk = choice.delta.content;
                                         responseContents[responseIndex] += contentChunk;
-                                        tokensSinceLastUpdate++;
-                                        progressData[responseIndex].currentTokens++;
+                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                        tokensSinceLastUpdate += chunkTokens;
+                                        progressData[responseIndex].currentTokens += chunkTokens;
                                     }
                                 }
                             }
@@ -18506,13 +18517,7 @@ export class LlmService {
 
             stream.on('end', async () => {
                 Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
-                
                 sendProgressUpdate(); // Final update
-
-                if (totalFinished < count) {
-                    Services.loggerService.warn(`Stream ended but only ${totalFinished}/${count} responses were marked as finished.`);
-                }
-
                 const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responseContents, cycleData.tabCount || 4, cycleData.cycleContext);
                 serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
             });
@@ -22273,7 +22278,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C59 (Add styles for stacked progress bar and status indicator)
+// Updated on: C60 (Add styles for completed progress bar and fix layout)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -22552,6 +22557,7 @@ body {
     flex-grow: 1;
     min-width: 0;
     overflow-y: auto;
+    box-sizing: border-box; // Fix for overflow
 
     .progress-header {
         display: flex;
@@ -22600,6 +22606,11 @@ body {
         background-color: var(--vscode-progressBar-background);
         border-radius: 4px;
         overflow: hidden;
+        
+        &.completed .unused {
+            background-color: var(--vscode-testing-iconPassed); // Definitive completion color
+            opacity: 0.4;
+        }
     }
 
     .progress-segment {
@@ -22614,7 +22625,7 @@ body {
         background-color: var(--vscode-testing-iconPassed); // Green
     }
     .progress-segment.unused {
-        background-color: transparent;
+        background-color: var(--vscode-input-background); // Gray for unused
     }
 
     .token-count-text {
@@ -24267,7 +24278,8 @@ export enum ServerToClientChannel {
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
-// Updated on: C59 (Add promptTokens and status to GenerationProgress)
+// src/common/ipc/channels.type.ts
+// Updated on: C60 (Add promptTokens and status to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -24289,7 +24301,7 @@ export interface GenerationProgress {
     currentTokens: number;
     totalTokens: number;
     promptTokens: number;
-    status: 'thinking' | 'generating' | 'complete' | 'error';
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
 }
 
 
@@ -25444,7 +25456,7 @@ This document serves as a living record of persistent or complex bugs that have 
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C59 (Implement 3-color progress bar and status indicator)
+// Updated on: C60 (Implement 3-color progress bar and status indicator)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -25471,7 +25483,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             case 'error':
                 return <>Error</>;
             default:
-                return null;
+                return <>Pending...</>;
         }
     };
 
@@ -25487,6 +25499,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const promptPct = (p.promptTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
                 const remainingPct = 100 - promptPct - generatedPct;
+                const isComplete = p.status === 'complete';
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -25496,8 +25509,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 {getStatusIndicator(p.status)}
                             </span>
                         </div>
-                        <div className="stacked-progress-bar">
-                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Prompt: ${p.promptTokens} tk`}></div>
+                        <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
+                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Thinking: ${p.promptTokens} tk`}></div>
                             <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
                             <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
                         </div>

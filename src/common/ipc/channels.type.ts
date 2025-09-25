@@ -1,4 +1,5 @@
-// Updated on: C59 (Add promptTokens and status to GenerationProgress)
+// src/common/ipc/channels.type.ts
+// Updated on: C60 (Add promptTokens and status to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -20,7 +21,7 @@ export interface GenerationProgress {
     currentTokens: number;
     totalTokens: number;
     promptTokens: number;
-    status: 'thinking' | 'generating' | 'complete' | 'error';
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
 }
 
 

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C59 (Implement 3-color progress bar and status indicator)
+// Updated on: C60 (Implement 3-color progress bar and status indicator)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -26,7 +26,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             case 'error':
                 return <>Error</>;
             default:
-                return null;
+                return <>Pending...</>;
         }
     };
 
@@ -42,6 +42,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const promptPct = (p.promptTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
                 const remainingPct = 100 - promptPct - generatedPct;
+                const isComplete = p.status === 'complete';
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -51,8 +52,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 {getStatusIndicator(p.status)}
                             </span>
                         </div>
-                        <div className="stacked-progress-bar">
-                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Prompt: ${p.promptTokens} tk`}></div>
+                        <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
+                            <div className="progress-segment thinking" style={{ width: `${promptPct}%` }} title={`Thinking: ${p.promptTokens} tk`}></div>
                             <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
                             <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
                         </div>

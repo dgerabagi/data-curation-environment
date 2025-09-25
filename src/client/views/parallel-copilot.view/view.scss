@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C59 (Add styles for stacked progress bar and status indicator)
+// Updated on: C60 (Add styles for completed progress bar and fix layout)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -278,6 +278,7 @@ body {
     flex-grow: 1;
     min-width: 0;
     overflow-y: auto;
+    box-sizing: border-box; // Fix for overflow
 
     .progress-header {
         display: flex;
@@ -326,6 +327,11 @@ body {
         background-color: var(--vscode-progressBar-background);
         border-radius: 4px;
         overflow: hidden;
+        
+        &.completed .unused {
+            background-color: var(--vscode-testing-iconPassed); // Definitive completion color
+            opacity: 0.4;
+        }
     }
 
     .progress-segment {
@@ -340,7 +346,7 @@ body {
         background-color: var(--vscode-testing-iconPassed); // Green
     }
     .progress-segment.unused {
-        background-color: transparent;
+        background-color: var(--vscode-input-background); // Gray for unused
     }
 
     .token-count-text {
