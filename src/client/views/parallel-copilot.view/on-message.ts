@@ -1,4 +1,4 @@
-// Updated on: C49 (Add handler for new onboarding channel)
+// Updated on: C62 (Add handler for single regeneration)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -15,6 +15,18 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
         await llmService.generateBatch(prompt, data.count, data.cycleData);
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
+        llmService.stopGeneration(data.responseId);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSingleRegeneration, async (data) => {
+        const cycleData = await historyService.getCycleData(data.cycleId);
+        if (cycleData) {
+            const prompt = await promptService.generatePromptString(cycleData);
+            await llmService.generateSingle(prompt, data.cycleId, data.tabId);
+        }
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {

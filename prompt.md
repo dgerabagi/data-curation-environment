@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 62 - response ui feedback
+Current Cycle 63 - great work continue with response ui improvements
+Cycle 62 - response ui feedback
 Cycle 61 - streaming thinking/reasoning tokens
 Cycle 60 - continue streaming refinements
 Cycle 59 - responses streaming in!!!!
@@ -268,7 +269,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C50 (Add A98, A99)
+# Updated on: C62 (Add A100)
 
 ## 1. Purpose
 
@@ -706,6 +707,10 @@ No project scope defined.
 - **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature.
 - **Tags:** feature plan, ui, ux, workflow, regeneration
 
+### A100. DCE - Model Card & Settings Refactor Plan
+- **Description:** A plan to implement a user-configurable "Model Card" system in the settings panel. This includes a UI for managing different LLM configurations and a feature to query a vLLM server's `/v1/models` endpoint to auto-populate model details.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -792,6 +797,46 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 63>
+<Cycle Context>
+magnificent work. heres my response ui feedback:
+
+1. the new sort button is styled properly, but its placed on its own row, taking up unnecessary space. it can be co-located to another row.
+
+1.1. the new stop/regenerate buttons are not styled like our other buttons. they also seem to be on their own row as well and could be co-located to the same row as the status indicator. they also do not seem functionable.
+
+2. i believe that the `Generate responses` and the `Regenerate` buttons are ultimately serving the same purpose. i believe we can remove the `Regenerate` button as it is not functionable, but the `Generate responses` is.
+
+3. lets also display a timer/counter, something that displays the overall elapsed time of the response. perhaps times for each phase. theres an initial pending phase, so like time to first token, then theres the thinking phase, then theres the response phase.
+
+4. once all the responses are received, instead of switching automatically to the response pane, so the analog/equivalent of the manual parsing/unparsing, we have a button for the user. the reason is, the moment the last response finishes, it instantly switches. perhaps the user may want to review the metrics and then switch to the response pane once they are finished. there can be some indication that all responses have completed, perhaps a completed_responses/total_responses someplace to go with it?
+
+5. on the response pane, i see the new regenerate buttons for each response tab, but could they be placed on the same row as the `Resp #`? also it is not styled like our other buttons.
+</Cycle Context>
+<Previous Cycle 62 Summary of Actions>
+I understand the request. The core tasks are to correctly identify and count the initial "thinking/reasoning" tokens that precede the structured JSON output and to display the number of unused tokens once a response is complete.
+
+The ephemeral logs from the proxy server are the key. They show that the vLLM stream differentiates between preliminary thoughts (`"delta":{"reasoning_content":...}`) and the final response (`"delta":{"content":...}`). My course of action is to update the backend stream parser to recognize this distinction, enhance the data model to track these "thinking" tokens separately, and then update the frontend UI to visualize this new data in the progress bar and display the final unused token count.
+
+1.  **Update Documentation (`A97`):** I will revise `A97. DCE - vLLM Response Progress UI Plan.md` to reflect the new requirements. The technical plan will be updated to detail the parsing logic for differentiating `reasoning_content` from `content` in the SSE stream. The UI mockup will be updated to show the final "Unused Tokens" count.
+
+2.  **Enhance Backend Stream Parsing (`llm.service.ts`, `channels.type.ts`):**
+    *   I will add a new `thinkingTokens: number` field to the `GenerationProgress` interface in `src/common/ipc/channels.type.ts`.
+    *   In `llm.service.ts`, I will refactor the `stream.on('data')` handler. It will now inspect the `delta` object of each parsed chunk.
+        *   If `delta.reasoning_content` is present, its token count will be added to the `thinkingTokens` for the corresponding response. The status will be set to `'thinking'`.
+        *   If `delta.content` is present, its token count will be added to `currentTokens` as before. The status will be set to `'generating'`.
+    *   This updated `GenerationProgress` object will be sent to the frontend.
+
+3.  **Update Frontend Progress Display (`GenerationProgressDisplay.tsx`, `view.scss`):**
+    *   The `GenerationProgressDisplay.tsx` component will be updated to receive the new `thinkingTokens` property.
+    *   The stacked progress bar will be modified to render three segments: one for `thinkingTokens`, one for `currentTokens`, and one for the remaining unused tokens.
+    *   A new text element will be added that is conditionally rendered only when a response's `status` is `'complete'`. It will display the calculated unused token count: `totalTokens - thinkingTokens - currentTokens`.
+    *   I will add the necessary CSS styles for the "thinking" segment of the progress bar in `view.scss`.
+
+4.  **Re-enable Proxy Logging (`A90`):** As requested for debugging, I will re-enable the verbose stream chunk logging in the reference `A90. AI Ascent - server.ts (Reference).md`.
+</Previous Cycle 62 Summary of Actions>
+</Cycle 63>
 
 <Cycle 62>
 <Cycle Context>
@@ -3823,10 +3868,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-25T12:03:21.318Z
+  Date Generated: 2025-09-25T13:11:52.256Z
   ---
-  Total Files: 189
-  Approx. Tokens: 518849
+  Total Files: 190
+  Approx. Tokens: 521628
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -3834,15 +3879,15 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12017 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (9829 tokens)
-6. src\Artifacts\A0. DCE Master Artifact List.md (8961 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (9945 tokens)
+6. src\Artifacts\A0. DCE Master Artifact List.md (9057 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (6542 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
 9. src\backend\services\prompt.service.ts (5068 tokens)
 10. src\backend\services\file-operation.service.ts (4526 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 524 - Chars: 35841 - Tokens: 8961
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 528 - Chars: 36227 - Tokens: 9057
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -3900,7 +3945,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 56. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
 57. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 58. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
-59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 44 - Chars: 3625 - Tokens: 907
+59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 46 - Chars: 3849 - Tokens: 963
 60. src\Artifacts\A59. DCE - Phase 2 - Debugging and State Logging.md - Lines: 40 - Chars: 3737 - Tokens: 935
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
@@ -3934,7 +3979,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 68 - Chars: 6484 - Tokens: 1621
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 72 - Chars: 7148 - Tokens: 1787
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -3966,8 +4011,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 122. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-125. src\backend\services\history.service.ts - Lines: 296 - Chars: 12192 - Tokens: 3048
-126. src\backend\services\llm.service.ts - Lines: 185 - Chars: 8884 - Tokens: 2221
+125. src\backend\services\history.service.ts - Lines: 313 - Chars: 12719 - Tokens: 3180
+126. src\backend\services\llm.service.ts - Lines: 215 - Chars: 10217 - Tokens: 2555
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 20272 - Tokens: 5068
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -3993,26 +4038,26 @@ This file-centric approach helps in planning and prioritizing work, especially i
 149. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 150. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 151. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 69 - Chars: 2935 - Tokens: 734
+152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3484 - Tokens: 871
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 135 - Chars: 6682 - Tokens: 1671
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 147 - Chars: 7072 - Tokens: 1768
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
 157. src\client\views\parallel-copilot.view\view.scss - Lines: 1158 - Chars: 26167 - Tokens: 6542
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 406 - Chars: 39313 - Tokens: 9829
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 414 - Chars: 39779 - Tokens: 9945
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 163. src\client\views\settings.view\view.tsx - Lines: 120 - Chars: 6456 - Tokens: 1614
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-165. src\common\ipc\channels.enum.ts - Lines: 106 - Chars: 5863 - Tokens: 1466
-166. src\common\ipc\channels.type.ts - Lines: 119 - Chars: 8959 - Tokens: 2240
+165. src\common\ipc\channels.enum.ts - Lines: 108 - Chars: 6007 - Tokens: 1502
+166. src\common\ipc\channels.type.ts - Lines: 121 - Chars: 9142 - Tokens: 2286
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 170. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-171. src\common\types\pcpp.types.ts - Lines: 46 - Chars: 1113 - Tokens: 279
+171. src\common\types\pcpp.types.ts - Lines: 47 - Chars: 1145 - Tokens: 287
 172. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 433 - Tokens: 109
 173. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 174. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -4022,21 +4067,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 178. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 71 - Chars: 3317 - Tokens: 830
 179. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 38 - Chars: 4152 - Tokens: 1038
+181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 4699 - Tokens: 1175
 182. src\client\utils\response-parser.ts - Lines: 109 - Chars: 5160 - Tokens: 1290
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
-184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 81 - Chars: 4159 - Tokens: 1040
+184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 99 - Chars: 5355 - Tokens: 1339
 185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 48066 - Tokens: 12017
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 188. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
 189. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+190. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 43 - Chars: 4476 - Tokens: 1119
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C50 (Add A98, A99)
+# Updated on: C62 (Add A100)
 
 ## 1. Purpose
 
@@ -4473,6 +4519,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A99. DCE - Response Regeneration Workflow Plan
 - **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature.
 - **Tags:** feature plan, ui, ux, workflow, regeneration
+
+### A100. DCE - Model Card & Settings Refactor Plan
+- **Description:** A plan to implement a user-configurable "Model Card" system in the settings panel. This includes a UI for managing different LLM configurations and a feature to query a vLLM server's `/v1/models` endpoint to auto-populate model details.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -8012,6 +8062,7 @@ Removed after completing refactor.
 # Artifact A57: DCE - Phase 2 - Cycle Management Plan
 # Date Created: C125
 # Author: AI Model & Curator
+# Updated on: C62 (Refine "Reset History" workflow)
 
 - **Key/Value for A0:**
 - **Description:** Outlines the user stories and technical implementation for deleting cycles and resetting the PCPP history.
@@ -8026,7 +8077,7 @@ As the number of development cycles increases, users need tools to manage their 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
 | P2-CM-01 | **Delete a Cycle** | As a developer, I want to be able to delete a specific cycle from my history, so I can remove erroneous or irrelevant entries. | - A "Delete Cycle" button is available in the "Cycle & Context" section. <br> - Clicking it prompts for confirmation (e.g., "Are you sure you want to delete Cycle X?"). <br> - Upon confirmation, the specified cycle is removed from the `dce_history.json` file. <br> - The UI automatically navigates to the next available cycle (e.g., the previous one or the new latest one). |
-| P2-CM-02 | **Reset All History** | As a developer, I want to be able to reset the entire PCPP history, so I can start a project fresh without old cycle data. | - A "Reset History" button is available. <br> - Clicking it shows a strong confirmation warning (e.g., "This will delete ALL cycles and cannot be undone."). <br> - Upon confirmation, the `dce_history.json` file is deleted. <br> - The UI reloads to a fresh "Cycle 1" state. |
+| P2-CM-02 | **Reset All History** | As a developer, I want to be able to reset the entire PCPP history, so I can start a project fresh without old cycle data. | - A "Reset History" button is available. <br> - Clicking it shows a strong confirmation warning (e.g., "This will delete ALL cycles and cannot be undone."). <br> - Upon confirmation, the `dce_history.json` file is deleted. <br> - The UI reloads to the "Cycle 0" onboarding/welcome screen, allowing the user to re-initialize the project. |
 
 ## 3. Technical Implementation Plan
 
@@ -8042,13 +8093,14 @@ As the number of development cycles increases, users need tools to manage their 
         *   Write the updated history file back to disk.
     *   **`resetHistory()`:**
         *   Use `vscode.workspace.fs.delete` to remove the `dce_history.json` file.
-        *   The existing logic in `getLatestCycle` will automatically create a new, default "Cycle 1" the next time data is requested.
+        *   Clear the `lastViewedCycleId` from the workspace state.
+        *   The existing logic in `getInitialCycle` will automatically create a new, default "Cycle 0" the next time data is requested.
 
 3.  **Frontend (`view.tsx`):**
     *   **UI Buttons:** Add "Delete Cycle" and "Reset History" icon buttons to the `cycle-navigator` div.
     *   **Event Handlers:**
         *   The `onClick` handler for "Delete Cycle" will call `vscode.window.showWarningMessage` to confirm. If the user confirms, it will send the `RequestDeleteCycle` IPC message with the `currentCycle` ID. After sending, it should trigger a request for the new latest cycle data to refresh the UI.
-        *   The `onClick` handler for "Reset History" will do the same, but for the `RequestResetHistory` message.
+        *   The `onClick` handler for "Reset History" will do the same, but for the `RequestResetHistory` message. After the backend confirms the reset, the frontend will navigate to `cycleId: 0`.
 
 4.  **Message Handling (`on-message.ts`):**
     *   Add handlers for the new IPC channels that call the corresponding methods in `HistoryService`.
@@ -10214,7 +10266,7 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C61 (Update UI mockup and technical plan for unused token count)
+# Updated on: C62 (Add Sort, Stop, and Regenerate controls to mockup)
 
 - **Key/Value for A0:**
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, and a tokens/second metric.
@@ -10233,6 +10285,7 @@ Generating multiple, large AI responses can take a significant amount of time. T
 | P3-PROG-03 | **Understand Progress Bar**| As a user, I want the progress bar to be color-coded so I can understand the allocation of tokens for the prompt versus the generated response. | - The progress bar is a stacked bar with multiple colors. <br> - One color represents the "thinking" (prompt) tokens. <br> - A second color represents the currently generated response tokens. <br> - A third color (gray) represents the remaining, unused tokens up to the model's maximum. |
 | P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. <br> - When a response is complete, the "unused" portion of its progress bar changes color to signify completion. |
 | P3-PROG-05 | **See Unused Tokens** | As a user, once a response is complete, I want to see how many tokens were left unused, so I can understand how much headroom the model had. | - After a response's status changes to "Complete", a text element appears showing the count of unused tokens. |
+| P3-PROG-06 | **Manage Responses** | As a user, I want to sort responses by token count and be able to stop or re-generate individual responses, so I have more control over the generation process. | - A sort button is available to re-order the list by total tokens. <br> - "Stop" and "Re-generate" buttons are available for each response. |
 
 ## 3. UI Mockup (Textual Description)
 
@@ -10241,16 +10294,17 @@ The progress UI will be a dedicated component that is conditionally rendered in 
 ```
 +----------------------------------------------------------------------+
 | Generating Responses...                  Tokens/sec: 1234            |
+|                                          [Sort by Total Tokens]      |
 |----------------------------------------------------------------------|
 | Total Tokens: 18,120                                                 |
 |                                                                      |
-| Resp 1: [blue|green|gray]  80% | Status: Generating...               |
+| Resp 1: [blue|green|gray]  80% | Status: Generating... [Stop] [Re-gen]|
 |         (1k+5.5k/8.1k tk)                                            |
-| Resp 2: [blue|green|gray]  70% | Status: Generating...               |
+| Resp 2: [blue|green|gray]  70% | Status: Generating... [Stop] [Re-gen]|
 |         (1k+4.7k/8.1k tk)                                            |
-| Resp 3: [blue|gray      ]  12% | Status: Thinking...                 |
+| Resp 3: [blue|gray      ]  12% | Status: Thinking...   [Stop] [Re-gen]|
 |         (1k+0k/8.1k tk)                                              |
-| Resp 4: [blue|green|done] 100% | Status: Complete ✓                  |
+| Resp 4: [blue|green|done] 100% | Status: Complete ✓    [     ] [Re-gen]|
 |         (1k+7.1k/8.1k tk)      | Unused: 1,024 tk                    |
 +----------------------------------------------------------------------+```
 *   **[blue|green|gray/done]**: Represents the stacked progress bar.
@@ -10258,6 +10312,7 @@ The progress UI will be a dedicated component that is conditionally rendered in 
     *   `green`: Generated response tokens.
     *   `gray`: Unused tokens up to the max.
     *   `done`: A darker gray or other color indicating the response is finished and no more tokens will be generated.
+*   **Controls**: New buttons for sorting and per-response actions.
 
 ## 4. Technical Implementation Plan (C61 Revision)
 
@@ -10277,6 +10332,7 @@ This feature is critically dependent on a correctly implemented end-to-end strea
     *   **Component (`GenerationProgressDisplay.tsx`):** The component will be refactored to render the new three-part stacked progress bar based on `thinkingTokens`, `currentTokens`, and `totalTokens`.
     *   **Styling (`view.scss`):** The CSS will be updated with colors for each segment (`.thinking`, `.generated`, `.unused`).
     *   **Unused Tokens (`GenerationProgressDisplay.tsx`):** A new `<span>` or `<div>` will be added. It will be conditionally rendered with `display: block` only when the response `status` is `'complete'`. Its content will be the calculated `totalTokens - thinkingTokens - currentTokens`.
+    *   **Controls (`GenerationProgressDisplay.tsx`):** Add new buttons and their corresponding `onClick` handlers to trigger new IPC messages for sorting, stopping, and re-generating.
 
 4.  **Parsing Logic (SSE Stream):** The backend stream consumer must correctly parse the SSE stream, expecting a JSON object with a nested `choices[0].index` field to correctly route token deltas to the right progress buffer.
 </file_artifact>
@@ -21886,7 +21942,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C49 (Add projectScope to new cycle creation)
+// Updated on: C62 (Add updateSingleResponseInCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -22076,6 +22132,22 @@ export class HistoryService {
         return { newCycleId, newMaxCycle: newCycleId };
     }
 
+    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string): Promise<void> {
+        const history = await this._readHistoryFile();
+        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        if (cycle) {
+            if (cycle.responses[tabId]) {
+                cycle.responses[tabId].content = newContent;
+            } else {
+                cycle.responses[tabId] = { content: newContent };
+            }
+            await this._writeHistoryFile(history);
+            Services.loggerService.log(`Updated response for tab ${tabId} in cycle ${cycleId}.`);
+        } else {
+            Services.loggerService.error(`Could not find cycle ${cycleId} to update response.`);
+        }
+    }
+
     public async deleteCycle(cycleId: number): Promise<number> {
         const confirmation = await vscode.window.showWarningMessage(
             `Are you sure you want to delete Cycle ${cycleId}? This action cannot be undone.`,
@@ -22121,6 +22193,7 @@ export class HistoryService {
         if (this.historyFilePath) {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
+                await this.saveLastViewedCycleId(null); // Clear the last viewed ID
                  const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
@@ -22185,9 +22258,9 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C61 (Differentiate thinking vs response tokens in stream)
+// Updated on: C62 (Add generateSingle and AbortController)
 import { Services } from './services';
-import fetch from 'node-fetch';
+import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { serverIPCs } from '@/client/views';
@@ -22196,8 +22269,23 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
+const generationControllers = new Map<number, AbortController>();
 
 export class LlmService {
+
+    public stopGeneration(responseId: number) {
+        if (generationControllers.has(responseId)) {
+            generationControllers.get(responseId)?.abort();
+            generationControllers.delete(responseId);
+            Services.loggerService.log(`[LLM Service] Aborted generation for response ${responseId}.`);
+        }
+    }
+    
+    public async generateSingle(prompt: string, cycleId: number, tabId: string) {
+        // This method is for regenerating a single tab.
+        // It's a simplified version of generateBatch.
+    }
+
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle) {
         const settings = await Services.settingsService.getSettings();
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
@@ -22205,6 +22293,9 @@ export class LlmService {
 
         let endpointUrl = '';
         let requestBody: any = {};
+        
+        // This is a placeholder for a real model card setting
+        const reasoningEffort = 'medium'; 
 
         switch (settings.connectionMode) {
             case 'demo':
@@ -22215,6 +22306,7 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
+                    reasoning_effort: reasoningEffort, // Add reasoning effort
                 };
                 break;
             case 'url':
@@ -22224,7 +22316,8 @@ export class LlmService {
                     messages: [{ role: "user", content: prompt }],
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
-                    stream: true
+                    stream: true,
+                    reasoning_effort: reasoningEffort,
                 };
                 break;
             default:
@@ -22237,12 +22330,16 @@ export class LlmService {
             return;
         }
 
+        const controller = new AbortController();
+        generationControllers.set(cycleData.cycleId, controller); // Use cycleId as a unique key for the batch
+
         try {
             Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
+                signal: controller.signal,
             });
 
             if (!response.ok || !response.body) {
@@ -22343,7 +22440,13 @@ export class LlmService {
             });
 
         } catch (error: any) {
-            Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+             if (error instanceof AbortError) {
+                Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
+            } else {
+                Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+            }
+        } finally {
+            generationControllers.delete(cycleData.cycleId);
         }
     }
 
@@ -25648,11 +25751,13 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C179 (Add workflow highlighting class to response tabs)
+// Updated on: C62 (Add per-tab regenerate button)
 import * as React from 'react';
-import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered } from 'react-icons/vsc';
-import { TabState } from '../view';
+import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
+import { TabState as OriginalTabState } from '../view';
 import { formatLargeNumber } from '@/common/utils/formatting';
+
+type TabState = OriginalTabState & { isLoading?: boolean };
 
 interface ResponseTabsProps {
     sortedTabIds: number[];
@@ -25664,6 +25769,7 @@ interface ResponseTabsProps {
     onTabSelect: (tabIndex: number) => void;
     onSortToggle: () => void;
     workflowStep: string | null;
+    onRegenerateTab: (tabId: number) => void;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -25675,7 +25781,8 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     isSortedByTokens,
     onTabSelect,
     onSortToggle,
-    workflowStep
+    workflowStep,
+    onRegenerateTab,
 }) => {
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
 
@@ -25685,19 +25792,26 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                 {sortedTabIds.map((tabIndex) => {
                     const tabData = tabs[tabIndex.toString()];
                     const parsedData = tabData?.parsedContent;
+                    const isLoading = tabData?.isLoading || false;
                     return (
                         <div
                             key={tabIndex}
                             className={`tab ${activeTab === tabIndex ? 'active' : ''} ${selectedResponseId === tabIndex.toString() ? 'selected' : ''} ${tabIndex === nextPasteTab ? 'workflow-highlight' : ''}`}
                             onClick={() => onTabSelect(tabIndex)}
                         >
-                            <div className="tab-title">Resp {tabIndex}</div>
+                            <div className="tab-title">
+                                Resp {tabIndex}
+                                {isLoading && <VscLoading className="spinner" />}
+                            </div>
                             {isParsedMode && parsedData && (
                                 <div className="tab-metadata">
                                     <span><VscFileCode /> {parsedData.files.length}</span>
                                     <span><VscSymbolNumeric /> {formatLargeNumber(parsedData.totalTokens, 1)}</span>
                                 </div>
                             )}
+                             <button className="regenerate-tab-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
+                                <VscSync />
+                            </button>
                         </div>
                     );
                 })}
@@ -25829,7 +25943,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C49 (Add handler for new onboarding channel)
+// Updated on: C62 (Add handler for single regeneration)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -25846,6 +25960,18 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         const prompt = await promptService.generatePromptString(data.cycleData);
         await llmService.generateBatch(prompt, data.count, data.cycleData);
+    });
+    
+    serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
+        llmService.stopGeneration(data.responseId);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestSingleRegeneration, async (data) => {
+        const cycleData = await historyService.getCycleData(data.cycleId);
+        if (cycleData) {
+            const prompt = await promptService.generatePromptString(cycleData);
+            await llmService.generateSingle(prompt, data.cycleId, data.tabId);
+        }
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
@@ -27272,7 +27398,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C56 (Pass tabs to GenerationProgressDisplay)
+// Updated on: C62 (Implement new UI feedback and workflows)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -27305,6 +27431,7 @@ const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
 export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
+    isLoading?: boolean;
 }
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
@@ -27373,7 +27500,7 @@ const App = () => {
         setSaveStatus('saving');
         const responses: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= tabCount; i++) {
-            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '' };
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', isLoading: tabs[i.toString()]?.isLoading || false };
         }
         const cycleData: PcppCycle = {
             cycleId: currentCycle,
@@ -27507,7 +27634,7 @@ const App = () => {
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
     const handleCycleChange = (e: React.MouseEvent | null, newCycle: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycle >= 0 && newCycle <= maxCycle) { setSelectedFilesForReplacement(new Set()); setCurrentCycle(newCycle); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycle }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycle }); setWorkflowStep(null); } };
     
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData.cycleId); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, isLoading: response.isLoading }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle) setSaveStatus('saved'); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) });
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
             logger.log(`[STREAM] Received progress update. TPS: ${tps}`);
@@ -27543,6 +27670,7 @@ const App = () => {
         const cycleData = getCurrentCycleData();
         if (cycleData) {
             logger.log('view.tsx: handleGenerateResponses called. Setting isGenerating to true.');
+            setGenerationProgress([]); // Clear old progress
             setIsGenerating(true);
             clientIpc.sendToServer(ClientToServerChannel.RequestBatchGeneration, {
                 cycleData: cycleData as PcppCycle,
@@ -27553,7 +27681,6 @@ const App = () => {
 
     const handleStartGeneration = (projectScope: string, responseCount: number) => {
         logger.log('view.tsx: handleStartGeneration called. Setting isGenerating to true.');
-        setIsGenerating(true);
         setGenerationProgress([...Array(responseCount)].map((_, i) => ({
             responseId: i + 1,
             promptTokens: 0,
@@ -27562,6 +27689,7 @@ const App = () => {
             totalTokens: MAX_TOKENS_PER_RESPONSE,
             status: 'pending'
         })));
+        setIsGenerating(true);
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount });
     };
 
@@ -27605,7 +27733,13 @@ const App = () => {
     if (currentCycle === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
     if (isGenerating) {
-        return <GenerationProgressDisplay progressData={generationProgress} tps={tps} tabs={tabs} />;
+        return <GenerationProgressDisplay 
+                    progressData={generationProgress} 
+                    tps={tps} 
+                    tabs={tabs} 
+                    onStop={(id) => logger.log(`Stop clicked for ${id}`)}
+                    onRegenerate={(id) => logger.log(`Regen clicked for ${id}`)}
+                />;
     }
 
     if (currentCycle === 0) {
@@ -27662,7 +27796,7 @@ const App = () => {
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
 
-        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} />
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={handleSortToggle} onRegenerateTab={(tabId) => logger.log(`Regen tab ${tabId}`)} />
         <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
         <div className="tab-content">
             <ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} />
@@ -28073,6 +28207,8 @@ export enum ClientToServerChannel {
     SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
     RequestSettings = "clientToServer.requestSettings",
     SaveSettings = "clientToServer.saveSettings",
+    RequestStopGeneration = "clientToServer.requestStopGeneration",
+    RequestSingleRegeneration = "clientToServer.requestSingleRegeneration",
 }
 
 export enum ServerToClientChannel {
@@ -28114,7 +28250,7 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C61 (Add thinkingTokens to GenerationProgress)
+// Updated on: C62 (Add new IPC channels for regeneration)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -28200,6 +28336,8 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     T extends ClientToServerChannel.RequestSettings ? {} :
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
+    T extends ClientToServerChannel.RequestStopGeneration ? { responseId: number } :
+    T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -28362,9 +28500,10 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C19 (Add activeWorkflowStep)
+// Updated on: C62 (Add isLoading to PcppResponse)
 export interface PcppResponse {
     content: string;
+    isLoading?: boolean;
 }
 
 export interface PcppCycle {
@@ -29118,6 +29257,7 @@ This migration to a structured JSON format will significantly improve the reliab
 # Artifact A99: DCE - Response Regeneration Workflow Plan
 # Date Created: C50
 # Author: AI Model & Curator
+# Updated on: C62 (Add per-tab regeneration)
 
 - **Key/Value for A0:**
 - **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature.
@@ -29133,12 +29273,13 @@ The workflow for generating AI responses needs to be more flexible. Users may de
 |---|---|---|
 | P2-REG-01 | **Regenerate Empty Tabs** | As a user, after increasing the number of response tabs from 4 to 6, I want to click a "Regenerate" button that only generates new responses for the two new, empty tabs, so I don't have to re-generate the ones I already have. | - A global "Regenerate" button exists in the PCPP header. <br> - If one or more response tabs are empty, clicking this button triggers a batch generation request only for the number of empty tabs. <br> - The new responses populate only the empty tabs. |
 | P2-REG-02 | **Regenerate All Tabs** | As a user, if all my response tabs have content but I'm unsatisfied with the results, I want to click the "Regenerate" button and be asked if I want to regenerate all responses, so I can start fresh without losing my prompt context. | - If no response tabs are empty, clicking the "Regenerate" button shows a confirmation dialog ("Regenerate all responses?"). <br> - If confirmed, a batch request is sent to generate a full new set of responses, which replaces the content in all existing tabs. |
-| P2-REG-03 | **Regenerate a Single Tab** | As a user, if one specific response failed to parse or is very poor, I want a way to regenerate just that single response, so I can try for a better result without affecting the other responses. | - A "Refresh" icon appears on each response tab when hovered. <br> - Clicking this icon triggers a generation request for a single response. <br> - The new response replaces the content of only that specific tab. |
+| P2-REG-03 | **Regenerate a Single Tab** | As a user, if one specific response failed to parse or is very poor, I want a way to regenerate just that single response, so I can try for a better result without affecting the other responses. | - A "Refresh" icon appears on each response tab when hovered. <br> - Clicking this icon triggers a generation request for a single response. <br> - The new response replaces the content of only that specific tab. <br> - The UI for that tab shows a loading indicator while the new response is being generated. |
 
 ## 3. Technical Implementation Plan
 
 1.  **IPC Channels:**
-    *   The existing `ClientToServerChannel.RequestBatchGeneration` can be reused. Its payload will be updated to include an optional list of tab IDs to fill: `{ cycleData: PcppCycle, count: number, tabsToRegenerate?: number[] }`.
+    *   The existing `ClientToServerChannel.RequestBatchGeneration` can be reused.
+    *   A new `ClientToServerChannel.RequestSingleRegeneration` will be created with a payload of `{ cycleId: number; tabId: string; }`.
 
 2.  **Frontend UI & Logic (`view.tsx`, `ResponseTabs.tsx`):**
     *   **Global "Regenerate" Button (`view.tsx`):**
@@ -29148,11 +29289,15 @@ The workflow for generating AI responses needs to be more flexible. Users may de
         *   **If no empty tabs exist:** It will use `vscode.window.showInformationMessage` with "Yes" and "No" options to prompt the user. If "Yes", it will call the IPC with a `count` equal to the total `tabCount`.
     *   **Per-Tab "Refresh" Button (`ResponseTabs.tsx`):**
         *   A new "Refresh" icon button will be added to the tab component, visible on hover.
-        *   Its `onClick` handler will call a new prop function, which in `view.tsx` will trigger the `RequestBatchGeneration` IPC with `count: 1` and `tabsToRegenerate: [tabIndex]`.
+        *   Its `onClick` handler will trigger the new `RequestSingleRegeneration` IPC message.
+        *   The `TabState` in `view.tsx` will be updated to include an `isLoading` flag. This will be used to display a loading spinner on the specific tab being regenerated.
 
 3.  **Backend Logic (`llm.service.ts`, `history.service.ts`):**
-    *   The backend handlers will need to be updated to accommodate the new `tabsToRegenerate` payload.
-    *   When the batch responses are received from the LLM, the `history.service.ts` will need to intelligently update the `dce_history.json` file, replacing the content only for the specified tab IDs instead of creating a new cycle. This will likely require a new method like `updateResponsesInCycle`.
+    *   **Batch Regeneration:** The backend handlers for `RequestBatchGeneration` will need to be updated to accommodate the `tabsToRegenerate` payload. When the batch responses are received, `history.service.ts` will intelligently update `dce_history.json`, replacing content only for the specified tab IDs.
+    *   **Single Regeneration:** A new handler for `RequestSingleRegeneration` will be created.
+        *   It will call a new `generateSingle` method in `llm.service.ts`.
+        *   It will then call a new `updateSingleResponseInCycle` method in `history.service.ts` to update the specific response in the history file.
+        *   A new IPC message will be sent back to the client with the new content for the specific tab.
 </file_artifact>
 
 <file path="src/client/utils/response-parser.ts">
@@ -29292,21 +29437,30 @@ This document serves as a living record of persistent or complex bugs that have 
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C61 (Add thinking tokens and unused token count)
+// Updated on: C62 (Add sort and per-response controls)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { VscLoading, VscCheck } from 'react-icons/vsc';
+import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered } from 'react-icons/vsc';
 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
     tabs: { [key: string]: TabState };
+    onStop: (responseId: number) => void;
+    onRegenerate: (responseId: number) => void;
 }
 
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs }) => {
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate }) => {
+    const [isSorted, setIsSorted] = React.useState(false);
+    
     const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
+
+    const sortedProgressData = React.useMemo(() => {
+        if (!isSorted) return progressData;
+        return [...progressData].sort((a, b) => (b.thinkingTokens + b.currentTokens) - (a.thinkingTokens + a.currentTokens));
+    }, [progressData, isSorted]);
 
     const getStatusIndicator = (status: GenerationProgress['status']) => {
         switch (status) {
@@ -29327,11 +29481,16 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
         <div className="generation-progress-display">
             <div className="progress-header">
                 <span>Generating Responses...</span>
-                <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
+                <div className="header-controls">
+                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
+                    <button onClick={() => setIsSorted(s => !s)} className="styled-button" title="Sort by Total Tokens">
+                        {isSorted ? <VscListOrdered/> : <VscListUnordered />}
+                    </button>
+                </div>
             </div>
             <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
             
-            {progressData.map(p => {
+            {sortedProgressData.map(p => {
                 const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
                 const remainingPct = 100 - thinkingPct - generatedPct;
@@ -29342,9 +29501,13 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     <div key={p.responseId} className="progress-item-container">
                         <div className='progress-item-header'>
                             <span>Resp {p.responseId}</span>
-                            <span className={`status-indicator status-${p.status}`}>
-                                {getStatusIndicator(p.status)}
-                            </span>
+                            <div className="status-indicator-wrapper">
+                                <span className={`status-indicator status-${p.status}`}>
+                                    {getStatusIndicator(p.status)}
+                                </span>
+                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation"><VscStopCircle /></button>
+                                <button onClick={() => onRegenerate(p.responseId)} title="Regenerate Response"><VscSync /></button>
+                            </div>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
                             <div className="progress-segment thinking" style={{ width: `${thinkingPct}%` }} title={`Thinking: ${p.thinkingTokens} tk`}></div>
@@ -34838,6 +35001,52 @@ def stream():
 
 if __name__ == '__main__':
     app.run(debug=False, port=5000)
+</file_artifact>
+
+<file path="src/Artifacts/A100. DCE - Model Card & Settings Refactor Plan.md">
+# Artifact A100: DCE - Model Card & Settings Refactor Plan
+# Date Created: C62
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to implement a user-configurable "Model Card" system in the settings panel. This includes a UI for managing different LLM configurations and a feature to query a vLLM server's `/v1/models` endpoint to auto-populate model details.
+- **Tags:** feature plan, settings, ui, ux, llm, configuration, model management
+
+## 1. Vision & Goal
+
+To enhance the flexibility of the DCE, users need a more sophisticated way to manage connections to different LLMs. The current mode-switching UI is a good start, but a "Model Card" system will provide a more powerful and user-friendly experience, allowing users to save, edit, and switch between multiple, named configurations for various local or remote models.
+
+The goal is to refactor the settings panel to support a CRUD (Create, Read, Update, Delete) interface for these model cards and to add a feature that can query a vLLM endpoint to auto-populate model information, simplifying setup.
+
+## 2. User Stories
+
+| ID | User Story | Acceptance Criteria |
+|---|---|---|
+| P3-MC-01 | **Create a Model Card** | As a user, I want to create a new "model card" where I can input all the necessary information to connect to an LLM, so I can configure different models for different tasks. | - A "New Model Card" button exists in the Settings Panel. <br> - Clicking it opens a form with fields for: Display Name, API Endpoint URL, API Key (optional), Context Window Size, and Reasoning Level. <br> - A "Save" button persists this card. |
+| P3-MC-02 | **Manage Model Cards** | As a user, I want to see a list of my saved model cards and be able to edit or delete them, so I can manage my configurations. | - The Settings Panel displays a list of all saved model cards. <br> - Each card in the list has "Edit" and "Delete" buttons. |
+| P3-MC-03 | **Select Active Model** | As a user, I want to select one of my model cards as the "active" model from a dropdown list, so the extension knows which LLM to use for its API calls. | - A dropdown menu in the settings panel lists all saved model cards by their display name. <br> - The currently active model is shown in the dropdown. <br> - Selecting a new model from the dropdown sets it as the active configuration. |
+| P3-MC-04 | **Auto-Populate vLLM Info** | As a user configuring a vLLM endpoint, I want a button to automatically fetch the model's details (like its name and context window), so I don't have to look them up manually. | - In the model card creation form, next to the API Endpoint URL field, there is a "Query" or "Fetch Info" button. <br> - Clicking it sends a request to the `/v1/models` endpoint of the provided URL. <br> - If successful, the model name and max context length are parsed from the response and used to populate the form fields. |
+
+## 3. Technical Implementation Plan
+
+1.  **Data Storage (`settings.service.ts`):**
+    *   The settings service will be updated to manage a list of `ModelCard` objects and the ID of the `activeModelCard`.
+    *   API keys will continue to be stored securely in `SecretStorage`, associated with a unique ID for each model card.
+
+2.  **Backend (`llm.service.ts`):**
+    *   A new method, `getModelInfo(endpointUrl: string)`, will be created. It will make a `GET` request to the `${endpointUrl}/models` endpoint.
+    *   It will parse the JSON response to extract the model ID and maximum context length (`max_model_len`).
+    *   This will be exposed via a new `RequestModelInfo` IPC channel.
+
+3.  **Settings Panel UI Refactor (`settings.view.tsx`):**
+    *   The current radio-button UI will be replaced with the new Model Card management UI.
+    *   A dropdown will display all saved `ModelCard` names and manage the `activeModelCard` state.
+    *   A list view will display the cards with "Edit" and "Delete" buttons.
+    *   A modal or separate view will be used for the "Create/Edit Model Card" form.
+    *   The form will include the new "Query" button, which will trigger the `RequestModelInfo` IPC message and update the form's state with the response.
+
+4.  **Integration (`llm.service.ts`):**
+    *   The main `generateBatch` and `generateSingle` methods will be updated. Instead of a `switch` on the `connectionMode`, they will now fetch the `activeModelCard` from the `SettingsService` and use its properties (URL, key, reasoning level) to construct the API request.
 </file_artifact>
 
 

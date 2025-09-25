@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C49 (Add projectScope to new cycle creation)
+// Updated on: C62 (Add updateSingleResponseInCycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -189,6 +189,22 @@ export class HistoryService {
         return { newCycleId, newMaxCycle: newCycleId };
     }
 
+    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string): Promise<void> {
+        const history = await this._readHistoryFile();
+        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        if (cycle) {
+            if (cycle.responses[tabId]) {
+                cycle.responses[tabId].content = newContent;
+            } else {
+                cycle.responses[tabId] = { content: newContent };
+            }
+            await this._writeHistoryFile(history);
+            Services.loggerService.log(`Updated response for tab ${tabId} in cycle ${cycleId}.`);
+        } else {
+            Services.loggerService.error(`Could not find cycle ${cycleId} to update response.`);
+        }
+    }
+
     public async deleteCycle(cycleId: number): Promise<number> {
         const confirmation = await vscode.window.showWarningMessage(
             `Are you sure you want to delete Cycle ${cycleId}? This action cannot be undone.`,
@@ -234,6 +250,7 @@ export class HistoryService {
         if (this.historyFilePath) {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
+                await this.saveLastViewedCycleId(null); // Clear the last viewed ID
                  const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });

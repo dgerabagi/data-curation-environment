@@ -1,7 +1,7 @@
 // src/backend/services/llm.service.ts
-// Updated on: C61 (Differentiate thinking vs response tokens in stream)
+// Updated on: C62 (Add generateSingle and AbortController)
 import { Services } from './services';
-import fetch from 'node-fetch';
+import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { serverIPCs } from '@/client/views';
@@ -10,8 +10,23 @@ import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
+const generationControllers = new Map<number, AbortController>();
 
 export class LlmService {
+
+    public stopGeneration(responseId: number) {
+        if (generationControllers.has(responseId)) {
+            generationControllers.get(responseId)?.abort();
+            generationControllers.delete(responseId);
+            Services.loggerService.log(`[LLM Service] Aborted generation for response ${responseId}.`);
+        }
+    }
+    
+    public async generateSingle(prompt: string, cycleId: number, tabId: string) {
+        // This method is for regenerating a single tab.
+        // It's a simplified version of generateBatch.
+    }
+
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle) {
         const settings = await Services.settingsService.getSettings();
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
@@ -19,6 +34,9 @@ export class LlmService {
 
         let endpointUrl = '';
         let requestBody: any = {};
+        
+        // This is a placeholder for a real model card setting
+        const reasoningEffort = 'medium'; 
 
         switch (settings.connectionMode) {
             case 'demo':
@@ -29,6 +47,7 @@ export class LlmService {
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
                     stream: true,
+                    reasoning_effort: reasoningEffort, // Add reasoning effort
                 };
                 break;
             case 'url':
@@ -38,7 +57,8 @@ export class LlmService {
                     messages: [{ role: "user", content: prompt }],
                     n: count,
                     max_tokens: MAX_TOKENS_PER_RESPONSE,
-                    stream: true
+                    stream: true,
+                    reasoning_effort: reasoningEffort,
                 };
                 break;
             default:
@@ -51,12 +71,16 @@ export class LlmService {
             return;
         }
 
+        const controller = new AbortController();
+        generationControllers.set(cycleData.cycleId, controller); // Use cycleId as a unique key for the batch
+
         try {
             Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
             const response = await fetch(endpointUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
+                signal: controller.signal,
             });
 
             if (!response.ok || !response.body) {
@@ -157,7 +181,13 @@ export class LlmService {
             });
 
         } catch (error: any) {
-            Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+             if (error instanceof AbortError) {
+                Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
+            } else {
+                Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+            }
+        } finally {
+            generationControllers.delete(cycleData.cycleId);
         }
     }
 

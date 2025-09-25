@@ -1,7 +1,8 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C19 (Add activeWorkflowStep)
+// Updated on: C62 (Add isLoading to PcppResponse)
 export interface PcppResponse {
     content: string;
+    isLoading?: boolean;
 }
 
 export interface PcppCycle {

@@ -67,6 +67,8 @@ export enum ClientToServerChannel {
     SaveLastViewedCycle = "clientToServer.saveLastViewedCycle",
     RequestSettings = "clientToServer.requestSettings",
     SaveSettings = "clientToServer.saveSettings",
+    RequestStopGeneration = "clientToServer.requestStopGeneration",
+    RequestSingleRegeneration = "clientToServer.requestSingleRegeneration",
 }
 
 export enum ServerToClientChannel {
