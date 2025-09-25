@@ -1,5 +1,5 @@
 // src/client/views/settings.view/view.tsx
-// Updated on: C64 (Implement static model card for Demo Mode)
+// Updated on: C65 (Refine static model card details)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -62,7 +62,9 @@ const App = () => {
         <div className="model-card">
             <h3><VscVm /> Demo Model Details</h3>
             <p><strong>Model:</strong> unsloth/gpt-oss-20b</p>
-            <p><strong>Context Window:</strong> 16384 tokens</p>
+            <p><strong>Total Context Window:</strong> 131,072 tokens</p>
+            <p><strong>Max Output Tokens:</strong> 16,384 tokens</p>
+            <p><strong>Reasoning Effort:</strong> Medium</p>
             <p><strong>GPU:</strong> NVIDIA RTX 3090 (24GB VRAM)</p>
             <p className="description">This model is hosted locally for demonstration purposes.</p>
         </div>

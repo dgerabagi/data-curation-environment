@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C64 (Handle JSON wrapped in markdown code fences)
+// Updated on: C65 (Add hybrid JSON/regex fallback parser)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -8,10 +8,16 @@ const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
+// Hybrid parsing regexes
+const HYBRID_SUMMARY_REGEX = /"summary"\s*:\s*"((?:\\"|[^"])*)"/;
+const HYBRID_COA_REGEX = /"course_of_action"\s*:\s*(\[[\s\S]*?\])/;
+const HYBRID_CURATOR_REGEX = /"curator_activity"\s*:\s*"((?:\\"|[^"])*)"/;
+const HYBRID_FILE_OBJ_REGEX = /\{\s*"path"\s*:\s*"((?:\\"|[^"])*)"\s*,\s*"content"\s*:\s*"((?:\\"|[^"])*)"\s*\}/g;
+
+
 export function parseResponse(rawText: string): ParsedResponse {
     let textToParse = rawText.trim();
     
-    // Handle JSON wrapped in markdown code fences
     if (textToParse.startsWith('```json')) {
         textToParse = textToParse.substring(7);
         if (textToParse.endsWith('```')) {
@@ -20,13 +26,13 @@ export function parseResponse(rawText: string): ParsedResponse {
         textToParse = textToParse.trim();
     }
 
-    // Attempt to parse as JSON first for Harmony structured output
+    // Stage 1: Attempt to parse as a single, valid JSON object
     try {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
                 path: f.path || '',
-                content: f.content || '',
+                content: (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'"),
                 tokenCount: Math.ceil((f.content || '').length / 4),
             }));
 
@@ -34,7 +40,7 @@ export function parseResponse(rawText: string): ParsedResponse {
                 ? jsonResponse.course_of_action
                     .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
                     .join('\n')
-            : jsonResponse.course_of_action;
+                : jsonResponse.course_of_action;
 
             return {
                 summary: jsonResponse.summary,
@@ -46,15 +52,47 @@ export function parseResponse(rawText: string): ParsedResponse {
             };
         }
     } catch (e) {
-        // Not a valid JSON object that matches our schema, proceed with regex parsing
+        // JSON parsing failed, proceed to hybrid/XML parsing
     }
 
-    // Fallback to existing regex-based parsing
+    // Stage 2: Hybrid JSON/Regex parsing for malformed JSON
+    const summaryMatchHybrid = textToParse.match(HYBRID_SUMMARY_REGEX);
+    const coaMatchHybrid = textToParse.match(HYBRID_COA_REGEX);
+    const curatorMatchHybrid = textToParse.match(HYBRID_CURATOR_REGEX);
+    const fileMatchesHybrid = [...textToParse.matchAll(HYBRID_FILE_OBJ_REGEX)];
+
+    if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
+        const files: ParsedFile[] = fileMatchesHybrid.map(match => {
+            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            return {
+                path: match[1] || '',
+                content: content,
+                tokenCount: Math.ceil(content.length / 4)
+            };
+        });
+
+        let courseOfAction = "Could not parse course of action.";
+        if (coaMatchHybrid?.[1]) {
+            try {
+                const coaArray = JSON.parse(coaMatchHybrid[1]);
+                courseOfAction = coaArray.map((step: any) => `* **Step ${step.step}:** ${step.description}`).join('\n');
+            } catch { /* ignore parse error */ }
+        }
+
+        return {
+            summary: (summaryMatchHybrid[1] || '').replace(/\\"/g, '"'),
+            courseOfAction,
+            curatorActivity: (curatorMatchHybrid?.[1] || '').replace(/\\"/g, '"'),
+            filesUpdated: files.map(f => f.path),
+            files,
+            totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+        };
+    }
+
+    // Stage 3: Fallback to existing XML regex-based parsing
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
-
-    let processedText = textToParse.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
-
+    let processedText = textToParse;
     const finalResponseMarker = 'assistantfinal';
     const markerIndex = processedText.indexOf(finalResponseMarker);
     if (markerIndex !== -1) {
@@ -63,16 +101,14 @@ export function parseResponse(rawText: string): ParsedResponse {
     }
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
-
     if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        const summary = `**PARSING FAILED:** Could not find a valid JSON object or XML tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
     for (const match of tagMatches) {
         const path = (match?.[1] ?? '').trim();
         let content = (match?.[2] ?? '');
-
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
             const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
@@ -94,7 +130,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const finalFiles = Array.from(fileMap.values());
     totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
-
     const summaryMatch = processedText.match(SUMMARY_REGEX);
     const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
     const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);

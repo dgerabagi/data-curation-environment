@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-25T22:48:39.967Z
+  Date Generated: 2025-09-25T23:18:36.736Z
   ---
   Total Files: 190
-  Approx. Tokens: 523694
+  Approx. Tokens: 524586
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12017 tokens)
+4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12445 tokens)
 5. src\client\views\parallel-copilot.view\view.tsx (10138 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (9057 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (7249 tokens)
@@ -182,7 +182,7 @@
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-163. src\client\views\settings.view\view.tsx - Lines: 132 - Chars: 7030 - Tokens: 1758
+163. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 108 - Chars: 6114 - Tokens: 1529
 166. src\common\ipc\channels.type.ts - Lines: 124 - Chars: 9184 - Tokens: 2296
@@ -201,15 +201,15 @@
 179. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 4742 - Tokens: 1186
-182. src\client\utils\response-parser.ts - Lines: 120 - Chars: 5385 - Tokens: 1347
+182. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
 183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
 184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 132 - Chars: 7129 - Tokens: 1783
-185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 405 - Chars: 48066 - Tokens: 12017
+185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 420 - Chars: 49779 - Tokens: 12445
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 188. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
 189. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
-190. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5181 - Tokens: 1296
+190. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -24199,7 +24199,7 @@ body {
 
 <file path="src/client/views/settings.view/view.tsx">
 // src/client/views/settings.view/view.tsx
-// Updated on: C64 (Implement static model card for Demo Mode)
+// Updated on: C65 (Refine static model card details)
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './view.scss';
@@ -24262,7 +24262,9 @@ const App = () => {
         <div className="model-card">
             <h3><VscVm /> Demo Model Details</h3>
             <p><strong>Model:</strong> unsloth/gpt-oss-20b</p>
-            <p><strong>Context Window:</strong> 16384 tokens</p>
+            <p><strong>Total Context Window:</strong> 131,072 tokens</p>
+            <p><strong>Max Output Tokens:</strong> 16,384 tokens</p>
+            <p><strong>Reasoning Effort:</strong> Medium</p>
             <p><strong>GPU:</strong> NVIDIA RTX 3090 (24GB VRAM)</p>
             <p className="description">This model is hosted locally for demonstration purposes.</p>
         </div>
@@ -25545,7 +25547,7 @@ The workflow for generating AI responses needs to be more flexible. Users may de
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C64 (Handle JSON wrapped in markdown code fences)
+// Updated on: C65 (Add hybrid JSON/regex fallback parser)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -25554,10 +25556,16 @@ const CURATOR_ACTIVITY_REGEX = /<curator_activity>([\s\S]*?)<\/curator_activity>
 const FILE_TAG_REGEX = /<file path="([^"]+)">([\s\S]*?)(?:<\/file_path>|<\/file>|<\/filepath>|<\/file_artifact>)/g;
 const CODE_FENCE_START_REGEX = /^\s*```[a-zA-Z]*\n/;
 
+// Hybrid parsing regexes
+const HYBRID_SUMMARY_REGEX = /"summary"\s*:\s*"((?:\\"|[^"])*)"/;
+const HYBRID_COA_REGEX = /"course_of_action"\s*:\s*(\[[\s\S]*?\])/;
+const HYBRID_CURATOR_REGEX = /"curator_activity"\s*:\s*"((?:\\"|[^"])*)"/;
+const HYBRID_FILE_OBJ_REGEX = /\{\s*"path"\s*:\s*"((?:\\"|[^"])*)"\s*,\s*"content"\s*:\s*"((?:\\"|[^"])*)"\s*\}/g;
+
+
 export function parseResponse(rawText: string): ParsedResponse {
     let textToParse = rawText.trim();
     
-    // Handle JSON wrapped in markdown code fences
     if (textToParse.startsWith('```json')) {
         textToParse = textToParse.substring(7);
         if (textToParse.endsWith('```')) {
@@ -25566,13 +25574,13 @@ export function parseResponse(rawText: string): ParsedResponse {
         textToParse = textToParse.trim();
     }
 
-    // Attempt to parse as JSON first for Harmony structured output
+    // Stage 1: Attempt to parse as a single, valid JSON object
     try {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
                 path: f.path || '',
-                content: f.content || '',
+                content: (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'"),
                 tokenCount: Math.ceil((f.content || '').length / 4),
             }));
 
@@ -25580,7 +25588,7 @@ export function parseResponse(rawText: string): ParsedResponse {
                 ? jsonResponse.course_of_action
                     .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
                     .join('\n')
-            : jsonResponse.course_of_action;
+                : jsonResponse.course_of_action;
 
             return {
                 summary: jsonResponse.summary,
@@ -25592,15 +25600,47 @@ export function parseResponse(rawText: string): ParsedResponse {
             };
         }
     } catch (e) {
-        // Not a valid JSON object that matches our schema, proceed with regex parsing
+        // JSON parsing failed, proceed to hybrid/XML parsing
     }
 
-    // Fallback to existing regex-based parsing
+    // Stage 2: Hybrid JSON/Regex parsing for malformed JSON
+    const summaryMatchHybrid = textToParse.match(HYBRID_SUMMARY_REGEX);
+    const coaMatchHybrid = textToParse.match(HYBRID_COA_REGEX);
+    const curatorMatchHybrid = textToParse.match(HYBRID_CURATOR_REGEX);
+    const fileMatchesHybrid = [...textToParse.matchAll(HYBRID_FILE_OBJ_REGEX)];
+
+    if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
+        const files: ParsedFile[] = fileMatchesHybrid.map(match => {
+            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            return {
+                path: match[1] || '',
+                content: content,
+                tokenCount: Math.ceil(content.length / 4)
+            };
+        });
+
+        let courseOfAction = "Could not parse course of action.";
+        if (coaMatchHybrid?.[1]) {
+            try {
+                const coaArray = JSON.parse(coaMatchHybrid[1]);
+                courseOfAction = coaArray.map((step: any) => `* **Step ${step.step}:** ${step.description}`).join('\n');
+            } catch { /* ignore parse error */ }
+        }
+
+        return {
+            summary: (summaryMatchHybrid[1] || '').replace(/\\"/g, '"'),
+            courseOfAction,
+            curatorActivity: (curatorMatchHybrid?.[1] || '').replace(/\\"/g, '"'),
+            filesUpdated: files.map(f => f.path),
+            files,
+            totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
+        };
+    }
+
+    // Stage 3: Fallback to existing XML regex-based parsing
     const fileMap = new Map<string, ParsedFile>();
     let totalTokens = 0;
-
-    let processedText = textToParse.replace(/</g, '<').replace(/>/g, '>').replace(/_/g, '_');
-
+    let processedText = textToParse;
     const finalResponseMarker = 'assistantfinal';
     const markerIndex = processedText.indexOf(finalResponseMarker);
     if (markerIndex !== -1) {
@@ -25609,16 +25649,14 @@ export function parseResponse(rawText: string): ParsedResponse {
     }
 
     const tagMatches = [...processedText.matchAll(FILE_TAG_REGEX)];
-
     if (tagMatches.length === 0 && (processedText.includes('<file path') || !processedText.match(SUMMARY_REGEX))) {
-        const summary = `**PARSING FAILED:** Could not find valid \`<file path="...">...</file_artifact>\` tags or a valid JSON object. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
+        const summary = `**PARSING FAILED:** Could not find a valid JSON object or XML tags. The response may be malformed or incomplete. Displaying raw response below.\n\n---\n\n${processedText}`;
         return { summary, courseOfAction: '', filesUpdated: [], files: [], totalTokens: Math.ceil(processedText.length / 4) };
     }
 
     for (const match of tagMatches) {
         const path = (match?.[1] ?? '').trim();
         let content = (match?.[2] ?? '');
-
         if (path) {
             content = content.replace(CODE_FENCE_START_REGEX, '');
             const patternsToRemove = [`</file_artifact>`, `</file_path>`, `</filepath>`, `</file>`, `</${path}>`, '```', '***'];
@@ -25640,7 +25678,6 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     const finalFiles = Array.from(fileMap.values());
     totalTokens = finalFiles.reduce((sum, file) => sum + file.tokenCount, 0);
-
     const summaryMatch = processedText.match(SUMMARY_REGEX);
     const courseOfActionMatch = processedText.match(COURSE_OF_ACTION_REGEX);
     const curatorActivityMatch = processedText.match(CURATOR_ACTIVITY_REGEX);
@@ -25828,7 +25865,7 @@ export default GenerationProgressDisplay;
 # Artifact A11.1: DCE - New Regression Case Studies
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C58 (Add SSE Parsing case study)
+# Updated on: C65 (Add Malformed JSON Array case study)
 
 - **Key/Value for A0:**
 - **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
@@ -25843,6 +25880,21 @@ Add new Case Studies to A11, not to this artifact. Thats the point of splitting 
 **This artifact is the historical archive for older case studies.** New, active issues should be logged in `A11. DCE - Regression Case Studies.md`. This separation keeps the primary document focused and manageable in size.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 041: Malformed JSON Array in LLM Responses
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C65
+-   **Symptom:** When using "Demo Mode" with a local vLLM, many responses fail to parse. The parser reports a generic failure, even though the response appears to be mostly correct JSON.
+-   **Root Cause Analysis (RCA):** The LLM, while correctly generating the `summary` and `course_of_action` fields, was frequently failing to generate a valid JSON array for the `files` property. Instead of a comma-separated list of objects within `[]`, it would often output a series of concatenated, independent JSON objects, sometimes with extra closing braces. This malformed structure caused the standard `JSON.parse()` call to fail.
+-   **Codified Solution & Best Practice:**
+    1.  **Implement a Hybrid Parser:** A single parsing strategy is too brittle for inconsistent LLM output. The parser was refactored into a multi-stage process.
+    2.  **Stage 1 (Strict JSON):** Attempt to parse the entire string with `JSON.parse()`. This handles the "perfect" cases.
+    3.  **Stage 2 (Hybrid Regex Fallback):** If Stage 1 fails, enter a hybrid mode. Use targeted, less-strict regular expressions to find and extract the JSON-like content of the `summary`, `course_of_action`, and `curator_activity` fields. Then, use a global regex to find all occurrences of the file object pattern (e.g., `{"path": "...", "content": "..."}`). These individually extracted, valid parts are then assembled into a valid `ParsedResponse` object.
+    4.  **Stage 3 (XML Fallback):** If both JSON-based methods fail, fall back to the original regex parser that looks for XML-style tags.
+    5.  **Best Practice:** When parsing LLM output that is intended to be structured, do not assume the structure will always be perfect. Implement a layered parsing strategy that can gracefully degrade from strict parsing (e.g., `JSON.parse`) to more flexible methods (like targeted regex) to maximize the success rate and recover as much data as possible from partially correct responses.
 
 ---
 
@@ -31294,7 +31346,7 @@ if __name__ == '__main__':
 # Artifact A100: DCE - Model Card & Settings Refactor Plan
 # Date Created: C62
 # Author: AI Model & Curator
-# Updated on: C64 (Add static model card for Demo Mode)
+# Updated on: C65 (Refine model card display details)
 
 - **Key/Value for A0:**
 - **Description:** A plan to implement a user-configurable "Model Card" system in the settings panel. This includes a UI for managing different LLM configurations and a feature to query a vLLM server's `/v1/models` endpoint to auto-populate model details. Also, specifies the display of a static model card for "Demo Mode".
@@ -31310,11 +31362,11 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 
 | ID | User Story | Acceptance Criteria |
 |---|---|---|
-| P3-MC-01 | **Create a Model Card** | As a user, I want to create a new "model card" where I can input all the necessary information to connect to an LLM, so I can configure different models for different tasks. | - A "New Model Card" button exists in the Settings Panel. <br> - Clicking it opens a form with fields for: Display Name, API Endpoint URL, API Key (optional), Context Window Size, and Reasoning Level. <br> - A "Save" button persists this card. |
+| P3-MC-01 | **Create a Model Card** | As a user, I want to create a new "model card" where I can input all the necessary information to connect to an LLM, so I can configure different models for different tasks. | - A "New Model Card" button exists in the Settings Panel. <br> - Clicking it opens a form with fields for: Display Name, API Endpoint URL, API Key (optional), Total Context Window, Max Output Tokens, and Reasoning Effort. <br> - A "Save" button persists this card. |
 | P3-MC-02 | **Manage Model Cards** | As a user, I want to see a list of my saved model cards and be able to edit or delete them, so I can manage my configurations. | - The Settings Panel displays a list of all saved model cards. <br> - Each card in the list has "Edit" and "Delete" buttons. |
 | P3-MC-03 | **Select Active Model** | As a user, I want to select one of my model cards as the "active" model from a dropdown list, so the extension knows which LLM to use for its API calls. | - A dropdown menu in the settings panel lists all saved model cards by their display name. <br> - The currently active model is shown in the dropdown. <br> - Selecting a new model from the dropdown sets it as the active configuration. |
 | P3-MC-04 | **Auto-Populate vLLM Info** | As a user configuring a vLLM endpoint, I want a button to automatically fetch the model's details (like its name and context window), so I don't have to look them up manually. | - In the model card creation form, next to the API Endpoint URL field, there is a "Query" or "Fetch Info" button. <br> - Clicking it sends a request to the `/v1/models` endpoint of the provided URL. <br> - If successful, the model name and max context length are parsed from the response and used to populate the form fields. |
-| P3-MC-05 | **Display Static Demo Model Card** | As a user in "Demo Mode," I want to see a pre-configured, read-only model card in the settings panel that provides information about the demo LLM (e.g., model name, context window, GPU), so I understand its capabilities. | - When "Demo Mode" is selected, a static, non-editable section appears. <br> - It displays "Model: unsloth/gpt-oss-20b", "Context Window: 16384 tokens", "GPU: NVIDIA RTX 3090 (24GB VRAM)". |
+| P3-MC-05 | **Display Static Demo Model Card** | As a user in "Demo Mode," I want to see a pre-configured, read-only model card in the settings panel that provides information about the demo LLM, so I understand its capabilities. | - When "Demo Mode" is selected, a static, non-editable section appears. <br> - It displays "Model: unsloth/gpt-oss-20b", "Total Context Window", "Max Output Tokens", "Reasoning Effort", and "GPU". |
 
 ## 3. Technical Implementation Plan
 
