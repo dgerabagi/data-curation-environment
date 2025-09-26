@@ -44,7 +44,8 @@ export enum ClientToServerChannel {
 
     // Phase 2: PCPP
     RequestCreatePromptFile = "clientToServer.requestCreatePromptFile",
-    RequestBatchGeneration = "clientToServer.requestBatchGeneration",
+    RequestBatchGeneration = "clientToServer.requestBatchGeneration", // Legacy, to be phased out
+    RequestNewCycleAndGenerate = "clientToServer.requestNewCycleAndGenerate", // New
     RequestInitialArtifactsAndGeneration = "clientToServer.requestInitialArtifactsAndGeneration",
     RequestRegenerateResponses = "clientToServer.requestRegenerateResponses",
     RequestFileExistence = "clientToServer.requestFileExistence",
@@ -105,4 +106,5 @@ export enum ServerToClientChannel {
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
     SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
     UpdateGenerationProgress = "serverToClient.updateGenerationProgress",
+    StartGenerationUI = "serverToClient.startGenerationUI", // New
 }

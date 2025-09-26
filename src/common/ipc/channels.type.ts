@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C63 (Add timestamps to GenerationProgress)
+// Updated on: C67 (Add status to PcppCycle)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -66,6 +66,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
     T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
     T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number } :
+    T extends ClientToServerChannel.RequestNewCycleAndGenerate ? { cycleData: PcppCycle, count: number } :
     T extends ClientToServerChannel.RequestInitialArtifactsAndGeneration ? { projectScope: string, responseCount: number } :
     T extends ClientToServerChannel.RequestRegenerateResponses ? { cycleData: PcppCycle, tabsToRegenerate: number[] } :
     T extends ClientToServerChannel.RequestFileExistence ? { paths: string[] } :
@@ -121,4 +122,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
+    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number } :
     never;

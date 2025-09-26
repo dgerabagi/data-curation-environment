@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C62 (Add isLoading to PcppResponse)
+// Updated on: C67 (Add status field)
 export interface PcppResponse {
     content: string;
     isLoading?: boolean;
@@ -23,6 +23,7 @@ export interface PcppCycle {
     cycleContextHeight?: number;
     ephemeralContextHeight?: number;
     activeWorkflowStep?: string;
+    status?: 'complete' | 'generating'; // New status field
 }
 
 export interface PcppHistoryFile {

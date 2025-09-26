@@ -1,4 +1,4 @@
-// Updated on: C66 (Refactor to handle new LLM service flow)
+// Updated on: C67 (Implement new generation workflow)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -11,23 +11,29 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
-        loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
+        loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         try {
+            // Step 1: Immediately create and save a placeholder for the new cycle
+            const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
+
+            // Step 2: Immediately tell the UI to switch to the new cycle and show the progress screen
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+
+            // Step 3: Asynchronously generate the prompt and get responses
             const prompt = await promptService.generatePromptString(data.cycleData);
-            const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
+            const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycleId });
             
-            // Create a new cycle with the received responses
-            const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(
-                responses,
-                data.cycleData.tabCount || 4,
-                data.cycleData.cycleContext
-            );
+            // Step 4: Update the placeholder cycle with the actual responses
+            await historyService.updateCycleWithResponses(newCycleId, responses);
             
+            // Step 5: Notify frontend that the entire process is complete
+            const finalHistory = await historyService.getFullHistory();
+            const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
             serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+
         } catch (error) {
-            loggerService.error(`Batch generation orchestration failed: ${error}`);
-            // Optionally, send an error message to the client
+            loggerService.error(`New generation workflow failed: ${error}`);
         }
     });
     
@@ -45,8 +51,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, async (data) => {
         try {
-            const prompt = await promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
-            // The above function now handles the LLM call internally, so no more code is needed here.
+            await promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
         } catch (error) {
             loggerService.error(`Initial artifacts and generation failed: ${error}`);
         }
@@ -95,7 +100,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestDeleteCycle, async (data) => {
-        const newMaxCycle = await historyService.deleteCycle(data.cycleId);
+        await historyService.deleteCycle(data.cycleId);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestResetHistory, () => {

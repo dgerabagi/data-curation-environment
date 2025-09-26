@@ -1,4 +1,4 @@
-// Updated on: C59 (Add getPromptTokenCount utility)
+// Updated on: C67 (Fix stale prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -99,8 +99,9 @@ ${staticContext.trim()}
     }
 
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
-        const relevantHistory = fullHistory.filter(c => c.cycleId <= currentCycleData.cycleId);
-        const cycleMap = new Map(relevantHistory.map(c => [c.cycleId, c]));
+        // Create a map of the persisted history
+        const cycleMap = new Map(fullHistory.map(c => [c.cycleId, c]));
+        // Overwrite the entry for the current cycle with the fresh data from the frontend
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
 
         const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
@@ -109,6 +110,9 @@ ${staticContext.trim()}
     
         for (const cycle of sortedHistory) {
             if (cycle.cycleId === 0) continue;
+            // Only include cycles up to and including the one being generated
+            if (cycle.cycleId > currentCycleData.cycleId) continue;
+
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -146,14 +150,17 @@ ${staticContext.trim()}
         const fullHistoryFile = await Services.historyService.getFullHistory();
         const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
         
-        const allCycles = fullHistory.filter(c => c.cycleId <= cycleData.cycleId);
+        // Create a map of persisted history and overwrite with fresh data
+        const cycleMap = new Map(fullHistory.map(c => [c.cycleId, c]));
+        cycleMap.set(cycleData.cycleId, cycleData);
+        
+        const allCycles = [...cycleMap.values()].filter(c => c.cycleId <= cycleData.cycleId);
         const sortedHistoryForOverview = [...allCycles].sort((a, b) => b.cycleId - a.cycleId);
 
         let cycleOverview = '<M2. cycle overview>\n';
-        cycleOverview += `Current Cycle ${cycleData.cycleId} - ${cycleData.title}\n`;
         for (const cycle of sortedHistoryForOverview) {
-            if (cycle.cycleId !== cycleData.cycleId) {
-                 cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
+            if (cycle.cycleId > 0) {
+                cycleOverview += `Cycle ${cycle.cycleId} - ${cycle.title}\n`;
             }
         }
         if (!cycleOverview.includes('Cycle 0')) {
@@ -161,7 +168,6 @@ ${staticContext.trim()}
         }
         cycleOverview += '</M2. cycle overview>';
        
-        
         const cyclesContent = await this._generateCyclesContent(cycleData, fullHistory);
 
         const userA0Files = await vscode.workspace.findFiles('**/*A0*Master*Artifact*List.md', '**/node_modules/**', 1);
@@ -350,10 +356,19 @@ ${staticContext.trim()}
             
             // Now, generate responses
             Services.loggerService.log(`Onboarding complete. Requesting ${responseCount} initial responses from LLM.`);
-            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount };
-            await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
+            const responses = await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
             
-            vscode.window.showInformationMessage(`Successfully generated initial artifacts and sent responses for processing.`);
+            // Create a new cycle with the received responses
+            await Services.historyService.updateCycleWithResponses(
+                1, // It will be the first real cycle
+                responses
+            );
+
+            const newCycleId = 1;
+            const newMaxCycle = 1;
+            
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate initial artifacts: ${error.message}`);

@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C66 (Add data loss prevention)
+// Updated on: C67 (Add createNewCyclePlaceholder)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -109,6 +109,7 @@ export class HistoryService {
             isSortedByTokens: false, 
             pathOverrides: {},
             activeWorkflowStep: null,
+            status: 'complete',
         };
 
         if (isFreshEnvironment) {
@@ -136,7 +137,7 @@ export class HistoryService {
         if (cycleId === 0) {
             const history = await this._readHistoryFile();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {},
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
             };
         }
 
@@ -179,33 +180,52 @@ export class HistoryService {
         }
     }
 
-    public async createNewCycleWithResponses(responses: string[], tabCount: number, projectScope?: string): Promise<{ newCycleId: number; newMaxCycle: number; }> {
+    public async createNewCyclePlaceholder(tabCount: number): Promise<{ newCycleId: number; newMaxCycle: number; }> {
         const history = await this._readHistoryFile();
-        history.projectScope = projectScope; // Save the scope with the new history
-        
         const newCycleId = (history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
 
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
-            newResponses[(i+1).toString()] = { content: responses[i] || '' };
+            newResponses[(i+1).toString()] = { content: '' };
         }
 
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'New Cycle',
+            title: `Cycle ${newCycleId} - Generating...`,
             cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
             tabCount: tabCount,
-            isParsedMode: true, // Default to parsed view for new responses
+            isParsedMode: true,
+            status: 'generating', // Set status to generating
         };
 
         history.cycles.push(newCycle);
         await this._writeHistoryFile(history);
-        Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
+        Services.loggerService.log(`Created new placeholder cycle ${newCycleId}.`);
         
         return { newCycleId, newMaxCycle: newCycleId };
+    }
+
+    public async updateCycleWithResponses(cycleId: number, responses: string[]): Promise<void> {
+        const history = await this._readHistoryFile();
+        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleId);
+
+        if (cycleIndex > -1) {
+            const cycle = history.cycles[cycleIndex];
+            cycle.status = 'complete';
+            cycle.title = `Cycle ${cycleId}`; // Reset title
+            Object.keys(cycle.responses).forEach((tabId, index) => {
+                if (responses[index]) {
+                    cycle.responses[tabId].content = responses[index];
+                }
+            });
+            await this._writeHistoryFile(history);
+            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses.`);
+        } else {
+            Services.loggerService.error(`Could not find placeholder cycle ${cycleId} to update with responses.`);
+        }
     }
 
     public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string): Promise<void> {
