@@ -1,8 +1,10 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C69 (Add Stop and Single Regen handlers)
+// Updated on: C71 (Add prompt.md write step)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
+import * as path from 'path';
+import * as vscode from 'vscode';
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService, llmService, settingsService } = Services;
@@ -17,9 +19,20 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         try {
             const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+
             const prompt = await promptService.generatePromptString(data.cycleData);
+
+            // C71 Fix: Write the generated prompt to disk for transparency and debugging
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (workspaceFolders && workspaceFolders.length > 0) {
+                const promptMdPath = path.join(workspaceFolders[0].uri.fsPath, 'prompt.md');
+                await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(prompt, 'utf-8'));
+                loggerService.log(`[on-message] Wrote generated prompt for C${data.cycleData.cycleId} to prompt.md`);
+            }
+            
             const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycleId });
             await historyService.updateCycleWithResponses(newCycleId, responses);
+            
             const finalHistory = await historyService.getFullHistory();
             const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
             serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 71 - slight progress, but still not prepping prompt.md prior to sending the prompt
+Current Cycle 72 - nice! prompt.md sent properly, now repsonse ui switching needs work
+Cycle 71 - slight progress, but still not prepping prompt.md prior to sending the prompt
 Cycle 70 - more feedback from playtesting/observations
 Cycle 69 - great progress, continue iterating this response solution
 Cycle 68 - playtest feedback/observations
@@ -809,6 +810,37 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 72>
+<Cycle Context>
+nice okay! we are sending the updated prompt.md file now. however, when i have the response ui up, and i switch my view away from and back to the response ui, like i open the prompt.md file and then switch back to the `DCE Parallel Co-Pilot` tab, the tab with the response ui, i am back to viewing my pcpp response pane and not the response ui. not only should there be a button to toggle the view in between the response pane and the response ui, but also my view should remain persistent, if when i switch away im viewing the response ui, when i switch back, thats what i should still be viewing.
+</Cycle Context>
+<Previous Cycle 71 Summary of Actions>
+I have analyzed the comprehensive feedback from Cycle 70. My course of action is to address all reported bugs and implement the requested UI enhancements to finalize the response generation workflow. This involves creating a new Universal Task Checklist to organize the work, fixing the non-functional "Stop" and "Regenerate" buttons, correcting the UI displays for token counts and status messages, and ensuring the `prompt.md` file is correctly generated as part of the automated workflow.
+
+The research confirms that `AbortController` is the standard and correct way to cancel `fetch` requests, which is the key to implementing the "Stop" functionality.
+
+1.  **Documentation First (Planning):**
+    *   I will create a new artifact, **`A102. DCE - Universal Task Checklist for Cycle 70.md`**, to formally plan and track the implementation of all feedback items from this cycle. This will serve as our guide for the upcoming work.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include this new checklist.
+
+2.  **Fix Core Workflow and Logic (T-1 from A102):**
+    *   **`prompt.md` Creation (`prompt.service.ts`):** I will modify the `generateInitialArtifactsAndResponses` method. Before making the `llmService.generateBatch` call, it will now first call `generatePromptString` and save the output to `prompt.md` in the workspace root. This aligns the automated workflow with the manual process, as requested.
+    *   **Stop Generation (`llm.service.ts`, `on-message.ts`):** I will implement the `stopGeneration` method in `llm.service.ts`. It will find the `AbortController` associated with the active generation's `cycleId` and call its `abort()` method. I will add a `try...catch` block around the `fetch` call to gracefully handle the resulting `AbortError`.
+    *   **Regenerate Response (`llm.service.ts`, `history.service.ts`):** I will fully implement the `generateSingle` method in `llm.service.ts` and the `updateSingleResponseInCycle` method in `history.service.ts` as planned in `A99`. This will enable the per-response regeneration buttons on both the progress UI and the main PCPP view.
+
+3.  **Implement UI Enhancements and Fixes (T-2 from A102):**
+    *   **`GenerationProgressDisplay.tsx`:**
+        *   I will update the token count display to render as `thinking + response = total / max`.
+        *   I will add a `<span>` with a `.token-unused` class to the "Unused" token count text.
+        *   The main title will be updated to conditionally display "Generation Complete" when `isGenerationComplete` is true.
+        *   The `onStop` and `onRegenerate` props will be correctly wired to the `onClick` handlers of their respective buttons.
+    *   **`view.tsx` (PCPP):**
+        *   I will add a "Return to Generation Progress" button to the main header. It will be conditionally rendered only when `connectionMode === 'demo'` and the latest cycle has a `status` of `'generating'`. Its `onClick` handler will navigate the user to the latest cycle.
+    *   **`view.scss`:**
+        *   I will add a new CSS rule for `.token-unused` to apply the correct blue color.
+</Previous Cycle 71 Summary of Actions>
+</Cycle 72>
 
 <Cycle 71>
 <Cycle Context>
@@ -4162,23 +4194,23 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-26T13:42:13.822Z
+  Date Generated: 2025-09-26T14:17:17.197Z
   ---
   Total Files: 187
-  Approx. Tokens: 466733
+  Approx. Tokens: 465666
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9397 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (9497 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (9165 tokens)
 4. src\client\views\parallel-copilot.view\view.scss (7204 tokens)
-5. src\backend\services\prompt.service.ts (4642 tokens)
+5. src\backend\services\prompt.service.ts (4830 tokens)
 6. src\backend\services\file-operation.service.ts (4526 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\backend\services\history.service.ts (3709 tokens)
+10. src\backend\services\history.service.ts (3796 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 532 - Chars: 36659 - Tokens: 9165
@@ -4305,10 +4337,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 122. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-125. src\backend\services\history.service.ts - Lines: 352 - Chars: 14833 - Tokens: 3709
+125. src\backend\services\history.service.ts - Lines: 352 - Chars: 15184 - Tokens: 3796
 126. src\backend\services\llm.service.ts - Lines: 242 - Chars: 12207 - Tokens: 3052
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-128. src\backend\services\prompt.service.ts - Lines: 357 - Chars: 18568 - Tokens: 4642
+128. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19318 - Tokens: 4830
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 130. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 131. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -4335,18 +4367,18 @@ This file-centric approach helps in planning and prioritizing work, especially i
 152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 74 - Chars: 3307 - Tokens: 827
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 163 - Chars: 8288 - Tokens: 2072
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 176 - Chars: 8776 - Tokens: 2194
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
 157. src\client\views\parallel-copilot.view\view.scss - Lines: 1227 - Chars: 28816 - Tokens: 7204
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 205 - Chars: 37585 - Tokens: 9397
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 214 - Chars: 37985 - Tokens: 9497
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 163. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6278 - Tokens: 1570
-166. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9364 - Tokens: 2341
+166. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9489 - Tokens: 2373
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -4365,7 +4397,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 182. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
 183. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 156 - Chars: 7749 - Tokens: 1938
 184. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-185. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 78 - Chars: 9450 - Tokens: 2363
+185. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 36 - Chars: 3065 - Tokens: 767
 186. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
 187. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3575 - Tokens: 894
 
@@ -22872,7 +22904,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C70 (Add prompt.md file generation to demo workflow)
+// Updated on: C71 (Add extensive logging for debugging stale prompts)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -22973,17 +23005,23 @@ ${staticContext.trim()}
     }
 
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
+        Services.loggerService.log(`[Prompt Gen] Generating cycles content. Current cycle ID from frontend: ${currentCycleData.cycleId}`);
         const cycleMap = new Map(fullHistory.map(c => [c.cycleId, c]));
+        
+        // Ensure the most up-to-date data from the frontend is used for the current cycle
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
-
+        Services.loggerService.log(`[Prompt Gen] Cycle map updated with fresh data for cycle ${currentCycleData.cycleId}. Context length: ${currentCycleData.cycleContext.length}`);
+        
         const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
     
         let cyclesContent = '<M6. Cycles>';
     
         for (const cycle of sortedHistory) {
             if (cycle.cycleId === 0) continue;
+            // This is the filter that ensures we only include the current cycle and past cycles
             if (cycle.cycleId > currentCycleData.cycleId) continue;
 
+            Services.loggerService.log(`[Prompt Gen] Processing Cycle ${cycle.cycleId} for M6 block.`);
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -23079,6 +23117,7 @@ ${staticContext.trim()}
     }
 
     public async generatePromptString(cycleData: PcppCycle): Promise<string> {
+        Services.loggerService.log(`[Prompt Gen] Starting prompt string generation for Cycle ${cycleData.cycleId}.`);
         const lastSelection = await Services.selectionService.getLastSelection();
         let flattenedContent = '<!-- No files selected for flattening -->';
         if (lastSelection.length > 0) {
@@ -26288,10 +26327,12 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C69 (Add Stop and Single Regen handlers)
+// Updated on: C71 (Add prompt.md write step)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
+import * as path from 'path';
+import * as vscode from 'vscode';
 
 export function onMessage(serverIpc: ServerPostMessageManager) {
     const { loggerService, promptService, fileOperationService, highlightingService, historyService, gitService, actionService, llmService, settingsService } = Services;
@@ -26306,9 +26347,20 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         try {
             const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+
             const prompt = await promptService.generatePromptString(data.cycleData);
+
+            // C71 Fix: Write the generated prompt to disk for transparency and debugging
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            if (workspaceFolders && workspaceFolders.length > 0) {
+                const promptMdPath = path.join(workspaceFolders[0].uri.fsPath, 'prompt.md');
+                await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(prompt, 'utf-8'));
+                loggerService.log(`[on-message] Wrote generated prompt for C${data.cycleData.cycleId} to prompt.md`);
+            }
+            
             const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycleId });
             await historyService.updateCycleWithResponses(newCycleId, responses);
+            
             const finalHistory = await historyService.getFullHistory();
             const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
             serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
@@ -27819,7 +27871,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C70 (Add "Return to Generation Progress" button)
+// Updated on: C71 (Add logging to auto-navigation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -27941,7 +27993,16 @@ const App = () => {
     const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycleId >= 0 && newCycleId <= maxCycle) { setSelectedFilesForReplacement(new Set()); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setWorkflowStep(null); } };
     
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, isLoading: response.isLoading }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); if (cycleData.status === 'generating') { setIsGenerating(true); setStartTime(Date.now()); } else { setIsGenerating(false); } }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle?.cycleId) setSaveStatus('saved'); }); clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) }); clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => { setGenerationProgress(progress); setTps(tps); setTabs(prevTabs => { const newTabs = { ...prevTabs }; Object.entries(chunks).forEach(([responseId, chunk]) => { const tabIndex = parseInt(responseId, 10); newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null }), rawContent: chunk }; }); return newTabs; }); }); 
-        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => { setIsGenerationComplete(true); setMaxCycle(newMaxCycle); });
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
+            logger.log(`[Auto-Nav] Received SendBatchGenerationComplete. New cycle: ${newCycleId}, Max cycle: ${newMaxCycle}`);
+            setIsGenerationComplete(true); 
+            setMaxCycle(newMaxCycle);
+            // C71 Fix: This is where the auto-navigation should happen.
+            if (newCycleId) {
+                logger.log(`[Auto-Nav] Navigating to new cycle ${newCycleId}.`);
+                handleCycleChange(null, newCycleId);
+            }
+        });
         clientIpc.onServerMessage(ServerToClientChannel.StartGenerationUI, ({ newCycleId }) => { handleCycleChange(null, newCycleId); setIsGenerating(true); setStartTime(Date.now()); setIsGenerationComplete(false); setGenerationProgress([]); });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
     }, [clientIpc, requestCostEstimation]);
@@ -29908,7 +29969,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C44 (Add vLLM Truncation case)
+# Updated on: C71 (Add Stale Prompt Context case)
 
 ## 1. Purpose
 
@@ -29920,68 +29981,27 @@ This document serves as a living record of persistent or complex bugs that have 
 
 ---
 
+### Case Study 040: Stale Prompt Context in Automated Generation Workflow
+
+-   **Artifacts Affected:** `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/on-message.ts`, `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C67, C71
+-   **Symptom:** When using the "Generate responses" button for a new cycle (e.g., Cycle 2), the responses received from the LLM are based on the context of a much older cycle (e.g., Cycle 0), completely ignoring the new information provided by the user in the current cycle (e.g., Cycle 1). Additionally, the UI fails to automatically navigate to the new cycle after generation is complete.
+-   **Root Cause Analysis (RCA):** This is a critical workflow failure with two main causes:
+    1.  **Stale Data:** The `prompt.service.ts` was not correctly combining the fresh, in-memory `cycleData` (for Cycle `N`) sent from the frontend with the full history read from disk. A logic error caused it to ignore the new `cycleContext` and build the prompt using only the older, persisted data for Cycle `N`.
+    2.  **Navigation Failure:** The frontend's message handler for `SendBatchGenerationComplete` was not reliably triggering the navigation to the new cycle (`N+1`), leaving the user on the old cycle view.
+-   **Codified Solution & Best Practice:**
+    1.  The backend handler for `RequestNewCycleAndGenerate` must use the `cycleData` from the client as the absolute source of truth for the current cycle.
+    2.  The `prompt.service.ts` must ensure its logic correctly overwrites any stale data from the history file with the fresh data from the client before assembling the prompt.
+    3.  As a best practice for transparency, the generated prompt string should be written to `prompt.md` in the workspace before being sent to the LLM.
+    4.  The frontend's `SendBatchGenerationComplete` handler must reliably call the navigation logic to switch the view to the `newCycleId`.
+
+---
+
 ### Case Study 039: vLLM Responses Truncated at Stop Token
 
 -   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
 -   **Cycles Observed:** C44
 -   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
-
----
-
-
-
-### Case Study 001: PCPP Context Textarea Instability
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/components/NumberedTextarea.tsx`, `src/client/views/parallel-copilot.view/components/ContextInputs.tsx`
--   **Cycles Observed:** C1, C2, C3, C167, C174, C1, C5
--   **Symptom:** The "Cycle Context" and "Ephemeral Context" text fields in the PCPP become unusable when a large amount of text is entered, especially when scrolling or word-wrapping is involved. The cursor's visual position desynchronizes from the actual text insertion point. The cursor may appear on the correct wrapped line, but typed characters will continue to render on a previous line, off-screen. This makes editing content impossible.
--   **Root Cause Analysis (RCA):** This bug has recurred with multiple implementations (`NumberedTextarea`, `react-simple-code-editor`). The root cause is the architectural choice of using an overlay approach to render line numbers or syntax highlighting. This involves rendering a `div` or `<pre>` block with the styled content behind a transparent `<textarea>`. The instability is caused by a synchronization failure:
-    1.  **Performance:** Re-calculating syntax highlighting and re-rendering the DOM on every single keystroke is computationally expensive for large blocks of text, causing severe input lag.
-    2.  **Synchronization Failure:** Subtle differences in CSS (`font`, `padding`, `line-height`, `word-spacing`, etc.) and the browser's rendering engine between the overlay `div` and the transparent `textarea` cause a "drift" in alignment as content grows and wraps. This leads to the cursor and text selection bugs.
--   **Codified Solution & Best Practice:**
-    1.  **Prioritize Stability:** For critical user inputs, stability and performance are more important than advanced features like line numbers or real-time syntax highlighting.
-    2.  **Simplify:** The complex overlay-based editor component in `ContextInputs.tsx` must be replaced with a standard, native `<textarea>` element.
-    3.  **Conclusion:** This change guarantees a reliable and performant text input experience. While it represents a temporary removal of a feature, it fixes a critical usability bug. A more robust implementation of a custom code editor (e.g., using Monaco or CodeMirror) can be planned for a future cycle, but the default should always be a stable, native component.
-
----
-
-### Case Study 002: FTV Flashing on PCPP Auto-Save
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`
--   **Cycles Observed:** C1, C4, C1
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads whenever the user stops typing in one of the Parallel Co-Pilot Panel's text areas.
--   **Root Cause Analysis (RCA):** The PCPP automatically saves its state to `dce_history.json` (located in the `.vscode` directory) after a brief period of inactivity. The backend `FileSystemWatcher` in `file-tree.service.ts` was configured to monitor the entire workspace for changes to trigger a refresh of the FTV. It was incorrectly reacting to the legitimate writes to the history file, treating it as a workspace change that required a full UI refresh. The initial fix was to add `.vscode` to a general exclusion pattern, but this was not specific enough.
--   **Codified Solution & Best Practice:**
-    1.  **Be Specific in Watcher Exclusions:** The file watcher logic must be highly specific about what it ignores. The fix was to add an explicit check at the beginning of the `onDidCreate` and `onDidChange` handlers to immediately ignore any event related to the exact path of the history file (`.vscode/dce_history.json`).
-    2.  **Example:** `if (normalizedPath.endsWith('.vscode/dce_history.json')) { return; }`. This prevents the watcher from reacting to the extension's own internal state changes while still correctly monitoring user-made changes to the workspace.
-    
----
-
-### Case Study 023: FTV Flashing on PCPP Auto-Save
-
--   **Artifacts Affected:** `src/backend/services/file-tree.service.ts`, `src/client/views/context-chooser.view/view.tsx`
--   **Cycles Observed:** C1, C4, C1, C179, C182, C183, C184
--   **Symptom:** The entire Data Curation file tree view (FTV) flashes or completely reloads, especially in the packaged version of the extension. Logs show a storm of `git state change` events.
--   **Root Cause Analysis (RCA):** The definitive root cause is the `repo.state.onDidChange` event listener in `file-tree.service.ts`. This listener is extremely sensitive and fires for almost any change in the repository, including internal state changes and writes to files listed in `.gitignore` (like `.vscode/dce_history.json`). The original implementation treated this event as a structural change, triggering a full, expensive rebuild of the entire file tree. This created a refresh storm that made the UI unusable.
--   **Codified Solution & Best Practice:** The architectural solution is to **decouple structural refreshes from decoration refreshes**.
-    1.  **Structural Changes:** The `FileSystemWatcher` is the source of truth for structural changes (files created, deleted, renamed). It should be the only trigger for a full tree rebuild (`triggerFullRefresh`).
-    2.  **Decoration Changes:** The `repo.state.onDidChange` event should only trigger a lightweight update. This involves creating a new `triggerDecorationsUpdate` method that solely re-calculates the Git status and problem maps and sends them to the frontend via a dedicated IPC channel.
-    3.  **Frontend State:** The frontend no longer receives Git status as part of the `FileNode` tree structure. Instead, it maintains a separate state map for Git statuses. When it receives a decoration update, it updates this map, causing a cheap re-render that applies the new styles without rebuilding the entire tree. This approach eliminates the flashing by making the most frequent update operation lightweight and non-disruptive.
-
----
-
-### Case Study 021: Stuck `Baseline` Highlight in Animated Workflow
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/git.service.ts`
--   **Cycles Observed:** C8, C9, C10, C11, C12
--   **Symptom:** In the animated workflow, after the user selects a response, the `Baseline (Commit)` button is correctly highlighted. After the user clicks it and the baseline is successfully created (confirmed via logs and Git status), the highlight remains on the `Baseline` button and does not advance to the next step (`Select All`).
--   **Root Cause Analysis (RCA):** The frontend UI, which manages the `workflowStep` state, had no reliable way of knowing when the backend Git operation was successfully completed. After an IPC message (`NotifyGitOperationResult`) was implemented, the frontend handler was still failing. The most likely cause is a **stale closure**. The `useEffect` hook that registers the message listener captures the `workflowStep` state at the time it's created. When the message arrives later, the handler's logic checks against this old, stale state (`'awaitingResponseSelect'`), not the current state (`'awaitingBaseline'`), causing the condition to fail and the state transition to be missed.
--   **Codified Solution & Best Practice:**
-    1.  **Backend (`git.service.ts`):** The `handleGitBaselineRequest` method must send a specific IPC message (`NotifyGitOperationResult`) back to the PCPP frontend upon completion with a `{ success, message }` payload.
-    2.  **Frontend (`view.tsx`):** The message listener for `NotifyGitOperationResult` must be made resilient to stale closures. The state update logic should use the **functional update form** of the state setter (e.g., `setWorkflowStep(prevStep => { ... })`). This guarantees the logic inside the setter is executed with the most recent state, allowing the condition `if (prevStep === 'awaitingBaseline')` to pass correctly and reliably transition the workflow to the next step (`'awaitingFileSelect'`).
-    3.  **Workflow Progression:** The rest of the workflow steps (`Select All` -> `Accept Selected` -> `Generate prompt.md` -> `+`) must be driven by subsequent user actions or state changes, each correctly transitioning the `workflowStep` state as defined in `A69`.
-
----
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">

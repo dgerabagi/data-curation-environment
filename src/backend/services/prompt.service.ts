@@ -1,4 +1,4 @@
-// Updated on: C70 (Add prompt.md file generation to demo workflow)
+// Updated on: C71 (Add extensive logging for debugging stale prompts)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -99,17 +99,23 @@ ${staticContext.trim()}
     }
 
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
+        Services.loggerService.log(`[Prompt Gen] Generating cycles content. Current cycle ID from frontend: ${currentCycleData.cycleId}`);
         const cycleMap = new Map(fullHistory.map(c => [c.cycleId, c]));
+        
+        // Ensure the most up-to-date data from the frontend is used for the current cycle
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
-
+        Services.loggerService.log(`[Prompt Gen] Cycle map updated with fresh data for cycle ${currentCycleData.cycleId}. Context length: ${currentCycleData.cycleContext.length}`);
+        
         const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
     
         let cyclesContent = '<M6. Cycles>';
     
         for (const cycle of sortedHistory) {
             if (cycle.cycleId === 0) continue;
+            // This is the filter that ensures we only include the current cycle and past cycles
             if (cycle.cycleId > currentCycleData.cycleId) continue;
 
+            Services.loggerService.log(`[Prompt Gen] Processing Cycle ${cycle.cycleId} for M6 block.`);
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
     
             if (cycle.cycleContext && cycle.cycleContext.trim()) {
@@ -205,6 +211,7 @@ ${staticContext.trim()}
     }
 
     public async generatePromptString(cycleData: PcppCycle): Promise<string> {
+        Services.loggerService.log(`[Prompt Gen] Starting prompt string generation for Cycle ${cycleData.cycleId}.`);
         const lastSelection = await Services.selectionService.getLastSelection();
         let flattenedContent = '<!-- No files selected for flattening -->';
         if (lastSelection.length > 0) {
