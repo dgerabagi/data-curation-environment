@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C64 (Refactor layout, add timer and manual navigation)
+// Updated on: C68 (Implement all UI fixes and enhancements)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -10,15 +10,18 @@ interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
     tabs: { [key: string]: TabState };
-    onStop: (responseId: number) => void;
+    onStop: (cycleId: number) => void;
     onRegenerate: (responseId: number) => void;
     isGenerationComplete: boolean;
     onViewResponses: () => void;
     startTime: number | null;
+    cycleId: number;
 }
 
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime }) => {
-    const [isSorted, setIsSorted] = React.useState(false);
+type SortMode = 'default' | 'total' | 'response';
+
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime, cycleId }) => {
+    const [sortMode, setSortMode] = React.useState<SortMode>('default');
     const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
     React.useEffect(() => {
@@ -40,9 +43,32 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     const completedCount = progressData.filter(p => p.status === 'complete').length;
 
     const sortedProgressData = React.useMemo(() => {
-        if (!isSorted) return progressData;
-        return [...progressData].sort((a, b) => (b.thinkingTokens + b.currentTokens) - (a.thinkingTokens + a.currentTokens));
-    }, [progressData, isSorted]);
+        const data = [...progressData];
+        if (sortMode === 'default') {
+            return data.sort((a,b) => a.responseId - b.responseId);
+        }
+        if (sortMode === 'total') {
+            return data.sort((a, b) => (b.thinkingTokens + b.currentTokens) - (a.thinkingTokens + a.currentTokens));
+        }
+        if (sortMode === 'response') {
+            return data.sort((a, b) => b.currentTokens - a.currentTokens);
+        }
+        return data;
+    }, [progressData, sortMode]);
+
+    const handleSortToggle = () => {
+        setSortMode(current => {
+            if (current === 'default') return 'total';
+            if (current === 'total') return 'response';
+            return 'default';
+        });
+    };
+
+    const getSortButtonText = () => {
+        if (sortMode === 'total') return 'Sort by Response Tk';
+        if (sortMode === 'response') return 'Default Sort';
+        return 'Sort by Total Tk';
+    };
 
     const getStatusIndicator = (status: GenerationProgress['status']) => {
         switch (status) {
@@ -64,14 +90,19 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             <div className="progress-header">
                 <span className="progress-title">Generating Responses...</span>
                 <div className="header-controls">
-                    <button onClick={() => setIsSorted(s => !s)} className="sort-button" title="Sort by Total Tokens">
-                        {isSorted ? <VscListOrdered/> : <VscListUnordered />} Sort
+                    <button onClick={handleSortToggle} className="sort-button" title={getSortButtonText()}>
+                        <VscListOrdered/> {getSortButtonText()}
                     </button>
                     <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
                     <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
-            <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
+            <div className="progress-total">
+                Total Tokens: (
+                <span className="token-thinking">{formatLargeNumber(progressData.reduce((s, p) => s + p.thinkingTokens, 0), 0)}</span> + 
+                <span className="token-response">{formatLargeNumber(progressData.reduce((s, p) => s + p.currentTokens, 0), 0)}</span> / 
+                {formatLargeNumber(progressData.reduce((s, p) => s + p.totalTokens, 0), 0)} tk)
+            </div>
             
             {sortedProgressData.map(p => {
                 const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
@@ -81,7 +112,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
                 const timeToFirstToken = (p.generationStartTime && p.startTime) ? (p.generationStartTime - p.startTime) / 1000 : null;
 
-
                 return (
                     <div key={p.responseId} className="progress-item-container">
                         <div className='progress-item-header'>
@@ -90,7 +120,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
                                 </span>
-                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
+                                <button onClick={() => onStop(cycleId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
                                 <button onClick={() => onRegenerate(p.responseId)} disabled={p.status === 'thinking' || p.status === 'generating'} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
                             </div>
                         </div>
@@ -101,10 +131,12 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                         </div>
                         <div className="token-count-footer">
                             <span className="token-count-text">
-                                ({formatLargeNumber(p.thinkingTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                                (<span className="token-thinking">{formatLargeNumber(p.thinkingTokens, 0)}</span> + 
+                                <span className="token-response">{formatLargeNumber(p.currentTokens, 0)}</span> / 
+                                {formatLargeNumber(p.totalTokens, 0)} tk)
                             </span>
                             {isComplete && (
-                                <span className="unused-tokens-display">
+                                <span className="unused-tokens-display token-unused">
                                     Unused: {formatLargeNumber(unusedTokens, 0)} tk
                                 </span>
                             )}

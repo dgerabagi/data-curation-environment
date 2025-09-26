@@ -1,4 +1,4 @@
-// Updated on: C67 (Fix stale prompt generation)
+// Updated on: C68 (Refactor onboarding to Create-Then-Generate)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -99,9 +99,7 @@ ${staticContext.trim()}
     }
 
     private async _generateCyclesContent(currentCycleData: PcppCycle, fullHistory: PcppCycle[]): Promise<string> {
-        // Create a map of the persisted history
         const cycleMap = new Map(fullHistory.map(c => [c.cycleId, c]));
-        // Overwrite the entry for the current cycle with the fresh data from the frontend
         cycleMap.set(currentCycleData.cycleId, currentCycleData);
 
         const sortedHistory = [...cycleMap.values()].sort((a, b) => b.cycleId - a.cycleId);
@@ -110,7 +108,6 @@ ${staticContext.trim()}
     
         for (const cycle of sortedHistory) {
             if (cycle.cycleId === 0) continue;
-            // Only include cycles up to and including the one being generated
             if (cycle.cycleId > currentCycleData.cycleId) continue;
 
             cyclesContent += `\n\n<Cycle ${cycle.cycleId}>\n`;
@@ -150,7 +147,6 @@ ${staticContext.trim()}
         const fullHistoryFile = await Services.historyService.getFullHistory();
         const fullHistory: PcppCycle[] = fullHistoryFile.cycles;
         
-        // Create a map of persisted history and overwrite with fresh data
         const cycleMap = new Map(fullHistory.map(c => [c.cycleId, c]));
         cycleMap.set(cycleData.cycleId, cycleData);
         
@@ -322,52 +318,33 @@ ${staticContext.trim()}
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
         }
-        const rootPath = this.workspaceRoot;
-        const promptMdPath = path.join(rootPath, 'prompt.md');
-        const artifactsDirInWorkspace = path.join(rootPath, 'src', 'Artifacts');
         
         try {
-            Services.loggerService.log("Generating Cycle 0 prompt.md file...");
+            Services.loggerService.log("Generating Cycle 0 prompt and starting generation...");
             await Services.historyService.saveProjectScope(projectScope);
+            
+            // Create-Then-Generate Pattern
+            const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
 
-            // ... (rest of the prompt generation logic from generateCycle0Prompt)
-            const cycle0Content = await this._generateCycle0Content();
-            const settings = await Services.settingsService.getSettings();
-            const schemaArtifact = settings.connectionMode === 'demo' ? 'A52.3 DCE - Harmony Interaction Schema Source.md' : 'A52.2 DCE - Interaction Schema Source.md';
-            const schemaError = settings.connectionMode === 'demo' ? '<!-- A52.3 Harmony Schema not found -->' : '<!-- A52.2 Interaction Schema Source not found -->';
-            const schemaSourceContent = await this.getArtifactContent(schemaArtifact, schemaError);
-            let interactionSchemaContent = `<M3. Interaction Schema>\n${schemaSourceContent}\n`;
-            if (settings.connectionMode !== 'demo') {
-                const a52_1_Content = await this.getArtifactContent('A52.1 DCE - Parser Logic and AI Guidance.md', '<!-- A52.1 Parser Logic not found -->');
-                interactionSchemaContent += `\n${a52_1_Content}\n`;
-            }
-            interactionSchemaContent += '</M3. Interaction Schema>';
-            const projectScopeContent = `<M4. current project scope>\n${projectScope}\n</M4. current project scope>`;
+            const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
-            const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome to the Data Curation Environment!');
+            
+            const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome!');
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-            const readmeFileContent = `<file path="src/Artifacts/DCE_README.md">\n${readmeContent}\n</file_artifact>`;
-            const flattenedRepoContent = `<M7. Flattened Repo>\n${readmeFileContent}\n</M7. Flattened Repo>`;
-            const promptParts = [ this.artifactSchemaTemplate, `<M2. cycle overview>\nCurrent Cycle 0 - Project Initialization\n</M2. cycle overview>`, interactionSchemaContent, projectScopeContent, `<M5. organized artifacts list>\n# No artifacts exist yet.\n</M5. organized artifacts list>`, `<M6. Cycles>\n${cycle0Content}\n</M6. Cycles>`, flattenedRepoContent ];
-            const promptContent = promptParts.join('\n\n');
-            const finalPrompt = `<prompt.md>\n\n${promptContent}\n\n</prompt.md>`;
-            await vscode.workspace.fs.writeFile(vscode.Uri.file(promptMdPath), Buffer.from(finalPrompt, 'utf-8'));
             
-            // Now, generate responses
-            Services.loggerService.log(`Onboarding complete. Requesting ${responseCount} initial responses from LLM.`);
             const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
-            const responses = await Services.llmService.generateBatch(finalPrompt, responseCount, dummyCycleData);
+            const prompt = await this.generatePromptString(dummyCycleData);
             
-            // Create a new cycle with the received responses
-            await Services.historyService.updateCycleWithResponses(
-                1, // It will be the first real cycle
-                responses
-            );
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
 
-            const newCycleId = 1;
-            const newMaxCycle = 1;
+            const responses = await Services.llmService.generateBatch(prompt, responseCount, { ...dummyCycleData, cycleId: newCycleId });
             
+            await Services.historyService.updateCycleWithResponses(newCycleId, responses);
+            
+            const finalHistory = await Services.historyService.getFullHistory();
+            const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
             serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
 
         } catch (error: any) {

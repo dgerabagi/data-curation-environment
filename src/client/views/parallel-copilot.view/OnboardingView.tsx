@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C53 (Adjust layout for split view)
+// Updated on: C68 (Refactor to use new backend-driven workflow)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -15,7 +15,6 @@ interface OnboardingViewProps {
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
     onStartGeneration: (projectScope: string, responseCount: number) => void;
-    isGenerating: boolean; // New prop to control layout
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -30,8 +29,7 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration, isGenerating }) => {
-    const [isGeneratingLocal, setIsGeneratingLocal] = React.useState(false);
+const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
     const [promptGenerated, setPromptGenerated] = React.useState(false);
     const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -44,13 +42,9 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                 logger.log(`OnboardingView: Generate button clicked. Calling onStartGeneration prop with ${responseCount} responses.`);
                 onStartGeneration(projectScope, responseCount);
             } else {
-                setIsGeneratingLocal(true);
                 logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
                 clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle: 'Initial Artifacts', currentCycle: 0, selectedFiles: [] });
-                setTimeout(() => {
-                    setIsGeneratingLocal(false);
-                    setPromptGenerated(true);
-                }, 1500);
+                setPromptGenerated(true);
             }
         }
     };
@@ -62,9 +56,8 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
 
     const buttonText = connectionMode === 'demo' ? 'Generate Initial Responses' : 'Generate Initial Artifacts Prompt';
 
-    // When generating, the view stays visible but might have a different layout controlled by the parent
     return (
-        <div className={`onboarding-container ${isGenerating ? 'generating' : ''}`}>
+        <div className={`onboarding-container`}>
             <h1>{isNavigatingBack ? 'Edit Project Plan' : 'Welcome to the Data Curation Environment!'}</h1>
             <p>
                 {isNavigatingBack 
@@ -82,7 +75,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                     placeholder="e.g., I want to build a web application that allows users to track their daily habits..."
                     value={projectScope}
                     onChange={(e) => onScopeChange(e.target.value)}
-                    disabled={isGeneratingLocal || (promptGenerated && !isNavigatingBack) || isGenerating}
+                    disabled={(promptGenerated && !isNavigatingBack)}
                 />
             </div>
             {isNavigatingBack ? (
@@ -100,16 +93,15 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                                 min="1" max="20" 
                                 value={responseCount} 
                                 onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
-                                disabled={isGenerating}
                             />
                         </div>
                     )}
                     <button 
                         className={`styled-button ${workflowStep === 'awaitingGenerateInitialPrompt' ? 'workflow-highlight' : ''}`}
                         onClick={handleGenerate} 
-                        disabled={!projectScope.trim() || isGeneratingLocal || isGenerating}
+                        disabled={!projectScope.trim()}
                     >
-                        <VscRocket /> {isGeneratingLocal || isGenerating ? 'Generating...' : buttonText}
+                        <VscRocket /> {buttonText}
                     </button>
                 </div>
             ) : (

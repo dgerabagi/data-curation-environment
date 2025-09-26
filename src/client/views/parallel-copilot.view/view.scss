@@ -1,5 +1,5 @@
 /* src/client/views/parallel-copilot.view/view.scss */
-// Updated on: C64 (Style refinements for generation progress and tabs)
+// Updated on: C68 (Add color styles for token counts)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -91,21 +91,6 @@ body {
     }
 }
 
-.onboarding-split-view {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    &.active {
-        .onboarding-container {
-            flex-basis: 50%;
-            border-right: 1px solid var(--vscode-panel-border);
-        }
-        .generation-progress-display {
-            flex-basis: 50%;
-        }
-    }
-}
-
 .onboarding-container {
     padding: 16px;
     display: flex;
@@ -114,12 +99,6 @@ body {
     gap: 16px;
     box-sizing: border-box;
     overflow-y: auto;
-    
-    &.generating {
-        // Styles for when it's part of the split view
-        flex-grow: 1;
-        min-width: 0;
-    }
 
     h1 {
         font-size: 1.5em;
@@ -1231,5 +1210,17 @@ body {
             opacity: 0.5;
             cursor: not-allowed;
         }
+    }
+}
+
+.token-count-text {
+    .token-thinking {
+        color: var(--vscode-testing-iconQueued); // Blue/Purple
+    }
+    .token-response {
+        color: var(--vscode-testing-iconPassed); // Green
+    }
+    .token-unused {
+        color: var(--vscode-descriptionForeground); // Gray
     }
 }

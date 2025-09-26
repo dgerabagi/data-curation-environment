@@ -1,4 +1,4 @@
-// Updated on: C67 (Implement new generation workflow)
+// Updated on: C68 (Add Stop Generation handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -14,38 +14,31 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         try {
-            // Step 1: Immediately create and save a placeholder for the new cycle
             const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
-
-            // Step 2: Immediately tell the UI to switch to the new cycle and show the progress screen
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
-
-            // Step 3: Asynchronously generate the prompt and get responses
             const prompt = await promptService.generatePromptString(data.cycleData);
             const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycleId });
-            
-            // Step 4: Update the placeholder cycle with the actual responses
             await historyService.updateCycleWithResponses(newCycleId, responses);
-            
-            // Step 5: Notify frontend that the entire process is complete
             const finalHistory = await historyService.getFullHistory();
             const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
             serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
-
         } catch (error) {
             loggerService.error(`New generation workflow failed: ${error}`);
         }
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
-        llmService.stopGeneration(data.responseId);
+        llmService.stopGeneration(data.cycleId);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSingleRegeneration, async (data) => {
         const cycleData = await historyService.getCycleData(data.cycleId);
         if (cycleData) {
             const prompt = await promptService.generatePromptString(cycleData);
-            await llmService.generateSingle(prompt, data.cycleId, data.tabId);
+            // This needs to be updated to handle a single response stream
+            // For now, it will log the request.
+            loggerService.log(`[WIP] Received request to regenerate tab ${data.tabId} for cycle ${data.cycleId}`);
+            // await llmService.generateSingle(prompt, data.cycleId, data.tabId);
         }
     });
 

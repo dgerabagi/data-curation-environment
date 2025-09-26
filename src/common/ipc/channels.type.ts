@@ -89,7 +89,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     T extends ClientToServerChannel.RequestSettings ? {} :
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
-    T extends ClientToServerChannel.RequestStopGeneration ? { responseId: number } :
+    T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number } :
     T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :

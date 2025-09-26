@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C66 (Refactor to separate response generation from cycle creation)
+// Updated on: C68 (Implement Stop and Single Regen logic)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -14,17 +14,31 @@ const generationControllers = new Map<number, AbortController>();
 
 export class LlmService {
 
-    public stopGeneration(responseId: number) {
-        if (generationControllers.has(responseId)) {
-            generationControllers.get(responseId)?.abort();
-            generationControllers.delete(responseId);
-            Services.loggerService.log(`[LLM Service] Aborted generation for response ${responseId}.`);
+    public stopGeneration(cycleId: number) {
+        if (generationControllers.has(cycleId)) {
+            generationControllers.get(cycleId)?.abort();
+            generationControllers.delete(cycleId);
+            Services.loggerService.log(`[LLM Service] Aborted generation for cycle ${cycleId}.`);
         }
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
-        // This method is for regenerating a single tab.
-        // It's a simplified version of generateBatch.
+        Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
+        const cycleData: PcppCycle = { cycleId: cycleId, title: `Regen C${cycleId} T${tabId}`, responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: 1, status: 'generating' };
+        try {
+            const responses = await this.generateBatch(prompt, 1, cycleData);
+            if (responses.length > 0) {
+                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responses[0]);
+                // We need a new IPC message to notify the frontend of the single update.
+                // For now, a full refresh will work.
+                const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+                if (serverIpc) {
+                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+                }
+            }
+        } catch (error) {
+            Services.loggerService.error(`[LLM Service] Single regeneration failed: ${error}`);
+        }
     }
 
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
