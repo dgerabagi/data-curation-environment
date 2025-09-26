@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C74 (Fix elapsed timer logic)
+// Updated on: C74 (Fix timer stale state bug)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -25,19 +25,19 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
     React.useEffect(() => {
-        if (!startTime) return;
+        if (!startTime || isGenerationComplete) {
+            return;
+        }
 
         const interval = setInterval(() => {
-            const now = Date.now();
-            const elapsed = (now - startTime) / 1000;
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = (elapsed % 60).toFixed(1);
-            setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+            const currentStartTime = startTime; // Capture startTime at the time of effect execution
+            if (currentStartTime) {
+                const elapsed = (Date.now() - currentStartTime) / 1000;
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = (elapsed % 60).toFixed(1);
+                setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+            }
         }, 100);
-
-        if (isGenerationComplete) {
-            clearInterval(interval);
-        }
 
         return () => clearInterval(interval);
     }, [startTime, isGenerationComplete]);
@@ -147,9 +147,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             {isGenerationComplete && (
                 <div className="progress-footer">
                     <span>{completedCount}/{progressData.length} Responses Complete</span>
-                    <button onClick={onViewResponses} className="styled-button">
-                        View Responses <VscArrowRight />
-                    </button>
+                    {/* The "View Responses" button is now effectively managed by the main view's state change */}
                 </div>
             )}
         </div>

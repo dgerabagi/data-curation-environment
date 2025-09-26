@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C74 (Add StartGenerationUI message)
+// Updated on: C74 (Pass newMaxCycle in StartGenerationUI)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -17,12 +17,12 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         try {
-            const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
-            // CRITICAL FIX: Notify the frontend to navigate BEFORE starting the long async operation.
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
+            const { newCycleId, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle });
 
             const prompt = await promptService.generatePromptString(data.cycleData);
 
+            // C71 Fix: Write the generated prompt to disk for transparency and debugging
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (workspaceFolders && workspaceFolders.length > 0) {
                 const promptMdPath = path.join(workspaceFolders[0].uri.fsPath, 'prompt.md');
@@ -34,8 +34,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
             await historyService.updateCycleWithResponses(newCycleId, responses);
             
             const finalHistory = await historyService.getFullHistory();
-            const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
-            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+            const finalMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle: finalMaxCycle });
         } catch (error) {
             loggerService.error(`New generation workflow failed: ${error}`);
         }

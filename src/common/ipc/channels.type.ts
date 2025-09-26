@@ -122,5 +122,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
-    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number; newMaxCycle: number; } :
+    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number, newMaxCycle: number } :
     never;
