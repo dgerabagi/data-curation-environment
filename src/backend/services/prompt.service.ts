@@ -339,7 +339,7 @@ ${staticContext.trim()}
 
             // Create-Then-Generate Pattern
             const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
 
             const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));

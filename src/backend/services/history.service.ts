@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C73 (Add isEphemeralContextCollapsed to default cycle)
+// Updated on: C74 (Return newMaxCycle from placeholder creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';

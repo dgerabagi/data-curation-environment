@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-26T22:02:03.573Z
+  Date Generated: 2025-09-26T22:28:55.875Z
   ---
   Total Files: 188
-  Approx. Tokens: 467059
+  Approx. Tokens: 467682
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. src\Artifacts\A0. DCE Master Artifact List.md (9232 tokens)
-3. src\client\views\parallel-copilot.view\view.tsx (9140 tokens)
+3. src\client\views\parallel-copilot.view\view.tsx (9184 tokens)
 4. src\client\views\parallel-copilot.view\view.scss (7279 tokens)
-5. src\backend\services\prompt.service.ts (4830 tokens)
+5. src\backend\services\prompt.service.ts (4836 tokens)
 6. src\backend\services\file-operation.service.ts (4526 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\backend\services\history.service.ts (3743 tokens)
+10. src\backend\services\history.service.ts (3742 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 536 - Chars: 36928 - Tokens: 9232
@@ -112,7 +112,7 @@
 90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
 91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
 92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 8508 - Tokens: 2127
+93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 67 - Chars: 8659 - Tokens: 2165
 94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
 95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
 96. src\Artifacts\A200. Cycle Log.md - Lines: 8971 - Chars: 901614 - Tokens: 225404
@@ -144,10 +144,10 @@
 122. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-125. src\backend\services\history.service.ts - Lines: 354 - Chars: 14970 - Tokens: 3743
-126. src\backend\services\llm.service.ts - Lines: 242 - Chars: 12207 - Tokens: 3052
+125. src\backend\services\history.service.ts - Lines: 354 - Chars: 14966 - Tokens: 3742
+126. src\backend\services\llm.service.ts - Lines: 241 - Chars: 11966 - Tokens: 2992
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-128. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19318 - Tokens: 4830
+128. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19343 - Tokens: 4836
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 130. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 131. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -171,21 +171,21 @@
 149. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 150. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 151. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3137 - Tokens: 785
-152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 74 - Chars: 3307 - Tokens: 827
+152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 82 - Chars: 3662 - Tokens: 916
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 176 - Chars: 8776 - Tokens: 2194
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 176 - Chars: 8819 - Tokens: 2205
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
 157. src\client\views\parallel-copilot.view\view.scss - Lines: 1241 - Chars: 29116 - Tokens: 7279
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 192 - Chars: 36557 - Tokens: 9140
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 192 - Chars: 36733 - Tokens: 9184
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 163. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 164. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 165. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6278 - Tokens: 1570
-166. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9489 - Tokens: 2373
+166. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9391 - Tokens: 2348
 167. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 168. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 169. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -202,12 +202,12 @@
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 5246 - Tokens: 1312
 182. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
-183. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 156 - Chars: 7750 - Tokens: 1938
+183. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 159 - Chars: 7796 - Tokens: 1949
 184. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-185. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 50 - Chars: 4624 - Tokens: 1156
+185. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 62 - Chars: 6183 - Tokens: 1546
 186. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
 187. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3575 - Tokens: 894
-188. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 58 - Chars: 4026 - Tokens: 1007
+188. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 62 - Chars: 4508 - Tokens: 1127
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -6405,7 +6405,7 @@ This is a major architectural change and should be implemented in phases.
 # Artifact A97: DCE - vLLM Response Progress UI Plan
 # Date Created: C48
 # Author: AI Model & Curator
-# Updated on: C69 (Refine color scheme and button functionality)
+# Updated on: C74 (Add requirement for per-response timers)
 
 - **Key/Value for A0:**
 - **Description:** A plan and textual mockup for a UI to display the progress of incoming vLLM responses, including color-coded progress bars, status indicators, timers, and a manual "View Responses" button.
@@ -6425,7 +6425,7 @@ Generating multiple, large AI responses can take a significant amount of time. T
 | P3-PROG-04 | **See Response Status** | As a user, I want to see the status of each individual response (e.g., "Thinking...", "Generating...", "Complete"), so I know what the system is doing. | - A text indicator next to each progress bar shows its current status. <br> - The indicator is animated during the "Thinking" and "Generating" phases. <br> - When a response is complete, the "unused" portion of its progress bar changes color to signify completion. |
 | P3-PROG-05 | **See Unused Tokens** | As a user, once a response is complete, I want to see how many tokens were left unused, so I can understand how much headroom the model had. | - After a response's status changes to "Complete", a text element appears showing the count of unused tokens. |
 | P3-PROG-06 | **Manage Responses** | As a user, I want to sort responses, stop a generation, or re-generate an individual response, so I have more control over the process. | - A sort button cycles through different sort orders. <br> - A "Stop" button for each response cancels its generation. <br> - A "Re-generate" button for each response triggers a new generation just for that slot. |
-| P3-PROG-07 | **See Elapsed Time** | As a user, I want to see a timer showing the total elapsed time for the generation, so I can understand how long the process is taking. | - A master timer is displayed in the header. <br> - Each response can display its own timing information (e.g., time to first token). |
+| P3-PROG-07 | **See Elapsed Time** | As a user, I want to see a timer showing the total elapsed time for the generation, so I can understand how long the process is taking. | - A master timer is displayed in the header. <br> - **(C74 Update)** Each response displays its own timing information (e.g., time to first token, total generation time). |
 | P3-PROG-08 | **Review Metrics Before Navigating** | As a user, after all responses are complete, I want to stay on the progress screen to review the final metrics, and then click a button to navigate to the new cycle, so I am in control of the workflow. | - When generation finishes, the UI does not automatically navigate away. <br> - A "View Responses" button appears. <br> - A completion counter (e.g., "4/4 Responses Complete") is displayed. |
 | P3-PROG-09 | **Three-Way Sorting** | As a user, I want the sort button to cycle between three states: the default order, sorting by total tokens (thinking + response), and sorting by response tokens only, so I can analyze the results in different ways. | - The sort button cycles through three distinct states. <br> - The UI re-orders the list of responses accordingly. |
 | P3-PROG-10 | **Color-Coded Totals** | As a user, I want the total token count display to also be color-coded, so it's consistent with the individual progress bars. | - The numbers in the "Total Tokens" display are color-coded to match the "thinking", "response", and "unused" categories. |
@@ -6458,13 +6458,13 @@ The progress UI will be a dedicated component that is conditionally rendered in 
     *   A "Time to First Token" (TTFT) or other phase timer is displayed.
 *   **Footer:** Appears only when generation is complete. Shows a completion counter and the button to navigate to the new cycle.
 
-## 4. Technical Implementation Plan (C69 Revision)
+## 4. Technical Implementation Plan (C74 Revision)
 
 1.  **IPC (`channels.type.ts`):** The `GenerationProgress` interface will be updated to include timing information, such as `startTime`, `firstTokenTime`, and `endTime` (as timestamps).
-2.  **Backend (`llm.service.ts`):** The `generateBatch` method will be updated to record timestamps at each stage of the streaming process and include them in the `UpdateGenerationProgress` payload. The `AbortController` will be used to make the "Stop" functionality work.
+2.  **Backend (`llm.service.ts`):** The `generateBatch` method will be updated to record timestamps at each stage of the streaming process for each individual response and include them in the `UpdateGenerationProgress` payload. The `AbortController` will be used to make the "Stop" functionality work.
 3.  **Frontend (`GenerationProgressDisplay.tsx` & `view.scss`):**
     *   **Layout:** The JSX will be refactored to move the buttons to their new locations. All buttons will receive a consistent style class.
-    *   **Timer Logic:** The component will receive the timestamps from the backend. A `useEffect` hook with a `setInterval` will be used to calculate and display the main elapsed timer.
+    *   **Timer Logic:** The component will receive the timestamps from the backend. A `useEffect` hook with a `setInterval` will be used to calculate and display the main elapsed timer. It will also use the per-response timestamps to calculate and display individual metrics.
     *   **Completion State:** The component will receive an `isGenerationComplete` prop. When true, it will render the new footer with the completion counter and the "View Responses" button.
     *   **Sorting Logic:** A new state `sortMode: 'default' | 'total' | 'response'` will be added. The sort button will cycle through these values. A `useMemo` hook will re-sort the `progressData` array based on the active `sortMode`.
     *   **Color-Coding:** Spans with specific classes (`token-thinking`, `token-response`, `token-unused`) will be added around the token count text elements for individual styling. The CSS for `.progress-segment.unused` will be updated to a blue color.
@@ -18076,7 +18076,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C73 (Add isEphemeralContextCollapsed to default cycle)
+// Updated on: C74 (Return newMaxCycle from placeholder creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -18433,7 +18433,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C69 (Implement Stop and Single Regen logic)
+// Updated on: C74 (Add startTime to progress data)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -18520,8 +18520,7 @@ export class LlmService {
 
         const controller = new AbortController();
         generationControllers.set(cycleData.cycleId, controller);
-        const startTime = Date.now();
-
+        
         return new Promise(async (resolve, reject) => {
             try {
                 Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
@@ -18549,7 +18548,7 @@ export class LlmService {
                     currentTokens: 0,
                     totalTokens: MAX_TOKENS_PER_RESPONSE,
                     status: 'pending',
-                    startTime: startTime,
+                    startTime: Date.now(), // Set start time for each response
                 }));
                 const responseContents: string[] = Array(count).fill('');
                 const finishedResponses: boolean[] = Array(count).fill(false);
@@ -19059,7 +19058,7 @@ ${staticContext.trim()}
 
             // Create-Then-Generate Pattern
             const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
 
             const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
@@ -21971,11 +21970,12 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C69 (Implement loading state for regeneration)
+// Updated on: C74 (Add loading indicator logic)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
 import { TabState as OriginalTabState } from '../view';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import { GenerationProgress } from '@/common/ipc/channels.type';
 
 type TabState = OriginalTabState & { isLoading?: boolean };
 
@@ -21990,6 +21990,8 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
+    generationProgress?: GenerationProgress[]; // Make optional
+    isGenerating: boolean;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -22003,8 +22005,11 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     onSortToggle,
     workflowStep,
     onRegenerateTab,
+    generationProgress = [],
+    isGenerating
 }) => {
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
+    const progressMap = new Map(generationProgress.map(p => [p.responseId, p]));
 
     return (
         <div className="tab-bar-container">
@@ -22012,7 +22017,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                 {sortedTabIds.map((tabIndex) => {
                     const tabData = tabs[tabIndex.toString()];
                     const parsedData = tabData?.parsedContent;
-                    const isLoading = tabData?.isLoading || false;
+                    const progress = progressMap.get(tabIndex);
+                    const isLoading = isGenerating && progress?.status !== 'complete';
+
                     return (
                         <div
                             key={tabIndex}
@@ -22158,7 +22165,7 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C71 (Add prompt.md write step)
+// Updated on: C74 (Add StartGenerationUI message)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -22177,11 +22184,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         try {
             const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+            // CRITICAL FIX: Notify the frontend to navigate BEFORE starting the long async operation.
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
 
             const prompt = await promptService.generatePromptString(data.cycleData);
 
-            // C71 Fix: Write the generated prompt to disk for transparency and debugging
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (workspaceFolders && workspaceFolders.length > 0) {
                 const promptMdPath = path.join(workspaceFolders[0].uri.fsPath, 'prompt.md');
@@ -23716,7 +23723,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C73 (Implement consolidated response UI)
+// Updated on: C74 (Fix navigation bug and refine UI for generation)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23832,11 +23839,11 @@ const App = () => {
     const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
 
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
-    const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => { e?.stopPropagation(); if (saveStatus !== 'saved') return; if (newCycleId >= 0 && newCycleId <= maxCycle) { setSelectedFilesForReplacement(new Set()); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setWorkflowStep(null); } };
+    const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => { e?.stopPropagation(); if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return; if (newCycleId >= 0 && newCycleId <= maxCycle) { setSelectedFilesForReplacement(new Set()); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setWorkflowStep(null); } };
     
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, isLoading: response.isLoading }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true); }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle?.cycleId) setSaveStatus('saved'); }); clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) }); clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => { setGenerationProgress(progress); setTps(tps); setTabs(prevTabs => { const newTabs = { ...prevTabs }; Object.entries(chunks).forEach(([responseId, chunk]) => { const tabIndex = parseInt(responseId, 10); newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null }), rawContent: chunk }; }); return newTabs; }); }); 
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => { setIsGenerationComplete(true); setMaxCycle(newMaxCycle); handleCycleChange(null, newCycleId); });
-        clientIpc.onServerMessage(ServerToClientChannel.StartGenerationUI, ({ newCycleId }) => { handleCycleChange(null, newCycleId); });
+        clientIpc.onServerMessage(ServerToClientChannel.StartGenerationUI, ({ newCycleId, newMaxCycle }) => { setMaxCycle(newMaxCycle); handleCycleChange(null, newCycleId); });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
     }, [clientIpc, requestCostEstimation]);
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
@@ -23889,11 +23896,11 @@ const App = () => {
             <CycleNavigator currentCycle={currentCycle.cycleId} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={!isReadyForNextCycle} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} isEphemeralContextCollapsed={isEphemeralContextCollapsed} onToggleEphemeralContext={() => { setIsEphemeralContextCollapsed(p => !p); setSaveStatus('unsaved'); }} />
         </CollapsibleSection>
+        <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={()=>{setIsSortedByTokens(prev => { const newState = !prev; setSaveStatus('unsaved'); return newState; });}} onRegenerateTab={handleRegenerateTab} generationProgress={generationProgress} isGenerating={currentCycle.status === 'generating'} />
         {currentCycle.status === 'generating' ? (
             <GenerationProgressDisplay progressData={generationProgress} tps={tps} tabs={tabs} onStop={(id) => clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId: id })} onRegenerate={handleRegenerateTab} isGenerationComplete={isGenerationComplete} onViewResponses={() => { /* This button is now vestigial */ }} startTime={startTime} cycleId={currentCycle.cycleId} />
         ) : (
             <>
-                <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onSortToggle={()=>{setIsSortedByTokens(prev => { const newState = !prev; setSaveStatus('unsaved'); return newState; });}} onRegenerateTab={handleRegenerateTab} />
                 <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
                 <div className="tab-content"><ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} /></div>
             </>
@@ -24364,7 +24371,7 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C69 (Add Stop and Single Regen types)
+// Updated on: C74 (Add newMaxCycle to StartGenerationUI)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -24487,7 +24494,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
-    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number } :
+    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number; newMaxCycle: number; } :
     never;
 </file_artifact>
 
@@ -25583,7 +25590,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C72 (Decouple view logic from generation status)
+// Updated on: C74 (Fix elapsed timer logic)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -25609,16 +25616,19 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
     React.useEffect(() => {
-        if (!startTime || isGenerationComplete) {
-            return;
-        }
+        if (!startTime) return;
 
         const interval = setInterval(() => {
-            const elapsed = (Date.now() - startTime) / 1000;
+            const now = Date.now();
+            const elapsed = (now - startTime) / 1000;
             const minutes = Math.floor(elapsed / 60);
             const seconds = (elapsed % 60).toFixed(1);
             setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
         }, 100);
+
+        if (isGenerationComplete) {
+            clearInterval(interval);
+        }
 
         return () => clearInterval(interval);
     }, [startTime, isGenerationComplete]);
@@ -25793,7 +25803,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C72 (Add PCPP View State persistence case)
+# Updated on: C74 (Add navigation failure case study)
 
 ## 1. Purpose
 
@@ -25802,6 +25812,18 @@ This document serves as a living record of persistent or complex bugs that have 
 **This artifact is the primary log for new and recent case studies.** Older, resolved issues are archived in `A11.1 DCE - New Regression Case Studies.md` to keep this document concise and focused on currently relevant issues.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 042: Failure to Navigate to New Cycle on Generation
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/common/ipc/channels.type.ts`, `src/backend/services/history.service.ts`
+-   **Cycles Observed:** C74
+-   **Symptom:** After the initial onboarding, when the user clicks "Generate responses" for Cycle 1, the backend correctly creates a new placeholder for Cycle 2 and starts the LLM generation. However, the frontend UI remains on Cycle 1 and does not display the generation progress UI.
+-   **Root Cause Analysis (RCA):** The "Create-Then-Generate" workflow relies on the backend telling the frontend to navigate to the new placeholder cycle. The `StartGenerationUI` message correctly provides the `newCycleId`, but the frontend's navigation logic (`handleCycleChange`) has a guard clause that prevents navigation to a cycle ID that is greater than its current `maxCycle` state. The `maxCycle` state was not being updated on the frontend before the navigation was attempted, causing the navigation to be silently ignored.
+-   **Codified Solution & Best Practice:**
+    1.  Any backend message that instructs the frontend to navigate to a newly created cycle **must** also include the new maximum cycle count in its payload (e.g., `{ newCycleId, newMaxCycle }`).
+    2.  The frontend message handler must update its `maxCycle` state *before* attempting to call its navigation function. This ensures the guard clauses in the navigation logic have the most up-to-date state and will permit the view switch.
 
 ---
 
@@ -25950,9 +25972,10 @@ This artifact provides a structured checklist for tracking the development tasks
 # Artifact A103: DCE - Consolidated Response UI Plan
 # Date Created: C73
 # Author: AI Model & Curator
+# Updated on: C74 (Refine UI to keep tabs visible during generation)
 
 - **Key/Value for A0:**
-- **Description:** Details the plan to consolidate the response generation UI into the main PCPP view. This involves removing the separate "progress" view and instead showing the progress display when the current cycle is in a "generating" state. Also includes making the Ephemeral Context collapsible.
+- **Description:** Details the plan to consolidate the response generation UI into the main PCPP view. This involves showing the progress display in the main content area when the current cycle is in a "generating" state, while keeping the response tabs visible. Also includes making the Ephemeral Context collapsible.
 - **Tags:** feature plan, ui, ux, workflow, refactor, state management
 
 ## 1. Vision & Goal
@@ -25961,14 +25984,17 @@ The current workflow for generating responses involves a jarring context switch.
 
 The goal of this refactor is to create a more seamless, integrated experience. The response generation UI will now be displayed *within* the main Parallel Co-Pilot Panel (PCPP) view itself. This is achieved by making the UI state-driven: if the currently selected cycle is in a "generating" state, the progress display is shown; otherwise, the standard response tabs are shown.
 
-## 2. User Flow
+## 2. User Flow (C74 Refinement)
 
 1.  **User Action:** The user is on Cycle `N` and clicks `Generate responses`.
 2.  **Backend Action:** The backend creates a new placeholder Cycle `N+1` with `status: 'generating'` and notifies the frontend.
 3.  **UI Navigation:** The frontend automatically navigates to the new Cycle `N+1`.
 4.  **Conditional Rendering:** The main PCPP view component loads the data for Cycle `N+1`. It sees that `status` is `'generating'`.
-5.  **New UI State:** Instead of rendering the `ResponseTabs` and `ResponsePane`, the component now renders the `GenerationProgressDisplay` in the main content area. The user sees the progress bars for the new cycle they are on.
-6.  **Completion:** When the LLM responses are complete, the backend updates the status of Cycle `N+1` to `'complete'`. The frontend receives this update, re-renders, and now shows the `ResponseTabs` and `ResponsePane` with the newly populated content.
+5.  **New UI State:**
+    *   The `ResponseTabs` component **remains visible**. The tabs for the generating responses will show a loading indicator.
+    *   The main content area *below* the tabs, which would normally show the `ResponsePane`, now renders the `GenerationProgressDisplay`. The user sees the progress bars for the new cycle they are on.
+    *   As individual responses complete, their loading indicators on the tabs disappear. The user can click on a completed response's tab to switch the view from the `GenerationProgressDisplay` to the `ResponsePane` for that specific tab, allowing them to review it while others are still generating.
+6.  **Completion:** When all LLM responses are complete, the backend updates the status of Cycle `N+1` to `'complete'`. The frontend receives this update, and the default view for all tabs becomes the `ResponsePane`.
 
 ## 3. Additional UI Refinements
 
@@ -25984,11 +26010,11 @@ The goal of this refactor is to create a more seamless, integrated experience. T
     *   The main render logic will be updated:
         ```jsx
         // Inside the App component's return statement
+        <ResponseTabs {...props} />
         {currentCycle?.status === 'generating' ? (
             <GenerationProgressDisplay {...props} />
         ) : (
             <>
-                <ResponseTabs {...props} />
                 <WorkflowToolbar {...props} />
                 <div className="tab-content">
                     <ResponsePane {...props} />

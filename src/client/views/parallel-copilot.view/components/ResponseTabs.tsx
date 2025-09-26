@@ -1,9 +1,10 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C69 (Implement loading state for regeneration)
+// Updated on: C74 (Add loading indicator logic)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
 import { TabState as OriginalTabState } from '../view';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import { GenerationProgress } from '@/common/ipc/channels.type';
 
 type TabState = OriginalTabState & { isLoading?: boolean };
 
@@ -18,6 +19,8 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
+    generationProgress?: GenerationProgress[]; // Make optional
+    isGenerating: boolean;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -31,8 +34,11 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     onSortToggle,
     workflowStep,
     onRegenerateTab,
+    generationProgress = [],
+    isGenerating
 }) => {
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
+    const progressMap = new Map(generationProgress.map(p => [p.responseId, p]));
 
     return (
         <div className="tab-bar-container">
@@ -40,7 +46,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                 {sortedTabIds.map((tabIndex) => {
                     const tabData = tabs[tabIndex.toString()];
                     const parsedData = tabData?.parsedContent;
-                    const isLoading = tabData?.isLoading || false;
+                    const progress = progressMap.get(tabIndex);
+                    const isLoading = isGenerating && progress?.status !== 'complete';
+
                     return (
                         <div
                             key={tabIndex}

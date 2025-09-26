@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C69 (Add Stop and Single Regen types)
+// Updated on: C74 (Add newMaxCycle to StartGenerationUI)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -122,5 +122,5 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
-    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number } :
+    T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number; newMaxCycle: number; } :
     never;

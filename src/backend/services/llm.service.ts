@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C69 (Implement Stop and Single Regen logic)
+// Updated on: C74 (Add startTime to progress data)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -86,8 +86,7 @@ export class LlmService {
 
         const controller = new AbortController();
         generationControllers.set(cycleData.cycleId, controller);
-        const startTime = Date.now();
-
+        
         return new Promise(async (resolve, reject) => {
             try {
                 Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
@@ -115,7 +114,7 @@ export class LlmService {
                     currentTokens: 0,
                     totalTokens: MAX_TOKENS_PER_RESPONSE,
                     status: 'pending',
-                    startTime: startTime,
+                    startTime: Date.now(), // Set start time for each response
                 }));
                 const responseContents: string[] = Array(count).fill('');
                 const finishedResponses: boolean[] = Array(count).fill(false);

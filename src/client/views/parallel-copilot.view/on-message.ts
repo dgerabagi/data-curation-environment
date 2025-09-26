@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C71 (Add prompt.md write step)
+// Updated on: C74 (Add StartGenerationUI message)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -18,11 +18,11 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
         try {
             const { newCycleId } = await historyService.createNewCyclePlaceholder(data.count);
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
+            // CRITICAL FIX: Notify the frontend to navigate BEFORE starting the long async operation.
+            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
 
             const prompt = await promptService.generatePromptString(data.cycleData);
 
-            // C71 Fix: Write the generated prompt to disk for transparency and debugging
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (workspaceFolders && workspaceFolders.length > 0) {
                 const promptMdPath = path.join(workspaceFolders[0].uri.fsPath, 'prompt.md');

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C72 (Decouple view logic from generation status)
+// Updated on: C74 (Fix elapsed timer logic)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -25,16 +25,19 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
     React.useEffect(() => {
-        if (!startTime || isGenerationComplete) {
-            return;
-        }
+        if (!startTime) return;
 
         const interval = setInterval(() => {
-            const elapsed = (Date.now() - startTime) / 1000;
+            const now = Date.now();
+            const elapsed = (now - startTime) / 1000;
             const minutes = Math.floor(elapsed / 60);
             const seconds = (elapsed % 60).toFixed(1);
             setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
         }, 100);
+
+        if (isGenerationComplete) {
+            clearInterval(interval);
+        }
 
         return () => clearInterval(interval);
     }, [startTime, isGenerationComplete]);
