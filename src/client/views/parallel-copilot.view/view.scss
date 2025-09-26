@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C69 (Add styles for token count colors)
+// Updated on: C70 (Add color for unused token text)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -1220,7 +1220,8 @@ body {
     .token-response {
         color: var(--vscode-testing-iconPassed); // Green
     }
-    .token-unused {
-        color: var(--vscode-editor-inactiveSelectionBackground); // Blue
-    }
+}
+
+.token-unused {
+    color: var(--vscode-editor-inactiveSelectionBackground); // Blue
 }

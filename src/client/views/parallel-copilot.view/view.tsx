@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C69 (Implement all UI fixes and enhancements)
+// Updated on: C70 (Add "Return to Generation Progress" button)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -173,6 +173,9 @@ const App = () => {
         const generationInProgress = currentCycle?.status === 'generating';
         if (generationInProgress) {
             return <button onClick={() => setIsGenerating(true)} title="View Generation Progress"><VscVm /> View Generation Progress</button>;
+        }
+        if (connectionMode === 'demo' && isGenerating) {
+            return <button onClick={() => handleCycleChange(null, maxCycle)} title="Return to Generation Progress"><VscGoToFile /> Return to Generation Progress</button>;
         }
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;

@@ -1,4 +1,4 @@
-// Updated on: C68 (Refactor onboarding to Create-Then-Generate)
+// Updated on: C70 (Add prompt.md file generation to demo workflow)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -323,6 +323,13 @@ ${staticContext.trim()}
             Services.loggerService.log("Generating Cycle 0 prompt and starting generation...");
             await Services.historyService.saveProjectScope(projectScope);
             
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
+            const prompt = await this.generatePromptString(dummyCycleData);
+            
+            // Create the prompt.md file before sending the request
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
+            Services.loggerService.log("prompt.md file created successfully before sending API request.");
+
             // Create-Then-Generate Pattern
             const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
@@ -334,11 +341,6 @@ ${staticContext.trim()}
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
             
-            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
-            const prompt = await this.generatePromptString(dummyCycleData);
-            
-            await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
-
             const responses = await Services.llmService.generateBatch(prompt, responseCount, { ...dummyCycleData, cycleId: newCycleId });
             
             await Services.historyService.updateCycleWithResponses(newCycleId, responses);

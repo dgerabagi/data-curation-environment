@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 70 - more feedback from playtesting/observations
+Current Cycle 71 - slight progress, but still not prepping prompt.md prior to sending the prompt
+Cycle 70 - more feedback from playtesting/observations
 Cycle 69 - great progress, continue iterating this response solution
 Cycle 68 - playtest feedback/observations
 Cycle 67 - continue iterating on generating responses function
@@ -276,7 +277,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C67 (Add A101)
+# Updated on: C70 (Add A102)
 
 ## 1. Purpose
 
@@ -718,6 +719,10 @@ No project scope defined.
 - **Description:** Documents the new, more robust workflow for generating responses. This involves creating a new cycle with a "generating" status first, which provides a persistent state container for the asynchronous LLM call, making the UI state recoverable on reload.
 - **Tags:** plan, architecture, workflow, persistence, asynchronous, state management
 
+### A102. DCE - Universal Task Checklist for Cycle 70
+- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from Cycle 70.
+- **Tags:** process, checklist, task management, planning, workflow
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -804,6 +809,17 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 71>
+<Cycle Context>
+okay... it seems that the new responses do indeed get placed into the next cycle, but i dont view that next cycle. instead, i return to the current cycle, and then i have to click `>`. thats when i see that indeed we got new responses. however, these new responses still have not sent off the updated `prompt.md`. i can tell because the `prompt.md` currently still does not contain <Cycle 1> content, yet i have now ostensibly received these cycle 2 responses, but thats not what came back. the responses are asking me to confirm if i see the new documentation artifacts, because the responses are still just trying to create the initial documentation artifacts, and not trying to create the project code files like i requested in my cycle 1 context.
+</Cycle Context>
+<Previous Cycle 70 Summary of Actions>
+I have implemented the requested UI refinements and bug fixes from Cycle 69. The token counts in the response generation view are now color-coded for better readability. The "Stop" and "Re-generate" buttons are now fully functional in both the progress view and on individual tabs in the main Parallel Co-Pilot Panel. When a response is being regenerated, the corresponding tab will now correctly display a loading animation. Finally, a new button has been added to allow users to return to the generation progress view if they navigate away while it's active.
+
+Could not parse course of action.
+</Previous Cycle 70 Summary of Actions>
+</Cycle 71>
 
 <Cycle 70>
 <Cycle Context>
@@ -4146,18 +4162,18 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-26T01:30:54.524Z
+  Date Generated: 2025-09-26T13:42:13.822Z
   ---
-  Total Files: 186
-  Approx. Tokens: 465805
+  Total Files: 187
+  Approx. Tokens: 466733
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9336 tokens)
-3. src\Artifacts\A0. DCE Master Artifact List.md (9106 tokens)
-4. src\client\views\parallel-copilot.view\view.scss (7208 tokens)
-5. src\backend\services\prompt.service.ts (4598 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (9397 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (9165 tokens)
+4. src\client\views\parallel-copilot.view\view.scss (7204 tokens)
+5. src\backend\services\prompt.service.ts (4642 tokens)
 6. src\backend\services\file-operation.service.ts (4526 tokens)
 7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
@@ -4165,7 +4181,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 10. src\backend\services\history.service.ts (3709 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 528 - Chars: 36422 - Tokens: 9106
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 532 - Chars: 36659 - Tokens: 9165
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -4290,9 +4306,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 125. src\backend\services\history.service.ts - Lines: 352 - Chars: 14833 - Tokens: 3709
-126. src\backend\services\llm.service.ts - Lines: 242 - Chars: 11966 - Tokens: 2992
+126. src\backend\services\llm.service.ts - Lines: 242 - Chars: 12207 - Tokens: 3052
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-128. src\backend\services\prompt.service.ts - Lines: 355 - Chars: 18390 - Tokens: 4598
+128. src\backend\services\prompt.service.ts - Lines: 357 - Chars: 18568 - Tokens: 4642
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 130. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 131. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -4319,11 +4335,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 74 - Chars: 3307 - Tokens: 827
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 163 - Chars: 8126 - Tokens: 2032
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 163 - Chars: 8288 - Tokens: 2072
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
-157. src\client\views\parallel-copilot.view\view.scss - Lines: 1226 - Chars: 28829 - Tokens: 7208
+157. src\client\views\parallel-copilot.view\view.scss - Lines: 1227 - Chars: 28816 - Tokens: 7204
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 202 - Chars: 37344 - Tokens: 9336
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 205 - Chars: 37585 - Tokens: 9397
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -4347,16 +4363,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 5246 - Tokens: 1312
 182. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
-183. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 165 - Chars: 8654 - Tokens: 2164
+183. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 156 - Chars: 7749 - Tokens: 1938
 184. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 185. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 78 - Chars: 9450 - Tokens: 2363
 186. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
+187. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3575 - Tokens: 894
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C67 (Add A101)
+# Updated on: C70 (Add A102)
 
 ## 1. Purpose
 
@@ -4797,6 +4814,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A101. DCE - Asynchronous Generation and State Persistence Plan
 - **Description:** Documents the new, more robust workflow for generating responses. This involves creating a new cycle with a "generating" status first, which provides a persistent state container for the asynchronous LLM call, making the UI state recoverable on reload.
 - **Tags:** plan, architecture, workflow, persistence, asynchronous, state management
+
+### A102. DCE - Universal Task Checklist for Cycle 70
+- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from Cycle 70.
+- **Tags:** process, checklist, task management, planning, workflow
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -22851,7 +22872,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C68 (Refactor onboarding to Create-Then-Generate)
+// Updated on: C70 (Add prompt.md file generation to demo workflow)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -23176,6 +23197,13 @@ ${staticContext.trim()}
             Services.loggerService.log("Generating Cycle 0 prompt and starting generation...");
             await Services.historyService.saveProjectScope(projectScope);
             
+            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
+            const prompt = await this.generatePromptString(dummyCycleData);
+            
+            // Create the prompt.md file before sending the request
+            await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
+            Services.loggerService.log("prompt.md file created successfully before sending API request.");
+
             // Create-Then-Generate Pattern
             const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId });
@@ -23187,11 +23215,6 @@ ${staticContext.trim()}
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
             
-            const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
-            const prompt = await this.generatePromptString(dummyCycleData);
-            
-            await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
-
             const responses = await Services.llmService.generateBatch(prompt, responseCount, { ...dummyCycleData, cycleId: newCycleId });
             
             await Services.historyService.updateCycleWithResponses(newCycleId, responses);
@@ -26553,7 +26576,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C69 (Add styles for token count colors)
+// Updated on: C70 (Add color for unused token text)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -27774,9 +27797,10 @@ body {
     .token-response {
         color: var(--vscode-testing-iconPassed); // Green
     }
-    .token-unused {
-        color: var(--vscode-editor-inactiveSelectionBackground); // Blue
-    }
+}
+
+.token-unused {
+    color: var(--vscode-editor-inactiveSelectionBackground); // Blue
 }
 </file_artifact>
 
@@ -27795,7 +27819,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C69 (Implement all UI fixes and enhancements)
+// Updated on: C70 (Add "Return to Generation Progress" button)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -27969,6 +27993,9 @@ const App = () => {
         const generationInProgress = currentCycle?.status === 'generating';
         if (generationInProgress) {
             return <button onClick={() => setIsGenerating(true)} title="View Generation Progress"><VscVm /> View Generation Progress</button>;
+        }
+        if (connectionMode === 'demo' && isGenerating) {
+            return <button onClick={() => handleCycleChange(null, maxCycle)} title="Return to Generation Progress"><VscGoToFile /> Return to Generation Progress</button>;
         }
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
@@ -29671,7 +29698,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C69 (Implement functional buttons and color-coded tokens)
+// Updated on: C70 (Implement functional buttons and UI fixes)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -29711,7 +29738,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
         return () => clearInterval(interval);
     }, [startTime, isGenerationComplete]);
 
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
     const completedCount = progressData.filter(p => p.status === 'complete').length;
 
     const sortedProgressData = React.useMemo(() => {
@@ -29760,7 +29786,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     return (
         <div className="generation-progress-display">
             <div className="progress-header">
-                <span className="progress-title">Generating Responses...</span>
+                <span className="progress-title">{isGenerationComplete ? 'Generation Complete' : 'Generating Responses...'}</span>
                 <div className="header-controls">
                     <button onClick={handleSortToggle} className="sort-button" title={getSortButtonText()}>
                         <VscListOrdered/> {getSortButtonText()}
@@ -29769,13 +29795,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
-            <div className="progress-total token-count-text">
-                Total Tokens: (
-                <span className="token-thinking">{formatLargeNumber(progressData.reduce((s, p) => s + p.thinkingTokens, 0), 0)}</span> + 
-                <span className="token-response">{formatLargeNumber(progressData.reduce((s, p) => s + p.currentTokens, 0), 0)}</span> / 
-                {formatLargeNumber(progressData.reduce((s, p) => s + p.totalTokens, 0), 0)} tk)
-                <span className="token-unused" style={{marginLeft: '16px'}}>Unused: {formatLargeNumber(progressData.reduce((s,p)=>s + (p.totalTokens - p.thinkingTokens - p.currentTokens), 0), 0)} tk</span>
-            </div>
             
             {sortedProgressData.map(p => {
                 const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
@@ -29783,7 +29802,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const remainingPct = 100 - thinkingPct - generatedPct;
                 const isComplete = p.status === 'complete';
                 const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
-                const timeToFirstToken = (p.generationStartTime && p.startTime) ? (p.generationStartTime - p.startTime) / 1000 : null;
+                const totalOutputTokens = p.thinkingTokens + p.currentTokens;
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -29805,7 +29824,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                         <div className="token-count-footer">
                             <span className="token-count-text">
                                 (<span className="token-thinking">{formatLargeNumber(p.thinkingTokens, 0)}</span> + 
-                                <span className="token-response">{formatLargeNumber(p.currentTokens, 0)}</span> / 
+                                <span className="token-response">{formatLargeNumber(p.currentTokens, 0)}</span> = {formatLargeNumber(totalOutputTokens, 0)} / 
                                 {formatLargeNumber(p.totalTokens, 0)} tk)
                             </span>
                             {isComplete && (
@@ -29813,7 +29832,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                     Unused: {formatLargeNumber(unusedTokens, 0)} tk
                                 </span>
                             )}
-                            {timeToFirstToken !== null && <span className="token-count-text">TTFT: {timeToFirstToken.toFixed(1)}s</span>}
                         </div>
                         <div className="partial-text-preview">
                             <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
@@ -30008,6 +30026,66 @@ To solve both issues, the workflow will be re-architected to be stateful and per
     *   Update the "Generate responses" button to use the new IPC channel.
     *   Add a handler for `StartGenerationUI`.
     *   Update the main rendering logic: if the currently loaded cycle has `status === 'generating'`, render the `GenerationProgressDisplay` component.
+</file_artifact>
+
+<file path="src/Artifacts/A102. DCE - Universal Task Checklist for Cycle 70.md">
+# Artifact A102: DCE - Universal Task Checklist for Cycle 70
+# Date Created: C70
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 70. It organizes the work by the group of files involved in each task to help plan and prioritize development, especially where context size (token count) is a constraint.
+
+---
+
+## Task List for Cycle 70+
+
+## T-1: Fix Core Workflow & Generation Logic
+- **Files Involved:**
+    - `src/backend/services/prompt.service.ts`
+    - `src/backend/services/llm.service.ts`
+    - `src/backend/services/history.service.ts`
+    - `src/client/views/parallel-copilot.view/on-message.ts`
+- **Total Tokens:** ~15,000
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 1.1):** Update `prompt.service.ts` to ensure `prompt.md` is generated and saved to disk *before* the API request is sent in the automated "Demo Mode" workflow.
+- [ ] **Task (T-ID: 1.2):** Fully implement the `stopGeneration` logic in `llm.service.ts` using an `AbortController` to make the "Stop" button functional.
+- [ ] **Task (T-ID: 1.3):** Fully implement the single-response regeneration logic in `llm.service.ts` and `history.service.ts` to make the "Re-generate" buttons functional.
+
+### Verification Steps
+1.  Enable "Demo Mode" and start a new project.
+2.  Click "Generate Initial Responses".
+3.  **Expected:** A `prompt.md` file should appear in the workspace root *before* the generation progress UI appears.
+4.  While responses are generating, click the "Stop" button for one of them.
+5.  **Expected:** The generation for that specific response should cease.
+6.  Once generation is complete, go to the PCPP, hover over a response tab, and click the "Refresh" icon.
+7.  **Expected:** A new response should be generated for that tab only, and the UI should show a loading indicator during the process.
+
+## T-2: Implement UI Enhancements & Fixes
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+    - `src/client/views/parallel-copilot.view/view.scss`
+- **Total Tokens:** ~18,700
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 2.1):** In `GenerationProgressDisplay.tsx`, update the token count display format to `thinking + response = total / max`.
+- [ ] **Task (T-ID: 2.2):** Add a class to the "Unused" token count text and style it with the correct blue color in `view.scss`.
+- [ ] **Task (T-ID: 2.3):** Update the title in `GenerationProgressDisplay.tsx` to change from "Generating Responses..." to "Generation Complete" when appropriate.
+- [ ] **Task (T-ID: 2.4):** Add a "Return to Generation Progress" button in the main `view.tsx` that is visible only in demo mode when a generation is active.
+- [ ] **Task (T-ID: 2.5):** (Stretch Goal) Investigate how to reflect a response selection from the PCPP back in the Generation Progress UI if the user navigates back to it.
+
+### Verification Steps
+1.  Start a response generation in "Demo Mode".
+2.  **Expected:** The token count for each response should display in the format `1k + 5k = 6k / 16.4k tk`.
+3.  **Expected:** The "Unused: xxx tk" text should be colored blue.
+4.  Once generation is complete, navigate to the PCPP.
+5.  **Expected:** A button to "Return to Generation Progress" should be visible. Clicking it should take you back to the progress screen.
+6.  **Expected:** The title on the progress screen should now read "Generation Complete".
 </file_artifact>
 
 

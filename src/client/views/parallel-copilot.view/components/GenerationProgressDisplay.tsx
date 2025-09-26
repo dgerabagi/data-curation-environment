@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C69 (Implement functional buttons and color-coded tokens)
+// Updated on: C70 (Implement functional buttons and UI fixes)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -39,7 +39,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
         return () => clearInterval(interval);
     }, [startTime, isGenerationComplete]);
 
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
     const completedCount = progressData.filter(p => p.status === 'complete').length;
 
     const sortedProgressData = React.useMemo(() => {
@@ -88,7 +87,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
     return (
         <div className="generation-progress-display">
             <div className="progress-header">
-                <span className="progress-title">Generating Responses...</span>
+                <span className="progress-title">{isGenerationComplete ? 'Generation Complete' : 'Generating Responses...'}</span>
                 <div className="header-controls">
                     <button onClick={handleSortToggle} className="sort-button" title={getSortButtonText()}>
                         <VscListOrdered/> {getSortButtonText()}
@@ -97,13 +96,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
-            <div className="progress-total token-count-text">
-                Total Tokens: (
-                <span className="token-thinking">{formatLargeNumber(progressData.reduce((s, p) => s + p.thinkingTokens, 0), 0)}</span> + 
-                <span className="token-response">{formatLargeNumber(progressData.reduce((s, p) => s + p.currentTokens, 0), 0)}</span> / 
-                {formatLargeNumber(progressData.reduce((s, p) => s + p.totalTokens, 0), 0)} tk)
-                <span className="token-unused" style={{marginLeft: '16px'}}>Unused: {formatLargeNumber(progressData.reduce((s,p)=>s + (p.totalTokens - p.thinkingTokens - p.currentTokens), 0), 0)} tk</span>
-            </div>
             
             {sortedProgressData.map(p => {
                 const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
@@ -111,7 +103,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const remainingPct = 100 - thinkingPct - generatedPct;
                 const isComplete = p.status === 'complete';
                 const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
-                const timeToFirstToken = (p.generationStartTime && p.startTime) ? (p.generationStartTime - p.startTime) / 1000 : null;
+                const totalOutputTokens = p.thinkingTokens + p.currentTokens;
 
                 return (
                     <div key={p.responseId} className="progress-item-container">
@@ -133,7 +125,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                         <div className="token-count-footer">
                             <span className="token-count-text">
                                 (<span className="token-thinking">{formatLargeNumber(p.thinkingTokens, 0)}</span> + 
-                                <span className="token-response">{formatLargeNumber(p.currentTokens, 0)}</span> / 
+                                <span className="token-response">{formatLargeNumber(p.currentTokens, 0)}</span> = {formatLargeNumber(totalOutputTokens, 0)} / 
                                 {formatLargeNumber(p.totalTokens, 0)} tk)
                             </span>
                             {isComplete && (
@@ -141,7 +133,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                     Unused: {formatLargeNumber(unusedTokens, 0)} tk
                                 </span>
                             )}
-                            {timeToFirstToken !== null && <span className="token-count-text">TTFT: {timeToFirstToken.toFixed(1)}s</span>}
                         </div>
                         <div className="partial-text-preview">
                             <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
