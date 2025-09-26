@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C68 (Implement all UI fixes and enhancements)
+// Updated on: C69 (Implement all UI fixes and enhancements)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
-import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscSync } from 'react-icons/vsc';
+import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning, VscSync, VscGoToFile } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { ParsedResponse, PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
@@ -169,7 +169,17 @@ const App = () => {
     const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle.cycleId - 1)} disabled={currentCycle.cycleId <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle.cycleId}</span><button onClick={(e) => handleCycleChange(e, currentCycle.cycleId + 1)} disabled={currentCycle.cycleId >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
     const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
     const SaveStatusIndicator = () => { let icon; let title; switch(saveStatus) { case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break; case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break; case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break; default: icon = null; title = ""; } return <div className="save-status-indicator" title={title}>{icon}</div>; };
-    const renderHeaderButtons = () => { if (connectionMode === 'manual') { return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>; } else { return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled} title={isGenerateResponsesDisabled ? `Cannot generate responses:\n${newCycleButtonDisabledReason}` : "Generate responses from local LLM"}><VscWand /> Generate responses</button>; } };
+    const renderHeaderButtons = () => {
+        const generationInProgress = currentCycle?.status === 'generating';
+        if (generationInProgress) {
+            return <button onClick={() => setIsGenerating(true)} title="View Generation Progress"><VscVm /> View Generation Progress</button>;
+        }
+        if (connectionMode === 'manual') {
+            return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
+        } else {
+            return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled} title={isGenerateResponsesDisabled ? `Cannot generate responses:\n${newCycleButtonDisabledReason}` : "Generate responses from local LLM"}><VscWand /> Generate responses</button>;
+        }
+    };
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => {setResponseCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>

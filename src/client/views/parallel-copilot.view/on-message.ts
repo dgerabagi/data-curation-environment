@@ -1,4 +1,5 @@
-// Updated on: C68 (Add Stop Generation handler)
+// src/client/views/parallel-copilot.view/on-message.ts
+// Updated on: C69 (Add Stop and Single Regen handlers)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -35,10 +36,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         const cycleData = await historyService.getCycleData(data.cycleId);
         if (cycleData) {
             const prompt = await promptService.generatePromptString(cycleData);
-            // This needs to be updated to handle a single response stream
-            // For now, it will log the request.
-            loggerService.log(`[WIP] Received request to regenerate tab ${data.tabId} for cycle ${data.cycleId}`);
-            // await llmService.generateSingle(prompt, data.cycleId, data.tabId);
+            loggerService.log(`[on-message] Received request to regenerate tab ${data.tabId} for cycle ${data.cycleId}`);
+            await llmService.generateSingle(prompt, data.cycleId, data.tabId);
         }
     });
 

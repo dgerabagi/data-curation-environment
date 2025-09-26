@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C67 (Add status to PcppCycle)
+// Updated on: C69 (Add Stop and Single Regen types)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";

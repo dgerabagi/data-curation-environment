@@ -1,3 +1,5 @@
+// src/common/ipc/channels.enum.ts
+// Updated on: C69 (Add Stop and Single Regen channels)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",

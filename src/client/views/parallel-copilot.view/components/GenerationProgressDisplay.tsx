@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C68 (Implement all UI fixes and enhancements)
+// Updated on: C69 (Implement functional buttons and color-coded tokens)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { TabState } from '../view';
@@ -97,11 +97,12 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                     <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
-            <div className="progress-total">
+            <div className="progress-total token-count-text">
                 Total Tokens: (
                 <span className="token-thinking">{formatLargeNumber(progressData.reduce((s, p) => s + p.thinkingTokens, 0), 0)}</span> + 
                 <span className="token-response">{formatLargeNumber(progressData.reduce((s, p) => s + p.currentTokens, 0), 0)}</span> / 
                 {formatLargeNumber(progressData.reduce((s, p) => s + p.totalTokens, 0), 0)} tk)
+                <span className="token-unused" style={{marginLeft: '16px'}}>Unused: {formatLargeNumber(progressData.reduce((s,p)=>s + (p.totalTokens - p.thinkingTokens - p.currentTokens), 0), 0)} tk</span>
             </div>
             
             {sortedProgressData.map(p => {

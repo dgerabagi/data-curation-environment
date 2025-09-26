@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C64 (Move regenerate button to tab title row and style)
+// Updated on: C69 (Implement loading state for regeneration)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
 import { TabState as OriginalTabState } from '../view';
