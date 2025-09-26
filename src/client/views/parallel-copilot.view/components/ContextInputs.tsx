@@ -1,7 +1,18 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C2 (Add onBlur handlers)
+// Updated on: C73 (Make Ephemeral Context collapsible)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import { VscChevronDown } from 'react-icons/vsc';
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, className, extraHeaderContent }) => (
+    <div className={`collapsible-section-inner context-collapsible ${className || ''}`}>
+        <div className={`collapsible-header-inner`} onClick={onToggle}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} /><span>{title}</span></div>
+            {extraHeaderContent}
+        </div>
+        {!isCollapsed && <div className="collapsible-content-inner">{children}</div>}
+    </div>
+);
 
 interface ContextInputsProps {
     cycleContext: string;
@@ -11,6 +22,8 @@ interface ContextInputsProps {
     onCycleContextChange: (value: string) => void;
     onEphemeralContextChange: (value: string) => void;
     workflowStep: string | null;
+    isEphemeralContextCollapsed: boolean;
+    onToggleEphemeralContext: () => void;
 }
 
 const ContextInputs: React.FC<ContextInputsProps> = ({
@@ -20,7 +33,9 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
     ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
-    workflowStep
+    workflowStep,
+    isEphemeralContextCollapsed,
+    onToggleEphemeralContext
 }) => {
     return (
         <div className="context-inputs">
@@ -36,18 +51,20 @@ const ContextInputs: React.FC<ContextInputsProps> = ({
                     spellCheck={false}
                 />
             </div>
-            <div className="context-input-wrapper">
-                <div className="context-label">
-                    <span>Ephemeral Context</span>
-                    <span>({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>
-                </div>
+            
+            <CollapsibleSection 
+                title="Ephemeral Context" 
+                isCollapsed={isEphemeralContextCollapsed} 
+                onToggle={onToggleEphemeralContext}
+                extraHeaderContent={<span className="context-token-count">({formatLargeNumber(ephemeralContextTokens, 1)} tk)</span>}
+            >
                 <textarea
                     className="response-textarea"
                     value={ephemeralContext}
                     onChange={(e) => onEphemeralContextChange(e.target.value)}
                     spellCheck={false}
                 />
-            </div>
+            </CollapsibleSection>
         </div>
     );
 };

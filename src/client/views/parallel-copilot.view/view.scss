@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C72 (Add styles for view toggle button)
+// Updated on: C73 (Add styles for collapsible context)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -83,11 +83,25 @@ body {
             display: flex;
             justify-content: space-between;
         }
+    }
 
-        // Use response-textarea styles for consistency
-        .response-textarea {
-            height: 150px;
-        }
+    .context-collapsible .collapsible-header-inner {
+        padding: 4px 8px;
+    }
+
+    .context-collapsible .collapsible-content-inner {
+        padding: 0;
+    }
+
+    .context-token-count {
+        font-weight: normal;
+        text-transform: none;
+        color: var(--vscode-descriptionForeground);
+    }
+
+    // Use response-textarea styles for consistency
+    .response-textarea {
+        height: 150px;
     }
 }
 
@@ -1109,7 +1123,7 @@ body {
 
 .collapsible-header-inner {
     background-color: var(--vscode-sideBar-sectionHeaderBackground);
-    padding: 4px 8px;
+    padding: 6px 10px;
     font-size: 11px;
     text-transform: uppercase;
     font-weight: bold;

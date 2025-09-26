@@ -1,4 +1,4 @@
-// Updated on: C72 (Add pcppActiveView to ViewState)
+// Updated on: C73 (Remove pcppActiveView)
 export interface WebviewApi<StateType> {
     postMessage(message: unknown): void;
     getState(): StateType | undefined;
@@ -8,7 +8,6 @@ export interface WebviewApi<StateType> {
 export interface ViewState {
     selectedFiles?: string[];
     pcppLeftPaneWidth?: number;
-    pcppActiveView?: 'main' | 'progress';
 }
 
 declare global {

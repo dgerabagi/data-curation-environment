@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C67 (Add createNewCyclePlaceholder)
+// Updated on: C73 (Add isEphemeralContextCollapsed to default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -110,6 +110,7 @@ export class HistoryService {
             pathOverrides: {},
             activeWorkflowStep: null,
             status: 'complete',
+            isEphemeralContextCollapsed: true, // Default to collapsed
         };
 
         if (isFreshEnvironment) {
@@ -199,6 +200,7 @@ export class HistoryService {
             tabCount: tabCount,
             isParsedMode: true,
             status: 'generating', // Set status to generating
+            isEphemeralContextCollapsed: true,
         };
 
         history.cycles.push(newCycle);

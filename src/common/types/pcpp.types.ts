@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C67 (Add status field)
+// Updated on: C73 (Add isEphemeralContextCollapsed)
 export interface PcppResponse {
     content: string;
     isLoading?: boolean;
@@ -23,7 +23,8 @@ export interface PcppCycle {
     cycleContextHeight?: number;
     ephemeralContextHeight?: number;
     activeWorkflowStep?: string;
-    status?: 'complete' | 'generating'; // New status field
+    status?: 'complete' | 'generating';
+    isEphemeralContextCollapsed?: boolean; // New
 }
 
 export interface PcppHistoryFile {
