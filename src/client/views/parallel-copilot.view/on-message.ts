@@ -1,4 +1,4 @@
-// Updated on: C62 (Add handler for single regeneration)
+// Updated on: C66 (Refactor to handle new LLM service flow)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -13,8 +13,22 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
-        const prompt = await promptService.generatePromptString(data.cycleData);
-        await llmService.generateBatch(prompt, data.count, data.cycleData);
+        try {
+            const prompt = await promptService.generatePromptString(data.cycleData);
+            const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
+            
+            // Create a new cycle with the received responses
+            const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(
+                responses,
+                data.cycleData.tabCount || 4,
+                data.cycleData.cycleContext
+            );
+            
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+        } catch (error) {
+            loggerService.error(`Batch generation orchestration failed: ${error}`);
+            // Optionally, send an error message to the client
+        }
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
@@ -29,8 +43,13 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         }
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
-        promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, async (data) => {
+        try {
+            const prompt = await promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
+            // The above function now handles the LLM call internally, so no more code is needed here.
+        } catch (error) {
+            loggerService.error(`Initial artifacts and generation failed: ${error}`);
+        }
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {

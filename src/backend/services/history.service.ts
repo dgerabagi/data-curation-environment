@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C62 (Add updateSingleResponseInCycle)
+// Updated on: C66 (Add data loss prevention)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -40,6 +40,25 @@ export class HistoryService {
 
     private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {
         if (!this.historyFilePath) return;
+
+        // --- DATA LOSS PREVENTION (C66) ---
+        if (!data || !Array.isArray(data.cycles) || (data.cycles.length === 0 && data.projectScope === undefined)) {
+            const errorMessage = `[CRITICAL] Aborting write to dce_history.json: Data is invalid or empty.`;
+            Services.loggerService.error(errorMessage);
+            try {
+                if (this.workspaceRoot) {
+                    const logFilePath = path.join(this.workspaceRoot, 'log-state-logs.md');
+                    const logContent = `## DATA LOSS PREVENTION TRIGGERED ##\n\n**Timestamp:** ${new Date().toISOString()}\n\n**Reason:** Attempted to write an invalid or empty history object to dce_history.json. The write operation was aborted.\n\n**Problematic State Object:**\n\`\`\`json\n${JSON.stringify(data, null, 2)}\n\`\`\`\n`;
+                    await fs.writeFile(logFilePath, logContent, 'utf-8');
+                    Services.loggerService.log(`[CRITICAL] The invalid state object has been logged to log-state-logs.md`);
+                }
+            } catch (logError) {
+                Services.loggerService.error(`[CRITICAL] Failed to write data loss log: ${logError}`);
+            }
+            return; // Abort the write
+        }
+        // --- END DATA LOSS PREVENTION ---
+
         const dir = path.dirname(this.historyFilePath);
         try {
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(dir));
@@ -164,8 +183,8 @@ export class HistoryService {
         const history = await this._readHistoryFile();
         history.projectScope = projectScope; // Save the scope with the new history
         
-        const newCycleId = 1; // Onboarding always creates cycle 1
-        
+        const newCycleId = (history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
+
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
             newResponses[(i+1).toString()] = { content: responses[i] || '' };
@@ -174,7 +193,7 @@ export class HistoryService {
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'Initial Artifacts',
+            title: 'New Cycle',
             cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
@@ -182,7 +201,7 @@ export class HistoryService {
             isParsedMode: true, // Default to parsed view for new responses
         };
 
-        history.cycles = [newCycle]; // Replace any existing history
+        history.cycles.push(newCycle);
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
         

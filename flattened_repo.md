@@ -1,18 +1,18 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-25T23:18:36.736Z
+  Date Generated: 2025-09-25T23:59:44.555Z
   ---
   Total Files: 190
-  Approx. Tokens: 524586
+  Approx. Tokens: 525340
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A200. Cycle Log.md (225404 tokens)
 2. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html (27803 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
-4. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md (12445 tokens)
-5. src\client\views\parallel-copilot.view\view.tsx (10138 tokens)
+4. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md (11684 tokens)
+5. src\client\views\parallel-copilot.view\view.tsx (10158 tokens)
 6. src\Artifacts\A0. DCE Master Artifact List.md (9057 tokens)
 7. src\client\views\parallel-copilot.view\view.scss (7249 tokens)
 8. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py (6132 tokens)
@@ -144,8 +144,8 @@
 122. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 123. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 124. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-125. src\backend\services\history.service.ts - Lines: 313 - Chars: 12719 - Tokens: 3180
-126. src\backend\services\llm.service.ts - Lines: 222 - Chars: 10525 - Tokens: 2632
+125. src\backend\services\history.service.ts - Lines: 332 - Chars: 13974 - Tokens: 3494
+126. src\backend\services\llm.service.ts - Lines: 228 - Chars: 11037 - Tokens: 2760
 127. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 128. src\backend\services\prompt.service.ts - Lines: 363 - Chars: 20272 - Tokens: 5068
 129. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -174,11 +174,11 @@
 152. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 74 - Chars: 3316 - Tokens: 829
 153. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 154. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 147 - Chars: 7218 - Tokens: 1805
+155. src\client\views\parallel-copilot.view\on-message.ts - Lines: 166 - Chars: 8003 - Tokens: 2001
 156. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 127 - Chars: 6701 - Tokens: 1676
 157. src\client\views\parallel-copilot.view\view.scss - Lines: 1235 - Chars: 28996 - Tokens: 7249
 158. src\client\views\parallel-copilot.view\view.ts - Lines: 10 - Chars: 327 - Tokens: 82
-159. src\client\views\parallel-copilot.view\view.tsx - Lines: 431 - Chars: 40550 - Tokens: 10138
+159. src\client\views\parallel-copilot.view\view.tsx - Lines: 434 - Chars: 40630 - Tokens: 10158
 160. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 161. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 162. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -202,9 +202,9 @@
 180. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 181. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 4742 - Tokens: 1186
 182. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
-183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 20 - Chars: 1109 - Tokens: 278
+183. src\Artifacts\A11. DCE - Regression Case Studies - WORKING.md - Lines: 397 - Chars: 46733 - Tokens: 11684
 184. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 132 - Chars: 7129 - Tokens: 1783
-185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 420 - Chars: 49779 - Tokens: 12445
+185. src\Artifacts\A11.1 DCE - New Regression Case Studies - READ-ONLY.md - Lines: 47 - Chars: 4539 - Tokens: 1135
 186. GPT-OSS-HARMONY-REFERENCE-REPO\templates\harmony_demo.html - Lines: 2859 - Chars: 111209 - Tokens: 27803
 187. GPT-OSS-HARMONY-REFERENCE-REPO\python\openai_harmony\__init__.py - Lines: 723 - Chars: 24526 - Tokens: 6132
 188. GPT-OSS-HARMONY-REFERENCE-REPO\examples\test_tools.py - Lines: 69 - Chars: 1756 - Tokens: 439
@@ -18072,7 +18072,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C62 (Add updateSingleResponseInCycle)
+// Updated on: C66 (Add data loss prevention)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -18113,6 +18113,25 @@ export class HistoryService {
 
     private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {
         if (!this.historyFilePath) return;
+
+        // --- DATA LOSS PREVENTION (C66) ---
+        if (!data || !Array.isArray(data.cycles) || (data.cycles.length === 0 && data.projectScope === undefined)) {
+            const errorMessage = `[CRITICAL] Aborting write to dce_history.json: Data is invalid or empty.`;
+            Services.loggerService.error(errorMessage);
+            try {
+                if (this.workspaceRoot) {
+                    const logFilePath = path.join(this.workspaceRoot, 'log-state-logs.md');
+                    const logContent = `## DATA LOSS PREVENTION TRIGGERED ##\n\n**Timestamp:** ${new Date().toISOString()}\n\n**Reason:** Attempted to write an invalid or empty history object to dce_history.json. The write operation was aborted.\n\n**Problematic State Object:**\n\`\`\`json\n${JSON.stringify(data, null, 2)}\n\`\`\`\n`;
+                    await fs.writeFile(logFilePath, logContent, 'utf-8');
+                    Services.loggerService.log(`[CRITICAL] The invalid state object has been logged to log-state-logs.md`);
+                }
+            } catch (logError) {
+                Services.loggerService.error(`[CRITICAL] Failed to write data loss log: ${logError}`);
+            }
+            return; // Abort the write
+        }
+        // --- END DATA LOSS PREVENTION ---
+
         const dir = path.dirname(this.historyFilePath);
         try {
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(dir));
@@ -18237,8 +18256,8 @@ export class HistoryService {
         const history = await this._readHistoryFile();
         history.projectScope = projectScope; // Save the scope with the new history
         
-        const newCycleId = 1; // Onboarding always creates cycle 1
-        
+        const newCycleId = (history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
+
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
             newResponses[(i+1).toString()] = { content: responses[i] || '' };
@@ -18247,7 +18266,7 @@ export class HistoryService {
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'Initial Artifacts',
+            title: 'New Cycle',
             cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
@@ -18255,7 +18274,7 @@ export class HistoryService {
             isParsedMode: true, // Default to parsed view for new responses
         };
 
-        history.cycles = [newCycle]; // Replace any existing history
+        history.cycles.push(newCycle);
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new cycle ${newCycleId} with ${responses.length} responses.`);
         
@@ -18388,7 +18407,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C63 (Add timestamps to progress updates)
+// Updated on: C66 (Refactor to separate response generation from cycle creation)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -18416,10 +18435,10 @@ export class LlmService {
         // It's a simplified version of generateBatch.
     }
 
-    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle) {
+    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
         const settings = await Services.settingsService.getSettings();
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
-        if (!serverIpc) return;
+        if (!serverIpc) return [];
 
         let endpointUrl = '';
         let requestBody: any = {};
@@ -18451,140 +18470,146 @@ export class LlmService {
                 break;
             default:
                 Services.loggerService.error("Attempted to call LLM in manual mode.");
-                return;
+                return [];
         }
 
         if (!endpointUrl) {
             Services.loggerService.error("LLM endpoint URL is not configured.");
-            return;
+            return [];
         }
 
         const controller = new AbortController();
         generationControllers.set(cycleData.cycleId, controller);
         const startTime = Date.now();
 
-        try {
-            Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
-            const response = await fetch(endpointUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-                signal: controller.signal,
-            });
+        return new Promise(async (resolve, reject) => {
+            try {
+                Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
+                const response = await fetch(endpointUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody),
+                    signal: controller.signal,
+                });
 
-            if (!response.ok || !response.body) {
-                const errorBody = await response.text();
-                throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
-            }
-
-            const stream = response.body;
-            let buffer = '';
-            let lastTpsUpdateTime = Date.now();
-            let tokensSinceLastUpdate = 0;
-            
-            const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
-                responseId: i + 1,
-                promptTokens: 0,
-                thinkingTokens: 0,
-                currentTokens: 0,
-                totalTokens: MAX_TOKENS_PER_RESPONSE,
-                status: 'pending',
-                startTime: startTime,
-            }));
-            const responseContents: string[] = Array(count).fill('');
-            const finishedResponses: boolean[] = Array(count).fill(false);
-            let totalFinished = 0;
-
-            const sendProgressUpdate = () => {
-                const now = Date.now();
-                const elapsed = (now - lastTpsUpdateTime) / 1000;
-                if (elapsed > 0) {
-                    const tps = tokensSinceLastUpdate / elapsed;
-                    const chunks: { [key: number]: string } = {};
-                    responseContents.forEach((content, i) => { chunks[i + 1] = content; });
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, { progress: progressData, tps: Math.round(tps), chunks });
-                    tokensSinceLastUpdate = 0;
-                    lastTpsUpdateTime = now;
+                if (!response.ok || !response.body) {
+                    const errorBody = await response.text();
+                    throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
                 }
-            };
-            const throttledSendProgress = this.throttle(sendProgressUpdate, 200);
 
-            stream.on('data', (chunk) => {
-                buffer += chunk.toString();
+                const stream = response.body;
+                let buffer = '';
+                let lastTpsUpdateTime = Date.now();
+                let tokensSinceLastUpdate = 0;
                 
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
+                const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
+                    responseId: i + 1,
+                    promptTokens: 0,
+                    thinkingTokens: 0,
+                    currentTokens: 0,
+                    totalTokens: MAX_TOKENS_PER_RESPONSE,
+                    status: 'pending',
+                    startTime: startTime,
+                }));
+                const responseContents: string[] = Array(count).fill('');
+                const finishedResponses: boolean[] = Array(count).fill(false);
+                let totalFinished = 0;
 
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const dataStr = line.substring(6);
-                        if (dataStr.trim() === '[DONE]') continue;
-                        
-                        try {
-                            const data = JSON.parse(dataStr);
-                            const choices = data.choices;
-                            if (Array.isArray(choices)) {
-                                for (const choice of choices) {
-                                    const responseIndex = choice.index;
-                                    if (responseIndex === undefined || responseIndex >= count) continue;
+                const sendProgressUpdate = () => {
+                    const now = Date.now();
+                    const elapsed = (now - lastTpsUpdateTime) / 1000;
+                    if (elapsed > 0) {
+                        const tps = tokensSinceLastUpdate / elapsed;
+                        const chunks: { [key: number]: string } = {};
+                        responseContents.forEach((content, i) => { chunks[i + 1] = content; });
+                        serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, { progress: progressData, tps: Math.round(tps), chunks });
+                        tokensSinceLastUpdate = 0;
+                        lastTpsUpdateTime = now;
+                    }
+                };
+                const throttledSendProgress = this.throttle(sendProgressUpdate, 200);
 
-                                    if (choice.finish_reason !== null) {
-                                        if (!finishedResponses[responseIndex]) {
-                                            Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
-                                            finishedResponses[responseIndex] = true;
-                                            progressData[responseIndex].status = 'complete';
-                                            totalFinished++;
-                                        }
-                                    } else if (choice.delta) {
-                                        if (choice.delta.reasoning_content !== undefined) {
-                                            if (progressData[responseIndex].status !== 'thinking') {
-                                                progressData[responseIndex].status = 'thinking';
-                                                progressData[responseIndex].thinkingStartTime = Date.now();
+                stream.on('data', (chunk) => {
+                    buffer += chunk.toString();
+                    
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.substring(6);
+                            if (dataStr.trim() === '[DONE]') continue;
+                            
+                            try {
+                                const data = JSON.parse(dataStr);
+                                const choices = data.choices;
+                                if (Array.isArray(choices)) {
+                                    for (const choice of choices) {
+                                        const responseIndex = choice.index;
+                                        if (responseIndex === undefined || responseIndex >= count) continue;
+
+                                        if (choice.finish_reason !== null) {
+                                            if (!finishedResponses[responseIndex]) {
+                                                Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
+                                                finishedResponses[responseIndex] = true;
+                                                progressData[responseIndex].status = 'complete';
+                                                totalFinished++;
                                             }
-                                            const contentChunk = choice.delta.reasoning_content;
-                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                            tokensSinceLastUpdate += chunkTokens;
-                                            progressData[responseIndex].thinkingTokens += chunkTokens;
-                                        }
-                                        
-                                        if (choice.delta.content !== undefined) {
-                                            if (progressData[responseIndex].status !== 'generating') {
-                                                progressData[responseIndex].status = 'generating';
-                                                progressData[responseIndex].generationStartTime = Date.now();
+                                        } else if (choice.delta) {
+                                            if (choice.delta.reasoning_content !== undefined) {
+                                                if (progressData[responseIndex].status !== 'thinking') {
+                                                    progressData[responseIndex].status = 'thinking';
+                                                    progressData[responseIndex].thinkingStartTime = Date.now();
+                                                }
+                                                const contentChunk = choice.delta.reasoning_content;
+                                                const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                                tokensSinceLastUpdate += chunkTokens;
+                                                progressData[responseIndex].thinkingTokens += chunkTokens;
                                             }
-                                            const contentChunk = choice.delta.content;
-                                            responseContents[responseIndex] += contentChunk;
-                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                            tokensSinceLastUpdate += chunkTokens;
-                                            progressData[responseIndex].currentTokens += chunkTokens;
+                                            
+                                            if (choice.delta.content !== undefined) {
+                                                if (progressData[responseIndex].status !== 'generating') {
+                                                    progressData[responseIndex].status = 'generating';
+                                                    progressData[responseIndex].generationStartTime = Date.now();
+                                                }
+                                                const contentChunk = choice.delta.content;
+                                                responseContents[responseIndex] += contentChunk;
+                                                const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                                tokensSinceLastUpdate += chunkTokens;
+                                                progressData[responseIndex].currentTokens += chunkTokens;
+                                            }
                                         }
                                     }
                                 }
+                            } catch (e) {
+                                Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`);
                             }
-                        } catch (e) {
-                            Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`);
                         }
                     }
+                    throttledSendProgress();
+                });
+
+                stream.on('end', async () => {
+                    Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
+                    sendProgressUpdate(); // Final update
+                    resolve(responseContents); // Resolve the promise with the final content
+                });
+                
+                stream.on('error', (err) => {
+                    reject(err);
+                });
+
+            } catch (error: any) {
+                 if (error instanceof AbortError) {
+                    Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
+                } else {
+                    Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
                 }
-                throttledSendProgress();
-            });
-
-            stream.on('end', async () => {
-                Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
-                sendProgressUpdate(); // Final update
-                const { newCycleId, newMaxCycle } = await Services.historyService.createNewCycleWithResponses(responseContents, cycleData.tabCount || 4, cycleData.cycleContext);
-                serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
-            });
-
-        } catch (error: any) {
-             if (error instanceof AbortError) {
-                Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
-            } else {
-                Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+                reject(error);
+            } finally {
+                generationControllers.delete(cycleData.cycleId);
             }
-        } finally {
-            generationControllers.delete(cycleData.cycleId);
-        }
+        });
     }
 
     private throttle(func: (...args: any[]) => void, limit: number) {
@@ -22074,7 +22099,7 @@ export const viewConfig = {
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
-// Updated on: C62 (Add handler for single regeneration)
+// Updated on: C66 (Refactor to handle new LLM service flow)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -22089,8 +22114,22 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestBatchGeneration, async (data) => {
         loggerService.log(`Received RequestBatchGeneration for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
-        const prompt = await promptService.generatePromptString(data.cycleData);
-        await llmService.generateBatch(prompt, data.count, data.cycleData);
+        try {
+            const prompt = await promptService.generatePromptString(data.cycleData);
+            const responses = await llmService.generateBatch(prompt, data.count, data.cycleData);
+            
+            // Create a new cycle with the received responses
+            const { newCycleId, newMaxCycle } = await historyService.createNewCycleWithResponses(
+                responses,
+                data.cycleData.tabCount || 4,
+                data.cycleData.cycleContext
+            );
+            
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+        } catch (error) {
+            loggerService.error(`Batch generation orchestration failed: ${error}`);
+            // Optionally, send an error message to the client
+        }
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
@@ -22105,8 +22144,13 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         }
     });
 
-    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, (data) => {
-        promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
+    serverIpc.onClientMessage(ClientToServerChannel.RequestInitialArtifactsAndGeneration, async (data) => {
+        try {
+            const prompt = await promptService.generateInitialArtifactsAndResponses(data.projectScope, data.responseCount, serverIpc);
+            // The above function now handles the LLM call internally, so no more code is needed here.
+        } catch (error) {
+            loggerService.error(`Initial artifacts and generation failed: ${error}`);
+        }
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSettings, async () => {
@@ -23606,7 +23650,7 @@ export interface TabState {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C64 (Implement UI improvements for generation progress and tabs)
+// Updated on: C66 (Use newCycleButtonDisabledReason for Generate Responses button)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -23872,7 +23916,10 @@ const App = () => {
     React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
     React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
 
-    const isNewCycleButtonDisabled = React.useMemo(() => { if (currentCycle === 0) return true; if (currentCycle !== maxCycle) return true; return !isReadyForNextCycle; }, [currentCycle, maxCycle, isReadyForNextCycle]);
+    const isGenerateResponsesDisabled = React.useMemo(() => {
+        if (currentCycle === 0) return true;
+        return !isReadyForNextCycle;
+    }, [currentCycle, isReadyForNextCycle]);
 
     const handleGeneratePrompt = () => { if (currentCycle === null) return; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle, selectedFiles: [] }); setWorkflowStep('readyForNewCycle'); };
     
@@ -24009,7 +24056,7 @@ const App = () => {
         if (connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
-            return <button onClick={handleGenerateResponses} disabled={isGenerating} title="Generate responses from local LLM"><VscWand /> Generate responses</button>;
+            return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled} title={isGenerateResponsesDisabled ? `Cannot generate responses:\n${newCycleButtonDisabledReason}` : "Generate responses from local LLM"}><VscWand /> Generate responses</button>;
         }
     };
 
@@ -24017,7 +24064,7 @@ const App = () => {
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => {setResponseCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
         
         <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
-            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={isNewCycleButtonDisabled} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
+            <CycleNavigator currentCycle={currentCycle} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={!isReadyForNextCycle} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
             <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} />
         </CollapsibleSection>
 
@@ -25724,191 +25771,10 @@ This document serves as a living record of persistent or complex bugs that have 
 -   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`, `src/backend/services/llm.service.ts`
 -   **Cycles Observed:** C44
 -   **Symptom:** When generating batch responses from the vLLM server, the AI-generated text is cut off prematurely, often right before it would have written `
-</file_artifact>
-
-<file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
-// src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C64 (Refactor layout, add timer and manual navigation)
-import * as React from 'react';
-import { formatLargeNumber } from '../../../../common/utils/formatting';
-import { TabState } from '../view';
-import { GenerationProgress } from '@/common/ipc/channels.type';
-import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
-
-interface GenerationProgressDisplayProps {
-    progressData: GenerationProgress[];
-    tps: number;
-    tabs: { [key: string]: TabState };
-    onStop: (responseId: number) => void;
-    onRegenerate: (responseId: number) => void;
-    isGenerationComplete: boolean;
-    onViewResponses: () => void;
-    startTime: number | null;
-}
-
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime }) => {
-    const [isSorted, setIsSorted] = React.useState(false);
-    const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
-    
-    React.useEffect(() => {
-        if (!startTime || isGenerationComplete) {
-            return;
-        }
-
-        const interval = setInterval(() => {
-            const elapsed = (Date.now() - startTime) / 1000;
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = (elapsed % 60).toFixed(1);
-            setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
-        }, 100);
-
-        return () => clearInterval(interval);
-    }, [startTime, isGenerationComplete]);
-
-    const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
-    const completedCount = progressData.filter(p => p.status === 'complete').length;
-
-    const sortedProgressData = React.useMemo(() => {
-        if (!isSorted) return progressData;
-        return [...progressData].sort((a, b) => (b.thinkingTokens + b.currentTokens) - (a.thinkingTokens + a.currentTokens));
-    }, [progressData, isSorted]);
-
-    const getStatusIndicator = (status: GenerationProgress['status']) => {
-        switch (status) {
-            case 'thinking':
-                return <><VscLoading className="spinner" /> Thinking...</>;
-            case 'generating':
-                return <><VscLoading className="spinner" /> Generating...</>;
-            case 'complete':
-                return <><VscCheck className="complete-check" /> Complete</>;
-            case 'error':
-                return <>Error</>;
-            default:
-                return <>Pending...</>;
-        }
-    };
-
-    return (
-        <div className="generation-progress-display">
-            <div className="progress-header">
-                <span className="progress-title">Generating Responses...</span>
-                <div className="header-controls">
-                    <button onClick={() => setIsSorted(s => !s)} className="sort-button" title="Sort by Total Tokens">
-                        {isSorted ? <VscListOrdered/> : <VscListUnordered />} Sort
-                    </button>
-                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
-                    <span className="elapsed-timer">{elapsedTime}</span>
-                </div>
-            </div>
-            <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
-            
-            {sortedProgressData.map(p => {
-                const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
-                const generatedPct = (p.currentTokens / p.totalTokens) * 100;
-                const remainingPct = 100 - thinkingPct - generatedPct;
-                const isComplete = p.status === 'complete';
-                const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
-                const timeToFirstToken = (p.generationStartTime && p.startTime) ? (p.generationStartTime - p.startTime) / 1000 : null;
-
-
-                return (
-                    <div key={p.responseId} className="progress-item-container">
-                        <div className='progress-item-header'>
-                            <span>Resp {p.responseId}</span>
-                            <div className="status-indicator-wrapper">
-                                <span className={`status-indicator status-${p.status}`}>
-                                    {getStatusIndicator(p.status)}
-                                </span>
-                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
-                                <button onClick={() => onRegenerate(p.responseId)} disabled={p.status === 'thinking' || p.status === 'generating'} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
-                            </div>
-                        </div>
-                        <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
-                            <div className="progress-segment thinking" style={{ width: `${thinkingPct}%` }} title={`Thinking: ${p.thinkingTokens} tk`}></div>
-                            <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
-                            <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
-                        </div>
-                        <div className="token-count-footer">
-                            <span className="token-count-text">
-                                ({formatLargeNumber(p.thinkingTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
-                            </span>
-                            {isComplete && (
-                                <span className="unused-tokens-display">
-                                    Unused: {formatLargeNumber(unusedTokens, 0)} tk
-                                </span>
-                            )}
-                            {timeToFirstToken !== null && <span className="token-count-text">TTFT: {timeToFirstToken.toFixed(1)}s</span>}
-                        </div>
-                        <div className="partial-text-preview">
-                            <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
-                        </div>
-                    </div>
-                );
-            })}
-
-            {isGenerationComplete && (
-                <div className="progress-footer">
-                    <span>{completedCount}/{progressData.length} Responses Complete</span>
-                    <button onClick={onViewResponses} className="styled-button">
-                        View Responses <VscArrowRight />
-                    </button>
-                </div>
-            )}
-        </div>
-    );
-};
-
-export default GenerationProgressDisplay;
-</file_artifact>
-
-<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies - READ-ONLY.md">
-# Artifact A11.1: DCE - New Regression Case Studies
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C65 (Add Malformed JSON Array case study)
-
-- **Key/Value for A0:**
-- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
-
-## 1. Purpose
-
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
-
-Add new Case Studies to A11, not to this artifact. Thats the point of splitting in the first place.
-
-**This artifact is the historical archive for older case studies.** New, active issues should be logged in `A11. DCE - Regression Case Studies.md`. This separation keeps the primary document focused and manageable in size.
-
-## 2. Case Studies
 
 ---
 
-### Case Study 041: Malformed JSON Array in LLM Responses
 
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** C65
--   **Symptom:** When using "Demo Mode" with a local vLLM, many responses fail to parse. The parser reports a generic failure, even though the response appears to be mostly correct JSON.
--   **Root Cause Analysis (RCA):** The LLM, while correctly generating the `summary` and `course_of_action` fields, was frequently failing to generate a valid JSON array for the `files` property. Instead of a comma-separated list of objects within `[]`, it would often output a series of concatenated, independent JSON objects, sometimes with extra closing braces. This malformed structure caused the standard `JSON.parse()` call to fail.
--   **Codified Solution & Best Practice:**
-    1.  **Implement a Hybrid Parser:** A single parsing strategy is too brittle for inconsistent LLM output. The parser was refactored into a multi-stage process.
-    2.  **Stage 1 (Strict JSON):** Attempt to parse the entire string with `JSON.parse()`. This handles the "perfect" cases.
-    3.  **Stage 2 (Hybrid Regex Fallback):** If Stage 1 fails, enter a hybrid mode. Use targeted, less-strict regular expressions to find and extract the JSON-like content of the `summary`, `course_of_action`, and `curator_activity` fields. Then, use a global regex to find all occurrences of the file object pattern (e.g., `{"path": "...", "content": "..."}`). These individually extracted, valid parts are then assembled into a valid `ParsedResponse` object.
-    4.  **Stage 3 (XML Fallback):** If both JSON-based methods fail, fall back to the original regex parser that looks for XML-style tags.
-    5.  **Best Practice:** When parsing LLM output that is intended to be structured, do not assume the structure will always be perfect. Implement a layered parsing strategy that can gracefully degrade from strict parsing (e.g., `JSON.parse`) to more flexible methods (like targeted regex) to maximize the success rate and recover as much data as possible from partially correct responses.
-
----
-
-### Case Study 040: SSE Stream Parsing Fails with `invalid index: undefined`
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C58
--   **Symptom:** When receiving a streamed batch response from the vLLM server, the DCE logs are spammed with `[WARN] Received chunk with invalid index: undefined`. No response content is displayed in the UI.
--   **Root Cause Analysis (RCA):** The stream parser in `llm.service.ts` was incorrectly attempting to access `chunk.index` at the top level of the JSON payload arriving in each Server-Sent Event (SSE) chunk. The OpenAI-compatible streaming protocol, which vLLM implements, nests this value at `chunk.choices[0].index`. The parser was therefore getting `undefined` for the index and could not correctly assign the content delta to its corresponding response buffer.
--   **Codified Solution & Best Practice:**
-    1.  The SSE stream parser must correctly destructure the nested `choices` array to access the `index` and `delta` properties for each chunk. The correct access pattern is `parsedJson.choices[0].index`.
-    2.  The parser must also be robust enough to handle multiple `data:` lines arriving in a single stream buffer. The incoming buffer should be split by newline characters (`\n`), and each resulting line should be processed individually to check if it starts with `data:`.
-
----
 
 ### Case Study 001: PCPP Context Textarea Instability
 
@@ -26282,6 +26148,191 @@ Add new Case Studies to A11, not to this artifact. Thats the point of splitting 
     1.  **Strict Environment Separation:** All file system path manipulation **must** occur in the backend (`src/backend/`).
     2.  **Normalized Paths:** The backend must normalize all paths to use forward slashes (`/`) before sending them to the frontend.
     3.  **Frontend Simplicity:** The frontend code must treat all file paths as simple strings and should never attempt to parse or join them using path-specific separators.
+</file_artifact>
+
+<file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
+// src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
+// Updated on: C64 (Refactor layout, add timer and manual navigation)
+import * as React from 'react';
+import { formatLargeNumber } from '../../../../common/utils/formatting';
+import { TabState } from '../view';
+import { GenerationProgress } from '@/common/ipc/channels.type';
+import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
+
+interface GenerationProgressDisplayProps {
+    progressData: GenerationProgress[];
+    tps: number;
+    tabs: { [key: string]: TabState };
+    onStop: (responseId: number) => void;
+    onRegenerate: (responseId: number) => void;
+    isGenerationComplete: boolean;
+    onViewResponses: () => void;
+    startTime: number | null;
+}
+
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime }) => {
+    const [isSorted, setIsSorted] = React.useState(false);
+    const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
+    
+    React.useEffect(() => {
+        if (!startTime || isGenerationComplete) {
+            return;
+        }
+
+        const interval = setInterval(() => {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = (elapsed % 60).toFixed(1);
+            setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, [startTime, isGenerationComplete]);
+
+    const totalGenerated = progressData.reduce((sum, p) => sum + p.thinkingTokens + p.currentTokens, 0);
+    const completedCount = progressData.filter(p => p.status === 'complete').length;
+
+    const sortedProgressData = React.useMemo(() => {
+        if (!isSorted) return progressData;
+        return [...progressData].sort((a, b) => (b.thinkingTokens + b.currentTokens) - (a.thinkingTokens + a.currentTokens));
+    }, [progressData, isSorted]);
+
+    const getStatusIndicator = (status: GenerationProgress['status']) => {
+        switch (status) {
+            case 'thinking':
+                return <><VscLoading className="spinner" /> Thinking...</>;
+            case 'generating':
+                return <><VscLoading className="spinner" /> Generating...</>;
+            case 'complete':
+                return <><VscCheck className="complete-check" /> Complete</>;
+            case 'error':
+                return <>Error</>;
+            default:
+                return <>Pending...</>;
+        }
+    };
+
+    return (
+        <div className="generation-progress-display">
+            <div className="progress-header">
+                <span className="progress-title">Generating Responses...</span>
+                <div className="header-controls">
+                    <button onClick={() => setIsSorted(s => !s)} className="sort-button" title="Sort by Total Tokens">
+                        {isSorted ? <VscListOrdered/> : <VscListUnordered />} Sort
+                    </button>
+                    <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
+                    <span className="elapsed-timer">{elapsedTime}</span>
+                </div>
+            </div>
+            <div className="progress-total">Total Tokens Generated: {formatLargeNumber(totalGenerated, 0)}</div>
+            
+            {sortedProgressData.map(p => {
+                const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
+                const generatedPct = (p.currentTokens / p.totalTokens) * 100;
+                const remainingPct = 100 - thinkingPct - generatedPct;
+                const isComplete = p.status === 'complete';
+                const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
+                const timeToFirstToken = (p.generationStartTime && p.startTime) ? (p.generationStartTime - p.startTime) / 1000 : null;
+
+
+                return (
+                    <div key={p.responseId} className="progress-item-container">
+                        <div className='progress-item-header'>
+                            <span>Resp {p.responseId}</span>
+                            <div className="status-indicator-wrapper">
+                                <span className={`status-indicator status-${p.status}`}>
+                                    {getStatusIndicator(p.status)}
+                                </span>
+                                <button onClick={() => onStop(p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
+                                <button onClick={() => onRegenerate(p.responseId)} disabled={p.status === 'thinking' || p.status === 'generating'} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
+                            </div>
+                        </div>
+                        <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
+                            <div className="progress-segment thinking" style={{ width: `${thinkingPct}%` }} title={`Thinking: ${p.thinkingTokens} tk`}></div>
+                            <div className="progress-segment generated" style={{ width: `${generatedPct}%` }} title={`Response: ${p.currentTokens} tk`}></div>
+                            <div className="progress-segment unused" style={{ width: `${remainingPct}%` }} title="Unused"></div>
+                        </div>
+                        <div className="token-count-footer">
+                            <span className="token-count-text">
+                                ({formatLargeNumber(p.thinkingTokens, 0)} + {formatLargeNumber(p.currentTokens, 0)} / {formatLargeNumber(p.totalTokens, 0)} tk)
+                            </span>
+                            {isComplete && (
+                                <span className="unused-tokens-display">
+                                    Unused: {formatLargeNumber(unusedTokens, 0)} tk
+                                </span>
+                            )}
+                            {timeToFirstToken !== null && <span className="token-count-text">TTFT: {timeToFirstToken.toFixed(1)}s</span>}
+                        </div>
+                        <div className="partial-text-preview">
+                            <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
+                        </div>
+                    </div>
+                );
+            })}
+
+            {isGenerationComplete && (
+                <div className="progress-footer">
+                    <span>{completedCount}/{progressData.length} Responses Complete</span>
+                    <button onClick={onViewResponses} className="styled-button">
+                        View Responses <VscArrowRight />
+                    </button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default GenerationProgressDisplay;
+</file_artifact>
+
+<file path="src/Artifacts/A11.1 DCE - New Regression Case Studies - READ-ONLY.md">
+# Artifact A11.1: DCE - New Regression Case Studies
+# Date Created: C1
+# Author: AI Model & Curator
+# Updated on: C65 (Add Malformed JSON Array case study)
+
+- **Key/Value for A0:**
+- **Description:** A separate log for new regression case studies to avoid bloating the original A11 artifact.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+
+Add new Case Studies to A11, not to this artifact. Thats the point of splitting in the first place.
+
+**This artifact is the historical archive for older case studies.** New, active issues should be logged in `A11. DCE - Regression Case Studies.md`. This separation keeps the primary document focused and manageable in size.
+
+## 2. Case Studies
+
+---
+
+### Case Study 041: Malformed JSON Array in LLM Responses
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C65
+-   **Symptom:** When using "Demo Mode" with a local vLLM, many responses fail to parse. The parser reports a generic failure, even though the response appears to be mostly correct JSON.
+-   **Root Cause Analysis (RCA):** The LLM, while correctly generating the `summary` and `course_of_action` fields, was frequently failing to generate a valid JSON array for the `files` property. Instead of a comma-separated list of objects within `[]`, it would often output a series of concatenated, independent JSON objects, sometimes with extra closing braces. This malformed structure caused the standard `JSON.parse()` call to fail.
+-   **Codified Solution & Best Practice:**
+    1.  **Implement a Hybrid Parser:** A single parsing strategy is too brittle for inconsistent LLM output. The parser was refactored into a multi-stage process.
+    2.  **Stage 1 (Strict JSON):** Attempt to parse the entire string with `JSON.parse()`. This handles the "perfect" cases.
+    3.  **Stage 2 (Hybrid Regex Fallback):** If Stage 1 fails, enter a hybrid mode. Use targeted, less-strict regular expressions to find and extract the JSON-like content of the `summary`, `course_of_action`, and `curator_activity` fields. Then, use a global regex to find all occurrences of the file object pattern (e.g., `{"path": "...", "content": "..."}`). These individually extracted, valid parts are then assembled into a valid `ParsedResponse` object.
+    4.  **Stage 3 (XML Fallback):** If both JSON-based methods fail, fall back to the original regex parser that looks for XML-style tags.
+    5.  **Best Practice:** When parsing LLM output that is intended to be structured, do not assume the structure will always be perfect. Implement a layered parsing strategy that can gracefully degrade from strict parsing (e.g., `JSON.parse`) to more flexible methods (like targeted regex) to maximize the success rate and recover as much data as possible from partially correct responses.
+
+---
+
+### Case Study 040: SSE Stream Parsing Fails with `invalid index: undefined`
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C58
+-   **Symptom:** When receiving a streamed batch response from the vLLM server, the DCE logs are spammed with `[WARN] Received chunk with invalid index: undefined`. No response content is displayed in the UI.
+-   **Root Cause Analysis (RCA):** The stream parser in `llm.service.ts` was incorrectly attempting to access `chunk.index` at the top level of the JSON payload arriving in each Server-Sent Event (SSE) chunk. The OpenAI-compatible streaming protocol, which vLLM implements, nests this value at `chunk.choices[0].index`. The parser was therefore getting `undefined` for the index and could not correctly assign the content delta to its corresponding response buffer.
+-   **Codified Solution & Best Practice:**
+    1.  The SSE stream parser must correctly destructure the nested `choices` array to access the `index` and `delta` properties for each chunk. The correct access pattern is `parsedJson.choices[0].index`.
+    2.  The parser must also be robust enough to handle multiple `data:` lines arriving in a single stream buffer. The incoming buffer should be split by newline characters (`\n`), and each resulting line should be processed individually to check if it starts with `data:`.
+
+---
 </file_artifact>
 
 <file path="GPT-OSS-HARMONY-REFERENCE-REPO/templates/harmony_demo.html">
