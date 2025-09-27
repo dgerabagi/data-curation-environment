@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C73 (Add styles for collapsible context)
+// Updated on: C76 (Add spinner animation keyframes)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -20,7 +20,6 @@
     border-radius: 4px; 
 }
 
-// Make sure specific elements get the highlight correctly
 .tab-bar .tab.workflow-highlight {
     border-radius: 4px 4px 0 0;
 }
@@ -57,6 +56,9 @@
     }
 }
 
+.spinner {
+    animation: spin 1.5s linear infinite;
+}
 
 body {
     padding: 0;
@@ -99,7 +101,6 @@ body {
         color: var(--vscode-descriptionForeground);
     }
 
-    // Use response-textarea styles for consistency
     .response-textarea {
         height: 150px;
     }
@@ -128,7 +129,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    min-height: 200px; // Ensure it has a minimum height
+    min-height: 200px;
 }
 
 .onboarding-header {
@@ -255,7 +256,7 @@ body {
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
-    flex-wrap: wrap; // Allow wrapping for progress UI
+    flex-wrap: wrap;
 }
 
 .generation-progress-display {
@@ -271,13 +272,13 @@ body {
     flex-grow: 1;
     min-width: 0;
     overflow-y: auto;
-    box-sizing: border-box; // Fix for overflow
+    box-sizing: border-box;
 
     .progress-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap; /* Allow wrapping for controls */
+        flex-wrap: wrap;
         
         .progress-title {
             font-weight: bold;
@@ -288,13 +289,7 @@ body {
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 8px; /* Reduced gap */
-        }
-
-        .elapsed-timer {
-            font-family: var(--vscode-editor-font-family); // Monospace for timer
-            font-weight: bold;
-            margin-left: 8px; /* Add margin to separate from sort */
+            gap: 8px;
         }
     }
     
@@ -306,6 +301,19 @@ body {
         display: flex;
         flex-direction: column;
         gap: 4px;
+    }
+    
+    .response-title-timer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: bold;
+        .elapsed-timer {
+            font-family: var(--vscode-editor-font-family);
+            font-weight: normal;
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+        }
     }
 
     .progress-item-header {
@@ -322,8 +330,8 @@ body {
                 background-color: var(--vscode-button-secondaryBackground);
                 color: var(--vscode-button-secondaryForeground);
                 border: 1px solid var(--vscode-button-border, transparent);
-                padding: 2px 6px; /* Adjusted padding */
-                font-size: 11px; /* Adjusted font size */
+                padding: 2px 6px;
+                font-size: 11px;
                 cursor: pointer;
                 border-radius: 2px;
                 
@@ -345,10 +353,6 @@ body {
         font-size: 11px;
         font-style: italic;
         
-        .spinner {
-            animation: spin 1.5s linear infinite;
-        }
-
         &.status-complete .complete-check {
             color: var(--vscode-testing-iconPassed);
         }
@@ -363,7 +367,7 @@ body {
         overflow: hidden;
         
         &.completed .unused {
-            background-color: var(--vscode-testing-iconPassed); // Definitive completion color
+            background-color: var(--vscode-testing-iconPassed);
             opacity: 0.4;
         }
     }
@@ -374,13 +378,13 @@ body {
     }
 
     .progress-segment.thinking {
-        background-color: var(--vscode-testing-iconQueued); // Blue/Purple
+        background-color: var(--vscode-testing-iconQueued);
     }
     .progress-segment.generated {
-        background-color: var(--vscode-testing-iconPassed); // Green
+        background-color: var(--vscode-testing-iconPassed);
     }
     .progress-segment.unused {
-        background-color: var(--vscode-input-background); // Gray for unused
+        background-color: var(--vscode-input-background);
     }
 
     .token-count-footer {
@@ -620,27 +624,27 @@ body {
 }
 
 .sort-button {
-    background-color: var(--vscode-button-secondaryBackground); /* Styled like secondary button */
+    background-color: var(--vscode-button-secondaryBackground);
     color: var(--vscode-button-secondaryForeground);
     border: 1px solid var(--vscode-button-border, transparent);
-    padding: 2px 8px; /* Adjusted padding */
-    font-size: 12px; /* Adjusted font size */
+    padding: 2px 8px;
+    font-size: 12px;
     cursor: pointer;
-    border-radius: 2px; /* Rounded corners */
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    margin-left: auto; /* Push to the right */
+    margin-left: auto;
 
     &:hover {
         background-color: var(--vscode-button-secondaryHoverBackground);
     }
     
     &.active {
-        background-color: var(--vscode-button-background); /* Primary button style when active */
+        background-color: var(--vscode-button-background);
         color: var(--vscode-button-foreground);
-        outline: none; /* Remove default outline */
+        outline: none;
         border-color: var(--vscode-focusBorder);
     }
 }
@@ -678,18 +682,18 @@ body {
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 4px; /* Reduced gap to fit regenerate button */
+    gap: 4px;
 }
 
 .regenerate-tab-button {
-    background-color: transparent !important; /* Make it transparent */
-    border: none !important; /* No border */
-    color: var(--vscode-icon-foreground) !important; /* Icon foreground color */
-    padding: 2px !important; /* Reduced padding */
-    font-size: 14px !important; /* Larger icon */
-    position: relative; /* Allow positioning within tab title */
-    right: -4px; /* Adjust position slightly */
-    opacity: 0.7; /* Slightly transparent when not hovered */
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--vscode-icon-foreground) !important;
+    padding: 2px !important;
+    font-size: 14px !important;
+    position: relative;
+    right: -4px;
+    opacity: 0.7;
     
     &:hover {
         background-color: var(--vscode-toolbar-hoverBackground) !important;
@@ -756,9 +760,9 @@ body {
     gap: 8px;
     min-width: 150px;
     padding-right: 8px;
-    flex-basis: 33%; /* Static width */
+    flex-basis: 33%;
     flex-shrink: 0;
-    margin: 2px; /* C187 Fix: Add margin for animation highlight */
+    margin: 2px;
 }
 
 .resizer {
@@ -915,7 +919,6 @@ body {
         margin-left: auto;
         padding: 0 4px;
         font-size: 12px;
-        /* Inherit from styled-button for consistency */
         background-color: var(--vscode-button-secondaryBackground);
         color: var(--vscode-button-secondaryForeground);
         border: 1px solid var(--vscode-button-border, transparent);
@@ -1118,7 +1121,7 @@ body {
     border: 1px solid var(--vscode-panel-border);
     border-radius: 4px;
     width: 100%;
-    margin: 2px; /* C187 Fix: Add margin for animation highlight */
+    margin: 2px;
 }
 
 .collapsible-header-inner {
@@ -1229,13 +1232,13 @@ body {
 
 .token-count-text {
     .token-thinking {
-        color: var(--vscode-testing-iconQueued); // Blue/Purple
+        color: var(--vscode-testing-iconQueued);
     }
     .token-response {
-        color: var(--vscode-testing-iconPassed); // Green
+        color: var(--vscode-testing-iconPassed);
     }
 }
 
 .token-unused {
-    color: var(--vscode-editor-inactiveSelectionBackground); // Blue
+    color: var(--vscode-editor-inactiveSelectionBackground);
 }

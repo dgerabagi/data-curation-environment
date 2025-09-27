@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C6 (Add onPaste handler)
+// Updated on: C76 (No functional changes, but included for completeness)
 import * as React from 'react';
-import { TabState } from '../view';
 import ParsedView from './ParsedView';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
+import { TabState } from '@/common/types/pcpp.types';
 
 interface ResponsePaneProps {
     isParsedMode: boolean;
@@ -23,7 +23,7 @@ interface ResponsePaneProps {
     onTempOverridePathChange: (path: string) => void;
     onLinkFile: (originalPath: string) => void;
     onUnlinkFile: (originalPath: string) => void;
-    comparisonMetrics: Map<string, ComparisonMetrics | null> | null;
+    comparisonMetrics: Map<string, ComparisonMetrics | null>;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;

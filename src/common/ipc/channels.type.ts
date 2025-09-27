@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C74 (Add newMaxCycle to StartGenerationUI)
+// Updated on: C76 (Add startTime to GenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -23,7 +23,7 @@ export interface GenerationProgress {
     promptTokens: number;
     thinkingTokens: number;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
-    startTime?: number;
+    startTime: number; // Changed to non-optional
     thinkingStartTime?: number;
     generationStartTime?: number;
 }

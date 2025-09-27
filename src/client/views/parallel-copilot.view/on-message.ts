@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C74 (Pass newMaxCycle in StartGenerationUI)
+// Updated on: C76 (Pass newMaxCycle in StartGenerationUI)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -22,7 +22,6 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
             const prompt = await promptService.generatePromptString(data.cycleData);
 
-            // C71 Fix: Write the generated prompt to disk for transparency and debugging
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (workspaceFolders && workspaceFolders.length > 0) {
                 const promptMdPath = path.join(workspaceFolders[0].uri.fsPath, 'prompt.md');

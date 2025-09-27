@@ -2,9 +2,4 @@
 // This file is a placeholder for type definitions or interfaces specific to the view.
 // It can be expanded as needed.
 
-import { ParsedResponse } from "@/common/types/pcpp.types";
-
-export interface TabState {
-    rawContent: string;
-    parsedContent: ParsedResponse | null;
-}
+// DEPRECATED in C76. All types moved to pcpp.types.ts

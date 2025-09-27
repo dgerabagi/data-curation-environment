@@ -1,10 +1,40 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C74 (Fix timer stale state bug)
+// Updated on: C76 (Implement individual timers)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
-import { TabState } from '../view';
+import { TabState } from '@/common/types/pcpp.types';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
+
+interface ResponseTimerProps {
+    startTime: number;
+    isComplete: boolean;
+}
+
+const ResponseTimer: React.FC<ResponseTimerProps> = ({ startTime, isComplete }) => {
+    const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
+    const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
+
+    React.useEffect(() => {
+        if (isComplete) {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+            return;
+        }
+
+        intervalRef.current = setInterval(() => {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = (elapsed % 60).toFixed(1);
+            setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
+        }, 100);
+
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [startTime, isComplete]);
+
+    return <span className="elapsed-timer">{elapsedTime}</span>;
+};
 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
@@ -14,34 +44,14 @@ interface GenerationProgressDisplayProps {
     onRegenerate: (responseId: number) => void;
     isGenerationComplete: boolean;
     onViewResponses: () => void;
-    startTime: number | null;
     cycleId: number;
 }
 
 type SortMode = 'default' | 'total' | 'response';
 
-const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, startTime, cycleId }) => {
+const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ progressData, tps, tabs, onStop, onRegenerate, isGenerationComplete, onViewResponses, cycleId }) => {
     const [sortMode, setSortMode] = React.useState<SortMode>('default');
-    const [elapsedTime, setElapsedTime] = React.useState('00:00.0');
     
-    React.useEffect(() => {
-        if (!startTime || isGenerationComplete) {
-            return;
-        }
-
-        const interval = setInterval(() => {
-            const currentStartTime = startTime; // Capture startTime at the time of effect execution
-            if (currentStartTime) {
-                const elapsed = (Date.now() - currentStartTime) / 1000;
-                const minutes = Math.floor(elapsed / 60);
-                const seconds = (elapsed % 60).toFixed(1);
-                setElapsedTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(4, '0')}`);
-            }
-        }, 100);
-
-        return () => clearInterval(interval);
-    }, [startTime, isGenerationComplete]);
-
     const completedCount = progressData.filter(p => p.status === 'complete').length;
 
     const sortedProgressData = React.useMemo(() => {
@@ -96,7 +106,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                         <VscListOrdered/> {getSortButtonText()}
                     </button>
                     <span title="Calculated based on all incoming response chunks per second.">Tokens/sec: {tps > 0 ? tps : '--'}</span>
-                    <span className="elapsed-timer">{elapsedTime}</span>
                 </div>
             </div>
             
@@ -111,7 +120,10 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 return (
                     <div key={p.responseId} className="progress-item-container">
                         <div className='progress-item-header'>
-                            <span>Resp {p.responseId}</span>
+                            <div className="response-title-timer">
+                                <span>Resp {p.responseId}</span>
+                                <ResponseTimer startTime={p.startTime} isComplete={isComplete} />
+                            </div>
                             <div className="status-indicator-wrapper">
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
@@ -147,7 +159,6 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
             {isGenerationComplete && (
                 <div className="progress-footer">
                     <span>{completedCount}/{progressData.length} Responses Complete</span>
-                    {/* The "View Responses" button is now effectively managed by the main view's state change */}
                 </div>
             )}
         </div>

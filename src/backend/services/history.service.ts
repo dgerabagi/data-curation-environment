@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C74 (Return newMaxCycle from placeholder creation)
+// Updated on: C76 (Return newMaxCycle from placeholder creation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -41,7 +41,6 @@ export class HistoryService {
     private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {
         if (!this.historyFilePath) return;
 
-        // --- DATA LOSS PREVENTION (C66) ---
         if (!data || !Array.isArray(data.cycles) || (data.cycles.length === 0 && data.projectScope === undefined)) {
             const errorMessage = `[CRITICAL] Aborting write to dce_history.json: Data is invalid or empty.`;
             Services.loggerService.error(errorMessage);
@@ -55,9 +54,8 @@ export class HistoryService {
             } catch (logError) {
                 Services.loggerService.error(`[CRITICAL] Failed to write data loss log: ${logError}`);
             }
-            return; // Abort the write
+            return;
         }
-        // --- END DATA LOSS PREVENTION ---
 
         const dir = path.dirname(this.historyFilePath);
         try {
@@ -110,7 +108,7 @@ export class HistoryService {
             pathOverrides: {},
             activeWorkflowStep: null,
             status: 'complete',
-            isEphemeralContextCollapsed: true, // Default to collapsed
+            isEphemeralContextCollapsed: true,
         };
 
         if (isFreshEnvironment) {
@@ -199,7 +197,7 @@ export class HistoryService {
             responses: newResponses,
             tabCount: tabCount,
             isParsedMode: true,
-            status: 'generating', // Set status to generating
+            status: 'generating',
             isEphemeralContextCollapsed: true,
         };
 
@@ -217,7 +215,7 @@ export class HistoryService {
         if (cycleIndex > -1) {
             const cycle = history.cycles[cycleIndex];
             cycle.status = 'complete';
-            cycle.title = `Cycle ${cycleId}`; // Reset title
+            cycle.title = `Cycle ${cycleId}`;
             Object.keys(cycle.responses).forEach((tabId, index) => {
                 if (responses[index]) {
                     cycle.responses[tabId].content = responses[index];
@@ -291,7 +289,7 @@ export class HistoryService {
         if (this.historyFilePath) {
             try {
                 await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
-                await this.saveLastViewedCycleId(null); // Clear the last viewed ID
+                await this.saveLastViewedCycleId(null);
                  const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });

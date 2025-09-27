@@ -1,12 +1,10 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C74 (Add loading indicator logic)
+// Updated on: C76 (Fix spinner animation)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
-import { TabState as OriginalTabState } from '../view';
+import { TabState } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-
-type TabState = OriginalTabState & { isLoading?: boolean };
 
 interface ResponseTabsProps {
     sortedTabIds: number[];
@@ -19,7 +17,7 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
-    generationProgress?: GenerationProgress[]; // Make optional
+    generationProgress?: GenerationProgress[];
     isGenerating: boolean;
 }
 

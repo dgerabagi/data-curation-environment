@@ -1,7 +1,13 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C73 (Add isEphemeralContextCollapsed)
+// Updated on: C76 (Consolidate TabState)
 export interface PcppResponse {
     content: string;
+    isLoading?: boolean;
+}
+
+export interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
     isLoading?: boolean;
 }
 
@@ -24,7 +30,7 @@ export interface PcppCycle {
     ephemeralContextHeight?: number;
     activeWorkflowStep?: string;
     status?: 'complete' | 'generating';
-    isEphemeralContextCollapsed?: boolean; // New
+    isEphemeralContextCollapsed?: boolean;
 }
 
 export interface PcppHistoryFile {

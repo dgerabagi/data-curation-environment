@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C74 (Add startTime to progress data)
+// Updated on: C76 (Implement individual timers and batch stop)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -29,8 +29,6 @@ export class LlmService {
             const responses = await this.generateBatch(prompt, 1, cycleData);
             if (responses.length > 0) {
                 await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responses[0]);
-                // We need a new IPC message to notify the frontend of the single update.
-                // For now, a full refresh will work.
                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
                     serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
@@ -114,7 +112,7 @@ export class LlmService {
                     currentTokens: 0,
                     totalTokens: MAX_TOKENS_PER_RESPONSE,
                     status: 'pending',
-                    startTime: Date.now(), // Set start time for each response
+                    startTime: Date.now(),
                 }));
                 const responseContents: string[] = Array(count).fill('');
                 const finishedResponses: boolean[] = Array(count).fill(false);
@@ -196,8 +194,8 @@ export class LlmService {
 
                 stream.on('end', async () => {
                     Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
-                    sendProgressUpdate(); // Final update
-                    resolve(responseContents); // Resolve the promise with the final content
+                    sendProgressUpdate();
+                    resolve(responseContents);
                 });
                 
                 stream.on('error', (err) => {
