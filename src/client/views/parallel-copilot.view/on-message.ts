@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C76 (Pass newMaxCycle in StartGenerationUI)
+// Updated on: C77 (Add logging for stale prompt debugging)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -16,6 +16,14 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
+        // Log incoming data to debug stale prompt issue
+        loggerService.log(`[Stale Prompt Debug] Incoming cycleData: ${JSON.stringify({
+            cycleId: data.cycleData.cycleId,
+            title: data.cycleData.title,
+            cycleContextLength: data.cycleData.cycleContext.length,
+            ephemeralContextLength: data.cycleData.ephemeralContext.length,
+        })}`);
+
         try {
             const { newCycleId, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle });

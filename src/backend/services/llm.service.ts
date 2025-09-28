@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C76 (Implement individual timers and batch stop)
+// Updated on: C77 (Add single response completion notification)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -157,6 +157,8 @@ export class LlmService {
                                                 finishedResponses[responseIndex] = true;
                                                 progressData[responseIndex].status = 'complete';
                                                 totalFinished++;
+                                                // Send final notification for immediate parsing
+                                                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
                                             }
                                         } else if (choice.delta) {
                                             if (choice.delta.reasoning_content !== undefined) {

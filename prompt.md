@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 77 - great progress! more work to do
+Current Cycle 78 - prompt.md no longer stale! now focus on response ui / re-generation process
+Cycle 77 - great progress! more work to do
 Cycle 76 - continue working the response ui
 Cycle 75 - more good progress, keep working on the responses
 Cycle 74 - great work on the combination!
@@ -832,48 +833,66 @@ No project scope defined.
 
 <M6. Cycles>
 
-<Cycle 77>
+<Cycle 78>
 <Cycle Context>
-fantastic work! the spinning animation in the response tab is now functional! im going to playtest and report my observations and findings below:
+okay, the prompt.md no longer appears stale in that i actually see the artifacts that were generated in cycle 0 appearing in the flattened repo portion, as well as seeing the correct cycle title and cycle context for cycle 1.
 
-1. while initial onboarding responses were generating, once one completed, i was able to select that responses tab and it correctly switched to the response viewer, which will allow a user to begin interpreting the results immediately, however they appeared to show 'parsing failed' but i do not think that is the case, i think it just didnt initiate the parse yet. i think so because as i watched the responses complete one at a time, they all showed the same thing (im providing a screenshot), parsing failed, but once the final response completed, all four responses magically parsed correctly, including the ones where it said failed. can you check to see if that is the case and if so, correct it?
+okay great, i proceeded to cycle 2 and generated a response and indeed, the responses that came back were relevant to cycle 2. we have resolved this stale prompt.md issue, great work.
 
-2. okay still, i am seeing a stale prompt.md. my cde_history.json shows correctly, yet when i click `Generate responses` the prompt.md doesnt contain what i wrote in Cycle 1 or Cycle 1 Context, or the newly created files. its a stale file. where is the `Generate prompt.md` button? that button should be working perfectly, right? we didnt change that functionality since working on this new `Demo Mode`? can you compare? i put logs of what i see in the dce when attempting to generate this prompt.md in ephemeral
+now, we need to focus on this stop/re-generate because its glitchy. for example, i only clicked the regenerate button for one of the tabs (it was an accidental click by the way, lets create a double-click method, such that hte user has to click once on the refresh, then it turns into a checkmark, then they click again and then it initiates the refresh. then, when a response is being generated, we would display the response ui, but only on that response tab! 
+
+im going to take a screenshot of my current state. its going to show you that resp 2, resp 3, and resp 4 have their spinning animation present, yet as you can see only one response was requested, response 1. secondly, youll see that response 1 has completed, yet i am still viewing the response ui rather than the response itself, despite it being completed. thirdly, youll notice that ive got resp 4 selected. since it was resp 1 that was requested, i should still be able to view response 4, in other words, response 4 should not be showing me the response ui, it should be showing me response 4. this is given by the fact that once again you can see in the response ui, only resp 1 was requested to be regenerated. moreover, if i were to select resp 1, which does indicate that the response is not being generated on that tab (no spinner), i am still presented with the response ui (screenshot 2).
+
+actually i think i have a solution here. if we treat and store this response informatino along with the resopnses as we currently store them (the raw responses themselves in our json) then the response ui would present that information, therefore, if a user clicks refresh on response 1, when they've already gotten the first round of resposnes in, then in that case if they click on the resp 1 tab they would still see the completed information about the other 3 responses, those would not have changed or disappeared as they have in my screenshot. rather, we would see those 3 are completed, and then we would see resp 1 being re-generated. this is perfect because then if the user decides they want to regenerate resp 3, they have the ability to just click the regenerate button (twice) on the resp 3 tab, and then, without changing from viewing resp 1, they would see response 3 in their response ui begin to refresh. do you see how the response ui is to be like a live representation of the response generation? but only when that response is being generated? right now its too buggy to be reliable, perhaps a systemitized approach now that we have this much described/built is in order? regardless, we are doing great and we are very close. right now we are to focus on the regenerate mechanisms, and also the stop as its tangential and still non-functional.
+
+please ask any clarifying questions if necessary.
+
+
+
+
+
 
 </Cycle Context>
-<Ephemeral Context>
+<Previous Cycle 77 Summary of Actions>
+I have analyzed the feedback from Cycle 76 and my failure to provide the implementation in the last cycle. My course of action is to deliver the complete set of documentation and code changes to fix the critical workflow blockers and UI bugs.
 
-[INFO] [10:08:28 AM] [File Operation] Received request to write 5 files.
-[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T1-Master-Artifact-List.md
-[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T2-Project-Vision-and-Goals.md
-[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T4-Technical-Scaffolding-Plan.md
-[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T14-GitHub-Repository-Setup-Guide.md
-[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T7-Development-and-Testing-Guide.md
-[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T1-Master-Artifact-List.md
-[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T14-GitHub-Repository-Setup-Guide.md
-[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T2-Project-Vision-and-Goals.md
-[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T4-Technical-Scaffolding-Plan.md
-[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T7-Development-and-Testing-Guide.md
-[INFO] [10:08:28 AM] [Auto-Add] Processing queue with 5 files: ["c:/Projects/TowerDefense58/src/Artifacts/T1-Master-Artifact-List.md","c:/Projects/TowerDefense58/src/Artifacts/T14-GitHub-Repository-Setup-Guide.md","c:/Projects/TowerDefense58/src/Artifacts/T2-Project-Vision-and-Goals.md","c:/Projects/TowerDefense58/src/Artifacts/T4-Technical-Scaffolding-Plan.md","c:/Projects/TowerDefense58/src/Artifacts/T7-Development-and-Testing-Guide.md"]
-[INFO] [10:08:28 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [10:08:28 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [10:08:28 AM] Persisted current selection of 8 items.
-[INFO] [10:08:28 AM] [Auto-Add] Sending ApplySelectionSet to client with 8 total paths.
-[INFO] [10:08:28 AM] Persisted current selection of 8 items.
-[INFO] [10:08:29 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [10:08:44 AM] Received RequestNewCycleAndGenerate for 4 responses from cycle 1.
-[INFO] [10:08:44 AM] Created new placeholder cycle 2.
-[INFO] [10:08:44 AM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [10:08:44 AM] [SelectionService] Found 8 paths in persisted state. Validating...
-[INFO] [10:08:44 AM] [SelectionService] Returning 8 valid paths.
-[INFO] [10:08:45 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [10:08:45 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [10:08:45 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [10:08:45 AM] [on-message] Wrote generated prompt for C1 to prompt.md
-[INFO] [10:08:45 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [10:08:45 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [10:08:46 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-</Ephemeral Context>
+First, I will create and update all necessary documentation. This includes a new Universal Task Checklist to organize the work, a new plan for refactoring the main view component, a new guide to explain the vLLM performance logs and quantization, and updates to existing plans to incorporate the new requirements for individual timers and refined regeneration workflows.
+
+Next, I will implement the code fixes. This will prioritize the critical bug preventing the UI from navigating to a new cycle and the issue where completed responses cannot be viewed while others are still generating. I will then implement individual timers for each response, fix the "Stop" button to cancel the entire batch, resolve the non-animating spinner icon, and consolidate the duplicate `TabState` interface to improve code quality.
+
+1.  **Documentation (New):** Create `A104. DCE - Universal Task Checklist for Cycle 76.md` to organize all tasks.
+2.  **Documentation (New):** Create `A105. DCE - PCPP View Refactoring Plan for Cycle 76.md` to detail the plan for splitting `view.tsx`.
+3.  **Documentation (New):** Create `A106. DCE - vLLM Performance and Quantization Guide.md` to answer the user's technical questions.
+4.  **Documentation (Update):** Update `A97`, `A99`, and `A103` to reflect new requirements for timers, regeneration UI, and viewing completed responses.
+5.  **Documentation (Update):** Update the `A0. DCE Master Artifact List.md` to include all new artifacts.
+6.  **Code (Type Consolidation):** Move the `TabState` interface to `src/common/types/pcpp.types.ts` and update `view.tsx` to import it, removing the local definition.
+7.  **Code (Backend Timers):** Update `llm.service.ts` to add and manage individual `startTime` properties for each response in the `GenerationProgress` object.
+8.  **Code (Frontend Timers):** Update `GenerationProgressDisplay.tsx` to use the new per-response `startTime` to calculate and render individual elapsed timers.
+9.  **Code (UI Navigation Bugs):**
+    *   Fix the `maxCycle` state update logic in `view.tsx` to ensure the UI navigates to the new cycle correctly. This is a re-implementation of a previously working fix.
+    *   Modify the main render logic in `view.tsx` to allow viewing a completed response's `ResponsePane` even if the parent cycle's status is still `generating`.
+10. **Code (Regeneration Bugs):**
+    *   Fix the state update logic for single-tab regeneration in the progress view to prevent it from clearing other responses.
+    *   Ensure regenerating a single tab from the main view switches the content area back to the `GenerationProgressDisplay`.
+11. **Code (Stop Button):** Implement the `onStop` handler to call `abort()` on the `AbortController` for the entire batch request in `llm.service.ts`.
+12. **Code (Spinner Animation):** Correct the CSS in `view.scss` to ensure the `@keyframes spin` animation is correctly applied to the `.spinner` class in the `ResponseTabs.tsx` component.
+</Previous Cycle 77 Summary of Actions>
+</Cycle 78>
+
+<Cycle 77>
+<Cycle Context>
+fantastic work! the spinning animation in the response tab is now functional!
+
+okay, im observing that when i use the `Re-generate` command on a response tab, it effectively clears the current response out and then sends the request to vllm, which is good, however my view on that response tab does not change to the response ui. once the vllm request finishes however, the response tab does eventually populate with the new response, which is great. we just want to display the response ui while a response is generating. also, i tested regenerating two response tabs at the same time, but it never took the second response like a batch, which was my expectation. i was watching the vllm logs and the number of running requests never went over 1. i had to wait for it to finish before i could start another response. users should be able to request regenerated responses and they should run in parallel or batch, regardless if they were requested individually rather than all at once, does that make sense?
+
+next, i still had to click the `>` in order to change my view to Cycle 2 once i clicked `Generate responses`. the responses did inititate to vllm, i just didnt automatically increment, which is the desire.
+
+third, it seems you still arent fully packaging the prompt.md prior to sending it off. what i mean is, despite my having set my cycle 1 title to `create code files`, when i view the `prompt.md`, the actual title is `Cycle 1 - Cycle 1`. how can that be the case? additionally, ive got 6 new artifacts created from the previous cycle, and they are all selected items in my flattened context, yet they also do not appear in my `prompt.md` how can this be? why is it that we had this working fine, and when all you need to do is send the prompt.md that gets created, so in effect add a step after, did we break the step before? final observation of a failed `prompt.md` creation is the Cycle 1 itself is blank, it just appears as an empty tag pair: <Cycle 1></Cycle 1>, despite my having input the string: `okay now lets build the code files from the scaffolding plan`. whats going on?
+
+okay i tried that --dtype float16 flag but it still seemed to want to apply mxfp4 anyway. see ephemeral.
+
+
+</Cycle Context>
 <Previous Cycle 76 Summary of Actions>
 You are absolutely right to call me out. I apologize for the critical failure in the last cycle where I described the plan but did not provide the code to implement it. That is a complete breakdown of our process. I will execute the plan now and provide the full, complete set of updated files.
 
@@ -4450,15 +4469,15 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-27T15:13:31.156Z
+  Date Generated: 2025-09-28T16:01:39.566Z
   ---
-  Total Files: 174
-  Approx. Tokens: 237178
+  Total Files: 175
+  Approx. Tokens: 238121
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A0. DCE Master Artifact List.md (9580 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9423 tokens)
+1. src\client\views\parallel-copilot.view\view.tsx (9653 tokens)
+2. src\Artifacts\A0. DCE Master Artifact List.md (9580 tokens)
 3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 4. src\backend\services\prompt.service.ts (4927 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -4575,7 +4594,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 352 - Chars: 15113 - Tokens: 3779
-107. src\backend\services\llm.service.ts - Lines: 239 - Chars: 11974 - Tokens: 2994
+107. src\backend\services\llm.service.ts - Lines: 241 - Chars: 12035 - Tokens: 3009
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -4604,17 +4623,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3576 - Tokens: 894
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8916 - Tokens: 2229
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9133 - Tokens: 2284
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 222 - Chars: 37692 - Tokens: 9423
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 228 - Chars: 38611 - Tokens: 9653
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6389 - Tokens: 1598
-146. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9540 - Tokens: 2385
+145. src\common\ipc\channels.enum.ts - Lines: 113 - Chars: 6366 - Tokens: 1592
+146. src\common\ipc\channels.type.ts - Lines: 127 - Chars: 9503 - Tokens: 2376
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -4630,7 +4649,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 4889 - Tokens: 1223
-162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
+162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 63 - Chars: 6339 - Tokens: 1585
@@ -4643,6 +4662,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 50 - Chars: 4363 - Tokens: 1091
 173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 174. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
+175. src\Artifacts\A107. DCE - Universal Task Checklist for Cycle 77.md - Lines: 47 - Chars: 2476 - Tokens: 619
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -13024,7 +13044,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C76 (Implement individual timers and batch stop)
+// Updated on: C77 (Add single response completion notification)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -13182,6 +13202,8 @@ export class LlmService {
                                                 finishedResponses[responseIndex] = true;
                                                 progressData[responseIndex].status = 'complete';
                                                 totalFinished++;
+                                                // Send final notification for immediate parsing
+                                                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
                                             }
                                         } else if (choice.delta) {
                                             if (choice.delta.reasoning_content !== undefined) {
@@ -16752,7 +16774,7 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C76 (Pass newMaxCycle in StartGenerationUI)
+// Updated on: C77 (Add logging for stale prompt debugging)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -16769,6 +16791,14 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
+        // Log incoming data to debug stale prompt issue
+        loggerService.log(`[Stale Prompt Debug] Incoming cycleData: ${JSON.stringify({
+            cycleId: data.cycleData.cycleId,
+            title: data.cycleData.title,
+            cycleContextLength: data.cycleData.cycleContext.length,
+            ephemeralContextLength: data.cycleData.ephemeralContext.length,
+        })}`);
+
         try {
             const { newCycleId, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle });
@@ -18299,7 +18329,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C76 (Implement all fixes from A104)
+// Updated on: C77 (Fix stale prompt and delayed parsing bugs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -18393,7 +18423,13 @@ const App = () => {
     const handleRawContentChange = (newContent: string, tabIndex: number) => { setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null }})); setSaveStatus('unsaved'); };
     const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => { const pastedText = e.clipboardData.getData('text'); const currentContent = tabs[tabIndex.toString()]?.rawContent || ''; const tokenCount = Math.ceil(pastedText.length / 4); if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) { handleRawContentChange(pastedText, tabIndex); setActiveTab(tabIndex + 1); } else { handleRawContentChange(pastedText, tabIndex); } };
     const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
-    const getCurrentCycleData = React.useCallback(() => stateRef.current.currentCycle, []);
+    const getCurrentCycleData = React.useCallback((): PcppCycle | null => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep, isEphemeralContextCollapsed } = stateRef.current;
+        if (!currentCycle) return null;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) { responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', isLoading: tabs[i.toString()]?.isLoading || false }; }
+        return { ...currentCycle, title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, activeTab, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), activeWorkflowStep: workflowStep || undefined, isEphemeralContextCollapsed };
+    }, []);
     const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData?.cycleId) { clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); } }, [clientIpc, getCurrentCycleData]);
     const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
 
@@ -18440,6 +18476,7 @@ const App = () => {
     const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => { e?.stopPropagation(); if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return; if (newCycleId >= 0 && newCycleId <= maxCycle) { setSelectedFilesForReplacement(new Set()); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setWorkflowStep(null); } };
     
     React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, isLoading: response.isLoading }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true); if (cycleData.status === 'generating') { setIsGenerationComplete(false); } else { setIsGenerationComplete(true); setGenerationProgress([]); } }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle?.cycleId) setSaveStatus('saved'); }); clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) }); clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => { setGenerationProgress(progress); setTps(tps); setTabs(prevTabs => { const newTabs = { ...prevTabs }; Object.entries(chunks).forEach(([responseId, chunk]) => { const tabIndex = parseInt(responseId, 10); newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null }), rawContent: chunk }; }); return newTabs; }); }); 
+        clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => { setTabs(prev => { const newTabs = { ...prev }; const tab = newTabs[responseId.toString()]; if (tab) { tab.parsedContent = parseResponse(content); tab.isLoading = false; } return newTabs; }); });
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => { setIsGenerationComplete(true); setMaxCycle(newMaxCycle); handleCycleChange(null, newCycleId); });
         clientIpc.onServerMessage(ServerToClientChannel.StartGenerationUI, ({ newCycleId, newMaxCycle }) => { logger.log(`[StartGenerationUI] Received: newCycleId=${newCycleId}, newMaxCycle=${newMaxCycle}`); setMaxCycle(newMaxCycle); handleCycleChange(null, newCycleId); });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
@@ -18488,9 +18525,8 @@ const App = () => {
     const SaveStatusIndicator = () => { let icon; let title; switch(saveStatus) { case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break; case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break; case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break; default: icon = null; title = ""; } return <div className="save-status-indicator" title={title}>{icon}</div>; };
     const renderHeaderButtons = () => { if (connectionMode === 'manual') { return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>; } else { return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled} title={isGenerateResponsesDisabled ? `Cannot generate responses:\n${newCycleButtonDisabledReason}` : "Generate responses from local LLM"}><VscWand /> Generate responses</button>; } };
 
-    const activeTabProgress = generationProgress.find(p => p.responseId === activeTab);
-    const activeTabIsComplete = activeTabProgress ? activeTabProgress.status === 'complete' : true;
-    const showProgressView = currentCycle.status === 'generating' && !activeTabIsComplete;
+    const activeTabIsLoading = tabs[activeTab.toString()]?.isLoading;
+    const showProgressView = currentCycle.status === 'generating' && !isGenerationComplete;
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => {setResponseCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
@@ -18862,7 +18898,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/common/ipc/channels.enum.ts">
 // src/common/ipc/channels.enum.ts
-// Updated on: C69 (Add Stop and Single Regen channels)
+// Updated on: C77 (Add NotifySingleResponseComplete channel)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -18971,13 +19007,14 @@ export enum ServerToClientChannel {
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
     SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
     UpdateGenerationProgress = "serverToClient.updateGenerationProgress",
-    StartGenerationUI = "serverToClient.startGenerationUI", // New
+    StartGenerationUI = "serverToClient.startGenerationUI",
+    NotifySingleResponseComplete = "serverToClient.notifySingleResponseComplete", // New
 }
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C76 (Add startTime to GenerationProgress)
+// Updated on: C77 (Add NotifySingleResponseComplete payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -19001,7 +19038,7 @@ export interface GenerationProgress {
     promptTokens: number;
     thinkingTokens: number;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
-    startTime: number; // Changed to non-optional
+    startTime: number;
     thinkingStartTime?: number;
     generationStartTime?: number;
 }
@@ -19101,6 +19138,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
     T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number, newMaxCycle: number } :
+    T extends ServerToClientChannel.NotifySingleResponseComplete ? { responseId: number; content: string; } :
     never;
 </file_artifact>
 
@@ -20928,6 +20966,56 @@ This document lists the feedback and tasks from the first official development c
 | 7 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
 | 8 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
 | 9 | Plan for Git-integrated testing workflow. | **Complete** | New artifact `A70` created to plan this feature. |
+</file_artifact>
+
+<file path="src/Artifacts/A107. DCE - Universal Task Checklist for Cycle 77.md">
+# Artifact A107: DCE - Universal Task Checklist for Cycle 77
+# Date Created: C77
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 77. It organizes the work by logical feature area and the group of files involved in each task to help plan and prioritize development.
+
+---
+
+## Task List for Cycle 77+
+
+## T-1: Fix Stale Prompt Generation
+- **Files Involved:**
+    - `src/backend/services/prompt.service.ts`
+    - `src/client/views/parallel-copilot.view/on-message.ts`
+- **Total Tokens:** ~7,150
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 1.1):** Correct the logic in `prompt.service.ts` (`_generateCyclesContent`) to ensure the fresh `cycleData` from the client overwrites the stale data from the history file for the current cycle.
+- [ ] **Task (T-ID: 1.2):** Add detailed logging in the `on-message.ts` handler for `RequestNewCycleAndGenerate` to dump the received `cycleData` object for easier debugging.
+
+### Verification Steps
+1.  In Demo Mode, start a new project and generate initial responses.
+2.  In Cycle 1, add significant text to the "Cycle Context" text area.
+3.  Click `Generate responses`.
+4.  Check the `dce.log` output.
+5.  **Expected:** The log should show the `cycleData` object with the correct, non-empty `cycleContext`.
+6.  Open the newly generated `prompt.md` file.
+7.  **Expected:** The `<Cycle 1>` block within `<M6. Cycles>` should contain the text you entered in the "Cycle Context" area.
+
+## T-2: Fix Delayed Response Parsing
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/view.tsx`
+- **Total Tokens:** ~9,400
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 2.1):** Modify the `UpdateGenerationProgress` message handler in `view.tsx`.
+- [ ] **Task (T-ID: 2.2):** When a response's status in the progress update changes to `'complete'`, immediately call `parseResponse` on that tab's content.
+- [ ] **Task (T-ID: 2.3):** Update the `tabs` state for that specific tab with the new `parsedContent`.
+
+### Verification Steps
+1.  In Demo Mode, start a generation of 4 responses.
+2.  Observe the response tabs in the main PCPP view.
+3.  **Expected:** As each response finishes generating, its tab should switch from the loading spinner to the parsed view individually, without showing a "PARSING FAILED" message and without waiting for all other responses to complete.
 </file_artifact>
 
 
