@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C76 (Return newMaxCycle from placeholder creation)
+// Updated on: C78 (Manage per-response status)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -97,7 +97,7 @@ export class HistoryService {
             title: 'New Cycle', 
             cycleContext: '', 
             ephemeralContext: '', 
-            responses: { "1": { content: "" } }, 
+            responses: { "1": { content: "", status: 'complete' } }, 
             isParsedMode: false, 
             leftPaneWidth: 33, 
             selectedResponseId: null, 
@@ -185,7 +185,7 @@ export class HistoryService {
 
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
-            newResponses[(i+1).toString()] = { content: '' };
+            newResponses[(i+1).toString()] = { content: '', status: 'generating' };
         }
 
         const newCycle: PcppCycle = {
@@ -217,6 +217,7 @@ export class HistoryService {
             cycle.status = 'complete';
             cycle.title = `Cycle ${cycleId}`;
             Object.keys(cycle.responses).forEach((tabId, index) => {
+                cycle.responses[tabId].status = 'complete';
                 if (responses[index]) {
                     cycle.responses[tabId].content = responses[index];
                 }
@@ -228,17 +229,24 @@ export class HistoryService {
         }
     }
 
-    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string): Promise<void> {
+    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string | null): Promise<void> {
         const history = await this._readHistoryFile();
         const cycle = history.cycles.find(c => c.cycleId === cycleId);
         if (cycle) {
-            if (cycle.responses[tabId]) {
+            if (!cycle.responses[tabId]) {
+                cycle.responses[tabId] = { content: '', status: 'pending' };
+            }
+            if (newContent !== null) {
                 cycle.responses[tabId].content = newContent;
+                cycle.responses[tabId].status = 'complete';
+                Services.loggerService.log(`Updated response content for tab ${tabId} in cycle ${cycleId}.`);
             } else {
-                cycle.responses[tabId] = { content: newContent };
+                // This means we are starting a regeneration
+                cycle.responses[tabId].content = '';
+                cycle.responses[tabId].status = 'generating';
+                Services.loggerService.log(`Starting regeneration for tab ${tabId} in cycle ${cycleId}.`);
             }
             await this._writeHistoryFile(history);
-            Services.loggerService.log(`Updated response for tab ${tabId} in cycle ${cycleId}.`);
         } else {
             Services.loggerService.error(`Could not find cycle ${cycleId} to update response.`);
         }

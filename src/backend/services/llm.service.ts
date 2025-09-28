@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C77 (Add single response completion notification)
+// Updated on: C78 (Implement AbortController for Stop button)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -16,26 +16,30 @@ export class LlmService {
 
     public stopGeneration(cycleId: number) {
         if (generationControllers.has(cycleId)) {
+            Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}.`);
             generationControllers.get(cycleId)?.abort();
             generationControllers.delete(cycleId);
-            Services.loggerService.log(`[LLM Service] Aborted generation for cycle ${cycleId}.`);
         }
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
+        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
         const cycleData: PcppCycle = { cycleId: cycleId, title: `Regen C${cycleId} T${tabId}`, responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: 1, status: 'generating' };
+        
         try {
             const responses = await this.generateBatch(prompt, 1, cycleData);
             if (responses.length > 0) {
                 await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responses[0]);
                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+                    // Notify client that this specific response is done, so it can be parsed immediately.
+                    serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responses[0] });
                 }
             }
         } catch (error) {
             Services.loggerService.error(`[LLM Service] Single regeneration failed: ${error}`);
+            // TODO: Set error status on the response
         }
     }
 
@@ -157,7 +161,6 @@ export class LlmService {
                                                 finishedResponses[responseIndex] = true;
                                                 progressData[responseIndex].status = 'complete';
                                                 totalFinished++;
-                                                // Send final notification for immediate parsing
                                                 serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
                                             }
                                         } else if (choice.delta) {
@@ -201,16 +204,20 @@ export class LlmService {
                 });
                 
                 stream.on('error', (err) => {
-                    reject(err);
+                    if (!(err instanceof AbortError)) {
+                        reject(err);
+                    }
                 });
 
             } catch (error: any) {
                  if (error instanceof AbortError) {
                     Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
+                    // Resolve with empty array as the operation was intentionally stopped
+                    resolve(Array(count).fill(''));
                 } else {
                     Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+                    reject(error);
                 }
-                reject(error);
             } finally {
                 generationControllers.delete(cycleData.cycleId);
             }

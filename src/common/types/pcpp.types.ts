@@ -1,14 +1,16 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C76 (Consolidate TabState)
+// Updated on: C78 (Add status to PcppResponse)
 export interface PcppResponse {
     content: string;
     isLoading?: boolean;
+    status?: 'pending' | 'generating' | 'complete' | 'error';
 }
 
 export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
     isLoading?: boolean;
+    status?: 'pending' | 'generating' | 'complete' | 'error';
 }
 
 export interface PcppCycle {

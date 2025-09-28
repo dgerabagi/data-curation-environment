@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 78 - prompt.md no longer stale! now focus on response ui / re-generation process
+Current Cycle 79 - continue refining response ui/response view/response regeneration
+Cycle 78 - prompt.md no longer stale! now focus on response ui / re-generation process
 Cycle 77 - great progress! more work to do
 Cycle 76 - continue working the response ui
 Cycle 75 - more good progress, keep working on the responses
@@ -284,7 +285,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C76 (Add A104, A105, A106)
+# Updated on: C78 (Add A108)
 
 ## 1. Purpose
 
@@ -746,6 +747,14 @@ No project scope defined.
 - **Description:** A guide explaining the performance warnings from the vLLM logs and detailing the various model quantization options available.
 - **Tags:** guide, vllm, performance, quantization, llm
 
+### A107. DCE - Universal Task Checklist for Cycle 77
+- **Description:** A tracking document for the feedback items and tasks from Cycle 77.
+- **Tags:** bugs, tracking, issues, backlog, cycle 77
+
+### A108. DCE - Universal Task Checklist for Cycle 78
+- **Description:** A tracking document for the feedback items and tasks from Cycle 78.
+- **Tags:** bugs, tracking, issues, backlog, cycle 78
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -832,6 +841,48 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 79>
+<Cycle Context>
+okay im witnessing the resposnes stream in.... once resposne 4 completes im going to see if its spinner animation stops and if ic an switch to that tab to view the response itself instead of the response ui as its generation has completed...
+
+okay, the spinner did stop correctly, but when i select resp 4, i still see the response ui.
+
+also, when a response being generated is generating thinking tokens, im witnessing the file count and the token count in the response tab appear with 0 files and a low token count. i believe we are triggering something too early or unnecessarily while we are streaming in a response. for instance, while the responses are streaming in, my DCE output logs are going rather crazy with these logs (see ephemeral).
+
+next, once all responses completed generating, then all tabs switched from the response ui to the response view. again if we could just get it to display the response ui for a generating tab, and the response viewer for a non-generating tab, that would be great. i will now test re-generating by clicking the re-generate button for resp 4 and writing down my observations:
+
+1. there was no two-step process to regenerate. i had asked for that.
+2. while resp 4 is getting generated, i do not see the response ui, i see you attempt to display the response ui, i see this paste ai response here... but the response ui never appears (screenshot). when the response finishes, it does switch to the response view and i see the regenerated response correctly.
+3. okay, i just switcehd from cycle 2 to cycle 1, and then back to cycle 2. now it shows all 4 responses are generating once again, but that is not the case, the only thing that happened was i switched from viewing cycle 2, to cycle 1, then back to cycle 2. to confirm, vllm received no responses, and nothing is streaming in, im just now stuck in cycle 2 on the generating responses... view for all four responses, despite having these responses. indeed, when i check my `dce_history.json`, the issue i think is the status shows as generating, but im not. i just manually changed this to `complete`. okay yeah, now i can see cycle 2 again. and now i can switch between cycle 2 and cycle 1. please fix this failure mode as well.
+</Cycle Context>
+<Ephemeral Context>
+
+[INFO] [11:15:31 AM] [File Existence] Received request to check paths: ["src/Artifacts/T14-GitHub-Repository-Setup-Guide.md","src/Artifacts/T7-Development-and-Testing-Guide.md","src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/T2-Project-Vision-and-Goals.md","src/Artifacts/T4-Technical-Scaffolding-Plan.md","docs/T1_Master_Artifact_List.md","docs/T14_GitHub_Repository_Setup_Guide.md","docs/T7_Development_and_Testing_Guide.md","docs/T2_Project_Vision_and_Goals.md","docs/T4_Technical_Scaffolding_Plan.md","docs/T14 TowerDefenseGame - GitHub Repository Setup Guide.md","docs/T7 TowerDefenseGame - Development and Testing Guide.md","docs/T1 TowerDefenseGame - Master Artifact List.md","docs/T2 TowerDefenseGame - Project Vision and Goals.md","docs/T4 TowerDefenseGame - Technical Scaffolding Plan.md"]
+[INFO] [11:15:31 AM] [File Existence] Received request to check paths: ["src/Artifacts/T14-GitHub-Repository-Setup-Guide.md","src/Artifacts/T7-Development-and-Testing-Guide.md","src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/T2-Project-Vision-and-Goals.md","src/Artifacts/T4-Technical-Scaffolding-Plan.md","docs/T1_Master_Artifact_List.md","docs/T14_GitHub_Repository_Setup_Guide.md","docs/T7_Development_and_Testing_Guide.md","docs/T2_Project_Vision_and_Goals.md","docs/T4_Technical_Scaffolding_Plan.md","docs/T14 TowerDefenseGame - GitHub Repository Setup Guide.md","docs/T7 TowerDefenseGame - Development and Testing Guide.md","docs/T1 TowerDefenseGame - Master Artifact List.md","docs/T2 TowerDefenseGame - Project Vision and Goals.md","docs/T4 TowerDefenseGame - Technical Scaffolding Plan.md"]
+
+</Ephemeral Context>
+<Previous Cycle 78 Summary of Actions>
+I have analyzed the two critical bugs from your playtesting session. The "parsing failed" illusion is happening because the parsing logic is only triggered once all responses are complete, not individually as each one finishes. The more severe issue is that the "Generate responses" button is using stale data, ignoring your latest `Cycle Context` and creating an incorrect `prompt.md`.
+
+My course of action is to fix these issues by addressing the root causes in the data flow and event handling logic. I will first fix the stale prompt bug, as it is a workflow blocker, and then correct the delayed parsing behavior.
+
+### Course of Action
+
+1.  **Fix Stale `prompt.md` Generation (Highest Priority):**
+    *   The root cause is that the `handleGenerateResponses` function in `view.tsx` was not correctly packaging the latest, in-memory state (`cycleTitle`, `cycleContext`, etc.) into the `cycleData` object sent to the backend.
+    *   I will modify `view.tsx` to ensure that when "Generate responses" is clicked, it constructs a `PcppCycle` object using the *current* state values from the UI before sending it with the `RequestNewCycleAndGenerate` IPC message.
+    *   I will add detailed logging to the backend `on-message.ts` handler to log the incoming `cycleData` payload, confirming that the fresh context is now being received correctly by the `prompt.service.ts`.
+
+2.  **Fix Delayed Parsing:**
+    *   To fix this, the backend needs to notify the frontend the moment a single response stream is complete.
+    *   **IPC:** I will create a new channel, `ServerToClientChannel.NotifySingleResponseComplete`, in `channels.enum.ts` and `channels.type.ts`. Its payload will be `{ responseId: number; content: string; }`.
+    *   **Backend (`llm.service.ts`):** I will modify the stream processing logic. When a chunk with a `finish_reason` is received for a specific response index, it will immediately send the new `NotifySingleResponseComplete` message with the full content for that response.
+    *   **Frontend (`view.tsx`):** I will add a new message handler for the `NotifySingleResponseComplete` message. This handler will take the full content, run it through the `parseResponse` utility, and update the `parsedContent` and `isLoading` state for the corresponding tab. This ensures that parsing happens immediately for each response as it finishes, rather than waiting for the entire batch.
+
+Could not parse course of action.
+</Previous Cycle 78 Summary of Actions>
+</Cycle 79>
 
 <Cycle 78>
 <Cycle Context>
@@ -4469,26 +4520,26 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-28T16:01:39.566Z
+  Date Generated: 2025-09-28T20:10:53.106Z
   ---
-  Total Files: 175
-  Approx. Tokens: 238121
+  Total Files: 176
+  Approx. Tokens: 239199
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\client\views\parallel-copilot.view\view.tsx (9653 tokens)
-2. src\Artifacts\A0. DCE Master Artifact List.md (9580 tokens)
+2. src\Artifacts\A0. DCE Master Artifact List.md (9538 tokens)
 3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 4. src\backend\services\prompt.service.ts (4927 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\backend\services\history.service.ts (3779 tokens)
+9. src\backend\services\history.service.ts (3819 tokens)
 10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 38317 - Tokens: 9580
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 556 - Chars: 38150 - Tokens: 9538
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -4593,8 +4644,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 352 - Chars: 15113 - Tokens: 3779
-107. src\backend\services\llm.service.ts - Lines: 241 - Chars: 12035 - Tokens: 3009
+106. src\backend\services\history.service.ts - Lines: 360 - Chars: 15273 - Tokens: 3819
+107. src\backend\services\llm.service.ts - Lines: 248 - Chars: 12508 - Tokens: 3127
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -4638,7 +4689,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-151. src\common\types\pcpp.types.ts - Lines: 55 - Chars: 1395 - Tokens: 349
+151. src\common\types\pcpp.types.ts - Lines: 57 - Chars: 1471 - Tokens: 368
 152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 421 - Tokens: 106
 153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -4648,12 +4699,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 158. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 74 - Chars: 3856 - Tokens: 964
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 4889 - Tokens: 1223
+161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 63 - Chars: 6339 - Tokens: 1585
-166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
+166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\client\views\parallel-copilot.view\view.ts - Lines: 5 - Chars: 229 - Tokens: 58
 169. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 72 - Chars: 4454 - Tokens: 1114
@@ -4663,12 +4714,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 174. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 175. src\Artifacts\A107. DCE - Universal Task Checklist for Cycle 77.md - Lines: 47 - Chars: 2476 - Tokens: 619
+176. src\Artifacts\A108. DCE - Universal Task Checklist for Cycle 78.md - Lines: 53 - Chars: 2700 - Tokens: 675
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C76 (Add A104, A105, A106)
+# Updated on: C78 (Add A108)
 
 ## 1. Purpose
 
@@ -5129,6 +5181,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A106. DCE - vLLM Performance and Quantization Guide
 - **Description:** A guide explaining the performance warnings from the vLLM logs and detailing the various model quantization options available.
 - **Tags:** guide, vllm, performance, quantization, llm
+
+### A107. DCE - Universal Task Checklist for Cycle 77
+- **Description:** A tracking document for the feedback items and tasks from Cycle 77.
+- **Tags:** bugs, tracking, issues, backlog, cycle 77
+
+### A108. DCE - Universal Task Checklist for Cycle 78
+- **Description:** A tracking document for the feedback items and tasks from Cycle 78.
+- **Tags:** bugs, tracking, issues, backlog, cycle 78
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -12689,7 +12749,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C76 (Return newMaxCycle from placeholder creation)
+// Updated on: C78 (Manage per-response status)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -12787,7 +12847,7 @@ export class HistoryService {
             title: 'New Cycle', 
             cycleContext: '', 
             ephemeralContext: '', 
-            responses: { "1": { content: "" } }, 
+            responses: { "1": { content: "", status: 'complete' } }, 
             isParsedMode: false, 
             leftPaneWidth: 33, 
             selectedResponseId: null, 
@@ -12875,7 +12935,7 @@ export class HistoryService {
 
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
-            newResponses[(i+1).toString()] = { content: '' };
+            newResponses[(i+1).toString()] = { content: '', status: 'generating' };
         }
 
         const newCycle: PcppCycle = {
@@ -12907,6 +12967,7 @@ export class HistoryService {
             cycle.status = 'complete';
             cycle.title = `Cycle ${cycleId}`;
             Object.keys(cycle.responses).forEach((tabId, index) => {
+                cycle.responses[tabId].status = 'complete';
                 if (responses[index]) {
                     cycle.responses[tabId].content = responses[index];
                 }
@@ -12918,17 +12979,24 @@ export class HistoryService {
         }
     }
 
-    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string): Promise<void> {
+    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string | null): Promise<void> {
         const history = await this._readHistoryFile();
         const cycle = history.cycles.find(c => c.cycleId === cycleId);
         if (cycle) {
-            if (cycle.responses[tabId]) {
+            if (!cycle.responses[tabId]) {
+                cycle.responses[tabId] = { content: '', status: 'pending' };
+            }
+            if (newContent !== null) {
                 cycle.responses[tabId].content = newContent;
+                cycle.responses[tabId].status = 'complete';
+                Services.loggerService.log(`Updated response content for tab ${tabId} in cycle ${cycleId}.`);
             } else {
-                cycle.responses[tabId] = { content: newContent };
+                // This means we are starting a regeneration
+                cycle.responses[tabId].content = '';
+                cycle.responses[tabId].status = 'generating';
+                Services.loggerService.log(`Starting regeneration for tab ${tabId} in cycle ${cycleId}.`);
             }
             await this._writeHistoryFile(history);
-            Services.loggerService.log(`Updated response for tab ${tabId} in cycle ${cycleId}.`);
         } else {
             Services.loggerService.error(`Could not find cycle ${cycleId} to update response.`);
         }
@@ -13044,7 +13112,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C77 (Add single response completion notification)
+// Updated on: C78 (Implement AbortController for Stop button)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -13061,26 +13129,30 @@ export class LlmService {
 
     public stopGeneration(cycleId: number) {
         if (generationControllers.has(cycleId)) {
+            Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}.`);
             generationControllers.get(cycleId)?.abort();
             generationControllers.delete(cycleId);
-            Services.loggerService.log(`[LLM Service] Aborted generation for cycle ${cycleId}.`);
         }
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
+        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
         const cycleData: PcppCycle = { cycleId: cycleId, title: `Regen C${cycleId} T${tabId}`, responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: 1, status: 'generating' };
+        
         try {
             const responses = await this.generateBatch(prompt, 1, cycleData);
             if (responses.length > 0) {
                 await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responses[0]);
                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
                 if (serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
+                    // Notify client that this specific response is done, so it can be parsed immediately.
+                    serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responses[0] });
                 }
             }
         } catch (error) {
             Services.loggerService.error(`[LLM Service] Single regeneration failed: ${error}`);
+            // TODO: Set error status on the response
         }
     }
 
@@ -13202,7 +13274,6 @@ export class LlmService {
                                                 finishedResponses[responseIndex] = true;
                                                 progressData[responseIndex].status = 'complete';
                                                 totalFinished++;
-                                                // Send final notification for immediate parsing
                                                 serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
                                             }
                                         } else if (choice.delta) {
@@ -13246,16 +13317,20 @@ export class LlmService {
                 });
                 
                 stream.on('error', (err) => {
-                    reject(err);
+                    if (!(err instanceof AbortError)) {
+                        reject(err);
+                    }
                 });
 
             } catch (error: any) {
                  if (error instanceof AbortError) {
                     Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
+                    // Resolve with empty array as the operation was intentionally stopped
+                    resolve(Array(count).fill(''));
                 } else {
                     Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
+                    reject(error);
                 }
-                reject(error);
             } finally {
                 generationControllers.delete(cycleData.cycleId);
             }
@@ -19270,16 +19345,18 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C76 (Consolidate TabState)
+// Updated on: C78 (Add status to PcppResponse)
 export interface PcppResponse {
     content: string;
     isLoading?: boolean;
+    status?: 'pending' | 'generating' | 'complete' | 'error';
 }
 
 export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
     isLoading?: boolean;
+    status?: 'pending' | 'generating' | 'complete' | 'error';
 }
 
 export interface PcppCycle {
@@ -20038,15 +20115,15 @@ This migration to a structured JSON format will significantly improve the reliab
 # Artifact A99: DCE - Response Regeneration Workflow Plan
 # Date Created: C50
 # Author: AI Model & Curator
-# Updated on: C76 (Refine UI behavior for single-tab regen from main view)
+# Updated on: C78 (Add double-click confirmation and per-tab progress view)
 
 - **Key/Value for A0:**
-- **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature.
+- **Description:** Details the user stories and technical implementation for the "Regenerate" button in the PCPP, including logic for regenerating empty tabs, all tabs, and a new per-tab refresh feature with double-click confirmation.
 - **Tags:** feature plan, ui, ux, workflow, regeneration
 
 ## 1. Vision & Goal
 
-The workflow for generating AI responses needs to be more flexible. Users may decide they need more responses after the initial batch, or a single response might fail to parse or be of low quality. The goal of this feature is to provide intuitive controls for regenerating responses, both globally and individually, without forcing the user to start a new cycle.
+The workflow for generating AI responses needs to be more flexible and deliberate. Users may decide they need more responses after the initial batch, a single response might be of low quality, or they may accidentally click the regenerate button. The goal of this feature is to provide intuitive, granular controls for regenerating responses while preventing accidental actions.
 
 ## 2. User Stories & Button Behaviors
 
@@ -20054,30 +20131,31 @@ The workflow for generating AI responses needs to be more flexible. Users may de
 |---|---|---|
 | P2-REG-01 | **Regenerate Empty Tabs** | As a user, after increasing the number of response tabs from 4 to 6, I want to click the global "Regenerate responses" button, which should only generate new responses for the two new, empty tabs. | - A global "Regenerate responses" button exists in the PCPP header. <br> - If one or more response tabs are empty, clicking this button triggers a batch generation request only for the number of empty tabs. <br> - The new responses populate only the empty tabs. |
 | P2-REG-02 | **Regenerate All Tabs** | As a user, if all my response tabs have content but I'm unsatisfied, I want to click the global "Regenerate responses" button and be asked if I want to regenerate *all* responses. | - If no response tabs are empty, clicking "Regenerate responses" shows a confirmation dialog. <br> - If confirmed, a batch request is sent to generate a full new set of responses, which replaces the content in all existing tabs. |
-| P2-REG-03 | **Regenerate a Single Tab (from Tab View)** | As a user, if one specific response is poor, I want a "Refresh" icon on that tab to regenerate just that single response without affecting others. | - A "Refresh" icon appears on each response tab when hovered. <br> - Clicking this icon triggers a generation request for a single response. <br> - The new response replaces the content of only that specific tab. <br> - **(C76 Update)** The content area for the active tab switches back to the `GenerationProgressDisplay` to show the new response streaming in. |
+| P2-REG-03 | **Regenerate a Single Tab (from Tab View)** | As a user, if one specific response is poor, I want a "Refresh" icon on that tab to regenerate just that single response without affecting others. | - A "Refresh" icon appears on each response tab. <br> - Clicking this icon triggers a generation request for a single response. <br> - The new response replaces the content of only that specific tab. <br> - The main content area for the active tab switches to show the `GenerationProgressDisplay` to show the new response streaming in. |
 | P2-REG-04 | **Re-generate a Single Response (from Progress View)** | As a user watching responses stream in, if one response seems stuck or is generating poorly, I want a "Re-generate" button next to it to discard the current attempt and start a new one for just that slot. | - In the `GenerationProgressDisplay`, a "Re-generate" button is available for each response. <br> - Clicking it stops the current generation for that response (if active) and immediately initiates a new request for that single response slot. |
+| P2-REG-05 | **Prevent Accidental Regeneration** | As a user, I want to confirm my intent to regenerate a response, so I don't accidentally lose a good response by misclicking. | - The first click on a "Regenerate" button (on a tab) changes its icon to a "Confirm" (checkmark) icon. <br> - A second click on the same button within a few seconds triggers the regeneration. <br> - If the user does not click again, the button reverts to its original state. |
 
-## 3. Technical Implementation Plan (C76 Update)
+## 3. Technical Implementation Plan (C78 Update)
 
-1.  **IPC Channels:**
-    *   The existing `ClientToServerChannel.RequestNewCycleAndGenerate` can be used for global regeneration.
-    *   The existing `ClientToServerChannel.RequestSingleRegeneration` will be used for per-tab regeneration.
+1.  **IPC Channels:** Existing channels are sufficient.
 
-2.  **Frontend UI & Logic (`view.tsx`, `ResponseTabs.tsx`):**
-    *   **Global "Regenerate responses" Button (`view.tsx`):** The logic will be updated to check for empty tabs and prompt for confirmation if none are found.
-    *   **Per-Tab "Refresh" Button (`ResponseTabs.tsx`):** This button will trigger the `RequestSingleRegeneration` IPC message.
-    *   **Single-Tab Regen UI (`view.tsx`):**
-        *   The `handleRegenerateTab` function will be updated. It will now not only set the `isLoading` state for the tab but also update a new state variable that controls which view is shown for that tab.
-        *   The main render logic will check this state. If a single tab is regenerating, it will render the `GenerationProgressDisplay` component in the main content area, but filtered to show only the progress for that one response.
+2.  **Frontend UI & Logic:**
+    *   **Double-Click Confirmation (`ResponseTabs.tsx`):**
+        *   Introduce a new local state `const [regenConfirmTabId, setRegenConfirmTabId] = useState<number | null>(null);`.
+        *   The `onClick` handler for the regenerate button will implement the two-click logic. The first click sets the state, the second click triggers the regeneration and resets the state.
+        *   A `useEffect` hook with a `setTimeout` will be used to reset the confirmation state after 3-4 seconds if no second click occurs.
+        *   The button icon will be conditionally rendered (`VscSync` or `VscCheck`) based on the `regenConfirmTabId` state.
+    *   **Per-Tab Progress View (`view.tsx`):**
+        *   The `handleRegenerateTab` function will update the `status` of the specific response in the `tabs` state to `'generating'`.
+        *   The main render logic will be refactored. It will check the status of the `activeTab`. If `tabs[activeTab].status === 'generating'`, it will render the `GenerationProgressDisplay` component. Otherwise, it will render the `ResponsePane`.
 
-3.  **Backend Logic (`llm.service.ts`, `history.service.ts`):**
-    *   **Batch Regeneration:** The backend handlers will be updated to accommodate regenerating only specific tabs.
-    *   **Single Regeneration (`on-message.ts`):**
-        *   The handler for `RequestSingleRegeneration` will retrieve the data for the specified `cycleId`.
-        *   It will then call `promptService.generatePromptString` with the data from the *current* cycle.
-        *   It will call a `generateSingle` method in `llm.service.ts` to handle the API call.
-        *   It will then call `updateSingleResponseInCycle` in `history.service.ts` to update the specific response in the history file.
-        *   It will send a message back to the client to signal completion.
+3.  **Backend Logic (Per-Response Status):**
+    *   **`pcpp.types.ts`:** Add `status: 'pending' | 'generating' | 'complete' | 'error'` to the `PcppResponse` interface.
+    *   **`history.service.ts`:**
+        *   The `updateSingleResponseInCycle` method will be updated to set the `status` of the target response to `'generating'` and reset its content.
+        *   When the response is fully received (from `llm.service.ts`), this method will be called again to set the status to `'complete'` and update the content.
+    *   **`llm.service.ts`:**
+        *   The `stopGeneration` method will be implemented using a `Map<number, AbortController>` to track and abort `fetch` requests.
 </file_artifact>
 
 <file path="src/client/utils/response-parser.ts">
@@ -20528,6 +20606,7 @@ This document serves as a living record of persistent or complex bugs that have 
 # Artifact A101: DCE - Asynchronous Generation and State Persistence Plan
 # Date Created: C67
 # Author: AI Model & Curator
+# Updated on: C78 (Add per-response status field)
 
 - **Key/Value for A0:**
 - **Description:** Documents the new, more robust workflow for generating responses. This involves creating a new cycle with a "generating" status first, which provides a persistent state container for the asynchronous LLM call, making the UI state recoverable on reload.
@@ -20544,28 +20623,31 @@ The "Generate responses" feature currently suffers from two critical flaws:
 To solve both issues, the workflow will be re-architected to be stateful and persistent.
 
 1.  **Initiate:** The user, on Cycle `N`, clicks "Generate responses".
-2.  **Create Placeholder:** The frontend sends a `RequestNewCycleAndGenerate` message to the backend. The backend's first action is to immediately create and save a new **Cycle `N+1`** in `dce_history.json`. This new cycle has a special status, e.g., `status: 'generating'`.
+2.  **Create Placeholder:** The frontend sends a `RequestNewCycleAndGenerate` message to the backend. The backend's first action is to immediately create and save a new **Cycle `N+1`** in `dce_history.json`. This new cycle has a special status, e.g., `status: 'generating'`, and each of its `PcppResponse` objects also has its status set to `'generating'`.
 3.  **Start UI:** The backend immediately responds to the frontend with a `StartGenerationUI` message, containing the ID of the new cycle (`N+1`).
 4.  **Navigate & Display:** The frontend navigates to Cycle `N+1` and, seeing the `generating` status, displays the `GenerationProgressDisplay` component.
 5.  **Asynchronous Generation:** *In parallel*, the backend uses the data from the original Cycle `N` (which was sent with the initial request) to generate the prompt and start the LLM call.
 6.  **Save Progress:** As response chunks stream in, the backend saves them directly into the placeholder Cycle `N+1` in `dce_history.json`.
-7.  **Completion:** When generation is complete, the backend updates the status of Cycle `N+1` from `generating` to `complete`.
+7.  **Completion:** When generation is complete, the backend updates the status of Cycle `N+1` from `generating` to `complete`, and also updates the status of each individual response.
 
 ## 3. Benefits of this Architecture
 
 -   **Fixes Stale Prompts:** The prompt for Cycle `N+1` is generated using the fresh, in-memory data from Cycle `N` that was sent directly from the client, guaranteeing it's up-to-date.
 -   **Fixes UI Persistence:** The `isGenerating` state is no longer a transient boolean in the UI. It's now a persistent `status` field in the cycle data itself. If the user navigates away and back, the extension will load the latest cycle (N+1), see its status is `generating`, and automatically re-display the progress UI, which will be populated with the latest progress saved in the history file.
+-   **Enables Granular Control:** Storing the status on each individual response allows for single-tab regeneration without disrupting the state of other tabs.
 
 ## 4. Technical Implementation Plan
 
-1.  **Data Model (`pcpp.types.ts`):** Add a `status?: 'complete' | 'generating'` property to the `PcppCycle` interface.
+1.  **Data Model (`pcpp.types.ts`):**
+    *   Add a `status?: 'complete' | 'generating'` property to the `PcppCycle` interface.
+    *   Add a `status?: 'pending' | 'generating' | 'complete' | 'error'` property to the `PcppResponse` interface.
 2.  **IPC Channels:** Add `RequestNewCycleAndGenerate` and `StartGenerationUI`.
 3.  **Backend (`history.service.ts`):** Create a `createNewCyclePlaceholder` method to create the new cycle with `status: 'generating'`. Update `saveCycleData` to handle partial progress updates for a generating cycle.
 4.  **Backend (`on-message.ts`):** Implement the new handler for `RequestNewCycleAndGenerate` to orchestrate this workflow.
 5.  **Frontend (`view.tsx`):**
     *   Update the "Generate responses" button to use the new IPC channel.
     *   Add a handler for `StartGenerationUI`.
-    *   Update the main rendering logic: if the currently loaded cycle has `status === 'generating'`, render the `GenerationProgressDisplay` component.
+    *   Update the main rendering logic: if the currently loaded cycle has `status === 'generating'`, render the `GenerationProgressDisplay` component. The logic will be further refined to check the status of the *active tab* for single-response regeneration.
 </file_artifact>
 
 <file path="src/Artifacts/A103. DCE - Consolidated Response UI Plan.md">
@@ -21016,6 +21098,62 @@ This artifact provides a structured checklist for tracking the development tasks
 1.  In Demo Mode, start a generation of 4 responses.
 2.  Observe the response tabs in the main PCPP view.
 3.  **Expected:** As each response finishes generating, its tab should switch from the loading spinner to the parsed view individually, without showing a "PARSING FAILED" message and without waiting for all other responses to complete.
+</file_artifact>
+
+<file path="src/Artifacts/A108. DCE - Universal Task Checklist for Cycle 78.md">
+# Artifact A108: DCE - Universal Task Checklist for Cycle 78
+# Date Created: C78
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 78. The primary focus is to fix the regeneration UI bugs, implement the "Stop" button, and add the double-click confirmation for regeneration.
+
+---
+
+## Task List for Cycle 78+
+
+## T-1: Implement Per-Response Status and UI Logic
+- **Files Involved:**
+    - `src/common/types/pcpp.types.ts`
+    - `src/backend/services/history.service.ts`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+- **Total Tokens:** ~14,800
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 1.1):** Add a `status` field to the `PcppResponse` interface in `pcpp.types.ts`.
+- [ ] **Task (T-ID: 1.2):** Update `history.service.ts` to set the individual response `status` to `'generating'` when a single regeneration is requested.
+- [ ] **Task (T-ID: 1.3):** Refactor the main render logic in `view.tsx`. The choice to render `GenerationProgressDisplay` vs. `ResponsePane` should be based on the `status` of the `activeTab`'s response data, not just the overall cycle status.
+
+### Verification Steps
+1.  Generate a batch of responses.
+2.  Regenerate "Resp 1".
+3.  While "Resp 1" is regenerating, click on the "Resp 4" tab.
+4.  **Expected:** The UI should show the content of "Resp 4". It should NOT show the progress UI.
+5.  Click back to the "Resp 1" tab.
+6.  **Expected:** The UI should now show the `GenerationProgressDisplay` for "Resp 1".
+
+## T-2: Implement Regeneration Confirmation and Stop Button
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/ResponseTabs.tsx`
+    - `src/backend/services/llm.service.ts`
+    - `src/client/views/parallel-copilot.view/on-message.ts`
+- **Total Tokens:** ~6,200
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 2.1):** Implement the double-click confirmation logic in `ResponseTabs.tsx` using local state to track the confirmation step.
+- [ ] **Task (T-ID: 2.2):** Implement the `AbortController` logic in `llm.service.ts` to make the "Stop" button functional.
+- [ ] **Task (T-ID: 2.3):** Wire up the "Stop" button in the UI to the backend service via a new IPC channel.
+
+### Verification Steps
+1.  Hover over a response tab and click the "Regenerate" icon once.
+2.  **Expected:** The icon changes to a checkmark.
+3.  Click it again.
+4.  **Expected:** The regeneration process starts.
+5.  Start a new generation and click the "Stop" button.
+6.  **Expected:** The vLLM logs should show the request was cancelled, and the UI should stop receiving progress updates.
 </file_artifact>
 
 
