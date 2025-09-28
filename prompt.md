@@ -834,2248 +834,45 @@ No project scope defined.
 
 <Cycle 77>
 <Cycle Context>
-fantastic work! the spinning animation in the response tab is now functional!
+fantastic work! the spinning animation in the response tab is now functional! im going to playtest and report my observations and findings below:
 
-okay, im observing that when i use the `Re-generate` command on a response tab, it effectively clears the current response out and then sends the request to vllm, which is good, however my view on that response tab does not change to the response ui. once the vllm request finishes however, the response tab does eventually populate with the new response, which is great. we just want to display the response ui while a response is generating. also, i tested regenerating two response tabs at the same time, but it never took the second response like a batch, which was my expectation. i was watching the vllm logs and the number of running requests never went over 1. i had to wait for it to finish before i could start another response. users should be able to request regenerated responses and they should run in parallel or batch, regardless if they were requested individually rather than all at once, does that make sense?
+1. while initial onboarding responses were generating, once one completed, i was able to select that responses tab and it correctly switched to the response viewer, which will allow a user to begin interpreting the results immediately, however they appeared to show 'parsing failed' but i do not think that is the case, i think it just didnt initiate the parse yet. i think so because as i watched the responses complete one at a time, they all showed the same thing (im providing a screenshot), parsing failed, but once the final response completed, all four responses magically parsed correctly, including the ones where it said failed. can you check to see if that is the case and if so, correct it?
 
-next, i still had to click the `>` in order to change my view to Cycle 2 once i clicked `Generate responses`. the responses did inititate to vllm, i just didnt automatically increment, which is the desire.
-
-third, it seems you still arent fully packaging the prompt.md prior to sending it off. what i mean is, despite my having set my cycle 1 title to `create code files`, when i view the `prompt.md`, the actual title is `Cycle 1 - Cycle 1`. how can that be the case? additionally, ive got 6 new artifacts created from the previous cycle, and they are all selected items in my flattened context, yet they also do not appear in my `prompt.md` how can this be? why is it that we had this working fine, and when all you need to do is send the prompt.md that gets created, so in effect add a step after, did we break the step before? final observation of a failed `prompt.md` creation is the Cycle 1 itself is blank, it just appears as an empty tag pair: <Cycle 1></Cycle 1>, despite my having input the string: `okay now lets build the code files from the scaffolding plan`. whats going on?
-
-okay now im going to go step-by-step through A104, the verification steps. im going to annotate in A104 for each verification step what the observation was.
-
-okay i annotated in a104. also i provided my dce logs in the ephemeral.
-
+2. okay still, i am seeing a stale prompt.md. my cde_history.json shows correctly, yet when i click `Generate responses` the prompt.md doesnt contain what i wrote in Cycle 1 or Cycle 1 Context, or the newly created files. its a stale file. where is the `Generate prompt.md` button? that button should be working perfectly, right? we didnt change that functionality since working on this new `Demo Mode`? can you compare? i put logs of what i see in the dce when attempting to generate this prompt.md in ephemeral
 
 </Cycle Context>
 <Ephemeral Context>
-<dce output logs>
-[INFO] [8:41:48 AM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [8:41:48 AM] Services initializing...
-[INFO] [8:41:48 AM] Services initialized successfully.
-[INFO] [8:41:48 AM] Registering 7 commands.
-[INFO] [8:41:49 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [8:41:49 AM] Parallel Co-Pilot view message handler initialized.
-[INFO] [8:41:49 AM] Starry Night syntax highlighter initialized.
-[INFO] [8:41:49 AM] Context Chooser view message handler initialized.
-[INFO] [8:41:49 AM] Executing dce.openSettingsPanel command.
-[INFO] [8:41:49 AM] Settings view message handler initialized.
-[INFO] [8:41:49 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [8:41:49 AM] [SelectionService] No last selection found in state.
-[INFO] [8:41:49 AM] Persisted current selection of 0 items.
-[INFO] [8:41:49 AM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [8:41:49 AM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [8:41:51 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [8:41:51 AM] Settings saved: Mode=demo, URL=undefined
-[INFO] [8:41:51 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [8:41:51 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [8:41:51 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [8:41:52 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [8:41:55 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [8:42:01 AM] Generating Cycle 0 prompt and starting generation...
-[INFO] [8:42:01 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
-[INFO] [8:42:01 AM] [SelectionService] No last selection found in state.
-[INFO] [8:42:01 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
-[INFO] [8:42:01 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
-[INFO] [8:42:01 AM] prompt.md file created successfully before sending API request.
-[INFO] [8:42:01 AM] Created new placeholder cycle 1.
-[INFO] [8:42:01 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [8:42:01 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [8:42:01 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [8:42:01 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [8:42:01 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [8:42:01 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense55/src","c:/Projects/TowerDefense55/src/Artifacts","c:/Projects/TowerDefense55/src/Artifacts/DCE_README.md"]
-[INFO] [8:42:01 AM] [SelectionService] No last selection found in state.
-[INFO] [8:42:01 AM] Persisted current selection of 3 items.
-[INFO] [8:42:01 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [8:42:01 AM] Persisted current selection of 3 items.
-[INFO] [8:42:02 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [8:43:00 AM] [STREAM] Response 3 finished.
-[INFO] [8:43:48 AM] [STREAM] Response 2 finished.
-[INFO] [8:44:41 AM] [STREAM] Response 1 finished.
-[INFO] [8:44:41 AM] [STREAM] Response 4 finished.
-[INFO] [8:44:41 AM] LLM stream ended. Total finished responses: 4/4
-[INFO] [8:44:41 AM] Updated cycle 1 with 4 responses.
-[INFO] [8:44:41 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [8:44:41 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [8:44:41 AM] [CostCalc] Found 3 selected files.
-[INFO] [8:44:41 AM] [Comparison] Received request for: Artifacts/A0. Master Artifact List.md
-[INFO] [8:44:41 AM] [Comparison] Received request for: Artifacts/A1. TowerDefenseGame - Project Vision and Goals.md
-[INFO] [8:44:41 AM] [Comparison] Received request for: Artifacts/A4. TowerDefenseGame - Technical Scaffolding Plan.md
-[INFO] [8:44:41 AM] [Comparison] Received request for: Artifacts/T14. TowerDefenseGame - GitHub Repository Setup Guide.md
-[INFO] [8:44:41 AM] [Comparison] Received request for: Artifacts/T7. TowerDefenseGame - Development and Testing Guide.md
-[INFO] [8:44:41 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A0. Master Artifact List.md::# Artifact A0: Master Artifact List
-# Date Created: C...
 
-- **Key/Value for A0:**
-- **Description:** List of all documentation artifacts for the TowerDefenseGame project.
-- **Tags:** master artifact list, project documentation
-
-## I. Project Planning & Design
-
-### A1. TowerDefenseGame - Project Vision and Goals
-- **Description:** High‑level overview of the project, its purpose, and the development plan.
-- **Tags:** project vision, goals, scope, planning
-
-### A2. TowerDefenseGame - Technical Scaffolding Plan
-- **Description:** Technical infrastructure and file structure for the project.
-- **Tags:** technical plan, architecture, scaffolding
-
-## II. Development & Deployment
-
-### A3. TowerDefenseGame - GitHub Repository Setup Guide
-- **Description:** Step‑by‑step instructions to initialize the repository and link to GitHub.
-- **Tags:** git, github, repo setup
-
-### A4. TowerDefenseGame - Development and Testing Guide
-- **Description:** Standard procedure for running, debugging, and testing the application.
-- **Tags:** development workflow, testing
-[INFO] [8:44:41 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A1. TowerDefenseGame - Project Vision and Goals.md::# Artifact A1: TowerDefenseGame - Project Vision and Goals
-# Date Created: C...
-
-## 1. Project Vision
-
-The vision of **TowerDefenseGame** is to create an accessible, yet deeply strategic tower defense game that runs in the web browser, allowing players to build and defend fortresses against waves of enemies. It aims to provide a lightweight, cross‑platform experience using modern web technologies.
-
-## 2. High‑Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: Core Game Loop
-
-The goal of this phase is to establish the foundational mechanics of the game.
-- **Core Functionality:** Implement the game loop, enemy spawning, and basic tower placement and damage logic.
-- **Outcome:** A playable demo where a player can place towers and defeat simple enemies.
-
-### Phase 2: Gameplay Enhancements
-
-Build upon the core loop to add richer mechanics such as technologies, unit upgrades, and resource management.
-- **Core Functionality:** Implement tower upgrades, limited resources, and wave progression.
-- **Outcome:** A polished prototype capable of multiple waves with escalating difficulty.
-[INFO] [8:44:41 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A4. TowerDefenseGame - Technical Scaffolding Plan.md::# Artifact A4: TowerDefenseGame - Technical Scaffolding Plan
-# Date Created: C...
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for TowerDefenseGame. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
-- **Language:** TypeScript
-- **Framework/Library:** React for UI, Phaser 3 for game engine
-- **Styling:** SCSS
-- **Bundler:** Vite
-- **State Management:** Zustand
-- **Testing:** Jest & React Testing Library
-
-## 3. Proposed File Structure
-
-The project will adhere to a feature‑driven directory structure:
-
-```
-.
-├── public/
-│   ├── index.html
-│   └── assets/
-│       └── images/
-├── src/
-│   ├── components/       # UI components (e.g., Header, GameCanvas)
-│   │
-│   ├── features/         # Feature modules
-│   │   └── game/
-│   │       ├── index.tsx
-│   │       ├── gameEngine.ts
-│   │       └── components/
-│   │
-│   ├── services/         # Services (e.g., Configuration, Audio)
-│   │
-│   ├── store/            # Zustand stores
-│   │
-│   ├── types/            # Shared TypeScript definitions
-│   │
-│   └── main.tsx          # Entry point rendering the React root
-│   
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── yarn.lock
-```
-
-## 4. Key Architectural Concepts
-
-- **Separation of Concerns:** The structure separates UI components, feature logic, game engine integrations, and shared services.
-- **Component‑Based UI:** UI is built from reusable small React components.
-- **Game Engine Layer:** The Phaser 3 integration lives in `features/game/gameEngine.ts`, keeping rendering logic distinct from UI.
-- **State Layer:** Zustand stores keep game state and configuration accessible across UI and engine.
-- **Strong Typing:** TypeScript ensures type safety throughout the project.
-[INFO] [8:44:41 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/T14. TowerDefenseGame - GitHub Repository Setup Guide.md::# Artifact T14: TowerDefenseGame - GitHub Repository Setup Guide
-# Date Created: C...
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step‑by‑Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top‑right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** `tower-defense-game`.
-4.  **Description:** A browser‑based tower defense game built with React, TypeScript, and Phaser.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command‑line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co‑Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co‑Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/T7. TowerDefenseGame - Development and Testing Guide.md::# Artifact T7: TowerDefenseGame - Development and Testing Guide
-# Date Created: C...
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **TowerDefenseGame** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-
-```bash
-npm run dev
-```
-
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-Open a browser to `http://localhost:5173` (Vite default) or the port specified in your `vite.config.ts`.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code using VS Code or browser dev tools. Running the server with `npm run dev` will open a page automatically where you can use the Sources panel in Chrome DevTools or the integrated debugger in VS Code.
-
-## 3. Testing
-
-The project is configured with Jest and React Testing Library. To run the test suite, use the following command:
-
-```bash
-npm run test
-```
-
-This will execute all test files located in the project and report the results to the console.
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A0-Master-Artifact-List.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A1-Project-Vision-and-Goals.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A2-Technical-Scaffolding-Plan.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A3-GitHub-Repository-Setup-Guide.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A4-Development-and-Testing-Guide.md
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0-Master-Artifact-List.md::# Master Artifact List
-
-## I. Project Planning & Design
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High-level overview of the project.
-- **Tags:** project vision, goals, scope, planning
-
-### A2. Tower Defense Game - Technical Scaffolding Plan
-- **Description:** Technical plan for folder structure, tech choices.
-- **Tags:** technical plan, architecture, scaffolding
-
-### A3. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Guide for initializing git and connecting to GitHub.
-- **Tags:** git, github, version control
-
-### A4. Tower Defense Game - Development and Testing Guide
-- **Description:** Development workflow and testing instructions.
-- **Tags:** development, testing, workflow
-
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A1-Project-Vision-and-Goals.md::# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-
-The vision of **Tower Defense Game** is to provide a browser-based tower defense experience that allows players to strategically defend a base from waves of monsters while promoting creative tactical thinking. It aims to deliver a customizable, replayable game that balances fun with depth, and includes an editor for creating custom level maps.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: Core Gameplay
-
-The goal of this phase is to establish the foundational elements of the game.
-- **Core Functionality:** Implement the game loop, monster spawning, basic tower placement, and collision detection.
-- **Outcome:** A working prototype where a player can place towers and defeat enemies starting at wave 1.
-
-### Phase 2: Level Editor and Resource System
-
-This phase will build upon the foundation of Phase 1 by adding key features that enhance the user experience.
-- **Core Functionality:** Provide a drag‑and‑drop level editor and a simple resource allocation system.
-- **Outcome:** Players can design maps and manage resources to upgrade towers.
-
-### Phase 3: Polishing, API and Deployment
-
-This phase focuses on refining the product, improving performance, and ensuring it is ready for release.
-- **Core Functionality:** Implement offline persistence, multiplayer support, performance tuning, and launch on a hosting service.
-- **Outcome:** A polished, production‑ready tower defense game.
-
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A2-Technical-Scaffolding-Plan.md::# Tower Defense Game - Technical Scaffolding Plan
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for Tower Defense Game. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** TypeScript
--   **Framework/Library:** React 18 with Vite
--   **Styling:** TailwindCSS
--   **State Management:** React Context + useReducer
--   **Bundler:** Vite
--   **Testing:** Jest + React Testing Library
-
-## 3. Proposed File Structure
-
-The project will adhere to a standard, feature-driven directory structure:
-
-```
-.
-├── src/
-│   ├── components/       # Reusable UI components (Button, Modal, etc.)
-│   ├── features/         # Feature-specific modules
-│   │   ├── game/
-│   │   │   ├── components/
-│   │   │   └── game.tsx
-│   │   ├── editor/
-│   │   │   ├── components/
-│   │   │   └── editor.tsx
-│   │   └── shared/
-│   │       └── types.ts
-│   ├── services/         # Core client-side services (game logic, API calls)
-│   ├── hooks/            # Custom React hooks
-│   ├── styles/           # Tailwind CSS and other styles
-│   └── main.tsx          # Main application entry point
-├── public/
-│   ├── index.html
-│   └── assets/
-├── tests/
-│   ├── unit/
-│   └── integration/
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 4. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
--   **Component-Based UI:** The UI will be built by composing small, reusable components.
--   **Service Layer:** Business logic and external communication will be encapsulated in services to keep components clean.
--   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A3-GitHub-Repository-Setup-Guide.md::# Tower Defense Game - GitHub Repository Setup Guide
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** Enter a name for your project (e.g., `tower-defense-game`).
-4.  **Description:** (Optional) Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ````bash
-    git init
-    ````
-
-2.  **Add all existing files:**
-    ````bash
-    git add .
-    ````
-
-3.  **Create the first commit:**
-    ````bash
-    git commit -m "Initial commit"
-    ````
-
-4.  **Rename the default branch to `main`:**
-    ````bash
-    git branch -M main
-    ````
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ````bash
-    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
-    ````
-
-2.  **Push your local `main` branch to GitHub:**
-    ````bash
-    git push -u origin main
-    ````
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
-
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A4-Development-and-Testing-Guide.md::# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-````bash
-npm install
-````
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-````bash
-npm run dev
-````
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-Open a browser to `http://localhost:5173` (default Vite dev server port) to see the application.
-
-### Step 4: Debugging
-
-Set breakpoints directly in your source code. VS Code automatically attaches a debugger when you run the dev server.
-
-## 3. Testing
-
-The project is configured with Jest and React Testing Library. To run the test suite, use the following command:
-````bash
-npm run test
-````
-This will execute all test files located in the project and report the results to the console.
-
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A0-Master-Artifact-List.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0-Master-Artifact-List.md::# Tower Defense Game - Master Artifact List
-
-## I. Project Planning & Design
-
-### A0. Tower Defense Game - Master Artifact List
-- **Description:** The definitive list of all documentation artifacts for the project.
-- **Tags:** project planning, artifact list
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High‑level vision and goal statement for the game.
-- **Tags:** project vision, goals
-
-### A2. Tower Defense Game - Technical Scaffolding Plan
-- **Description:** Detailed technical plan including stack and file structure.
-- **Tags:** technical plan, scaffolding
-
-### A3. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Customised example repository setup for this project.
-- **Tags:** git, setup
-
-### A4. Tower Defense Game - Development and Testing Guide
-- **Description:** Customised development & testing workflow for the project.
-- **Tags:** development, testing
-
-## II. Operational & Maintenance
-
-(No operational artifacts created yet in Cycle 0.)
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md::# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-The vision of **Tower Defense Game** is to create an engaging, strategic arcade style game where players defend a base by strategically placing towers to fend off waves of enemies. The game aims to provide a fast‑paced, yet thoughtful gameplay experience that balances resource management with tactical placement.
-
-## 2. High‑Level Goals & Phases
-
-### Phase 1: Core Gameplay Loop
-- **Core Functionality:** Implement tower placement, enemy spawning, and basic combat mechanics.
-- **Outcome:** A playable demo where enemies spawn, towers shoot, and the player can earn resources.
-
-### Phase 2: Expansion & Polish
-- **Core Functionality:** Add multiple tower types, upgrade paths, and a wave system with difficulty scaling.
-- **Outcome:** Extended gameplay with deeper strategic options.
-
-### Phase 3: Packaging & Release
-- **Core Functionality:** Implement menu UI, analytics, build scripts, and publish to a web platform.
-- **Outcome:** A polished, deployable package ready for distribution.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md::# Tower Defense Game - Technical Scaffolding Plan
-
-## 1. Overview
-This document outlines the proposed technical scaffolding and file structure for Tower Defense Game. The plan serves as a blueprint for the initial project setup.
-
-## 2. Technology Stack
-- **Language:** TypeScript
-- **Framework/Library:** React (Create React App or Vite with React)
-- **Styling:** TailwindCSS
-- **Bundler:** Vite (fast dev server & build)
-- **State Management:** React Context + useReducer
-- **Testing:** Jest + React Testing Library
-- **Package Manager:** npm
-
-## 3. Proposed File Structure
-
-```
-.
-├── public/
-│   └── index.html
-├── src/
-│   ├── assets/
-│   │   └── images/
-│   ├── components/
-│   │   ├── Tower.tsx
-│   │   ├── Enemy.tsx
-│   │   └── GameBoard.tsx
-│   ├── features/
-│   │   ├── GameLogic/
-│   │   │   ├── index.ts
-│   │   │   └── utilities.ts
-│   │   └── Player/
-│   │       ├── index.ts
-│   │       └── store.ts
-│   ├── services/
-│   │   ├── gameService.ts
-│   │   └── apiService.ts
-│   ├── hooks/
-│   │   └── useGameState.ts
-│   ├── types/
-│   │   └── index.ts
-│   ├── App.tsx
-│   ├── index.tsx
-│   └── main.ts
-├── package.json
-├── vite.config.ts
-├── tsconfig.json
-└── postcss.config.cjs
-```
-
-## 4. Key Architectural Concepts
-- **Separation of Concerns:** UI components, feature logic, and services are cleanly separated.
-- **Component‑Based UI:** Reusable components enable rapid UI construction.
-- **Service Layer:** Encapsulates business logic and external API interactions.
-- **Strong Typing:** TypeScript ensures compile‑time safety and better developer ergonomics.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md::# Tower Defense Game - GitHub Repository Setup Guide
-
-## 1. Overview
-This guide walks you through turning your local Tower Defense Game project folder into a Git repository, linking it to GitHub, and establishing a standard workflow for future development cycles.
-
-## 2. Prerequisites
-- Git installed on your machine.
-- GitHub account and a free repository.
-
-## 3. Step‑by‑Step Setup
-
-### 3.1. Create a New Repository on GitHub
-1. Go to [github.com](https://github.com) and log in.
-2. Click the **"+"** icon in the top‑right corner and choose **"New repository"**.
-3. **Repository name:** `tower-defense-game`.
-4. **Description:** *A simple tower defense game built with React and TypeScript.*
-5. Choose **Public**.
-6. **IMPORTANT:** Do *not* initialize the repository with a README, .gitignore, or license.
-7. Click **"Create repository"**.
-
-GitHub will display a page with command‑line instructions. Use the portion titled **"…or push an existing repository from the command line"**.
-
-### 3.2. Initialize Git Locally
-```bash
-cd path/to/tower-defense-game
-# Initialize Git
-git init
-# Add all files
-git add .
-# Commit
-git commit -m "Initial commit"
-# Rename the default branch
-git branch -M main
-```
-
-### 3.3. Link Remote and Push
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
-git push -u origin main
-```
-
-You should now see all project files in your new GitHub repository.
-
-## 4. Sample Development Workflow with DCE and Git
-
-1. **Keep a Clean Working Directory** – Run `git status` before starting a new cycle.
-2. **Generate AI Prompts** – Use DCE to create a `prompt.md` request.
-3. **Accept and Test** – Accept AI‑generated files, run the application (`npm run dev`), and observe results.
-4. **Restore if Needed** – On failure, execute `git restore .` to revert.
-5. **Commit Good Changes** – Stage (`git add .`) and commit (`git commit -m "…"`).
-
-These steps ensure a controlled, repeatable development process that protects the original codebase while allowing rapid iterations.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md::# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-Use Vite to start the dev server and watch for changes.
-```bash
-npm run dev
-```
-This will open the app at `http://localhost:5173` (default Vite port).
-
-### Step 3: Running the Application
-
-Open the browser to `http://localhost:5173` and verify that the main menu screen loads. From the menu, start a new game to test tower placement and enemy waves.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code and use the browser's dev tools. For React, the React DevTools extension is also handy.
-
-## 3. Testing
-
-The project uses Jest and React Testing Library. To run the test suite:
-```bash
-npm test
-```
-All tests in `src/**/*.test.tsx` and `src/**/*.test.ts` will be executed.
-
-### Test Recommendations
-- Write unit tests for game logic utilities (e.g., `calculateDamage`).
-- Write integration tests for components that manage state (e.g., `GameBoard`).
-- Ensure coverage for critical paths like tower upgrades and wave progression.
-[INFO] [8:44:42 AM] [Comparison] Received request for: Artifacts/A0-Master-Artifact-List.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: Artifacts/A1-Project-Vision-and-Goals.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: Artifacts/A2-GitHub-Repository-Setup-Guide.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: Artifacts/A3-Development-and-Testing-Guide.md
-[INFO] [8:44:42 AM] [Comparison] Received request for: Artifacts/A4-Technical-Scaffolding-Plan.md
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A0-Master-Artifact-List.md::## I. Project Planning & Design
-
-### A0. Tower Defense Game - Master Artifact List
-- **Description:** The definitive list of all documentation artifacts for the Tower Defense Game project.
-- **Tags:** master artifact list, project planning, documentation
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High-level overview of the project vision, goals, and phases.
-- **Tags:** project vision, goals, planning
-
-### A2. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Instructions for initializing a Git repo and pushing to GitHub.
-- **Tags:** git, github, version control
-
-### A3. Tower Defense Game - Development and Testing Guide
-- **Description:** Standard procedures for running, debugging, and testing the game locally.
-- **Tags:** development, testing, workflow
-
-### A4. Tower Defense Game - Technical Scaffolding Plan
-- **Description:** Proposed technical scaffolding and file structure for the game.
-- **Tags:** architecture, file structure, scaffolding
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A1-Project-Vision-and-Goals.md::# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-
-The vision of **Tower Defense Game** is to create an engaging, strategy-driven game where players design and deploy a series of defensive towers to fend off waves of enemies. It aims to provide a balanced mix of quick, tactical gameplay and deeper strategic planning that rewards creative tower placement and resource management.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: Core Game Mechanics
-
-The goal of this phase is to establish the foundational gameplay elements.
--   **Core Functionality:** Implement tower placement, enemy waves, health and damage system, and a basic UI to launch waves.
--   **Outcome:** A playable demo where a player can place towers and survive a single wave of enemies.
-
-### Phase 2: Balancing & UI Enhancements
-
-This phase will build upon the foundation by refining gameplay balance and adding polish.
--   **Core Functionality:** Balance tower damage and cost, add tower upgrades, implement a level selection UI, and provide visual and audio feedback.
--   **Outcome:** Smooth and engaging gameplay where players can plan defensive strategies and see clear progression.
-
-### Phase 3: Polish & Release
-
-The final phase focuses on finalizing the product for release.
--   **Core Functionality:** Add high-resolution sprites, sound effects, achievements, and a responsive layout for multiple screen sizes.
--   **Outcome:** A fully polished, cross-platform tower defense game ready for distribution.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A2-GitHub-Repository-Setup-Guide.md::# Tower Defense Game - GitHub Repository Setup Guide
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** `tower-defense-game`.
-4.  **Description:** *Optional* Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/your-username/tower-defense-game.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement AI-generated Tower Placement").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A3-Development-and-Testing-Guide.md::# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-
-```bash
-npm run dev
-```
-
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-Visit `http://localhost:3000` in your web browser to launch the game. You should see the game canvas and an initial UI.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code with VS Code. Launch the debugger by pressing F5 or using the debugging panel. The console will show runtime logs from the game.
-
-## 3. Testing
-
-The project is configured with Jest for unit tests. To run the test suite, use the following command:
-
-```bash
-npm run test
-```
-
-This will execute all test files located in the `src/tests` directory and report the results to the console.
-[INFO] [8:44:42 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A4-Technical-Scaffolding-Plan.md::# Tower Defense Game - Technical Scaffolding Plan
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for the Tower Defense Game project. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** TypeScript
--   **Game Engine:** Phaser 3 (TypeScript wrapper)
--   **Bundler:** Vite
--   **Styling:** Canvas (handled by Phaser)
--   **Testing:** Jest + @testing-library
-
-## 3. Proposed File Structure
-
-The project will adhere to a feature-driven directory structure:
-
-```
-.
-├── src/
-│   ├── assets/
-│   │   ├── images/
-│   │   └── sounds/
-│   │
-│   ├── components/        # Reusable UI components (e.g., Menu, HUD)
-│   │
-│   ├── features/          # Feature-specific modules
-│   │   ├── game/
-│   │   │   ├── scene/
-│   │   │   │   ├── MainScene.ts
-│   │   │   │   ├── EnemyScene.ts
-│   │   │   │   └── ...
-│   │   │   ├── entities/
-│   │   │   │   ├── Tower.ts
-│   │   │   │   ├── Enemy.ts
-│   │   │   │   └── ...
-│   │   │   └── utils/
-│   │   │       ├── WaveController.ts
-│   │   │       └── ...
-│   │   └── ui/
-│   │       ├── HUD.ts
-│   │       └── ...
-│   │
-│   ├── services/          # Core services such as AudioService, SaveService
-│   │
-│   ├── types/             # Shared TypeScript type definitions
-│   │
-│   ├── tests/             # Unit and integration tests
-│   │
-│   └── main.ts            # Main application entry point
-│
-├── public/
-│   └── index.html
-│
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 4. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
--   **Component-Based UI:** The UI is built by composing small, reusable components.
--   **Service Layer:** Business logic and external communication (e.g., audio streaming) are encapsulated in services to keep components lean.
--   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-[INFO] [8:44:42 AM] [File Existence] Received request to check paths: ["Artifacts/A0. Master Artifact List.md","Artifacts/A1. TowerDefenseGame - Project Vision and Goals.md","Artifacts/A4. TowerDefenseGame - Technical Scaffolding Plan.md","Artifacts/T14. TowerDefenseGame - GitHub Repository Setup Guide.md","Artifacts/T7. TowerDefenseGame - Development and Testing Guide.md","src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Project-Vision-and-Goals.md","src/Artifacts/A2-Technical-Scaffolding-Plan.md","src/Artifacts/A3-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Development-and-Testing-Guide.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:44:42 AM] [File Existence] Received request to check paths: ["Artifacts/A0. Master Artifact List.md","Artifacts/A1. TowerDefenseGame - Project Vision and Goals.md","Artifacts/A4. TowerDefenseGame - Technical Scaffolding Plan.md","Artifacts/T14. TowerDefenseGame - GitHub Repository Setup Guide.md","Artifacts/T7. TowerDefenseGame - Development and Testing Guide.md","src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Project-Vision-and-Goals.md","src/Artifacts/A2-Technical-Scaffolding-Plan.md","src/Artifacts/A3-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Development-and-Testing-Guide.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A0. Master Artifact List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A0. Master Artifact List.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A1. TowerDefenseGame - Project Vision and Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A1. TowerDefenseGame - Project Vision and Goals.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A4. TowerDefenseGame - Technical Scaffolding Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A4. TowerDefenseGame - Technical Scaffolding Plan.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/T14. TowerDefenseGame - GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\T14. TowerDefenseGame - GitHub Repository Setup Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/T7. TowerDefenseGame - Development and Testing Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\T7. TowerDefenseGame - Development and Testing Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A0-Master-Artifact-List.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A1-Project-Vision-and-Goals.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A2-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A2-Technical-Scaffolding-Plan.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A3-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A3-GitHub-Repository-Setup-Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A4-Development-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A4-Development-and-Testing-Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A0-Master-Artifact-List.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A1-Tower-Defense-Game-Project-Vision-Baselines.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A4-Tower-Defense-Game-Development-and-Testing-Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A0-Master-Artifact-List.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A1-Project-Vision-and-Goals.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A2-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A2-GitHub-Repository-Setup-Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A3-Development-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A3-Development-and-Testing-Guide.md'
-[ERROR] [8:44:42 AM] [Comparison] Failed for Artifacts/A4-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A4-Technical-Scaffolding-Plan.md'
-[INFO] [8:44:42 AM] [CostCalc] In-memory flattened content generated (797 tokens).
-[INFO] [8:44:42 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [8:44:42 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [8:44:42 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [8:44:42 AM] [CostCalc] Calculating breakdown:
-[INFO] [8:44:42 AM]   - M1 Artifact Schema: 48 tokens
-[INFO] [8:44:42 AM]   - M2 Cycle Overview: 32 tokens
-[INFO] [8:44:42 AM]   - M3 Interaction Schema: 977 tokens
-[INFO] [8:44:42 AM]   - M4 Project Scope: 24 tokens
-[INFO] [8:44:42 AM]   - M5 Artifact List: 30 tokens
-[INFO] [8:44:42 AM]   - M6 Cycles: 10945 tokens
-[INFO] [8:44:42 AM]   - M7 Flattened Repo: 808 tokens
-[INFO] [8:44:42 AM] [CostCalc] Total Tokens: 12864, Estimated Cost: $0.01608
-[INFO] [8:44:42 AM] [CostCalc] Sending estimation to client.
-[INFO] [8:44:50 AM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [8:44:50 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [8:44:50 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [8:44:50 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Project-Vision-and-Goals.md","src/Artifacts/A2-Technical-Scaffolding-Plan.md","src/Artifacts/A3-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Development-and-Testing-Guide.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:44:50 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [8:44:50 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [8:44:50 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [8:44:50 AM] [on-message] Received request to regenerate tab 1 for cycle 1
-[INFO] [8:44:50 AM] [LLM Service] Starting single regeneration for cycle 1, tab 1.
-[INFO] [8:44:50 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [8:44:58 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Project-Vision-and-Goals.md","src/Artifacts/A2-Technical-Scaffolding-Plan.md","src/Artifacts/A3-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Development-and-Testing-Guide.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:44:58 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Project-Vision-and-Goals.md","src/Artifacts/A2-Technical-Scaffolding-Plan.md","src/Artifacts/A3-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Development-and-Testing-Guide.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-omitted 400 nearly identical or identical lines
-[INFO] [8:46:28 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:28 AM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [8:46:28 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [8:46:28 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [8:46:28 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [8:46:28 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [8:46:28 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [8:46:28 AM] [on-message] Received request to regenerate tab 2 for cycle 1
-[INFO] [8:46:28 AM] [LLM Service] Starting single regeneration for cycle 1, tab 2.
-[INFO] [8:46:28 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [8:46:29 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:29 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:29 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:29 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-omitted 100 identical or nearly identical lines
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] [STREAM] Response 1 finished.
-[INFO] [8:46:44 AM] LLM stream ended. Total finished responses: 1/1
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] Updated response for tab 1 in cycle 1.
-[INFO] [8:46:44 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [8:46:44 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [8:46:44 AM] [Comparison] Received request for: src/Artifacts/A4.md
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A4.md::# Artifact T4: Technical Scaffolding Plan
-# Date Created: C203
-# Author: AI Model & Curator
-
-- **Key/Value for A4:**
-- **Description:** Overview of the proposed technical scaffolding and file structure for the TowerDefenseGame project.
-- **Tags:** technical scaffolding, architecture, file structure
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for **TowerDefenseGame**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** TypeScript
--   **Framework/Library:** React (with React Canvas or PixiJS)
--   **Styling:** SCSS
--   **Bundler:** Vite
--   **State Management:** Zustand or Context API
--   **Testing Framework:** Jest with React Testing Library
-
-## 3. Proposed File Structure
-
-The project will adhere to a feature-driven directory structure:
-
-```
-.
-├── public/
-│   ├── index.html
-│   └── assets/
-│
-├── src/
-│   ├── assets/
-│   │   └── images/
-│   │   └── sounds/
-│   │
-│   ├── components/
-│   │   ├── Tower/
-│   │   │   └── Tower.tsx
-│   │   ├── Enemy/
-│   │   │   └── Enemy.tsx
-│   │   └── UI/
-│   │       └── UIComponents.tsx
-│   │
-│   ├── features/
-│   │   ├── GameEngine/
-│   │   │   ├── index.ts
-│   │   │   └── services/
-│   │   │       ├── TowerService.ts
-│   │   │       └── EnemyService.ts
-│   │   └── LevelManager/
-│   │       └── LevelManager.ts
-│   │
-│   ├── services/
-│   │   └── audio.service.ts
-│   │
-│   ├── types/
-│   │   └── index.ts
-│   │
-│   ├── hooks/
-│   │   └── useGameLoop.ts
-│   │
-│   └── main.tsx
-│
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 4. Key Architectural Concepts
-
--   **Component-Based UI:** The UI will be built by composing small, reusable components.
--   **Feature Modules:** Each major game feature (e.g., GameEngine, LevelManager) resides in its own feature folder.
--   **Service Layer:** Business logic and data handling are encapsulated within services.
--   **State Management:** Global state such as the game grid and tower stats will be stored using Zustand or React Context.
--   **Modular Testing:** Tests live alongside components and services for easier maintenance.
-[INFO] [8:46:44 AM] [Comparison] Received request for: src/Artifacts/A0-Master-Artifact-List.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0-Master-Artifact-List.md::# Tower Defense Game - Master Artifact List
-
-## I. Project Planning & Design
-
-### A0. Tower Defense Game - Master Artifact List
-- **Description:** The definitive list of all documentation artifacts for the project.
-- **Tags:** project planning, artifact list
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High‑level vision and goal statement for the game.
-- **Tags:** project vision, goals
-
-### A2. Tower Defense Game - Technical Scaffolding Plan
-- **Description:** Detailed technical plan including stack and file structure.
-- **Tags:** technical plan, scaffolding
-
-### A3. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Customised example repository setup for this project.
-- **Tags:** git, setup
-
-### A4. Tower Defense Game - Development and Testing Guide
-- **Description:** Customised development & testing workflow for the project.
-- **Tags:** development, testing
-
-## II. Operational & Maintenance
-
-(No operational artifacts created yet in Cycle 0.)
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md::# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-The vision of **Tower Defense Game** is to create an engaging, strategic arcade style game where players defend a base by strategically placing towers to fend off waves of enemies. The game aims to provide a fast‑paced, yet thoughtful gameplay experience that balances resource management with tactical placement.
-
-## 2. High‑Level Goals & Phases
-
-### Phase 1: Core Gameplay Loop
-- **Core Functionality:** Implement tower placement, enemy spawning, and basic combat mechanics.
-- **Outcome:** A playable demo where enemies spawn, towers shoot, and the player can earn resources.
-
-### Phase 2: Expansion & Polish
-- **Core Functionality:** Add multiple tower types, upgrade paths, and a wave system with difficulty scaling.
-- **Outcome:** Extended gameplay with deeper strategic options.
-
-### Phase 3: Packaging & Release
-- **Core Functionality:** Implement menu UI, analytics, build scripts, and publish to a web platform.
-- **Outcome:** A polished, deployable package ready for distribution.
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md::# Tower Defense Game - Technical Scaffolding Plan
-
-## 1. Overview
-This document outlines the proposed technical scaffolding and file structure for Tower Defense Game. The plan serves as a blueprint for the initial project setup.
-
-## 2. Technology Stack
-- **Language:** TypeScript
-- **Framework/Library:** React (Create React App or Vite with React)
-- **Styling:** TailwindCSS
-- **Bundler:** Vite (fast dev server & build)
-- **State Management:** React Context + useReducer
-- **Testing:** Jest + React Testing Library
-- **Package Manager:** npm
-
-## 3. Proposed File Structure
-
-```
-.
-├── public/
-│   └── index.html
-├── src/
-│   ├── assets/
-│   │   └── images/
-│   ├── components/
-│   │   ├── Tower.tsx
-│   │   ├── Enemy.tsx
-│   │   └── GameBoard.tsx
-│   ├── features/
-│   │   ├── GameLogic/
-│   │   │   ├── index.ts
-│   │   │   └── utilities.ts
-│   │   └── Player/
-│   │       ├── index.ts
-│   │       └── store.ts
-│   ├── services/
-│   │   ├── gameService.ts
-│   │   └── apiService.ts
-│   ├── hooks/
-│   │   └── useGameState.ts
-│   ├── types/
-│   │   └── index.ts
-│   ├── App.tsx
-│   ├── index.tsx
-│   └── main.ts
-├── package.json
-├── vite.config.ts
-├── tsconfig.json
-└── postcss.config.cjs
-```
-
-## 4. Key Architectural Concepts
-- **Separation of Concerns:** UI components, feature logic, and services are cleanly separated.
-- **Component‑Based UI:** Reusable components enable rapid UI construction.
-- **Service Layer:** Encapsulates business logic and external API interactions.
-- **Strong Typing:** TypeScript ensures compile‑time safety and better developer ergonomics.
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md::# Tower Defense Game - GitHub Repository Setup Guide
-
-## 1. Overview
-This guide walks you through turning your local Tower Defense Game project folder into a Git repository, linking it to GitHub, and establishing a standard workflow for future development cycles.
-
-## 2. Prerequisites
-- Git installed on your machine.
-- GitHub account and a free repository.
-
-## 3. Step‑by‑Step Setup
-
-### 3.1. Create a New Repository on GitHub
-1. Go to [github.com](https://github.com) and log in.
-2. Click the **"+"** icon in the top‑right corner and choose **"New repository"**.
-3. **Repository name:** `tower-defense-game`.
-4. **Description:** *A simple tower defense game built with React and TypeScript.*
-5. Choose **Public**.
-6. **IMPORTANT:** Do *not* initialize the repository with a README, .gitignore, or license.
-7. Click **"Create repository"**.
-
-GitHub will display a page with command‑line instructions. Use the portion titled **"…or push an existing repository from the command line"**.
-
-### 3.2. Initialize Git Locally
-```bash
-cd path/to/tower-defense-game
-# Initialize Git
-git init
-# Add all files
-git add .
-# Commit
-git commit -m "Initial commit"
-# Rename the default branch
-git branch -M main
-```
-
-### 3.3. Link Remote and Push
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
-git push -u origin main
-```
-
-You should now see all project files in your new GitHub repository.
-
-## 4. Sample Development Workflow with DCE and Git
-
-1. **Keep a Clean Working Directory** – Run `git status` before starting a new cycle.
-2. **Generate AI Prompts** – Use DCE to create a `prompt.md` request.
-3. **Accept and Test** – Accept AI‑generated files, run the application (`npm run dev`), and observe results.
-4. **Restore if Needed** – On failure, execute `git restore .` to revert.
-5. **Commit Good Changes** – Stage (`git add .`) and commit (`git commit -m "…"`).
-
-These steps ensure a controlled, repeatable development process that protects the original codebase while allowing rapid iterations.
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md::# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-Use Vite to start the dev server and watch for changes.
-```bash
-npm run dev
-```
-This will open the app at `http://localhost:5173` (default Vite port).
-
-### Step 3: Running the Application
-
-Open the browser to `http://localhost:5173` and verify that the main menu screen loads. From the menu, start a new game to test tower placement and enemy waves.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code and use the browser's dev tools. For React, the React DevTools extension is also handy.
-
-## 3. Testing
-
-The project uses Jest and React Testing Library. To run the test suite:
-```bash
-npm test
-```
-All tests in `src/**/*.test.tsx` and `src/**/*.test.ts` will be executed.
-
-### Test Recommendations
-- Write unit tests for game logic utilities (e.g., `calculateDamage`).
-- Write integration tests for components that manage state (e.g., `GameBoard`).
-- Ensure coverage for critical paths like tower upgrades and wave progression.
-[INFO] [8:46:44 AM] [Comparison] Received request for: Artifacts/A0-Master-Artifact-List.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: Artifacts/A1-Project-Vision-and-Goals.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: Artifacts/A2-GitHub-Repository-Setup-Guide.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: Artifacts/A3-Development-and-Testing-Guide.md
-[INFO] [8:46:44 AM] [Comparison] Received request for: Artifacts/A4-Technical-Scaffolding-Plan.md
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A0-Master-Artifact-List.md::## I. Project Planning & Design
-
-### A0. Tower Defense Game - Master Artifact List
-- **Description:** The definitive list of all documentation artifacts for the Tower Defense Game project.
-- **Tags:** master artifact list, project planning, documentation
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High-level overview of the project vision, goals, and phases.
-- **Tags:** project vision, goals, planning
-
-### A2. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Instructions for initializing a Git repo and pushing to GitHub.
-- **Tags:** git, github, version control
-
-### A3. Tower Defense Game - Development and Testing Guide
-- **Description:** Standard procedures for running, debugging, and testing the game locally.
-- **Tags:** development, testing, workflow
-
-### A4. Tower Defense Game - Technical Scaffolding Plan
-- **Description:** Proposed technical scaffolding and file structure for the game.
-- **Tags:** architecture, file structure, scaffolding
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A1-Project-Vision-and-Goals.md::# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-
-The vision of **Tower Defense Game** is to create an engaging, strategy-driven game where players design and deploy a series of defensive towers to fend off waves of enemies. It aims to provide a balanced mix of quick, tactical gameplay and deeper strategic planning that rewards creative tower placement and resource management.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: Core Game Mechanics
-
-The goal of this phase is to establish the foundational gameplay elements.
--   **Core Functionality:** Implement tower placement, enemy waves, health and damage system, and a basic UI to launch waves.
--   **Outcome:** A playable demo where a player can place towers and survive a single wave of enemies.
-
-### Phase 2: Balancing & UI Enhancements
-
-This phase will build upon the foundation by refining gameplay balance and adding polish.
--   **Core Functionality:** Balance tower damage and cost, add tower upgrades, implement a level selection UI, and provide visual and audio feedback.
--   **Outcome:** Smooth and engaging gameplay where players can plan defensive strategies and see clear progression.
-
-### Phase 3: Polish & Release
-
-The final phase focuses on finalizing the product for release.
--   **Core Functionality:** Add high-resolution sprites, sound effects, achievements, and a responsive layout for multiple screen sizes.
--   **Outcome:** A fully polished, cross-platform tower defense game ready for distribution.
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A2-GitHub-Repository-Setup-Guide.md::# Tower Defense Game - GitHub Repository Setup Guide
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** `tower-defense-game`.
-4.  **Description:** *Optional* Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/your-username/tower-defense-game.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement AI-generated Tower Placement").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A3-Development-and-Testing-Guide.md::# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-
-```bash
-npm run dev
-```
-
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-Visit `http://localhost:3000` in your web browser to launch the game. You should see the game canvas and an initial UI.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code with VS Code. Launch the debugger by pressing F5 or using the debugging panel. The console will show runtime logs from the game.
-
-## 3. Testing
-
-The project is configured with Jest for unit tests. To run the test suite, use the following command:
-
-```bash
-npm run test
-```
-
-This will execute all test files located in the `src/tests` directory and report the results to the console.
-[INFO] [8:46:44 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A4-Technical-Scaffolding-Plan.md::# Tower Defense Game - Technical Scaffolding Plan
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for the Tower Defense Game project. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** TypeScript
--   **Game Engine:** Phaser 3 (TypeScript wrapper)
--   **Bundler:** Vite
--   **Styling:** Canvas (handled by Phaser)
--   **Testing:** Jest + @testing-library
-
-## 3. Proposed File Structure
-
-The project will adhere to a feature-driven directory structure:
-
-```
-.
-├── src/
-│   ├── assets/
-│   │   ├── images/
-│   │   └── sounds/
-│   │
-│   ├── components/        # Reusable UI components (e.g., Menu, HUD)
-│   │
-│   ├── features/          # Feature-specific modules
-│   │   ├── game/
-│   │   │   ├── scene/
-│   │   │   │   ├── MainScene.ts
-│   │   │   │   ├── EnemyScene.ts
-│   │   │   │   └── ...
-│   │   │   ├── entities/
-│   │   │   │   ├── Tower.ts
-│   │   │   │   ├── Enemy.ts
-│   │   │   │   └── ...
-│   │   │   └── utils/
-│   │   │       ├── WaveController.ts
-│   │   │       └── ...
-│   │   └── ui/
-│   │       ├── HUD.ts
-│   │       └── ...
-│   │
-│   ├── services/          # Core services such as AudioService, SaveService
-│   │
-│   ├── types/             # Shared TypeScript type definitions
-│   │
-│   ├── tests/             # Unit and integration tests
-│   │
-│   └── main.ts            # Main application entry point
-│
-├── public/
-│   └── index.html
-│
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 4. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
--   **Component-Based UI:** The UI is built by composing small, reusable components.
--   **Service Layer:** Business logic and external communication (e.g., audio streaming) are encapsulated in services to keep components lean.
--   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","src/Artifacts/A0-Master-Artifact-List.md","src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md","src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md","src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:46:44 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [8:46:44 AM] [CostCalc] Found 3 selected files.
-[ERROR] [8:46:44 AM] [Comparison] Failed for src/Artifacts/A4.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A4.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for src/Artifacts/A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A0-Master-Artifact-List.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for src/Artifacts/A1-Tower-Defense-Game-Project-Vision-Baselines.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A1-Tower-Defense-Game-Project-Vision-Baselines.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for src/Artifacts/A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A2-Tower-Defense-Game-Technical-Scaffolding-Plan.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for src/Artifacts/A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A3-Tower-Defense-Game-GitHub-Repository-Setup-Guide.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for src/Artifacts/A4-Tower-Defense-Game-Development-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A4-Tower-Defense-Game-Development-and-Testing-Guide.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for Artifacts/A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A0-Master-Artifact-List.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for Artifacts/A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A1-Project-Vision-and-Goals.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for Artifacts/A2-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A2-GitHub-Repository-Setup-Guide.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for Artifacts/A3-Development-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A3-Development-and-Testing-Guide.md'
-[ERROR] [8:46:44 AM] [Comparison] Failed for Artifacts/A4-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A4-Technical-Scaffolding-Plan.md'
-[INFO] [8:46:44 AM] [CostCalc] In-memory flattened content generated (797 tokens).
-[INFO] [8:46:44 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [8:46:44 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [8:46:44 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [8:46:44 AM] [CostCalc] Calculating breakdown:
-[INFO] [8:46:44 AM]   - M1 Artifact Schema: 48 tokens
-[INFO] [8:46:44 AM]   - M2 Cycle Overview: 28 tokens
-[INFO] [8:46:44 AM]   - M3 Interaction Schema: 977 tokens
-[INFO] [8:46:44 AM]   - M4 Project Scope: 24 tokens
-[INFO] [8:46:44 AM]   - M5 Artifact List: 30 tokens
-[INFO] [8:46:44 AM]   - M6 Cycles: 10945 tokens
-[INFO] [8:46:44 AM]   - M7 Flattened Repo: 808 tokens
-[INFO] [8:46:44 AM] [CostCalc] Total Tokens: 12860, Estimated Cost: $0.016075000000000002
-[INFO] [8:46:44 AM] [CostCalc] Sending estimation to client.
-[ERROR] [8:46:50 AM] Failed to generate batch responses via stream: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
-[ERROR] [8:46:50 AM] [LLM Service] Single regeneration failed: FetchError: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
-[INFO] [8:48:13 AM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [8:48:13 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [8:48:13 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [8:48:13 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [8:48:13 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [8:48:13 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [8:48:13 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:48:13 AM] [on-message] Received request to regenerate tab 3 for cycle 1
-[INFO] [8:48:13 AM] [LLM Service] Starting single regeneration for cycle 1, tab 3.
-[INFO] [8:48:13 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [8:48:13 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-omitted
-[INFO] [8:49:59 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:49:59 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:49:59 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:49:59 AM] [STREAM] Response 1 finished.
-[INFO] [8:49:59 AM] LLM stream ended. Total finished responses: 1/1
-[INFO] [8:49:59 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:49:59 AM] Updated response for tab 3 in cycle 1.
-[INFO] [8:49:59 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [8:49:59 AM] [File Existence] Received request to check paths: ["src/Artifacts/A4.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:50:00 AM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [8:50:00 AM] [Comparison] Received request for: src/Artifacts/A0_Master_Artifact_List.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: src/Artifacts/A1_TowerDefense_Project_Vision_and_Goals.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: src/Artifacts/A2_TowerDefense_Technical_Scaffolding_Plan.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: src/Artifacts/A14_TowerDefense_GitHub_Repository_Setup_Guide.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: src/Artifacts/A7_TowerDefense_Development_and_Testing_Guide.md
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0_Master_Artifact_List.md::# Artifact A0: Master Artifact List
-# Date Created: C200
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A comprehensive, parseable list of all documentation artifacts for the Tower Defense project. This list serves as the source of truth for project knowledge.
-- **Tags:** documentation, master artifact list, project management
-
-## Project Planning & Design
-
-### A1. Tower Defense - Project Vision and Goals
-- **Description:** Provides a high-level overview of the Tower Defense game, its core gameplay, and project goals.
-- **Tags:** project vision, goals, scope
-
-### A2. Tower Defense - Technical Scaffolding Plan
-- **Description:** Outlines the technical architecture, technology stack, and file structure for the project.
-- **Tags:** technical plan, architecture
-
-### A14. Tower Defense - GitHub Repository Setup Guide
-- **Description:** Step-by-step instructions for initializing and linking the project repository on GitHub.
-- **Tags:** git, github, repository setup
-
-### A7. Tower Defense - Development and Testing Guide
-- **Description:** Provides the development workflow, testing commands, and debugging guidance for the project.
-- **Tags:** development, testing, workflow
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A1_TowerDefense_Project_Vision_and_Goals.md::# Artifact A1: Tower Defense - Project Vision and Goals
-# Date Created: C200
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a Project Vision and Goals document.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Project Vision
-
-The vision of Tower Defense is to create an engaging tower defense game that allows players to strategically place towers to fend off waves of enemies, blending deep strategic planning with a fun, polished experience.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: Core Mechanics
-The goal of this phase is to establish the foundational elements of the game.
-- **Core Functionality:** Basic tower placement, enemy spawning, wave progression.
-- **Outcome:** A playable prototype where a player can place towers and defeat a single wave of enemies.
-
-### Phase 2: Enemy Variations & Difficulty Scaling
-This phase will build upon the foundation of Phase 1 by adding diverse enemy types and scaling difficulty.
-- **Core Functionality:** Multiple enemy archetypes, difficulty tiers, stamina management for towers.
-- **Outcome:** A robust gameplay loop with multiple waves, each increasing in challenge.
-
-### Phase 3: Polish and Expand
-This phase focuses on refining the game, adding polish, and preparing for release.
-- **Core Functionality:** UI polish, sound effects, responsive design, analytics.
-- **Outcome:** A polished, production-ready game ready for distribution.
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A2_TowerDefense_Technical_Scaffolding_Plan.md::# Artifact A2: Tower Defense - Technical Scaffolding Plan
-# Date Created: C200
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a technical scaffolding plan.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for the Tower Defense project. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture.
-
-## 2. Technology Stack
-
-- **Language:** TypeScript
-- **Framework/Library:** Phaser 3 with TypeScript bindings
-- **Styling:** SCSS
-- **Bundler:** Vite
-- **Package Manager:** npm
-
-## 3. Proposed File Structure
-
-The project will adhere to a feature-driven directory structure:
-
-```
-.
-├── public/
-│   ├── index.html
-│   └── assets/
-│       ├── images/
-│       └── sounds/
-├── src/
-│   ├── assets/
-│   │   ├── textures/
-│   │   └── audio/
-│   ├── components/
-│   │   ├── Tower/
-│   │   │   ├── Tower.ts
-│   │   │   └── TowerConfig.ts
-│   │   └── Enemy/
-│   │       ├── Enemy.ts
-│   │       └── EnemyConfig.ts
-│   ├── game/
-│   │   ├── scenes/
-│   │   │   ├── MainScene.ts
-│   │   │   └── LoadingScene.ts
-│   │   └── game.ts
-│   ├── services/
-│   │   └── AudioService.ts
-│   ├── types/
-│   │   └── index.d.ts
-│   └── main.ts
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 4. Key Architectural Concepts
-
-- **Separation of Concerns:** Game logic, assets, and UI are organized into distinct modules.
-- **Component-Based Game Objects:** Towers and enemies are defined as reusable components with configuration objects.
-- **Service Layer:** Global services like audio management are isolated for easier testing and maintenance.
-- **Strong Typing:** TypeScript provides type safety across the entire codebase.
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A14_TowerDefense_GitHub_Repository_Setup_Guide.md::# Artifact A14: Tower Defense - GitHub Repository Setup Guide
-# Date Created: C200
-# Author: AI Model & Curator
-# Updated on: C200 (added sample workflow)
-
-- **Key/Value for A0:**
-- **Description:** A generic guide on setting up a new project with Git and GitHub for Tower Defense.
-- **Tags:** template, cycle 0, git, github, version control, workflow
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local Tower Defense project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to github.com and log in.
-2.  In the top-right corner, click the `+` icon and select "New repository".
-3.  **Repository name:** Enter a name for your project (e.g., `tower-defense`).
-4.  **Description:** (Optional) Provide a brief description of your project.
-5.  Choose "Private" or "Public".
-6.  **IMPORTANT:** Do not initialize the repository with a README, .gitignore, or license. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click "Create repository".
-
-GitHub will now show you a page with command-line instructions. We will use the section titled "...or push an existing repository from the command line".
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to main:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/tower-defense.git
-    ```
-
-2.  **Push your local main branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1  Review the responses and find one that looks promising.
-2  Select that response and use the "Accept Selected Files" button to write the AI's proposed changes to your workspace.
-3  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*  If the changes are bad (e.g., introduce bugs, don't work as expected):
-   1.  Open the terminal in VS Code.
-   2.  Run the command: git restore .
-   3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-   4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*  If the changes are good:
-   1.  Open the Source Control panel in VS Code.
-   2  Stage the changes (`git add .`).
-   3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").
-   4.  Commit the changes.
-   5.  You are now ready to start the next development cycle from a new, clean state.
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A7_TowerDefense_Development_and_Testing_Guide.md::# Artifact A7: Tower Defense - Development and Testing Guide
-# Date Created: C200
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A generic template for a development and testing guide for Tower Defense.
-- **Tags:** template, cycle 0, documentation, project setup
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the Tower Defense application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-```bash
-npm run dev
-```
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-Open a browser to `http://localhost:5173` (Vite default) and you should see the loading screen of the Tower Defense game.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code. In VS Code, open the desired TypeScript file, click on the gutter left of the line number, and press F5 to launch the Debugger and attach to the Vite server.
-
-## 3. Testing
-
-The project is configured with a testing framework (Jest + Vitest). To run the test suite, use the following command:
-```bash
-npm run test
-```
-This will execute all test files located in the project and report the results to the console.
-[INFO] [8:50:00 AM] [Comparison] Received request for: Artifacts/A0-Master-Artifact-List.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: Artifacts/A1-Project-Vision-and-Goals.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: Artifacts/A2-GitHub-Repository-Setup-Guide.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: Artifacts/A3-Development-and-Testing-Guide.md
-[INFO] [8:50:00 AM] [Comparison] Received request for: Artifacts/A4-Technical-Scaffolding-Plan.md
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A0-Master-Artifact-List.md::## I. Project Planning & Design
-
-### A0. Tower Defense Game - Master Artifact List
-- **Description:** The definitive list of all documentation artifacts for the Tower Defense Game project.
-- **Tags:** master artifact list, project planning, documentation
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High-level overview of the project vision, goals, and phases.
-- **Tags:** project vision, goals, planning
-
-### A2. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Instructions for initializing a Git repo and pushing to GitHub.
-- **Tags:** git, github, version control
-
-### A3. Tower Defense Game - Development and Testing Guide
-- **Description:** Standard procedures for running, debugging, and testing the game locally.
-- **Tags:** development, testing, workflow
-
-### A4. Tower Defense Game - Technical Scaffolding Plan
-- **Description:** Proposed technical scaffolding and file structure for the game.
-- **Tags:** architecture, file structure, scaffolding
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A1-Project-Vision-and-Goals.md::# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-
-The vision of **Tower Defense Game** is to create an engaging, strategy-driven game where players design and deploy a series of defensive towers to fend off waves of enemies. It aims to provide a balanced mix of quick, tactical gameplay and deeper strategic planning that rewards creative tower placement and resource management.
-
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflow.
-
-### Phase 1: Core Game Mechanics
-
-The goal of this phase is to establish the foundational gameplay elements.
--   **Core Functionality:** Implement tower placement, enemy waves, health and damage system, and a basic UI to launch waves.
--   **Outcome:** A playable demo where a player can place towers and survive a single wave of enemies.
-
-### Phase 2: Balancing & UI Enhancements
-
-This phase will build upon the foundation by refining gameplay balance and adding polish.
--   **Core Functionality:** Balance tower damage and cost, add tower upgrades, implement a level selection UI, and provide visual and audio feedback.
--   **Outcome:** Smooth and engaging gameplay where players can plan defensive strategies and see clear progression.
-
-### Phase 3: Polish & Release
-
-The final phase focuses on finalizing the product for release.
--   **Core Functionality:** Add high-resolution sprites, sound effects, achievements, and a responsive layout for multiple screen sizes.
--   **Outcome:** A fully polished, cross-platform tower defense game ready for distribution.
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A2-GitHub-Repository-Setup-Guide.md::# Tower Defense Game - GitHub Repository Setup Guide
-
-## 1. Overview
-
-This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
-
-## 2. Prerequisites
-
-*   You have `git` installed on your machine.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com) and log in.
-2.  In the top-right corner, click the `+` icon and select **"New repository"**.
-3.  **Repository name:** `tower-defense-game`.
-4.  **Description:** *Optional* Provide a brief description of your project.
-5.  Choose **"Private"** or **"Public"**.
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
-7.  Click **"Create repository"**.
-
-GitHub will now show you a page with command-line instructions. We will use the section titled **"...or push an existing repository from the command line"**.
-
-### Step 2: Initialize Git in Your Local Project
-
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
-
-1.  **Initialize the repository:**
-    ```bash
-    git init
-    ```
-
-2.  **Add all existing files:**
-    ```bash
-    git add .
-    ```
-
-3.  **Create the first commit:**
-    ```bash
-    git commit -m "Initial commit"
-    ```
-
-4.  **Rename the default branch to `main`:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push to GitHub
-
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
-    ```bash
-    git remote add origin https://github.com/your-username/tower-defense-game.git
-    ```
-
-2.  **Push your local `main` branch to GitHub:**
-    ```bash
-    git push -u origin main
-    ```
-
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.
-
-## 4. Sample Development Workflow with DCE and Git
-
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
-
-### Step 1: Start with a Clean State
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
-
-### Step 2: Generate a Prompt and Get Responses
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
-
-### Step 3: Paste and Parse
-Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
-
-### Step 4: Accept and Test
-1.  Review the responses and find one that looks promising.
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.
-3.  Now, compile and test the application. Does it work? Does it have errors?
-
-### Step 5: The "Restore" Loop
-This is where Git becomes a powerful part of the workflow.
-
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
-    1.  Open the terminal in VS Code.
-    2.  Run the command: `git restore .`
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
-    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
-
-*   **If the changes are good:**
-    1.  Open the Source Control panel in VS Code.
-    2.  Stage the changes (`git add .`).
-    3.  Write a commit message (e.g., "Feat: Implement AI-generated Tower Placement").
-    4.  Commit the changes.
-    5.  You are now ready to start the next development cycle from a new, clean state.
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A3-Development-and-Testing-Guide.md::# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
-
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npm.
-
-```bash
-npm install
-```
-
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following command:
-
-```bash
-npm run dev
-```
-
-This will start the development server and automatically recompile your code when you save a file.
-
-### Step 3: Running the Application
-
-Visit `http://localhost:3000` in your web browser to launch the game. You should see the game canvas and an initial UI.
-
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code with VS Code. Launch the debugger by pressing F5 or using the debugging panel. The console will show runtime logs from the game.
-
-## 3. Testing
-
-The project is configured with Jest for unit tests. To run the test suite, use the following command:
-
-```bash
-npm run test
-```
-
-This will execute all test files located in the `src/tests` directory and report the results to the console.
-[INFO] [8:50:00 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: Artifacts/A4-Technical-Scaffolding-Plan.md::# Tower Defense Game - Technical Scaffolding Plan
-
-## 1. Overview
-
-This document outlines the proposed technical scaffolding and file structure for the Tower Defense Game project. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
-
-## 2. Technology Stack
-
--   **Language:** TypeScript
--   **Game Engine:** Phaser 3 (TypeScript wrapper)
--   **Bundler:** Vite
--   **Styling:** Canvas (handled by Phaser)
--   **Testing:** Jest + @testing-library
-
-## 3. Proposed File Structure
-
-The project will adhere to a feature-driven directory structure:
-
-```
-.
-├── src/
-│   ├── assets/
-│   │   ├── images/
-│   │   └── sounds/
-│   │
-│   ├── components/        # Reusable UI components (e.g., Menu, HUD)
-│   │
-│   ├── features/          # Feature-specific modules
-│   │   ├── game/
-│   │   │   ├── scene/
-│   │   │   │   ├── MainScene.ts
-│   │   │   │   ├── EnemyScene.ts
-│   │   │   │   └── ...
-│   │   │   ├── entities/
-│   │   │   │   ├── Tower.ts
-│   │   │   │   ├── Enemy.ts
-│   │   │   │   └── ...
-│   │   │   └── utils/
-│   │   │       ├── WaveController.ts
-│   │   │       └── ...
-│   │   └── ui/
-│   │       ├── HUD.ts
-│   │       └── ...
-│   │
-│   ├── services/          # Core services such as AudioService, SaveService
-│   │
-│   ├── types/             # Shared TypeScript type definitions
-│   │
-│   ├── tests/             # Unit and integration tests
-│   │
-│   └── main.ts            # Main application entry point
-│
-├── public/
-│   └── index.html
-│
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 4. Key Architectural Concepts
-
--   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
--   **Component-Based UI:** The UI is built by composing small, reusable components.
--   **Service Layer:** Business logic and external communication (e.g., audio streaming) are encapsulated in services to keep components lean.
--   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
-[INFO] [8:50:00 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0_Master_Artifact_List.md","src/Artifacts/A1_TowerDefense_Project_Vision_and_Goals.md","src/Artifacts/A2_TowerDefense_Technical_Scaffolding_Plan.md","src/Artifacts/A14_TowerDefense_GitHub_Repository_Setup_Guide.md","src/Artifacts/A7_TowerDefense_Development_and_Testing_Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[INFO] [8:50:00 AM] [SelectionService] Returning 3 valid paths.
-[INFO] [8:50:00 AM] [CostCalc] Found 3 selected files.
-[ERROR] [8:50:00 AM] [Comparison] Failed for src/Artifacts/A0_Master_Artifact_List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A0_Master_Artifact_List.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for src/Artifacts/A1_TowerDefense_Project_Vision_and_Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A1_TowerDefense_Project_Vision_and_Goals.md'
-[INFO] [8:50:00 AM] [File Existence] Received request to check paths: ["src/Artifacts/A0_Master_Artifact_List.md","src/Artifacts/A1_TowerDefense_Project_Vision_and_Goals.md","src/Artifacts/A2_TowerDefense_Technical_Scaffolding_Plan.md","src/Artifacts/A14_TowerDefense_GitHub_Repository_Setup_Guide.md","src/Artifacts/A7_TowerDefense_Development_and_Testing_Guide.md","Artifacts/A0-Master-Artifact-List.md","Artifacts/A1-Project-Vision-and-Goals.md","Artifacts/A2-GitHub-Repository-Setup-Guide.md","Artifacts/A3-Development-and-Testing-Guide.md","Artifacts/A4-Technical-Scaffolding-Plan.md"]
-[ERROR] [8:50:00 AM] [Comparison] Failed for src/Artifacts/A2_TowerDefense_Technical_Scaffolding_Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A2_TowerDefense_Technical_Scaffolding_Plan.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for src/Artifacts/A14_TowerDefense_GitHub_Repository_Setup_Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A14_TowerDefense_GitHub_Repository_Setup_Guide.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for src/Artifacts/A7_TowerDefense_Development_and_Testing_Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\src\Artifacts\A7_TowerDefense_Development_and_Testing_Guide.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for Artifacts/A0-Master-Artifact-List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A0-Master-Artifact-List.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for Artifacts/A1-Project-Vision-and-Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A1-Project-Vision-and-Goals.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for Artifacts/A2-GitHub-Repository-Setup-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A2-GitHub-Repository-Setup-Guide.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for Artifacts/A3-Development-and-Testing-Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A3-Development-and-Testing-Guide.md'
-[ERROR] [8:50:00 AM] [Comparison] Failed for Artifacts/A4-Technical-Scaffolding-Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\TowerDefense55\Artifacts\A4-Technical-Scaffolding-Plan.md'
-[INFO] [8:50:00 AM] [CostCalc] In-memory flattened content generated (797 tokens).
-[INFO] [8:50:00 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [8:50:00 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [8:50:00 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [8:50:00 AM] [CostCalc] Calculating breakdown:
-[INFO] [8:50:00 AM]   - M1 Artifact Schema: 48 tokens
-[INFO] [8:50:00 AM]   - M2 Cycle Overview: 28 tokens
-[INFO] [8:50:00 AM]   - M3 Interaction Schema: 977 tokens
-[INFO] [8:50:00 AM]   - M4 Project Scope: 24 tokens
-[INFO] [8:50:00 AM]   - M5 Artifact List: 30 tokens
-[INFO] [8:50:00 AM]   - M6 Cycles: 10945 tokens
-[INFO] [8:50:00 AM]   - M7 Flattened Repo: 808 tokens
-[INFO] [8:50:00 AM] [CostCalc] Total Tokens: 12860, Estimated Cost: $0.016075000000000002
-[INFO] [8:50:00 AM] [CostCalc] Sending estimation to client.
-
-</dce output logs>
-
+[INFO] [10:08:28 AM] [File Operation] Received request to write 5 files.
+[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T1-Master-Artifact-List.md
+[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T2-Project-Vision-and-Goals.md
+[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T4-Technical-Scaffolding-Plan.md
+[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T14-GitHub-Repository-Setup-Guide.md
+[INFO] [10:08:28 AM] Successfully wrote content to: src/Artifacts/T7-Development-and-Testing-Guide.md
+[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T1-Master-Artifact-List.md
+[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T14-GitHub-Repository-Setup-Guide.md
+[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T2-Project-Vision-and-Goals.md
+[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T4-Technical-Scaffolding-Plan.md
+[INFO] [10:08:28 AM] [FTV Refresh] Full refresh triggered. Reason: file change: T7-Development-and-Testing-Guide.md
+[INFO] [10:08:28 AM] [Auto-Add] Processing queue with 5 files: ["c:/Projects/TowerDefense58/src/Artifacts/T1-Master-Artifact-List.md","c:/Projects/TowerDefense58/src/Artifacts/T14-GitHub-Repository-Setup-Guide.md","c:/Projects/TowerDefense58/src/Artifacts/T2-Project-Vision-and-Goals.md","c:/Projects/TowerDefense58/src/Artifacts/T4-Technical-Scaffolding-Plan.md","c:/Projects/TowerDefense58/src/Artifacts/T7-Development-and-Testing-Guide.md"]
+[INFO] [10:08:28 AM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [10:08:28 AM] [SelectionService] Returning 3 valid paths.
+[INFO] [10:08:28 AM] Persisted current selection of 8 items.
+[INFO] [10:08:28 AM] [Auto-Add] Sending ApplySelectionSet to client with 8 total paths.
+[INFO] [10:08:28 AM] Persisted current selection of 8 items.
+[INFO] [10:08:29 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [10:08:44 AM] Received RequestNewCycleAndGenerate for 4 responses from cycle 1.
+[INFO] [10:08:44 AM] Created new placeholder cycle 2.
+[INFO] [10:08:44 AM] [Prompt Gen] Starting prompt string generation for Cycle 1.
+[INFO] [10:08:44 AM] [SelectionService] Found 8 paths in persisted state. Validating...
+[INFO] [10:08:44 AM] [SelectionService] Returning 8 valid paths.
+[INFO] [10:08:45 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [10:08:45 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
+[INFO] [10:08:45 AM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [10:08:45 AM] [on-message] Wrote generated prompt for C1 to prompt.md
+[INFO] [10:08:45 AM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
+[INFO] [10:08:45 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [10:08:46 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
 </Ephemeral Context>
 <Previous Cycle 76 Summary of Actions>
 You are absolutely right to call me out. I apologize for the critical failure in the last cycle where I described the plan but did not provide the code to implement it. That is a complete breakdown of our process. I will execute the plan now and provide the full, complete set of updated files.
@@ -6653,26 +4450,26 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-27T14:21:59.549Z
+  Date Generated: 2025-09-27T15:13:31.156Z
   ---
-  Total Files: 173
-  Approx. Tokens: 236170
+  Total Files: 174
+  Approx. Tokens: 237178
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A0. DCE Master Artifact List.md (9443 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9368 tokens)
-3. src\client\views\parallel-copilot.view\view.scss (7043 tokens)
-4. src\backend\services\prompt.service.ts (4836 tokens)
+1. src\Artifacts\A0. DCE Master Artifact List.md (9580 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (9423 tokens)
+3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
+4. src\backend\services\prompt.service.ts (4927 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\context-chooser.view\view.scss (3708 tokens)
-10. src\backend\services\history.service.ts (3691 tokens)
+9. src\backend\services\history.service.ts (3779 tokens)
+10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 37770 - Tokens: 9443
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 38317 - Tokens: 9580
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -6735,116 +4532,117 @@ This file-centric approach helps in planning and prioritizing work, especially i
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
-64. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-65. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-66. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-67. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-68. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
-69. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-70. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
-71. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-72. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-73. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-74. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-75. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
-76. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-77. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-78. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-79. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-80. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-81. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-82. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-83. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-84. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
-85. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 16280 - Tokens: 4070
-87. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-88. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
-89. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 63 - Chars: 7516 - Tokens: 1879
-94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-96. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-97. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-98. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-99. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-102. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
-103. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
-104. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
-105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 352 - Chars: 14762 - Tokens: 3691
-108. src\backend\services\llm.service.ts - Lines: 239 - Chars: 11736 - Tokens: 2934
-109. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-110. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19343 - Tokens: 4836
-111. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-112. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-113. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
-114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-115. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-116. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
-117. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-118. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-119. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-120. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-121. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-122. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-123. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 3044 - Tokens: 761
-130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-131. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-132. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-133. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3182 - Tokens: 796
-134. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3576 - Tokens: 894
-135. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-136. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-137. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8742 - Tokens: 2186
-138. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
-139. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 28169 - Tokens: 7043
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 222 - Chars: 37471 - Tokens: 9368
-141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-142. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-143. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-144. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
-145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-146. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6389 - Tokens: 1598
-147. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9415 - Tokens: 2354
-148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-152. src\common\types\pcpp.types.ts - Lines: 55 - Chars: 1341 - Tokens: 336
-153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 421 - Tokens: 106
-154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-158. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-159. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 74 - Chars: 3856 - Tokens: 964
-160. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-161. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-162. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 4889 - Tokens: 1223
-163. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
-164. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8084 - Tokens: 2021
-165. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-166. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 63 - Chars: 6339 - Tokens: 1585
-167. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
-168. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3575 - Tokens: 894
-169. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4866 - Tokens: 1217
-170. src\client\views\parallel-copilot.view\view.ts - Lines: 5 - Chars: 225 - Tokens: 57
-171. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 103 - Chars: 8342 - Tokens: 2086
-172. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 50 - Chars: 4314 - Tokens: 1079
-173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
+64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3583 - Tokens: 896
+65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
+66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
+68. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
+70. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+71. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+72. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+73. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+74. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
+75. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+76. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+77. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+78. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+79. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+80. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+81. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 16280 - Tokens: 4070
+86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
+88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+89. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+90. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
+91. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+92. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 63 - Chars: 7516 - Tokens: 1879
+93. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+94. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+95. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+96. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+97. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+98. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+101. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+102. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+106. src\backend\services\history.service.ts - Lines: 352 - Chars: 15113 - Tokens: 3779
+107. src\backend\services\llm.service.ts - Lines: 239 - Chars: 11974 - Tokens: 2994
+108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
+110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
+113. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+114. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+115. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
+116. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+117. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+118. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+119. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+120. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+121. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+122. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+123. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+124. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+125. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+126. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+127. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 3044 - Tokens: 761
+129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3260 - Tokens: 815
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3576 - Tokens: 894
+134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8916 - Tokens: 2229
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 222 - Chars: 37692 - Tokens: 9423
+140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
+144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+145. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6389 - Tokens: 1598
+146. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9540 - Tokens: 2385
+147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+151. src\common\types\pcpp.types.ts - Lines: 55 - Chars: 1395 - Tokens: 349
+152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 421 - Tokens: 106
+153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+155. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+156. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+157. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+158. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 74 - Chars: 3856 - Tokens: 964
+159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 4889 - Tokens: 1223
+162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
+163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
+164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 63 - Chars: 6339 - Tokens: 1585
+166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
+167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
+168. src\client\views\parallel-copilot.view\view.ts - Lines: 5 - Chars: 229 - Tokens: 58
+169. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 72 - Chars: 4454 - Tokens: 1114
+170. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
+171. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3631 - Tokens: 908
+172. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 50 - Chars: 4363 - Tokens: 1091
+173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
+174. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -11118,34 +8916,6 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### Verification Steps
 1.  Check the `src/Artifacts` directory.
 2.  **Expected:** The new `A88` artifact should exist and contain a detailed technical plan.
-</file_artifact>
-
-<file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
-# Artifact A66: DCE - Cycle 1 - Task Tracker
-# Date Created: C167
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
-- **Tags:** bugs, tracking, issues, backlog, cycle 1
-
-## 1. Overview
-
-This document lists the feedback and tasks from the first official development cycle using the DCE tool. It serves as a checklist to ensure all initial bugs and feature requests are addressed.
-
-## 2. Task List
-
-| ID | Task | Status (C167) | Notes |
-|---|---|---|---|
-| 1 | Fix FTV flashing on save/auto-save. | **In Progress** | Annoying UX issue. Investigate file watcher and refresh logic. |
-| 2 | Rework line numbers in context panes for word wrap and scrolling. | **In Progress** | Critical usability bug. Requires rework of `NumberedTextarea.tsx`. |
-| 3 | Fix cursor and selection highlighting in context panes. | **In Progress** | Critical usability bug. Likely related to the line number issue. |
-| 4 | Implement animated UI workflow guide. | **In Progress** | Major new feature. Requires state management and CSS animations. |
-| 5 | Document the new animated workflow in an artifact. | **Complete** | `A69. DCE - Animated UI Workflow Guide.md` created. |
-| 6 | Fix `</prompt.md>` tag appearing at the top of generated prompts. | **In Progress** | Critical bug in `prompt.service.ts`. |
-| 7 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
-| 8 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
-| 9 | Plan for Git-integrated testing workflow. | **Complete** | New artifact `A70` created to plan this feature. |
 </file_artifact>
 
 <file path="src/Artifacts/A67. DCE - PCPP View Refactoring Plan.md">
@@ -22760,66 +20530,6 @@ To solve both issues, the workflow will be re-architected to be stateful and per
     *   Update the main rendering logic: if the currently loaded cycle has `status === 'generating'`, render the `GenerationProgressDisplay` component.
 </file_artifact>
 
-<file path="src/Artifacts/A102. DCE - Universal Task Checklist for Cycle 70.md">
-# Artifact A102: DCE - Universal Task Checklist for Cycle 70
-# Date Created: C70
-# Author: AI Model & Curator
-
-## 1. Purpose
-
-This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 70. It organizes the work by the group of files involved in each task to help plan and prioritize development, especially where context size (token count) is a constraint.
-
----
-
-## Task List for Cycle 70+
-
-## T-1: Fix Core Workflow & Generation Logic
-- **Files Involved:**
-    - `src/backend/services/prompt.service.ts`
-    - `src/backend/services/llm.service.ts`
-    - `src/backend/services/history.service.ts`
-    - `src/client/views/parallel-copilot.view/on-message.ts`
-- **Total Tokens:** ~15,000
-- **More than one cycle?** No
-- **Status:** To Do
-
-- [ ] **Task (T-ID: 1.1):** Update `prompt.service.ts` to ensure `prompt.md` is generated and saved to disk *before* the API request is sent in the automated "Demo Mode" workflow.
-- [ ] **Task (T-ID: 1.2):** Fully implement the `stopGeneration` logic in `llm.service.ts` using an `AbortController` to make the "Stop" button functional.
-- [ ] **Task (T-ID: 1.3):** Fully implement the single-response regeneration logic in `llm.service.ts` and `history.service.ts` to make the "Re-generate" buttons functional.
-
-### Verification Steps
-1.  Enable "Demo Mode" and start a new project.
-2.  Click "Generate Initial Responses".
-3.  **Expected:** A `prompt.md` file should appear in the workspace root *before* the generation progress UI appears.
-4.  While responses are generating, click the "Stop" button for one of them.
-5.  **Expected:** The generation for that specific response should cease.
-6.  Once generation is complete, go to the PCPP, hover over a response tab, and click the "Refresh" icon.
-7.  **Expected:** A new response should be generated for that tab only, and the UI should show a loading indicator during the process.
-
-## T-2: Implement UI Enhancements & Fixes
-- **Files Involved:**
-    - `src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-    - `src/client/views/parallel-copilot.view/view.scss`
-- **Total Tokens:** ~18,700
-- **More than one cycle?** No
-- **Status:** To Do
-
-- [ ] **Task (T-ID: 2.1):** In `GenerationProgressDisplay.tsx`, update the token count display format to `thinking + response = total / max`.
-- [ ] **Task (T-ID: 2.2):** Add a class to the "Unused" token count text and style it with the correct blue color in `view.scss`.
-- [ ] **Task (T-ID: 2.3):** Update the title in `GenerationProgressDisplay.tsx` to change from "Generating Responses..." to "Generation Complete" when appropriate.
-- [ ] **Task (T-ID: 2.4):** Add a "Return to Generation Progress" button in the main `view.tsx` that is visible only in demo mode when a generation is active.
-- [ ] **Task (T-ID: 2.5):** (Stretch Goal) Investigate how to reflect a response selection from the PCPP back in the Generation Progress UI if the user navigates back to it.
-
-### Verification Steps
-1.  Start a response generation in "Demo Mode".
-2.  **Expected:** The token count for each response should display in the format `1k + 5k = 6k / 16.4k tk`.
-3.  **Expected:** The "Unused: xxx tk" text should be colored blue.
-4.  Once generation is complete, navigate to the PCPP.
-5.  **Expected:** A button to "Return to Generation Progress" should be visible. Clicking it should take you back to the progress screen.
-6.  **Expected:** The title on the progress screen should now read "Generation Complete".
-</file_artifact>
-
 <file path="src/Artifacts/A103. DCE - Consolidated Response UI Plan.md">
 # Artifact A103: DCE - Consolidated Response UI Plan
 # Date Created: C73
@@ -22903,6 +20613,7 @@ The goal of this refactor is to create a more seamless, integrated experience. T
 
 ## 1. Purpose
 
+This
 This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 76. It organizes the work by logical feature area and the group of files involved in each task to help plan and prioritize development.
 
 ---
@@ -22925,37 +20636,12 @@ This artifact provides a structured checklist for tracking the development tasks
 
 ### Verification Steps
 1.  In Demo Mode, start a new project, and generate initial responses.
-Action taken: 
-created new project directory: `TowerDefense54`
-switched to `Demo Mode`
-wrote `i want to create a tower defense game` in the `Project Scope` on the onboarding page, then clicked `Generate Initial Responses`
-Observation:
-the spinning animation for all response tabs spinning correctly for the first time. everything seems fine at this time. all four responses streamed in.
 2.  In Cycle 1, add context and click `Generate responses`.
-Action taken:
-selected the longest response, selected all the files in that response, and accepted the selection of 5 files into my workspace.
-wrote `now lets build the files from the scaffolding plan` in the `Cycle Context`
-set the `Cycle Title` to `create code files`, and the clicked `Generate responses`
 3.  **Expected:** The UI should automatically navigate to the new Cycle 2 and display the generation progress UI.
-Observation:
-the UI did -not- automatically navigate to the new Cycle 2. I have to click `>` which i observed changed from gray to white once i clicked `Generate responses`.
-the content of the responses is not aligned with my request in Cycle 1. this is because of the aforementioned failure to properly package the prompt.md prior to sending it.
 4.  While responses are generating, click on a tab for a response that has already completed.
-Observation:
-this works as expected, when i select a completed response tab, i can see that response in view and begin interpreting it.
 5.  **Expected:** The view should switch from the progress display to the `ResponsePane` for that completed response.
 6.  After all responses are complete, select a tab and click the per-tab "Regenerate" button.
-Action taken:
-clicked on the response 1 tab regenerate button.
-Observation:
-the response 1 tab correctly switched to the response ui, however i also observe the spinning animation appear for all tabs, not just the one that i selected the re-generate for. upon checking, the other responses didnt actually re-generate, just the spinner triggered. only the one i clicked on actually regenerated.
-
-i did a further test by attempting to refresh response 2, and what happened was the response 1 tab showed the ui, and it indicated that it was response 1 that was being regenerated, despite my having clicked re-generate for response 2. it does seem that it was response 2 that did end up getting updated, hwoever, so functionally its working, visually we're misaligned.
-
-i ran one more test of the same, this time i regenerated response 3. i checked the token count of both response 1 and response 3 before clicking regenerate for repsonse 3 and i can confirm that when it finished, it was response 3 that was updated... hwoever this time resopnse 1 never came back, so i essentially lost my response 1 in the process of re-generating response 3. so mayby not fully functional, but very very close.
-
 7.  **Expected:** The view for that tab should switch back to the progress display to show the new response streaming in.
-Observation: the response ui only seems to appear in response 1 tab despite regenerating some other tab(s). additionally, i am unable to refresh tabs in parallel or simultaneously. while observing vllm, i can see that i ahve to wait for the current req to finish before i can initate a second one. i should be able to batch them easily as a user by simply clicking regenerate on whichever responses i want to regenerate.
 
 ## T-2: Implement and Refine Response UI Features
 - **Files Involved:**
@@ -22975,17 +20661,10 @@ Observation: the response ui only seems to appear in response 1 tab despite rege
 
 ### Verification Steps
 1.  Start a new generation.
-action taken: started a new test in the same manner as above.
 2.  **Expected:** Each response in the progress UI has its own, independently running elapsed timer.
-observation: yes, indeed each response has its own individual timer.
 3.  Click the "Stop" button.
-action taken: clicked the stop button on a generating response
-observation: the generating response did not stop. it is still generating.
 4.  **Expected:** The vLLM logs should show the request was cancelled, and the UI should stop updating.
-observation: the vllm logs did not indicate any stop it still showed it was generating all 4 requests.
 5.  **Expected:** The spinner icon on generating tabs should be actively spinning.
-observation: spinners are spinning as expected. the only time they spin unexpectedly is when i click re-generate for one of the tabs, then for some reason all the others tabs spinners appear and start to spin as well. they also dont stop when that response comes back, only the expected one stops.
-action: on this run, after the test, i then clicked re-generate on resp 1. this time, i do not see the spinner, and i do not see the response ui, but i do see in the vllm that it is processing the request. once the response completed i did see my response view for response 1 update correctly. to test again, went to resp 2 and clicked re-generate. no spinner, but it is processing in vllm. i wonder why i saw the responses in test 1 but not in this test? i followed the same steps in these tests...
 
 ## T-3: Code Quality and Documentation
 - **Files Involved:**
@@ -23000,6 +20679,126 @@ action: on this run, after the test, i then clicked re-generate on resp 1. this 
 - [ ] **Task (T-ID: 3.1):** Consolidate the `TabState` interface. Move the definition to `pcpp.types.ts` and update all components to import it from there.
 - [ ] **Task (T-ID: 3.2):** Create the new artifact `A105` detailing the plan to refactor `view.tsx`.
 - [ ] **Task (T-ID: 3.3):** Create the new artifact `A106` explaining vLLM performance and quantization.
+</file_artifact>
+
+<file path="src/Artifacts/A105. DCE - vLLM Performance and Quantization Guide.md">
+# Artifact A105: DCE - vLLM Performance and Quantization Guide
+# Date Created: C76
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains vLLM quantization, interprets performance warnings from the logs, and provides guidance on how to optimize the local LLM setup.
+- **Tags:** guide, vllm, performance, quantization, optimization, gpu
+
+## 1. Overview
+
+This guide provides answers to questions regarding the vLLM server logs from Cycle 76. It explains the type of quantization being used, what the performance warnings mean, and offers concrete steps you can take to potentially improve the performance of your local LLM server.
+
+## 2. Understanding Your Current Setup (Based on Logs)
+
+The vLLM server logs provide several key pieces of information about your current configuration:
+
+-   **Model:** `unsloth/gpt-oss-20b`
+-   **Quantization Method:** `mxfp4`
+-   **Data Type (dtype):** `torch.bfloat16`
+
+### What is `mxfp4` Quantization?
+
+The list of quantization types you provided (e.g., `Q4_K_M`, `Q8_0`) are specific to the **GGUF** format, which is commonly used by frameworks like `llama.cpp`. However, you are running the full, un-quantized Hugging Face model (`unsloth/gpt-oss-20b`).
+
+vLLM has its own set of quantization methods that it can apply on-the-fly. The log line `(APIServer pid=731) WARNING 09-27 06:30:31 [__init__.py:1217] mxfp4 quantization is not fully optimized yet` indicates that vLLM is using its **MXFP4** quantization scheme. This is a very new and experimental 4-bit floating-point format designed for high performance on modern GPUs.
+
+**In summary:** You are not using a pre-quantized GGUF model. You are loading the full model, and vLLM is applying its own experimental 4-bit quantization (`mxfp4`) at runtime.
+
+## 3. Interpreting the Performance Warnings
+
+Your logs contain two important warnings that suggest you can get better performance:
+
+1.  **`Your GPU does not have native support for FP4 computation...`**
+    *   **What it means:** Your GPU (an RTX 3090, which is an Ampere architecture card) does not have the specialized hardware to perform calculations directly in the 4-bit FP4 format. vLLM is using a fallback method called "Weight-only FP4 compression" with the Marlin kernel. This means the model's weights are stored in 4-bit format in VRAM (saving space), but they must be "de-quantized" to a higher precision format (like 16-bit) right before computations are performed. This conversion adds a small amount of overhead.
+
+2.  **`You are running Marlin kernel with bf16 on GPUs before SM90. You can consider change to fp16 to achieve better performance if possible.`**
+    *   **What it means:** This is the most actionable warning. Your GPU is based on the Ampere architecture (SM86). True `bfloat16` (bf16) performance is best on Hopper architecture GPUs (SM90) and newer. For Ampere cards like the RTX 3090, standard `float16` (fp16) is often faster and more mature. vLLM is telling you that you might get a speed boost by switching the data type from `bfloat16` to `float16`.
+
+## 4. How to Improve Performance
+
+Based on the logs, here is a concrete step you can take to potentially increase your tokens/second:
+
+### Change the Data Type to `fp16`
+
+You can instruct vLLM to use `float16` instead of the default `bfloat16` by adding the `--dtype float16` flag to your server launch command.
+
+**New Recommended Command:**
+
+```bash
+python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b" --dtype float16
+```
+
+**Why this should help:** This aligns the computation type with the optimal format for your RTX 3090's architecture, as recommended by the warning message. This is the single most likely change to yield a performance improvement.
+
+### Experimenting with Other Quantizations
+
+If you want to experiment further, you could try one of vLLM's other supported quantization methods, like AWQ. However, this often requires using a model that has been specifically pre-quantized for that method. For now, simply changing the `dtype` is the easiest and most direct optimization to try.
+</file_artifact>
+
+<file path="src/Artifacts/A102. DCE - Universal Task Checklist for Cycle 70.md">
+# Artifact A102: DCE - Universal Task Checklist for Cycle 70
+# Date Created: C70
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 70. It organizes the work by the group of files involved in each task to help plan and prioritize development, especially where context size (token count) is a constraint.
+
+---
+
+## Task List for Cycle 70+
+
+## T-1: Fix Core Workflow & Generation Logic
+- **Files Involved:**
+    - `src/backend/services/prompt.service.ts`
+    - `src/backend/services/llm.service.ts`
+    - `src/backend/services/history.service.ts`
+    - `src/client/views/parallel-copilot.view/on-message.ts`
+- **Total Tokens:** ~15,000
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 1.1):** Update `prompt.service.ts` to ensure `prompt.md` is generated and saved to disk *before* the API request is sent in the automated "Demo Mode" workflow.
+- [ ] **Task (T-ID: 1.2):** Fully implement the `stopGeneration` logic in `llm.service.ts` using an `AbortController` to make the "Stop" button functional.
+- [ ] **Task (T-ID: 1.3):** Fully implement the single-response regeneration logic in `llm.service.ts` and `history.service.ts` to make the "Re-generate" buttons functional.
+
+### Verification Steps
+1.  Enable "Demo Mode" and start a new project.
+2.  Click "Generate Initial Responses".
+3.  **Expected:** A `prompt.md` file should appear in the workspace root *before* the generation progress UI appears.
+4.  While responses are generating, click the "Stop" button for one of them.
+5.  **Expected:** The generation for that specific response should cease.
+6.  Once generation is complete, go to the PCPP, hover over a response tab, and click the "Refresh" icon.
+7.  **Expected:** A new response should be generated for that tab only, and the UI should show a loading indicator during the process.
+
+## T-2: Implement UI Enhancements & Fixes
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+    - `src/client/views/parallel-copilot.view/view.scss`
+- **Total Tokens:** ~18,700
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 2.1):** In `GenerationProgressDisplay.tsx`, update the token count display format to `thinking + response = total / max`.
+- [ ] **Task (T-ID: 2.2):** Add a class to the "Unused" token count text and style it with the correct blue color in `view.scss`.
+- [ ] **Task (T-ID: 2.3):** Update the title in `GenerationProgressDisplay.tsx` to change from "Generating Responses..." to "Generation Complete" when appropriate.
+- [ ] **Task (T-ID: 2.4):** Add a "Return to Generation Progress" button in the main `view.tsx` that is visible only in demo mode when a generation is active.
+- [ ] **Task (T-ID: 2.5):** (Stretch Goal) Investigate how to reflect a response selection from the PCPP back in the Generation Progress UI if the user navigates back to it.
+
+### Verification Steps
+1.  Start a response generation in "Demo Mode".
+2.  **Expected:** The token count for each response should display in the format `1k + 5k = 6k / 16.4k tk`.
+3.  **Expected:** The "Unused: xxx tk" text should be colored blue.
+4.  Once generation is complete, navigate to the PCPP.
+5.  **Expected:** A button to "Return to Generation Progress" should be visible. Clicking it should take you back to the progress screen.
+6.  **Expected:** The title on the progress screen should now read "Generation Complete".
 </file_artifact>
 
 <file path="src/Artifacts/A105. DCE - PCPP View Refactoring Plan for Cycle 76.md">
@@ -23101,6 +20900,34 @@ The command you ran (`python -m vllm.entrypoints.openai.api_server --model "unsl
 The list of `Q` files you found are typically associated with the **GGUF format**, which is used by other inference engines like `llama.cpp`. vLLM does not load GGUF files directly. It has its own supported quantization methods (like AWQ, GPTQ, and the experimental `mxfp4`) that it applies to the base model.
 
 **In summary:** You are not using one of the GGUF files from your list. You are using the base model, and vLLM is applying its own 4-bit quantization to it. The warnings are helpful tips for potentially improving performance on your specific hardware.
+</file_artifact>
+
+<file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
+# Artifact A66: DCE - Cycle 1 - Task Tracker
+# Date Created: C167
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
+- **Tags:** bugs, tracking, issues, backlog, cycle 1
+
+## 1. Overview
+
+This document lists the feedback and tasks from the first official development cycle using the DCE tool. It serves as a checklist to ensure all initial bugs and feature requests are addressed.
+
+## 2. Task List
+
+| ID | Task | Status (C167) | Notes |
+|---|---|---|---|
+| 1 | Fix FTV flashing on save/auto-save. | **In Progress** | Annoying UX issue. Investigate file watcher and refresh logic. |
+| 2 | Rework line numbers in context panes for word wrap and scrolling. | **In Progress** | Critical usability bug. Requires rework of `NumberedTextarea.tsx`. |
+| 3 | Fix cursor and selection highlighting in context panes. | **In Progress** | Critical usability bug. Likely related to the line number issue. |
+| 4 | Implement animated UI workflow guide. | **In Progress** | Major new feature. Requires state management and CSS animations. |
+| 5 | Document the new animated workflow in an artifact. | **Complete** | `A69. DCE - Animated UI Workflow Guide.md` created. |
+| 6 | Fix `</prompt.md>` tag appearing at the top of generated prompts. | **In Progress** | Critical bug in `prompt.service.ts`. |
+| 7 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
+| 8 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
+| 9 | Plan for Git-integrated testing workflow. | **Complete** | New artifact `A70` created to plan this feature. |
 </file_artifact>
 
 

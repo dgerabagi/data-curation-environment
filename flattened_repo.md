@@ -1,26 +1,26 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-27T14:21:59.549Z
+  Date Generated: 2025-09-27T15:13:31.156Z
   ---
-  Total Files: 173
-  Approx. Tokens: 236170
+  Total Files: 174
+  Approx. Tokens: 237178
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A0. DCE Master Artifact List.md (9443 tokens)
-2. src\client\views\parallel-copilot.view\view.tsx (9368 tokens)
-3. src\client\views\parallel-copilot.view\view.scss (7043 tokens)
-4. src\backend\services\prompt.service.ts (4836 tokens)
+1. src\Artifacts\A0. DCE Master Artifact List.md (9580 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (9423 tokens)
+3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
+4. src\backend\services\prompt.service.ts (4927 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\context-chooser.view\view.scss (3708 tokens)
-10. src\backend\services\history.service.ts (3691 tokens)
+9. src\backend\services\history.service.ts (3779 tokens)
+10. src\client\views\context-chooser.view\view.scss (3708 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 37770 - Tokens: 9443
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 38317 - Tokens: 9580
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -83,116 +83,117 @@
 61. src\Artifacts\A60. DCE - Phase 2 - Cycle 0 Onboarding Experience.md - Lines: 35 - Chars: 4177 - Tokens: 1045
 62. src\Artifacts\A61. DCE - Phase 2 - Cycle History Management Plan.md - Lines: 45 - Chars: 3559 - Tokens: 890
 63. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
-64. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1806 - Tokens: 452
-65. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3537 - Tokens: 885
-66. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-67. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
-68. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
-69. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-70. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
-71. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
-72. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
-73. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
-74. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
-75. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
-76. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
-77. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
-78. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
-79. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
-80. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
-81. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
-82. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
-83. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
-84. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
-85. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-86. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 16280 - Tokens: 4070
-87. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
-88. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
-89. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
-90. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
-91. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
-92. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
-93. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 63 - Chars: 7516 - Tokens: 1879
-94. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
-95. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
-96. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
-97. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
-98. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
-99. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
-100. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
-101. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-102. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
-103. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
-104. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
-105. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-106. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-107. src\backend\services\history.service.ts - Lines: 352 - Chars: 14762 - Tokens: 3691
-108. src\backend\services\llm.service.ts - Lines: 239 - Chars: 11736 - Tokens: 2934
-109. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-110. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19343 - Tokens: 4836
-111. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-112. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
-113. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
-114. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
-115. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
-116. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
-117. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
-118. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
-119. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
-120. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
-121. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
-122. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
-123. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
-124. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
-125. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
-126. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
-127. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
-128. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
-129. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 3044 - Tokens: 761
-130. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
-131. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-132. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
-133. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3182 - Tokens: 796
-134. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3576 - Tokens: 894
-135. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
-136. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-137. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8742 - Tokens: 2186
-138. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
-139. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 28169 - Tokens: 7043
-140. src\client\views\parallel-copilot.view\view.tsx - Lines: 222 - Chars: 37471 - Tokens: 9368
-141. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
-142. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
-143. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
-144. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
-145. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-146. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6389 - Tokens: 1598
-147. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9415 - Tokens: 2354
-148. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
-149. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
-150. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
-151. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-152. src\common\types\pcpp.types.ts - Lines: 55 - Chars: 1341 - Tokens: 336
-153. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 421 - Tokens: 106
-154. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
-155. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
-156. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
-157. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
-158. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
-159. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 74 - Chars: 3856 - Tokens: 964
-160. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
-161. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
-162. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 4889 - Tokens: 1223
-163. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
-164. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8084 - Tokens: 2021
-165. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-166. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 63 - Chars: 6339 - Tokens: 1585
-167. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
-168. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3575 - Tokens: 894
-169. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4866 - Tokens: 1217
-170. src\client\views\parallel-copilot.view\view.ts - Lines: 5 - Chars: 225 - Tokens: 57
-171. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 103 - Chars: 8342 - Tokens: 2086
-172. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 50 - Chars: 4314 - Tokens: 1079
-173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
+64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3583 - Tokens: 896
+65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
+66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
+68. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
+69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
+70. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
+71. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
+72. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
+73. src\Artifacts\A76. DCE - Word Wrap Line Numbering Challenges.md - Lines: 61 - Chars: 4895 - Tokens: 1224
+74. src\Artifacts\A77. DCE - Whitepaper Generation Plan.md - Lines: 74 - Chars: 8731 - Tokens: 2183
+75. src\Artifacts\A78. DCE - VSIX Packaging and FTV Flashing Bug.md - Lines: 50 - Chars: 3687 - Tokens: 922
+76. src\Artifacts\A79. DCE - Autosave and Navigation Locking Plan.md - Lines: 49 - Chars: 4291 - Tokens: 1073
+77. src\Artifacts\A80. DCE - Settings Panel Plan.md - Lines: 39 - Chars: 3592 - Tokens: 898
+78. src\Artifacts\A81. DCE - Curator Activity Plan.md - Lines: 34 - Chars: 2346 - Tokens: 587
+79. src\Artifacts\A82. DCE - Advanced Exclusion Management Plan.md - Lines: 40 - Chars: 3010 - Tokens: 753
+80. src\Artifacts\A85. DCE - Phase 3 - Model Cards Feature Plan.md - Lines: 53 - Chars: 4197 - Tokens: 1050
+81. src\Artifacts\A86. DCE - PCPP Workflow Centralization and UI Persistence Plan.md - Lines: 74 - Chars: 5931 - Tokens: 1483
+82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
+83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
+84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 16280 - Tokens: 4070
+86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
+87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
+88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
+89. src\Artifacts\A94. DCE - Connecting to a Local LLM Guide.md - Lines: 42 - Chars: 2565 - Tokens: 642
+90. src\Artifacts\A95. DCE - LLM Connection Modes Plan.md - Lines: 54 - Chars: 4725 - Tokens: 1182
+91. src\Artifacts\A96. DCE - Harmony-Aligned Response Schema Plan.md - Lines: 33 - Chars: 2660 - Tokens: 665
+92. src\Artifacts\A97. DCE - vLLM Response Progress UI Plan.md - Lines: 63 - Chars: 7516 - Tokens: 1879
+93. src\Artifacts\A149. Local LLM Integration Plan.md - Lines: 99 - Chars: 6208 - Tokens: 1552
+94. src\Artifacts\A189. Number Formatting Reference Guide.md - Lines: 118 - Chars: 4938 - Tokens: 1235
+95. src\Artifacts\DCE_README.md - Lines: 47 - Chars: 3127 - Tokens: 782
+96. src\backend\commands\commands.ts - Lines: 110 - Chars: 4507 - Tokens: 1127
+97. src\backend\commands\register-commands.ts - Lines: 11 - Chars: 456 - Tokens: 114
+98. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
+99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
+100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
+101. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+102. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
+106. src\backend\services\history.service.ts - Lines: 352 - Chars: 15113 - Tokens: 3779
+107. src\backend\services\llm.service.ts - Lines: 239 - Chars: 11974 - Tokens: 2994
+108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
+109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
+110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
+111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
+113. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
+114. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
+115. src\client\components\file-tree\FileTree.utils.ts - Lines: 134 - Chars: 4721 - Tokens: 1181
+116. src\client\components\tree-view\TreeView.tsx - Lines: 395 - Chars: 17687 - Tokens: 4422
+117. src\client\components\tree-view\TreeView.utils.ts - Lines: 13 - Chars: 333 - Tokens: 84
+118. src\client\components\Checkbox.tsx - Lines: 25 - Chars: 814 - Tokens: 204
+119. src\client\components\ContextMenu.tsx - Lines: 72 - Chars: 3353 - Tokens: 839
+120. src\client\components\LocationPane.tsx - Lines: 28 - Chars: 776 - Tokens: 194
+121. src\client\components\SelectedFilesView.tsx - Lines: 276 - Chars: 13123 - Tokens: 3281
+122. src\client\utils\logger.ts - Lines: 19 - Chars: 744 - Tokens: 186
+123. src\client\views\context-chooser.view\index.ts - Lines: 7 - Chars: 184 - Tokens: 46
+124. src\client\views\context-chooser.view\on-message.ts - Lines: 78 - Chars: 5167 - Tokens: 1292
+125. src\client\views\context-chooser.view\view.scss - Lines: 630 - Chars: 14830 - Tokens: 3708
+126. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
+127. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
+128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 72 - Chars: 3044 - Tokens: 761
+129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3386 - Tokens: 847
+130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
+132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3260 - Tokens: 815
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 80 - Chars: 3576 - Tokens: 894
+134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
+135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8916 - Tokens: 2229
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 222 - Chars: 37692 - Tokens: 9423
+140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
+141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
+142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
+143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
+144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
+145. src\common\ipc\channels.enum.ts - Lines: 112 - Chars: 6389 - Tokens: 1598
+146. src\common\ipc\channels.type.ts - Lines: 126 - Chars: 9540 - Tokens: 2385
+147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
+148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
+149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
+150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
+151. src\common\types\pcpp.types.ts - Lines: 55 - Chars: 1395 - Tokens: 349
+152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 421 - Tokens: 106
+153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
+154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
+155. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
+156. src\common\view-types.ts - Lines: 8 - Chars: 175 - Tokens: 44
+157. src\extension.ts - Lines: 174 - Chars: 7202 - Tokens: 1801
+158. src\Artifacts\A52.3 DCE - Harmony Interaction Schema Source.md - Lines: 74 - Chars: 3856 - Tokens: 964
+159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
+160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
+161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 43 - Chars: 4889 - Tokens: 1223
+162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7131 - Tokens: 1783
+163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
+164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 63 - Chars: 6339 - Tokens: 1585
+166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 41 - Chars: 3918 - Tokens: 980
+167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
+168. src\client\views\parallel-copilot.view\view.ts - Lines: 5 - Chars: 229 - Tokens: 58
+169. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 72 - Chars: 4454 - Tokens: 1114
+170. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
+171. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3631 - Tokens: 908
+172. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 50 - Chars: 4363 - Tokens: 1091
+173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
+174. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -4466,34 +4467,6 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### Verification Steps
 1.  Check the `src/Artifacts` directory.
 2.  **Expected:** The new `A88` artifact should exist and contain a detailed technical plan.
-</file_artifact>
-
-<file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
-# Artifact A66: DCE - Cycle 1 - Task Tracker
-# Date Created: C167
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
-- **Tags:** bugs, tracking, issues, backlog, cycle 1
-
-## 1. Overview
-
-This document lists the feedback and tasks from the first official development cycle using the DCE tool. It serves as a checklist to ensure all initial bugs and feature requests are addressed.
-
-## 2. Task List
-
-| ID | Task | Status (C167) | Notes |
-|---|---|---|---|
-| 1 | Fix FTV flashing on save/auto-save. | **In Progress** | Annoying UX issue. Investigate file watcher and refresh logic. |
-| 2 | Rework line numbers in context panes for word wrap and scrolling. | **In Progress** | Critical usability bug. Requires rework of `NumberedTextarea.tsx`. |
-| 3 | Fix cursor and selection highlighting in context panes. | **In Progress** | Critical usability bug. Likely related to the line number issue. |
-| 4 | Implement animated UI workflow guide. | **In Progress** | Major new feature. Requires state management and CSS animations. |
-| 5 | Document the new animated workflow in an artifact. | **Complete** | `A69. DCE - Animated UI Workflow Guide.md` created. |
-| 6 | Fix `</prompt.md>` tag appearing at the top of generated prompts. | **In Progress** | Critical bug in `prompt.service.ts`. |
-| 7 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
-| 8 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
-| 9 | Plan for Git-integrated testing workflow. | **Complete** | New artifact `A70` created to plan this feature. |
 </file_artifact>
 
 <file path="src/Artifacts/A67. DCE - PCPP View Refactoring Plan.md">
@@ -16108,66 +16081,6 @@ To solve both issues, the workflow will be re-architected to be stateful and per
     *   Update the main rendering logic: if the currently loaded cycle has `status === 'generating'`, render the `GenerationProgressDisplay` component.
 </file_artifact>
 
-<file path="src/Artifacts/A102. DCE - Universal Task Checklist for Cycle 70.md">
-# Artifact A102: DCE - Universal Task Checklist for Cycle 70
-# Date Created: C70
-# Author: AI Model & Curator
-
-## 1. Purpose
-
-This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 70. It organizes the work by the group of files involved in each task to help plan and prioritize development, especially where context size (token count) is a constraint.
-
----
-
-## Task List for Cycle 70+
-
-## T-1: Fix Core Workflow & Generation Logic
-- **Files Involved:**
-    - `src/backend/services/prompt.service.ts`
-    - `src/backend/services/llm.service.ts`
-    - `src/backend/services/history.service.ts`
-    - `src/client/views/parallel-copilot.view/on-message.ts`
-- **Total Tokens:** ~15,000
-- **More than one cycle?** No
-- **Status:** To Do
-
-- [ ] **Task (T-ID: 1.1):** Update `prompt.service.ts` to ensure `prompt.md` is generated and saved to disk *before* the API request is sent in the automated "Demo Mode" workflow.
-- [ ] **Task (T-ID: 1.2):** Fully implement the `stopGeneration` logic in `llm.service.ts` using an `AbortController` to make the "Stop" button functional.
-- [ ] **Task (T-ID: 1.3):** Fully implement the single-response regeneration logic in `llm.service.ts` and `history.service.ts` to make the "Re-generate" buttons functional.
-
-### Verification Steps
-1.  Enable "Demo Mode" and start a new project.
-2.  Click "Generate Initial Responses".
-3.  **Expected:** A `prompt.md` file should appear in the workspace root *before* the generation progress UI appears.
-4.  While responses are generating, click the "Stop" button for one of them.
-5.  **Expected:** The generation for that specific response should cease.
-6.  Once generation is complete, go to the PCPP, hover over a response tab, and click the "Refresh" icon.
-7.  **Expected:** A new response should be generated for that tab only, and the UI should show a loading indicator during the process.
-
-## T-2: Implement UI Enhancements & Fixes
-- **Files Involved:**
-    - `src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx`
-    - `src/client/views/parallel-copilot.view/view.tsx`
-    - `src/client/views/parallel-copilot.view/view.scss`
-- **Total Tokens:** ~18,700
-- **More than one cycle?** No
-- **Status:** To Do
-
-- [ ] **Task (T-ID: 2.1):** In `GenerationProgressDisplay.tsx`, update the token count display format to `thinking + response = total / max`.
-- [ ] **Task (T-ID: 2.2):** Add a class to the "Unused" token count text and style it with the correct blue color in `view.scss`.
-- [ ] **Task (T-ID: 2.3):** Update the title in `GenerationProgressDisplay.tsx` to change from "Generating Responses..." to "Generation Complete" when appropriate.
-- [ ] **Task (T-ID: 2.4):** Add a "Return to Generation Progress" button in the main `view.tsx` that is visible only in demo mode when a generation is active.
-- [ ] **Task (T-ID: 2.5):** (Stretch Goal) Investigate how to reflect a response selection from the PCPP back in the Generation Progress UI if the user navigates back to it.
-
-### Verification Steps
-1.  Start a response generation in "Demo Mode".
-2.  **Expected:** The token count for each response should display in the format `1k + 5k = 6k / 16.4k tk`.
-3.  **Expected:** The "Unused: xxx tk" text should be colored blue.
-4.  Once generation is complete, navigate to the PCPP.
-5.  **Expected:** A button to "Return to Generation Progress" should be visible. Clicking it should take you back to the progress screen.
-6.  **Expected:** The title on the progress screen should now read "Generation Complete".
-</file_artifact>
-
 <file path="src/Artifacts/A103. DCE - Consolidated Response UI Plan.md">
 # Artifact A103: DCE - Consolidated Response UI Plan
 # Date Created: C73
@@ -16251,6 +16164,7 @@ The goal of this refactor is to create a more seamless, integrated experience. T
 
 ## 1. Purpose
 
+This
 This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 76. It organizes the work by logical feature area and the group of files involved in each task to help plan and prioritize development.
 
 ---
@@ -16273,37 +16187,12 @@ This artifact provides a structured checklist for tracking the development tasks
 
 ### Verification Steps
 1.  In Demo Mode, start a new project, and generate initial responses.
-Action taken: 
-created new project directory: `TowerDefense54`
-switched to `Demo Mode`
-wrote `i want to create a tower defense game` in the `Project Scope` on the onboarding page, then clicked `Generate Initial Responses`
-Observation:
-the spinning animation for all response tabs spinning correctly for the first time. everything seems fine at this time. all four responses streamed in.
 2.  In Cycle 1, add context and click `Generate responses`.
-Action taken:
-selected the longest response, selected all the files in that response, and accepted the selection of 5 files into my workspace.
-wrote `now lets build the files from the scaffolding plan` in the `Cycle Context`
-set the `Cycle Title` to `create code files`, and the clicked `Generate responses`
 3.  **Expected:** The UI should automatically navigate to the new Cycle 2 and display the generation progress UI.
-Observation:
-the UI did -not- automatically navigate to the new Cycle 2. I have to click `>` which i observed changed from gray to white once i clicked `Generate responses`.
-the content of the responses is not aligned with my request in Cycle 1. this is because of the aforementioned failure to properly package the prompt.md prior to sending it.
 4.  While responses are generating, click on a tab for a response that has already completed.
-Observation:
-this works as expected, when i select a completed response tab, i can see that response in view and begin interpreting it.
 5.  **Expected:** The view should switch from the progress display to the `ResponsePane` for that completed response.
 6.  After all responses are complete, select a tab and click the per-tab "Regenerate" button.
-Action taken:
-clicked on the response 1 tab regenerate button.
-Observation:
-the response 1 tab correctly switched to the response ui, however i also observe the spinning animation appear for all tabs, not just the one that i selected the re-generate for. upon checking, the other responses didnt actually re-generate, just the spinner triggered. only the one i clicked on actually regenerated.
-
-i did a further test by attempting to refresh response 2, and what happened was the response 1 tab showed the ui, and it indicated that it was response 1 that was being regenerated, despite my having clicked re-generate for response 2. it does seem that it was response 2 that did end up getting updated, hwoever, so functionally its working, visually we're misaligned.
-
-i ran one more test of the same, this time i regenerated response 3. i checked the token count of both response 1 and response 3 before clicking regenerate for repsonse 3 and i can confirm that when it finished, it was response 3 that was updated... hwoever this time resopnse 1 never came back, so i essentially lost my response 1 in the process of re-generating response 3. so mayby not fully functional, but very very close.
-
 7.  **Expected:** The view for that tab should switch back to the progress display to show the new response streaming in.
-Observation: the response ui only seems to appear in response 1 tab despite regenerating some other tab(s). additionally, i am unable to refresh tabs in parallel or simultaneously. while observing vllm, i can see that i ahve to wait for the current req to finish before i can initate a second one. i should be able to batch them easily as a user by simply clicking regenerate on whichever responses i want to regenerate.
 
 ## T-2: Implement and Refine Response UI Features
 - **Files Involved:**
@@ -16323,17 +16212,10 @@ Observation: the response ui only seems to appear in response 1 tab despite rege
 
 ### Verification Steps
 1.  Start a new generation.
-action taken: started a new test in the same manner as above.
 2.  **Expected:** Each response in the progress UI has its own, independently running elapsed timer.
-observation: yes, indeed each response has its own individual timer.
 3.  Click the "Stop" button.
-action taken: clicked the stop button on a generating response
-observation: the generating response did not stop. it is still generating.
 4.  **Expected:** The vLLM logs should show the request was cancelled, and the UI should stop updating.
-observation: the vllm logs did not indicate any stop it still showed it was generating all 4 requests.
 5.  **Expected:** The spinner icon on generating tabs should be actively spinning.
-observation: spinners are spinning as expected. the only time they spin unexpectedly is when i click re-generate for one of the tabs, then for some reason all the others tabs spinners appear and start to spin as well. they also dont stop when that response comes back, only the expected one stops.
-action: on this run, after the test, i then clicked re-generate on resp 1. this time, i do not see the spinner, and i do not see the response ui, but i do see in the vllm that it is processing the request. once the response completed i did see my response view for response 1 update correctly. to test again, went to resp 2 and clicked re-generate. no spinner, but it is processing in vllm. i wonder why i saw the responses in test 1 but not in this test? i followed the same steps in these tests...
 
 ## T-3: Code Quality and Documentation
 - **Files Involved:**
@@ -16348,6 +16230,126 @@ action: on this run, after the test, i then clicked re-generate on resp 1. this 
 - [ ] **Task (T-ID: 3.1):** Consolidate the `TabState` interface. Move the definition to `pcpp.types.ts` and update all components to import it from there.
 - [ ] **Task (T-ID: 3.2):** Create the new artifact `A105` detailing the plan to refactor `view.tsx`.
 - [ ] **Task (T-ID: 3.3):** Create the new artifact `A106` explaining vLLM performance and quantization.
+</file_artifact>
+
+<file path="src/Artifacts/A105. DCE - vLLM Performance and Quantization Guide.md">
+# Artifact A105: DCE - vLLM Performance and Quantization Guide
+# Date Created: C76
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Explains vLLM quantization, interprets performance warnings from the logs, and provides guidance on how to optimize the local LLM setup.
+- **Tags:** guide, vllm, performance, quantization, optimization, gpu
+
+## 1. Overview
+
+This guide provides answers to questions regarding the vLLM server logs from Cycle 76. It explains the type of quantization being used, what the performance warnings mean, and offers concrete steps you can take to potentially improve the performance of your local LLM server.
+
+## 2. Understanding Your Current Setup (Based on Logs)
+
+The vLLM server logs provide several key pieces of information about your current configuration:
+
+-   **Model:** `unsloth/gpt-oss-20b`
+-   **Quantization Method:** `mxfp4`
+-   **Data Type (dtype):** `torch.bfloat16`
+
+### What is `mxfp4` Quantization?
+
+The list of quantization types you provided (e.g., `Q4_K_M`, `Q8_0`) are specific to the **GGUF** format, which is commonly used by frameworks like `llama.cpp`. However, you are running the full, un-quantized Hugging Face model (`unsloth/gpt-oss-20b`).
+
+vLLM has its own set of quantization methods that it can apply on-the-fly. The log line `(APIServer pid=731) WARNING 09-27 06:30:31 [__init__.py:1217] mxfp4 quantization is not fully optimized yet` indicates that vLLM is using its **MXFP4** quantization scheme. This is a very new and experimental 4-bit floating-point format designed for high performance on modern GPUs.
+
+**In summary:** You are not using a pre-quantized GGUF model. You are loading the full model, and vLLM is applying its own experimental 4-bit quantization (`mxfp4`) at runtime.
+
+## 3. Interpreting the Performance Warnings
+
+Your logs contain two important warnings that suggest you can get better performance:
+
+1.  **`Your GPU does not have native support for FP4 computation...`**
+    *   **What it means:** Your GPU (an RTX 3090, which is an Ampere architecture card) does not have the specialized hardware to perform calculations directly in the 4-bit FP4 format. vLLM is using a fallback method called "Weight-only FP4 compression" with the Marlin kernel. This means the model's weights are stored in 4-bit format in VRAM (saving space), but they must be "de-quantized" to a higher precision format (like 16-bit) right before computations are performed. This conversion adds a small amount of overhead.
+
+2.  **`You are running Marlin kernel with bf16 on GPUs before SM90. You can consider change to fp16 to achieve better performance if possible.`**
+    *   **What it means:** This is the most actionable warning. Your GPU is based on the Ampere architecture (SM86). True `bfloat16` (bf16) performance is best on Hopper architecture GPUs (SM90) and newer. For Ampere cards like the RTX 3090, standard `float16` (fp16) is often faster and more mature. vLLM is telling you that you might get a speed boost by switching the data type from `bfloat16` to `float16`.
+
+## 4. How to Improve Performance
+
+Based on the logs, here is a concrete step you can take to potentially increase your tokens/second:
+
+### Change the Data Type to `fp16`
+
+You can instruct vLLM to use `float16` instead of the default `bfloat16` by adding the `--dtype float16` flag to your server launch command.
+
+**New Recommended Command:**
+
+```bash
+python -m vllm.entrypoints.openai.api_server --model "unsloth/gpt-oss-20b" --dtype float16
+```
+
+**Why this should help:** This aligns the computation type with the optimal format for your RTX 3090's architecture, as recommended by the warning message. This is the single most likely change to yield a performance improvement.
+
+### Experimenting with Other Quantizations
+
+If you want to experiment further, you could try one of vLLM's other supported quantization methods, like AWQ. However, this often requires using a model that has been specifically pre-quantized for that method. For now, simply changing the `dtype` is the easiest and most direct optimization to try.
+</file_artifact>
+
+<file path="src/Artifacts/A102. DCE - Universal Task Checklist for Cycle 70.md">
+# Artifact A102: DCE - Universal Task Checklist for Cycle 70
+# Date Created: C70
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for tracking the development tasks, feedback, and bugs identified in Cycle 70. It organizes the work by the group of files involved in each task to help plan and prioritize development, especially where context size (token count) is a constraint.
+
+---
+
+## Task List for Cycle 70+
+
+## T-1: Fix Core Workflow & Generation Logic
+- **Files Involved:**
+    - `src/backend/services/prompt.service.ts`
+    - `src/backend/services/llm.service.ts`
+    - `src/backend/services/history.service.ts`
+    - `src/client/views/parallel-copilot.view/on-message.ts`
+- **Total Tokens:** ~15,000
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 1.1):** Update `prompt.service.ts` to ensure `prompt.md` is generated and saved to disk *before* the API request is sent in the automated "Demo Mode" workflow.
+- [ ] **Task (T-ID: 1.2):** Fully implement the `stopGeneration` logic in `llm.service.ts` using an `AbortController` to make the "Stop" button functional.
+- [ ] **Task (T-ID: 1.3):** Fully implement the single-response regeneration logic in `llm.service.ts` and `history.service.ts` to make the "Re-generate" buttons functional.
+
+### Verification Steps
+1.  Enable "Demo Mode" and start a new project.
+2.  Click "Generate Initial Responses".
+3.  **Expected:** A `prompt.md` file should appear in the workspace root *before* the generation progress UI appears.
+4.  While responses are generating, click the "Stop" button for one of them.
+5.  **Expected:** The generation for that specific response should cease.
+6.  Once generation is complete, go to the PCPP, hover over a response tab, and click the "Refresh" icon.
+7.  **Expected:** A new response should be generated for that tab only, and the UI should show a loading indicator during the process.
+
+## T-2: Implement UI Enhancements & Fixes
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx`
+    - `src/client/views/parallel-copilot.view/view.tsx`
+    - `src/client/views/parallel-copilot.view/view.scss`
+- **Total Tokens:** ~18,700
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 2.1):** In `GenerationProgressDisplay.tsx`, update the token count display format to `thinking + response = total / max`.
+- [ ] **Task (T-ID: 2.2):** Add a class to the "Unused" token count text and style it with the correct blue color in `view.scss`.
+- [ ] **Task (T-ID: 2.3):** Update the title in `GenerationProgressDisplay.tsx` to change from "Generating Responses..." to "Generation Complete" when appropriate.
+- [ ] **Task (T-ID: 2.4):** Add a "Return to Generation Progress" button in the main `view.tsx` that is visible only in demo mode when a generation is active.
+- [ ] **Task (T-ID: 2.5):** (Stretch Goal) Investigate how to reflect a response selection from the PCPP back in the Generation Progress UI if the user navigates back to it.
+
+### Verification Steps
+1.  Start a response generation in "Demo Mode".
+2.  **Expected:** The token count for each response should display in the format `1k + 5k = 6k / 16.4k tk`.
+3.  **Expected:** The "Unused: xxx tk" text should be colored blue.
+4.  Once generation is complete, navigate to the PCPP.
+5.  **Expected:** A button to "Return to Generation Progress" should be visible. Clicking it should take you back to the progress screen.
+6.  **Expected:** The title on the progress screen should now read "Generation Complete".
 </file_artifact>
 
 <file path="src/Artifacts/A105. DCE - PCPP View Refactoring Plan for Cycle 76.md">
@@ -16449,5 +16451,33 @@ The command you ran (`python -m vllm.entrypoints.openai.api_server --model "unsl
 The list of `Q` files you found are typically associated with the **GGUF format**, which is used by other inference engines like `llama.cpp`. vLLM does not load GGUF files directly. It has its own supported quantization methods (like AWQ, GPTQ, and the experimental `mxfp4`) that it applies to the base model.
 
 **In summary:** You are not using one of the GGUF files from your list. You are using the base model, and vLLM is applying its own 4-bit quantization to it. The warnings are helpful tips for potentially improving performance on your specific hardware.
+</file_artifact>
+
+<file path="src/Artifacts/A66. DCE - Cycle 1 - Task Tracker.md">
+# Artifact A66: DCE - Cycle 1 - Task Tracker
+# Date Created: C167
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
+- **Tags:** bugs, tracking, issues, backlog, cycle 1
+
+## 1. Overview
+
+This document lists the feedback and tasks from the first official development cycle using the DCE tool. It serves as a checklist to ensure all initial bugs and feature requests are addressed.
+
+## 2. Task List
+
+| ID | Task | Status (C167) | Notes |
+|---|---|---|---|
+| 1 | Fix FTV flashing on save/auto-save. | **In Progress** | Annoying UX issue. Investigate file watcher and refresh logic. |
+| 2 | Rework line numbers in context panes for word wrap and scrolling. | **In Progress** | Critical usability bug. Requires rework of `NumberedTextarea.tsx`. |
+| 3 | Fix cursor and selection highlighting in context panes. | **In Progress** | Critical usability bug. Likely related to the line number issue. |
+| 4 | Implement animated UI workflow guide. | **In Progress** | Major new feature. Requires state management and CSS animations. |
+| 5 | Document the new animated workflow in an artifact. | **Complete** | `A69. DCE - Animated UI Workflow Guide.md` created. |
+| 6 | Fix `</prompt.md>` tag appearing at the top of generated prompts. | **In Progress** | Critical bug in `prompt.service.ts`. |
+| 7 | Plan for UX improvements to context panes (token count, line numbers). | **Complete** | New artifact `A68` created to plan this feature. |
+| 8 | Plan for refactoring the large `parallel-copilot.view.tsx`. | **Complete** | New artifact `A67` created to plan this refactor. |
+| 9 | Plan for Git-integrated testing workflow. | **Complete** | New artifact `A70` created to plan this feature. |
 </file_artifact>
 
