@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C76 (Fix spinner animation)
+// Updated on: C79 (Implement two-step regeneration confirmation)
 import * as React from 'react';
-import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading } from 'react-icons/vsc';
+import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck } from 'react-icons/vsc';
 import { TabState } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { GenerationProgress } from '@/common/ipc/channels.type';
@@ -35,6 +35,28 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     generationProgress = [],
     isGenerating
 }) => {
+    const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
+    const confirmTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+    const handleRegenerateClick = (e: React.MouseEvent, tabId: number) => {
+        e.stopPropagation();
+        if (confirmTimeoutRef.current) {
+            clearTimeout(confirmTimeoutRef.current);
+            confirmTimeoutRef.current = null;
+        }
+
+        if (regenConfirmTabId === tabId) {
+            onRegenerateTab(tabId);
+            setRegenConfirmTabId(null);
+        } else {
+            setRegenConfirmTabId(tabId);
+            confirmTimeoutRef.current = setTimeout(() => {
+                setRegenConfirmTabId(null);
+                confirmTimeoutRef.current = null;
+            }, 3000);
+        }
+    };
+
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
     const progressMap = new Map(generationProgress.map(p => [p.responseId, p]));
 
@@ -44,8 +66,8 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                 {sortedTabIds.map((tabIndex) => {
                     const tabData = tabs[tabIndex.toString()];
                     const parsedData = tabData?.parsedContent;
-                    const progress = progressMap.get(tabIndex);
-                    const isLoading = isGenerating && progress?.status !== 'complete';
+                    const isLoading = tabData?.status === 'generating';
+                    const isConfirmingRegen = regenConfirmTabId === tabIndex;
 
                     return (
                         <div
@@ -56,8 +78,8 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                             <div className="tab-title">
                                 Resp {tabIndex}
                                 {isLoading && <VscLoading className="spinner" />}
-                                <button className="regenerate-tab-button" onClick={(e) => { e.stopPropagation(); onRegenerateTab(tabIndex); }} title="Regenerate this response">
-                                    <VscSync />
+                                <button className="regenerate-tab-button" onClick={(e) => handleRegenerateClick(e, tabIndex)} title={isConfirmingRegen ? "Click again to confirm" : "Regenerate this response"}>
+                                    {isConfirmingRegen ? <VscCheck /> : <VscSync />}
                                 </button>
                             </div>
                             {isParsedMode && parsedData && (

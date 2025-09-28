@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C78 (Manage per-response status)
+// Updated on: C79 (Add finalizeCycleStatus)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -207,6 +207,20 @@ export class HistoryService {
         
         return { newCycleId, newMaxCycle: newCycleId };
     }
+    
+    public async finalizeCycleStatus(cycleId: number): Promise<void> {
+        Services.loggerService.log(`[History] Finalizing status for cycle ${cycleId}.`);
+        const history = await this._readHistoryFile();
+        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        if (cycle) {
+            cycle.status = 'complete';
+            cycle.title = cycle.title.replace(' - Generating...', '');
+            await this._writeHistoryFile(history);
+            Services.loggerService.log(`[History] Cycle ${cycleId} status set to 'complete'.`);
+        } else {
+            Services.loggerService.warn(`[History] Could not find cycle ${cycleId} to finalize.`);
+        }
+    }
 
     public async updateCycleWithResponses(cycleId: number, responses: string[]): Promise<void> {
         const history = await this._readHistoryFile();
@@ -214,8 +228,7 @@ export class HistoryService {
 
         if (cycleIndex > -1) {
             const cycle = history.cycles[cycleIndex];
-            cycle.status = 'complete';
-            cycle.title = `Cycle ${cycleId}`;
+            // Do not change cycle status here; wait for finalizeCycleStatus
             Object.keys(cycle.responses).forEach((tabId, index) => {
                 cycle.responses[tabId].status = 'complete';
                 if (responses[index]) {

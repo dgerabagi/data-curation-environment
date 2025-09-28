@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C78 (Implement AbortController for Stop button)
+// Updated on: C79 (Add call to finalizeCycleStatus)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -162,6 +162,9 @@ export class LlmService {
                                                 progressData[responseIndex].status = 'complete';
                                                 totalFinished++;
                                                 serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
+                                                if (totalFinished === count) {
+                                                    Services.historyService.finalizeCycleStatus(cycleData.cycleId);
+                                                }
                                             }
                                         } else if (choice.delta) {
                                             if (choice.delta.reasoning_content !== undefined) {
