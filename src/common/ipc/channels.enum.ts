@@ -1,5 +1,5 @@
 // src/common/ipc/channels.enum.ts
-// Updated on: C77 (Add NotifySingleResponseComplete channel)
+// Updated on: C80 (Add UpdateSingleGenerationProgress)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -108,6 +108,7 @@ export enum ServerToClientChannel {
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
     SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
     UpdateGenerationProgress = "serverToClient.updateGenerationProgress",
+    UpdateSingleGenerationProgress = "serverToClient.updateSingleGenerationProgress", // New
     StartGenerationUI = "serverToClient.startGenerationUI",
-    NotifySingleResponseComplete = "serverToClient.notifySingleResponseComplete", // New
+    NotifySingleResponseComplete = "serverToClient.notifySingleResponseComplete",
 }

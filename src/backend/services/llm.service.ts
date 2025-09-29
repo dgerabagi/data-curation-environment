@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C79 (Add call to finalizeCycleStatus)
+// Updated on: C80 (Refactor generateSingle for atomic updates)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -25,21 +25,108 @@ export class LlmService {
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
-        const cycleData: PcppCycle = { cycleId: cycleId, title: `Regen C${cycleId} T${tabId}`, responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: 1, status: 'generating' };
         
+        const responseId = parseInt(tabId, 10);
+        
+        // This is a simplified version of the batch generation logic for a single stream
+        const settings = await Services.settingsService.getSettings();
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (!serverIpc) return;
+
+        let endpointUrl = '';
+        let requestBody: any = {};
+        
+        const reasoningEffort = 'medium'; 
+
+        switch (settings.connectionMode) {
+            case 'demo':
+                endpointUrl = 'https://aiascent.game/api/dce/proxy';
+                break;
+            case 'url':
+                endpointUrl = settings.apiUrl || '';
+                break;
+            default:
+                Services.loggerService.error("Attempted to call LLM in manual mode for single generation.");
+                return;
+        }
+
+        requestBody = {
+            model: settings.connectionMode === 'demo' ? "unsloth/gpt-oss-20b" : "local-model",
+            messages: [{ role: "user", content: prompt }],
+            n: 1, // Only one response
+            max_tokens: MAX_TOKENS_PER_RESPONSE,
+            stream: true,
+            reasoning_effort: reasoningEffort,
+        };
+
+        const controller = new AbortController();
+        generationControllers.set(cycleId, controller); // Note: This might need a more granular key for multiple single-gens
+
         try {
-            const responses = await this.generateBatch(prompt, 1, cycleData);
-            if (responses.length > 0) {
-                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responses[0]);
-                const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
-                if (serverIpc) {
-                    // Notify client that this specific response is done, so it can be parsed immediately.
-                    serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responses[0] });
-                }
+            const response = await fetch(endpointUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+                signal: controller.signal,
+            });
+
+            if (!response.ok || !response.body) {
+                throw new Error(`API request failed with status ${response.status}`);
             }
+
+            const stream = response.body;
+            let buffer = '';
+            let responseContent = '';
+            const progress: GenerationProgress = {
+                responseId: responseId,
+                promptTokens: 0, thinkingTokens: 0, currentTokens: 0,
+                totalTokens: MAX_TOKENS_PER_RESPONSE,
+                status: 'pending', startTime: Date.now(),
+            };
+
+            stream.on('data', (chunk) => {
+                buffer += chunk.toString();
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const dataStr = line.substring(6);
+                        if (dataStr.trim() === '[DONE]') continue;
+                        try {
+                            const data = JSON.parse(dataStr);
+                            if (data.choices?.finish_reason !== null) {
+                                progress.status = 'complete';
+                            } else if (data.choices?.delta) {
+                                if (data.choices.delta.reasoning_content) {
+                                    progress.status = 'thinking';
+                                    progress.thinkingTokens += Math.ceil(data.choices.delta.reasoning_content.length / 4);
+                                }
+                                if (data.choices.delta.content) {
+                                    progress.status = 'generating';
+                                    const contentChunk = data.choices.delta.content;
+                                    responseContent += contentChunk;
+                                    progress.currentTokens += Math.ceil(contentChunk.length / 4);
+                                }
+                            }
+                        } catch (e) { /* ignore */ }
+                    }
+                }
+                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+            });
+
+            stream.on('end', async () => {
+                Services.loggerService.log(`[LLM Service] Single stream ended for C${cycleId} T${tabId}.`);
+                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responseContent);
+                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: responseContent });
+            });
+            stream.on('error', (err) => { throw err; });
+
         } catch (error) {
             Services.loggerService.error(`[LLM Service] Single regeneration failed: ${error}`);
             // TODO: Set error status on the response
+        } finally {
+            generationControllers.delete(cycleId);
         }
     }
 

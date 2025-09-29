@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-28T22:26:52.335Z
+  Date Generated: 2025-09-29T11:18:25.063Z
   ---
   Total Files: 177
-  Approx. Tokens: 240855
+  Approx. Tokens: 242268
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\client\views\parallel-copilot.view\view.tsx (9775 tokens)
+1. src\client\views\parallel-copilot.view\view.tsx (10245 tokens)
 2. src\Artifacts\A0. DCE Master Artifact List.md (9587 tokens)
 3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 4. src\backend\services\prompt.service.ts (4927 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\backend\services\history.service.ts (3991 tokens)
-10. src\client\views\context-chooser.view\view.scss (3708 tokens)
+7. src\backend\services\llm.service.ts (4082 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+10. src\backend\services\history.service.ts (3991 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38346 - Tokens: 9587
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 373 - Chars: 15963 - Tokens: 3991
-107. src\backend\services\llm.service.ts - Lines: 251 - Chars: 12743 - Tokens: 3186
+107. src\backend\services\llm.service.ts - Lines: 338 - Chars: 16326 - Tokens: 4082
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -155,17 +155,17 @@
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 102 - Chars: 4468 - Tokens: 1117
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9133 - Tokens: 2284
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9134 - Tokens: 2284
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 252 - Chars: 39098 - Tokens: 9775
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 306 - Chars: 40977 - Tokens: 10245
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 113 - Chars: 6366 - Tokens: 1592
-146. src\common\ipc\channels.type.ts - Lines: 127 - Chars: 9503 - Tokens: 2376
+145. src\common\ipc\channels.enum.ts - Lines: 114 - Chars: 6446 - Tokens: 1612
+146. src\common\ipc\channels.type.ts - Lines: 128 - Chars: 9609 - Tokens: 2403
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -8611,7 +8611,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C79 (Add call to finalizeCycleStatus)
+// Updated on: C80 (Refactor generateSingle for atomic updates)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle } from '@/common/types/pcpp.types';
@@ -8637,21 +8637,108 @@ export class LlmService {
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
-        const cycleData: PcppCycle = { cycleId: cycleId, title: `Regen C${cycleId} T${tabId}`, responses: {}, cycleContext: '', ephemeralContext: '', timestamp: '', tabCount: 1, status: 'generating' };
         
+        const responseId = parseInt(tabId, 10);
+        
+        // This is a simplified version of the batch generation logic for a single stream
+        const settings = await Services.settingsService.getSettings();
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (!serverIpc) return;
+
+        let endpointUrl = '';
+        let requestBody: any = {};
+        
+        const reasoningEffort = 'medium'; 
+
+        switch (settings.connectionMode) {
+            case 'demo':
+                endpointUrl = 'https://aiascent.game/api/dce/proxy';
+                break;
+            case 'url':
+                endpointUrl = settings.apiUrl || '';
+                break;
+            default:
+                Services.loggerService.error("Attempted to call LLM in manual mode for single generation.");
+                return;
+        }
+
+        requestBody = {
+            model: settings.connectionMode === 'demo' ? "unsloth/gpt-oss-20b" : "local-model",
+            messages: [{ role: "user", content: prompt }],
+            n: 1, // Only one response
+            max_tokens: MAX_TOKENS_PER_RESPONSE,
+            stream: true,
+            reasoning_effort: reasoningEffort,
+        };
+
+        const controller = new AbortController();
+        generationControllers.set(cycleId, controller); // Note: This might need a more granular key for multiple single-gens
+
         try {
-            const responses = await this.generateBatch(prompt, 1, cycleData);
-            if (responses.length > 0) {
-                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responses[0]);
-                const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
-                if (serverIpc) {
-                    // Notify client that this specific response is done, so it can be parsed immediately.
-                    serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responses[0] });
-                }
+            const response = await fetch(endpointUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+                signal: controller.signal,
+            });
+
+            if (!response.ok || !response.body) {
+                throw new Error(`API request failed with status ${response.status}`);
             }
+
+            const stream = response.body;
+            let buffer = '';
+            let responseContent = '';
+            const progress: GenerationProgress = {
+                responseId: responseId,
+                promptTokens: 0, thinkingTokens: 0, currentTokens: 0,
+                totalTokens: MAX_TOKENS_PER_RESPONSE,
+                status: 'pending', startTime: Date.now(),
+            };
+
+            stream.on('data', (chunk) => {
+                buffer += chunk.toString();
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const dataStr = line.substring(6);
+                        if (dataStr.trim() === '[DONE]') continue;
+                        try {
+                            const data = JSON.parse(dataStr);
+                            if (data.choices?.finish_reason !== null) {
+                                progress.status = 'complete';
+                            } else if (data.choices?.delta) {
+                                if (data.choices.delta.reasoning_content) {
+                                    progress.status = 'thinking';
+                                    progress.thinkingTokens += Math.ceil(data.choices.delta.reasoning_content.length / 4);
+                                }
+                                if (data.choices.delta.content) {
+                                    progress.status = 'generating';
+                                    const contentChunk = data.choices.delta.content;
+                                    responseContent += contentChunk;
+                                    progress.currentTokens += Math.ceil(contentChunk.length / 4);
+                                }
+                            }
+                        } catch (e) { /* ignore */ }
+                    }
+                }
+                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+            });
+
+            stream.on('end', async () => {
+                Services.loggerService.log(`[LLM Service] Single stream ended for C${cycleId} T${tabId}.`);
+                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responseContent);
+                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: responseContent });
+            });
+            stream.on('error', (err) => { throw err; });
+
         } catch (error) {
             Services.loggerService.error(`[LLM Service] Single regeneration failed: ${error}`);
             // TODO: Set error status on the response
+        } finally {
+            generationControllers.delete(cycleId);
         }
     }
 
@@ -12373,7 +12460,7 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C77 (Add logging for stale prompt debugging)
+// Updated on: C80 (No functional changes, just for context)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -13928,14 +14015,14 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C79 (Refactor render logic and IPC handlers)
+// Updated on: C80 (Refactor render logic and add single progress handler)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
-import { ParsedResponse, PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
+import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
 import { parseResponse } from '../../../client/utils/response-parser';
 import { BatchWriteFile, ComparisonMetrics, GenerationProgress } from '../../../common/ipc/channels.type';
 import OnboardingView from './OnboardingView';
@@ -13949,6 +14036,8 @@ import WorkflowToolbar from './components/WorkflowToolbar';
 import { logger } from '../../utils/logger';
 import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
 import GenerationProgressDisplay from './components/GenerationProgressDisplay';
+
+type ParsedResponse = ReturnType<typeof parseResponse>;
 
 const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -14006,9 +14095,9 @@ const App = () => {
     
     const clientIpc = ClientPostMessageManager.getInstance();
     
-    const stateRef = React.useRef({ currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed });
+    const stateRef = React.useRef({ currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed, generationProgress });
 
-    React.useEffect(() => { stateRef.current = { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed]);
+    React.useEffect(() => { stateRef.current = { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed, generationProgress }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed, generationProgress]);
     
     const saveCurrentCycleState = React.useCallback(() => {
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep, isEphemeralContextCollapsed } = stateRef.current;
@@ -14035,7 +14124,38 @@ const App = () => {
     React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
     React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden' && stateRef.current.currentCycle !== null) { clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle.cycleId }); saveCurrentCycleState(); } }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [clientIpc, saveCurrentCycleState]);
     
-    const requestAllMetrics = React.useCallback((parsedResponse: ParsedResponse) => { if (!parsedResponse) return; parsedResponse.filesUpdated.forEach(filePath => { const file = parsedResponse.files.find(f => f.path === filePath); if (file) { const pathForComparison = pathOverrides.get(filePath) || filePath; clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, { filePath: pathForComparison, modifiedContent: file.content }); } }); }, [clientIpc, pathOverrides]);
+    interface ParsedResponseFile {
+        path: string;
+        content: string;
+    }
+
+    interface FileComparisonRequest {
+        filePath: string;
+        modifiedContent: string;
+    }
+
+    const requestAllMetrics = React.useCallback(
+        (parsedResponse: ParsedResponse): void => {
+            if (!parsedResponse) return;
+            parsedResponse.filesUpdated.forEach((filePath: string) => {
+                const file = parsedResponse.files.find(
+                    (f: ParsedResponseFile) => f.path === filePath
+                ) as ParsedResponseFile | undefined;
+                if (file) {
+                    const pathForComparison: string = pathOverrides.get(filePath) || filePath;
+                    const comparisonRequest: FileComparisonRequest = {
+                        filePath: pathForComparison,
+                        modifiedContent: file.content,
+                    };
+                    clientIpc.sendToServer(
+                        ClientToServerChannel.RequestFileComparison,
+                        comparisonRequest
+                    );
+                }
+            });
+        },
+        [clientIpc, pathOverrides]
+    );
     
     const parseAllTabs = React.useCallback((): void => {
         setTabs((prevTabs: { [key: string]: TabState }) => {
@@ -14051,10 +14171,21 @@ const App = () => {
                     tabState.status = 'complete';
                     parsed.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
                     requestAllMetrics(parsed);
-                    parsed.files.forEach((file) => {
+                    interface ParsedFile {
+                        path: string;
+                        content: string;
+                    }
+
+                    interface SyntaxHighlightPayload {
+                        code: string;
+                        lang: string;
+                        id: string;
+                    }
+
+                    parsed.files.forEach((file: ParsedFile) => {
                         const lang: string = path.extname(file.path).substring(1) || 'plaintext';
                         const id: string = `${file.path}::${file.content}`;
-                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id });
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id } as SyntaxHighlightPayload);
                     });
                 } else if (tabState.parsedContent) {
                     tabState.parsedContent.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
@@ -14075,7 +14206,7 @@ const App = () => {
     React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
     const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => { e?.stopPropagation(); if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return; if (newCycleId >= 0 && newCycleId <= maxCycle) { setSelectedFilesForReplacement(new Set()); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setWorkflowStep(null); } };
     
-    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, status: response.status || 'complete' }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true); if (cycleData.status === 'generating') { setIsGenerationComplete(false); } else { setIsGenerationComplete(true); setGenerationProgress([]); } }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle?.cycleId) setSaveStatus('saved'); }); clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) }); 
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, status: response.status || 'complete' }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true); if (cycleData.status === 'generating') { setIsGenerationComplete(false); setGenerationProgress(Object.keys(cycleData.responses).map(key => ({ responseId: parseInt(key), status: 'pending', startTime: Date.now(), currentTokens: 0, thinkingTokens: 0, totalTokens: 16384, promptTokens: 0 }))); } else { setIsGenerationComplete(true); setGenerationProgress([]); } }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle?.cycleId) setSaveStatus('saved'); }); clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) }); 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => { 
             setGenerationProgress(progress); 
             setTps(tps); 
@@ -14088,6 +14219,16 @@ const App = () => {
                 return newTabs; 
             }); 
         }); 
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
+            setGenerationProgress(prev => {
+                const newProgress = [...prev];
+                const index = newProgress.findIndex(p => p.responseId === progress.responseId);
+                if (index !== -1) {
+                    newProgress[index] = progress;
+                }
+                return newProgress;
+            });
+        });
         clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => { 
             setTabs(prev => { 
                 const newTabs = { ...prev }; 
@@ -14113,7 +14254,7 @@ const App = () => {
     const handleGeneratePrompt = () => { if (currentCycle === null) return; const selectedResponseData = selectedResponseId ? tabs[selectedResponseId] : null; const selectedFiles = selectedResponseData?.parsedContent?.files.map(f => f.path) || []; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle: currentCycle.cycleId, selectedFiles }); setWorkflowStep('readyForNewCycle'); };
     const handleGenerateResponses = () => { const cycleData = getCurrentCycleData(); if (cycleData) { clientIpc.sendToServer(ClientToServerChannel.RequestNewCycleAndGenerate, { cycleData, count: responseCount }); } };
     const handleStartGeneration = (projectScope: string, responseCount: number) => { clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount }); };
-    const handleRegenerateTab = (responseId: number) => { if (currentCycle === null) return; const tabId = responseId.toString(); setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } })); clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId }); setSaveStatus('unsaved'); };
+    const handleRegenerateTab = (responseId: number) => { if (currentCycle === null) return; const tabId = responseId.toString(); setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } })); clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId }); setSaveStatus('unsaved'); setIsGenerationComplete(false); };
     const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
     const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
     const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
@@ -14150,7 +14291,7 @@ const App = () => {
     const SaveStatusIndicator = () => { let icon; let title; switch(saveStatus) { case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break; case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break; case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break; default: icon = null; title = ""; } return <div className="save-status-indicator" title={title}>{icon}</div>; };
     const renderHeaderButtons = () => { if (connectionMode === 'manual') { return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>; } else { return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled} title={isGenerateResponsesDisabled ? `Cannot generate responses:\n${newCycleButtonDisabledReason}` : "Generate responses from local LLM"}><VscWand /> Generate responses</button>; } };
 
-    const showProgressView = tabs[activeTab.toString()]?.status === 'generating';
+    const showProgressView = currentCycle.status === 'generating';
 
     return <div className="pc-view-container">
         <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => {setResponseCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
@@ -14521,7 +14662,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/common/ipc/channels.enum.ts">
 // src/common/ipc/channels.enum.ts
-// Updated on: C77 (Add NotifySingleResponseComplete channel)
+// Updated on: C80 (Add UpdateSingleGenerationProgress)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -14630,14 +14771,15 @@ export enum ServerToClientChannel {
     SendBatchGenerationResult = "serverToClient.sendBatchGenerationResult",
     SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
     UpdateGenerationProgress = "serverToClient.updateGenerationProgress",
+    UpdateSingleGenerationProgress = "serverToClient.updateSingleGenerationProgress", // New
     StartGenerationUI = "serverToClient.startGenerationUI",
-    NotifySingleResponseComplete = "serverToClient.notifySingleResponseComplete", // New
+    NotifySingleResponseComplete = "serverToClient.notifySingleResponseComplete",
 }
 </file_artifact>
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C77 (Add NotifySingleResponseComplete payload)
+// Updated on: C80 (Add UpdateSingleGenerationProgress payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -14760,6 +14902,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
+    T extends ServerToClientChannel.UpdateSingleGenerationProgress ? { progress: GenerationProgress } :
     T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number, newMaxCycle: number } :
     T extends ServerToClientChannel.NotifySingleResponseComplete ? { responseId: number; content: string; } :
     never;
