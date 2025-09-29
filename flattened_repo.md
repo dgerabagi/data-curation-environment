@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-29T11:18:25.063Z
+  Date Generated: 2025-09-29T11:47:04.757Z
   ---
   Total Files: 177
-  Approx. Tokens: 242268
+  Approx. Tokens: 253909
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\client\views\parallel-copilot.view\view.tsx (10245 tokens)
-2. src\Artifacts\A0. DCE Master Artifact List.md (9587 tokens)
-3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
-4. src\backend\services\prompt.service.ts (4927 tokens)
-5. src\backend\services\file-operation.service.ts (4526 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-7. src\backend\services\llm.service.ts (4082 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\backend\services\history.service.ts (3991 tokens)
+1. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md (11451 tokens)
+2. src\client\views\parallel-copilot.view\view.tsx (10321 tokens)
+3. src\Artifacts\A0. DCE Master Artifact List.md (9587 tokens)
+4. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
+5. src\backend\services\prompt.service.ts (4927 tokens)
+6. src\backend\services\file-operation.service.ts (4526 tokens)
+7. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+8. src\backend\services\llm.service.ts (4166 tokens)
+9. src\backend\services\history.service.ts (4084 tokens)
+10. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38346 - Tokens: 9587
@@ -125,8 +125,8 @@
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 373 - Chars: 15963 - Tokens: 3991
-107. src\backend\services\llm.service.ts - Lines: 338 - Chars: 16326 - Tokens: 4082
+106. src\backend\services\history.service.ts - Lines: 373 - Chars: 16335 - Tokens: 4084
+107. src\backend\services\llm.service.ts - Lines: 338 - Chars: 16663 - Tokens: 4166
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -152,26 +152,26 @@
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 151 - Chars: 9933 - Tokens: 2484
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 79 - Chars: 3260 - Tokens: 815
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 102 - Chars: 4468 - Tokens: 1117
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 102 - Chars: 4569 - Tokens: 1143
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 96 - Chars: 4051 - Tokens: 1013
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9134 - Tokens: 2284
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 306 - Chars: 40977 - Tokens: 10245
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 306 - Chars: 41282 - Tokens: 10321
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 114 - Chars: 6446 - Tokens: 1612
-146. src\common\ipc\channels.type.ts - Lines: 128 - Chars: 9609 - Tokens: 2403
+145. src\common\ipc\channels.enum.ts - Lines: 114 - Chars: 6559 - Tokens: 1640
+146. src\common\ipc\channels.type.ts - Lines: 128 - Chars: 9736 - Tokens: 2434
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-151. src\common\types\pcpp.types.ts - Lines: 57 - Chars: 1471 - Tokens: 368
-152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 421 - Tokens: 106
+151. src\common\types\pcpp.types.ts - Lines: 57 - Chars: 1527 - Tokens: 382
+152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 435 - Tokens: 109
 153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
 155. src\common\utils\view-html.ts - Lines: 37 - Chars: 1314 - Tokens: 329
@@ -184,19 +184,19 @@
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 66 - Chars: 7363 - Tokens: 1841
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 66 - Chars: 7428 - Tokens: 1857
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
-168. src\client\views\parallel-copilot.view\view.ts - Lines: 5 - Chars: 229 - Tokens: 58
-169. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 72 - Chars: 4454 - Tokens: 1114
-170. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
-171. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3631 - Tokens: 908
-172. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 50 - Chars: 4363 - Tokens: 1091
-173. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
-174. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-175. src\Artifacts\A107. DCE - Universal Task Checklist for Cycle 77.md - Lines: 47 - Chars: 2476 - Tokens: 619
-176. src\Artifacts\A108. DCE - Universal Task Checklist for Cycle 78.md - Lines: 53 - Chars: 2700 - Tokens: 675
-177. src\Artifacts\A109. DCE - Universal Task Checklist for Cycle 79.md - Lines: 52 - Chars: 3098 - Tokens: 775
+168. src\Artifacts\A104. DCE - Universal Task Checklist for Cycle 76.md - Lines: 72 - Chars: 4454 - Tokens: 1114
+169. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
+170. src\Artifacts\A102. DCE - Universal Task Checklist for Cycle 70.md - Lines: 57 - Chars: 3631 - Tokens: 908
+171. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 360 - Chars: 45802 - Tokens: 11451
+172. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
+173. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
+174. src\Artifacts\A107. DCE - Universal Task Checklist for Cycle 77.md - Lines: 47 - Chars: 2476 - Tokens: 619
+175. src\Artifacts\A108. DCE - Universal Task Checklist for Cycle 78.md - Lines: 53 - Chars: 2700 - Tokens: 675
+176. src\Artifacts\A109. DCE - Universal Task Checklist for Cycle 79.md - Lines: 52 - Chars: 3098 - Tokens: 775
+177. src\Artifacts\A110. DCE - Universal Task Checklist for Cycle 81.md - Lines: 57 - Chars: 3869 - Tokens: 968
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -16412,14 +16412,6 @@ The goal of this refactor is to create a more seamless, integrated experience. T
     *   **`view.scss`:** Add styling for the new collapsible section within the `context-inputs` container.
 </file_artifact>
 
-<file path="src/client/views/parallel-copilot.view/view.ts">
-// src/client/views/parallel-copilot.view/view.ts
-// This file is a placeholder for type definitions or interfaces specific to the view.
-// It can be expanded as needed.
-
-// DEPRECATED in C76. All types moved to pcpp.types.ts
-</file_artifact>
-
 <file path="src/Artifacts/A104. DCE - Universal Task Checklist for Cycle 76.md">
 # Artifact A104: DCE - Universal Task Checklist for Cycle 76
 # Date Created: C76
@@ -16666,6 +16658,316 @@ This is the proposed breakdown of the existing `view.tsx` functionality into new
 -   **Reduced `view.tsx` Size:** The token count of `view.tsx` will be reduced from over 9,000 to approximately 2,500, making it much easier to work with.
 -   **Improved Maintainability:** Bugs will be easier to isolate. For example, a bug in the cycle navigator will now be located entirely within `CycleNavigator.tsx`.
 -   **Clearer Data Flow:** The use of props will make the flow of data and events through the application more explicit and easier to trace.
+
+
+<Pre-Refactor Version of src\client\views\parallel-copilot.view\view.tsx>
+// src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C80 (Refactor render logic and add single progress handler)
+import * as React from 'react';
+import { createRoot } from 'react-dom/client';
+import './view.scss';
+import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscVm, VscWarning } from 'react-icons/vsc';
+import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
+import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
+import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
+import { parseResponse } from '../../../client/utils/response-parser';
+import { BatchWriteFile, ComparisonMetrics, GenerationProgress } from '../../../common/ipc/channels.type';
+import OnboardingView from './OnboardingView';
+import { formatLargeNumber } from '../../../common/utils/formatting';
+import CycleNavigator from './components/CycleNavigator';
+import ContextInputs from './components/ContextInputs';
+import ResponseTabs from './components/ResponseTabs';
+import ResponsePane from './components/ResponsePane';
+import * as path from 'path-browserify';
+import WorkflowToolbar from './components/WorkflowToolbar';
+import { logger } from '../../utils/logger';
+import { ConnectionMode, DceSettings } from '../../../backend/services/settings.service';
+import GenerationProgressDisplay from './components/GenerationProgressDisplay';
+
+type ParsedResponse = ReturnType<typeof parseResponse>;
+
+const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
+    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+    const debouncedFunction = React.useCallback((...args: any[]) => { if (timeoutRef.current) clearTimeout(timeoutRef.current); timeoutRef.current = setTimeout(() => callback(...args), delay); }, [callback, delay]);
+    return debouncedFunction;
+};
+
+const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
+    <div className="collapsible-section">
+        <div className={`collapsible-header ${className || ''}`} onClick={onToggle}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><VscChevronDown className={`chevron ${isCollapsed ? 'collapsed' : ''}`} /><span>{title}</span></div>
+            {isCollapsed ? collapsedContent : extraHeaderContent}
+        </div>
+        {!isCollapsed && <div className="collapsible-content">{children}</div>}
+    </div>
+);
+
+const App = () => {
+    // State declarations...
+    const [activeTab, setActiveTab] = React.useState(1);
+    const [tabCount, setTabCount] = React.useState(4);
+    const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(null);
+    const [projectScope, setProjectScope] = React.useState<string | undefined>('');
+    const [maxCycle, setMaxCycle] = React.useState(1);
+    const [cycleTitle, setCycleTitle] = React.useState('');
+    const [cycleContext, setCycleContext] = React.useState('');
+    const [ephemeralContext, setEphemeralContext] = React.useState('');
+    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
+    const [highlightedCodeBlocks, setHighlightedCodeBlocks] = React.useState<Map<string, string>>(new Map());
+    const [fileExistenceMap, setFileExistenceMap] = React.useState<Map<string, boolean>>(new Map());
+    const [isParsedMode, setIsParsedMode] = React.useState(false);
+    const [selectedFilePath, setSelectedFilePath] = React.useState<string | null>(null);
+    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [leftPaneWidth, setLeftPaneWidth] = React.useState(33);
+    const [selectedFilesForReplacement, setSelectedFilesForReplacement] = React.useState<Set<string>>(new Set());
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(null);
+    const [comparisonMetrics, setComparisonMetrics] = React.useState<Map<string, ComparisonMetrics | null>>(new Map());
+    const [isSortedByTokens, setIsSortedByTokens] = React.useState(false);
+    const [pathOverrides, setPathOverrides] = React.useState<Map<string, string>>(new Map());
+    const [tempOverridePath, setTempOverridePath] = React.useState('');
+    const [cycleContextTokens, setCycleContextTokens] = React.useState(0);
+    const [ephemeralContextTokens, setEphemeralContextTokens] = React.useState(0);
+    const [totalPromptTokens, setTotalPromptTokens] = React.useState(0);
+    const [estimatedPromptCost, setEstimatedPromptCost] = React.useState(0);
+    const [costBreakdown, setCostBreakdown] = React.useState<{[key: string]: number} | null>(null);
+    const [workflowStep, setWorkflowStep] = React.useState<string | null>(null);
+    const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
+    const [associatedFileMenu, setAssociatedFileMenu] = React.useState<{ x: number; y: number; path: string } | null>(null);
+    const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
+    const [responseCount, setResponseCount] = React.useState(4);
+    const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
+    const [tps, setTps] = React.useState(0);
+    const [isGenerationComplete, setIsGenerationComplete] = React.useState(false);
+    const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(true);
+    
+    const clientIpc = ClientPostMessageManager.getInstance();
+    
+    const stateRef = React.useRef({ currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed, generationProgress });
+
+    React.useEffect(() => { stateRef.current = { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed, generationProgress }; }, [currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, fileExistenceMap, workflowStep, totalPromptTokens, estimatedPromptCost, costBreakdown, connectionMode, responseCount, isEphemeralContextCollapsed, generationProgress]);
+    
+    const saveCurrentCycleState = React.useCallback(() => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep, isEphemeralContextCollapsed } = stateRef.current;
+        if (currentCycle === null) return;
+        setSaveStatus('saving');
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) { responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' }; }
+        const cycleData: PcppCycle = { ...currentCycle, title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, activeTab, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), activeWorkflowStep: workflowStep || undefined, isEphemeralContextCollapsed };
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
+    const handleRawContentChange = (newContent: string, tabIndex: number) => { setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null, status: 'complete' }})); setSaveStatus('unsaved'); };
+    const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => { const pastedText = e.clipboardData.getData('text'); const currentContent = tabs[tabIndex.toString()]?.rawContent || ''; const tokenCount = Math.ceil(pastedText.length / 4); if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) { handleRawContentChange(pastedText, tabIndex); setActiveTab(tabIndex + 1); } else { handleRawContentChange(pastedText, tabIndex); } };
+    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
+    const getCurrentCycleData = React.useCallback((): PcppCycle | null => {
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, tabs, tabCount, activeTab, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement, isSortedByTokens, pathOverrides, workflowStep, isEphemeralContextCollapsed } = stateRef.current;
+        if (!currentCycle) return null;
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) { responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' }; }
+        return { ...currentCycle, title: cycleTitle, cycleContext, ephemeralContext, responses, isParsedMode, leftPaneWidth, selectedResponseId, selectedFilesForReplacement: Array.from(selectedFilesForReplacement), tabCount, activeTab, isSortedByTokens, pathOverrides: Object.fromEntries(pathOverrides), activeWorkflowStep: workflowStep || undefined, isEphemeralContextCollapsed };
+    }, []);
+    const requestCostEstimation = React.useCallback(() => { const cycleData = getCurrentCycleData(); if (cycleData?.cycleId) { clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData }); } }, [clientIpc, getCurrentCycleData]);
+    const debouncedCostRequest = useDebounce(requestCostEstimation, 500);
+
+    React.useEffect(() => { if (saveStatus === 'unsaved') debouncedSave(); }, [saveStatus, debouncedSave]);
+    React.useEffect(() => { const handleVisibilityChange = () => { if (document.visibilityState === 'hidden' && stateRef.current.currentCycle !== null) { clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: stateRef.current.currentCycle.cycleId }); saveCurrentCycleState(); } }; document.addEventListener('visibilitychange', handleVisibilityChange); return () => document.removeEventListener('visibilitychange', handleVisibilityChange); }, [clientIpc, saveCurrentCycleState]);
+    
+    interface ParsedResponseFile {
+        path: string;
+        content: string;
+    }
+
+    interface FileComparisonRequest {
+        filePath: string;
+        modifiedContent: string;
+    }
+
+    const requestAllMetrics = React.useCallback(
+        (parsedResponse: ParsedResponse): void => {
+            if (!parsedResponse) return;
+            parsedResponse.filesUpdated.forEach((filePath: string) => {
+                const file = parsedResponse.files.find(
+                    (f: ParsedResponseFile) => f.path === filePath
+                ) as ParsedResponseFile | undefined;
+                if (file) {
+                    const pathForComparison: string = pathOverrides.get(filePath) || filePath;
+                    const comparisonRequest: FileComparisonRequest = {
+                        filePath: pathForComparison,
+                        modifiedContent: file.content,
+                    };
+                    clientIpc.sendToServer(
+                        ClientToServerChannel.RequestFileComparison,
+                        comparisonRequest
+                    );
+                }
+            });
+        },
+        [clientIpc, pathOverrides]
+    );
+    
+    const parseAllTabs = React.useCallback((): void => {
+        setTabs((prevTabs: { [key: string]: TabState }) => {
+            const allFilePaths: Set<string> = new Set<string>();
+            const updatedTabs: { [key: string]: TabState } = { ...prevTabs };
+            let needsUpdate: boolean = false;
+
+            Object.values(updatedTabs).forEach((tabState: TabState) => {
+                if (tabState.rawContent && !tabState.parsedContent) {
+                    needsUpdate = true;
+                    const parsed: ParsedResponse = parseResponse(tabState.rawContent);
+                    tabState.parsedContent = parsed;
+                    tabState.status = 'complete';
+                    parsed.filesUpdated.forEach((filePath: string) => allFilePaths.add(filePath));
+                    requestAllMetrics(parsed);
+                    interface ParsedFile {
+                        path: string;
+                        content: string;
+                    }
+
+                    interface SyntaxHighlightPayload {
+                        code: string;
+                        lang: string;
+                        id: string;
+                    }
+
+                    parsed.files.forEach((file: ParsedFile) => {
+                        const lang: string = path.extname(file.path).substring(1) || 'plaintext';
+                        const id: string = `${file.path}::${file.content}`;
+                        clientIpc.sendToServer(ClientToServerChannel.RequestSyntaxHighlight, { code: file.content, lang, id } as SyntaxHighlightPayload);
+                    });
+                } else if (tabState.parsedContent) {
+                    tabState.parsedContent.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
+                }
+            });
+
+            if (allFilePaths.size > 0) {
+                clientIpc.sendToServer(ClientToServerChannel.RequestFileExistence, { paths: Array.from(allFilePaths) });
+            }
+
+            return needsUpdate ? updatedTabs : prevTabs;
+        });
+    }, [clientIpc, requestAllMetrics]);
+    
+    const isReadyForNextCycle = React.useMemo(() => { const hasTitle = cycleTitle && cycleTitle.trim() !== 'New Cycle' && cycleTitle.trim() !== ''; const hasContext = cycleContext.trim() !== ''; const hasSelectedResponse = selectedResponseId !== null; return hasTitle && hasContext && hasSelectedResponse; }, [cycleTitle, cycleContext, selectedResponseId]);
+    const newCycleButtonDisabledReason = React.useMemo(() => { const reasons: string[] = []; if (!cycleTitle || cycleTitle.trim() === 'New Cycle' || cycleTitle.trim() === '') reasons.push("- A cycle title is required."); if (!cycleContext || cycleContext.trim() === '') reasons.push("- Cycle context cannot be empty."); if (!selectedResponseId) reasons.push("- A response must be selected."); return reasons.join('\n'); }, [cycleTitle, cycleContext, selectedResponseId]);
+
+    React.useEffect(() => { if (workflowStep === null) return; if (workflowStep === 'readyForNewCycle') return; if (workflowStep === 'awaitingGeneratePrompt') { if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt'); return; } if (workflowStep === 'awaitingCycleTitle') { if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') { setWorkflowStep('awaitingGeneratePrompt'); } return; } if (workflowStep === 'awaitingCycleContext') { if (cycleContext.trim()) { setWorkflowStep('awaitingCycleTitle'); } return; } if (workflowStep === 'awaitingAccept') { return; } if (workflowStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestGitStatus, {}); return; } if (workflowStep === 'awaitingFileSelect') { if (selectedFilesForReplacement.size > 0) { setWorkflowStep('awaitingAccept'); } return; } if (workflowStep === 'awaitingResponseSelect') { if (selectedResponseId) { setWorkflowStep('awaitingBaseline'); } return; } if (workflowStep === 'awaitingSort') { if (isSortedByTokens) { setWorkflowStep('awaitingResponseSelect'); } return; } if (workflowStep === 'awaitingParse') { if (isParsedMode) { setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort'); } return; } const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste'); if (waitingForPaste) { for (let i = 1; i <= tabCount; i++) { if (!tabs[i.toString()]?.rawContent?.trim()) { setWorkflowStep(`awaitingResponsePaste_${i}`); return; } } setWorkflowStep('awaitingParse'); } }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, clientIpc]);
+    const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => { e?.stopPropagation(); if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return; if (newCycleId >= 0 && newCycleId <= maxCycle) { setSelectedFilesForReplacement(new Set()); clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId }); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setWorkflowStep(null); } };
+    
+    React.useEffect(() => { const loadCycleData = (cycleData: PcppCycle, scope?: string) => { setCurrentCycle(cycleData); setProjectScope(scope); setCycleTitle(cycleData.title); setCycleContext(cycleData.cycleContext); setEphemeralContext(cycleData.ephemeralContext); setCycleContextTokens(Math.ceil((cycleData.cycleContext || '').length / 4)); setEphemeralContextTokens(Math.ceil((cycleData.ephemeralContext || '').length / 4)); const newTabs: { [key: string]: TabState } = {}; Object.entries(cycleData.responses).forEach(([tabId, response]) => { newTabs[tabId] = { rawContent: response.content, parsedContent: null, status: response.status || 'complete' }; }); setTabs(newTabs); setTabCount(cycleData.tabCount || 4); setActiveTab(cycleData.activeTab || 1); setIsParsedMode(cycleData.isParsedMode || false); setLeftPaneWidth(cycleData.leftPaneWidth || 33); setSelectedResponseId(cycleData.selectedResponseId || null); setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement || [])); setIsSortedByTokens(cycleData.isSortedByTokens || false); setPathOverrides(new Map(Object.entries(cycleData.pathOverrides || {}))); setWorkflowStep(cycleData.activeWorkflowStep || null); setSaveStatus('saved'); requestCostEstimation(); setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true); if (cycleData.status === 'generating') { setIsGenerationComplete(false); setGenerationProgress(Object.keys(cycleData.responses).map(key => ({ responseId: parseInt(key), status: 'pending', startTime: Date.now(), currentTokens: 0, thinkingTokens: 0, totalTokens: 16384, promptTokens: 0 }))); } else { setIsGenerationComplete(true); setGenerationProgress([]); } }; clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => { loadCycleData(cycleData, projectScope); setMaxCycle(cycleData.cycleId); if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope'); else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1'); }); clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => { if (cycleData) loadCycleData(cycleData, projectScope); }); clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml))); clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => setFileExistenceMap(new Map(Object.entries(existenceMap)))); clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => { if (reason === 'history') clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); }); clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => { setFileExistenceMap(prevMap => { const newMap = new Map(prevMap); paths.forEach(p => newMap.set(p, true)); return newMap; }); }); clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => { setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics)); }); clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => { logger.log(`[COST_ESTIMATION_RECEIVED] Tokens: ${totalTokens}, Cost: ${estimatedCost}`); setTotalPromptTokens(totalTokens); setEstimatedPromptCost(estimatedCost); setCostBreakdown(breakdown); }); clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => { if (result.success) { setWorkflowStep(prevStep => { if (prevStep === 'awaitingBaseline') { clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message }); return 'awaitingFileSelect'; } return prevStep; }); } }); clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => { if (isClean && workflowStep === 'awaitingBaseline') { setWorkflowStep('awaitingFileSelect'); } }); clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => { if (cycleId === stateRef.current.currentCycle?.cycleId) setSaveStatus('saved'); }); clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => { setConnectionMode(settings.connectionMode) }); 
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => { 
+            setGenerationProgress(progress); 
+            setTps(tps); 
+            setTabs(prevTabs => { 
+                const newTabs = { ...prevTabs }; 
+                Object.entries(chunks).forEach(([responseId, chunk]) => { 
+                    const tabIndex = parseInt(responseId, 10); 
+                    newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null, status: 'generating' }), rawContent: chunk }; 
+                }); 
+                return newTabs; 
+            }); 
+        }); 
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
+            setGenerationProgress(prev => {
+                const newProgress = [...prev];
+                const index = newProgress.findIndex(p => p.responseId === progress.responseId);
+                if (index !== -1) {
+                    newProgress[index] = progress;
+                }
+                return newProgress;
+            });
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => { 
+            setTabs(prev => { 
+                const newTabs = { ...prev }; 
+                const tabId = responseId.toString();
+                const tab = newTabs[tabId]; 
+                if (tab) { 
+                    tab.rawContent = content; // Ensure raw content is updated
+                    tab.parsedContent = parseResponse(content); 
+                    tab.status = 'complete'; 
+                } 
+                return newTabs; 
+            }); 
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => { setIsGenerationComplete(true); setMaxCycle(newMaxCycle); handleCycleChange(null, newCycleId); });
+        clientIpc.onServerMessage(ServerToClientChannel.StartGenerationUI, ({ newCycleId, newMaxCycle }) => { logger.log(`[StartGenerationUI] Received: newCycleId=${newCycleId}, newMaxCycle=${newMaxCycle}`); setMaxCycle(newMaxCycle); handleCycleChange(null, newCycleId); });
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {}); clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
+    }, [clientIpc, requestCostEstimation]);
+    React.useEffect(() => { if (isParsedMode) parseAllTabs(); }, [isParsedMode, tabs, parseAllTabs]);
+    React.useEffect(() => { if (!selectedFilePath) return; const currentTabData = tabs[activeTab.toString()]; if (currentTabData?.parsedContent) { const fileExistsInTab = currentTabData.parsedContent.files.some(f => f.path === selectedFilePath); if (!fileExistsInTab) setSelectedFilePath(null); } }, [activeTab, tabs, selectedFilePath]);
+
+    const isGenerateResponsesDisabled = React.useMemo(() => { if (currentCycle?.cycleId === 0) return true; return !isReadyForNextCycle; }, [currentCycle, isReadyForNextCycle]);
+
+    const handleGeneratePrompt = () => { if (currentCycle === null) return; const selectedResponseData = selectedResponseId ? tabs[selectedResponseId] : null; const selectedFiles = selectedResponseData?.parsedContent?.files.map(f => f.path) || []; clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle, currentCycle: currentCycle.cycleId, selectedFiles }); setWorkflowStep('readyForNewCycle'); };
+    const handleGenerateResponses = () => { const cycleData = getCurrentCycleData(); if (cycleData) { clientIpc.sendToServer(ClientToServerChannel.RequestNewCycleAndGenerate, { cycleData, count: responseCount }); } };
+    const handleStartGeneration = (projectScope: string, responseCount: number) => { clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount }); };
+    const handleRegenerateTab = (responseId: number) => { if (currentCycle === null) return; const tabId = responseId.toString(); setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } })); clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId }); setSaveStatus('unsaved'); setIsGenerationComplete(false); };
+    const handleSelectForViewing = (filePath: string) => { const newPath = selectedFilePath === filePath ? null : filePath; setSelectedFilePath(newPath); };
+    const handleAcceptSelectedFiles = () => { if (selectedFilesForReplacement.size === 0) return; const filesToWrite: BatchWriteFile[] = []; selectedFilesForReplacement.forEach(compositeKey => { const [responseId, filePath] = compositeKey.split(':::'); const responseData = tabs[responseId]; if (responseData?.parsedContent) { const file = responseData.parsedContent.files.find(f => f.path === filePath); if (file) { const finalPath = pathOverrides.get(file.path) || file.path; filesToWrite.push({ path: finalPath, content: file.content }); } } }); if (filesToWrite.length > 0) { clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite }); } setWorkflowStep('awaitingCycleContext'); };
+    const handleLinkFile = (originalPath: string) => { if (tempOverridePath.trim()) { setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim())); setFileExistenceMap(prev => new Map(prev).set(originalPath, true)); setTempOverridePath(''); handleSelectForViewing(originalPath); } };
+    const handleUnlinkFile = (originalPath: string) => { setPathOverrides(prev => { const newMap = new Map(prev); newMap.delete(originalPath); return newMap; }); setFileExistenceMap(prev => new Map(prev).set(originalPath, false)); };
+    const onCycleContextChange = React.useCallback((value: string) => { setCycleContext(value); setCycleContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);
+    const onEphemeralContextChange = React.useCallback((value: string) => { setEphemeralContext(value); setEphemeralContextTokens(Math.ceil(value.length / 4)); setSaveStatus('unsaved'); }, []);
+    const activeTabData = tabs[activeTab.toString()];
+    const sortedTabIds = React.useMemo(() => { const tabIds = [...Array(tabCount)].map((_, i) => i + 1); if (isParsedMode && isSortedByTokens) tabIds.sort((a, b) => { const tokensA = tabs[a.toString()]?.parsedContent?.totalTokens ?? -1; const tokensB = tabs[b.toString()]?.parsedContent?.totalTokens ?? -1; return tokensB - tokensA; }); return tabIds; }, [tabs, isParsedMode, isSortedByTokens, tabCount]);
+    const viewableContent = React.useMemo(() => { if (!selectedFilePath || !activeTabData?.parsedContent) return undefined; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (!file) return '<div>Error: File data not found in parsed response.</div>'; const id = `${file.path}::${file.content}`; return highlightedCodeBlocks.get(id); }, [selectedFilePath, activeTabData?.parsedContent, highlightedCodeBlocks]);
+    const handleContextKeyDown = React.useCallback(() => {}, []);
+    const handleGlobalParseToggle = () => { const newParseMode = !isParsedMode; setIsParsedMode(newParseMode); setSelectedFilePath(null); if (!newParseMode) setTabs(prev => { const newTabs = {...prev}; Object.keys(newTabs).forEach(key => { newTabs[key].parsedContent = null; }); return newTabs; }); setSaveStatus('unsaved'); };
+    const handleSortToggle = () => { setIsSortedByTokens(p => !p); setSaveStatus('unsaved'); };
+    const handleNewCycle = (e: React.MouseEvent) => { e.stopPropagation(); if (saveStatus !== 'saved') return; const newCycleId = maxCycle + 1; const newTabs: { [key: string]: TabState } = {}; for (let i = 1; i <= tabCount; i++) newTabs[i.toString()] = { rawContent: '', parsedContent: null, status: 'complete' }; setMaxCycle(newCycleId); const newCycle: PcppCycle = { cycleId: newCycleId, title: 'New Cycle', cycleContext: '', ephemeralContext: '', responses: {}, tabCount: tabCount, timestamp: new Date().toISOString(), status: 'complete', isEphemeralContextCollapsed: true }; setCurrentCycle(newCycle); setCycleTitle('New Cycle'); setCycleContext(''); setEphemeralContext(''); setTabs(newTabs); setIsParsedMode(false); setSelectedResponseId(null); setSelectedFilesForReplacement(new Set()); setWorkflowStep('awaitingResponsePaste_1'); clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId }); setSaveStatus('unsaved'); };
+    const handleDeleteCycle = () => { if(currentCycle !== null) clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId }); };
+    const handleResetHistory = () => { clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {}); };
+    const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
+    const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
+    const handleGitBaseline = () => { const commitMessage = `DCE Baseline: Cycle ${currentCycle?.cycleId} - ${cycleTitle || 'New Cycle'}`; clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage }); };
+    const onGitRestore = () => { const { selectedFilesForReplacement, fileExistenceMap } = stateRef.current; const filesToDelete = Array.from(selectedFilesForReplacement).map(key => key.split(':::')).filter(fileParts => fileParts && fileParts[1] && !fileExistenceMap.get(fileParts[1])).map(fileParts => fileParts[1]); clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete }); };
+    const handleFileSelectionToggle = (filePath: string) => { const currentTabId = activeTab.toString(); const compositeKeyForCurrent = `${currentTabId}:::${filePath}`; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); let existingKey: string | undefined; for (const key of newSet) if (key.endsWith(`:::${filePath}`)) { existingKey = key; break; } if (existingKey) { if (existingKey === compositeKeyForCurrent) newSet.delete(existingKey); else { newSet.delete(existingKey); newSet.add(compositeKeyForCurrent); } } else newSet.add(compositeKeyForCurrent); return newSet; }); setSaveStatus('unsaved'); };
+    const handleSelectAllAssociatedFiles = () => { if (!activeTabData?.parsedContent) return; const allFilesForTab = activeTabData.parsedContent.filesUpdated; setSelectedFilesForReplacement(prev => { const newSet = new Set(prev); allFilesForTab.forEach(filePath => { for (const key of newSet) { if (key.endsWith(`:::${filePath}`)) { newSet.delete(key); } } }); allFilesForTab.forEach(filePath => newSet.add(`${activeTab}:::${filePath}`)); return newSet; }); setSaveStatus('unsaved'); };
+    const isAllFilesSelected = React.useMemo(() => { if (!activeTabData?.parsedContent) return false; const allFiles = activeTabData.parsedContent.filesUpdated; if (allFiles.length === 0) return false; return allFiles.every(file => selectedFilesForReplacement.has(`${activeTab}:::${file}`)); }, [selectedFilesForReplacement, activeTabData, activeTab]);
+    const handleLogState = () => { const currentState = getCurrentCycleData(); if (currentState) clientIpc.sendToServer(ClientToServerChannel.RequestLogState, { currentState: currentState as any, costState: { totalPromptTokens, estimatedPromptCost, costBreakdown } }); };
+    const handleCopyContent = () => { if (!selectedFilePath || !activeTabData?.parsedContent) return; const file = activeTabData.parsedContent.files.find(f => f.path === selectedFilePath); if (file) clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content }); };
+    const costBreakdownTooltip = React.useMemo(() => { if (!costBreakdown) return "Calculating..."; return Object.entries(costBreakdown).map(([key, value]) => `${key}: ${formatLargeNumber(value, 1)} tk`).join('\n'); }, [costBreakdown]);
+    const onScopeChange = (scope: string) => { if (currentCycle?.cycleId === 0) { setProjectScope(scope); onCycleContextChange(scope); } };
+
+    if (currentCycle === null) return <div>Loading...</div>;
+    if (currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
+    if (currentCycle.cycleId === 0) { return <OnboardingView projectScope={projectScope || ''} onScopeChange={onScopeChange} onNavigateToCycle={(id) => handleCycleChange(null, id)} latestCycleId={maxCycle} workflowStep={workflowStep} saveStatus={saveStatus} connectionMode={connectionMode} onStartGeneration={handleStartGeneration} />; }
+    
+    const collapsedNavigator = <div className="collapsed-navigator"><button onClick={(e) => handleCycleChange(e, currentCycle.cycleId - 1)} disabled={currentCycle.cycleId <= 0 || saveStatus !== 'saved'}>&lt;</button><span className="cycle-display">C{currentCycle.cycleId}</span><button onClick={(e) => handleCycleChange(e, currentCycle.cycleId + 1)} disabled={currentCycle.cycleId >= maxCycle || saveStatus !== 'saved'}>&gt;</button></div>;
+    const totalPromptCostDisplay = ( <span className="total-prompt-cost" title={costBreakdownTooltip}> Total Est: ({formatLargeNumber(totalPromptTokens, 1)} tk) ~ ${estimatedPromptCost.toFixed(4)} {tabCount > 1 && ` x ${responseCount} = $${(estimatedPromptCost * responseCount).toFixed(4)}`} </span> );
+    const SaveStatusIndicator = () => { let icon; let title; switch(saveStatus) { case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break; case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break; case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break; default: icon = null; title = ""; } return <div className="save-status-indicator" title={title}>{icon}</div>; };
+    const renderHeaderButtons = () => { if (connectionMode === 'manual') { return <button onClick={handleGeneratePrompt} title="Generate prompt.md" className={workflowStep === 'awaitingGeneratePrompt' ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>; } else { return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled} title={isGenerateResponsesDisabled ? `Cannot generate responses:\n${newCycleButtonDisabledReason}` : "Generate responses from local LLM"}><VscWand /> Generate responses</button>; } };
+
+    const showProgressView = currentCycle.status === 'generating';
+
+    return <div className="pc-view-container">
+        <div className="pc-header"><div className="pc-toolbar"><button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>{renderHeaderButtons()}<button onClick={handleLogState} title="For developer use only. Logs internal state to the output channel."><VscBug/></button></div><div className="tab-count-input"><label htmlFor="tab-count">Responses:</label><input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => {setResponseCount(parseInt(e.target.value, 10) || 1); setSaveStatus('unsaved');}} /></div></div>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} className={isReadyForNextCycle ? 'selected' : ''} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+            <CycleNavigator currentCycle={currentCycle.cycleId} maxCycle={maxCycle} cycleTitle={cycleTitle} isNewCycleButtonDisabled={!isReadyForNextCycle} onCycleChange={handleCycleChange} onNewCycle={handleNewCycle} onTitleChange={(title) => { setCycleTitle(title); setSaveStatus('unsaved'); }} onDeleteCycle={handleDeleteCycle} onResetHistory={handleResetHistory} onExportHistory={handleExportHistory} onImportHistory={handleImportHistory} workflowStep={workflowStep} disabledReason={newCycleButtonDisabledReason} saveStatus={saveStatus} />
+            <ContextInputs cycleContext={cycleContext} ephemeralContext={ephemeralContext} cycleContextTokens={cycleContextTokens} ephemeralContextTokens={ephemeralContextTokens} onCycleContextChange={onCycleContextChange} onEphemeralContextChange={onEphemeralContextChange} workflowStep={workflowStep} isEphemeralContextCollapsed={isEphemeralContextCollapsed} onToggleEphemeralContext={() => { setIsEphemeralContextCollapsed(p => !p); setSaveStatus('unsaved'); }} />
+        </CollapsibleSection>
+        <div className="main-content-area">
+            <ResponseTabs sortedTabIds={sortedTabIds} tabs={tabs} activeTab={activeTab} selectedResponseId={selectedResponseId} isParsedMode={isParsedMode} isSortedByTokens={isSortedByTokens} onTabSelect={setActiveTab} workflowStep={workflowStep} onRegenerateTab={handleRegenerateTab} isGenerating={currentCycle.status === 'generating'} generationProgress={generationProgress} onSortToggle={handleSortToggle} />
+            
+            {showProgressView ? (
+                <GenerationProgressDisplay progressData={generationProgress} tps={tps} tabs={tabs} onStop={(id) => clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId: id })} onRegenerate={handleRegenerateTab} isGenerationComplete={isGenerationComplete} onViewResponses={() => { /* Handled by state change */ }} cycleId={currentCycle.cycleId} />
+            ) : (
+                <>
+                    <WorkflowToolbar isParsedMode={isParsedMode} onParseToggle={handleGlobalParseToggle} onSelectResponse={() => { setSelectedResponseId(prev => prev === activeTab.toString() ? null : activeTab.toString()); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} selectedResponseId={selectedResponseId} activeTab={activeTab} onBaseline={handleGitBaseline} onRestore={onGitRestore} onAcceptSelected={handleAcceptSelectedFiles} selectedFilesForReplacementCount={selectedFilesForReplacement.size} workflowStep={workflowStep} onSelectAll={handleSelectAllAssociatedFiles} onDeselectAll={() => setSelectedFilesForReplacement(new Set())} />
+                    <div className="tab-content"><ResponsePane isParsedMode={isParsedMode} activeTabData={activeTabData} onRawContentChange={(content) => handleRawContentChange(content, activeTab)} onContextKeyDown={handleContextKeyDown} onPaste={(e) => handlePaste(e, activeTab)} fileExistenceMap={fileExistenceMap} selectedFilePath={selectedFilePath} onSelectForViewing={handleSelectForViewing} selectedFilesForReplacement={selectedFilesForReplacement} onFileSelectionToggle={handleFileSelectionToggle} activeTab={activeTab} pathOverrides={pathOverrides} tempOverridePath={tempOverridePath} onTempOverridePathChange={setTempOverridePath} onLinkFile={handleLinkFile} onUnlinkFile={handleUnlinkFile} comparisonMetrics={comparisonMetrics} viewableContent={viewableContent} onCopyContent={handleCopyContent} selectedResponseId={selectedResponseId} onSelectResponse={(id) => { setSelectedResponseId(prev => prev === id ? null : id); setWorkflowStep('awaitingResponseSelect'); setSaveStatus('unsaved'); }} onSelectAllFiles={handleSelectAllAssociatedFiles} onDeselectAllFiles={() => {setSelectedFilesForReplacement(new Set()); setSaveStatus('unsaved');}} isAllFilesSelected={isAllFilesSelected} onAcceptSelected={handleAcceptSelectedFiles} leftPaneWidth={leftPaneWidth} onBaseline={handleGitBaseline} onRestore={onGitRestore} workflowStep={workflowStep} /></div>
+                </>
+            )}
+        </div>
+    </div>;
+};
+
+try {
+    const root = createRoot(document.getElementById('root') as HTMLElement);
+    root.render(<App />);
+} catch (error) {
+    //
+}
+</Pre-Refactor Version of src\client\views\parallel-copilot.view\view.tsx>
 </file_artifact>
 
 <file path="src/Artifacts/A106. DCE - vLLM Performance and Quantization Guide.md">
@@ -16903,5 +17205,65 @@ This artifact provides a structured checklist for tracking the development tasks
 4.  **Expected:** The regeneration request is sent.
 5.  Start a new generation.
 6.  **Expected:** The UI should not flicker with "0 files" or "parsing failed" messages while "thinking" tokens are streaming in.
+</file_artifact>
+
+<file path="src/Artifacts/A110. DCE - Universal Task Checklist for Cycle 81.md">
+# Artifact A110: DCE - Universal Task Checklist for Cycle 81
+# Date Created: C81
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for tracking the development tasks and critical bugs identified in Cycle 81. The primary focus is a major refactor of the response generation state management to fix UI disconnects, state persistence failures, and incorrect history status.
+
+---
+
+## Task List for Cycle 81+
+
+## T-1: Consolidate and Persist Generation State (Core Refactor)
+- **Files Involved:**
+    - `src/common/types/pcpp.types.ts`
+    - `src/common/types/vscode-webview.d.ts`
+    - `src/backend/services/llm.service.ts`
+    - `src/backend/services/history.service.ts`
+- **Total Tokens:** ~10,000
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 1.1):** In `pcpp.types.ts`, enhance the `TabState` interface to include all generation progress metrics (`startTime`, `thinkingTokens`, `currentTokens`, `totalTokens`). This will be the single source of truth.
+- [ ] **Task (T-ID: 1.2):** In `vscode-webview.d.ts`, add a `generationState?: { [key: string]: TabState }` to the `ViewState` interface to define the shape of the persisted state.
+- [ ] **Task (T-ID: 1.3):** In `llm.service.ts`, refactor `generateBatch` to construct and persist these comprehensive `TabState` objects via the history service on each data chunk.
+- [ ] **Task (T-ID: 1.4):** In `history.service.ts`, create a new `updateTabStateInCycle` method to handle frequent, partial state updates to `dce_history.json`, making it the durable store for generation progress.
+
+### Verification Steps
+1.  Initiate a generation.
+2.  Inspect `dce_history.json` while generation is in progress.
+3.  **Expected:** The `responses` objects for the new cycle should be continuously updated with the latest token counts and status.
+
+## T-2: Fix Frontend Rendering Logic and State Restoration
+- **Files Involved:**
+    - `src/client/views/parallel-copilot.view/view.tsx`
+    - `src/client/views/parallel-copilot.view/components/ResponseTabs.tsx`
+    - `src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx`
+- **Total Tokens:** ~22,000
+- **More than one cycle?** No
+- **Status:** To Do
+
+- [ ] **Task (T-ID: 2.1):** In `view.tsx`, eliminate the separate `generationProgress` state. The main `tabs` state will now hold all progress information.
+- [ ] **Task (T-ID: 2.2):** Implement `vscode.setState` to save the `tabs` object whenever `UpdateGenerationProgress` is received. Use `vscode.getState` on initial load to restore this state, fixing the persistence bug.
+- [ ] **Task (T-ID: 2.3):** Rewrite the main render logic in `view.tsx`. The decision to show `GenerationProgressDisplay` vs. `ResponsePane` must be based *only* on the `status` of the `activeTab`.
+- [ ] **Task (T-ID: 2.4):** Refactor `ResponseTabs.tsx`. The spinner should be visible if `tab.status` is `'thinking'` or `'generating'`. File/token counts should *only* be visible if `tab.status === 'complete'`.
+- [ ] **Task (T-ID: 2.5):** Update `GenerationProgressDisplay.tsx` to receive the `tabs` object as its source of truth for rendering progress bars.
+
+### Verification Steps
+1.  Start a new generation.
+2.  **Expected:** Tabs that are generating should show a spinner and NO token counts.
+3.  As a tab completes, its spinner should disappear and its token/file count should appear.
+4.  Click on a completed tab while others are generating.
+5.  **Expected:** The view should switch to the `ResponsePane` for that tab.
+6.  Navigate away from the VS Code window and back.
+7.  **Expected:** The progress display should reappear in the exact same state it was in before, with timers and progress bars intact.
+8.  Once all responses are complete, select any tab.
+9.  **Expected:** The view should show the `ResponsePane` for the selected tab, not the progress display.
 </file_artifact>
 
