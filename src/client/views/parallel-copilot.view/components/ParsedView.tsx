@@ -43,8 +43,7 @@ interface ParsedViewProps {
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     workflowStep: string | null;
-    leftPaneWidth: number; 
-    selectedResponseId: string | null;
+    leftPaneWidth: number;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {

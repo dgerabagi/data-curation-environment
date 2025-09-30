@@ -25,7 +25,6 @@ interface ResponsePaneProps {
     comparisonMetrics: Map<string, ComparisonMetrics | null>;
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
-    selectedResponseId: string | null;
     leftPaneWidth: number;
     workflowStep: string | null;
 }
@@ -61,7 +60,6 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             comparisonMetrics={props.comparisonMetrics}
             viewableContent={props.viewableContent}
             onCopyContent={props.onCopyContent}
-            selectedResponseId={props.selectedResponseId}
             leftPaneWidth={props.leftPaneWidth}
             workflowStep={props.workflowStep}
         />

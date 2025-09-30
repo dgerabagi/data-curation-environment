@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
-import { ServerToClientChannel } from '@/common/ipc/channels.enum';
+import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
 import { PcppCycle } from '@/common/types/pcpp.types';
 
@@ -27,9 +27,6 @@ export const usePcppIpc = (
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
-        // ... (rest of the useEffect content from view.tsx)
-        
-        // This is just a subset for demonstration. The full useEffect from view.tsx would go here.
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => {
             loadCycleData(cycleData, projectScope);
             setMaxCycle(cycleData.cycleId);
@@ -96,8 +93,6 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => {
             setConnectionMode(settings.connectionMode);
         });
-
-        // ... (rest of the listeners)
 
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});

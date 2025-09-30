@@ -3,7 +3,6 @@ import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck } from 'react-icons/vsc';
 import { TabState } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
-import { GenerationProgress } from '@/common/ipc/channels.type';
 
 interface ResponseTabsProps {
     sortedTabIds: number[];
@@ -30,7 +29,6 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     onSortToggle,
     workflowStep,
     onRegenerateTab,
-    isGenerating
 }) => {
     const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
     const confirmTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);

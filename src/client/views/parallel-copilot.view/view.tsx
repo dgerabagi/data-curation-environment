@@ -4,8 +4,8 @@ import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
-import { ClientToServerChannel } from '../../../common/ipc/channels.enum';
-import { PcppCycle } from '../../../common/types/pcpp.types';
+import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
+import { PcppCycle, TabState } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '../../../common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
@@ -36,200 +36,176 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
     
-    // This is a placeholder until the initial data comes from IPC
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
 
-    // A simple effect to get the very first payload
     React.useEffect(() => {
-        clientIpc.onServerMessage(ClientToServerChannel.RequestInitialCycleData as any, ({ cycleData, projectScope }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc]);
 
+    const saveState = () => { /* Logic to be defined/passed to useCycleManagement */ };
 
-    const {
-        currentCycle, projectScope, maxCycle, cycleTitle, cycleContext, ephemeralContext, isCycleCollapsed,
-        isEphemeralContextCollapsed, saveStatus, loadCycleData, handleCycleChange, handleNewCycle, onCycleContextChange,
-        onEphemeralContextChange, onTitleChange, handleDeleteCycle, handleResetHistory, handleExportHistory, handleImportHistory,
-        setIsCycleCollapsed, setIsEphemeralContextCollapsed, setSaveStatus, setMaxCycle,
-    } = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, () => {});
-
-    // This is complex, will be filled by IPC hook
-    const requestAllMetrics = React.useCallback(() => {}, []);
-
-    const {
-        tabs, activeTab, tabCount, isParsedMode, isSortedByTokens, sortedTabIds, handleTabSelect,
-        handleTabCountChange, handleRawContentChange, handlePaste, handleGlobalParseToggle, handleSortToggle, setTabs,
-    } = useTabManagement(
-        {}, 1, 1, false, false, setSaveStatus, requestAllMetrics
+    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, saveState);
+    const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
+    const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, null, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+    
+    usePcppIpc(
+        cycleManagement.loadCycleData,
+        fileManagement.setHighlightedCodeBlocks,
+        fileManagement.setFileExistenceMap,
+        fileManagement.setComparisonMetrics,
+        () => {}, // setTotalPromptTokens
+        () => {}, // setEstimatedPromptCost
+        () => {}, // setCostBreakdown
+        setWorkflowStep,
+        cycleManagement.setSaveStatus,
+        generationManagement.setConnectionMode,
+        generationManagement.setGenerationProgress,
+        generationManagement.setTps,
+        tabManagement.setTabs,
+        generationManagement.setIsGenerationComplete,
+        cycleManagement.setMaxCycle,
+        cycleManagement.handleCycleChange,
+        cycleManagement.currentCycle?.cycleId || null
     );
 
-    const {
-        highlightedCodeBlocks, fileExistenceMap, selectedFilePath, selectedFilesForReplacement,
-        comparisonMetrics, pathOverrides, tempOverridePath, handleSelectForViewing, handleFileSelectionToggle,
-        handleLinkFile, handleUnlinkFile, handleCopyContent, setTempOverridePath, setSelectedFilesForReplacement,
-    } = useFileManagement(activeTab, tabs, setSaveStatus);
+    if (cycleManagement.currentCycle === null) return <div>Loading...</div>;
+    if (cycleManagement.currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
-    // In a real implementation, `isReadyForNextCycle` would be derived in a memo inside the container
-    const isReadyForNextCycle = true; 
+    const onScopeChange = (scope: string) => { if (cycleManagement.currentCycle?.cycleId === 0) { cycleManagement.onCycleContextChange(scope); } };
 
-    const { workflowStep, setWorkflowStep } = useWorkflow(
-        null, isReadyForNextCycle, cycleTitle, cycleContext, selectedFilesForReplacement, null, isSortedByTokens, isParsedMode, tabs, tabCount
-    );
-
-    const {
-        connectionMode, responseCount, generationProgress, tps, isGenerationComplete, handleGenerateResponses,
-        handleStartGeneration, handleRegenerateTab, isGenerateResponsesDisabled, newCycleButtonDisabledReason,
-    } = useGeneration(currentCycle, () => null, isReadyForNextCycle, '', setTabs, setSaveStatus);
-
-    // The IPC hook would now take all the setters it needs
-    // usePcppIpc(loadCycleData, setHighlightedCodeBlocks, ... all other setters);
-
-    if (currentCycle === null) return <div>Loading...</div>;
-    if (currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
-    
-    const onScopeChange = (scope: string) => { if (currentCycle?.cycleId === 0) { onCycleContextChange(scope); } };
-
-    if (currentCycle.cycleId === 0) { 
+    if (cycleManagement.currentCycle.cycleId === 0) { 
         return <OnboardingView 
-            projectScope={projectScope || ''} 
+            projectScope={cycleManagement.projectScope || ''} 
             onScopeChange={onScopeChange} 
-            onNavigateToCycle={(id) => handleCycleChange(null, id)} 
-            latestCycleId={maxCycle} 
+            onNavigateToCycle={(id) => cycleManagement.handleCycleChange(null, id)} 
+            latestCycleId={cycleManagement.maxCycle} 
             workflowStep={workflowStep} 
-            saveStatus={saveStatus} 
-            connectionMode={connectionMode} 
-            onStartGeneration={handleStartGeneration} 
+            saveStatus={cycleManagement.saveStatus} 
+            connectionMode={generationManagement.connectionMode} 
+            onStartGeneration={generationManagement.handleStartGeneration} 
         />; 
     }
     
-    const collapsedNavigator = <div>...</div>; // Simplified for brevity
+    const collapsedNavigator = <div>...</div>;
     const totalPromptCostDisplay = <span>...</span>;
     const SaveStatusIndicator = () => <span>...</span>;
     const renderHeaderButtons = () => {
-        if (connectionMode === 'manual') {
+        if (generationManagement.connectionMode === 'manual') {
             return <button><VscFileCode /> Generate prompt.md</button>;
         } else {
-            return <button onClick={handleGenerateResponses} disabled={isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
+            return <button onClick={generationManagement.handleGenerateResponses} disabled={generationManagement.isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
         }
     };
     
-    const showProgressView = currentCycle.status === 'generating';
+    const showProgressView = cycleManagement.currentCycle.status === 'generating';
 
     return <div className="pc-view-container">
         <div className="pc-header">
             <div className="pc-toolbar">
-                <button onClick={(e) => handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
+                <button onClick={(e) => cycleManagement.handleCycleChange(e, 0)} title="Project Plan"><VscBook /> Project Plan</button>
                 {renderHeaderButtons()}
                 <button title="Log State"><VscBug/></button>
             </div>
             <div className="tab-count-input">
                 <label htmlFor="tab-count">Responses:</label>
-                <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => handleTabCountChange(parseInt(e.target.value, 10) || 1)} />
+                <input type="number" id="tab-count" min="1" max="20" value={tabManagement.tabCount} onChange={e => tabManagement.setTabCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={isCycleCollapsed} onToggle={() => setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => cycleManagement.setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator 
-                currentCycle={currentCycle.cycleId} 
-                maxCycle={maxCycle} 
-                cycleTitle={cycleTitle} 
-                isNewCycleButtonDisabled={!isReadyForNextCycle} 
-                onCycleChange={handleCycleChange} 
-                onNewCycle={handleNewCycle} 
-                onTitleChange={onTitleChange} 
-                onDeleteCycle={handleDeleteCycle} 
-                onResetHistory={handleResetHistory} 
-                onExportHistory={handleExportHistory} 
-                onImportHistory={handleImportHistory} 
+                currentCycle={cycleManagement.currentCycle.cycleId} 
+                maxCycle={cycleManagement.maxCycle} 
+                cycleTitle={cycleManagement.cycleTitle} 
+                isNewCycleButtonDisabled={!true} 
+                onCycleChange={cycleManagement.handleCycleChange} 
+                onNewCycle={cycleManagement.handleNewCycle} 
+                onTitleChange={cycleManagement.onTitleChange} 
+                onDeleteCycle={cycleManagement.handleDeleteCycle} 
+                onResetHistory={cycleManagement.handleResetHistory} 
+                onExportHistory={cycleManagement.handleExportHistory} 
+                onImportHistory={cycleManagement.handleImportHistory} 
                 workflowStep={workflowStep} 
-                disabledReason={newCycleButtonDisabledReason} 
-                saveStatus={saveStatus} 
+                disabledReason={generationManagement.newCycleButtonDisabledReason} 
+                saveStatus={cycleManagement.saveStatus} 
             />
             <ContextInputs 
-                cycleContext={cycleContext} 
-                ephemeralContext={ephemeralContext} 
-                cycleContextTokens={0} 
-                ephemeralContextTokens={0}
-                onCycleContextChange={onCycleContextChange} 
-                onEphemeralContextChange={onEphemeralContextChange} 
+                cycleContext={cycleManagement.cycleContext} 
+                ephemeralContext={cycleManagement.ephemeralContext} 
+                onCycleContextChange={cycleManagement.onCycleContextChange} 
+                onEphemeralContextChange={cycleManagement.onEphemeralContextChange} 
                 workflowStep={workflowStep} 
-                isEphemeralContextCollapsed={isEphemeralContextCollapsed} 
-                onToggleEphemeralContext={() => { setIsEphemeralContextCollapsed(p => !p); setSaveStatus('unsaved'); }} 
+                isEphemeralContextCollapsed={cycleManagement.isEphemeralContextCollapsed} 
+                onToggleEphemeralContext={() => { cycleManagement.setIsEphemeralContextCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} 
             />
         </CollapsibleSection>
         <div className="main-content-area">
             <ResponseTabs 
-                sortedTabIds={sortedTabIds} 
-                tabs={tabs} 
-                activeTab={activeTab} 
+                sortedTabIds={tabManagement.sortedTabIds} 
+                tabs={tabManagement.tabs} 
+                activeTab={tabManagement.activeTab} 
                 selectedResponseId={null} 
-                isParsedMode={isParsedMode} 
-                isSortedByTokens={isSortedByTokens} 
-                onTabSelect={handleTabSelect} 
+                isParsedMode={tabManagement.isParsedMode} 
+                isSortedByTokens={tabManagement.isSortedByTokens} 
+                onTabSelect={tabManagement.handleTabSelect} 
                 workflowStep={workflowStep} 
-                onRegenerateTab={handleRegenerateTab} 
+                onRegenerateTab={generationManagement.handleRegenerateTab} 
                 isGenerating={showProgressView} 
-                generationProgress={generationProgress} 
-                onSortToggle={handleSortToggle} 
+                onSortToggle={tabManagement.handleSortToggle} 
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 
-                    progressData={generationProgress} 
-                    tps={tps} 
-                    tabs={tabs} 
+                    progressData={generationManagement.generationProgress} 
+                    tps={generationManagement.tps} 
+                    tabs={tabManagement.tabs} 
                     onStop={() => {}} 
-                    onRegenerate={handleRegenerateTab} 
-                    isGenerationComplete={isGenerationComplete} 
+                    onRegenerate={generationManagement.handleRegenerateTab} 
+                    isGenerationComplete={generationManagement.isGenerationComplete} 
                     onViewResponses={() => {}} 
-                    cycleId={currentCycle.cycleId} 
+                    cycleId={cycleManagement.currentCycle.cycleId} 
                 />
             ) : (
                 <>
                     <WorkflowToolbar 
-                        isParsedMode={isParsedMode}
-                        onParseToggle={handleGlobalParseToggle}
+                        isParsedMode={tabManagement.isParsedMode}
+                        onParseToggle={tabManagement.handleGlobalParseToggle}
                         selectedResponseId={null}
-                        activeTab={activeTab}
+                        activeTab={tabManagement.activeTab}
                         onSelectResponse={() => {}}
                         onBaseline={() => {}}
                         onRestore={() => {}}
                         onAcceptSelected={() => {}}
                         onSelectAll={() => {}}
-                        onDeselectAll={() => setSelectedFilesForReplacement(new Set())}
-                        selectedFilesForReplacementCount={selectedFilesForReplacement.size}
+                        onDeselectAll={() => fileManagement.setSelectedFilesForReplacement(new Set())}
+                        selectedFilesForReplacementCount={fileManagement.selectedFilesForReplacement.size}
                         workflowStep={workflowStep}
                     />
                     <div className="tab-content">
                         <ResponsePane 
-                            isParsedMode={isParsedMode} 
-                            activeTabData={tabs[activeTab.toString()]} 
-                            onRawContentChange={(content) => handleRawContentChange(content, activeTab)} 
+                            isParsedMode={tabManagement.isParsedMode} 
+                            activeTabData={tabManagement.tabs[tabManagement.activeTab.toString()]} 
+                            onRawContentChange={(content) => tabManagement.handleRawContentChange(content, tabManagement.activeTab)} 
                             onContextKeyDown={() => {}} 
-                            onPaste={(e) => handlePaste(e, activeTab)}
-                            fileExistenceMap={fileExistenceMap}
-                            selectedFilePath={selectedFilePath}
-                            onSelectForViewing={handleSelectForViewing}
-                            selectedFilesForReplacement={selectedFilesForReplacement}
-                            onFileSelectionToggle={handleFileSelectionToggle}
-                            activeTab={activeTab}
-                            pathOverrides={new Map()}
-                            tempOverridePath={tempOverridePath}
-                            onTempOverridePathChange={setTempOverridePath}
-                            onLinkFile={handleLinkFile}
-                            onUnlinkFile={handleUnlinkFile}
-                            comparisonMetrics={comparisonMetrics}
+                            onPaste={(e) => tabManagement.handlePaste(e, tabManagement.activeTab)}
+                            fileExistenceMap={fileManagement.fileExistenceMap}
+                            selectedFilePath={fileManagement.selectedFilePath}
+                            onSelectForViewing={fileManagement.handleSelectForViewing}
+                            selectedFilesForReplacement={fileManagement.selectedFilesForReplacement}
+                            onFileSelectionToggle={fileManagement.handleFileSelectionToggle}
+                            activeTab={tabManagement.activeTab}
+                            pathOverrides={fileManagement.pathOverrides}
+                            tempOverridePath={fileManagement.tempOverridePath}
+                            onTempOverridePathChange={fileManagement.setTempOverridePath}
+                            onLinkFile={fileManagement.handleLinkFile}
+                            onUnlinkFile={fileManagement.handleUnlinkFile}
+                            comparisonMetrics={fileManagement.comparisonMetrics}
                             viewableContent={""}
-                            onCopyContent={handleCopyContent}
-                            selectedResponseId={null}
-                            onSelectResponse={() => {}}
-                            onSelectAllFiles={() => {}}
-                            onDeselectAllFiles={() => {}}
-                            isAllFilesSelected={false}
-                            onAcceptSelected={() => {}}
-                            leftPaneWidth={leftPaneWidth}
-                            onBaseline={() => {}}
-                            onRestore={() => {}}
+                            onCopyContent={fileManagement.handleCopyContent}
+                            leftPaneWidth={0} // Placeholder
                             workflowStep={workflowStep}
                         />
                     </div>
