@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 86 - make a better plan
+Current Cycle 87 - initiate/deliver on new refactor plan (A105)
+Cycle 86 - make a better plan
 Cycle 85 - this refactor is not really refactoring
 Cycle 84 - continue refactor
 Cycle 83 - continue refactor (A111)
@@ -852,6 +853,40 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 87>
+<Cycle Context>
+okay great, i found one response which took the approach to split it into `Container/Hooks/Presentational`, which solves the problem because this plan comes with new files which is where our tokens can go from view.tsx.
+
+lets now begin the implementation of the plan in A105. note that A105 will contain a reference version as we progress through the refactor over subsequent cycles, and is labeled as: <Pre-Refactor Version of src\client\views\parallel-copilot.view\view.tsx>
+
+
+</Cycle Context>
+<Previous Cycle 86 Summary of Actions>
+You are absolutely right. My previous attempts at refactoring have been ineffective, merely shuffling code within existing files instead of properly modularizing the application. This approach has failed to reduce the complexity of `view.tsx` and has wasted your time. I understand the core problem now: the refactor requires creating new, separate component files and turning `view.tsx` into a true "container" component that manages state and logic, delegating rendering to its children.
+
+My course of action is to execute this refactor correctly. I will first update the refactoring plan, `A105`, to be far more explicit. It will now detail the exact props interface for each new component, making the contract between the container and its children clear. Then, I will provide the complete, final code for all the new component files and the rewritten, leaner `view.tsx` container. I will not remove the original reference code from `A105` until this refactor is complete and verified.
+
+1.  **Update `A105` (Refactoring Plan):** I will significantly update the refactoring plan to serve as a clear blueprint.
+    *   I will add a new section explicitly defining the `Props` interface for each new presentational component (`CycleNavigator`, `ContextInputs`, `ResponseTabs`, `WorkflowToolbar`, `ResponsePane`). This defines the contract for what data and callbacks each component needs.
+    *   I will update the implementation steps to be unambiguous about creating *new files* for these components.
+
+2.  **Create `CycleNavigator.tsx` (New File):** I will create this new component file. It will contain the JSX for the cycle navigation bar and will be a purely presentational component, receiving all its state and handlers from `view.tsx` via props.
+
+3.  **Create `ContextInputs.tsx` (New File):** I will create this new component file for the "Cycle Context" and "Ephemeral Context" text areas. It will be a presentational component, receiving its values and `onChange` handlers via props.
+
+4.  **Create `ResponseTabs.tsx` (New File):** I will create this new component file for the tab bar. It will receive the list of tabs, the active tab, and selection handlers as props.
+
+5.  **Create `WorkflowToolbar.tsx` (New File):** I will create this new component file to house the centralized workflow buttons. It will receive all necessary state and `onClick` handlers as props.
+
+6.  **Create `ResponsePane.tsx` (New File):** I will create this new component file. It will act as a bridge, conditionally rendering either the raw `textarea` or the `ParsedView` based on the `isParsedMode` prop passed down from the container.
+
+7.  **Refactor `view.tsx` (Container):** This is the core of the refactor.
+    *   I will remove all JSX related to the UI sections that have been moved to new components.
+    *   The file will now primarily contain state management (`useState`, `useRef`, `useCallback`, `useEffect` for IPC) and logic.
+    *   The `render` function will be drastically simplified, importing the new components and rendering them while passing down the required state and callbacks as props. This will achieve the target size of ~2.5k tokens.
+</Previous Cycle 86 Summary of Actions>
+</Cycle 87>
 
 <Cycle 86>
 <Cycle Context>
@@ -4730,14 +4765,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-30T21:15:15.471Z
+  Date Generated: 2025-09-30T21:49:04.417Z
   ---
   Total Files: 266
-  Approx. Tokens: 305676
+  Approx. Tokens: 305843
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md (11451 tokens)
+1. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md (11618 tokens)
 2. src\client\views\parallel-copilot.view\view.tsx (10321 tokens)
 3. src\Artifacts\A0. DCE Master Artifact List.md (9727 tokens)
 4. The-Creator-AI-main\src\common\constants\agents.constants.ts (9159 tokens)
@@ -4917,7 +4952,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
-169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 360 - Chars: 45802 - Tokens: 11451
+169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. The-Creator-AI-main\public\main.css - Lines: 40 - Chars: 559 - Tokens: 140
@@ -21294,54 +21329,58 @@ If you want to experiment further, you could try one of vLLM's other supported q
 # Artifact A105: DCE - PCPP View Refactoring Plan for Cycle 76
 # Date Created: C76
 # Author: AI Model & Curator
+# Updated on: C86 (Complete rewrite of refactoring strategy)
 
-- **Key/Value for A0:**
-- **Description:** Provides a detailed plan for refactoring the monolithic `parallel-copilot.view/view.tsx` component into smaller, more manageable sub-components to improve maintainability and reduce token count.
-- **Tags:** plan, refactor, architecture, technical debt, pcpp
+## 1. Problem Statement & Acknowledgment of Prior Failures
 
-## 1. Problem Statement
+The `parallel-copilot.view/view.tsx` component has grown to over 10,000 tokens, making it a "god component." It manages state and renders logic for numerous distinct features, making it difficult to maintain, prone to bugs, and inefficient to include in AI prompts.
 
-The `parallel-copilot.view/view.tsx` component has grown to over 9,000 tokens, making it a "god component." It manages state and renders logic for numerous distinct features, including cycle navigation, context inputs, response tabs, the workflow toolbar, and the conditional rendering of the onboarding view, progress display, and main response pane. This complexity makes the component difficult to maintain, prone to bugs (like the recent navigation failure), and inefficient to include in AI prompts.
+Previous refactoring attempts in Cycles 82-85 were ineffective. They failed to significantly reduce the component's size because they only shuffled logic between `view.tsx` and other *existing* presentational components. They did not address the core problem: the monolithic concentration of business logic and state management within the `view.tsx` file itself.
 
-## 2. Refactoring Goals
+This document presents a new, fundamentally different refactoring strategy that will resolve this issue by extracting logic into **new files** as custom React hooks.
 
-1.  **Improve Readability & Maintainability:** Break the component into smaller, single-responsibility components.
-2.  **Isolate State:** Co-locate state with the components that use it wherever possible.
-3.  **Reduce Token Count:** Significantly reduce the token count of the main `view.tsx` file.
+## 2. The New Refactoring Strategy: Container/Hooks/Presentational
 
-## 3. Proposed Refactoring Plan
+The new plan is to refactor `view.tsx` using a standard, robust React pattern for managing complexity: **Container/Hooks/Presentational**.
 
-The main `view.tsx` file will be refactored into a "container" component. Its primary role will be to manage the top-level state (like the `currentCycle` object) and the IPC message handlers. It will then pass slices of this state and callback functions as props to smaller, more focused "presentational" components.
+1.  **Container (`view.tsx`):** The `view.tsx` file will become a lean "container" component. Its sole responsibility will be to orchestrate the application. It will call the various custom hooks to get the state and logic handlers it needs, and then pass that data down as props to the presentational components.
+2.  **Hooks (`/hooks/*.ts`):** All complex business logic, state management (`useState`, `useMemo`, `useEffect`), and IPC handling will be extracted from `view.tsx` and moved into a series of new, single-responsibility custom hooks. These are new files that will live in a new `src/client/views/parallel-copilot.view/hooks/` directory.
+3.  **Presentational (`/components/*.tsx`):** The existing components (`CycleNavigator`, `ResponseTabs`, `ParsedView`, etc.) will remain as "dumb" presentational components. They will receive all the data they need to render and all the functions they need to call via props.
 
-### 3.1. New Component Structure & Token Estimates
+## 3. Proposed New Files: Custom Hooks
 
-This is the proposed breakdown of the existing `view.tsx` functionality into new or existing components within `src/client/views/parallel-copilot.view/components/`.
+A new directory will be created: `src/client/views/parallel-copilot.view/hooks/`. The following new files will be created within it, each containing a custom hook to manage a specific domain of logic.
 
-| Component | Responsibility | Estimated Tokens |
+| New File | Hook Name | Responsibility | Estimated Tokens |
+| :--- | :--- | :--- | :--- |
+| `usePcppIpc.ts` | `usePcppIpc` | Encapsulates the massive `useEffect` that registers all `clientIpc.onServerMessage` listeners. It will take state-setter functions as arguments and call them when messages are received. | ~2,000 |
+| `useCycleManagement.ts` | `useCycleManagement` | Manages `currentCycle`, `maxCycle`, `cycleTitle`, `cycleContext`, `ephemeralContext`, `saveStatus`. Exposes handlers like `handleCycleChange`, `handleNewCycle`, `saveCurrentCycleState`. | ~1,500 |
+| `useTabManagement.ts` | `useTabManagement` | Manages `tabs`, `activeTab`, `tabCount`, `isParsedMode`, `isSortedByTokens`. Exposes handlers like `handleTabSelect`, `handleRawContentChange`, `parseAllTabs`, `handleSortToggle`. | ~1,800 |
+| `useFileManagement.ts` | `useFileManagement` | Manages `selectedFilePath`, `selectedFilesForReplacement`, `fileExistenceMap`, `pathOverrides`, `comparisonMetrics`. Exposes handlers like `handleSelectForViewing`, `handleAcceptSelectedFiles`, `handleLinkFile`. | ~2,000 |
+| `useWorkflow.ts` | `useWorkflow` | Manages the `workflowStep` state and contains the complex `useEffect` logic that determines the next step in the guided workflow. | ~1,200 |
+| `useGeneration.ts` | `useGeneration` | Manages `generationProgress`, `tps`, `isGenerationComplete`, `connectionMode`. Exposes handlers like `handleGenerateResponses`, `handleStartGeneration`, `handleRegenerateTab`. | ~1,000 |
+
+### 3.1. Revised Token Distribution Estimate
+
+| Component | Responsibility | New Estimated Tokens |
 | :--- | :--- | :--- |
-| **`view.tsx` (Container)** | - Manages `currentCycle`, `maxCycle`, `tabs` state. <br> - Handles all IPC messages. <br> - Orchestrates rendering of child components. | **~2,500** |
-| **`CycleNavigator.tsx`** | - Renders the cycle navigation bar, title input, and management buttons. | **~850** |
-| **`ContextInputs.tsx`** | - Renders the "Cycle Context" and "Ephemeral Context" text areas. | **~750** |
-| **`ResponseTabs.tsx`** | - Renders the main tab bar and sort button. | **~950** |
-| **`WorkflowToolbar.tsx`** | - Renders the centralized workflow buttons (Parse, Select, Baseline, etc.). | **~1,000** |
-| **`ResponsePane.tsx`** | - Renders the content of the active tab, conditionally showing either the raw `textarea` or the `ParsedView`. | **~800** |
-| **`ParsedView.tsx`** | - Renders the complex multi-pane view for a parsed response. | **~2,500** |
-| **`GenerationProgressDisplay.tsx`** | - Renders the UI for streaming responses. | **~2,000** |
-| **`OnboardingView.tsx`** | - Renders the initial project setup view for Cycle 0. | **~1,500** |
+| **`view.tsx` (Container)** | - Call all custom hooks. <br> - Render top-level conditional UI (`Onboarding`, `Progress`, `Main`). <br> - Pass props to presentational components. | **~1,500** |
+| **New Hooks Total** | - All business logic and state management. | **~9,500** |
+| **Existing Components** | - UI Rendering. | (Unchanged) |
 
-### 3.2. Implementation Steps (For a Future Cycle)
+This architecture will reduce `view.tsx` from **~10,300 tokens** to a much more manageable **~1,500 tokens**.
 
-1.  **Prop Drilling:** Begin by identifying all state and handler functions in `view.tsx` that can be passed down as props to the existing components (`CycleNavigator`, `ContextInputs`, etc.).
-2.  **Component Creation:** Create new component files for any logic that is not already in a separate component (e.g., the main conditional rendering logic could be moved to a `MainContent.tsx` component).
-3.  **State Lifting/Co-location:** Review the state variables. While the main `currentCycle` object should remain in the container, UI-specific state (like the collapsed state of a section) can be moved into the relevant child component.
-4.  **Cleanup:** Once the logic is successfully moved and props are passed correctly, remove the now-redundant rendering logic from `view.tsx`, significantly reducing its size.
+## 4. Implementation Steps (For Next Cycle)
 
-## 4. Benefits
+1.  **Create `hooks` directory and files:** Create the new directory and the empty hook files listed above.
+2.  **Migrate Logic to Hooks:** Systematically move related `useState`, `useCallback`, `useMemo`, and `useEffect` blocks from `view.tsx` into the appropriate new custom hook file. Each hook will return an object containing the state values and handler functions it manages.
+3.  **Refactor `view.tsx`:**
+    *   Remove all the logic that was moved to the hooks.
+    *   Call each new custom hook at the top of the `App` component.
+    *   Update the props being passed to the child presentational components (`CycleNavigator`, `ContextInputs`, etc.) to use the state and handlers returned from the hooks.
+4.  **Verification:** Test the UI thoroughly to ensure that all functionality remains intact after the refactor.
 
--   **Reduced `view.tsx` Size:** The token count of `view.tsx` will be reduced from over 9,000 to approximately 2,500, making it much easier to work with.
--   **Improved Maintainability:** Bugs will be easier to isolate. For example, a bug in the cycle navigator will now be located entirely within `CycleNavigator.tsx`.
--   **Clearer Data Flow:** The use of props will make the flow of data and events through the application more explicit and easier to trace.
-
+---
 
 <Pre-Refactor Version of src\client\views\parallel-copilot.view\view.tsx>
 // src/client/views/parallel-copilot.view/view.tsx
