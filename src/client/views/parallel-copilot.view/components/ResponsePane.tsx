@@ -1,5 +1,4 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C76 (No functional changes, but included for completeness)
 import * as React from 'react';
 import ParsedView from './ParsedView';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
@@ -27,14 +26,7 @@ interface ResponsePaneProps {
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     selectedResponseId: string | null;
-    onSelectResponse: (id: string) => void;
-    onSelectAllFiles: () => void;
-    onDeselectAllFiles: () => void;
-    isAllFilesSelected: boolean;
-    onAcceptSelected: () => void;
     leftPaneWidth: number;
-    onBaseline: () => void;
-    onRestore: () => void;
     workflowStep: string | null;
 }
 

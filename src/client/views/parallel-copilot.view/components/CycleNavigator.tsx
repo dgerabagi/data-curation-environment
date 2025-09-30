@@ -1,5 +1,4 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
-// Updated on: C19 (Remove Git buttons)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 

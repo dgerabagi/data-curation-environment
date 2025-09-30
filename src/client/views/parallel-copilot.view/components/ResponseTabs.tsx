@@ -1,5 +1,4 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C79 (Implement two-step regeneration confirmation)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck } from 'react-icons/vsc';
 import { TabState } from '@/common/types/pcpp.types';
@@ -17,7 +16,6 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
-    generationProgress?: GenerationProgress[];
     isGenerating: boolean;
 }
 
@@ -32,7 +30,6 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     onSortToggle,
     workflowStep,
     onRegenerateTab,
-    generationProgress = [],
     isGenerating
 }) => {
     const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
@@ -58,7 +55,6 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     };
 
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
-    const progressMap = new Map(generationProgress.map(p => [p.responseId, p]));
 
     return (
         <div className="tab-bar-container">

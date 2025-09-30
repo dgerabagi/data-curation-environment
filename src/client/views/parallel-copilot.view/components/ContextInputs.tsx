@@ -1,5 +1,4 @@
 // src/client/views/parallel-copilot.view/components/ContextInputs.tsx
-// Updated on: C73 (Make Ephemeral Context collapsible)
 import * as React from 'react';
 import { formatLargeNumber } from '@/common/utils/formatting';
 import { VscChevronDown } from 'react-icons/vsc';
@@ -17,8 +16,6 @@ const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; i
 interface ContextInputsProps {
     cycleContext: string;
     ephemeralContext: string;
-    cycleContextTokens: number;
-    ephemeralContextTokens: number;
     onCycleContextChange: (value: string) => void;
     onEphemeralContextChange: (value: string) => void;
     workflowStep: string | null;
@@ -29,14 +26,15 @@ interface ContextInputsProps {
 const ContextInputs: React.FC<ContextInputsProps> = ({
     cycleContext,
     ephemeralContext,
-    cycleContextTokens,
-    ephemeralContextTokens,
     onCycleContextChange,
     onEphemeralContextChange,
     workflowStep,
     isEphemeralContextCollapsed,
     onToggleEphemeralContext
 }) => {
+    const cycleContextTokens = React.useMemo(() => Math.ceil(cycleContext.length / 4), [cycleContext]);
+    const ephemeralContextTokens = React.useMemo(() => Math.ceil(ephemeralContext.length / 4), [ephemeralContext]);
+
     return (
         <div className="context-inputs">
             <div className={`context-input-wrapper ${workflowStep === 'awaitingCycleContext' ? 'workflow-highlight' : ''}`}>

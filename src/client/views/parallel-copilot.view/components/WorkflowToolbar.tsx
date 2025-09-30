@@ -1,5 +1,4 @@
 // src/client/views/parallel-copilot.view/components/WorkflowToolbar.tsx
-// Updated on: C21 (Re-add Select All buttons)
 import * as React from 'react';
 import { VscWand, VscCheck, VscSourceControl, VscDiscard, VscCheckAll, VscClearAll } from 'react-icons/vsc';
 
