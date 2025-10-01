@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-01T13:08:47.312Z
+  Date Generated: 2025-10-01T13:32:44.214Z
   ---
   Total Files: 177
-  Approx. Tokens: 250569
+  Approx. Tokens: 251504
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md (11618 tokens)
 2. src\Artifacts\A0. DCE Master Artifact List.md (9727 tokens)
 3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
-4. src\backend\services\prompt.service.ts (4939 tokens)
+4. src\backend\services\prompt.service.ts (5119 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\backend\services\llm.service.ts (4166 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\backend\services\history.service.ts (3967 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3979 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38905 - Tokens: 9727
@@ -128,7 +128,7 @@
 106. src\backend\services\history.service.ts - Lines: 368 - Chars: 15867 - Tokens: 3967
 107. src\backend\services\llm.service.ts - Lines: 338 - Chars: 16663 - Tokens: 4166
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 376 - Chars: 19755 - Tokens: 4939
+109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20476 - Tokens: 5119
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9316 - Tokens: 2329
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 280 - Chars: 15703 - Tokens: 3926
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 287 - Chars: 15916 - Tokens: 3979
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -184,14 +184,14 @@
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 107 - Chars: 12404 - Tokens: 3101
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 132 - Chars: 15384 - Tokens: 3846
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 137 - Chars: 5774 - Tokens: 1444
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
@@ -8987,7 +8987,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C92 (Handle Cycle 0 prompt generation)
+// Updated on: C93 (Reinstate opening of DCE_README.md)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -9289,13 +9289,22 @@ ${staticContext.trim()}
             
             const fullHistoryFile = await Services.historyService.getFullHistory();
             let currentCycleData: PcppCycle | undefined;
+            let readmePath: string | undefined;
 
             if (currentCycleId === 0) {
+                const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
+                await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
+                
+                const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome!');
+                const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
+                readmePath = readmeUri.fsPath;
+                await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
+
                 currentCycleData = {
                     cycleId: 0,
                     title: cycleTitle,
                     cycleContext: fullHistoryFile.projectScope || '',
-                    ephemeralContext: '', // Ephemeral context is not used for C0 prompt gen
+                    ephemeralContext: '',
                     responses: {},
                     timestamp: new Date().toISOString(),
                     status: 'complete'
@@ -9315,6 +9324,9 @@ ${staticContext.trim()}
             Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycleId}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
+            if (readmePath) {
+                await Services.fileOperationService.handleOpenFileRequest(readmePath);
+            }
 
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;
@@ -14000,6 +14012,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C93 (Implement correct debounced save effect)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14041,14 +14054,7 @@ const App = () => {
     // --- State & Hooks Initialization ---
     const saveStateRef = React.useRef<() => void>(() => {});
 
-    const debouncedSave = React.useCallback(() => {
-        const timeout = setTimeout(() => {
-            saveStateRef.current();
-        }, 1500);
-        return () => clearTimeout(timeout);
-    }, []);
-
-    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
+    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
@@ -14112,6 +14118,19 @@ const App = () => {
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
+
+    // Correct debounced save implementation
+    React.useEffect(() => {
+        if (cycleManagement.saveStatus === 'unsaved') {
+            const handler = setTimeout(() => {
+                saveStateRef.current();
+            }, 1500);
+    
+            return () => {
+                clearTimeout(handler);
+            };
+        }
+    }, [cycleManagement.saveStatus]);
 
     // --- Component Logic & Rendering ---
 
@@ -16190,13 +16209,38 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C92 (Add Cycle 0 bugs)
+# Updated on: C93 (Add post-refactor regressions)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 048: Stuck Auto-Save Spinner After Hook Refactor
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
+-   **Cycles Observed:** C93
+-   **Symptom:** After a save is triggered (e.g., by typing in a text field), the save status indicator changes to a spinning animation but never reverts to the "saved" (checkmark) state, even though the backend confirms the save was successful.
+-   **Root Cause Analysis (RCA):** The debouncing logic implemented after the major refactor to custom hooks was flawed. The container component (`view.tsx`) was passing a function to the `useCycleManagement` hook that was intended to be a debounced trigger. However, the implementation was incorrect, leading to an unreliable side-effect chain. This broke the final step where the UI state should be updated to `'saved'` upon receiving the `NotifySaveComplete` message from the backend.
+-   **Codified Solution & Best Practice:**
+    1.  The responsibility for managing side-effects like debounced API calls should reside in the container component, not within a state-management hook.
+    2.  The state-managing hook (`useCycleManagement`) should only be responsible for managing its own state and exposing a status (e.g., `'unsaved'`).
+    3.  The container component (`view.tsx`) should use a `useEffect` hook to watch for this `'unsaved'` status. When detected, the effect should be responsible for initiating the debounced action (e.g., via `setTimeout`), which calls the main save function. This cleanly separates state management from side-effect orchestration and is a standard, robust React pattern.
+
+---
+
+### Case Study 047: README File Fails to Open on Initial Generation
+
+-   **Artifacts Affected:** `src/backend/services/prompt.service.ts`
+-   **Cycles Observed:** C93
+-   **Symptom:** During project initialization (Cycle 0), clicking the "Generate Initial Artifacts Prompt" button correctly creates both `prompt.md` and `src/Artifacts/DCE_README.md`, but it only opens `prompt.md` in the editor.
+-   **Root Cause Analysis (RCA):** The logic for handling the initial prompt generation was consolidated into the `generatePromptFile` method in `prompt.service.ts`. This method correctly contained the logic to create both files. However, at the end of the function, it only contained a single call to `fileOperationService.handleOpenFileRequest` for the `prompt.md` file. The corresponding call to open the newly created `DCE_README.md` was missing.
+-   **Codified Solution & Best Practice:**
+    1.  When a user action is expected to result in the creation and display of multiple files, ensure that the responsible service method includes calls to open *all* relevant files.
+    2.  In `prompt.service.ts`, the `generatePromptFile` method must call `handleOpenFileRequest` for both the `prompt.md` path and, in the case of Cycle 0, the `DCE_README.md` path.
 
 ---
 
@@ -16917,7 +16961,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C92 (Handle projectScope for Cycle 0)
+// Updated on: C93 (Remove debouncing logic)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -16926,8 +16970,7 @@ import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 export const useCycleManagement = (
     initialCycle: PcppCycle | null,
     initialProjectScope: string | undefined,
-    initialMaxCycle: number,
-    saveState: () => void
+    initialMaxCycle: number
 ) => {
     const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(initialCycle);
     const [projectScope, setProjectScope] = React.useState<string | undefined>(initialProjectScope);
@@ -17016,12 +17059,6 @@ export const useCycleManagement = (
         setSelectedResponseId(prev => prev === id ? null : id);
         setSaveStatus('unsaved');
     }, []);
-
-    React.useEffect(() => {
-        if (saveStatus === 'unsaved') {
-            saveState();
-        }
-    }, [saveStatus, saveState]);
 
     return {
         currentCycle,

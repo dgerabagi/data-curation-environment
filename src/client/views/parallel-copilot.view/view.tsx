@@ -1,4 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
+// Updated on: C93 (Implement correct debounced save effect)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -40,14 +41,7 @@ const App = () => {
     // --- State & Hooks Initialization ---
     const saveStateRef = React.useRef<() => void>(() => {});
 
-    const debouncedSave = React.useCallback(() => {
-        const timeout = setTimeout(() => {
-            saveStateRef.current();
-        }, 1500);
-        return () => clearTimeout(timeout);
-    }, []);
-
-    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
+    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
@@ -111,6 +105,19 @@ const App = () => {
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
+
+    // Correct debounced save implementation
+    React.useEffect(() => {
+        if (cycleManagement.saveStatus === 'unsaved') {
+            const handler = setTimeout(() => {
+                saveStateRef.current();
+            }, 1500);
+    
+            return () => {
+                clearTimeout(handler);
+            };
+        }
+    }, [cycleManagement.saveStatus]);
 
     // --- Component Logic & Rendering ---
 

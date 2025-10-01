@@ -1,4 +1,4 @@
-// Updated on: C92 (Handle Cycle 0 prompt generation)
+// Updated on: C93 (Reinstate opening of DCE_README.md)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -300,13 +300,22 @@ ${staticContext.trim()}
             
             const fullHistoryFile = await Services.historyService.getFullHistory();
             let currentCycleData: PcppCycle | undefined;
+            let readmePath: string | undefined;
 
             if (currentCycleId === 0) {
+                const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
+                await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
+                
+                const readmeContent = await this.getArtifactContent('A72. DCE - README for Artifacts.md', '# Welcome!');
+                const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
+                readmePath = readmeUri.fsPath;
+                await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
+
                 currentCycleData = {
                     cycleId: 0,
                     title: cycleTitle,
                     cycleContext: fullHistoryFile.projectScope || '',
-                    ephemeralContext: '', // Ephemeral context is not used for C0 prompt gen
+                    ephemeralContext: '',
                     responses: {},
                     timestamp: new Date().toISOString(),
                     status: 'complete'
@@ -326,6 +335,9 @@ ${staticContext.trim()}
             Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycleId}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
+            if (readmePath) {
+                await Services.fileOperationService.handleOpenFileRequest(readmePath);
+            }
 
         } catch (error: any) {
             let errorMessage = `Failed to generate prompt.md: ${error.message}`;

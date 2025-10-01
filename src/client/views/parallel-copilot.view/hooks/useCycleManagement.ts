@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C92 (Handle projectScope for Cycle 0)
+// Updated on: C93 (Remove debouncing logic)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -8,8 +8,7 @@ import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 export const useCycleManagement = (
     initialCycle: PcppCycle | null,
     initialProjectScope: string | undefined,
-    initialMaxCycle: number,
-    saveState: () => void
+    initialMaxCycle: number
 ) => {
     const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(initialCycle);
     const [projectScope, setProjectScope] = React.useState<string | undefined>(initialProjectScope);
@@ -98,12 +97,6 @@ export const useCycleManagement = (
         setSelectedResponseId(prev => prev === id ? null : id);
         setSaveStatus('unsaved');
     }, []);
-
-    React.useEffect(() => {
-        if (saveStatus === 'unsaved') {
-            saveState();
-        }
-    }, [saveStatus, saveState]);
 
     return {
         currentCycle,
