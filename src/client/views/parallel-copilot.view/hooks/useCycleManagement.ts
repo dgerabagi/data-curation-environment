@@ -1,4 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
+// Updated on: C92 (Handle projectScope for Cycle 0)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -27,7 +28,8 @@ export const useCycleManagement = (
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
-        setCycleContext(cycleData.cycleContext);
+        // Handle Cycle 0 where context comes from project scope
+        setCycleContext(cycleData.cycleId === 0 ? (scope || '') : cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
         setSelectedResponseId(cycleData.selectedResponseId || null);

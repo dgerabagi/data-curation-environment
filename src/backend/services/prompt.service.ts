@@ -1,4 +1,4 @@
-// Updated on: C71 (Add extensive logging for debugging stale prompts)
+// Updated on: C92 (Handle Cycle 0 prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -280,7 +280,7 @@ ${staticContext.trim()}
         }
     }
 
-    public async generatePromptFile(cycleTitle: string, currentCycle: number) {
+    public async generatePromptFile(cycleTitle: string, currentCycleId: number) {
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -289,7 +289,7 @@ ${staticContext.trim()}
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
-            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycle}...`);
+            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycleId}...`);
             
             const lastSelection = await Services.selectionService.getLastSelection();
             if (lastSelection.length > 0) {
@@ -298,18 +298,32 @@ ${staticContext.trim()}
                 Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.");
             }
             
-            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
-            const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
-            if (!currentCycleDataFromHistory) {
-                throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
+            const fullHistoryFile = await Services.historyService.getFullHistory();
+            let currentCycleData: PcppCycle | undefined;
+
+            if (currentCycleId === 0) {
+                currentCycleData = {
+                    cycleId: 0,
+                    title: cycleTitle,
+                    cycleContext: fullHistoryFile.projectScope || '',
+                    ephemeralContext: '', // Ephemeral context is not used for C0 prompt gen
+                    responses: {},
+                    timestamp: new Date().toISOString(),
+                    status: 'complete'
+                };
+            } else {
+                const historyCycle = fullHistoryFile.cycles.find(c => c.cycleId === currentCycleId);
+                if (!historyCycle) {
+                    throw new Error(`Could not find data for current cycle (${currentCycleId}) in history.`);
+                }
+                currentCycleData = { ...historyCycle, title: cycleTitle };
             }
-            const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
             const finalPrompt = await this.generatePromptString(currentCycleData);
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycle}.`);
-            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycle}.`);
+            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycleId}.`);
+            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycleId}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
 
@@ -333,11 +347,9 @@ ${staticContext.trim()}
             const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
             const prompt = await this.generatePromptString(dummyCycleData);
             
-            // Create the prompt.md file before sending the request
             await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
             Services.loggerService.log("prompt.md file created successfully before sending API request.");
 
-            // Create-Then-Generate Pattern
             const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
 

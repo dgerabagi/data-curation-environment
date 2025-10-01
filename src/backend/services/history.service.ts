@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C79 (Add finalizeCycleStatus)
+// Updated on: C92 (Fix save notification for Cycle 0)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -155,24 +155,19 @@ export class HistoryService {
 
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
-            if (serverIpc) {
-                serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
-            }
-            return;
-        }
-
-        const history = await this._readHistoryFile();
-        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
-
-        if (cycleIndex > -1) {
-            history.cycles[cycleIndex] = cycleData;
         } else {
-            history.cycles.push(cycleData);
-        }
-        
-        history.cycles.sort((a, b) => a.cycleId - b.cycleId);
+            const history = await this._readHistoryFile();
+            const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 
-        await this._writeHistoryFile(history);
+            if (cycleIndex > -1) {
+                history.cycles[cycleIndex] = cycleData;
+            } else {
+                history.cycles.push(cycleData);
+            }
+            
+            history.cycles.sort((a, b) => a.cycleId - b.cycleId);
+            await this._writeHistoryFile(history);
+        }
 
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });

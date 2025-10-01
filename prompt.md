@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 92 - continue working through errors
+Current Cycle 93 - continue working through issues
+Cycle 92 - continue working through errors
 Cycle 91 - ts errors
 Cycle 90 - one stop forward, another issue presents itself
 Cycle 89 - analyze observations after refactor
@@ -859,6 +860,87 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 93>
+<Cycle Context>
+okay great work. from the previous cycle, the disappearance of the text in the project scope as well as the clicking of the `generate initial artifacts prompt` both function once again. however, the auto-save checkmark does not ever swap back from the spinning animation to the checkmark once the save completes.i can see/confirm a save takes place because what i write in the text field makes its way in to the dce_history.json, despite the spinner indication.
+
+ah, so it seems that we got one step further with the `generate initial artifacts prompt`, in that it now creates the prompt.md (i wonder why it is no longer opening the README.md, can you check to see if the original reference of view.tsx in our A105 artifact contains the fact that we were opening both the prompt.md and the README.md to the user, and if so, please review that file and look/work to ensure that which caused us to get misaligned here, to re-align, as it were.
+
+we had just done a refactor where we removed like 7k tokens from the parallel view.tsx, and placed them in to all the use hook files, and it was very successful in reducing the size of view.tsx, now we just need to restore our functionalities. i left the reference on purpsoe because of that. providing the logs below in ephemeral
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [8:03:08 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [8:03:08 AM] Services initializing...
+[INFO] [8:03:08 AM] Services initialized successfully.
+[INFO] [8:03:08 AM] Registering 7 commands.
+[INFO] [8:03:08 AM] Starry Night syntax highlighter initialized.
+[INFO] [8:03:09 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [8:03:09 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [8:03:09 AM] Context Chooser view message handler initialized.
+[INFO] [8:03:09 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [8:03:09 AM] [SelectionService] No last selection found in state.
+[INFO] [8:03:09 AM] Persisted current selection of 0 items.
+[INFO] [8:03:09 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:03:09 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:03:16 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [8:03:18 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:03:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [8:03:21 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:03:26 AM] Generating prompt.md file for cycle 0...
+[INFO] [8:03:26 AM] [SelectionService] No last selection found in state.
+[WARN] [8:03:26 AM] No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.
+[INFO] [8:03:26 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
+[INFO] [8:03:26 AM] [SelectionService] No last selection found in state.
+[INFO] [8:03:26 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
+[INFO] [8:03:26 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
+[INFO] [8:03:26 AM] Successfully generated prompt.md file for Cycle 0.
+[INFO] [8:03:26 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[WARN] [8:03:26 AM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/TowerDefense16/prompt.md
+[INFO] [8:03:27 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:03:28 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:03:28 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:03:34 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:03:34 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:15 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:15 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:37 AM] Generating prompt.md file for cycle 0...
+[INFO] [8:05:37 AM] [SelectionService] No last selection found in state.
+[WARN] [8:05:37 AM] No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.
+[INFO] [8:05:37 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
+[INFO] [8:05:37 AM] [SelectionService] No last selection found in state.
+[INFO] [8:05:37 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
+[INFO] [8:05:37 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 46
+[INFO] [8:05:37 AM] Successfully generated prompt.md file for Cycle 0.
+[INFO] [8:05:37 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [8:05:39 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:05:40 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:40 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:46 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:46 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+</Ephemeral Context>
+<Previous Cycle 92 Summary of Actions>
+I have analyzed the TypeScript errors from the previous cycle. The errors are a direct result of the recent, complex refactoring into custom hooks, compounded by a flawed attempt to introduce a debounced saving mechanism. The "redeclare block-scoped variable" errors indicate that the hook initialization logic was duplicated within `view.tsx`. The errors related to the `.current` property stem from using a `useDebounce` hook that is designed for debouncing *values*, not for debouncing function calls, leading to an incorrect implementation pattern. Finally, a piece of state, `selectedResponseId`, was not correctly returned from any hook, causing it to be undefined where it was used.
+
+My course of action is to correct these structural issues. I will remove the incorrect `useDebounce` hook and replace it with a standard and reliable debounced save implementation directly within the main `view.tsx` container. I will then correctly locate the `selectedResponseId` state within the `useCycleManagement` hook, as it is a core part of a cycle's persisted data, and ensure it is passed down to the components that need it.
+
+### Course of Action
+
+1.  **Remove Flawed `useDebounce.ts`:** This hook is the incorrect tool for debouncing function calls and is the source of several errors. It will be removed.
+2.  **Fix `view.tsx` Container:**
+    *   I will remove the duplicated hook initialization block to resolve all `TS2451: Cannot redeclare block-scoped variable` errors.
+    *   I will implement a standard debounced save pattern. A `useEffect` hook will listen for the `saveStatus` becoming `'unsaved'`. When it does, it will trigger a `setTimeout` that calls the main `saveCurrentCycleState` function. This provides a robust and easy-to-understand auto-save mechanism.
+    *   The `saveCurrentCycleState` function will be defined with `useCallback` to gather the latest state from all hooks before sending it to the backend. This will resolve all `TS2339: Property 'current' does not exist` errors.
+3.  **Update `useCycleManagement.ts`:**
+    *   This hook will now be the source of truth for `selectedResponseId`. I will add the state management for it here.
+    *   I will create and export a new handler, `handleSelectResponse`, to manage changes to this state.
+    *   The `loadCycleData` function within this hook will be updated to correctly restore `selectedResponseId` when a cycle is loaded.
+4.  **Update Prop Drilling in `view.tsx`:**
+    *   The container will retrieve `selectedResponseId` and `handleSelectResponse` from the `useCycleManagement` hook.
+    *   It will then pass these down as props to the `WorkflowToolbar` and `ResponseTabs` components, resolving the final `Property 'selectedResponseId' does not exist` error.
+5.  **Update Child Components:** I will update the props interfaces for `WorkflowToolbar.tsx` and `ResponseTabs.tsx` to correctly receive the new props.
+</Previous Cycle 92 Summary of Actions>
+</Cycle 93>
+
 <Cycle 92>
 <Cycle Context>
 okay great, however ive discovered two issues with the onboarding page. here is my test:
@@ -879,33 +961,6 @@ current `dce_history.json`:
 }
 </dce_history.json>
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [7:41:00 AM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [7:41:00 AM] Services initializing...
-[INFO] [7:41:00 AM] Services initialized successfully.
-[INFO] [7:41:00 AM] Registering 7 commands.
-[INFO] [7:41:00 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [7:41:00 AM] Parallel Co-Pilot view message handler initialized.
-[INFO] [7:41:00 AM] Starry Night syntax highlighter initialized.
-[INFO] [7:41:00 AM] Context Chooser view message handler initialized.
-[INFO] [7:41:01 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [7:41:01 AM] [SelectionService] No last selection found in state.
-[INFO] [7:41:01 AM] Persisted current selection of 0 items.
-[INFO] [7:41:01 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:41:01 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:41:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [7:41:06 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [7:41:07 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [7:41:08 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [7:41:19 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:41:19 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:41:33 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:41:33 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [7:44:46 AM] Generating prompt.md file for cycle 0...
-[INFO] [7:44:46 AM] [SelectionService] No last selection found in state.
-[WARN] [7:44:46 AM] No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.
-[ERROR] [7:44:46 AM] Failed to generate prompt.md: Could not find data for current cycle (0) in history.
-</Ephemeral Context>
 <Previous Cycle 91 Summary of Actions>
 I have analyzed the bug report regarding the non-functional auto-save. Your diagnosis is correct; this is a critical regression that occurred during the major refactoring in the previous cycles. The root cause is that the core debounced save logic was inadvertently lost from the main `view.tsx` container component. The `onScopeChange` event was correctly updating the state but was no longer triggering the debounced function responsible for persisting that state to the backend.
 
@@ -4921,23 +4976,23 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-01T12:47:02.369Z
+  Date Generated: 2025-10-01T13:08:47.312Z
   ---
   Total Files: 177
-  Approx. Tokens: 249873
+  Approx. Tokens: 250569
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md (11618 tokens)
 2. src\Artifacts\A0. DCE Master Artifact List.md (9727 tokens)
 3. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
-4. src\backend\services\prompt.service.ts (4927 tokens)
+4. src\backend\services\prompt.service.ts (4939 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\backend\services\llm.service.ts (4166 tokens)
-8. src\backend\services\history.service.ts (4084 tokens)
-9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+10. src\backend\services\history.service.ts (3967 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38905 - Tokens: 9727
@@ -5045,10 +5100,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 373 - Chars: 16335 - Tokens: 4084
+106. src\backend\services\history.service.ts - Lines: 368 - Chars: 15867 - Tokens: 3967
 107. src\backend\services\llm.service.ts - Lines: 338 - Chars: 16663 - Tokens: 4166
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 364 - Chars: 19706 - Tokens: 4927
+109. src\backend\services\prompt.service.ts - Lines: 376 - Chars: 19755 - Tokens: 4939
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -5104,14 +5159,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 80 - Chars: 9359 - Tokens: 2340
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 107 - Chars: 12404 - Tokens: 3101
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 135 - Chars: 5614 - Tokens: 1404
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 137 - Chars: 5774 - Tokens: 1444
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
@@ -13155,7 +13210,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C79 (Add finalizeCycleStatus)
+// Updated on: C92 (Fix save notification for Cycle 0)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -13311,24 +13366,19 @@ export class HistoryService {
 
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
-            if (serverIpc) {
-                serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
-            }
-            return;
-        }
-
-        const history = await this._readHistoryFile();
-        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
-
-        if (cycleIndex > -1) {
-            history.cycles[cycleIndex] = cycleData;
         } else {
-            history.cycles.push(cycleData);
-        }
-        
-        history.cycles.sort((a, b) => a.cycleId - b.cycleId);
+            const history = await this._readHistoryFile();
+            const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
 
-        await this._writeHistoryFile(history);
+            if (cycleIndex > -1) {
+                history.cycles[cycleIndex] = cycleData;
+            } else {
+                history.cycles.push(cycleData);
+            }
+            
+            history.cycles.sort((a, b) => a.cycleId - b.cycleId);
+            await this._writeHistoryFile(history);
+        }
 
         if (serverIpc) {
             serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: cycleData.cycleId });
@@ -13912,7 +13962,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C71 (Add extensive logging for debugging stale prompts)
+// Updated on: C92 (Handle Cycle 0 prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -14194,7 +14244,7 @@ ${staticContext.trim()}
         }
     }
 
-    public async generatePromptFile(cycleTitle: string, currentCycle: number) {
+    public async generatePromptFile(cycleTitle: string, currentCycleId: number) {
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -14203,7 +14253,7 @@ ${staticContext.trim()}
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
-            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycle}...`);
+            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycleId}...`);
             
             const lastSelection = await Services.selectionService.getLastSelection();
             if (lastSelection.length > 0) {
@@ -14212,18 +14262,32 @@ ${staticContext.trim()}
                 Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.");
             }
             
-            const fullHistory = (await Services.historyService.getFullHistory()).cycles;
-            const currentCycleDataFromHistory = fullHistory.find(c => c.cycleId === currentCycle);
-            if (!currentCycleDataFromHistory) {
-                throw new Error(`Could not find data for current cycle (${currentCycle}) in history.`);
+            const fullHistoryFile = await Services.historyService.getFullHistory();
+            let currentCycleData: PcppCycle | undefined;
+
+            if (currentCycleId === 0) {
+                currentCycleData = {
+                    cycleId: 0,
+                    title: cycleTitle,
+                    cycleContext: fullHistoryFile.projectScope || '',
+                    ephemeralContext: '', // Ephemeral context is not used for C0 prompt gen
+                    responses: {},
+                    timestamp: new Date().toISOString(),
+                    status: 'complete'
+                };
+            } else {
+                const historyCycle = fullHistoryFile.cycles.find(c => c.cycleId === currentCycleId);
+                if (!historyCycle) {
+                    throw new Error(`Could not find data for current cycle (${currentCycleId}) in history.`);
+                }
+                currentCycleData = { ...historyCycle, title: cycleTitle };
             }
-            const currentCycleData = { ...currentCycleDataFromHistory, title: cycleTitle };
 
             const finalPrompt = await this.generatePromptString(currentCycleData);
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycle}.`);
-            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycle}.`);
+            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycleId}.`);
+            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycleId}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
 
@@ -14247,11 +14311,9 @@ ${staticContext.trim()}
             const dummyCycleData: PcppCycle = { cycleId: 0, title: 'Initial Artifacts', responses: {}, cycleContext: projectScope, ephemeralContext: '', timestamp: '', tabCount: responseCount, status: 'complete' };
             const prompt = await this.generatePromptString(dummyCycleData);
             
-            // Create the prompt.md file before sending the request
             await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
             Services.loggerService.log("prompt.md file created successfully before sending API request.");
 
-            // Create-Then-Generate Pattern
             const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
 
@@ -21103,13 +21165,40 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C90 (Add case for broken auto-save after refactor)
+# Updated on: C92 (Add Cycle 0 bugs)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 046: Prompt Generation Fails for Cycle 0
+
+-   **Artifacts Affected:** `src/backend/services/prompt.service.ts`
+-   **Cycles Observed:** C92
+-   **Symptom:** In a new workspace, clicking "Generate Initial Artifacts Prompt" fails with the error `Failed to generate prompt.md: Could not find data for current cycle (0) in history.`
+-   **Root Cause Analysis (RCA):** The prompt generation logic was designed to fetch a cycle object from the `cycles` array in `dce_history.json`. For a new project, this array is empty. The logic did not account for the special case of Cycle 0, which doesn't exist as a formal cycle entry but whose context is derived from the top-level `projectScope` property in the history file. The service tried to find `cycles[0]`, failed, and threw an error.
+-   **Codified Solution & Best Practice:**
+    1.  Services handling cycle data must treat Cycle 0 as a special case.
+    2.  When a prompt is requested for Cycle 0, the service must not query the `cycles` array. Instead, it should read the `projectScope` from the history file and construct a temporary, in-memory `PcppCycle` object with `cycleId: 0` and `cycleContext: projectScope`.
+    3.  This temporary object can then be passed to the downstream prompt-building functions, which can then operate on a consistent data structure.
+
+---
+
+### Case Study 045: Onboarding View State Is Not Persistent
+
+-   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
+-   **Cycles Observed:** C92
+-   **Symptom:** In the onboarding view (Cycle 0), typing in the "Project Scope" text area causes the auto-save indicator to spin indefinitely. If the user navigates to another VS Code tab and returns, the text they entered has disappeared.
+-   **Root Cause Analysis (RCA):** This was a two-part failure.
+    1.  **Backend:** The `saveCycleData` method in `history.service.ts` had a specific branch for `cycleId === 0` that would save the `projectScope` but would then `return` before sending the `NotifySaveComplete` message back to the client. This left the frontend UI stuck in a "saving" state.
+    2.  **Frontend:** The `loadCycleData` function in the `useCycleManagement` hook was designed to populate its state from a full `PcppCycle` object. For Cycle 0, the initial object from the backend has an empty `cycleContext`. When the view re-initializes (on tab switch), it doesn't correctly re-load the `projectScope` from the backend into the `cycleContext` state, causing the UI to display an empty string.
+-   **Codified Solution & Best Practice:**
+    1.  Backend services must provide consistent acknowledgment. The `saveCycleData` function must always send the `NotifySaveComplete` message, regardless of the `cycleId`.
+    2.  Frontend state initialization must be robust. The `loadCycleData` function must explicitly handle the Cycle 0 case, ensuring that `cycleContext` is populated from the `projectScope` property received from the backend, not just from the initial `PcppCycle` object.
 
 ---
 
@@ -21803,6 +21892,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
+// Updated on: C92 (Handle projectScope for Cycle 0)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -21831,7 +21921,8 @@ export const useCycleManagement = (
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
-        setCycleContext(cycleData.cycleContext);
+        // Handle Cycle 0 where context comes from project scope
+        setCycleContext(cycleData.cycleId === 0 ? (scope || '') : cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
         setSelectedResponseId(cycleData.selectedResponseId || null);
