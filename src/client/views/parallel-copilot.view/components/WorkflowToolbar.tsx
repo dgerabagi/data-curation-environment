@@ -7,7 +7,7 @@ interface WorkflowToolbarProps {
     onParseToggle: () => void;
     selectedResponseId: string | null;
     activeTab: number;
-    onSelectResponse: () => void;
+    onSelectResponse: (id: string) => void;
     onBaseline: () => void;
     onRestore: () => void;
     onAcceptSelected: () => void;
@@ -43,7 +43,7 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
             {isParsedMode && (
                 <>
                     <button
-                        onClick={onSelectResponse}
+                        onClick={() => onSelectResponse(activeTab.toString())}
                         className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
                         title="Select this response as the basis for the next cycle"
                     >

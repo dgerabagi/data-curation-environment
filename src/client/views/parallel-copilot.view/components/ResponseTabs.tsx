@@ -15,7 +15,6 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
-    isGenerating: boolean;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 91 - ts errors
+Current Cycle 92 - continue working through errors
+Cycle 91 - ts errors
 Cycle 90 - one stop forward, another issue presents itself
 Cycle 89 - analyze observations after refactor
 Cycle 88 - refactor started, 11 ts errors
@@ -858,62 +859,74 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 92>
+<Cycle Context>
+okay great, however ive discovered two issues with the onboarding page. here is my test:
+
+started a new workspace by opening a folder i just created. this brings me to the onboarding screen.
+
+I write in 'i want to make a tower defense game' in to the project scope text field. i am able to write it in (previously i couldnt) and the autosave indicator first switches to the caution, and then once i stop writing, it then begins the auto-save process (processing animation), however it never returns to the green checkmark, it remains spinning. we have encountered and resolved this before, prior to the refactor. additionally, i opened the `dce_history.json` after writing my scope to see if the auto save captured my string, and sure enough it did. however, when i switch back to the onboarding tab, two additional things occurred that i observed: 1. my written text in the text field disappeared, and 2. the green checkmark is appeared its no longer a spinnig animation. so it seems to just be some persistence/state issues. can you work on this?
+
+next, when i tried to actually generate the prompt i saw this error: `Failed to generate prompt.md: Could not find data for current cycle (0) in history.`
+
+current `dce_history.json`: 
+
+<dce_history.json>
+{
+  "version": 1,
+  "cycles": [],
+  "projectScope": "i want to make a tower defense game."
+}
+</dce_history.json>
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [7:41:00 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [7:41:00 AM] Services initializing...
+[INFO] [7:41:00 AM] Services initialized successfully.
+[INFO] [7:41:00 AM] Registering 7 commands.
+[INFO] [7:41:00 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [7:41:00 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [7:41:00 AM] Starry Night syntax highlighter initialized.
+[INFO] [7:41:00 AM] Context Chooser view message handler initialized.
+[INFO] [7:41:01 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [7:41:01 AM] [SelectionService] No last selection found in state.
+[INFO] [7:41:01 AM] Persisted current selection of 0 items.
+[INFO] [7:41:01 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:41:01 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:41:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [7:41:06 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [7:41:07 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [7:41:08 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [7:41:19 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:41:19 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:41:33 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:41:33 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [7:44:46 AM] Generating prompt.md file for cycle 0...
+[INFO] [7:44:46 AM] [SelectionService] No last selection found in state.
+[WARN] [7:44:46 AM] No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.
+[ERROR] [7:44:46 AM] Failed to generate prompt.md: Could not find data for current cycle (0) in history.
+</Ephemeral Context>
+<Previous Cycle 91 Summary of Actions>
+I have analyzed the bug report regarding the non-functional auto-save. Your diagnosis is correct; this is a critical regression that occurred during the major refactoring in the previous cycles. The root cause is that the core debounced save logic was inadvertently lost from the main `view.tsx` container component. The `onScopeChange` event was correctly updating the state but was no longer triggering the debounced function responsible for persisting that state to the backend.
+
+My course of action is to definitively fix this by re-implementing the debounced save mechanism in the container component and ensuring it is correctly wired to the state management hooks. This will restore the auto-save functionality for the project scope and all other persisted fields in the PCPP.
+
+1.  **Documentation (Codify the Bug):** I will add a new case study to `A11. DCE - Regression Case Studies.md`. It will document that during the refactor to custom hooks, the debounced save logic was not correctly re-implemented in the container component (`view.tsx`), leading to a failure in the auto-save trigger mechanism. The codified solution is to ensure the container component is responsible for creating the debounced save function and passing it to the relevant state management hooks.
+2.  **Create `useDebounce` Hook:** I will create a new, reusable custom hook in `src/client/hooks/useDebounce.ts`. This standard hook will take a value and a delay, and return a debounced version of that value, which is a common and robust pattern for handling debouncing in React.
+3.  **Refactor `view.tsx` (Container):**
+    *   I will import the new `useDebounce` hook.
+    *   I will create a `saveCurrentCycleState` function. This function will be responsible for gathering the complete, up-to-date state from all the individual hooks (`useCycleManagement`, `useTabManagement`, etc.) and assembling it into a single `PcppCycle` object.
+    *   This function will then call `cycleManagement.setSaveStatus('saving')` and send the complete `PcppCycle` object to the backend via the `SaveCycleData` IPC message.
+4.  **Update `useCycleManagement.ts` Hook:**
+    *   The hook will be modified to accept the `saveState` function as a dependency.
+    *   The `useEffect` hook within `useCycleManagement` that listens for `saveStatus === 'unsaved'` will be updated. It will now correctly call the debounced save function passed in from the `view.tsx` container, definitively restoring the auto-save functionality.
+</Previous Cycle 91 Summary of Actions>
+</Cycle 92>
+
 <Cycle 91>
 <Cycle Context>
 okay i liked this responses approach to create a useDebounce. however i ended up with a handful of ts errors in view.tsx, see ephemeral.
 </Cycle Context>
-<Ephemeral Context>
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 43:10-31
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(43,11)
-      TS2451: Cannot redeclare block-scoped variable 'saveCurrentCycleState'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 47:10-23
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(47,11)
-      TS2451: Cannot redeclare block-scoped variable 'debouncedSave'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 49:10-25
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(49,11)
-      TS2451: Cannot redeclare block-scoped variable 'cycleManagement'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 81:30-37
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(81,31)
-      TS2339: Property 'current' does not exist on type '() => void'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 85:20-38
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(85,21)
-      TS2339: Property 'selectedResponseId' does not exist on type '{ highlightedCodeBlocks: Map<string, string>; setHighlightedCodeBlocks: Dispatch<SetStateAction<Map<string, string>>>; fileExistenceMap: Map<...>; ... 15 more ...; handleCopyContent: () => void; }'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 117:10-31
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(117,11)
-      TS2451: Cannot redeclare block-scoped variable 'saveCurrentCycleState'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 118:10-23
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(118,11)
-      TS2451: Cannot redeclare block-scoped variable 'debouncedSave'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 118:60-67
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(118,61)
-      TS2339: Property 'current' does not exist on type '() => void'.
-
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-      TS2451: Cannot redeclare block-scoped variable 'cycleManagement'.
-
-9 errors have detailed information that is not shown.
-Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
-
-webpack 5.101.1 compiled with 10 errors in 2437 ms
-    [webpack-cli] Compiler is watching files for updates...
-
-</Ephemeral Context>
 <Previous Cycle 90 Summary of Actions>
 I have analyzed the two critical bugs from Cycle 89. The first issue, where the project scope input on the onboarding screen is unresponsive, is a state management bug. The `OnboardingView` component was being passed a stale `projectScope` prop instead of the actively updated `cycleContext` state. The second, more severe issue—the infinite loop of `RequestInitialCycleData` messages and the failure to save `dce_history.json`—is a classic React dependency loop. The recent refactoring into custom hooks failed to memoize the handler functions being returned. This caused their references to change on every render, triggering a `useEffect` hook in the IPC listener (`usePcppIpc.ts`) to re-run, which in turn re-requested initial data, creating an infinite loop that prevented other operations like saving from completing.
 
@@ -4908,10 +4921,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-01T11:10:05.969Z
+  Date Generated: 2025-10-01T12:47:02.369Z
   ---
-  Total Files: 178
-  Approx. Tokens: 250142
+  Total Files: 177
+  Approx. Tokens: 249873
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -4924,7 +4937,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 7. src\backend\services\llm.service.ts (4166 tokens)
 8. src\backend\services\history.service.ts (4084 tokens)
 9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4069 tokens)
+10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38905 - Tokens: 9727
@@ -5059,13 +5072,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 150 - Chars: 9893 - Tokens: 2474
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 69 - Chars: 2775 - Tokens: 694
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 96 - Chars: 4163 - Tokens: 1041
-134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4004 - Tokens: 1001
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
+134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4042 - Tokens: 1011
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9316 - Tokens: 2329
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 290 - Chars: 16275 - Tokens: 4069
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 280 - Chars: 15703 - Tokens: 3926
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -5098,13 +5111,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 126 - Chars: 5291 - Tokens: 1323
-173. src\client\views\parallel-copilot.view\hooks\useDebounce.ts - Lines: 22 - Chars: 838 - Tokens: 210
-174. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-175. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
-176. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
-177. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
-178. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 135 - Chars: 5614 - Tokens: 1404
+173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -17155,7 +17167,6 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
-    isGenerating: boolean;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -17246,7 +17257,7 @@ interface WorkflowToolbarProps {
     onParseToggle: () => void;
     selectedResponseId: string | null;
     activeTab: number;
-    onSelectResponse: () => void;
+    onSelectResponse: (id: string) => void;
     onBaseline: () => void;
     onRestore: () => void;
     onAcceptSelected: () => void;
@@ -17282,7 +17293,7 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
             {isParsedMode && (
                 <>
                     <button
-                        onClick={onSelectResponse}
+                        onClick={() => onSelectResponse(activeTab.toString())}
                         className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
                         title="Select this response as the basis for the next cycle"
                     >
@@ -18910,7 +18921,6 @@ import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
-import { formatLargeNumber } from '../../../common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
@@ -18925,7 +18935,6 @@ import { useFileManagement } from './hooks/useFileManagement';
 import { useWorkflow } from './hooks/useWorkflow';
 import { useGeneration } from './hooks/useGeneration';
 import { usePcppIpc } from './hooks/usePcppIpc';
-import { useDebounce } from './hooks/useDebounce';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -18943,17 +18952,20 @@ const App = () => {
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
 
     // --- State & Hooks Initialization ---
-    const saveCurrentCycleState = React.useCallback(() => {
-        // This function will be defined later, once all hooks are initialized
-    }, []); 
+    const saveStateRef = React.useRef<() => void>(() => {});
 
-    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
+    const debouncedSave = React.useCallback(() => {
+        const timeout = setTimeout(() => {
+            saveStateRef.current();
+        }, 1500);
+        return () => clearTimeout(timeout);
+    }, []);
 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, null, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     // --- IPC Message Handling ---
     usePcppIpc(
@@ -18980,49 +18992,39 @@ const App = () => {
     const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
     stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
 
-    React.useEffect(() => {
-        saveCurrentCycleState.current = () => {
-            const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
-            const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed } = cycleManagement;
-            const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
-            const { selectedResponseId, selectedFilesForReplacement, pathOverrides } = fileManagement;
-            
-            if (currentCycle === null) return;
-            
-            cycleManagement.setSaveStatus('saving');
-            
-            const responses: { [key: string]: PcppResponse } = {};
-            for (let i = 1; i <= tabCount; i++) {
-                responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
-            }
+    saveStateRef.current = React.useCallback(() => {
+        const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
+        const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+        const { selectedFilesForReplacement, pathOverrides } = fileManagement;
+        
+        if (currentCycle === null) return;
+        
+        cycleManagement.setSaveStatus('saving');
+        
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
+        }
 
-            const cycleData: PcppCycle = {
-                ...currentCycle,
-                title: cycleTitle,
-                cycleContext,
-                ephemeralContext,
-                responses,
-                isParsedMode,
-                leftPaneWidth: 0, // Placeholder
-                selectedResponseId,
-                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-                tabCount,
-                activeTab,
-                isSortedByTokens,
-                pathOverrides: Object.fromEntries(pathOverrides),
-                activeWorkflowStep: workflowStep || undefined,
-                isEphemeralContextCollapsed
-            };
-            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+        const cycleData: PcppCycle = {
+            ...currentCycle,
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            activeTab,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides),
+            activeWorkflowStep: workflowStep || undefined,
+            isEphemeralContextCollapsed
         };
-    }, []); // This runs once to assign the function
-
-    const saveCurrentCycleState = React.useRef<() => void>(() => {});
-    const debouncedSave = useDebounce(saveCurrentCycleState.current, 1500);
-
-    // Re-initialize the cycle management hook with the real save function
-    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
-
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
 
     // --- Component Logic & Rendering ---
 
@@ -19118,13 +19120,12 @@ const App = () => {
                 sortedTabIds={tabManagement.sortedTabIds} 
                 tabs={tabManagement.tabs} 
                 activeTab={tabManagement.activeTab} 
-                selectedResponseId={null} 
+                selectedResponseId={cycleManagement.selectedResponseId}
                 isParsedMode={tabManagement.isParsedMode} 
                 isSortedByTokens={tabManagement.isSortedByTokens} 
                 onTabSelect={tabManagement.handleTabSelect} 
                 workflowStep={workflowStep} 
                 onRegenerateTab={generationManagement.handleRegenerateTab} 
-                isGenerating={showProgressView} 
                 onSortToggle={tabManagement.handleSortToggle} 
             />
             {showProgressView ? (
@@ -19143,9 +19144,9 @@ const App = () => {
                     <WorkflowToolbar 
                         isParsedMode={tabManagement.isParsedMode}
                         onParseToggle={tabManagement.handleGlobalParseToggle}
-                        selectedResponseId={null}
+                        selectedResponseId={cycleManagement.selectedResponseId}
                         activeTab={tabManagement.activeTab}
-                        onSelectResponse={() => {}}
+                        onSelectResponse={cycleManagement.handleSelectResponse}
                         onBaseline={() => {}}
                         onRestore={() => {}}
                         onAcceptSelected={() => {}}
@@ -21811,7 +21812,7 @@ export const useCycleManagement = (
     initialCycle: PcppCycle | null,
     initialProjectScope: string | undefined,
     initialMaxCycle: number,
-    saveState: () => void // This will now be the debounced save function
+    saveState: () => void
 ) => {
     const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(initialCycle);
     const [projectScope, setProjectScope] = React.useState<string | undefined>(initialProjectScope);
@@ -21822,6 +21823,7 @@ export const useCycleManagement = (
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -21832,6 +21834,7 @@ export const useCycleManagement = (
         setCycleContext(cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
+        setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
     }, []);
 
@@ -21893,9 +21896,14 @@ export const useCycleManagement = (
     const handleExportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {}), [clientIpc]);
     const handleImportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {}), [clientIpc]);
 
+    const handleSelectResponse = React.useCallback((id: string) => {
+        setSelectedResponseId(prev => prev === id ? null : id);
+        setSaveStatus('unsaved');
+    }, []);
+
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {
-            saveState(); // This now calls the debounced save function from the container
+            saveState();
         }
     }, [saveStatus, saveState]);
 
@@ -21915,6 +21923,7 @@ export const useCycleManagement = (
         setIsEphemeralContextCollapsed,
         saveStatus,
         setSaveStatus,
+        selectedResponseId,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -21925,33 +21934,9 @@ export const useCycleManagement = (
         handleResetHistory,
         handleExportHistory,
         handleImportHistory,
+        handleSelectResponse,
     };
 };
-</file_artifact>
-
-<file path="src/client/views/parallel-copilot.view/hooks/useDebounce.ts">
-// src/client/views/parallel-copilot.view/hooks/useDebounce.ts
-import { useEffect, useState } from 'react';
-
-// A custom hook to debounce a value.
-// It will only update the returned value after the specified delay has passed without the input value changing.
-export function useDebounce<T>(value: T, delay: number): T {
-    const [debouncedValue, setDebouncedValue] = useState<T>(value);
-
-    useEffect(() => {
-        // Set up a timer to update the debounced value after the delay
-        const handler = setTimeout(() => {
-            setDebouncedValue(value);
-        }, delay);
-
-        // Clean up the timer if the value changes before the delay has passed
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [value, delay]); // Only re-run the effect if value or delay changes
-
-    return debouncedValue;
-}
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/hooks/useFileManagement.ts">

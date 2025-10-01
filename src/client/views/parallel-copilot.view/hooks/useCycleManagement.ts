@@ -8,7 +8,7 @@ export const useCycleManagement = (
     initialCycle: PcppCycle | null,
     initialProjectScope: string | undefined,
     initialMaxCycle: number,
-    saveState: () => void // This will now be the debounced save function
+    saveState: () => void
 ) => {
     const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(initialCycle);
     const [projectScope, setProjectScope] = React.useState<string | undefined>(initialProjectScope);
@@ -19,6 +19,7 @@ export const useCycleManagement = (
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -29,6 +30,7 @@ export const useCycleManagement = (
         setCycleContext(cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
+        setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
     }, []);
 
@@ -90,9 +92,14 @@ export const useCycleManagement = (
     const handleExportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {}), [clientIpc]);
     const handleImportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {}), [clientIpc]);
 
+    const handleSelectResponse = React.useCallback((id: string) => {
+        setSelectedResponseId(prev => prev === id ? null : id);
+        setSaveStatus('unsaved');
+    }, []);
+
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {
-            saveState(); // This now calls the debounced save function from the container
+            saveState();
         }
     }, [saveStatus, saveState]);
 
@@ -112,6 +119,7 @@ export const useCycleManagement = (
         setIsEphemeralContextCollapsed,
         saveStatus,
         setSaveStatus,
+        selectedResponseId,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -122,5 +130,6 @@ export const useCycleManagement = (
         handleResetHistory,
         handleExportHistory,
         handleImportHistory,
+        handleSelectResponse,
     };
 };

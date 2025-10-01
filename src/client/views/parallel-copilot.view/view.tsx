@@ -7,7 +7,6 @@ import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
-import { formatLargeNumber } from '../../../common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
@@ -22,7 +21,6 @@ import { useFileManagement } from './hooks/useFileManagement';
 import { useWorkflow } from './hooks/useWorkflow';
 import { useGeneration } from './hooks/useGeneration';
 import { usePcppIpc } from './hooks/usePcppIpc';
-import { useDebounce } from './hooks/useDebounce';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -40,17 +38,20 @@ const App = () => {
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
 
     // --- State & Hooks Initialization ---
-    const saveCurrentCycleState = React.useCallback(() => {
-        // This function will be defined later, once all hooks are initialized
-    }, []); 
+    const saveStateRef = React.useRef<() => void>(() => {});
 
-    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
+    const debouncedSave = React.useCallback(() => {
+        const timeout = setTimeout(() => {
+            saveStateRef.current();
+        }, 1500);
+        return () => clearTimeout(timeout);
+    }, []);
 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, null, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     // --- IPC Message Handling ---
     usePcppIpc(
@@ -77,49 +78,39 @@ const App = () => {
     const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
     stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
 
-    React.useEffect(() => {
-        saveCurrentCycleState.current = () => {
-            const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
-            const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed } = cycleManagement;
-            const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
-            const { selectedResponseId, selectedFilesForReplacement, pathOverrides } = fileManagement;
-            
-            if (currentCycle === null) return;
-            
-            cycleManagement.setSaveStatus('saving');
-            
-            const responses: { [key: string]: PcppResponse } = {};
-            for (let i = 1; i <= tabCount; i++) {
-                responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
-            }
+    saveStateRef.current = React.useCallback(() => {
+        const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
+        const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+        const { selectedFilesForReplacement, pathOverrides } = fileManagement;
+        
+        if (currentCycle === null) return;
+        
+        cycleManagement.setSaveStatus('saving');
+        
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
+        }
 
-            const cycleData: PcppCycle = {
-                ...currentCycle,
-                title: cycleTitle,
-                cycleContext,
-                ephemeralContext,
-                responses,
-                isParsedMode,
-                leftPaneWidth: 0, // Placeholder
-                selectedResponseId,
-                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-                tabCount,
-                activeTab,
-                isSortedByTokens,
-                pathOverrides: Object.fromEntries(pathOverrides),
-                activeWorkflowStep: workflowStep || undefined,
-                isEphemeralContextCollapsed
-            };
-            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+        const cycleData: PcppCycle = {
+            ...currentCycle,
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            activeTab,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides),
+            activeWorkflowStep: workflowStep || undefined,
+            isEphemeralContextCollapsed
         };
-    }, []); // This runs once to assign the function
-
-    const saveCurrentCycleState = React.useRef<() => void>(() => {});
-    const debouncedSave = useDebounce(saveCurrentCycleState.current, 1500);
-
-    // Re-initialize the cycle management hook with the real save function
-    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
-
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
 
     // --- Component Logic & Rendering ---
 
@@ -215,13 +206,12 @@ const App = () => {
                 sortedTabIds={tabManagement.sortedTabIds} 
                 tabs={tabManagement.tabs} 
                 activeTab={tabManagement.activeTab} 
-                selectedResponseId={null} 
+                selectedResponseId={cycleManagement.selectedResponseId}
                 isParsedMode={tabManagement.isParsedMode} 
                 isSortedByTokens={tabManagement.isSortedByTokens} 
                 onTabSelect={tabManagement.handleTabSelect} 
                 workflowStep={workflowStep} 
                 onRegenerateTab={generationManagement.handleRegenerateTab} 
-                isGenerating={showProgressView} 
                 onSortToggle={tabManagement.handleSortToggle} 
             />
             {showProgressView ? (
@@ -240,9 +230,9 @@ const App = () => {
                     <WorkflowToolbar 
                         isParsedMode={tabManagement.isParsedMode}
                         onParseToggle={tabManagement.handleGlobalParseToggle}
-                        selectedResponseId={null}
+                        selectedResponseId={cycleManagement.selectedResponseId}
                         activeTab={tabManagement.activeTab}
-                        onSelectResponse={() => {}}
+                        onSelectResponse={cycleManagement.handleSelectResponse}
                         onBaseline={() => {}}
                         onRestore={() => {}}
                         onAcceptSelected={() => {}}

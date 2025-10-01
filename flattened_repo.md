@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-01T11:10:05.969Z
+  Date Generated: 2025-10-01T12:47:02.369Z
   ---
-  Total Files: 178
-  Approx. Tokens: 250142
+  Total Files: 177
+  Approx. Tokens: 249873
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -17,7 +17,7 @@
 7. src\backend\services\llm.service.ts (4166 tokens)
 8. src\backend\services\history.service.ts (4084 tokens)
 9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4069 tokens)
+10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38905 - Tokens: 9727
@@ -152,13 +152,13 @@
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 150 - Chars: 9893 - Tokens: 2474
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 69 - Chars: 2775 - Tokens: 694
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 96 - Chars: 4163 - Tokens: 1041
-134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4004 - Tokens: 1001
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
+134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4042 - Tokens: 1011
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9316 - Tokens: 2329
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 290 - Chars: 16275 - Tokens: 4069
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 280 - Chars: 15703 - Tokens: 3926
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -191,13 +191,12 @@
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 126 - Chars: 5291 - Tokens: 1323
-173. src\client\views\parallel-copilot.view\hooks\useDebounce.ts - Lines: 22 - Chars: 838 - Tokens: 210
-174. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-175. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
-176. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
-177. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
-178. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 135 - Chars: 5614 - Tokens: 1404
+173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -12248,7 +12247,6 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
-    isGenerating: boolean;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -12339,7 +12337,7 @@ interface WorkflowToolbarProps {
     onParseToggle: () => void;
     selectedResponseId: string | null;
     activeTab: number;
-    onSelectResponse: () => void;
+    onSelectResponse: (id: string) => void;
     onBaseline: () => void;
     onRestore: () => void;
     onAcceptSelected: () => void;
@@ -12375,7 +12373,7 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({
             {isParsedMode && (
                 <>
                     <button
-                        onClick={onSelectResponse}
+                        onClick={() => onSelectResponse(activeTab.toString())}
                         className={`styled-button ${selectedResponseId === activeTab.toString() ? 'toggled' : ''} ${workflowStep === 'awaitingResponseSelect' ? 'workflow-highlight' : ''}`}
                         title="Select this response as the basis for the next cycle"
                     >
@@ -14003,7 +14001,6 @@ import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
 import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
-import { formatLargeNumber } from '../../../common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
 import ResponseTabs from './components/ResponseTabs';
@@ -14018,7 +14015,6 @@ import { useFileManagement } from './hooks/useFileManagement';
 import { useWorkflow } from './hooks/useWorkflow';
 import { useGeneration } from './hooks/useGeneration';
 import { usePcppIpc } from './hooks/usePcppIpc';
-import { useDebounce } from './hooks/useDebounce';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -14036,17 +14032,20 @@ const App = () => {
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
 
     // --- State & Hooks Initialization ---
-    const saveCurrentCycleState = React.useCallback(() => {
-        // This function will be defined later, once all hooks are initialized
-    }, []); 
+    const saveStateRef = React.useRef<() => void>(() => {});
 
-    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
+    const debouncedSave = React.useCallback(() => {
+        const timeout = setTimeout(() => {
+            saveStateRef.current();
+        }, 1500);
+        return () => clearTimeout(timeout);
+    }, []);
 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, null, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     // --- IPC Message Handling ---
     usePcppIpc(
@@ -14073,49 +14072,39 @@ const App = () => {
     const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
     stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
 
-    React.useEffect(() => {
-        saveCurrentCycleState.current = () => {
-            const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
-            const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed } = cycleManagement;
-            const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
-            const { selectedResponseId, selectedFilesForReplacement, pathOverrides } = fileManagement;
-            
-            if (currentCycle === null) return;
-            
-            cycleManagement.setSaveStatus('saving');
-            
-            const responses: { [key: string]: PcppResponse } = {};
-            for (let i = 1; i <= tabCount; i++) {
-                responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
-            }
+    saveStateRef.current = React.useCallback(() => {
+        const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
+        const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+        const { selectedFilesForReplacement, pathOverrides } = fileManagement;
+        
+        if (currentCycle === null) return;
+        
+        cycleManagement.setSaveStatus('saving');
+        
+        const responses: { [key: string]: PcppResponse } = {};
+        for (let i = 1; i <= tabCount; i++) {
+            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
+        }
 
-            const cycleData: PcppCycle = {
-                ...currentCycle,
-                title: cycleTitle,
-                cycleContext,
-                ephemeralContext,
-                responses,
-                isParsedMode,
-                leftPaneWidth: 0, // Placeholder
-                selectedResponseId,
-                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-                tabCount,
-                activeTab,
-                isSortedByTokens,
-                pathOverrides: Object.fromEntries(pathOverrides),
-                activeWorkflowStep: workflowStep || undefined,
-                isEphemeralContextCollapsed
-            };
-            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+        const cycleData: PcppCycle = {
+            ...currentCycle,
+            title: cycleTitle,
+            cycleContext,
+            ephemeralContext,
+            responses,
+            isParsedMode,
+            selectedResponseId,
+            selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+            tabCount,
+            activeTab,
+            isSortedByTokens,
+            pathOverrides: Object.fromEntries(pathOverrides),
+            activeWorkflowStep: workflowStep || undefined,
+            isEphemeralContextCollapsed
         };
-    }, []); // This runs once to assign the function
-
-    const saveCurrentCycleState = React.useRef<() => void>(() => {});
-    const debouncedSave = useDebounce(saveCurrentCycleState.current, 1500);
-
-    // Re-initialize the cycle management hook with the real save function
-    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
-
+        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+    }, [clientIpc]);
 
     // --- Component Logic & Rendering ---
 
@@ -14211,13 +14200,12 @@ const App = () => {
                 sortedTabIds={tabManagement.sortedTabIds} 
                 tabs={tabManagement.tabs} 
                 activeTab={tabManagement.activeTab} 
-                selectedResponseId={null} 
+                selectedResponseId={cycleManagement.selectedResponseId}
                 isParsedMode={tabManagement.isParsedMode} 
                 isSortedByTokens={tabManagement.isSortedByTokens} 
                 onTabSelect={tabManagement.handleTabSelect} 
                 workflowStep={workflowStep} 
                 onRegenerateTab={generationManagement.handleRegenerateTab} 
-                isGenerating={showProgressView} 
                 onSortToggle={tabManagement.handleSortToggle} 
             />
             {showProgressView ? (
@@ -14236,9 +14224,9 @@ const App = () => {
                     <WorkflowToolbar 
                         isParsedMode={tabManagement.isParsedMode}
                         onParseToggle={tabManagement.handleGlobalParseToggle}
-                        selectedResponseId={null}
+                        selectedResponseId={cycleManagement.selectedResponseId}
                         activeTab={tabManagement.activeTab}
-                        onSelectResponse={() => {}}
+                        onSelectResponse={cycleManagement.handleSelectResponse}
                         onBaseline={() => {}}
                         onRestore={() => {}}
                         onAcceptSelected={() => {}}
@@ -16904,7 +16892,7 @@ export const useCycleManagement = (
     initialCycle: PcppCycle | null,
     initialProjectScope: string | undefined,
     initialMaxCycle: number,
-    saveState: () => void // This will now be the debounced save function
+    saveState: () => void
 ) => {
     const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(initialCycle);
     const [projectScope, setProjectScope] = React.useState<string | undefined>(initialProjectScope);
@@ -16915,6 +16903,7 @@ export const useCycleManagement = (
     const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
+    const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -16925,6 +16914,7 @@ export const useCycleManagement = (
         setCycleContext(cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
+        setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
     }, []);
 
@@ -16986,9 +16976,14 @@ export const useCycleManagement = (
     const handleExportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {}), [clientIpc]);
     const handleImportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {}), [clientIpc]);
 
+    const handleSelectResponse = React.useCallback((id: string) => {
+        setSelectedResponseId(prev => prev === id ? null : id);
+        setSaveStatus('unsaved');
+    }, []);
+
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {
-            saveState(); // This now calls the debounced save function from the container
+            saveState();
         }
     }, [saveStatus, saveState]);
 
@@ -17008,6 +17003,7 @@ export const useCycleManagement = (
         setIsEphemeralContextCollapsed,
         saveStatus,
         setSaveStatus,
+        selectedResponseId,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -17018,33 +17014,9 @@ export const useCycleManagement = (
         handleResetHistory,
         handleExportHistory,
         handleImportHistory,
+        handleSelectResponse,
     };
 };
-</file_artifact>
-
-<file path="src/client/views/parallel-copilot.view/hooks/useDebounce.ts">
-// src/client/views/parallel-copilot.view/hooks/useDebounce.ts
-import { useEffect, useState } from 'react';
-
-// A custom hook to debounce a value.
-// It will only update the returned value after the specified delay has passed without the input value changing.
-export function useDebounce<T>(value: T, delay: number): T {
-    const [debouncedValue, setDebouncedValue] = useState<T>(value);
-
-    useEffect(() => {
-        // Set up a timer to update the debounced value after the delay
-        const handler = setTimeout(() => {
-            setDebouncedValue(value);
-        }, delay);
-
-        // Clean up the timer if the value changes before the delay has passed
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [value, delay]); // Only re-run the effect if value or delay changes
-
-    return debouncedValue;
-}
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/hooks/useFileManagement.ts">
