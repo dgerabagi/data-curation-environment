@@ -5,7 +5,7 @@ import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
-import { PcppCycle, TabState } from '../../../common/types/pcpp.types';
+import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
 import { formatLargeNumber } from '../../../common/utils/formatting';
 import CycleNavigator from './components/CycleNavigator';
@@ -22,6 +22,7 @@ import { useFileManagement } from './hooks/useFileManagement';
 import { useWorkflow } from './hooks/useWorkflow';
 import { useGeneration } from './hooks/useGeneration';
 import { usePcppIpc } from './hooks/usePcppIpc';
+import { useDebounce } from './hooks/useDebounce';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -38,21 +39,20 @@ const App = () => {
     
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
 
-    React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
-            setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
-        });
-        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
-    }, [clientIpc]);
+    // --- State & Hooks Initialization ---
+    const saveCurrentCycleState = React.useCallback(() => {
+        // This function will be defined later, once all hooks are initialized
+    }, []); 
 
-    const saveState = () => { /* Logic to be defined/passed to useCycleManagement */ };
+    const debouncedSave = useDebounce(saveCurrentCycleState, 1500);
 
-    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, saveState);
+    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, null, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
+    // --- IPC Message Handling ---
     usePcppIpc(
         cycleManagement.loadCycleData,
         fileManagement.setHighlightedCodeBlocks,
@@ -72,6 +72,63 @@ const App = () => {
         cycleManagement.handleCycleChange,
         cycleManagement.currentCycle?.cycleId || null
     );
+
+    // --- Core Save Logic ---
+    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
+    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
+
+    React.useEffect(() => {
+        saveCurrentCycleState.current = () => {
+            const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+            const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed } = cycleManagement;
+            const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+            const { selectedResponseId, selectedFilesForReplacement, pathOverrides } = fileManagement;
+            
+            if (currentCycle === null) return;
+            
+            cycleManagement.setSaveStatus('saving');
+            
+            const responses: { [key: string]: PcppResponse } = {};
+            for (let i = 1; i <= tabCount; i++) {
+                responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
+            }
+
+            const cycleData: PcppCycle = {
+                ...currentCycle,
+                title: cycleTitle,
+                cycleContext,
+                ephemeralContext,
+                responses,
+                isParsedMode,
+                leftPaneWidth: 0, // Placeholder
+                selectedResponseId,
+                selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
+                tabCount,
+                activeTab,
+                isSortedByTokens,
+                pathOverrides: Object.fromEntries(pathOverrides),
+                activeWorkflowStep: workflowStep || undefined,
+                isEphemeralContextCollapsed
+            };
+            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+        };
+    }, []); // This runs once to assign the function
+
+    const saveCurrentCycleState = React.useRef<() => void>(() => {});
+    const debouncedSave = useDebounce(saveCurrentCycleState.current, 1500);
+
+    // Re-initialize the cycle management hook with the real save function
+    const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle, debouncedSave);
+
+
+    // --- Component Logic & Rendering ---
+
+    React.useEffect(() => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
+            setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+        });
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
+    }, [clientIpc]);
 
     if (cycleManagement.currentCycle === null) return <div>Loading...</div>;
     if (cycleManagement.currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
@@ -93,7 +150,17 @@ const App = () => {
     
     const collapsedNavigator = <div>...</div>;
     const totalPromptCostDisplay = <span>...</span>;
-    const SaveStatusIndicator = () => <span>...</span>;
+    const SaveStatusIndicator = () => {
+        let icon;
+        let title;
+        switch(cycleManagement.saveStatus) {
+            case 'saving': icon = <VscLoading className="saving"/>; title = "Saving..."; break;
+            case 'unsaved': icon = <VscWarning className="unsaved"/>; title = "Unsaved changes"; break;
+            case 'saved': icon = <VscCheck className="saved"/>; title = "Saved"; break;
+            default: icon = null; title = "";
+        }
+        return <div className="save-status-indicator" title={title}>{icon}</div>;
+    };
     const renderHeaderButtons = () => {
         if (generationManagement.connectionMode === 'manual') {
             return <button><VscFileCode /> Generate prompt.md</button>;

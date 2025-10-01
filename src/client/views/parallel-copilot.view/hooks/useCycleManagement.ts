@@ -8,7 +8,7 @@ export const useCycleManagement = (
     initialCycle: PcppCycle | null,
     initialProjectScope: string | undefined,
     initialMaxCycle: number,
-    saveState: () => void
+    saveState: () => void // This will now be the debounced save function
 ) => {
     const [currentCycle, setCurrentCycle] = React.useState<PcppCycle | null>(initialCycle);
     const [projectScope, setProjectScope] = React.useState<string | undefined>(initialProjectScope);
@@ -92,7 +92,7 @@ export const useCycleManagement = (
 
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {
-            saveState();
+            saveState(); // This now calls the debounced save function from the container
         }
     }, [saveStatus, saveState]);
 
