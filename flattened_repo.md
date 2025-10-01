@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-30T22:41:07.588Z
+  Date Generated: 2025-09-30T23:33:07.828Z
   ---
   Total Files: 177
-  Approx. Tokens: 248212
+  Approx. Tokens: 248635
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -155,8 +155,8 @@
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 96 - Chars: 4163 - Tokens: 1041
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4004 - Tokens: 1001
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9134 - Tokens: 2284
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9316 - Tokens: 2329
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 223 - Chars: 13130 - Tokens: 3283
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
@@ -191,11 +191,11 @@
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 126 - Chars: 4862 - Tokens: 1216
-173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4008 - Tokens: 1002
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2829 - Tokens: 708
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 101 - Chars: 5192 - Tokens: 1298
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5547 - Tokens: 1387
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 126 - Chars: 5178 - Tokens: 1295
+173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
@@ -14075,7 +14075,7 @@ const App = () => {
 
     if (cycleManagement.currentCycle.cycleId === 0) { 
         return <OnboardingView 
-            projectScope={cycleManagement.projectScope || ''} 
+            projectScope={cycleManagement.cycleContext || ''} 
             onScopeChange={onScopeChange} 
             onNavigateToCycle={(id) => cycleManagement.handleCycleChange(null, id)} 
             latestCycleId={cycleManagement.maxCycle} 
@@ -16836,7 +16836,7 @@ export const useCycleManagement = (
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const loadCycleData = (cycleData: PcppCycle, scope?: string) => {
+    const loadCycleData = React.useCallback((cycleData: PcppCycle, scope?: string) => {
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
@@ -16844,18 +16844,18 @@ export const useCycleManagement = (
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
         setSaveStatus('saved');
-    };
+    }, []);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => {
+    const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
         e?.stopPropagation();
         if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return;
         if (newCycleId >= 0 && newCycleId <= maxCycle) {
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId });
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         }
-    };
+    }, [saveStatus, currentCycle, maxCycle, clientIpc]);
 
-    const handleNewCycle = (e: React.MouseEvent) => {
+    const handleNewCycle = React.useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
         if (saveStatus !== 'saved') return;
         const newCycleId = maxCycle + 1;
@@ -16874,7 +16874,7 @@ export const useCycleManagement = (
         loadCycleData(newCycle);
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
-    };
+    }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
     
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
@@ -16891,18 +16891,18 @@ export const useCycleManagement = (
         setSaveStatus('unsaved');
     }, []);
 
-    const handleDeleteCycle = () => {
+    const handleDeleteCycle = React.useCallback(() => {
         if (currentCycle !== null) {
             clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId });
         }
-    };
+    }, [currentCycle, clientIpc]);
 
-    const handleResetHistory = () => {
+    const handleResetHistory = React.useCallback(() => {
         clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    };
+    }, [clientIpc]);
 
-    const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
-    const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
+    const handleExportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {}), [clientIpc]);
+    const handleImportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {}), [clientIpc]);
 
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {
@@ -16962,12 +16962,12 @@ export const useFileManagement = (
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleSelectForViewing = (filePath: string) => {
+    const handleSelectForViewing = React.useCallback((filePath: string) => {
         const newPath = selectedFilePath === filePath ? null : filePath;
         setSelectedFilePath(newPath);
-    };
+    }, [selectedFilePath]);
 
-    const handleFileSelectionToggle = (filePath: string) => {
+    const handleFileSelectionToggle = React.useCallback((filePath: string) => {
         const currentTabId = activeTab.toString();
         const compositeKeyForCurrent = `${currentTabId}:::${filePath}`;
         setSelectedFilesForReplacement(prev => {
@@ -16992,33 +16992,33 @@ export const useFileManagement = (
             return newSet;
         });
         setSaveStatus('unsaved');
-    };
+    }, [activeTab, setSaveStatus]);
 
-    const handleLinkFile = (originalPath: string) => {
+    const handleLinkFile = React.useCallback((originalPath: string) => {
         if (tempOverridePath.trim()) {
             setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
             setFileExistenceMap(prev => new Map(prev).set(originalPath, true));
             setTempOverridePath('');
             handleSelectForViewing(originalPath);
         }
-    };
+    }, [tempOverridePath, handleSelectForViewing]);
     
-    const handleUnlinkFile = (originalPath: string) => {
+    const handleUnlinkFile = React.useCallback((originalPath: string) => {
         setPathOverrides(prev => {
             const newMap = new Map(prev);
             newMap.delete(originalPath);
             return newMap;
         });
         setFileExistenceMap(prev => new Map(prev).set(originalPath, false));
-    };
+    }, []);
 
-    const handleCopyContent = () => {
+    const handleCopyContent = React.useCallback(() => {
         if (!selectedFilePath || !tabs[activeTab.toString()]?.parsedContent) return;
         const file = tabs[activeTab.toString()].parsedContent.files.find((f: any) => f.path === selectedFilePath);
         if (file) {
             clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
         }
-    };
+    }, [selectedFilePath, tabs, activeTab, clientIpc]);
 
     return {
         highlightedCodeBlocks,
@@ -17069,25 +17069,25 @@ export const useGeneration = (
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleGenerateResponses = () => {
+    const handleGenerateResponses = React.useCallback(() => {
         const cycleData = getCurrentCycleData();
         if (cycleData) {
             clientIpc.sendToServer(ClientToServerChannel.RequestNewCycleAndGenerate, { cycleData, count: responseCount });
         }
-    };
+    }, [clientIpc, getCurrentCycleData, responseCount]);
     
-    const handleStartGeneration = (projectScope: string, count: number) => {
+    const handleStartGeneration = React.useCallback((projectScope: string, count: number) => {
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount: count });
-    };
+    }, [clientIpc]);
 
-    const handleRegenerateTab = (responseId: number) => {
+    const handleRegenerateTab = React.useCallback((responseId: number) => {
         if (currentCycle === null) return;
         const tabId = responseId.toString();
         setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } }));
         clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId });
         setSaveStatus('unsaved');
         setIsGenerationComplete(false);
-    };
+    }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;
@@ -17119,7 +17119,6 @@ export const useGeneration = (
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { logger } from '@/client/utils/logger';
 import { PcppCycle } from '@/common/types/pcpp.types';
 
 export const usePcppIpc = (
@@ -17144,6 +17143,17 @@ export const usePcppIpc = (
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
+        // This effect runs only once on mount to fetch initial data.
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [clientIpc]);
+
+    React.useEffect(() => {
+        // This effect registers all the message listeners.
+        // It will re-register them if any of the handler functions change.
+        // The handlers are now stabilized with useCallback, so this should run infrequently.
+        
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => {
             loadCycleData(cycleData, projectScope);
             setMaxCycle(cycleData.cycleId);
@@ -17211,10 +17221,12 @@ export const usePcppIpc = (
             setConnectionMode(settings.connectionMode);
         });
 
-        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
-        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
-
-    }, [clientIpc, loadCycleData, setMaxCycle, setWorkflowStep, setHighlightedCodeBlocks, setFileExistenceMap, setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, setCostBreakdown, setSaveStatus, setConnectionMode, currentCycleId]);
+    }, [
+        clientIpc, loadCycleData, setHighlightedCodeBlocks, setFileExistenceMap, 
+        setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
+        setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
+        currentCycleId, setMaxCycle
+    ]);
 };
 </file_artifact>
 
@@ -17243,12 +17255,12 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleTabSelect = (tabIndex: number) => {
+    const handleTabSelect = React.useCallback((tabIndex: number) => {
         setActiveTab(tabIndex);
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handleTabCountChange = (count: number) => {
+    const handleTabCountChange = React.useCallback((count: number) => {
         setTabCount(count);
         setTabs(prev => {
             const newTabs = { ...prev };
@@ -17260,14 +17272,14 @@ export const useTabManagement = (
             return newTabs;
         });
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handleRawContentChange = (newContent: string, tabIndex: number) => {
+    const handleRawContentChange = React.useCallback((newContent: string, tabIndex: number) => {
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null, status: 'complete' } }));
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => {
+    const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
         const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
@@ -17277,7 +17289,7 @@ export const useTabManagement = (
         } else {
             handleRawContentChange(pastedText, tabIndex);
         }
-    };
+    }, [tabs, tabCount, handleRawContentChange]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -17306,7 +17318,7 @@ export const useTabManagement = (
         });
     }, [clientIpc, requestAllMetrics]);
 
-    const handleGlobalParseToggle = () => {
+    const handleGlobalParseToggle = React.useCallback(() => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         if (!newParseMode) {
@@ -17319,12 +17331,12 @@ export const useTabManagement = (
             });
         }
         setSaveStatus('unsaved');
-    };
+    }, [isParsedMode, setSaveStatus]);
 
-    const handleSortToggle = () => {
+    const handleSortToggle = React.useCallback(() => {
         setIsSortedByTokens(p => !p);
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
     const sortedTabIds = React.useMemo(() => {
         const tabIds = [...Array(tabCount)].map((_, i) => i + 1);

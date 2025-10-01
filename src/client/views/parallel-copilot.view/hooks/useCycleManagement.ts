@@ -22,7 +22,7 @@ export const useCycleManagement = (
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const loadCycleData = (cycleData: PcppCycle, scope?: string) => {
+    const loadCycleData = React.useCallback((cycleData: PcppCycle, scope?: string) => {
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
@@ -30,18 +30,18 @@ export const useCycleManagement = (
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
         setSaveStatus('saved');
-    };
+    }, []);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => {
+    const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
         e?.stopPropagation();
         if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return;
         if (newCycleId >= 0 && newCycleId <= maxCycle) {
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId });
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         }
-    };
+    }, [saveStatus, currentCycle, maxCycle, clientIpc]);
 
-    const handleNewCycle = (e: React.MouseEvent) => {
+    const handleNewCycle = React.useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
         if (saveStatus !== 'saved') return;
         const newCycleId = maxCycle + 1;
@@ -60,7 +60,7 @@ export const useCycleManagement = (
         loadCycleData(newCycle);
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
-    };
+    }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
     
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
@@ -77,18 +77,18 @@ export const useCycleManagement = (
         setSaveStatus('unsaved');
     }, []);
 
-    const handleDeleteCycle = () => {
+    const handleDeleteCycle = React.useCallback(() => {
         if (currentCycle !== null) {
             clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId });
         }
-    };
+    }, [currentCycle, clientIpc]);
 
-    const handleResetHistory = () => {
+    const handleResetHistory = React.useCallback(() => {
         clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    };
+    }, [clientIpc]);
 
-    const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
-    const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
+    const handleExportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {}), [clientIpc]);
+    const handleImportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {}), [clientIpc]);
 
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {

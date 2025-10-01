@@ -19,12 +19,12 @@ export const useFileManagement = (
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleSelectForViewing = (filePath: string) => {
+    const handleSelectForViewing = React.useCallback((filePath: string) => {
         const newPath = selectedFilePath === filePath ? null : filePath;
         setSelectedFilePath(newPath);
-    };
+    }, [selectedFilePath]);
 
-    const handleFileSelectionToggle = (filePath: string) => {
+    const handleFileSelectionToggle = React.useCallback((filePath: string) => {
         const currentTabId = activeTab.toString();
         const compositeKeyForCurrent = `${currentTabId}:::${filePath}`;
         setSelectedFilesForReplacement(prev => {
@@ -49,33 +49,33 @@ export const useFileManagement = (
             return newSet;
         });
         setSaveStatus('unsaved');
-    };
+    }, [activeTab, setSaveStatus]);
 
-    const handleLinkFile = (originalPath: string) => {
+    const handleLinkFile = React.useCallback((originalPath: string) => {
         if (tempOverridePath.trim()) {
             setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
             setFileExistenceMap(prev => new Map(prev).set(originalPath, true));
             setTempOverridePath('');
             handleSelectForViewing(originalPath);
         }
-    };
+    }, [tempOverridePath, handleSelectForViewing]);
     
-    const handleUnlinkFile = (originalPath: string) => {
+    const handleUnlinkFile = React.useCallback((originalPath: string) => {
         setPathOverrides(prev => {
             const newMap = new Map(prev);
             newMap.delete(originalPath);
             return newMap;
         });
         setFileExistenceMap(prev => new Map(prev).set(originalPath, false));
-    };
+    }, []);
 
-    const handleCopyContent = () => {
+    const handleCopyContent = React.useCallback(() => {
         if (!selectedFilePath || !tabs[activeTab.toString()]?.parsedContent) return;
         const file = tabs[activeTab.toString()].parsedContent.files.find((f: any) => f.path === selectedFilePath);
         if (file) {
             clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
         }
-    };
+    }, [selectedFilePath, tabs, activeTab, clientIpc]);
 
     return {
         highlightedCodeBlocks,

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { logger } from '@/client/utils/logger';
 import { PcppCycle } from '@/common/types/pcpp.types';
 
 export const usePcppIpc = (
@@ -27,6 +26,17 @@ export const usePcppIpc = (
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
+        // This effect runs only once on mount to fetch initial data.
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [clientIpc]);
+
+    React.useEffect(() => {
+        // This effect registers all the message listeners.
+        // It will re-register them if any of the handler functions change.
+        // The handlers are now stabilized with useCallback, so this should run infrequently.
+        
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => {
             loadCycleData(cycleData, projectScope);
             setMaxCycle(cycleData.cycleId);
@@ -94,8 +104,10 @@ export const usePcppIpc = (
             setConnectionMode(settings.connectionMode);
         });
 
-        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
-        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
-
-    }, [clientIpc, loadCycleData, setMaxCycle, setWorkflowStep, setHighlightedCodeBlocks, setFileExistenceMap, setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, setCostBreakdown, setSaveStatus, setConnectionMode, currentCycleId]);
+    }, [
+        clientIpc, loadCycleData, setHighlightedCodeBlocks, setFileExistenceMap, 
+        setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
+        setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
+        currentCycleId, setMaxCycle
+    ]);
 };

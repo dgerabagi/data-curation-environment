@@ -22,25 +22,25 @@ export const useGeneration = (
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleGenerateResponses = () => {
+    const handleGenerateResponses = React.useCallback(() => {
         const cycleData = getCurrentCycleData();
         if (cycleData) {
             clientIpc.sendToServer(ClientToServerChannel.RequestNewCycleAndGenerate, { cycleData, count: responseCount });
         }
-    };
+    }, [clientIpc, getCurrentCycleData, responseCount]);
     
-    const handleStartGeneration = (projectScope: string, count: number) => {
+    const handleStartGeneration = React.useCallback((projectScope: string, count: number) => {
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount: count });
-    };
+    }, [clientIpc]);
 
-    const handleRegenerateTab = (responseId: number) => {
+    const handleRegenerateTab = React.useCallback((responseId: number) => {
         if (currentCycle === null) return;
         const tabId = responseId.toString();
         setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } }));
         clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId });
         setSaveStatus('unsaved');
         setIsGenerationComplete(false);
-    };
+    }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;

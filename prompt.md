@@ -1,4 +1,3 @@
-Critical Note: Do not use placeholders. produce only complete, copy and pastable code products. If you provide any placeholder, the entire response is invalidated and re-submitted.
 <prompt.md>
 
 <M1. artifact schema>
@@ -12,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 89 - analyze observations after refactor
+Current Cycle 90 - one stop forward, another issue presents itself
+Cycle 89 - analyze observations after refactor
 Cycle 88 - refactor started, 11 ts errors
 Cycle 87 - initiate/deliver on new refactor plan (A105)
 Cycle 86 - make a better plan
@@ -857,6 +857,42 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 90>
+<Cycle Context>
+nice! now whatever i write in the project scope text field remains. however, i am seeing the caution symbol on the auto-save, and its not actually ever auto-saving. can you look into what might be causing that to stop working? i put all the logs that i see in the dce output into ephemeral after typing into a new workspace some text in the project scope and witnessing no autosave trigger to return the caution icon to a green checkmark.
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [6:30:52 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [6:30:52 PM] Services initializing...
+[INFO] [6:30:52 PM] Services initialized successfully.
+[INFO] [6:30:52 PM] Registering 7 commands.
+[INFO] [6:30:52 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [6:30:52 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [6:30:53 PM] Starry Night syntax highlighter initialized.
+[INFO] [6:30:53 PM] Context Chooser view message handler initialized.
+[INFO] [6:30:53 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
+[INFO] [6:30:53 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:30:53 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:30:53 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [6:30:53 PM] [SelectionService] No last selection found in state.
+[INFO] [6:30:53 PM] Persisted current selection of 0 items.
+</Ephemeral Context>
+<Previous Cycle 89 Summary of Actions>
+I have resolved all 11 TypeScript errors from the previous refactoring cycle. The errors were primarily due to missing imports in the newly created hook files and mismatches in the props being passed from the main `view.tsx` container to its child components.
+
+I have added the necessary imports to `usePcppIpc.ts`. I then corrected the props being passed to `ContextInputs`, `ResponseTabs`, `ResponsePane`, and `ParsedView` to align with their updated interfaces after the refactor. I also ensured that state variables managed by the new hooks, such as `leftPaneWidth`, are correctly returned and passed down through the component tree.
+
+The project should now be in a stable, compilable state, with the `view.tsx` component significantly simplified.
+
+1.  **`usePcppIpc.ts`:** Add the missing import for `ClientToServerChannel` and `ServerToClientChannel` to resolve the `Cannot find name` errors.
+2.  **`ContextInputs.tsx`:** Remove the `cycleContextTokens` and `ephemeralContextTokens` props, as this component will now calculate these values internally for better encapsulation.
+3.  **`ResponseTabs.tsx`:** Remove the `generationProgress` prop, as the loading state is now derived from the `status` property on each individual tab.
+4.  **`ResponsePane.tsx`:** Remove the `onSelectResponse` prop, as this logic is now handled by the `useWorkflow` hook. Add the `leftPaneWidth` prop to control the resizable pane layout.
+5.  **`ParsedView.tsx`:** Add the `leftPaneWidth` prop to its interface to correctly receive it from `ResponsePane`.
+6.  **`view.tsx`:** Update the component to reflect all the prop changes made to its children, ensuring the application compiles without errors. This includes changing a call from `handleTabCountChange` to `setTabCount` to match the new hook's API.
+</Previous Cycle 89 Summary of Actions>
+</Cycle 90>
+
 <Cycle 89>
 <Cycle Context>
 fantastic work! okay i got it running again. i started a new workspace to test.
@@ -865,46 +901,6 @@ okay the first observation is that whatever i type in to the project scope text 
 
 im also noticing the auto-save indicator does cycle when i type instantly between the caution and the checkmark, which is indicative of it autosaving when i type, however there is no dce_history.json getting created, so its getting stopped somewhere before that action occurring.
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [5:36:44 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [5:36:44 PM] Services initializing...
-[INFO] [5:36:44 PM] Services initialized successfully.
-[INFO] [5:36:44 PM] Registering 7 commands.
-[INFO] [5:36:44 PM] Starry Night syntax highlighter initialized.
-[INFO] [5:36:44 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [5:36:44 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [5:36:44 PM] Context Chooser view message handler initialized.
-[INFO] [5:36:44 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [5:36:44 PM] [SelectionService] No last selection found in state.
-[INFO] [5:36:44 PM] Persisted current selection of 0 items.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [5:36:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[... Continual spam ...]
-</Ephemeral Context>
 <Previous Cycle 88 Summary of Actions>
 I will begin the systematic refactor of `parallel-copilot.view/view.tsx` into a **Container/Hooks/Presentational** architecture as detailed in `A105`. This is the correct approach to address the component's excessive size and complexity. My course of action is to create a new `hooks` directory and extract all business logic, state management, and IPC handling from `view.tsx` into a series of new, single-responsibility custom hooks. The `view.tsx` file will be rewritten as a lean container component that orchestrates these hooks and passes data to the existing presentational components. I will provide the complete code for all new hook files, the refactored container, and the updated presentational components.
 
@@ -4860,10 +4856,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-09-30T22:41:07.588Z
+  Date Generated: 2025-09-30T23:33:07.828Z
   ---
   Total Files: 177
-  Approx. Tokens: 248212
+  Approx. Tokens: 248635
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5014,8 +5010,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 96 - Chars: 4163 - Tokens: 1041
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4004 - Tokens: 1001
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9134 - Tokens: 2284
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 5958 - Tokens: 1490
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 183 - Chars: 9316 - Tokens: 2329
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 223 - Chars: 13130 - Tokens: 3283
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
@@ -5050,11 +5046,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 364 - Chars: 46470 - Tokens: 11618
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 126 - Chars: 4862 - Tokens: 1216
-173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4008 - Tokens: 1002
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2829 - Tokens: 708
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 101 - Chars: 5192 - Tokens: 1298
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5547 - Tokens: 1387
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 126 - Chars: 5178 - Tokens: 1295
+173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
@@ -18934,7 +18930,7 @@ const App = () => {
 
     if (cycleManagement.currentCycle.cycleId === 0) { 
         return <OnboardingView 
-            projectScope={cycleManagement.projectScope || ''} 
+            projectScope={cycleManagement.cycleContext || ''} 
             onScopeChange={onScopeChange} 
             onNavigateToCycle={(id) => cycleManagement.handleCycleChange(null, id)} 
             latestCycleId={cycleManagement.maxCycle} 
@@ -21695,7 +21691,7 @@ export const useCycleManagement = (
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const loadCycleData = (cycleData: PcppCycle, scope?: string) => {
+    const loadCycleData = React.useCallback((cycleData: PcppCycle, scope?: string) => {
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
@@ -21703,18 +21699,18 @@ export const useCycleManagement = (
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
         setSaveStatus('saved');
-    };
+    }, []);
 
-    const handleCycleChange = (e: React.MouseEvent | null, newCycleId: number) => {
+    const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
         e?.stopPropagation();
         if (saveStatus !== 'saved' && currentCycle?.cycleId !== newCycleId) return;
         if (newCycleId >= 0 && newCycleId <= maxCycle) {
             clientIpc.sendToServer(ClientToServerChannel.RequestCycleData, { cycleId: newCycleId });
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         }
-    };
+    }, [saveStatus, currentCycle, maxCycle, clientIpc]);
 
-    const handleNewCycle = (e: React.MouseEvent) => {
+    const handleNewCycle = React.useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
         if (saveStatus !== 'saved') return;
         const newCycleId = maxCycle + 1;
@@ -21733,7 +21729,7 @@ export const useCycleManagement = (
         loadCycleData(newCycle);
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
-    };
+    }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
     
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
@@ -21750,18 +21746,18 @@ export const useCycleManagement = (
         setSaveStatus('unsaved');
     }, []);
 
-    const handleDeleteCycle = () => {
+    const handleDeleteCycle = React.useCallback(() => {
         if (currentCycle !== null) {
             clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId });
         }
-    };
+    }, [currentCycle, clientIpc]);
 
-    const handleResetHistory = () => {
+    const handleResetHistory = React.useCallback(() => {
         clientIpc.sendToServer(ClientToServerChannel.RequestResetHistory, {});
-    };
+    }, [clientIpc]);
 
-    const handleExportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {});
-    const handleImportHistory = () => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {});
+    const handleExportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestExportHistory, {}), [clientIpc]);
+    const handleImportHistory = React.useCallback(() => clientIpc.sendToServer(ClientToServerChannel.RequestImportHistory, {}), [clientIpc]);
 
     React.useEffect(() => {
         if (saveStatus === 'unsaved') {
@@ -21821,12 +21817,12 @@ export const useFileManagement = (
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleSelectForViewing = (filePath: string) => {
+    const handleSelectForViewing = React.useCallback((filePath: string) => {
         const newPath = selectedFilePath === filePath ? null : filePath;
         setSelectedFilePath(newPath);
-    };
+    }, [selectedFilePath]);
 
-    const handleFileSelectionToggle = (filePath: string) => {
+    const handleFileSelectionToggle = React.useCallback((filePath: string) => {
         const currentTabId = activeTab.toString();
         const compositeKeyForCurrent = `${currentTabId}:::${filePath}`;
         setSelectedFilesForReplacement(prev => {
@@ -21851,33 +21847,33 @@ export const useFileManagement = (
             return newSet;
         });
         setSaveStatus('unsaved');
-    };
+    }, [activeTab, setSaveStatus]);
 
-    const handleLinkFile = (originalPath: string) => {
+    const handleLinkFile = React.useCallback((originalPath: string) => {
         if (tempOverridePath.trim()) {
             setPathOverrides(prev => new Map(prev).set(originalPath, tempOverridePath.trim()));
             setFileExistenceMap(prev => new Map(prev).set(originalPath, true));
             setTempOverridePath('');
             handleSelectForViewing(originalPath);
         }
-    };
+    }, [tempOverridePath, handleSelectForViewing]);
     
-    const handleUnlinkFile = (originalPath: string) => {
+    const handleUnlinkFile = React.useCallback((originalPath: string) => {
         setPathOverrides(prev => {
             const newMap = new Map(prev);
             newMap.delete(originalPath);
             return newMap;
         });
         setFileExistenceMap(prev => new Map(prev).set(originalPath, false));
-    };
+    }, []);
 
-    const handleCopyContent = () => {
+    const handleCopyContent = React.useCallback(() => {
         if (!selectedFilePath || !tabs[activeTab.toString()]?.parsedContent) return;
         const file = tabs[activeTab.toString()].parsedContent.files.find((f: any) => f.path === selectedFilePath);
         if (file) {
             clientIpc.sendToServer(ClientToServerChannel.RequestCopyTextToClipboard, { text: file.content });
         }
-    };
+    }, [selectedFilePath, tabs, activeTab, clientIpc]);
 
     return {
         highlightedCodeBlocks,
@@ -21928,25 +21924,25 @@ export const useGeneration = (
     
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleGenerateResponses = () => {
+    const handleGenerateResponses = React.useCallback(() => {
         const cycleData = getCurrentCycleData();
         if (cycleData) {
             clientIpc.sendToServer(ClientToServerChannel.RequestNewCycleAndGenerate, { cycleData, count: responseCount });
         }
-    };
+    }, [clientIpc, getCurrentCycleData, responseCount]);
     
-    const handleStartGeneration = (projectScope: string, count: number) => {
+    const handleStartGeneration = React.useCallback((projectScope: string, count: number) => {
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialArtifactsAndGeneration, { projectScope, responseCount: count });
-    };
+    }, [clientIpc]);
 
-    const handleRegenerateTab = (responseId: number) => {
+    const handleRegenerateTab = React.useCallback((responseId: number) => {
         if (currentCycle === null) return;
         const tabId = responseId.toString();
         setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } }));
         clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId });
         setSaveStatus('unsaved');
         setIsGenerationComplete(false);
-    };
+    }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;
@@ -21978,7 +21974,6 @@ export const useGeneration = (
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { logger } from '@/client/utils/logger';
 import { PcppCycle } from '@/common/types/pcpp.types';
 
 export const usePcppIpc = (
@@ -22003,6 +21998,17 @@ export const usePcppIpc = (
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
+        // This effect runs only once on mount to fetch initial data.
+        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
+        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [clientIpc]);
+
+    React.useEffect(() => {
+        // This effect registers all the message listeners.
+        // It will re-register them if any of the handler functions change.
+        // The handlers are now stabilized with useCallback, so this should run infrequently.
+        
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => {
             loadCycleData(cycleData, projectScope);
             setMaxCycle(cycleData.cycleId);
@@ -22070,10 +22076,12 @@ export const usePcppIpc = (
             setConnectionMode(settings.connectionMode);
         });
 
-        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
-        clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
-
-    }, [clientIpc, loadCycleData, setMaxCycle, setWorkflowStep, setHighlightedCodeBlocks, setFileExistenceMap, setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, setCostBreakdown, setSaveStatus, setConnectionMode, currentCycleId]);
+    }, [
+        clientIpc, loadCycleData, setHighlightedCodeBlocks, setFileExistenceMap, 
+        setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
+        setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
+        currentCycleId, setMaxCycle
+    ]);
 };
 </file_artifact>
 
@@ -22102,12 +22110,12 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleTabSelect = (tabIndex: number) => {
+    const handleTabSelect = React.useCallback((tabIndex: number) => {
         setActiveTab(tabIndex);
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handleTabCountChange = (count: number) => {
+    const handleTabCountChange = React.useCallback((count: number) => {
         setTabCount(count);
         setTabs(prev => {
             const newTabs = { ...prev };
@@ -22119,14 +22127,14 @@ export const useTabManagement = (
             return newTabs;
         });
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handleRawContentChange = (newContent: string, tabIndex: number) => {
+    const handleRawContentChange = React.useCallback((newContent: string, tabIndex: number) => {
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null, status: 'complete' } }));
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => {
+    const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
         const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
@@ -22136,7 +22144,7 @@ export const useTabManagement = (
         } else {
             handleRawContentChange(pastedText, tabIndex);
         }
-    };
+    }, [tabs, tabCount, handleRawContentChange]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -22165,7 +22173,7 @@ export const useTabManagement = (
         });
     }, [clientIpc, requestAllMetrics]);
 
-    const handleGlobalParseToggle = () => {
+    const handleGlobalParseToggle = React.useCallback(() => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         if (!newParseMode) {
@@ -22178,12 +22186,12 @@ export const useTabManagement = (
             });
         }
         setSaveStatus('unsaved');
-    };
+    }, [isParsedMode, setSaveStatus]);
 
-    const handleSortToggle = () => {
+    const handleSortToggle = React.useCallback(() => {
         setIsSortedByTokens(p => !p);
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
     const sortedTabIds = React.useMemo(() => {
         const tabIds = [...Array(tabCount)].map((_, i) => i + 1);

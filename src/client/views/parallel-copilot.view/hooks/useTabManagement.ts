@@ -22,12 +22,12 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const handleTabSelect = (tabIndex: number) => {
+    const handleTabSelect = React.useCallback((tabIndex: number) => {
         setActiveTab(tabIndex);
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handleTabCountChange = (count: number) => {
+    const handleTabCountChange = React.useCallback((count: number) => {
         setTabCount(count);
         setTabs(prev => {
             const newTabs = { ...prev };
@@ -39,14 +39,14 @@ export const useTabManagement = (
             return newTabs;
         });
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handleRawContentChange = (newContent: string, tabIndex: number) => {
+    const handleRawContentChange = React.useCallback((newContent: string, tabIndex: number) => {
         setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null, status: 'complete' } }));
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
-    const handlePaste = (e: React.ClipboardEvent, tabIndex: number) => {
+    const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
         const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
@@ -56,7 +56,7 @@ export const useTabManagement = (
         } else {
             handleRawContentChange(pastedText, tabIndex);
         }
-    };
+    }, [tabs, tabCount, handleRawContentChange]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -85,7 +85,7 @@ export const useTabManagement = (
         });
     }, [clientIpc, requestAllMetrics]);
 
-    const handleGlobalParseToggle = () => {
+    const handleGlobalParseToggle = React.useCallback(() => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         if (!newParseMode) {
@@ -98,12 +98,12 @@ export const useTabManagement = (
             });
         }
         setSaveStatus('unsaved');
-    };
+    }, [isParsedMode, setSaveStatus]);
 
-    const handleSortToggle = () => {
+    const handleSortToggle = React.useCallback(() => {
         setIsSortedByTokens(p => !p);
         setSaveStatus('unsaved');
-    };
+    }, [setSaveStatus]);
 
     const sortedTabIds = React.useMemo(() => {
         const tabIds = [...Array(tabCount)].map((_, i) => i + 1);

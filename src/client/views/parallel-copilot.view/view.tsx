@@ -80,7 +80,7 @@ const App = () => {
 
     if (cycleManagement.currentCycle.cycleId === 0) { 
         return <OnboardingView 
-            projectScope={cycleManagement.projectScope || ''} 
+            projectScope={cycleManagement.cycleContext || ''} 
             onScopeChange={onScopeChange} 
             onNavigateToCycle={(id) => cycleManagement.handleCycleChange(null, id)} 
             latestCycleId={cycleManagement.maxCycle} 
