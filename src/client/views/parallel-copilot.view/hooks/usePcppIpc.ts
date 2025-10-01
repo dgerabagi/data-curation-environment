@@ -95,7 +95,11 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
-            if (cycleId === currentCycleId) {
+            // C94 Fix: Handle cycle 0 unconditionally to prevent race condition on initial load.
+            if (cycleId === 0) {
+                setSaveStatus('saved');
+            }
+            else if (cycleId === currentCycleId) {
                 setSaveStatus('saved');
             }
         });

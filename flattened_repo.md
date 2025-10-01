@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-01T13:32:44.214Z
+  Date Generated: 2025-10-01T21:49:34.555Z
   ---
   Total Files: 177
-  Approx. Tokens: 251504
+  Approx. Tokens: 252047
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,10 +14,10 @@
 4. src\backend\services\prompt.service.ts (5119 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-7. src\backend\services\llm.service.ts (4166 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3979 tokens)
+7. src\Artifacts\A11. DCE - Regression Case Studies.md (4249 tokens)
+8. src\backend\services\llm.service.ts (4166 tokens)
+9. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
+10. src\backend\services\history.service.ts (4059 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 560 - Chars: 38905 - Tokens: 9727
@@ -125,7 +125,7 @@
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 368 - Chars: 15867 - Tokens: 3967
+106. src\backend\services\history.service.ts - Lines: 368 - Chars: 16234 - Tokens: 4059
 107. src\backend\services\llm.service.ts - Lines: 338 - Chars: 16663 - Tokens: 4166
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 388 - Chars: 20476 - Tokens: 5119
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 132 - Chars: 15384 - Tokens: 3846
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 16995 - Tokens: 4249
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -194,7 +194,7 @@
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 2999 - Tokens: 750
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 113 - Chars: 5607 - Tokens: 1402
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 117 - Chars: 5797 - Tokens: 1450
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 139 - Chars: 5802 - Tokens: 1451
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 
@@ -8987,7 +8987,7 @@ export class LoggerService {
 </file_artifact>
 
 <file path="src/backend/services/prompt.service.ts">
-// Updated on: C93 (Reinstate opening of DCE_README.md)
+// Updated on: C94 (Reinstate opening of DCE_README.md)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -16209,13 +16209,25 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C93 (Add post-refactor regressions)
+# Updated on: C94 (Add Onboarding Spinner race condition)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 049: Onboarding Auto-Save Spinner Gets Stuck
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
+-   **Cycles Observed:** C92, C94 (Regression)
+-   **Symptom:** When a user types in the "Project Scope" text area in the onboarding view (Cycle 0), the auto-save indicator changes to a spinning animation but never reverts to the "saved" (green checkmark) state. The UI only corrects itself if the user navigates away from the VS Code tab and back again.
+-   **Root Cause Analysis (RCA):** A race condition exists on the frontend during the initial load of the PCPP. The `NotifySaveComplete` message, sent from the backend after a successful save for Cycle 0, can arrive at the frontend *before* the component's state has been fully initialized and the `currentCycleId` state variable has been updated from `null` to `0`. This causes the listener's check (`if (cycleId === currentCycleId)`) to fail (`0 === null` is false), so the `saveStatus` is never updated to `'saved'`.
+-   **Codified Solution & Best Practice:**
+    1.  IPC listeners for global, unambiguous events should not rely on potentially uninitialized state.
+    2.  The listener for `NotifySaveComplete` must be made more robust. It should include a specific, unconditional check for `cycleId === 0`. Since there is only one "Cycle 0" context (the onboarding view), a save notification for this cycle is unambiguous and can be trusted without needing to compare it against the component's current cycle state. This makes the listener resilient to the initialization race condition.
 
 ---
 
@@ -17364,7 +17376,11 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
-            if (cycleId === currentCycleId) {
+            // C94 Fix: Handle cycle 0 unconditionally to prevent race condition on initial load.
+            if (cycleId === 0) {
+                setSaveStatus('saved');
+            }
+            else if (cycleId === currentCycleId) {
                 setSaveStatus('saved');
             }
         });
