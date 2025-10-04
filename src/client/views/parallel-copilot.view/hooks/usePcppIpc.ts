@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C95 (Replace StartGenerationUI)
+// Updated on: C98 (Fix TabState to PcppResponse refactor)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle, TabState } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { ConnectionMode } from '@/backend/services/settings.service';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -22,7 +22,7 @@ export const usePcppIpc = (
     setConnectionMode: React.Dispatch<React.SetStateAction<ConnectionMode>>,
     setGenerationProgress: React.Dispatch<React.SetStateAction<GenerationProgress[]>>,
     setTps: React.Dispatch<React.SetStateAction<number>>,
-    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: TabState }>>,
+    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
     setIsGenerationComplete: React.Dispatch<React.SetStateAction<boolean>>,
     setMaxCycle: React.Dispatch<React.SetStateAction<number>>,
     currentCycleId: number | null
@@ -35,7 +35,7 @@ export const usePcppIpc = (
     }, [clientIpc]);
 
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             loadCycleData(cycleData, projectScope);
             setMaxCycle(cycleData.cycleId);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
@@ -119,7 +119,8 @@ export const usePcppIpc = (
                 const newTabs = { ...prevTabs };
                 Object.entries(chunks).forEach(([responseId, chunk]) => {
                     const tabIndex = parseInt(responseId, 10);
-                    newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null, status: 'generating' }), rawContent: chunk };
+                    const existingTab = newTabs[tabIndex] || { content: '', status: 'generating' };
+                    newTabs[tabIndex] = { ...existingTab, content: chunk };
                 });
                 return newTabs;
             });
@@ -142,7 +143,7 @@ export const usePcppIpc = (
                 const tabId = responseId.toString();
                 const tab = newTabs[tabId];
                 if (tab) {
-                    tab.rawContent = content;
+                    tab.content = content;
                     tab.parsedContent = parseResponse(content);
                     tab.status = 'complete';
                 }

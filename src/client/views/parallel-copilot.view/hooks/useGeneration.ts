@@ -1,17 +1,18 @@
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
+// Updated on: C98 (Fix TabState to PcppResponse refactor)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { ConnectionMode } from '@/backend/services/settings.service';
-import { PcppCycle, TabState } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 
 export const useGeneration = (
     currentCycle: PcppCycle | null,
     getCurrentCycleData: () => PcppCycle | null,
     isReadyForNextCycle: boolean,
     newCycleButtonDisabledReason: string,
-    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: TabState }>>,
+    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void
 ) => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
@@ -36,7 +37,11 @@ export const useGeneration = (
     const handleRegenerateTab = React.useCallback((responseId: number) => {
         if (currentCycle === null) return;
         const tabId = responseId.toString();
-        setTabs(prev => ({ ...prev, [tabId]: { ...prev[tabId], rawContent: '', parsedContent: null, status: 'generating' } }));
+        setTabs(prev => {
+            const newTabs = { ...prev };
+            newTabs[tabId] = { ...newTabs[tabId], content: '', parsedContent: null, status: 'generating' };
+            return newTabs;
+        });
         clientIpc.sendToServer(ClientToServerChannel.RequestSingleRegeneration, { cycleId: currentCycle.cycleId, tabId });
         setSaveStatus('unsaved');
         setIsGenerationComplete(false);

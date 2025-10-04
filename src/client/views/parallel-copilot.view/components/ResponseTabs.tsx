@@ -1,12 +1,13 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
+// Updated on: C98 (Fix TabState to PcppResponse refactor)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck } from 'react-icons/vsc';
-import { TabState } from '@/common/types/pcpp.types';
+import { PcppResponse } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
 interface ResponseTabsProps {
     sortedTabIds: number[];
-    tabs: { [key: string]: TabState };
+    tabs: { [key: string]: PcppResponse };
     activeTab: number;
     selectedResponseId: string | null;
     isParsedMode: boolean;
@@ -59,7 +60,7 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                 {sortedTabIds.map((tabIndex) => {
                     const tabData = tabs[tabIndex.toString()];
                     const parsedData = tabData?.parsedContent;
-                    const isLoading = tabData?.status === 'generating';
+                    const isLoading = tabData?.status === 'generating' || tabData?.status === 'thinking';
                     const isConfirmingRegen = regenConfirmTabId === tabIndex;
 
                     return (

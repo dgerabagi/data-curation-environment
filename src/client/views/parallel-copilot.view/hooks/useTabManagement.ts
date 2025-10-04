@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C97 (Switch from TabState to PcppResponse)
+// Updated on: C98 (Update isLoading check in ResponseTabs)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';

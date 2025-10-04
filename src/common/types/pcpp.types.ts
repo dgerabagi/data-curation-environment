@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C97 (Unify TabState into PcppResponse)
+// Updated on: C98 (No functional changes, just for context)
 export interface PcppResponse {
     content: string;
     // The single source of truth for the response's state
@@ -17,11 +17,14 @@ export interface PcppResponse {
 }
 
 // DEPRECATED: This has been merged into PcppResponse to create a single source of truth.
-// export interface TabState {
-//     rawContent: string;
-//     parsedContent: ParsedResponse | null;
-//     status?: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
-// }
+// The TabState type is no longer exported.
+/*
+export interface TabState {
+    rawContent: string;
+    parsedContent: ParsedResponse | null;
+    status?: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+}
+*/
 
 export interface PcppCycle {
     cycleId: number;
