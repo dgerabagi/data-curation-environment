@@ -1,4 +1,5 @@
-// Updated on: C94 (Reinstate opening of DCE_README.md)
+// src/backend/services/prompt.service.ts
+// Updated on: C95 (Use new IPC channel)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -362,8 +363,8 @@ ${staticContext.trim()}
             await vscode.workspace.fs.writeFile(vscode.Uri.file(path.join(this.workspaceRoot, 'prompt.md')), Buffer.from(prompt, 'utf-8'));
             Services.loggerService.log("prompt.md file created successfully before sending API request.");
 
-            const { newCycleId } = await Services.historyService.createNewCyclePlaceholder(responseCount);
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle: newCycleId });
+            const { newCycle, newMaxCycle } = await Services.historyService.createNewCyclePlaceholder(responseCount);
+            serverIpc.sendToClient(ServerToClientChannel.NavigateToNewGeneratingCycle, { newCycleData: newCycle, newMaxCycle });
 
             const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
             await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
@@ -372,13 +373,13 @@ ${staticContext.trim()}
             const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
             await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
             
-            const responses = await Services.llmService.generateBatch(prompt, responseCount, { ...dummyCycleData, cycleId: newCycleId });
+            const responses = await Services.llmService.generateBatch(prompt, responseCount, { ...dummyCycleData, cycleId: newCycle.cycleId });
             
-            await Services.historyService.updateCycleWithResponses(newCycleId, responses);
+            await Services.historyService.updateCycleWithResponses(newCycle.cycleId, responses);
             
             const finalHistory = await Services.historyService.getFullHistory();
-            const newMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
-            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle });
+            const finalMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId: newCycle.cycleId, newMaxCycle: finalMaxCycle });
 
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to generate initial artifacts: ${error.message}`);

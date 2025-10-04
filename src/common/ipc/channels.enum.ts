@@ -1,5 +1,5 @@
 // src/common/ipc/channels.enum.ts
-// Updated on: C80 (Add UpdateSingleGenerationProgress)
+// Updated on: C95 (Replace StartGenerationUI)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -109,6 +109,7 @@ export enum ServerToClientChannel {
     SendBatchGenerationComplete = "serverToClient.sendBatchGenerationComplete",
     UpdateGenerationProgress = "serverToClient.updateGenerationProgress",
     UpdateSingleGenerationProgress = "serverToClient.updateSingleGenerationProgress", // New
-    StartGenerationUI = "serverToClient.startGenerationUI",
+    StartGenerationUI = "serverToClient.startGenerationUI", // DEPRECATED
+    NavigateToNewGeneratingCycle = "serverToClient.navigateToNewGeneratingCycle", // NEW
     NotifySingleResponseComplete = "serverToClient.notifySingleResponseComplete",
 }

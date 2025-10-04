@@ -25,7 +25,8 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
         })}`);
 
         try {
-            const { newCycleId, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
+            const { newCycle, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
+            const newCycleId = newCycle.cycleId;
             serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle });
 
             const prompt = await promptService.generatePromptString(data.cycleData);

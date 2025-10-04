@@ -1,8 +1,13 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
+// Updated on: C95 (Replace StartGenerationUI)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle } from '@/common/types/pcpp.types';
+import { PcppCycle, TabState } from '@/common/types/pcpp.types';
+import { GenerationProgress } from '@/common/ipc/channels.type';
+import { ConnectionMode } from '@/backend/services/settings.service';
+import { parseResponse } from '@/client/utils/response-parser';
+import { logger } from '@/client/utils/logger';
 
 export const usePcppIpc = (
     loadCycleData: (cycleData: PcppCycle, scope?: string) => void,
@@ -14,29 +19,22 @@ export const usePcppIpc = (
     setCostBreakdown: React.Dispatch<React.SetStateAction<any>>,
     setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>,
     setSaveStatus: React.Dispatch<React.SetStateAction<"saved" | "saving" | "unsaved">>,
-    setConnectionMode: React.Dispatch<React.SetStateAction<any>>,
-    setGenerationProgress: React.Dispatch<React.SetStateAction<any[]>>,
+    setConnectionMode: React.Dispatch<React.SetStateAction<ConnectionMode>>,
+    setGenerationProgress: React.Dispatch<React.SetStateAction<GenerationProgress[]>>,
     setTps: React.Dispatch<React.SetStateAction<number>>,
-    setTabs: React.Dispatch<React.SetStateAction<any>>,
+    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: TabState }>>,
     setIsGenerationComplete: React.Dispatch<React.SetStateAction<boolean>>,
     setMaxCycle: React.Dispatch<React.SetStateAction<number>>,
-    handleCycleChange: (e: React.MouseEvent | null, newCycleId: number) => void,
     currentCycleId: number | null
 ) => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
-        // This effect runs only once on mount to fetch initial data.
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
         clientIpc.sendToServer(ClientToServerChannel.RequestSettings, {});
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [clientIpc]);
 
     React.useEffect(() => {
-        // This effect registers all the message listeners.
-        // It will re-register them if any of the handler functions change.
-        // The handlers are now stabilized with useCallback, so this should run infrequently.
-        
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }) => {
             loadCycleData(cycleData, projectScope);
             setMaxCycle(cycleData.cycleId);
@@ -95,7 +93,6 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
-            // C94 Fix: Handle cycle 0 unconditionally to prevent race condition on initial load.
             if (cycleId === 0) {
                 setSaveStatus('saved');
             }
@@ -107,11 +104,61 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => {
             setConnectionMode(settings.connectionMode);
         });
+        
+        clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
+            logger.log(`[NavigateToNewGeneratingCycle] Received: newCycleId=${newCycleData.cycleId}`);
+            setMaxCycle(newMaxCycle);
+            loadCycleData(newCycleData);
+            clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
+            setGenerationProgress(progress);
+            setTps(tps);
+            setTabs(prevTabs => {
+                const newTabs = { ...prevTabs };
+                Object.entries(chunks).forEach(([responseId, chunk]) => {
+                    const tabIndex = parseInt(responseId, 10);
+                    newTabs[tabIndex] = { ...(newTabs[tabIndex] || { rawContent: '', parsedContent: null, status: 'generating' }), rawContent: chunk };
+                });
+                return newTabs;
+            });
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
+            setGenerationProgress(prev => {
+                const newProgress = [...prev];
+                const index = newProgress.findIndex(p => p.responseId === progress.responseId);
+                if (index !== -1) {
+                    newProgress[index] = progress;
+                }
+                return newProgress;
+            });
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => {
+            setTabs(prev => {
+                const newTabs = { ...prev };
+                const tabId = responseId.toString();
+                const tab = newTabs[tabId];
+                if (tab) {
+                    tab.rawContent = content;
+                    tab.parsedContent = parseResponse(content);
+                    tab.status = 'complete';
+                }
+                return newTabs;
+            });
+        });
+
+        clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
+            setIsGenerationComplete(true);
+            // The navigation is now handled by NavigateToNewGeneratingCycle, this just finalizes state.
+        });
 
     }, [
         clientIpc, loadCycleData, setHighlightedCodeBlocks, setFileExistenceMap, 
         setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
         setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
-        currentCycleId, setMaxCycle
+        currentCycleId, setMaxCycle, setGenerationProgress, setTps, setTabs, setIsGenerationComplete
     ]);
 };

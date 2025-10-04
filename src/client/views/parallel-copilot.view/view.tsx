@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C93 (Implement correct debounced save effect)
+// Updated on: C95 (Add useEffect for progress initialization)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -37,10 +37,9 @@ const App = () => {
     const clientIpc = ClientPostMessageManager.getInstance();
     
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
-
-    // --- State & Hooks Initialization ---
     const saveStateRef = React.useRef<() => void>(() => {});
 
+    // --- State & Hooks Initialization ---
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
     const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
@@ -64,7 +63,6 @@ const App = () => {
         tabManagement.setTabs,
         generationManagement.setIsGenerationComplete,
         cycleManagement.setMaxCycle,
-        cycleManagement.handleCycleChange,
         cycleManagement.currentCycle?.cycleId || null
     );
 
@@ -106,7 +104,6 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
-    // Correct debounced save implementation
     React.useEffect(() => {
         if (cycleManagement.saveStatus === 'unsaved') {
             const handler = setTimeout(() => {
@@ -119,8 +116,25 @@ const App = () => {
         }
     }, [cycleManagement.saveStatus]);
 
-    // --- Component Logic & Rendering ---
+    // NEW: Effect to initialize generation progress UI
+    React.useEffect(() => {
+        if (cycleManagement.currentCycle?.status === 'generating') {
+            generationManagement.setIsGenerationComplete(false);
+            const initialProgress = Object.keys(cycleManagement.currentCycle.responses).map(key => ({
+                responseId: parseInt(key),
+                status: cycleManagement.currentCycle?.responses[key].status || 'pending',
+                startTime: Date.now(),
+                currentTokens: 0,
+                thinkingTokens: 0,
+                totalTokens: 16384,
+                promptTokens: 0
+            }));
+            generationManagement.setGenerationProgress(initialProgress);
+        }
+    }, [cycleManagement.currentCycle, generationManagement.setIsGenerationComplete, generationManagement.setGenerationProgress]);
 
+
+    // --- Component Logic & Rendering ---
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
@@ -208,7 +222,7 @@ const App = () => {
                 onToggleEphemeralContext={() => { cycleManagement.setIsEphemeralContextCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} 
             />
         </CollapsibleSection>
-        <div className="main-content-area">
+        <div className="main-content-area" style={{display: 'flex', flexDirection: 'column', flexGrow: 1, minHeight: 0}}>
             <ResponseTabs 
                 sortedTabIds={tabManagement.sortedTabIds} 
                 tabs={tabManagement.tabs} 

@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C92 (Fix save notification for Cycle 0)
+// Updated on: C95 (Modify createNewCyclePlaceholder)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -174,7 +174,7 @@ export class HistoryService {
         }
     }
 
-    public async createNewCyclePlaceholder(tabCount: number): Promise<{ newCycleId: number; newMaxCycle: number; }> {
+    public async createNewCyclePlaceholder(tabCount: number): Promise<{ newCycle: PcppCycle; newMaxCycle: number; }> {
         const history = await this._readHistoryFile();
         const newCycleId = (history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
 
@@ -200,7 +200,7 @@ export class HistoryService {
         await this._writeHistoryFile(history);
         Services.loggerService.log(`Created new placeholder cycle ${newCycleId}.`);
         
-        return { newCycleId, newMaxCycle: newCycleId };
+        return { newCycle, newMaxCycle: newCycleId };
     }
     
     public async finalizeCycleStatus(cycleId: number): Promise<void> {
