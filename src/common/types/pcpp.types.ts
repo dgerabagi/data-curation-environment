@@ -1,15 +1,21 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C78 (Add status to PcppResponse)
+// Updated on: C96 (Expand PcppResponse to persist metrics)
 export interface PcppResponse {
     content: string;
-    isLoading?: boolean;
-    status?: 'pending' | 'generating' | 'complete' | 'error';
+    // The single source of truth for the response's state
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    
+    // Persisted Metrics for the Response UI
+    startTime?: number;         // Timestamp (Date.now()) when generation for this response started
+    thinkingEndTime?: number;   // Timestamp when the 'thinking' phase ended and 'generating' began
+    endTime?: number;           // Timestamp when the response was fully received
+    thinkingTokens?: number;    // Total tokens from the 'thinking' phase
+    responseTokens?: number;    // Total tokens from the 'response' phase (the actual content)
 }
 
 export interface TabState {
     rawContent: string;
     parsedContent: ParsedResponse | null;
-    isLoading?: boolean;
     status?: 'pending' | 'generating' | 'complete' | 'error';
 }
 

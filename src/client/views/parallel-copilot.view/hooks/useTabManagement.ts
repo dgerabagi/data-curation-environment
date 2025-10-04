@@ -1,13 +1,14 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
+// Updated on: C96 (Initialize from PcppResponse)
 import * as React from 'react';
-import { TabState, ParsedResponse } from '@/common/types/pcpp.types';
+import { TabState, ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import * as path from 'path-browserify';
 
 export const useTabManagement = (
-    initialTabs: { [key: string]: TabState },
+    initialResponses: { [key: string]: PcppResponse },
     initialTabCount: number,
     initialActiveTab: number,
     initialIsParsedMode: boolean,
@@ -15,12 +16,31 @@ export const useTabManagement = (
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
     requestAllMetrics: (parsedResponse: ParsedResponse) => void
 ) => {
-    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>(initialTabs);
+    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
     const [tabCount, setTabCount] = React.useState(initialTabCount);
     const [isParsedMode, setIsParsedMode] = React.useState(initialIsParsedMode);
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
+
+    React.useEffect(() => {
+        const newTabs: { [key: string]: TabState } = {};
+        for (let i = 1; i <= initialTabCount; i++) {
+            const key = i.toString();
+            const response = initialResponses[key];
+            newTabs[key] = {
+                rawContent: response?.content || '',
+                parsedContent: response?.content ? parseResponse(response.content) : null,
+                status: response?.status || 'complete',
+            };
+        }
+        setTabs(newTabs);
+        setTabCount(initialTabCount);
+        setActiveTab(initialActiveTab);
+        setIsParsedMode(initialIsParsedMode);
+        setIsSortedByTokens(initialIsSorted);
+    }, [initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted]);
+
 
     const handleTabSelect = React.useCallback((tabIndex: number) => {
         setActiveTab(tabIndex);

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C95 (Add useEffect for progress initialization)
+// Updated on: C96 (Refactor rendering logic to be per-tab)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -19,8 +19,8 @@ import GenerationProgressDisplay from './components/GenerationProgressDisplay';
 import { useCycleManagement } from './hooks/useCycleManagement';
 import { useTabManagement } from './hooks/useTabManagement';
 import { useFileManagement } from './hooks/useFileManagement';
-import { useWorkflow } from './hooks/useWorkflow';
 import { useGeneration } from './hooks/useGeneration';
+import { useWorkflow } from './hooks/useWorkflow';
 import { usePcppIpc } from './hooks/usePcppIpc';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
@@ -41,7 +41,7 @@ const App = () => {
 
     // --- State & Hooks Initialization ---
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement({}, 4, 1, false, false, cycleManagement.setSaveStatus, () => {});
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, initialData.cycle?.tabCount || 4, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
@@ -80,17 +80,12 @@ const App = () => {
         
         cycleManagement.setSaveStatus('saving');
         
-        const responses: { [key: string]: PcppResponse } = {};
-        for (let i = 1; i <= tabCount; i++) {
-            responses[i.toString()] = { content: tabs[i.toString()]?.rawContent || '', status: tabs[i.toString()]?.status || 'complete' };
-        }
-
         const cycleData: PcppCycle = {
             ...currentCycle,
             title: cycleTitle,
             cycleContext,
             ephemeralContext,
-            responses,
+            responses: tabs, // Persist the rich response objects
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
@@ -115,24 +110,6 @@ const App = () => {
             };
         }
     }, [cycleManagement.saveStatus]);
-
-    // NEW: Effect to initialize generation progress UI
-    React.useEffect(() => {
-        if (cycleManagement.currentCycle?.status === 'generating') {
-            generationManagement.setIsGenerationComplete(false);
-            const initialProgress = Object.keys(cycleManagement.currentCycle.responses).map(key => ({
-                responseId: parseInt(key),
-                status: cycleManagement.currentCycle?.responses[key].status || 'pending',
-                startTime: Date.now(),
-                currentTokens: 0,
-                thinkingTokens: 0,
-                totalTokens: 16384,
-                promptTokens: 0
-            }));
-            generationManagement.setGenerationProgress(initialProgress);
-        }
-    }, [cycleManagement.currentCycle, generationManagement.setIsGenerationComplete, generationManagement.setGenerationProgress]);
-
 
     // --- Component Logic & Rendering ---
     React.useEffect(() => {
@@ -181,7 +158,8 @@ const App = () => {
         }
     };
     
-    const showProgressView = cycleManagement.currentCycle.status === 'generating';
+    const activeTabState = tabManagement.tabs[tabManagement.activeTab.toString()];
+    const showProgressView = activeTabState?.status === 'generating' || activeTabState?.status === 'thinking';
 
     return <div className="pc-view-container">
         <div className="pc-header">

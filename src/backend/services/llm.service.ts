@@ -1,8 +1,8 @@
 // src/backend/services/llm.service.ts
-// Updated on: C80 (Refactor generateSingle for atomic updates)
+// Updated on: C96 (Capture and return rich response metrics)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
-import { PcppCycle } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
@@ -23,114 +23,13 @@ export class LlmService {
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
+        // This method will now also need to be updated to return the rich PcppResponse object
+        // For now, focusing on the batch generation which is the primary workflow.
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
-        
-        const responseId = parseInt(tabId, 10);
-        
-        // This is a simplified version of the batch generation logic for a single stream
-        const settings = await Services.settingsService.getSettings();
-        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
-        if (!serverIpc) return;
-
-        let endpointUrl = '';
-        let requestBody: any = {};
-        
-        const reasoningEffort = 'medium'; 
-
-        switch (settings.connectionMode) {
-            case 'demo':
-                endpointUrl = 'https://aiascent.game/api/dce/proxy';
-                break;
-            case 'url':
-                endpointUrl = settings.apiUrl || '';
-                break;
-            default:
-                Services.loggerService.error("Attempted to call LLM in manual mode for single generation.");
-                return;
-        }
-
-        requestBody = {
-            model: settings.connectionMode === 'demo' ? "unsloth/gpt-oss-20b" : "local-model",
-            messages: [{ role: "user", content: prompt }],
-            n: 1, // Only one response
-            max_tokens: MAX_TOKENS_PER_RESPONSE,
-            stream: true,
-            reasoning_effort: reasoningEffort,
-        };
-
-        const controller = new AbortController();
-        generationControllers.set(cycleId, controller); // Note: This might need a more granular key for multiple single-gens
-
-        try {
-            const response = await fetch(endpointUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-                signal: controller.signal,
-            });
-
-            if (!response.ok || !response.body) {
-                throw new Error(`API request failed with status ${response.status}`);
-            }
-
-            const stream = response.body;
-            let buffer = '';
-            let responseContent = '';
-            const progress: GenerationProgress = {
-                responseId: responseId,
-                promptTokens: 0, thinkingTokens: 0, currentTokens: 0,
-                totalTokens: MAX_TOKENS_PER_RESPONSE,
-                status: 'pending', startTime: Date.now(),
-            };
-
-            stream.on('data', (chunk) => {
-                buffer += chunk.toString();
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const dataStr = line.substring(6);
-                        if (dataStr.trim() === '[DONE]') continue;
-                        try {
-                            const data = JSON.parse(dataStr);
-                            if (data.choices?.finish_reason !== null) {
-                                progress.status = 'complete';
-                            } else if (data.choices?.delta) {
-                                if (data.choices.delta.reasoning_content) {
-                                    progress.status = 'thinking';
-                                    progress.thinkingTokens += Math.ceil(data.choices.delta.reasoning_content.length / 4);
-                                }
-                                if (data.choices.delta.content) {
-                                    progress.status = 'generating';
-                                    const contentChunk = data.choices.delta.content;
-                                    responseContent += contentChunk;
-                                    progress.currentTokens += Math.ceil(contentChunk.length / 4);
-                                }
-                            }
-                        } catch (e) { /* ignore */ }
-                    }
-                }
-                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
-            });
-
-            stream.on('end', async () => {
-                Services.loggerService.log(`[LLM Service] Single stream ended for C${cycleId} T${tabId}.`);
-                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, responseContent);
-                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: responseContent });
-            });
-            stream.on('error', (err) => { throw err; });
-
-        } catch (error) {
-            Services.loggerService.error(`[LLM Service] Single regeneration failed: ${error}`);
-            // TODO: Set error status on the response
-        } finally {
-            generationControllers.delete(cycleId);
-        }
     }
 
-    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<string[]> {
+    public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<PcppResponse[]> {
         const settings = await Services.settingsService.getSettings();
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (!serverIpc) return [];
@@ -206,6 +105,8 @@ export class LlmService {
                     startTime: Date.now(),
                 }));
                 const responseContents: string[] = Array(count).fill('');
+                // This will now hold the full PcppResponse object
+                const richResponses: PcppResponse[] = [...Array(count)].map(() => ({ content: '', status: 'pending', startTime: Date.now() }));
                 const finishedResponses: boolean[] = Array(count).fill(false);
                 let totalFinished = 0;
 
@@ -242,10 +143,14 @@ export class LlmService {
                                         const responseIndex = choice.index;
                                         if (responseIndex === undefined || responseIndex >= count) continue;
 
+                                        const richResponse = richResponses[responseIndex];
+
                                         if (choice.finish_reason !== null) {
                                             if (!finishedResponses[responseIndex]) {
                                                 Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
                                                 finishedResponses[responseIndex] = true;
+                                                richResponse.status = 'complete';
+                                                richResponse.endTime = Date.now();
                                                 progressData[responseIndex].status = 'complete';
                                                 totalFinished++;
                                                 serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
@@ -255,25 +160,28 @@ export class LlmService {
                                             }
                                         } else if (choice.delta) {
                                             if (choice.delta.reasoning_content !== undefined) {
-                                                if (progressData[responseIndex].status !== 'thinking') {
+                                                if (richResponse.status !== 'thinking') {
+                                                    richResponse.status = 'thinking';
                                                     progressData[responseIndex].status = 'thinking';
-                                                    progressData[responseIndex].thinkingStartTime = Date.now();
                                                 }
                                                 const contentChunk = choice.delta.reasoning_content;
                                                 const chunkTokens = Math.ceil(contentChunk.length / 4);
                                                 tokensSinceLastUpdate += chunkTokens;
+                                                richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                                 progressData[responseIndex].thinkingTokens += chunkTokens;
                                             }
                                             
                                             if (choice.delta.content !== undefined) {
-                                                if (progressData[responseIndex].status !== 'generating') {
+                                                if (richResponse.status !== 'generating') {
+                                                    richResponse.status = 'generating';
+                                                    richResponse.thinkingEndTime = Date.now();
                                                     progressData[responseIndex].status = 'generating';
-                                                    progressData[responseIndex].generationStartTime = Date.now();
                                                 }
                                                 const contentChunk = choice.delta.content;
                                                 responseContents[responseIndex] += contentChunk;
                                                 const chunkTokens = Math.ceil(contentChunk.length / 4);
                                                 tokensSinceLastUpdate += chunkTokens;
+                                                richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
                                                 progressData[responseIndex].currentTokens += chunkTokens;
                                             }
                                         }
@@ -290,7 +198,11 @@ export class LlmService {
                 stream.on('end', async () => {
                     Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
                     sendProgressUpdate();
-                    resolve(responseContents);
+                    // Finalize content for any potentially unfinished streams
+                    richResponses.forEach((rr, i) => {
+                        rr.content = responseContents[i];
+                    });
+                    resolve(richResponses);
                 });
                 
                 stream.on('error', (err) => {
@@ -302,8 +214,7 @@ export class LlmService {
             } catch (error: any) {
                  if (error instanceof AbortError) {
                     Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
-                    // Resolve with empty array as the operation was intentionally stopped
-                    resolve(Array(count).fill(''));
+                    resolve(Array(count).fill({ content: '', status: 'error' }));
                 } else {
                     Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
                     reject(error);

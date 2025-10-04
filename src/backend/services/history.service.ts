@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C95 (Modify createNewCyclePlaceholder)
+// Updated on: C96 (Fix new cycle title bug)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -186,7 +186,7 @@ export class HistoryService {
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: `Cycle ${newCycleId} - Generating...`,
+            title: 'New Cycle', // FIX: Do not programmatically set "Generating..."
             cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
@@ -209,7 +209,7 @@ export class HistoryService {
         const cycle = history.cycles.find(c => c.cycleId === cycleId);
         if (cycle) {
             cycle.status = 'complete';
-            cycle.title = cycle.title.replace(' - Generating...', '');
+            // Do not change title here, let user control it
             await this._writeHistoryFile(history);
             Services.loggerService.log(`[History] Cycle ${cycleId} status set to 'complete'.`);
         } else {
@@ -217,41 +217,35 @@ export class HistoryService {
         }
     }
 
-    public async updateCycleWithResponses(cycleId: number, responses: string[]): Promise<void> {
+    public async updateCycleWithResponses(cycleId: number, responses: PcppResponse[]): Promise<void> {
         const history = await this._readHistoryFile();
         const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleId);
 
         if (cycleIndex > -1) {
             const cycle = history.cycles[cycleIndex];
-            // Do not change cycle status here; wait for finalizeCycleStatus
             Object.keys(cycle.responses).forEach((tabId, index) => {
-                cycle.responses[tabId].status = 'complete';
                 if (responses[index]) {
-                    cycle.responses[tabId].content = responses[index];
+                    // Overwrite the placeholder with the rich response object
+                    cycle.responses[tabId] = responses[index];
                 }
             });
             await this._writeHistoryFile(history);
-            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses.`);
+            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses and their metrics.`);
         } else {
             Services.loggerService.error(`Could not find placeholder cycle ${cycleId} to update with responses.`);
         }
     }
 
-    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newContent: string | null): Promise<void> {
+    public async updateSingleResponseInCycle(cycleId: number, tabId: string, newResponse: PcppResponse | null): Promise<void> {
         const history = await this._readHistoryFile();
         const cycle = history.cycles.find(c => c.cycleId === cycleId);
         if (cycle) {
-            if (!cycle.responses[tabId]) {
-                cycle.responses[tabId] = { content: '', status: 'pending' };
-            }
-            if (newContent !== null) {
-                cycle.responses[tabId].content = newContent;
-                cycle.responses[tabId].status = 'complete';
-                Services.loggerService.log(`Updated response content for tab ${tabId} in cycle ${cycleId}.`);
+            if (newResponse !== null) {
+                cycle.responses[tabId] = newResponse;
+                Services.loggerService.log(`Updated response content and metrics for tab ${tabId} in cycle ${cycleId}.`);
             } else {
                 // This means we are starting a regeneration
-                cycle.responses[tabId].content = '';
-                cycle.responses[tabId].status = 'generating';
+                cycle.responses[tabId] = { content: '', status: 'generating' };
                 Services.loggerService.log(`Starting regeneration for tab ${tabId} in cycle ${cycleId}.`);
             }
             await this._writeHistoryFile(history);
