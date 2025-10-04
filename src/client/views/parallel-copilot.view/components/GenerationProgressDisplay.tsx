@@ -1,8 +1,8 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C76 (Implement individual timers)
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
-import { TabState } from '@/common/types/pcpp.types';
+import { PcppResponse } from '@/common/types/pcpp.types';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
 
@@ -16,7 +16,7 @@ const ResponseTimer: React.FC<ResponseTimerProps> = ({ startTime, isComplete }) 
     const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
     React.useEffect(() => {
-        if (isComplete) {
+        if (isComplete || !startTime) {
             if (intervalRef.current) clearInterval(intervalRef.current);
             return;
         }
@@ -39,7 +39,7 @@ const ResponseTimer: React.FC<ResponseTimerProps> = ({ startTime, isComplete }) 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
-    tabs: { [key: string]: TabState };
+    tabs: { [key: string]: PcppResponse };
     onStop: (cycleId: number) => void;
     onRegenerate: (responseId: number) => void;
     isGenerationComplete: boolean;
@@ -122,7 +122,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                         <div className='progress-item-header'>
                             <div className="response-title-timer">
                                 <span>Resp {p.responseId}</span>
-                                <ResponseTimer startTime={p.startTime} isComplete={isComplete} />
+                                {p.startTime && <ResponseTimer startTime={p.startTime} isComplete={isComplete} />}
                             </div>
                             <div className="status-indicator-wrapper">
                                 <span className={`status-indicator status-${p.status}`}>
@@ -150,7 +150,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                             )}
                         </div>
                         <div className="partial-text-preview">
-                            <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
+                            <pre><code>{tabs[p.responseId.toString()]?.content || ''}</code></pre>
                         </div>
                     </div>
                 );

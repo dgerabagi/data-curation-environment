@@ -1,12 +1,12 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C96 (Refactor rendering logic to be per-tab)
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
-import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
@@ -85,7 +85,7 @@ const App = () => {
             title: cycleTitle,
             cycleContext,
             ephemeralContext,
-            responses: tabs, // Persist the rich response objects
+            responses: tabs,
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
@@ -244,7 +244,7 @@ const App = () => {
                         <ResponsePane 
                             isParsedMode={tabManagement.isParsedMode} 
                             activeTabData={tabManagement.tabs[tabManagement.activeTab.toString()]} 
-                            onRawContentChange={(content) => tabManagement.handleRawContentChange(content, tabManagement.activeTab)} 
+                            onContentChange={(content) => tabManagement.handleContentChange(content, tabManagement.activeTab)} 
                             onContextKeyDown={() => {}} 
                             onPaste={(e) => tabManagement.handlePaste(e, tabManagement.activeTab)}
                             fileExistenceMap={fileManagement.fileExistenceMap}

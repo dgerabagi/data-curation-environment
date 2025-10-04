@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 97 - 3 ts errors
+Current Cycle 98 - ts errors
+Cycle 97 - 3 ts errors
 Cycle 96 - refine reponse ui persistence/state
 Cycle 95 - great work, continue reaching prior parity
 Cycle 94 - focus on onboarding autosave spinning animation -> green checkmark issue
@@ -868,41 +869,67 @@ No project scope defined.
 
 <M6. Cycles>
 
-<Cycle 97>
+<Cycle 98>
 <Cycle Context>
-okay i think this response is a good approach, but we got 3 ts errors which i like to call 'directives in disguise'.
+3 different ts errors (see ephemeral)
 </Cycle Context>
 <Ephemeral Context>
-<ts errors>
 
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\hooks\useTabManagement.ts
-./src/client/views/parallel-copilot.view/hooks/useTabManagement.ts 34:16-22
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\hooks\useTabManagement.ts(34,17)
-      TS2322: Type '"complete" | "generating" | "error" | "pending" | "thinking"' is not assignable to type '"complete" | "generating" | "error" | "pending"'.
-  Type '"thinking"' is not assignable to type '"complete" | "generating" | "error" | "pending"'.
- @ ./src/client/views/parallel-copilot.view/view.tsx 19:0-60 59:24-40
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts
+./src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts 6:20-28
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts(6,21)
+      TS2305: Module '"@/common/types/pcpp.types"' has no exported member 'TabState'.
+ @ ./src/client/views/parallel-copilot.view/view.tsx 23:0-48 68:2-12
 
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 88:12-21
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(88,13)
-      TS2322: Type '{ [key: string]: TabState; }' is not assignable to type '{ [tabId: string]: PcppResponse; }'.
-  'string' index signatures are incompatible.
-    Property 'content' is missing in type 'TabState' but required in type 'PcppResponse'.
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\hooks\useGeneration.ts
+./src/client/views/parallel-copilot.view/hooks/useGeneration.ts 7:20-28
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\hooks\useGeneration.ts(7,21)
+      TS2305: Module '"@/common/types/pcpp.types"' has no exported member 'TabState'.
+ @ ./src/client/views/parallel-copilot.view/view.tsx 21:0-54 61:31-44
 
-ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx
-./src/client/views/parallel-copilot.view/view.tsx 162:72-109
-[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\view.tsx(162,73)
-      TS2367: This comparison appears to be unintentional because the types '"complete" | "error" | "pending"' and '"thinking"' have no overlap.
+ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ResponseTabs.tsx
+./src/client/views/parallel-copilot.view/components/ResponseTabs.tsx 4:9-17
+[tsl] ERROR in C:\Projects\DCE\src\client\views\parallel-copilot.view\components\ResponseTabs.tsx(4,10)
+      TS2305: Module '"@/common/types/pcpp.types"' has no exported member 'TabState'.
+ @ ./src/client/views/parallel-copilot.view/view.tsx 12:0-53 299:38-50
 
 3 errors have detailed information that is not shown.
 Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
 
-webpack 5.101.1 compiled with 3 errors in 15160 ms
+webpack 5.101.1 compiled with 3 errors in 1904 ms
     [webpack-cli] Compiler is watching files for updates...
-
-
-</ts errors>
 </Ephemeral Context>
+<Previous Cycle 97 Summary of Actions>
+I have analyzed your detailed feedback from Cycle 96. The issues you've identified point to critical gaps in our state management and data persistence logic for the response generation UI. The core problems are that the UI is keying off the wrong status flag (the overall cycle's status instead of the individual response's status), and we are not persisting the new metrics from the response UI, which causes state loss on view changes.
+
+My course of action is to implement a comprehensive fix that addresses these root causes. I will start by creating a new planning artifact to serve as our blueprint. Then, I will update the data model to support the new metrics, modify the backend to capture and save this data, and refactor the frontend's rendering logic to be driven by the correct per-tab status.
+
+### Course of Action
+
+1.  **Documentation (New Plan):**
+    *   I will create a new artifact, **`A110. DCE - Response UI State Persistence and Workflow Plan.md`**, to formally document the required data model changes and the new UI rendering logic. This will be our source of truth for this feature.
+    *   I will update **`A0. DCE Master Artifact List.md`** to include this new artifact.
+
+2.  **Update Data Model (`pcpp.types.ts`):**
+    *   This is the foundational step. I will expand the `PcppResponse` interface to include fields for all the metrics displayed in the response UI. This will include `thinkingTokens`, `responseTokens`, `startTime`, and `endTime`. The `status` field will be the single source of truth for a response's state.
+
+3.  **Update Backend to Capture and Persist Metrics:**
+    *   **`llm.service.ts`:** I will enhance the stream processing logic in `generateBatch`. It will now capture the start time, differentiate between "thinking" and "response" tokens, and record the end time for each individual response stream.
+    *   **`history.service.ts`:** The `updateCycleWithResponses` method will be updated to accept this new, richer response object and save all the new metric fields to `dce_history.json`.
+
+4.  **Refactor Frontend Rendering Logic:**
+    *   **`view.tsx`:** The main rendering logic will be significantly refactored. The decision to show the `GenerationProgressDisplay` or the `ResponsePane` will no longer be based on the *cycle's* status. Instead, it will be determined by the status of the *currently active tab* (`tabs[activeTab]?.status === 'generating'`). This is the key change that will allow viewing a completed response while others are still generating and will fix the "stuck on response UI" bug.
+    *   **`GenerationProgressDisplay.tsx`:** This component will be updated to read the new, persisted metrics from the loaded cycle data. This ensures that if the user navigates away and back, the progress bars, timers, and token counts will correctly re-render their last known state.
+
+5.  **Fix Cycle Title Bug:**
+    *   **`history.service.ts`:** I will modify the `createNewCyclePlaceholder` method. It will no longer programmatically set the title to `"Cycle X - Generating..."`. It will now correctly set the title to `"New Cycle"`, as requested, allowing the user-driven workflow to function correctly.
+</Previous Cycle 97 Summary of Actions>
+</Cycle 98>
+
+<Cycle 97>
+<Cycle Context>
+okay i think this response is a good approach, but we got 3 ts errors which i like to call 'directives in disguise'.
+</Cycle Context>
 <Previous Cycle 96 Summary of Actions>
 I have analyzed the two critical bugs preventing the response generation UI from appearing correctly. The root cause is a race condition in the IPC workflow combined with missing state initialization logic from the recent refactor into custom hooks.
 
@@ -5076,10 +5103,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-04T19:44:18.441Z
+  Date Generated: 2025-10-04T19:59:39.339Z
   ---
   Total Files: 178
-  Approx. Tokens: 242860
+  Approx. Tokens: 242989
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5091,7 +5118,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (3992 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (3978 tokens)
 10. src\backend\services\history.service.ts (3904 tokens)
 
 <!-- Full File List -->
@@ -5226,14 +5253,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 83 - Chars: 3346 - Tokens: 837
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 150 - Chars: 9893 - Tokens: 2474
-132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 69 - Chars: 2775 - Tokens: 694
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
+132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 70 - Chars: 2832 - Tokens: 708
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 95 - Chars: 4230 - Tokens: 1058
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 184 - Chars: 9364 - Tokens: 2341
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 279 - Chars: 15967 - Tokens: 3992
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 279 - Chars: 15912 - Tokens: 3978
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -5245,7 +5272,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-151. src\common\types\pcpp.types.ts - Lines: 63 - Chars: 2005 - Tokens: 502
+151. src\common\types\pcpp.types.ts - Lines: 67 - Chars: 2205 - Tokens: 552
 152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 435 - Tokens: 109
 153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -5257,7 +5284,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
-163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8251 - Tokens: 2063
+163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8129 - Tokens: 2033
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
@@ -5269,8 +5296,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 67 - Chars: 3065 - Tokens: 767
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 164 - Chars: 8038 - Tokens: 2010
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 159 - Chars: 6647 - Tokens: 1662
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 164 - Chars: 8201 - Tokens: 2051
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 167 - Chars: 6824 - Tokens: 1706
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 
@@ -17164,15 +17191,16 @@ export default ParsedView;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponsePane.tsx">
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
 import ParsedView from './ParsedView';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
-import { TabState } from '@/common/types/pcpp.types';
+import { PcppResponse } from '@/common/types/pcpp.types';
 
 interface ResponsePaneProps {
     isParsedMode: boolean;
-    activeTabData: TabState | undefined;
-    onRawContentChange: (content: string) => void;
+    activeTabData: PcppResponse | undefined;
+    onContentChange: (content: string) => void;
     onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     onPaste: (e: React.ClipboardEvent) => void;
     // Props for ParsedView
@@ -17200,8 +17228,8 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             <textarea
                 className="response-textarea"
                 placeholder={`Paste AI response here...`}
-                value={props.activeTabData?.rawContent || ''}
-                onChange={(e) => props.onRawContentChange(e.target.value)}
+                value={props.activeTabData?.content || ''}
+                onChange={(e) => props.onContentChange(e.target.value)}
                 onKeyDown={props.onContextKeyDown}
                 onPaste={props.onPaste}
             />
@@ -18999,14 +19027,14 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C96 (Refactor rendering logic to be per-tab)
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
-import { PcppCycle, PcppResponse, TabState } from '../../../common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
@@ -19085,7 +19113,7 @@ const App = () => {
             title: cycleTitle,
             cycleContext,
             ephemeralContext,
-            responses: tabs, // Persist the rich response objects
+            responses: tabs,
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
@@ -19244,7 +19272,7 @@ const App = () => {
                         <ResponsePane 
                             isParsedMode={tabManagement.isParsedMode} 
                             activeTabData={tabManagement.tabs[tabManagement.activeTab.toString()]} 
-                            onRawContentChange={(content) => tabManagement.handleRawContentChange(content, tabManagement.activeTab)} 
+                            onContentChange={(content) => tabManagement.handleContentChange(content, tabManagement.activeTab)} 
                             onContextKeyDown={() => {}} 
                             onPaste={(e) => tabManagement.handlePaste(e, tabManagement.activeTab)}
                             fileExistenceMap={fileManagement.fileExistenceMap}
@@ -19995,12 +20023,15 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C96 (Expand PcppResponse to persist metrics)
+// Updated on: C97 (Unify TabState into PcppResponse)
 export interface PcppResponse {
     content: string;
     // The single source of truth for the response's state
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
     
+    // Parsed content, formerly in TabState
+    parsedContent?: ParsedResponse | null;
+
     // Persisted Metrics for the Response UI
     startTime?: number;         // Timestamp (Date.now()) when generation for this response started
     thinkingEndTime?: number;   // Timestamp when the 'thinking' phase ended and 'generating' began
@@ -20009,11 +20040,12 @@ export interface PcppResponse {
     responseTokens?: number;    // Total tokens from the 'response' phase (the actual content)
 }
 
-export interface TabState {
-    rawContent: string;
-    parsedContent: ParsedResponse | null;
-    status?: 'pending' | 'generating' | 'complete' | 'error';
-}
+// DEPRECATED: This has been merged into PcppResponse to create a single source of truth.
+// export interface TabState {
+//     rawContent: string;
+//     parsedContent: ParsedResponse | null;
+//     status?: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+// }
 
 export interface PcppCycle {
     cycleId: number;
@@ -20974,10 +21006,10 @@ export function parseResponse(rawText: string): ParsedResponse {
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C76 (Implement individual timers)
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
-import { TabState } from '@/common/types/pcpp.types';
+import { PcppResponse } from '@/common/types/pcpp.types';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
 
@@ -20991,7 +21023,7 @@ const ResponseTimer: React.FC<ResponseTimerProps> = ({ startTime, isComplete }) 
     const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
     React.useEffect(() => {
-        if (isComplete) {
+        if (isComplete || !startTime) {
             if (intervalRef.current) clearInterval(intervalRef.current);
             return;
         }
@@ -21014,7 +21046,7 @@ const ResponseTimer: React.FC<ResponseTimerProps> = ({ startTime, isComplete }) 
 interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
-    tabs: { [key: string]: TabState };
+    tabs: { [key: string]: PcppResponse };
     onStop: (cycleId: number) => void;
     onRegenerate: (responseId: number) => void;
     isGenerationComplete: boolean;
@@ -21097,7 +21129,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                         <div className='progress-item-header'>
                             <div className="response-title-timer">
                                 <span>Resp {p.responseId}</span>
-                                <ResponseTimer startTime={p.startTime} isComplete={isComplete} />
+                                {p.startTime && <ResponseTimer startTime={p.startTime} isComplete={isComplete} />}
                             </div>
                             <div className="status-indicator-wrapper">
                                 <span className={`status-indicator status-${p.status}`}>
@@ -21125,7 +21157,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                             )}
                         </div>
                         <div className="partial-text-preview">
-                            <pre><code>{tabs[p.responseId.toString()]?.rawContent || ''}</code></pre>
+                            <pre><code>{tabs[p.responseId.toString()]?.content || ''}</code></pre>
                         </div>
                     </div>
                 );
@@ -22125,9 +22157,9 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C96 (Initialize from PcppResponse)
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
-import { TabState, ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -22142,7 +22174,7 @@ export const useTabManagement = (
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
     requestAllMetrics: (parsedResponse: ParsedResponse) => void
 ) => {
-    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
+    const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
     const [tabCount, setTabCount] = React.useState(initialTabCount);
     const [isParsedMode, setIsParsedMode] = React.useState(initialIsParsedMode);
@@ -22150,14 +22182,15 @@ export const useTabManagement = (
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
-        const newTabs: { [key: string]: TabState } = {};
+        const newTabs: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= initialTabCount; i++) {
             const key = i.toString();
             const response = initialResponses[key];
             newTabs[key] = {
-                rawContent: response?.content || '',
+                content: response?.content || '',
                 parsedContent: response?.content ? parseResponse(response.content) : null,
                 status: response?.status || 'complete',
+                ...response // Carry over all other properties like metrics
             };
         }
         setTabs(newTabs);
@@ -22179,7 +22212,7 @@ export const useTabManagement = (
             const newTabs = { ...prev };
             for (let i = 1; i <= count; i++) {
                 if (!newTabs[i.toString()]) {
-                    newTabs[i.toString()] = { rawContent: '', parsedContent: null, status: 'complete' };
+                    newTabs[i.toString()] = { content: '', status: 'complete' };
                 }
             }
             return newTabs;
@@ -22187,30 +22220,37 @@ export const useTabManagement = (
         setSaveStatus('unsaved');
     }, [setSaveStatus]);
 
-    const handleRawContentChange = React.useCallback((newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null, status: 'complete' } }));
+    const handleContentChange = React.useCallback((newContent: string, tabIndex: number) => {
+        setTabs(prev => ({ 
+            ...prev, 
+            [tabIndex.toString()]: { 
+                ...(prev[tabIndex.toString()] || { content: '', status: 'complete' }),
+                content: newContent, 
+                parsedContent: null 
+            } 
+        }));
         setSaveStatus('unsaved');
     }, [setSaveStatus]);
 
     const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
-        const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
+        const currentContent = tabs[tabIndex.toString()]?.content || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
         if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
-            handleRawContentChange(pastedText, tabIndex);
+            handleContentChange(pastedText, tabIndex);
             setActiveTab(tabIndex + 1);
         } else {
-            handleRawContentChange(pastedText, tabIndex);
+            handleContentChange(pastedText, tabIndex);
         }
-    }, [tabs, tabCount, handleRawContentChange]);
+    }, [tabs, tabCount, handleContentChange]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
             const updatedTabs = { ...prevTabs };
             Object.values(updatedTabs).forEach(tabState => {
-                if (tabState.rawContent && !tabState.parsedContent) {
-                    const parsed = parseResponse(tabState.rawContent);
+                if (tabState.content && !tabState.parsedContent) {
+                    const parsed = parseResponse(tabState.content);
                     tabState.parsedContent = parsed;
                     tabState.status = 'complete';
                     parsed.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
@@ -22275,7 +22315,7 @@ export const useTabManagement = (
         setIsParsedMode,
         isSortedByTokens,
         handleTabSelect,
-        handleRawContentChange,
+        handleContentChange,
         handlePaste,
         parseAllTabs,
         handleGlobalParseToggle,

@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C96 (Initialize from PcppResponse)
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
-import { TabState, ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -16,7 +16,7 @@ export const useTabManagement = (
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
     requestAllMetrics: (parsedResponse: ParsedResponse) => void
 ) => {
-    const [tabs, setTabs] = React.useState<{ [key: string]: TabState }>({});
+    const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
     const [tabCount, setTabCount] = React.useState(initialTabCount);
     const [isParsedMode, setIsParsedMode] = React.useState(initialIsParsedMode);
@@ -24,14 +24,15 @@ export const useTabManagement = (
     const clientIpc = ClientPostMessageManager.getInstance();
 
     React.useEffect(() => {
-        const newTabs: { [key: string]: TabState } = {};
+        const newTabs: { [key: string]: PcppResponse } = {};
         for (let i = 1; i <= initialTabCount; i++) {
             const key = i.toString();
             const response = initialResponses[key];
             newTabs[key] = {
-                rawContent: response?.content || '',
+                content: response?.content || '',
                 parsedContent: response?.content ? parseResponse(response.content) : null,
                 status: response?.status || 'complete',
+                ...response // Carry over all other properties like metrics
             };
         }
         setTabs(newTabs);
@@ -53,7 +54,7 @@ export const useTabManagement = (
             const newTabs = { ...prev };
             for (let i = 1; i <= count; i++) {
                 if (!newTabs[i.toString()]) {
-                    newTabs[i.toString()] = { rawContent: '', parsedContent: null, status: 'complete' };
+                    newTabs[i.toString()] = { content: '', status: 'complete' };
                 }
             }
             return newTabs;
@@ -61,30 +62,37 @@ export const useTabManagement = (
         setSaveStatus('unsaved');
     }, [setSaveStatus]);
 
-    const handleRawContentChange = React.useCallback((newContent: string, tabIndex: number) => {
-        setTabs(prev => ({ ...prev, [tabIndex.toString()]: { rawContent: newContent, parsedContent: null, status: 'complete' } }));
+    const handleContentChange = React.useCallback((newContent: string, tabIndex: number) => {
+        setTabs(prev => ({ 
+            ...prev, 
+            [tabIndex.toString()]: { 
+                ...(prev[tabIndex.toString()] || { content: '', status: 'complete' }),
+                content: newContent, 
+                parsedContent: null 
+            } 
+        }));
         setSaveStatus('unsaved');
     }, [setSaveStatus]);
 
     const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
-        const currentContent = tabs[tabIndex.toString()]?.rawContent || '';
+        const currentContent = tabs[tabIndex.toString()]?.content || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
         if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
-            handleRawContentChange(pastedText, tabIndex);
+            handleContentChange(pastedText, tabIndex);
             setActiveTab(tabIndex + 1);
         } else {
-            handleRawContentChange(pastedText, tabIndex);
+            handleContentChange(pastedText, tabIndex);
         }
-    }, [tabs, tabCount, handleRawContentChange]);
+    }, [tabs, tabCount, handleContentChange]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
             const updatedTabs = { ...prevTabs };
             Object.values(updatedTabs).forEach(tabState => {
-                if (tabState.rawContent && !tabState.parsedContent) {
-                    const parsed = parseResponse(tabState.rawContent);
+                if (tabState.content && !tabState.parsedContent) {
+                    const parsed = parseResponse(tabState.content);
                     tabState.parsedContent = parsed;
                     tabState.status = 'complete';
                     parsed.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
@@ -149,7 +157,7 @@ export const useTabManagement = (
         setIsParsedMode,
         isSortedByTokens,
         handleTabSelect,
-        handleRawContentChange,
+        handleContentChange,
         handlePaste,
         parseAllTabs,
         handleGlobalParseToggle,

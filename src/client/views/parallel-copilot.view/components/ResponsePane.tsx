@@ -1,13 +1,14 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
+// Updated on: C97 (Switch from TabState to PcppResponse)
 import * as React from 'react';
 import ParsedView from './ParsedView';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
-import { TabState } from '@/common/types/pcpp.types';
+import { PcppResponse } from '@/common/types/pcpp.types';
 
 interface ResponsePaneProps {
     isParsedMode: boolean;
-    activeTabData: TabState | undefined;
-    onRawContentChange: (content: string) => void;
+    activeTabData: PcppResponse | undefined;
+    onContentChange: (content: string) => void;
     onContextKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     onPaste: (e: React.ClipboardEvent) => void;
     // Props for ParsedView
@@ -35,8 +36,8 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             <textarea
                 className="response-textarea"
                 placeholder={`Paste AI response here...`}
-                value={props.activeTabData?.rawContent || ''}
-                onChange={(e) => props.onRawContentChange(e.target.value)}
+                value={props.activeTabData?.content || ''}
+                onChange={(e) => props.onContentChange(e.target.value)}
                 onKeyDown={props.onContextKeyDown}
                 onPaste={props.onPaste}
             />
