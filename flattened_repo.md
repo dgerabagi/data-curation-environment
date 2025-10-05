@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-04T20:33:43.003Z
+  Date Generated: 2025-10-05T16:40:12.451Z
   ---
   Total Files: 179
-  Approx. Tokens: 245381
+  Approx. Tokens: 245979
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 3. src\backend\services\prompt.service.ts (5143 tokens)
-4. src\backend\services\file-operation.service.ts (4526 tokens)
-5. src\backend\services\llm.service.ts (4516 tokens)
+4. src\backend\services\llm.service.ts (4563 tokens)
+5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4144 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3978 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3983 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 346 - Chars: 18064 - Tokens: 4516
+107. src\backend\services\llm.service.ts - Lines: 348 - Chars: 18251 - Tokens: 4563
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 184 - Chars: 9364 - Tokens: 2341
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 279 - Chars: 15912 - Tokens: 3978
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 279 - Chars: 15932 - Tokens: 3983
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -193,12 +193,12 @@
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 72 - Chars: 3153 - Tokens: 789
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 165 - Chars: 8127 - Tokens: 2032
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3355 - Tokens: 839
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 165 - Chars: 8291 - Tokens: 2073
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 167 - Chars: 6826 - Tokens: 1707
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 42 - Chars: 3715 - Tokens: 929
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 56 - Chars: 5534 - Tokens: 1384
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8623,7 +8623,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C99 (Implement generateSingle method)
+// Updated on: C100 (Fix AbortController lifecycle)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8642,7 +8642,7 @@ export class LlmService {
         if (generationControllers.has(cycleId)) {
             Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}.`);
             generationControllers.get(cycleId)?.abort();
-            generationControllers.delete(cycleId);
+            // The controller is deleted from the map in the catch/error/end handlers now.
         }
     }
     
@@ -8671,7 +8671,7 @@ export class LlmService {
         }
 
         const controller = new AbortController();
-        generationControllers.set(cycleId, controller); // Note: This might need a more granular key for concurrent single-gens
+        generationControllers.set(cycleId, controller);
 
         try {
             const response = await fetch(endpointUrl, {
@@ -8703,19 +8703,19 @@ export class LlmService {
                         if (dataStr.trim() === '[DONE]') continue;
                         try {
                             const data = JSON.parse(dataStr);
-                            if (data.choices?.finish_reason !== null) {
+                            if (data.choices?.[0]?.finish_reason !== null) {
                                 richResponse.status = 'complete';
                                 richResponse.endTime = Date.now();
                                 progress.status = 'complete';
-                            } else if (data.choices?.delta) {
-                                if (data.choices.delta.reasoning_content) {
+                            } else if (data.choices?.[0]?.delta) {
+                                if (data.choices[0].delta.reasoning_content) {
                                     if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
                                     const contentChunk = data.choices.delta.reasoning_content;
                                     const chunkTokens = Math.ceil(contentChunk.length / 4);
                                     richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                     progress.thinkingTokens += chunkTokens;
                                 }
-                                if (data.choices.delta.content) {
+                                if (data.choices[0].delta.content) {
                                     if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
                                     const contentChunk = data.choices.delta.content;
                                     responseContent += contentChunk;
@@ -8731,6 +8731,7 @@ export class LlmService {
             });
 
             stream.on('end', async () => {
+                generationControllers.delete(cycleId);
                 richResponse.content = responseContent;
                 await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, richResponse);
                 serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responseContent });
@@ -8738,17 +8739,17 @@ export class LlmService {
             });
 
             stream.on('error', (err) => {
+                generationControllers.delete(cycleId);
                 if (!(err instanceof AbortError)) throw err;
             });
 
         } catch (error: any) {
+            generationControllers.delete(cycleId);
             if (error instanceof AbortError) {
                 Services.loggerService.log(`[LLM Service] Single regeneration was aborted.`);
             } else {
                 Services.loggerService.error(`Failed to generate single response: ${error.message}`);
             }
-        } finally {
-            generationControllers.delete(cycleId);
         }
     }
 
@@ -8918,6 +8919,7 @@ export class LlmService {
                 });
 
                 stream.on('end', async () => {
+                    generationControllers.delete(cycleData.cycleId);
                     Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
                     sendProgressUpdate();
                     richResponses.forEach((rr, i) => {
@@ -8927,12 +8929,14 @@ export class LlmService {
                 });
                 
                 stream.on('error', (err) => {
+                    generationControllers.delete(cycleData.cycleId);
                     if (!(err instanceof AbortError)) {
                         reject(err);
                     }
                 });
 
             } catch (error: any) {
+                generationControllers.delete(cycleData.cycleId);
                  if (error instanceof AbortError) {
                     Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
                     resolve(Array(count).fill({ content: '', status: 'error' }));
@@ -8940,8 +8944,6 @@ export class LlmService {
                     Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
                     reject(error);
                 }
-            } finally {
-                generationControllers.delete(cycleData.cycleId);
             }
         });
     }
@@ -14041,7 +14043,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C97 (Switch from TabState to PcppResponse)
+// Updated on: C100 (Wire up onStop handler)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14260,7 +14262,7 @@ const App = () => {
                     progressData={generationManagement.generationProgress} 
                     tps={generationManagement.tps} 
                     tabs={tabManagement.tabs} 
-                    onStop={() => {}} 
+                    onStop={generationManagement.handleStopGeneration} 
                     onRegenerate={generationManagement.handleRegenerateTab} 
                     isGenerationComplete={generationManagement.isGenerationComplete} 
                     onViewResponses={() => {}} 
@@ -16937,7 +16939,7 @@ export const useFileManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useGeneration.ts">
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C98 (Fix TabState to PcppResponse refactor)
+// Updated on: C100 (Implement stop handler)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -16985,6 +16987,10 @@ export const useGeneration = (
         setIsGenerationComplete(false);
     }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
+    const handleStopGeneration = React.useCallback((cycleId: number) => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId });
+    }, [clientIpc]);
+
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;
         return !isReadyForNextCycle;
@@ -17004,6 +17010,7 @@ export const useGeneration = (
         handleGenerateResponses,
         handleStartGeneration,
         handleRegenerateTab,
+        handleStopGeneration,
         isGenerateResponsesDisabled,
         newCycleButtonDisabledReason,
     };
@@ -17524,6 +17531,7 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
+# Updated on: C100 (Add AbortController lifecycle bug)
 
 - **Key/Value for A0:**
 - **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
@@ -17537,17 +17545,16 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
-### Case Study 001: "Stop Generation" Does Not Cancel vLLM Request
+### Case Study 003: `AbortController` Lifecycle Bug Causes Unstable Cancellations
 
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C70, C75, C99
--   **Symptom:** Clicking the "Stop" button in the response generation UI correctly closes the connection from the DCE extension, but the vLLM server continues to process the request, consuming GPU resources unnecessarily.
--   **Root Cause Analysis (RCA):** The architecture involves the DCE extension making a request to a proxy server, which in turn makes a request to the vLLM server. The `AbortController` in the DCE extension's `llm.service.ts` only aborts the initial request (DCE -> Proxy). The proxy server did not have logic to detect this client-side disconnection and propagate the cancellation to its own downstream request (Proxy -> vLLM). The Express.js response object (`res`) emits a `'close'` event when the client disconnects, which can be used to trigger this cancellation.
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C100
+-   **Symptom:** When generating responses, the connection is sometimes aborted immediately and unexpectedly. Furthermore, the manual "Stop Generation" button is unreliable. The root cause is a flaw in how the `AbortController` for the `fetch` request is managed.
+-   **Root Cause Analysis (RCA):** The logic for managing streaming `fetch` requests in `generateBatch` and `generateSingle` placed the cleanup code (`generationControllers.delete(cycleId)`) in a `finally` block. For a streaming request, the `await fetch()` promise resolves as soon as the headers are received, allowing the code to proceed while the body streams in asynchronously. Consequently, the `finally` block was executing almost immediately, removing the `AbortController` from the tracking map while the stream was still in progress. This made it impossible to manually cancel the request later and could contribute to unstable connections.
 -   **Codified Solution & Best Practice:**
-    1.  When proxying streaming requests, always propagate client cancellation.
-    2.  In the Express.js route handler for the proxy, create a new `AbortController` for the downstream `fetch` request.
-    3.  Pass the controller's `signal` to the `fetch` options.
-    4.  Register an event listener on the client response object: `res.on('close', () => { controller.abort(); });`. This ensures that if the client hangs up, the server immediately aborts the expensive downstream operation, freeing up resources.
+    1.  The lifecycle of a resource tied to a stream (like an `AbortController`) must be managed by the stream's own events, not by a `try/finally` block around the initial `fetch` call.
+    2.  The `generationControllers.delete(cycleId)` call must be removed from the `finally` block.
+    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)`, as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
 
 ---
 
@@ -17563,5 +17570,19 @@ This document serves as a living record of persistent or complex bugs. By docume
     3.  It must create and execute a streaming `fetch` request to the configured LLM endpoint.
     4.  It must be able to process the resulting Server-Sent Events (SSE) stream and send granular progress updates back to the client using a dedicated IPC channel (e.g., `UpdateSingleGenerationProgress`) to avoid disrupting the state of other, non-regenerating responses.
     5.  Upon completion, it must persist the final, complete response and its metrics via the `HistoryService`.
+
+---
+
+### Case Study 001: "Stop Generation" Does Not Cancel vLLM Request
+
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
+-   **Cycles Observed:** C70, C75, C99
+-   **Symptom:** Clicking the "Stop" button in the response generation UI correctly closes the connection from the DCE extension, but the vLLM server continues to process the request, consuming GPU resources unnecessarily.
+-   **Root Cause Analysis (RCA):** The architecture involves the DCE extension making a request to a proxy server, which in turn makes a request to the vLLM server. The `AbortController` in the DCE extension's `llm.service.ts` only aborts the initial request (DCE -> Proxy). The proxy server did not have logic to detect this client-side disconnection and propagate the cancellation to its own downstream request (Proxy -> vLLM). The Express.js response object (`res`) emits a `'close'` event when the client disconnects, which can be used to trigger this cancellation.
+-   **Codified Solution & Best Practice:**
+    1.  When proxying streaming requests, always propagate client cancellation.
+    2.  In the Express.js route handler for the proxy, create a new `AbortController` for the downstream `fetch` request.
+    3.  Pass the controller's `signal` to the `fetch` options.
+    4.  Register an event listener on the client response object: `res.on('close', () => { controller.abort(); });`. This ensures that if the client hangs up, the server immediately aborts the expensive downstream operation, freeing up resources.
 </file_artifact>
 

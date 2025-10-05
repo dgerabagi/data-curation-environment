@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C98 (Fix TabState to PcppResponse refactor)
+// Updated on: C100 (Implement stop handler)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -47,6 +47,10 @@ export const useGeneration = (
         setIsGenerationComplete(false);
     }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
+    const handleStopGeneration = React.useCallback((cycleId: number) => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId });
+    }, [clientIpc]);
+
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;
         return !isReadyForNextCycle;
@@ -66,6 +70,7 @@ export const useGeneration = (
         handleGenerateResponses,
         handleStartGeneration,
         handleRegenerateTab,
+        handleStopGeneration,
         isGenerateResponsesDisabled,
         newCycleButtonDisabledReason,
     };

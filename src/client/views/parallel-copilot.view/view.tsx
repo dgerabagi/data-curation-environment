@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C97 (Switch from TabState to PcppResponse)
+// Updated on: C100 (Wire up onStop handler)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -218,7 +218,7 @@ const App = () => {
                     progressData={generationManagement.generationProgress} 
                     tps={generationManagement.tps} 
                     tabs={tabManagement.tabs} 
-                    onStop={() => {}} 
+                    onStop={generationManagement.handleStopGeneration} 
                     onRegenerate={generationManagement.handleRegenerateTab} 
                     isGenerationComplete={generationManagement.isGenerationComplete} 
                     onViewResponses={() => {}} 

@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C99 (Implement generateSingle method)
+// Updated on: C100 (Fix AbortController lifecycle)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -18,7 +18,7 @@ export class LlmService {
         if (generationControllers.has(cycleId)) {
             Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}.`);
             generationControllers.get(cycleId)?.abort();
-            generationControllers.delete(cycleId);
+            // The controller is deleted from the map in the catch/error/end handlers now.
         }
     }
     
@@ -47,7 +47,7 @@ export class LlmService {
         }
 
         const controller = new AbortController();
-        generationControllers.set(cycleId, controller); // Note: This might need a more granular key for concurrent single-gens
+        generationControllers.set(cycleId, controller);
 
         try {
             const response = await fetch(endpointUrl, {
@@ -79,19 +79,19 @@ export class LlmService {
                         if (dataStr.trim() === '[DONE]') continue;
                         try {
                             const data = JSON.parse(dataStr);
-                            if (data.choices?.finish_reason !== null) {
+                            if (data.choices?.[0]?.finish_reason !== null) {
                                 richResponse.status = 'complete';
                                 richResponse.endTime = Date.now();
                                 progress.status = 'complete';
-                            } else if (data.choices?.delta) {
-                                if (data.choices.delta.reasoning_content) {
+                            } else if (data.choices?.[0]?.delta) {
+                                if (data.choices[0].delta.reasoning_content) {
                                     if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
                                     const contentChunk = data.choices.delta.reasoning_content;
                                     const chunkTokens = Math.ceil(contentChunk.length / 4);
                                     richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                     progress.thinkingTokens += chunkTokens;
                                 }
-                                if (data.choices.delta.content) {
+                                if (data.choices[0].delta.content) {
                                     if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
                                     const contentChunk = data.choices.delta.content;
                                     responseContent += contentChunk;
@@ -107,6 +107,7 @@ export class LlmService {
             });
 
             stream.on('end', async () => {
+                generationControllers.delete(cycleId);
                 richResponse.content = responseContent;
                 await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, richResponse);
                 serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responseContent });
@@ -114,17 +115,17 @@ export class LlmService {
             });
 
             stream.on('error', (err) => {
+                generationControllers.delete(cycleId);
                 if (!(err instanceof AbortError)) throw err;
             });
 
         } catch (error: any) {
+            generationControllers.delete(cycleId);
             if (error instanceof AbortError) {
                 Services.loggerService.log(`[LLM Service] Single regeneration was aborted.`);
             } else {
                 Services.loggerService.error(`Failed to generate single response: ${error.message}`);
             }
-        } finally {
-            generationControllers.delete(cycleId);
         }
     }
 
@@ -294,6 +295,7 @@ export class LlmService {
                 });
 
                 stream.on('end', async () => {
+                    generationControllers.delete(cycleData.cycleId);
                     Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
                     sendProgressUpdate();
                     richResponses.forEach((rr, i) => {
@@ -303,12 +305,14 @@ export class LlmService {
                 });
                 
                 stream.on('error', (err) => {
+                    generationControllers.delete(cycleData.cycleId);
                     if (!(err instanceof AbortError)) {
                         reject(err);
                     }
                 });
 
             } catch (error: any) {
+                generationControllers.delete(cycleData.cycleId);
                  if (error instanceof AbortError) {
                     Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
                     resolve(Array(count).fill({ content: '', status: 'error' }));
@@ -316,8 +320,6 @@ export class LlmService {
                     Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
                     reject(error);
                 }
-            } finally {
-                generationControllers.delete(cycleData.cycleId);
             }
         });
     }
