@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C109 (Implement robust concatenated JSON parser)
+// Updated on: C110 (Fix JSON parser brace counting)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -101,40 +101,46 @@ export class LlmService {
 
                             let braceCount = 0;
                             let lastSlice = 0;
+                            let inString = false;
                             for (let i = 0; i < dataStr.length; i++) {
-                                if (dataStr[i] === '{') {
-                                    braceCount++;
-                                } else if (dataStr[i] === '}') {
-                                    braceCount--;
-                                    if (braceCount === 0) {
-                                        const jsonObjectStr = dataStr.substring(lastSlice, i + 1);
-                                        lastSlice = i + 1;
-                                        try {
-                                            const data = JSON.parse(jsonObjectStr);
-                                            if (data.choices?.[0]?.finish_reason !== null) {
-                                                richResponse.status = 'complete';
-                                                richResponse.endTime = Date.now();
-                                                progress.status = 'complete';
-                                            } else if (data.choices?.[0]?.delta) {
-                                                const delta = data.choices[0].delta;
-                                                if (delta.reasoning_content) {
-                                                    if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                                    const contentChunk = delta.reasoning_content;
-                                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                    richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                                    progress.thinkingTokens += chunkTokens;
+                                if (dataStr[i] === '"' && (i === 0 || dataStr[i-1] !== '\\')) {
+                                    inString = !inString;
+                                }
+                                if (!inString) {
+                                    if (dataStr[i] === '{') {
+                                        braceCount++;
+                                    } else if (dataStr[i] === '}') {
+                                        braceCount--;
+                                        if (braceCount === 0) {
+                                            const jsonObjectStr = dataStr.substring(lastSlice, i + 1);
+                                            lastSlice = i + 1;
+                                            try {
+                                                const data = JSON.parse(jsonObjectStr);
+                                                if (data.choices?.[0]?.finish_reason !== null) {
+                                                    richResponse.status = 'complete';
+                                                    richResponse.endTime = Date.now();
+                                                    progress.status = 'complete';
+                                                } else if (data.choices?.[0]?.delta) {
+                                                    const delta = data.choices[0].delta;
+                                                    if (delta.reasoning_content) {
+                                                        if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                                        const contentChunk = delta.reasoning_content;
+                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                                        richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                                        progress.thinkingTokens += chunkTokens;
+                                                    }
+                                                    if (delta.content) {
+                                                        if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                                        const contentChunk = delta.content;
+                                                        responseContent += contentChunk;
+                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                                        richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                                        progress.currentTokens += chunkTokens;
+                                                    }
                                                 }
-                                                if (delta.content) {
-                                                    if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                                    const contentChunk = delta.content;
-                                                    responseContent += contentChunk;
-                                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                    richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                                    progress.currentTokens += chunkTokens;
-                                                }
+                                            } catch (e) {
+                                                Services.loggerService.warn(`Could not parse JSON object from stream: ${jsonObjectStr}`);
                                             }
-                                        } catch (e) {
-                                            Services.loggerService.warn(`Could not parse JSON object from stream: ${jsonObjectStr}`);
                                         }
                                     }
                                 }

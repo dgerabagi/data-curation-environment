@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C104 (Update handleStopGeneration signature)
+// Updated on: C110 (Add optimistic UI update for stop button)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -48,8 +48,18 @@ export const useGeneration = (
     }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
     const handleStopGeneration = React.useCallback((cycleId: number, responseId: number) => {
+        // Optimistic UI update for immediate feedback
+        setGenerationProgress(prev => {
+            const newProgress = [...prev];
+            const index = newProgress.findIndex(p => p.responseId === responseId);
+            if (index !== -1 && newProgress[index].status !== 'stopped') {
+                newProgress[index] = { ...newProgress[index], status: 'stopped' };
+            }
+            return newProgress;
+        });
+        // Send message to backend to perform the actual stop
         clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId, responseId });
-    }, [clientIpc]);
+    }, [clientIpc, setGenerationProgress]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;

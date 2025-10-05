@@ -1,17 +1,17 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T22:21:43.465Z
+  Date Generated: 2025-10-05T23:27:31.346Z
   ---
   Total Files: 179
-  Approx. Tokens: 248208
+  Approx. Tokens: 248841
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
 3. src\backend\services\prompt.service.ts (5143 tokens)
-4. src\Artifacts\A111. DCE - New Regression Case Studies.md (4613 tokens)
+4. src\Artifacts\A111. DCE - New Regression Case Studies.md (5002 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 14097 - Tokens: 3525
+107. src\backend\services\llm.service.ts - Lines: 282 - Chars: 14551 - Tokens: 3638
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -193,12 +193,12 @@
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3402 - Tokens: 851
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 3927 - Tokens: 982
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 192 - Chars: 8845 - Tokens: 2212
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 157 - Chars: 18451 - Tokens: 4613
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 169 - Chars: 20006 - Tokens: 5002
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,7 +8630,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C109 (Implement robust concatenated JSON parser)
+// Updated on: C110 (Fix JSON parser brace counting)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8732,40 +8732,46 @@ export class LlmService {
 
                             let braceCount = 0;
                             let lastSlice = 0;
+                            let inString = false;
                             for (let i = 0; i < dataStr.length; i++) {
-                                if (dataStr[i] === '{') {
-                                    braceCount++;
-                                } else if (dataStr[i] === '}') {
-                                    braceCount--;
-                                    if (braceCount === 0) {
-                                        const jsonObjectStr = dataStr.substring(lastSlice, i + 1);
-                                        lastSlice = i + 1;
-                                        try {
-                                            const data = JSON.parse(jsonObjectStr);
-                                            if (data.choices?.[0]?.finish_reason !== null) {
-                                                richResponse.status = 'complete';
-                                                richResponse.endTime = Date.now();
-                                                progress.status = 'complete';
-                                            } else if (data.choices?.[0]?.delta) {
-                                                const delta = data.choices[0].delta;
-                                                if (delta.reasoning_content) {
-                                                    if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                                    const contentChunk = delta.reasoning_content;
-                                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                    richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                                    progress.thinkingTokens += chunkTokens;
+                                if (dataStr[i] === '"' && (i === 0 || dataStr[i-1] !== '\\')) {
+                                    inString = !inString;
+                                }
+                                if (!inString) {
+                                    if (dataStr[i] === '{') {
+                                        braceCount++;
+                                    } else if (dataStr[i] === '}') {
+                                        braceCount--;
+                                        if (braceCount === 0) {
+                                            const jsonObjectStr = dataStr.substring(lastSlice, i + 1);
+                                            lastSlice = i + 1;
+                                            try {
+                                                const data = JSON.parse(jsonObjectStr);
+                                                if (data.choices?.[0]?.finish_reason !== null) {
+                                                    richResponse.status = 'complete';
+                                                    richResponse.endTime = Date.now();
+                                                    progress.status = 'complete';
+                                                } else if (data.choices?.[0]?.delta) {
+                                                    const delta = data.choices[0].delta;
+                                                    if (delta.reasoning_content) {
+                                                        if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                                        const contentChunk = delta.reasoning_content;
+                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                                        richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                                        progress.thinkingTokens += chunkTokens;
+                                                    }
+                                                    if (delta.content) {
+                                                        if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                                        const contentChunk = delta.content;
+                                                        responseContent += contentChunk;
+                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                                        richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                                        progress.currentTokens += chunkTokens;
+                                                    }
                                                 }
-                                                if (delta.content) {
-                                                    if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                                    const contentChunk = delta.content;
-                                                    responseContent += contentChunk;
-                                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                    richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                                    progress.currentTokens += chunkTokens;
-                                                }
+                                            } catch (e) {
+                                                Services.loggerService.warn(`Could not parse JSON object from stream: ${jsonObjectStr}`);
                                             }
-                                        } catch (e) {
-                                            Services.loggerService.warn(`Could not parse JSON object from stream: ${jsonObjectStr}`);
                                         }
                                     }
                                 }
@@ -16876,7 +16882,7 @@ export const useFileManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useGeneration.ts">
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C104 (Update handleStopGeneration signature)
+// Updated on: C110 (Add optimistic UI update for stop button)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -16925,8 +16931,18 @@ export const useGeneration = (
     }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
     const handleStopGeneration = React.useCallback((cycleId: number, responseId: number) => {
+        // Optimistic UI update for immediate feedback
+        setGenerationProgress(prev => {
+            const newProgress = [...prev];
+            const index = newProgress.findIndex(p => p.responseId === responseId);
+            if (index !== -1 && newProgress[index].status !== 'stopped') {
+                newProgress[index] = { ...newProgress[index], status: 'stopped' };
+            }
+            return newProgress;
+        });
+        // Send message to backend to perform the actual stop
         clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId, responseId });
-    }, [clientIpc]);
+    }, [clientIpc, setGenerationProgress]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {
         if (currentCycle?.cycleId === 0) return true;
@@ -17503,7 +17519,7 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C109 (Add Concatenated JSON Objects case)
+# Updated on: C110 (Add JSON Brace Counting case)
 
 ## 1. Purpose
 
@@ -17513,12 +17529,24 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
+### Case Study 012: SSE Parser Fails on JSON Chunks Containing Brace Characters
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C110
+-   **Symptom:** During response generation, the logs show sporadic `Could not parse JSON object from stream` warnings. The final, assembled response content in the UI is truncated, missing its beginning characters (e.g., missing the leading `{`).
+-   **Root Cause Analysis (RCA):** The parser designed to handle concatenated JSON objects in an SSE stream used a naive brace-counting (`{}`) algorithm to find object boundaries. This algorithm failed when the `delta.content` from the vLLM contained brace characters as part of its string value (e.g., `{"content": "{\\"some\\": \\"json\\"}"}`). The parser would incorrectly count the brace inside the string literal and prematurely slice the stream, attempting to parse an incomplete JSON fragment. This resulted in both the parsing error and the loss of the initial content chunks.
+-   **Codified Solution & Best Practice:**
+    1.  Manual parsers for structured text formats like JSON must account for the language's syntax, such as string literals.
+    2.  The brace-counting logic must be enhanced to be "string-aware." The parser should track whether its iterator is currently inside a double-quoted string. Brace characters (`{` and `}`) should only be counted towards object boundary detection when the iterator is *not* inside a string. This ensures that only structural braces are considered, making the parser robust.
+
+---
+
 ### Case Study 011: SSE Parser Fails on Concatenated JSON Objects
 
 -   **Artifacts Affected:** `src/backend/services/llm.service.ts`
 -   **Cycles Observed:** C109
 -   **Symptom:** The log shows "Could not parse SSE chunk" for what appears to be valid JSON. This happens frequently during the "thinking" phase of generation where many small `reasoning_content` updates are sent. The UI does not update with streaming tokens for this phase.
--   **Root Cause Analysis (RCA):** The SSE stream parser correctly splits messages by newline and removes the `data: ` prefix. However, it assumes the remaining string is a single JSON object. The vLLM server, especially when sending rapid, small updates, can concatenate multiple JSON objects into a single `data:` payload (e.g., `data: {"id":1}{"id":2}`). Attempting to `JSON.parse()` this concatenated string is a syntax error, causing the parser to fail.
+-   **Root Cause Analysis (RCA):** The SSE stream parser correctly splits messages by newline and removes the `data: ` prefix. However, it assumed the remaining string is a single JSON object. The vLLM server, especially when sending rapid, small updates, can concatenate multiple JSON objects into a single `data:` payload (e.g., `data: {"id":1}{"id":2}`). Attempting to `JSON.parse()` this concatenated string is a syntax error, causing the parser to fail.
 -   **Codified Solution & Best Practice:**
     1.  The SSE `data` payload should not be assumed to be a single JSON object.
     2.  Implement a more robust parser that can handle a stream of concatenated JSON objects. A simple and effective method is to iterate through the string, use a counter to track the nesting level of braces (`{}`), and slice out and parse each complete top-level object when its brace count returns to zero. This makes the parser resilient to variations in how the server batches data within SSE messages.
