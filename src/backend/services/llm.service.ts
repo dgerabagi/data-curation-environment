@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C106 (Remove incorrect Readable.fromWeb conversion)
+// Updated on: C107 (Include partial content in progress updates)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -86,8 +86,6 @@ export class LlmService {
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
-                // C106 FIX: response.body from node-fetch is already a Node.js stream.
-                // Do not use Readable.fromWeb().
                 const stream = response.body;
                 let buffer = '';
 
@@ -114,7 +112,7 @@ export class LlmService {
                                         richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                         progress.thinkingTokens += chunkTokens;
                                     }
-                                    if (data.choices.delta.content) {
+                                    if (data.choices[0].delta.content) {
                                         if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
                                         const contentChunk = data.choices.delta.content;
                                         responseContent += contentChunk;
@@ -126,14 +124,14 @@ export class LlmService {
                             } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`); }
                         }
                     }
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                 });
 
                 stream.on('end', () => {
                     generationControllers.delete(controllerKey);
                     richResponse.content = responseContent;
                     progress.status = 'complete';
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                     resolve(richResponse);
                 });
 
@@ -144,7 +142,7 @@ export class LlmService {
                         richResponse.content = responseContent;
                         richResponse.status = 'stopped';
                         progress.status = 'stopped';
-                        serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                        serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                         resolve(richResponse);
                     } else {
                         throw err;
@@ -163,7 +161,7 @@ export class LlmService {
                     richResponse.status = 'error';
                     progress.status = 'error';
                 }
-                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                 resolve(richResponse);
             }
         });

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C105 (Add view toggle state and pass to ResponseTabs)
+// Updated on: C107 (Pass setTabs to usePcppIpc hook)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';

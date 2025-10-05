@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T21:29:13.672Z
+  Date Generated: 2025-10-05T21:39:57.297Z
   ---
   Total Files: 179
-  Approx. Tokens: 246615
+  Approx. Tokens: 247133
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -16,7 +16,7 @@
 6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (4007 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
 10. src\backend\services\history.service.ts (3904 tokens)
 
 <!-- Full File List -->
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 261 - Chars: 12989 - Tokens: 3248
+107. src\backend\services\llm.service.ts - Lines: 259 - Chars: 12957 - Tokens: 3240
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -158,14 +158,14 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 16027 - Tokens: 4007
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 16012 - Tokens: 4003
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 145. src\common\ipc\channels.enum.ts - Lines: 115 - Chars: 6540 - Tokens: 1635
-146. src\common\ipc\channels.type.ts - Lines: 129 - Chars: 9769 - Tokens: 2443
+146. src\common\ipc\channels.type.ts - Lines: 129 - Chars: 9796 - Tokens: 2449
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -194,11 +194,11 @@
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3402 - Tokens: 851
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 182 - Chars: 8535 - Tokens: 2134
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 192 - Chars: 8845 - Tokens: 2212
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 115 - Chars: 13508 - Tokens: 3377
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 129 - Chars: 15292 - Tokens: 3823
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,7 +8630,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C106 (Remove incorrect Readable.fromWeb conversion)
+// Updated on: C107 (Include partial content in progress updates)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8717,8 +8717,6 @@ export class LlmService {
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
-                // C106 FIX: response.body from node-fetch is already a Node.js stream.
-                // Do not use Readable.fromWeb().
                 const stream = response.body;
                 let buffer = '';
 
@@ -8745,7 +8743,7 @@ export class LlmService {
                                         richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                         progress.thinkingTokens += chunkTokens;
                                     }
-                                    if (data.choices.delta.content) {
+                                    if (data.choices[0].delta.content) {
                                         if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
                                         const contentChunk = data.choices.delta.content;
                                         responseContent += contentChunk;
@@ -8757,14 +8755,14 @@ export class LlmService {
                             } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`); }
                         }
                     }
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                 });
 
                 stream.on('end', () => {
                     generationControllers.delete(controllerKey);
                     richResponse.content = responseContent;
                     progress.status = 'complete';
-                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                     resolve(richResponse);
                 });
 
@@ -8775,7 +8773,7 @@ export class LlmService {
                         richResponse.content = responseContent;
                         richResponse.status = 'stopped';
                         progress.status = 'stopped';
-                        serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                        serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                         resolve(richResponse);
                     } else {
                         throw err;
@@ -8794,7 +8792,7 @@ export class LlmService {
                     richResponse.status = 'error';
                     progress.status = 'error';
                 }
-                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress, content: responseContent });
                 resolve(richResponse);
             }
         });
@@ -13974,7 +13972,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C105 (Add view toggle state and pass to ResponseTabs)
+// Updated on: C107 (Pass setTabs to usePcppIpc hook)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14711,7 +14709,7 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C104 (Update RequestStopGeneration payload)
+// Updated on: C107 (Add content to UpdateSingleGenerationProgress)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -14834,7 +14832,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendBatchGenerationResult ? { responses: string[], newCycleId: number } :
     T extends ServerToClientChannel.SendBatchGenerationComplete ? { newCycleId: number; newMaxCycle: number; } :
     T extends ServerToClientChannel.UpdateGenerationProgress ? { progress: GenerationProgress[], tps: number, chunks: { [responseId: number]: string } } :
-    T extends ServerToClientChannel.UpdateSingleGenerationProgress ? { progress: GenerationProgress } :
+    T extends ServerToClientChannel.UpdateSingleGenerationProgress ? { progress: GenerationProgress; content: string; } :
     T extends ServerToClientChannel.StartGenerationUI ? { newCycleId: number, newMaxCycle: number } : // DEPRECATED
     T extends ServerToClientChannel.NavigateToNewGeneratingCycle ? { newCycleData: PcppCycle, newMaxCycle: number } :
     T extends ServerToClientChannel.NotifySingleResponseComplete ? { responseId: number; content: string; } :
@@ -16941,11 +16939,11 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C105 (Fix generation progress initialization)
+// Updated on: C107 (Update tab content from progress messages)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { logger } from '@/client/utils/logger';
 import { useCycleManagement } from './useCycleManagement';
@@ -17048,7 +17046,6 @@ export const usePcppIpc = (
             cycleManagement.loadCycleData(newCycleData);
             tabManagement.resetAndLoadTabs(newCycleData.responses);
 
-            // C105 Fix: Initialize the generationProgress state array
             const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
                 const responseId = parseInt(key, 10);
                 return {
@@ -17057,7 +17054,7 @@ export const usePcppIpc = (
                     promptTokens: 0,
                     thinkingTokens: 0,
                     currentTokens: 0,
-                    totalTokens: 16384, // Default value, will be updated by stream
+                    totalTokens: 16384,
                     startTime: Date.now()
                 };
             });
@@ -17080,18 +17077,29 @@ export const usePcppIpc = (
             });
         });
 
-        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress, content }) => {
             generationManagement.setGenerationProgress(prev => {
                 const newProgress = [...prev];
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
                     newProgress[index] = progress;
                 } else {
-                    // C105 Fix: Add the item if it's not found
                     newProgress.push(progress);
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
                 return newProgress;
+            });
+
+            tabManagement.setTabs(prev => {
+                const newTabs = { ...prev };
+                const tabId = progress.responseId.toString();
+                const existingTab = newTabs[tabId] || { content: '', status: 'pending' };
+                newTabs[tabId] = {
+                    ...existingTab,
+                    content: content,
+                    status: progress.status,
+                };
+                return newTabs;
             });
         });
 
@@ -17478,13 +17486,27 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C106 (Add ReadableStream TypeError)
+# Updated on: C107 (Add Token Streaming UI Failure)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 009: Token Counts and Content Do Not Stream in UI
+
+-   **Artifacts Affected:** `llm.service.ts`, `channels.type.ts`, `usePcppIpc.ts`
+-   **Cycles Observed:** C107
+-   **Symptom:** In the "Generating Responses" UI, the progress bars correctly change status (e.g., to 'thinking', 'generating'), but the token counters remain at zero, and the partial text preview is empty. The UI only updates when the entire response is complete.
+-   **Root Cause Analysis (RCA):** The refactor to a "fan-out" request architecture in Cycle 105 introduced a new IPC channel, `UpdateSingleGenerationProgress`. The payload for this message correctly sent metric updates (like the response `status`) but failed to include the accumulating text `content` of the response. The frontend UI relied on this `content` string to derive the live token counts and to display the partial text preview. Without the streaming content, these UI elements could not be updated in real-time.
+-   **Codified Solution & Best Practice:**
+    1.  When designing IPC messages for streaming data, ensure the payload contains all necessary information for the UI to reconstruct its state, including both metrics and the partial data itself.
+    2.  The IPC payload for `UpdateSingleGenerationProgress` must be enhanced to include the partial `content` string: `{ progress: GenerationProgress; content: string; }`.
+    3.  The backend stream handler (`llm.service.ts`) must accumulate the content as chunks arrive and include it in every progress message.
+    4.  The frontend IPC listener (`usePcppIpc.ts`) must be updated to use this complete payload to update all relevant pieces of state simultaneously—in this case, both the `generationProgress` state (for metrics) and the `tabs` state (for content).
 
 ---
 

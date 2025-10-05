@@ -1,9 +1,9 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C105 (Fix generation progress initialization)
+// Updated on: C107 (Update tab content from progress messages)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { logger } from '@/client/utils/logger';
 import { useCycleManagement } from './useCycleManagement';
@@ -106,7 +106,6 @@ export const usePcppIpc = (
             cycleManagement.loadCycleData(newCycleData);
             tabManagement.resetAndLoadTabs(newCycleData.responses);
 
-            // C105 Fix: Initialize the generationProgress state array
             const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
                 const responseId = parseInt(key, 10);
                 return {
@@ -115,7 +114,7 @@ export const usePcppIpc = (
                     promptTokens: 0,
                     thinkingTokens: 0,
                     currentTokens: 0,
-                    totalTokens: 16384, // Default value, will be updated by stream
+                    totalTokens: 16384,
                     startTime: Date.now()
                 };
             });
@@ -138,18 +137,29 @@ export const usePcppIpc = (
             });
         });
 
-        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
+        clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress, content }) => {
             generationManagement.setGenerationProgress(prev => {
                 const newProgress = [...prev];
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
                     newProgress[index] = progress;
                 } else {
-                    // C105 Fix: Add the item if it's not found
                     newProgress.push(progress);
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
                 return newProgress;
+            });
+
+            tabManagement.setTabs(prev => {
+                const newTabs = { ...prev };
+                const tabId = progress.responseId.toString();
+                const existingTab = newTabs[tabId] || { content: '', status: 'pending' };
+                newTabs[tabId] = {
+                    ...existingTab,
+                    content: content,
+                    status: progress.status,
+                };
+                return newTabs;
             });
         });
 
