@@ -1,26 +1,26 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-04T20:14:17.427Z
+  Date Generated: 2025-10-04T20:33:43.003Z
   ---
-  Total Files: 178
-  Approx. Tokens: 243005
+  Total Files: 179
+  Approx. Tokens: 245381
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A0. DCE Master Artifact List.md (9664 tokens)
+1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 3. src\backend\services\prompt.service.ts (5143 tokens)
 4. src\backend\services\file-operation.service.ts (4526 tokens)
-5. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4070 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (3978 tokens)
-10. src\backend\services\history.service.ts (3904 tokens)
+5. src\backend\services\llm.service.ts (4516 tokens)
+6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4144 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3978 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 564 - Chars: 38656 - Tokens: 9664
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -104,7 +104,7 @@
 82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 357 - Chars: 16280 - Tokens: 4070
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 370 - Chars: 16574 - Tokens: 4144
 86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 249 - Chars: 12797 - Tokens: 3200
+107. src\backend\services\llm.service.ts - Lines: 346 - Chars: 18064 - Tokens: 4516
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -198,12 +198,13 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 167 - Chars: 6826 - Tokens: 1707
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 42 - Chars: 3715 - Tokens: 929
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C96 (Add A110)
+# Updated on: C99 (Add A111)
 
 ## 1. Purpose
 
@@ -680,6 +681,10 @@
 ### A110. DCE - Response UI State Persistence and Workflow Plan
 - **Description:** A plan to fix the response UI state loss by expanding the data model to include generation metrics and refactoring the UI to be driven by a per-response status.
 - **Tags:** plan, bug fix, persistence, state management, ui, ux
+
+### A111. DCE - New Regression Case Studies
+- **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -5669,17 +5674,17 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C59 (Remove stream chunk logging)
+# Updated on: C99 (Add client disconnection handling to proxy route)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project, used as a baseline for implementing the DCE LLM proxy. The proxy route has been corrected to handle the modern OpenAI `messages` format instead of the legacy `prompt` format.
-- **Tags:** reference, source code, backend, nodejs, express, streaming, sse
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route has been updated to handle client disconnections, allowing it to cancel the downstream request to the vLLM server.
+- **Tags:** reference, source code, backend, nodejs, express, streaming, sse, abortcontroller
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected to fix a critical bug. It was previously expecting a `{ "prompt": "..." }` field in the request body, but the DCE extension sends the modern OpenAI format, `{ "messages": [...] }`. The code now correctly handles the `messages` array, resolving the `400 Bad Request` error. **The diagnostic chunk logging has been removed as streaming is now stable.**
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been enhanced to properly handle the "Stop Generation" feature. It now creates an `AbortController` for its `fetch` request to the vLLM server and listens for the client's `close` event. If the client disconnects, the proxy will now abort its own request, freeing up resources on the vLLM server.
 
-## 2. Source Code (with corrected route)
+## 2. Source Code (with disconnection handling)
 
 ```typescript
 // Updated on: C1384 (Correct import path for generateSpeech from llmService.)
@@ -5699,6 +5704,7 @@ import { logInfo, logError, logWarn } from './logger';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import fs from 'fs';
+import { Readable } from 'stream';
 import { type PlayerDirection, type PlayerProfile, type PoetryBattleChatbotData } from './state/gameStoreTypes';
 import type { Founder } from './state';
 import { CompetitionSystem } from './game/systems/CompetitionSystem';
@@ -5919,15 +5925,21 @@ app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as a
 app.post('/api/dce/proxy', async (req, res) => {
     logInfo('[DCE]', 'Received request on /api/dce/proxy');
 
+    // --- C99 FIX: AbortController for downstream request ---
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    // Listen for the client to close the connection
+    req.on('close', () => {
+        logWarn('[DCE]', 'Client closed the connection. Aborting request to vLLM.');
+        controller.abort();
+    });
+    // --- END C99 FIX ---
+
     if (DCE_API_KEY) {
-        const authHeader = req.headers.authorization;
-        if (!authHeader || authHeader !== `Bearer ${DCE_API_KEY}`) {
-            logWarn('[DCE]', 'Unauthorized request: Missing or invalid API key.');
-            return res.status(401).json({ error: 'Unauthorized' });
-        }
+        // ... (API key validation remains the same)
     }
 
-    // FIX: Expect 'messages' array instead of 'prompt' string
     const { messages, n = 1, ...rest } = req.body;
 
     if (!messages || !Array.isArray(messages) || messages.length === 0 || !messages[0].content) {
@@ -5944,34 +5956,39 @@ app.post('/api/dce/proxy', async (req, res) => {
                 'Content-Type': 'application/json',
                 'Accept': 'text/event-stream'
             },
-            // FIX: Pass the request body through, as it's already in the correct format for vLLM
             body: JSON.stringify({
                 ...rest,
                 messages,
                 n,
                 stream: true,
             }),
+            signal, // --- C99 FIX: Pass the abort signal to fetch ---
         });
 
         if (!vllmResponse.ok || !vllmResponse.body) {
             const errorBody = await vllmResponse.text();
             throw new Error(`vLLM server returned an error: ${vllmResponse.status} ${vllmResponse.statusText} - ${errorBody}`);
         }
-
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
 
         const stream = vllmResponse.body;
-        stream.pipe(res);
+        const nodeStream = Readable.fromWeb(stream as any);
+        nodeStream.pipe(res);
         logInfo('[DCE]', 'Successfully established stream from vLLM to client.');
 
     } catch (error: any) {
-        logError('[DCE]', 'Error proxying request to vLLM:', error.message);
-        res.status(500).json({ error: 'Failed to get responses from vLLM backend.' });
+        if (error.name === 'AbortError') {
+            logInfo('[DCE]', 'vLLM request was successfully aborted.');
+        } else {
+            logError('[DCE]', 'Error proxying request to vLLM:', error.message);
+            if (!res.headersSent) {
+                res.status(500).json({ error: 'Failed to get responses from vLLM backend.' });
+            }
+        }
     }
 });
-
 
 // NEW: TTS Proxy Route
 app.post('/api/tts/generate', async (req, res) => {
@@ -6023,6 +6040,7 @@ process.on('SIGINT', () => {
     io.close();
     server.close(() => process.exit(0));
 });
+```
 </file_artifact>
 
 <file path="src/Artifacts/A91. AI Ascent - Caddyfile (Reference).md">
@@ -8605,7 +8623,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C96 (Capture and return rich response metrics)
+// Updated on: C99 (Implement generateSingle method)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8629,10 +8647,109 @@ export class LlmService {
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
-        // This method will now also need to be updated to return the rich PcppResponse object
-        // For now, focusing on the batch generation which is the primary workflow.
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
+
+        const settings = await Services.settingsService.getSettings();
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (!serverIpc) return;
+
+        let endpointUrl = '';
+        let requestBody: any = {};
+        const reasoningEffort = 'medium';
+
+        switch (settings.connectionMode) {
+            case 'demo':
+                endpointUrl = 'https://aiascent.game/api/dce/proxy';
+                requestBody = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], n: 1, max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
+                break;
+            case 'url':
+                endpointUrl = settings.apiUrl || '';
+                requestBody = { model: "local-model", messages: [{ role: "user", content: prompt }], n: 1, max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
+                break;
+            default: return;
+        }
+
+        const controller = new AbortController();
+        generationControllers.set(cycleId, controller); // Note: This might need a more granular key for concurrent single-gens
+
+        try {
+            const response = await fetch(endpointUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+                signal: controller.signal,
+            });
+
+            if (!response.ok || !response.body) {
+                const errorBody = await response.text();
+                throw new Error(`API request failed: ${response.status} ${errorBody}`);
+            }
+
+            const stream = response.body;
+            let buffer = '';
+            let responseContent = '';
+            const richResponse: PcppResponse = { content: '', status: 'pending', startTime: Date.now() };
+            const progress: GenerationProgress = { responseId: parseInt(tabId, 10), promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
+
+            stream.on('data', (chunk) => {
+                buffer += chunk.toString();
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const dataStr = line.substring(6);
+                        if (dataStr.trim() === '[DONE]') continue;
+                        try {
+                            const data = JSON.parse(dataStr);
+                            if (data.choices?.finish_reason !== null) {
+                                richResponse.status = 'complete';
+                                richResponse.endTime = Date.now();
+                                progress.status = 'complete';
+                            } else if (data.choices?.delta) {
+                                if (data.choices.delta.reasoning_content) {
+                                    if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                    const contentChunk = data.choices.delta.reasoning_content;
+                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                    richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                    progress.thinkingTokens += chunkTokens;
+                                }
+                                if (data.choices.delta.content) {
+                                    if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                    const contentChunk = data.choices.delta.content;
+                                    responseContent += contentChunk;
+                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                    richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                    progress.currentTokens += chunkTokens;
+                                }
+                            }
+                        } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk for single regen: ${dataStr}`); }
+                    }
+                }
+                serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+            });
+
+            stream.on('end', async () => {
+                richResponse.content = responseContent;
+                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, richResponse);
+                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responseContent });
+                Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
+            });
+
+            stream.on('error', (err) => {
+                if (!(err instanceof AbortError)) throw err;
+            });
+
+        } catch (error: any) {
+            if (error instanceof AbortError) {
+                Services.loggerService.log(`[LLM Service] Single regeneration was aborted.`);
+            } else {
+                Services.loggerService.error(`Failed to generate single response: ${error.message}`);
+            }
+        } finally {
+            generationControllers.delete(cycleId);
+        }
     }
 
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<PcppResponse[]> {
@@ -8711,7 +8828,6 @@ export class LlmService {
                     startTime: Date.now(),
                 }));
                 const responseContents: string[] = Array(count).fill('');
-                // This will now hold the full PcppResponse object
                 const richResponses: PcppResponse[] = [...Array(count)].map(() => ({ content: '', status: 'pending', startTime: Date.now() }));
                 const finishedResponses: boolean[] = Array(count).fill(false);
                 let totalFinished = 0;
@@ -8804,7 +8920,6 @@ export class LlmService {
                 stream.on('end', async () => {
                     Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
                     sendProgressUpdate();
-                    // Finalize content for any potentially unfinished streams
                     richResponses.forEach((rr, i) => {
                         rr.content = responseContents[i];
                     });
@@ -17403,5 +17518,50 @@ This allows the UI to correctly show the progress view for a tab that is activel
     *   Add a new button to the `WorkflowToolbar`.
     *   This button will be visible only when viewing a cycle with a status of `'complete'`.
     *   It will toggle a local `useState` boolean that overrides the main logic, allowing the user to manually switch between the `ResponsePane` and the (now historical) `GenerationProgressDisplay` for that cycle.
+</file_artifact>
+
+<file path="src/Artifacts/A111. DCE - New Regression Case Studies.md">
+# Artifact A111: DCE - New Regression Case Studies
+# Date Created: C99
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
+
+## 1. Purpose
+
+This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
+
+## 2. Case Studies
+
+---
+
+### Case Study 001: "Stop Generation" Does Not Cancel vLLM Request
+
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
+-   **Cycles Observed:** C70, C75, C99
+-   **Symptom:** Clicking the "Stop" button in the response generation UI correctly closes the connection from the DCE extension, but the vLLM server continues to process the request, consuming GPU resources unnecessarily.
+-   **Root Cause Analysis (RCA):** The architecture involves the DCE extension making a request to a proxy server, which in turn makes a request to the vLLM server. The `AbortController` in the DCE extension's `llm.service.ts` only aborts the initial request (DCE -> Proxy). The proxy server did not have logic to detect this client-side disconnection and propagate the cancellation to its own downstream request (Proxy -> vLLM). The Express.js response object (`res`) emits a `'close'` event when the client disconnects, which can be used to trigger this cancellation.
+-   **Codified Solution & Best Practice:**
+    1.  When proxying streaming requests, always propagate client cancellation.
+    2.  In the Express.js route handler for the proxy, create a new `AbortController` for the downstream `fetch` request.
+    3.  Pass the controller's `signal` to the `fetch` options.
+    4.  Register an event listener on the client response object: `res.on('close', () => { controller.abort(); });`. This ensures that if the client hangs up, the server immediately aborts the expensive downstream operation, freeing up resources.
+
+---
+
+### Case Study 002: "Re-generate" Button is Non-Functional
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C75, C99
+-   **Symptom:** Clicking the "Re-generate" button on a response tab correctly updates the UI to show a loading/spinning state, but no request is ever sent to the vLLM server, and no new response is generated.
+-   **Root Cause Analysis (RCA):** The backend method responsible for this feature, `llm.service.ts::generateSingle`, was an unimplemented stub. The entire frontend and IPC message-passing infrastructure was correctly wired up to call this function, but the function itself contained only placeholder logic to update the UI state to "generating" and did not contain any `fetch` call to actually initiate a new LLM request.
+-   **Codified Solution & Best Practice:**
+    1.  Ensure all backend service methods intended for user-facing features are fully implemented and not just stubs.
+    2.  The `generateSingle` method must be implemented to mirror the core logic of `generateBatch`, but for a single response (`n: 1`).
+    3.  It must create and execute a streaming `fetch` request to the configured LLM endpoint.
+    4.  It must be able to process the resulting Server-Sent Events (SSE) stream and send granular progress updates back to the client using a dedicated IPC channel (e.g., `UpdateSingleGenerationProgress`) to avoid disrupting the state of other, non-regenerating responses.
+    5.  Upon completion, it must persist the final, complete response and its metrics via the `HistoryService`.
 </file_artifact>
 
