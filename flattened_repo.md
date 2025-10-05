@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T21:02:55.294Z
+  Date Generated: 2025-10-05T21:15:41.047Z
   ---
   Total Files: 179
-  Approx. Tokens: 245438
+  Approx. Tokens: 246113
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-2. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
+2. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
 3. src\backend\services\prompt.service.ts (5143 tokens)
 4. src\backend\services\file-operation.service.ts (4526 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
 8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\backend\services\history.service.ts (3904 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3840 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4007 tokens)
+10. src\backend\services\history.service.ts (3904 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -152,13 +152,13 @@
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 150 - Chars: 9893 - Tokens: 2474
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 70 - Chars: 2832 - Tokens: 708
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 96 - Chars: 4237 - Tokens: 1060
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 109 - Chars: 4783 - Tokens: 1196
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 268 - Chars: 15359 - Tokens: 3840
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 16027 - Tokens: 4007
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -194,11 +194,11 @@
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3402 - Tokens: 851
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 162 - Chars: 7650 - Tokens: 1913
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 182 - Chars: 8535 - Tokens: 2134
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 90 - Chars: 10357 - Tokens: 2590
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 103 - Chars: 12099 - Tokens: 3025
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -12188,9 +12188,9 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C98 (Fix TabState to PcppResponse refactor)
+// Updated on: C105 (Add view toggle button)
 import * as React from 'react';
-import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck } from 'react-icons/vsc';
+import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
@@ -12205,6 +12205,9 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
+    isGenerating: boolean;
+    forceShowResponseView: boolean;
+    onToggleForceResponseView: () => void;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -12218,6 +12221,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     onSortToggle,
     workflowStep,
     onRegenerateTab,
+    isGenerating,
+    forceShowResponseView,
+    onToggleForceResponseView,
 }) => {
     const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
     const confirmTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -12275,9 +12281,16 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                     );
                 })}
             </div>
-            <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
-                {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
-            </button>
+            <div className="tab-bar-controls">
+                {isGenerating && (
+                    <button onClick={onToggleForceResponseView} className="styled-button" title={forceShowResponseView ? "Show Generation Progress" : "Show Response View"}>
+                        <VscEye />
+                    </button>
+                )}
+                <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
+                    {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
+                </button>
+            </div>
         </div>
     );
 };
@@ -12696,7 +12709,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C76 (Add spinner animation keyframes)
+// Updated on: C105 (Add styles for tab bar controls)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -13313,6 +13326,13 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.tab-bar-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 4px;
 }
 
 .tab-bar {
@@ -13943,7 +13963,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C102 (Refactor to pass hook objects to usePcppIpc)
+// Updated on: C105 (Add view toggle state and pass to ResponseTabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -13982,6 +14002,7 @@ const App = () => {
     
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
     const saveStateRef = React.useRef<() => void>(() => {});
+    const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
 
     // --- State & Hooks Initialization ---
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
@@ -14048,6 +14069,13 @@ const App = () => {
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+            setForceShowResponseView(false);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
+            if (cycleData) setForceShowResponseView(false);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
+            setForceShowResponseView(false);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc]);
@@ -14091,8 +14119,7 @@ const App = () => {
         }
     };
     
-    const activeTabState = tabManagement.tabs[tabManagement.activeTab.toString()];
-    const showProgressView = cycleManagement.currentCycle.status === 'generating';
+    const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;
 
     return <div className="pc-view-container">
         <div className="pc-header">
@@ -14145,6 +14172,9 @@ const App = () => {
                 workflowStep={workflowStep} 
                 onRegenerateTab={generationManagement.handleRegenerateTab} 
                 onSortToggle={tabManagement.handleSortToggle} 
+                isGenerating={cycleManagement.currentCycle.status === 'generating'}
+                forceShowResponseView={forceShowResponseView}
+                onToggleForceResponseView={() => setForceShowResponseView(p => !p)}
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 
@@ -16900,7 +16930,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C102 (Refactor to use management objects and fix UI refresh)
+// Updated on: C105 (Fix generation progress initialization)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -16911,6 +16941,7 @@ import { useCycleManagement } from './useCycleManagement';
 import { useTabManagement } from './useTabManagement';
 import { useFileManagement } from './useFileManagement';
 import { useGeneration } from './useGeneration';
+import { GenerationProgress } from '@/common/ipc/channels.type';
 
 type CycleManagementHook = ReturnType<typeof useCycleManagement>;
 type TabManagementHook = ReturnType<typeof useTabManagement>;
@@ -17003,9 +17034,24 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
             logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
             cycleManagement.setMaxCycle(newMaxCycle);
-            // Call both setters to ensure state is updated together
             cycleManagement.loadCycleData(newCycleData);
             tabManagement.resetAndLoadTabs(newCycleData.responses);
+
+            // C105 Fix: Initialize the generationProgress state array
+            const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
+                const responseId = parseInt(key, 10);
+                return {
+                    responseId,
+                    status: 'pending',
+                    promptTokens: 0,
+                    thinkingTokens: 0,
+                    currentTokens: 0,
+                    totalTokens: 16384, // Default value, will be updated by stream
+                    startTime: Date.now()
+                };
+            });
+            generationManagement.setGenerationProgress(initialProgress);
+            
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
 
@@ -17029,6 +17075,10 @@ export const usePcppIpc = (
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
                     newProgress[index] = progress;
+                } else {
+                    // C105 Fix: Add the item if it's not found
+                    newProgress.push(progress);
+                    newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
                 return newProgress;
             });
@@ -17417,13 +17467,26 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C104 (Add "Stop All vs Stop One" case study)
+# Updated on: C105 (Add Response Progress UI initialization failure)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 007: Response Progress UI Fails to Render After Fan-Out Refactor
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
+-   **Cycles Observed:** C105
+-   **Symptom:** When a new generation is started, the UI correctly switches to the "Generating Responses..." view, but the `GenerationProgressDisplay` component remains empty. No progress bars or response items ever appear, despite vLLM processing the requests.
+-   **Root Cause Analysis (RCA):** This was a state initialization failure. The `generationProgress` state array in the `useGeneration` hook was initialized as an empty array (`[]`). The IPC handler that received `UpdateSingleGenerationProgress` messages was designed to *update* existing items in this array using `findIndex`. Because the array was empty, `findIndex` always returned -1, and the handler lacked an `else` block to `push` the new progress item into the array. Consequently, the state array remained perpetually empty, and the UI had nothing to render.
+-   **Codified Solution & Best Practice:**
+    1.  State for dynamic lists that are populated by asynchronous events must be properly initialized.
+    2.  The `NavigateToNewGeneratingCycle` IPC handler, which is the event that starts the generation process, is the correct place to initialize the `generationProgress` state. It must create a placeholder `GenerationProgress` object for each expected response (e.g., with a `'pending'` status) and set this as the initial state.
+    3.  As a defensive measure, state update handlers for array data should be resilient. They should handle the case where an item is not found, either by adding it or logging an error, rather than failing silently.
 
 ---
 

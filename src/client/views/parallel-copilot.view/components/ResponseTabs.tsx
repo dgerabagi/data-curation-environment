@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C98 (Fix TabState to PcppResponse refactor)
+// Updated on: C105 (Add view toggle button)
 import * as React from 'react';
-import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck } from 'react-icons/vsc';
+import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
 
@@ -16,6 +16,9 @@ interface ResponseTabsProps {
     onSortToggle: () => void;
     workflowStep: string | null;
     onRegenerateTab: (tabId: number) => void;
+    isGenerating: boolean;
+    forceShowResponseView: boolean;
+    onToggleForceResponseView: () => void;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -29,6 +32,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     onSortToggle,
     workflowStep,
     onRegenerateTab,
+    isGenerating,
+    forceShowResponseView,
+    onToggleForceResponseView,
 }) => {
     const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
     const confirmTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -86,9 +92,16 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                     );
                 })}
             </div>
-            <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
-                {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
-            </button>
+            <div className="tab-bar-controls">
+                {isGenerating && (
+                    <button onClick={onToggleForceResponseView} className="styled-button" title={forceShowResponseView ? "Show Generation Progress" : "Show Response View"}>
+                        <VscEye />
+                    </button>
+                )}
+                <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
+                    {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
+                </button>
+            </div>
         </div>
     );
 };

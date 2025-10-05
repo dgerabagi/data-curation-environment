@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C76 (Add spinner animation keyframes)
+// Updated on: C105 (Add styles for tab bar controls)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -616,6 +616,13 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.tab-bar-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 4px;
 }
 
 .tab-bar {

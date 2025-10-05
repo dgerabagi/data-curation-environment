@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C102 (Refactor to use management objects and fix UI refresh)
+// Updated on: C105 (Fix generation progress initialization)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -10,6 +10,7 @@ import { useCycleManagement } from './useCycleManagement';
 import { useTabManagement } from './useTabManagement';
 import { useFileManagement } from './useFileManagement';
 import { useGeneration } from './useGeneration';
+import { GenerationProgress } from '@/common/ipc/channels.type';
 
 type CycleManagementHook = ReturnType<typeof useCycleManagement>;
 type TabManagementHook = ReturnType<typeof useTabManagement>;
@@ -102,9 +103,24 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
             logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
             cycleManagement.setMaxCycle(newMaxCycle);
-            // Call both setters to ensure state is updated together
             cycleManagement.loadCycleData(newCycleData);
             tabManagement.resetAndLoadTabs(newCycleData.responses);
+
+            // C105 Fix: Initialize the generationProgress state array
+            const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
+                const responseId = parseInt(key, 10);
+                return {
+                    responseId,
+                    status: 'pending',
+                    promptTokens: 0,
+                    thinkingTokens: 0,
+                    currentTokens: 0,
+                    totalTokens: 16384, // Default value, will be updated by stream
+                    startTime: Date.now()
+                };
+            });
+            generationManagement.setGenerationProgress(initialProgress);
+            
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
 
@@ -128,6 +144,10 @@ export const usePcppIpc = (
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
                     newProgress[index] = progress;
+                } else {
+                    // C105 Fix: Add the item if it's not found
+                    newProgress.push(progress);
+                    newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
                 return newProgress;
             });

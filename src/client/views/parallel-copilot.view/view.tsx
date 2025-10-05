@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C102 (Refactor to pass hook objects to usePcppIpc)
+// Updated on: C105 (Add view toggle state and pass to ResponseTabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -38,6 +38,7 @@ const App = () => {
     
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
     const saveStateRef = React.useRef<() => void>(() => {});
+    const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
 
     // --- State & Hooks Initialization ---
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
@@ -104,6 +105,13 @@ const App = () => {
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+            setForceShowResponseView(false);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
+            if (cycleData) setForceShowResponseView(false);
+        });
+        clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
+            setForceShowResponseView(false);
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc]);
@@ -147,8 +155,7 @@ const App = () => {
         }
     };
     
-    const activeTabState = tabManagement.tabs[tabManagement.activeTab.toString()];
-    const showProgressView = cycleManagement.currentCycle.status === 'generating';
+    const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;
 
     return <div className="pc-view-container">
         <div className="pc-header">
@@ -201,6 +208,9 @@ const App = () => {
                 workflowStep={workflowStep} 
                 onRegenerateTab={generationManagement.handleRegenerateTab} 
                 onSortToggle={tabManagement.handleSortToggle} 
+                isGenerating={cycleManagement.currentCycle.status === 'generating'}
+                forceShowResponseView={forceShowResponseView}
+                onToggleForceResponseView={() => setForceShowResponseView(p => !p)}
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 
