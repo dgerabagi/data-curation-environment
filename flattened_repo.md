@@ -1,21 +1,21 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T16:40:12.451Z
+  Date Generated: 2025-10-05T17:05:33.619Z
   ---
   Total Files: 179
-  Approx. Tokens: 245979
+  Approx. Tokens: 246473
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 3. src\backend\services\prompt.service.ts (5143 tokens)
-4. src\backend\services\llm.service.ts (4563 tokens)
+4. src\backend\services\llm.service.ts (4650 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4144 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4125 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 10. src\client\views\parallel-copilot.view\view.tsx (3983 tokens)
 
@@ -104,7 +104,7 @@
 82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 370 - Chars: 16574 - Tokens: 4144
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 368 - Chars: 16499 - Tokens: 4125
 86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 348 - Chars: 18251 - Tokens: 4563
+107. src\backend\services\llm.service.ts - Lines: 348 - Chars: 18598 - Tokens: 4650
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -198,7 +198,7 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 167 - Chars: 6826 - Tokens: 1707
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 56 - Chars: 5534 - Tokens: 1384
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 68 - Chars: 7239 - Tokens: 1810
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -5674,17 +5674,17 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C99 (Add client disconnection handling to proxy route)
+# Updated on: C101 (Correct stream cancellation to use 'res' object)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route has been updated to handle client disconnections, allowing it to cancel the downstream request to the vLLM server.
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route has been corrected to listen for the `close` event on the `response` object, fixing a bug that caused premature stream termination.
 - **Tags:** reference, source code, backend, nodejs, express, streaming, sse, abortcontroller
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been enhanced to properly handle the "Stop Generation" feature. It now creates an `AbortController` for its `fetch` request to the vLLM server and listens for the client's `close` event. If the client disconnects, the proxy will now abort its own request, freeing up resources on the vLLM server.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected. The event listener for client disconnection is now attached to the `res` (response) object instead of the `req` (request) object. This is the correct way to detect cancellation for a long-lived streaming response and fixes the "trigger-happy" abort bug from Cycle 100.
 
-## 2. Source Code (with disconnection handling)
+## 2. Source Code (with corrected disconnection handling)
 
 ```typescript
 // Updated on: C1384 (Correct import path for generateSpeech from llmService.)
@@ -5925,16 +5925,15 @@ app.post('/api/report/vote', (req, res) => handleReportVote(req as any, res as a
 app.post('/api/dce/proxy', async (req, res) => {
     logInfo('[DCE]', 'Received request on /api/dce/proxy');
 
-    // --- C99 FIX: AbortController for downstream request ---
     const controller = new AbortController();
     const signal = controller.signal;
 
-    // Listen for the client to close the connection
-    req.on('close', () => {
+    // --- C101 FIX: Listen on the response object, not the request object ---
+    res.on('close', () => {
         logWarn('[DCE]', 'Client closed the connection. Aborting request to vLLM.');
         controller.abort();
     });
-    // --- END C99 FIX ---
+    // --- END C101 FIX ---
 
     if (DCE_API_KEY) {
         // ... (API key validation remains the same)
@@ -5962,7 +5961,7 @@ app.post('/api/dce/proxy', async (req, res) => {
                 n,
                 stream: true,
             }),
-            signal, // --- C99 FIX: Pass the abort signal to fetch ---
+            signal, 
         });
 
         if (!vllmResponse.ok || !vllmResponse.body) {
@@ -6040,7 +6039,6 @@ process.on('SIGINT', () => {
     io.close();
     server.close(() => process.exit(0));
 });
-```
 </file_artifact>
 
 <file path="src/Artifacts/A91. AI Ascent - Caddyfile (Reference).md">
@@ -17531,7 +17529,7 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C100 (Add AbortController lifecycle bug)
+# Updated on: C101 (Add Express.js stream cancellation bug)
 
 - **Key/Value for A0:**
 - **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
@@ -17542,6 +17540,18 @@ This allows the UI to correctly show the progress view for a tab that is activel
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 004: Proxy Server Aborts vLLM Stream Prematurely
+
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
+-   **Cycles Observed:** C100, C101
+-   **Symptom:** When the DCE extension sends a streaming request to the vLLM via the proxy server, the connection is immediately aborted. The proxy logs show "Client closed the connection. Aborting request to vLLM," even though the client is still waiting for a response.
+-   **Root Cause Analysis (RCA):** The logic to handle client-side cancellation was implemented by attaching an event listener to the Express.js `request` object (`req.on('close', ...)`). For a standard HTTP request, the `req` object represents the incoming data from the client. Once the request body is fully received, the `req` stream is finished. However, for a *streaming response*, the long-lived connection is represented by the `response` object (`res`). The `req.on('close')` event was firing prematurely because the initial POST request from the client was completing, which the server misinterpreted as the client disconnecting entirely. The correct event to listen for is `res.on('close')`, which fires only when the client that is *receiving* the streamed response actually closes the connection.
+-   **Codified Solution & Best Practice:**
+    1.  When implementing cancellation logic for a streaming HTTP response in Express.js, the event listener to detect a client disconnection **must** be attached to the `response` (`res`) object.
+    2.  The correct implementation is to use `res.on('close', () => { controller.abort(); });`. This ensures the cancellation is only triggered when the downstream client terminates the connection.
 
 ---
 
