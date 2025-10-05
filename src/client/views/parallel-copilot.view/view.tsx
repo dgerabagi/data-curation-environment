@@ -1,12 +1,12 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C100 (Wire up onStop handler)
+// Updated on: C102 (Pass loadTabData to IPC hook)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
+import { PcppCycle } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
@@ -49,6 +49,7 @@ const App = () => {
     // --- IPC Message Handling ---
     usePcppIpc(
         cycleManagement.loadCycleData,
+        tabManagement.loadTabData, // Pass the new function here
         fileManagement.setHighlightedCodeBlocks,
         fileManagement.setFileExistenceMap,
         fileManagement.setComparisonMetrics,

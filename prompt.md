@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 102 - new behavior, we are close.
+Current Cycle 103 - stop works! but it stopped the entire batch not just the single response as intended
+Cycle 102 - new behavior, we are close.
 Cycle 101 - responses still instantly stopped--never reach vllm
 Cycle 100 - i think we have a stop working but its a bit 'trigger-happy'...
 Cycle 99 - focus on stop and re-generation
@@ -877,6 +878,32 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 103>
+<Cycle Context>
+nice! well, kind of. nice because the stop button did stop, its just it was over-zealous. it stopped all responses, rather than just the response that i clicked the stop button for. for example, i had four initial responses streaming in, and you fixed the refresh state btw, but then when i went to click 'Stop' for 'Resp 3', all tokens stopped streaming in instantly, not just the one for 'Resp 3'.
+
+be sure we update the state as well on this when i click 'Stop' it should actually show 'Stopped', but just for that response. the others should still continue to stream in. is that possible?
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [[DCE]] Received request on /api/dce/proxy
+[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
+[INFO] [[DCE]] Successfully established stream from vLLM to client.
+[WARN] [[DCE]] Client closed the connection. Aborting request to vLLM.
+[INFO] [[DCE]] Stream aborted as requested by client.
+</Ephemeral Context>
+<Previous Cycle 102 Summary of Actions>
+I have analyzed the logs from Cycle 101, and the root cause of the "instantly stopped" responses is clear. My previous implementation for the "Stop" button was flawed, causing the proxy server to prematurely abort the connection to the vLLM. The logs confirm that the proxy server receives the request but then immediately detects a "client closed connection" event, which incorrectly triggers the cancellation logic I added in the last cycle.
+
+The error is in the `server.ts` file. I attached the cancellation listener to the incoming `request` object (`req`) instead of the outgoing `response` object (`res`). For a streaming response, the `req` object's lifecycle is very short, while the `res` object represents the long-lived connection back to the client. By listening on `req.on('close')`, the server was incorrectly interpreting the end of the initial POST request as the client disconnecting, which is why the abort was "trigger-happy."
+
+My course of action is to correct this bug by moving the event listener to the correct object.
+
+1.  **Codify the Bug:** I will create a new case study in `A111. DCE - New Regression Case Studies.md` to document this specific bug. It will explain that for streaming responses in Express.js, client disconnection must be detected on the `response` object (`res.on('close')`), not the `request` object (`req.on('close')`), to correctly manage the connection lifecycle.
+2.  **Fix Proxy Server Logic:** I will provide the corrected code for `A90. AI Ascent - server.ts (Reference).md`. The line `req.on('close', ...)` will be changed to `res.on('close', ...)`. This ensures the abort logic is only triggered if the DCE extension truly closes the connection while receiving the stream.
+3.  **Provide Curator Instructions:** I will add a `<curator_activity>` block with explicit instructions for you to update your `server.ts` file on the `aiascent.game` server and restart the Node.js process.
+</Previous Cycle 102 Summary of Actions>
+</Cycle 103>
+
 <Cycle 102>
 <Cycle Context>
 okay, we have new behavior now... it is no longer instantly stopping. i have a new test setup, i am about to select `Generate Initial Responses`...
@@ -887,130 +914,6 @@ if i change my view away from and back to the pcpp, i then see the actual respon
 
 okay, once i clicked `Stop` on a streaming response (from the response ui) i got an error in the server.ts proxy (see ephemeral)
 </Cycle Context>
-<Ephemeral Context>
-<dce output logs>
-[INFO] [12:00:23 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [12:00:23 PM] Services initializing...
-[INFO] [12:00:23 PM] Services initialized successfully.
-[INFO] [12:00:23 PM] Registering 7 commands.
-[INFO] [12:00:23 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [12:00:23 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [12:00:23 PM] Starry Night syntax highlighter initialized.
-[INFO] [12:00:24 PM] Context Chooser view message handler initialized.
-[INFO] [12:00:24 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [12:00:24 PM] Executing dce.openSettingsPanel command.
-[INFO] [12:00:24 PM] Settings view message handler initialized.
-[INFO] [12:00:24 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [12:00:24 PM] [SelectionService] No last selection found in state.
-[INFO] [12:00:24 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [12:00:24 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [12:00:24 PM] Persisted current selection of 0 items.
-[INFO] [12:00:25 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [12:00:25 PM] Settings saved: Mode=demo, URL=undefined
-[INFO] [12:00:25 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [12:00:26 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [12:00:26 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [12:00:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [12:00:30 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [12:00:30 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [12:00:31 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [12:01:13 PM] Generating Cycle 0 prompt and starting generation...
-[INFO] [12:01:13 PM] [Prompt Gen] Starting prompt string generation for Cycle 0.
-[INFO] [12:01:13 PM] [SelectionService] No last selection found in state.
-[INFO] [12:01:13 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
-[INFO] [12:01:13 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
-[INFO] [12:01:14 PM] prompt.md file created successfully before sending API request.
-[INFO] [12:01:14 PM] Created new placeholder cycle 1.
-[INFO] [12:01:14 PM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
-[INFO] [12:01:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [12:01:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [12:01:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [12:01:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [12:01:14 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense39/src","c:/Projects/TowerDefense39/src/Artifacts","c:/Projects/TowerDefense39/src/Artifacts/DCE_README.md"]
-[INFO] [12:01:14 PM] [SelectionService] No last selection found in state.
-[INFO] [12:01:14 PM] Persisted current selection of 3 items.
-[INFO] [12:01:14 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [12:01:14 PM] Persisted current selection of 3 items.
-[INFO] [12:01:15 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [12:02:00 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [12:02:00 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [12:02:00 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [12:02:00 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [12:02:24 PM] [STREAM] Response 4 finished.
-[INFO] [12:02:39 PM] [LLM Service] Aborting generation for cycle 1.
-
-</dce output logs>
-
-<server.ts logs>
-PS C:\Projects\ai-ascent> npm run start
-
-> ai-ascent-game@1.0.0 start
-> cross-env NODE_ENV=production node dist/server.js
-
-[INFO] [[researchDataUtils]] Starting research node map creation. Total Nodes expected: 246
-[INFO] [[researchDataUtils]] Finished map creation. Map size: 246. Duplicate IDs found: false
-[ERROR] [data:feature:merge] Collision detected! Feature ID "chain_of_thought_reasoning_feature" from source "chatbotServiceFeatures" already exists. Skipping definition. undefined
-[ERROR] [data:feature:merge] Found 1 duplicate feature IDs during merge! Check category files. undefined
-[INFO] [componentData:init] Initialized component data hub. Total Components: 145. Lookup Size: 188
-[INFO] [[SERVER]] Server starting... Client Origin for CORS: https://aiascent.game, Production: true
-[INFO] [[DCE]] vLLM proxy endpoint configured for: http://127.0.0.1:8000/v1/chat/completions
-[WARN] [[DCE]] DCE_API_KEY is not set. The /api/dce/proxy endpoint will be unsecured.
-[INFO] [system:competition] CompetitionSystem instantiated
-[WARN] [system:competition] ComputeSystem reference not found during CompetitionSystem construction.
-[INFO] [system:pvp] PvpSystem instantiated.
-[INFO] [system:poetry_battle] PoetryBattleSystem instantiated
-[INFO] [[SERVER]] Socket.IO server initialized.
-[INFO] [[SERVER]] Production mode detected. Serving static files from: C:\Projects\ai-ascent\dist
-[INFO] [[SERVER]] Server listening on http://localhost:3001
-[INFO] [[AscentiaKB]] Loading GAME FAISS index and chunk data...
-[INFO] [[AscentiaKB]] Successfully loaded GAME FAISS index with function ntotal() { [native code] } vectors and 618 chunks.
-[INFO] [[ReportKB]] Loading REPORT FAISS index and chunk data...
-[INFO] [[ReportKB]] Successfully loaded REPORT FAISS index with function ntotal() { [native code] } vectors and 275 chunks.
-[INFO] [[DCE]] Received request on /api/dce/proxy
-[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 1 parallel responses.
-[INFO] [[DCE]] Successfully established stream from vLLM to client.
-[WARN] [[DCE]] Client closed the connection. Aborting request to vLLM.
-[INFO] [[DCE]] Received request on /api/dce/proxy
-[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
-[INFO] [[DCE]] Successfully established stream from vLLM to client.
-[WARN] [[DCE]] Client closed the connection. Aborting request to vLLM.
-
-node:events:502
-      throw er; // Unhandled 'error' event
-      ^
-DOMException [AbortError]: This operation was aborted
-    at new DOMException (node:internal/per_context/domexception:53:5)
-    at AbortController.abort (node:internal/abort_controller:465:18)
-    at ServerResponse.<anonymous> (C:\Projects\ai-ascent\dist\server.js:223:20)
-    at ServerResponse.emit (node:events:536:35)
-    at emitCloseNT (node:_http_server:1033:10)
-    at Socket.onServerResponseClose (node:_http_server:284:5)
-    at Socket.emit (node:events:536:35)
-    at TCP.<anonymous> (node:net:351:12)
-Emitted 'error' event on Readable instance at:
-    at emitErrorNT (node:internal/streams/destroy:170:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
-    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
-
-Node.js v22.13.1
-PS C:\Projects\ai-ascent>
-
-</server.ts logs>
-
-<vllm logs>
-(APIServer pid=7842) INFO:     127.0.0.1:36516 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=7842) INFO 10-05 12:01:21 [loggers.py:123] Engine 000: Avg prompt throughput: 4540.9 tokens/s, Avg generation throughput: 52.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.7%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:01:31 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 180.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.4%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:01:41 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 176.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.1%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:01:51 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 176.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.8%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:02:01 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 174.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.4%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:02:11 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 170.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.1%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:02:21 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 174.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.8%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:02:31 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 134.9 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.1%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:02:41 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 90.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 76.7%
-(APIServer pid=7842) INFO 10-05 12:02:51 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 76.7%
-</vllm logs>
-</Ephemeral Context>
 <Previous Cycle 101 Summary of Actions>
 I have analyzed the logs and your report. The log message `Client closed the connection. Aborting request to vLLM` is the key piece of evidence. It indicates that the DCE extension's backend is prematurely terminating its connection to the proxy server, which then correctly cancels the request to the vLLM.
 
@@ -5314,10 +5217,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T17:05:33.619Z
+  Date Generated: 2025-10-05T17:19:47.464Z
   ---
   Total Files: 179
-  Approx. Tokens: 246473
+  Approx. Tokens: 247044
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5328,9 +5231,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4125 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4222 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3983 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3998 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -5417,7 +5320,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 368 - Chars: 16499 - Tokens: 4125
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16887 - Tokens: 4222
 86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
@@ -5471,7 +5374,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 184 - Chars: 9364 - Tokens: 2341
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 279 - Chars: 15932 - Tokens: 3983
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 280 - Chars: 15989 - Tokens: 3998
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -5507,11 +5410,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3355 - Tokens: 839
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 165 - Chars: 8291 - Tokens: 2073
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 167 - Chars: 6826 - Tokens: 1707
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 176 - Chars: 8639 - Tokens: 2160
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 172 - Chars: 7025 - Tokens: 1757
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 68 - Chars: 7239 - Tokens: 1810
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 76 - Chars: 8525 - Tokens: 2132
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -10987,17 +10890,17 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C101 (Correct stream cancellation to use 'res' object)
+# Updated on: C102 (Add error handling to stream pipe to prevent crash)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route has been corrected to listen for the `close` event on the `response` object, fixing a bug that caused premature stream termination.
-- **Tags:** reference, source code, backend, nodejs, express, streaming, sse, abortcontroller
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route now includes an error handler on the `nodeStream` to gracefully handle `AbortError` events, preventing the server from crashing when a stream is cancelled by the client.
+- **Tags:** reference, source code, backend, nodejs, express, streaming, sse, abortcontroller, error handling
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been corrected. The event listener for client disconnection is now attached to the `res` (response) object instead of the `req` (request) object. This is the correct way to detect cancellation for a long-lived streaming response and fixes the "trigger-happy" abort bug from Cycle 100.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been made more robust. An `.on('error', ...)` handler has been added to the stream being piped back to the client. This is the critical fix to catch the `AbortError` that is emitted when the `AbortController` is triggered by a client disconnection, preventing the unhandled error from crashing the entire Node.js process.
 
-## 2. Source Code (with corrected disconnection handling)
+## 2. Source Code (with stream error handling)
 
 ```typescript
 // Updated on: C1384 (Correct import path for generateSpeech from llmService.)
@@ -11241,12 +11144,10 @@ app.post('/api/dce/proxy', async (req, res) => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    // --- C101 FIX: Listen on the response object, not the request object ---
     res.on('close', () => {
         logWarn('[DCE]', 'Client closed the connection. Aborting request to vLLM.');
         controller.abort();
     });
-    // --- END C101 FIX ---
 
     if (DCE_API_KEY) {
         // ... (API key validation remains the same)
@@ -11287,6 +11188,17 @@ app.post('/api/dce/proxy', async (req, res) => {
 
         const stream = vllmResponse.body;
         const nodeStream = Readable.fromWeb(stream as any);
+
+        // --- C102 FIX: Add error handler to prevent crash on abort ---
+        nodeStream.on('error', (err: any) => {
+            if (err.name === 'AbortError') {
+                logInfo('[DCE]', 'Stream aborted as requested by client.');
+            } else {
+                logError('[DCE]', 'An error occurred in the vLLM response stream:', err);
+            }
+        });
+        // --- END C102 FIX ---
+
         nodeStream.pipe(res);
         logInfo('[DCE]', 'Successfully established stream from vLLM to client.');
 
@@ -19354,14 +19266,14 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C100 (Wire up onStop handler)
+// Updated on: C102 (Pass loadTabData to IPC hook)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
 import { VscWand, VscFileCode, VscBug, VscBook, VscFolder, VscChevronDown, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '../../../common/ipc/client-ipc';
 import { ClientToServerChannel, ServerToClientChannel } from '../../../common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '../../../common/types/pcpp.types';
+import { PcppCycle } from '../../../common/types/pcpp.types';
 import OnboardingView from './OnboardingView';
 import CycleNavigator from './components/CycleNavigator';
 import ContextInputs from './components/ContextInputs';
@@ -19404,6 +19316,7 @@ const App = () => {
     // --- IPC Message Handling ---
     usePcppIpc(
         cycleManagement.loadCycleData,
+        tabManagement.loadTabData, // Pass the new function here
         fileManagement.setHighlightedCodeBlocks,
         fileManagement.setFileExistenceMap,
         fileManagement.setComparisonMetrics,
@@ -22330,7 +22243,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C98 (Fix TabState to PcppResponse refactor)
+// Updated on: C102 (Call loadTabData explicitly)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -22342,6 +22255,7 @@ import { logger } from '@/client/utils/logger';
 
 export const usePcppIpc = (
     loadCycleData: (cycleData: PcppCycle, scope?: string) => void,
+    loadTabData: (responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => void,
     setHighlightedCodeBlocks: React.Dispatch<React.SetStateAction<Map<string, string>>>,
     setFileExistenceMap: React.Dispatch<React.SetStateAction<Map<string, boolean>>>,
     setComparisonMetrics: React.Dispatch<React.SetStateAction<Map<string, any>>>,
@@ -22436,12 +22350,23 @@ export const usePcppIpc = (
             setConnectionMode(settings.connectionMode);
         });
         
+        // --- C102 FIX: Make state update atomic ---
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
             logger.log(`[NavigateToNewGeneratingCycle] Received: newCycleId=${newCycleData.cycleId}`);
             setMaxCycle(newMaxCycle);
+            // First, update the cycle data
             loadCycleData(newCycleData);
+            // Then, explicitly update the tab data from the new cycle
+            loadTabData(
+                newCycleData.responses,
+                newCycleData.tabCount || 4,
+                newCycleData.activeTab || 1,
+                newCycleData.isParsedMode || false,
+                newCycleData.isSortedByTokens || false
+            );
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
+        // --- END C102 FIX ---
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
             setGenerationProgress(progress);
@@ -22484,11 +22409,10 @@ export const usePcppIpc = (
 
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
             setIsGenerationComplete(true);
-            // The navigation is now handled by NavigateToNewGeneratingCycle, this just finalizes state.
         });
 
     }, [
-        clientIpc, loadCycleData, setHighlightedCodeBlocks, setFileExistenceMap, 
+        clientIpc, loadCycleData, loadTabData, setHighlightedCodeBlocks, setFileExistenceMap, 
         setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
         setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
         currentCycleId, setMaxCycle, setGenerationProgress, setTps, setTabs, setIsGenerationComplete
@@ -22498,9 +22422,9 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C98 (Update isLoading check in ResponseTabs)
+// Updated on: C102 (Export loadTabData function)
 import * as React from 'react';
-import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
+import { PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -22513,7 +22437,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: ParsedResponse) => void
+    requestAllMetrics: (parsedResponse: any) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -22522,24 +22446,28 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    React.useEffect(() => {
+    const loadTabData = React.useCallback((responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => {
         const newTabs: { [key: string]: PcppResponse } = {};
-        for (let i = 1; i <= initialTabCount; i++) {
+        for (let i = 1; i <= count; i++) {
             const key = i.toString();
-            const response = initialResponses[key];
+            const response = responses[key];
             newTabs[key] = {
                 content: response?.content || '',
                 parsedContent: response?.content ? parseResponse(response.content) : null,
                 status: response?.status || 'complete',
-                ...response // Carry over all other properties like metrics
+                ...response
             };
         }
         setTabs(newTabs);
-        setTabCount(initialTabCount);
-        setActiveTab(initialActiveTab);
-        setIsParsedMode(initialIsParsedMode);
-        setIsSortedByTokens(initialIsSorted);
-    }, [initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted]);
+        setTabCount(count);
+        setActiveTab(active);
+        setIsParsedMode(parsed);
+        setIsSortedByTokens(sorted);
+    }, []);
+
+    React.useEffect(() => {
+        loadTabData(initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted);
+    }, [initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted, loadTabData]);
 
 
     const handleTabSelect = React.useCallback((tabIndex: number) => {
@@ -22662,6 +22590,7 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
+        loadTabData, // Export the new function
     };
 };
 </file_artifact>
@@ -22842,17 +22771,25 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C101 (Add Express.js stream cancellation bug)
-
-- **Key/Value for A0:**
-- **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
+# Updated on: C102 (Add Proxy Server Crash on Abort)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 005: Proxy Server Crashes on Stream Abort
+
+-   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
+-   **Cycles Observed:** C102
+-   **Symptom:** When the user clicks the "Stop" button during a streaming generation, the `aiascent.game` proxy server process crashes with an "Unhandled 'error' event" for a `DOMException [AbortError]`.
+-   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection and calls `AbortController.abort()`. This action causes the underlying `node-fetch` request to the vLLM server to terminate. The `ReadableStream` from the `fetch` response, which is being piped to the client, correctly emits an `error` event with an `AbortError`. However, there was no `.on('error', ...)` handler attached to this stream (`nodeStream`). In Node.js, an unhandled `error` event on any `EventEmitter` (including streams) will bubble up and crash the entire process by default.
+-   **Codified Solution & Best Practice:**
+    1.  Any Node.js stream that is part of an abortable operation, or is piped from another stream that can be aborted, **must** have an error event handler (`.on('error', handler)`).
+    2.  This handler should inspect the error. If it is the expected `AbortError`, it can be safely ignored or logged as an informational message. Any other unexpected errors should be logged as true errors. This prevents the expected cancellation signal from causing an unhandled exception that crashes the server.
 
 ---
 

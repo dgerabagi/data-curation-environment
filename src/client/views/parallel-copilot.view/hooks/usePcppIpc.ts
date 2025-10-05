@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C98 (Fix TabState to PcppResponse refactor)
+// Updated on: C102 (Call loadTabData explicitly)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -11,6 +11,7 @@ import { logger } from '@/client/utils/logger';
 
 export const usePcppIpc = (
     loadCycleData: (cycleData: PcppCycle, scope?: string) => void,
+    loadTabData: (responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => void,
     setHighlightedCodeBlocks: React.Dispatch<React.SetStateAction<Map<string, string>>>,
     setFileExistenceMap: React.Dispatch<React.SetStateAction<Map<string, boolean>>>,
     setComparisonMetrics: React.Dispatch<React.SetStateAction<Map<string, any>>>,
@@ -105,12 +106,23 @@ export const usePcppIpc = (
             setConnectionMode(settings.connectionMode);
         });
         
+        // --- C102 FIX: Make state update atomic ---
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
             logger.log(`[NavigateToNewGeneratingCycle] Received: newCycleId=${newCycleData.cycleId}`);
             setMaxCycle(newMaxCycle);
+            // First, update the cycle data
             loadCycleData(newCycleData);
+            // Then, explicitly update the tab data from the new cycle
+            loadTabData(
+                newCycleData.responses,
+                newCycleData.tabCount || 4,
+                newCycleData.activeTab || 1,
+                newCycleData.isParsedMode || false,
+                newCycleData.isSortedByTokens || false
+            );
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
+        // --- END C102 FIX ---
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
             setGenerationProgress(progress);
@@ -153,11 +165,10 @@ export const usePcppIpc = (
 
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
             setIsGenerationComplete(true);
-            // The navigation is now handled by NavigateToNewGeneratingCycle, this just finalizes state.
         });
 
     }, [
-        clientIpc, loadCycleData, setHighlightedCodeBlocks, setFileExistenceMap, 
+        clientIpc, loadCycleData, loadTabData, setHighlightedCodeBlocks, setFileExistenceMap, 
         setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
         setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
         currentCycleId, setMaxCycle, setGenerationProgress, setTps, setTabs, setIsGenerationComplete
