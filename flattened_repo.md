@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T17:19:47.464Z
+  Date Generated: 2025-10-05T20:48:49.370Z
   ---
   Total Files: 179
-  Approx. Tokens: 247044
+  Approx. Tokens: 246765
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -15,9 +15,9 @@
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4222 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3998 tokens)
+10. src\backend\services\history.service.ts (3904 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -104,7 +104,7 @@
 82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16887 - Tokens: 4222
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16856 - Tokens: 4214
 86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 184 - Chars: 9364 - Tokens: 2341
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 280 - Chars: 15989 - Tokens: 3998
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 268 - Chars: 15359 - Tokens: 3840
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -194,11 +194,11 @@
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3355 - Tokens: 839
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 176 - Chars: 8639 - Tokens: 2160
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 172 - Chars: 7025 - Tokens: 1757
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 162 - Chars: 7650 - Tokens: 1913
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 76 - Chars: 8525 - Tokens: 2132
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 80 - Chars: 8899 - Tokens: 2225
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -5674,15 +5674,15 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C102 (Add error handling to stream pipe to prevent crash)
+# Updated on: C102 (Add stream error handler to prevent crash)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route now includes an error handler on the `nodeStream` to gracefully handle `AbortError` events, preventing the server from crashing when a stream is cancelled by the client.
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route has been updated with a stream error handler to gracefully catch `AbortError` and prevent the server from crashing when a client cancels a request.
 - **Tags:** reference, source code, backend, nodejs, express, streaming, sse, abortcontroller, error handling
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been made more robust. An `.on('error', ...)` handler has been added to the stream being piped back to the client. This is the critical fix to catch the `AbortError` that is emitted when the `AbortController` is triggered by a client disconnection, preventing the unhandled error from crashing the entire Node.js process.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been made more robust. A `.on('error', ...)` handler has been added to the stream being piped from the vLLM server. This is the critical fix that catches the `AbortError` emitted when a stream is cancelled, preventing the unhandled exception that was crashing the Node.js process in the previous cycle.
 
 ## 2. Source Code (with stream error handling)
 
@@ -5974,11 +5974,11 @@ app.post('/api/dce/proxy', async (req, res) => {
         const nodeStream = Readable.fromWeb(stream as any);
 
         // --- C102 FIX: Add error handler to prevent crash on abort ---
-        nodeStream.on('error', (err: any) => {
-            if (err.name === 'AbortError') {
-                logInfo('[DCE]', 'Stream aborted as requested by client.');
+        nodeStream.on('error', (error) => {
+            if ((error as any).name === 'AbortError') {
+                logInfo('[DCE]', 'vLLM stream successfully aborted on the server.');
             } else {
-                logError('[DCE]', 'An error occurred in the vLLM response stream:', err);
+                logError('[DCE]', 'An error occurred in the vLLM response stream.', error);
             }
         });
         // --- END C102 FIX ---
@@ -14050,7 +14050,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C102 (Pass loadTabData to IPC hook)
+// Updated on: C102 (Refactor to pass hook objects to usePcppIpc)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14099,23 +14099,11 @@ const App = () => {
     
     // --- IPC Message Handling ---
     usePcppIpc(
-        cycleManagement.loadCycleData,
-        tabManagement.loadTabData, // Pass the new function here
-        fileManagement.setHighlightedCodeBlocks,
-        fileManagement.setFileExistenceMap,
-        fileManagement.setComparisonMetrics,
-        () => {}, // setTotalPromptTokens
-        () => {}, // setEstimatedPromptCost
-        () => {}, // setCostBreakdown
-        setWorkflowStep,
-        cycleManagement.setSaveStatus,
-        generationManagement.setConnectionMode,
-        generationManagement.setGenerationProgress,
-        generationManagement.setTps,
-        tabManagement.setTabs,
-        generationManagement.setIsGenerationComplete,
-        cycleManagement.setMaxCycle,
-        cycleManagement.currentCycle?.cycleId || null
+        cycleManagement,
+        tabManagement,
+        fileManagement,
+        generationManagement,
+        setWorkflowStep
     );
 
     // --- Core Save Logic ---
@@ -14211,7 +14199,7 @@ const App = () => {
     };
     
     const activeTabState = tabManagement.tabs[tabManagement.activeTab.toString()];
-    const showProgressView = activeTabState?.status === 'generating' || activeTabState?.status === 'thinking';
+    const showProgressView = cycleManagement.currentCycle.status === 'generating';
 
     return <div className="pc-view-container">
         <div className="pc-header">
@@ -17027,34 +17015,29 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C102 (Call loadTabData explicitly)
+// Updated on: C102 (Refactor to use management objects and fix UI refresh)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
-import { GenerationProgress } from '@/common/ipc/channels.type';
-import { ConnectionMode } from '@/backend/services/settings.service';
+import { PcppCycle } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { logger } from '@/client/utils/logger';
+import { useCycleManagement } from './useCycleManagement';
+import { useTabManagement } from './useTabManagement';
+import { useFileManagement } from './useFileManagement';
+import { useGeneration } from './useGeneration';
+
+type CycleManagementHook = ReturnType<typeof useCycleManagement>;
+type TabManagementHook = ReturnType<typeof useTabManagement>;
+type FileManagementHook = ReturnType<typeof useFileManagement>;
+type GenerationManagementHook = ReturnType<typeof useGeneration>;
 
 export const usePcppIpc = (
-    loadCycleData: (cycleData: PcppCycle, scope?: string) => void,
-    loadTabData: (responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => void,
-    setHighlightedCodeBlocks: React.Dispatch<React.SetStateAction<Map<string, string>>>,
-    setFileExistenceMap: React.Dispatch<React.SetStateAction<Map<string, boolean>>>,
-    setComparisonMetrics: React.Dispatch<React.SetStateAction<Map<string, any>>>,
-    setTotalPromptTokens: React.Dispatch<React.SetStateAction<number>>,
-    setEstimatedPromptCost: React.Dispatch<React.SetStateAction<number>>,
-    setCostBreakdown: React.Dispatch<React.SetStateAction<any>>,
-    setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>,
-    setSaveStatus: React.Dispatch<React.SetStateAction<"saved" | "saving" | "unsaved">>,
-    setConnectionMode: React.Dispatch<React.SetStateAction<ConnectionMode>>,
-    setGenerationProgress: React.Dispatch<React.SetStateAction<GenerationProgress[]>>,
-    setTps: React.Dispatch<React.SetStateAction<number>>,
-    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
-    setIsGenerationComplete: React.Dispatch<React.SetStateAction<boolean>>,
-    setMaxCycle: React.Dispatch<React.SetStateAction<number>>,
-    currentCycleId: number | null
+    cycleManagement: CycleManagementHook,
+    tabManagement: TabManagementHook,
+    fileManagement: FileManagementHook,
+    generationManagement: GenerationManagementHook,
+    setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>
 ) => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -17065,22 +17048,22 @@ export const usePcppIpc = (
 
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
-            loadCycleData(cycleData, projectScope);
-            setMaxCycle(cycleData.cycleId);
+            cycleManagement.loadCycleData(cycleData, projectScope);
+            cycleManagement.setMaxCycle(cycleData.cycleId);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
-            if (cycleData) loadCycleData(cycleData, projectScope);
+            if (cycleData) cycleManagement.loadCycleData(cycleData, projectScope);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
+            fileManagement.setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistenceMap(new Map(Object.entries(existenceMap)));
+            fileManagement.setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
@@ -17088,7 +17071,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => {
-            setFileExistenceMap(prevMap => {
+            fileManagement.setFileExistenceMap(prevMap => {
                 const newMap = new Map(prevMap);
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
@@ -17096,13 +17079,11 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
+            fileManagement.setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            setTotalPromptTokens(totalTokens);
-            setEstimatedPromptCost(estimatedCost);
-            setCostBreakdown(breakdown);
+            // Placeholder for cost state update
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
@@ -17123,39 +17104,30 @@ export const usePcppIpc = (
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
             if (cycleId === 0) {
-                setSaveStatus('saved');
+                cycleManagement.setSaveStatus('saved');
             }
-            else if (cycleId === currentCycleId) {
-                setSaveStatus('saved');
+            else if (cycleId === cycleManagement.currentCycle?.cycleId) {
+                cycleManagement.setSaveStatus('saved');
             }
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => {
-            setConnectionMode(settings.connectionMode);
+            generationManagement.setConnectionMode(settings.connectionMode);
         });
         
-        // --- C102 FIX: Make state update atomic ---
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
-            logger.log(`[NavigateToNewGeneratingCycle] Received: newCycleId=${newCycleData.cycleId}`);
-            setMaxCycle(newMaxCycle);
-            // First, update the cycle data
-            loadCycleData(newCycleData);
-            // Then, explicitly update the tab data from the new cycle
-            loadTabData(
-                newCycleData.responses,
-                newCycleData.tabCount || 4,
-                newCycleData.activeTab || 1,
-                newCycleData.isParsedMode || false,
-                newCycleData.isSortedByTokens || false
-            );
+            logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
+            cycleManagement.setMaxCycle(newMaxCycle);
+            // Call both setters to ensure state is updated together
+            cycleManagement.loadCycleData(newCycleData);
+            tabManagement.resetAndLoadTabs(newCycleData.responses);
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
-        // --- END C102 FIX ---
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
-            setGenerationProgress(progress);
-            setTps(tps);
-            setTabs(prevTabs => {
+            generationManagement.setGenerationProgress(progress);
+            generationManagement.setTps(tps);
+            tabManagement.setTabs(prevTabs => {
                 const newTabs = { ...prevTabs };
                 Object.entries(chunks).forEach(([responseId, chunk]) => {
                     const tabIndex = parseInt(responseId, 10);
@@ -17167,7 +17139,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
-            setGenerationProgress(prev => {
+            generationManagement.setGenerationProgress(prev => {
                 const newProgress = [...prev];
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
@@ -17178,7 +17150,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => {
-            setTabs(prev => {
+            tabManagement.setTabs(prev => {
                 const newTabs = { ...prev };
                 const tabId = responseId.toString();
                 const tab = newTabs[tabId];
@@ -17192,27 +17164,30 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
-            setIsGenerationComplete(true);
+            generationManagement.setIsGenerationComplete(true);
         });
 
     }, [
-        clientIpc, loadCycleData, loadTabData, setHighlightedCodeBlocks, setFileExistenceMap, 
-        setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
-        setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
-        currentCycleId, setMaxCycle, setGenerationProgress, setTps, setTabs, setIsGenerationComplete
+        clientIpc, 
+        cycleManagement, 
+        tabManagement, 
+        fileManagement, 
+        generationManagement, 
+        setWorkflowStep
     ]);
 };
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C102 (Export loadTabData function)
+// Updated on: C102 (Remove useEffect and create resetAndLoadTabs)
 import * as React from 'react';
-import { PcppResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import * as path from 'path-browserify';
+import { logger } from '@/client/utils/logger';
 
 export const useTabManagement = (
     initialResponses: { [key: string]: PcppResponse },
@@ -17221,7 +17196,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: any) => void
+    requestAllMetrics: (parsedResponse: ParsedResponse) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -17230,8 +17205,10 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const loadTabData = React.useCallback((responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => {
+    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
+        logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
+        const count = Object.keys(responses).length || initialTabCount;
         for (let i = 1; i <= count; i++) {
             const key = i.toString();
             const response = responses[key];
@@ -17244,14 +17221,14 @@ export const useTabManagement = (
         }
         setTabs(newTabs);
         setTabCount(count);
-        setActiveTab(active);
-        setIsParsedMode(parsed);
-        setIsSortedByTokens(sorted);
-    }, []);
+    }, [initialTabCount]);
 
     React.useEffect(() => {
-        loadTabData(initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted);
-    }, [initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted, loadTabData]);
+        resetAndLoadTabs(initialResponses);
+        setActiveTab(initialActiveTab);
+        setIsParsedMode(initialIsParsedMode);
+        setIsSortedByTokens(initialIsSorted);
+    }, [initialResponses, initialActiveTab, initialIsParsedMode, initialIsSorted, resetAndLoadTabs]);
 
 
     const handleTabSelect = React.useCallback((tabIndex: number) => {
@@ -17374,7 +17351,7 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
-        loadTabData, // Export the new function
+        resetAndLoadTabs, // Export the new function
     };
 };
 </file_artifact>
@@ -17555,7 +17532,11 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C102 (Add Proxy Server Crash on Abort)
+# Updated on: C102 (Add Unhandled AbortError in Express Stream)
+
+- **Key/Value for A0:**
+- **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ## 1. Purpose
 
@@ -17565,15 +17546,15 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
-### Case Study 005: Proxy Server Crashes on Stream Abort
+### Case Study 005: Unhandled 'AbortError' Crashes Express.js Proxy Server
 
 -   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
 -   **Cycles Observed:** C102
--   **Symptom:** When the user clicks the "Stop" button during a streaming generation, the `aiascent.game` proxy server process crashes with an "Unhandled 'error' event" for a `DOMException [AbortError]`.
--   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection and calls `AbortController.abort()`. This action causes the underlying `node-fetch` request to the vLLM server to terminate. The `ReadableStream` from the `fetch` response, which is being piped to the client, correctly emits an `error` event with an `AbortError`. However, there was no `.on('error', ...)` handler attached to this stream (`nodeStream`). In Node.js, an unhandled `error` event on any `EventEmitter` (including streams) will bubble up and crash the entire process by default.
+-   **Symptom:** When a client-side "Stop" action aborts a streaming `fetch` request to an Express.js proxy that is piping a response from a downstream service (like vLLM), the entire Node.js process crashes with a `DOMException [AbortError]: This operation was aborted` and an "Unhandled 'error' event".
+-   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection via `res.on('close', ...)` and aborts its own `fetch` request to the downstream service. However, aborting an active `fetch` stream causes the underlying `ReadableStream` to emit an `error` event. In the proxy, the code was piping this stream directly to the client response (`nodeStream.pipe(res)`). When the `nodeStream` emitted the `AbortError`, there was no error handler attached to it (`nodeStream.on('error', ...)`), leading to an unhandled exception that crashed the server.
 -   **Codified Solution & Best Practice:**
-    1.  Any Node.js stream that is part of an abortable operation, or is piped from another stream that can be aborted, **must** have an error event handler (`.on('error', handler)`).
-    2.  This handler should inspect the error. If it is the expected `AbortError`, it can be safely ignored or logged as an informational message. Any other unexpected errors should be logged as true errors. This prevents the expected cancellation signal from causing an unhandled exception that crashes the server.
+    1.  Any Node.js `ReadableStream` that is being piped and has the potential to be aborted or encounter an error **must** have an error handler attached.
+    2.  The correct implementation is to add a `stream.on('error', (error) => { ... });` handler before calling `stream.pipe()`. This handler should check if the error is an expected `AbortError` and handle it gracefully (e.g., by logging an informational message) while throwing or logging any other unexpected errors. This prevents the process from crashing on a controlled cancellation.
 
 ---
 

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C102 (Pass loadTabData to IPC hook)
+// Updated on: C102 (Refactor to pass hook objects to usePcppIpc)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -48,23 +48,11 @@ const App = () => {
     
     // --- IPC Message Handling ---
     usePcppIpc(
-        cycleManagement.loadCycleData,
-        tabManagement.loadTabData, // Pass the new function here
-        fileManagement.setHighlightedCodeBlocks,
-        fileManagement.setFileExistenceMap,
-        fileManagement.setComparisonMetrics,
-        () => {}, // setTotalPromptTokens
-        () => {}, // setEstimatedPromptCost
-        () => {}, // setCostBreakdown
-        setWorkflowStep,
-        cycleManagement.setSaveStatus,
-        generationManagement.setConnectionMode,
-        generationManagement.setGenerationProgress,
-        generationManagement.setTps,
-        tabManagement.setTabs,
-        generationManagement.setIsGenerationComplete,
-        cycleManagement.setMaxCycle,
-        cycleManagement.currentCycle?.cycleId || null
+        cycleManagement,
+        tabManagement,
+        fileManagement,
+        generationManagement,
+        setWorkflowStep
     );
 
     // --- Core Save Logic ---
@@ -160,7 +148,7 @@ const App = () => {
     };
     
     const activeTabState = tabManagement.tabs[tabManagement.activeTab.toString()];
-    const showProgressView = activeTabState?.status === 'generating' || activeTabState?.status === 'thinking';
+    const showProgressView = cycleManagement.currentCycle.status === 'generating';
 
     return <div className="pc-view-container">
         <div className="pc-header">

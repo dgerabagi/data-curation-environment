@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 103 - stop works! but it stopped the entire batch not just the single response as intended
+Current Cycle 104 - Stop still stops all responses instead of just the individual response
+Cycle 103 - stop works! but it stopped the entire batch not just the single response as intended
 Cycle 102 - new behavior, we are close.
 Cycle 101 - responses still instantly stopped--never reach vllm
 Cycle 100 - i think we have a stop working but its a bit 'trigger-happy'...
@@ -878,19 +879,95 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 104>
+<Cycle Context>
+okay still there is a disconnect between what i am asking for and what you are delivering. the evidence of this is in the output logs. the output log says after i clicked the `Stop` button for `Resp 4`: `[INFO] [3:44:24 PM] [LLM Service] Aborting generation for cycle 1.`. now why would this log say aborting generation for cycle 1? i am not aborting cycle 1. thats a non-sensical statement for our purposes here. i can only abort responses. as such, when I click `Stop` for `Resp 4`, my intention is for the other 3 responses to continue to be produced. currently its stopping all responses. that was the sole complaint of the previous cycle.
+</Cycle Context>
+<Ephemeral Context>
+<server.ts logs>
+[INFO] [[DCE]] Received request on /api/dce/proxy
+[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
+[INFO] [[DCE]] Successfully established stream from vLLM to client.
+[WARN] [[DCE]] Client closed the connection. Aborting request to vLLM.
+[INFO] [[DCE]] Stream from vLLM was successfully aborted by client.
+[INFO] [[DCE]] Received request on /api/dce/proxy
+[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
+[INFO] [[DCE]] Successfully established stream from vLLM to client.
+[WARN] [[DCE]] Client closed the connection. Aborting request to vLLM.
+[INFO] [[DCE]] Stream from vLLM was successfully aborted by client.
+
+</server.ts logs>
+
+
+<dce output>
+[INFO] [3:43:33 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [3:43:33 PM] Services initializing...
+[INFO] [3:43:33 PM] Services initialized successfully.
+[INFO] [3:43:33 PM] Registering 7 commands.
+[INFO] [3:43:33 PM] Starry Night syntax highlighter initialized.
+[INFO] [3:43:45 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [3:43:45 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [3:43:45 PM] Context Chooser view message handler initialized.
+[INFO] [3:43:45 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [3:43:45 PM] [SelectionService] No last selection found in state.
+[INFO] [3:43:46 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [3:43:46 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [3:43:47 PM] Persisted current selection of 0 items.
+[INFO] [3:43:50 PM] Executing dce.openSettingsPanel command.
+[INFO] [3:43:50 PM] Settings view message handler initialized.
+[INFO] [3:43:52 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [3:43:52 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [3:43:53 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [3:43:53 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [3:43:53 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [3:43:53 PM] Settings saved: Mode=demo, URL=undefined
+[INFO] [3:43:55 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:43:58 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [3:43:58 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [3:43:59 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:44:00 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [3:44:00 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [3:44:06 PM] Generating Cycle 0 prompt and starting generation...
+[INFO] [3:44:06 PM] [Prompt Gen] Starting prompt string generation for Cycle 0.
+[INFO] [3:44:06 PM] [SelectionService] No last selection found in state.
+[INFO] [3:44:06 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
+[INFO] [3:44:06 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
+[INFO] [3:44:07 PM] prompt.md file created successfully before sending API request.
+[INFO] [3:44:07 PM] Created new placeholder cycle 1.
+[INFO] [3:44:07 PM] Starting STREAMING batch request to: https://aiascent.game/api/dce/proxy
+[INFO] [3:44:07 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [3:44:07 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [3:44:07 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [3:44:07 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [3:44:07 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense42/src","c:/Projects/TowerDefense42/src/Artifacts","c:/Projects/TowerDefense42/src/Artifacts/DCE_README.md"]
+[INFO] [3:44:07 PM] [SelectionService] No last selection found in state.
+[INFO] [3:44:07 PM] Persisted current selection of 3 items.
+[INFO] [3:44:07 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [3:44:07 PM] Persisted current selection of 3 items.
+[INFO] [3:44:08 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [3:44:24 PM] [LLM Service] Aborting generation for cycle 1.
+
+</dce output>
+</Ephemeral Context>
+<Previous Cycle 103 Summary of Actions>
+I have analyzed the two critical bugs from Cycle 102. The UI failing to refresh upon starting a new generation is a state synchronization issue between the newly refactored custom hooks. The proxy server crash is a classic unhandled error in a Node.js stream, specifically when the client-side "Stop" action aborts the request.
+
+My course of action is to provide the complete implementation to fix both issues. I will add the necessary error handling to the proxy server to prevent the crash. For the UI, I will make the state update atomic by having the IPC message handler explicitly call functions to update both the cycle state and the tab state in the same event loop, eliminating the race condition that was preventing the refresh.
+
+1.  **Update `A111. DCE - New Regression Case Studies.md`:** Add the new case study for the "Proxy Server Crash on Stream Abort" bug, codifying the root cause and the solution of adding an error handler to the stream.
+2.  **Update `A90. AI Ascent - server.ts (Reference).md`:** In the `/api/dce/proxy` route, add an `.on('error', ...)` handler to the `nodeStream` to gracefully catch the `AbortError` and prevent the server from crashing.
+3.  **Refactor `useTabManagement.ts`:** Extract the state-setting logic from the `useEffect` into a new, exported `loadTabData` function. This makes the state update logic callable from outside the hook.
+4.  **Update `view.tsx` (Container):** Retrieve the new `loadTabData` function from the `useTabManagement` hook and pass it down as a prop to the `usePcppIpc` hook.
+5.  **Update `usePcppIpc.ts` (Core Fix):** Modify the hook to accept the `loadTabData` function. The message handler for `NavigateToNewGeneratingCycle` will now make two explicit calls in sequence: `loadCycleData()` followed by `loadTabData()`. This ensures both pieces of state are updated atomically, forcing the UI to refresh correctly.
+</Previous Cycle 103 Summary of Actions>
+</Cycle 104>
+
 <Cycle 103>
 <Cycle Context>
 nice! well, kind of. nice because the stop button did stop, its just it was over-zealous. it stopped all responses, rather than just the response that i clicked the stop button for. for example, i had four initial responses streaming in, and you fixed the refresh state btw, but then when i went to click 'Stop' for 'Resp 3', all tokens stopped streaming in instantly, not just the one for 'Resp 3'.
 
 be sure we update the state as well on this when i click 'Stop' it should actually show 'Stopped', but just for that response. the others should still continue to stream in. is that possible?
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [[DCE]] Received request on /api/dce/proxy
-[INFO] [[DCE]] Proxying streaming prompt to vLLM. Requesting 4 parallel responses.
-[INFO] [[DCE]] Successfully established stream from vLLM to client.
-[WARN] [[DCE]] Client closed the connection. Aborting request to vLLM.
-[INFO] [[DCE]] Stream aborted as requested by client.
-</Ephemeral Context>
 <Previous Cycle 102 Summary of Actions>
 I have analyzed the logs from Cycle 101, and the root cause of the "instantly stopped" responses is clear. My previous implementation for the "Stop" button was flawed, causing the proxy server to prematurely abort the connection to the vLLM. The logs confirm that the proxy server receives the request but then immediately detects a "client closed connection" event, which incorrectly triggers the cancellation logic I added in the last cycle.
 
@@ -5217,10 +5294,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T17:19:47.464Z
+  Date Generated: 2025-10-05T20:48:49.370Z
   ---
   Total Files: 179
-  Approx. Tokens: 247044
+  Approx. Tokens: 246765
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5231,9 +5308,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4222 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
 9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (3998 tokens)
+10. src\backend\services\history.service.ts (3904 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -5320,7 +5397,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 82. src\Artifacts\A87. VCPG - vLLM High-Throughput Inference Plan.md - Lines: 56 - Chars: 4251 - Tokens: 1063
 83. src\Artifacts\A88. DCE - Native Diff Integration Plan.md - Lines: 43 - Chars: 4053 - Tokens: 1014
 84. src\Artifacts\A89. DCE - vLLM Integration and API Proxy Plan.md - Lines: 61 - Chars: 3736 - Tokens: 934
-85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16887 - Tokens: 4222
+85. src\Artifacts\A90. AI Ascent - server.ts (Reference).md - Lines: 377 - Chars: 16856 - Tokens: 4214
 86. src\Artifacts\A91. AI Ascent - Caddyfile (Reference).md - Lines: 54 - Chars: 2305 - Tokens: 577
 87. src\Artifacts\A92. DCE - vLLM Setup Guide.md - Lines: 100 - Chars: 4302 - Tokens: 1076
 88. src\Artifacts\A93. DCE - vLLM Encryption in Transit Guide.md - Lines: 65 - Chars: 3811 - Tokens: 953
@@ -5374,7 +5451,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 184 - Chars: 9364 - Tokens: 2341
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 280 - Chars: 15989 - Tokens: 3998
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 268 - Chars: 15359 - Tokens: 3840
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -5410,11 +5487,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3355 - Tokens: 839
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 176 - Chars: 8639 - Tokens: 2160
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 172 - Chars: 7025 - Tokens: 1757
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 162 - Chars: 7650 - Tokens: 1913
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 76 - Chars: 8525 - Tokens: 2132
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 80 - Chars: 8899 - Tokens: 2225
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -10890,15 +10967,15 @@ This architecture provides a secure, scalable, and highly performant solution fo
 # Artifact A90: AI Ascent - server.ts (Reference)
 # Date Created: C29
 # Author: AI Model & Curator
-# Updated on: C102 (Add error handling to stream pipe to prevent crash)
+# Updated on: C102 (Add stream error handler to prevent crash)
 
 - **Key/Value for A0:**
-- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route now includes an error handler on the `nodeStream` to gracefully handle `AbortError` events, preventing the server from crashing when a stream is cancelled by the client.
+- **Description:** A reference copy of the `server.ts` file from the `aiascent.game` project. The proxy route has been updated with a stream error handler to gracefully catch `AbortError` and prevent the server from crashing when a client cancels a request.
 - **Tags:** reference, source code, backend, nodejs, express, streaming, sse, abortcontroller, error handling
 
 ## 1. Overview
 
-This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been made more robust. An `.on('error', ...)` handler has been added to the stream being piped back to the client. This is the critical fix to catch the `AbortError` that is emitted when the `AbortController` is triggered by a client disconnection, preventing the unhandled error from crashing the entire Node.js process.
+This artifact contains the updated source code for `server.ts`. The `/api/dce/proxy` route has been made more robust. A `.on('error', ...)` handler has been added to the stream being piped from the vLLM server. This is the critical fix that catches the `AbortError` emitted when a stream is cancelled, preventing the unhandled exception that was crashing the Node.js process in the previous cycle.
 
 ## 2. Source Code (with stream error handling)
 
@@ -11190,11 +11267,11 @@ app.post('/api/dce/proxy', async (req, res) => {
         const nodeStream = Readable.fromWeb(stream as any);
 
         // --- C102 FIX: Add error handler to prevent crash on abort ---
-        nodeStream.on('error', (err: any) => {
-            if (err.name === 'AbortError') {
-                logInfo('[DCE]', 'Stream aborted as requested by client.');
+        nodeStream.on('error', (error) => {
+            if ((error as any).name === 'AbortError') {
+                logInfo('[DCE]', 'vLLM stream successfully aborted on the server.');
             } else {
-                logError('[DCE]', 'An error occurred in the vLLM response stream:', err);
+                logError('[DCE]', 'An error occurred in the vLLM response stream.', error);
             }
         });
         // --- END C102 FIX ---
@@ -19266,7 +19343,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C102 (Pass loadTabData to IPC hook)
+// Updated on: C102 (Refactor to pass hook objects to usePcppIpc)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -19315,23 +19392,11 @@ const App = () => {
     
     // --- IPC Message Handling ---
     usePcppIpc(
-        cycleManagement.loadCycleData,
-        tabManagement.loadTabData, // Pass the new function here
-        fileManagement.setHighlightedCodeBlocks,
-        fileManagement.setFileExistenceMap,
-        fileManagement.setComparisonMetrics,
-        () => {}, // setTotalPromptTokens
-        () => {}, // setEstimatedPromptCost
-        () => {}, // setCostBreakdown
-        setWorkflowStep,
-        cycleManagement.setSaveStatus,
-        generationManagement.setConnectionMode,
-        generationManagement.setGenerationProgress,
-        generationManagement.setTps,
-        tabManagement.setTabs,
-        generationManagement.setIsGenerationComplete,
-        cycleManagement.setMaxCycle,
-        cycleManagement.currentCycle?.cycleId || null
+        cycleManagement,
+        tabManagement,
+        fileManagement,
+        generationManagement,
+        setWorkflowStep
     );
 
     // --- Core Save Logic ---
@@ -19427,7 +19492,7 @@ const App = () => {
     };
     
     const activeTabState = tabManagement.tabs[tabManagement.activeTab.toString()];
-    const showProgressView = activeTabState?.status === 'generating' || activeTabState?.status === 'thinking';
+    const showProgressView = cycleManagement.currentCycle.status === 'generating';
 
     return <div className="pc-view-container">
         <div className="pc-header">
@@ -22243,34 +22308,29 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C102 (Call loadTabData explicitly)
+// Updated on: C102 (Refactor to use management objects and fix UI refresh)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
-import { GenerationProgress } from '@/common/ipc/channels.type';
-import { ConnectionMode } from '@/backend/services/settings.service';
+import { PcppCycle } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { logger } from '@/client/utils/logger';
+import { useCycleManagement } from './useCycleManagement';
+import { useTabManagement } from './useTabManagement';
+import { useFileManagement } from './useFileManagement';
+import { useGeneration } from './useGeneration';
+
+type CycleManagementHook = ReturnType<typeof useCycleManagement>;
+type TabManagementHook = ReturnType<typeof useTabManagement>;
+type FileManagementHook = ReturnType<typeof useFileManagement>;
+type GenerationManagementHook = ReturnType<typeof useGeneration>;
 
 export const usePcppIpc = (
-    loadCycleData: (cycleData: PcppCycle, scope?: string) => void,
-    loadTabData: (responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => void,
-    setHighlightedCodeBlocks: React.Dispatch<React.SetStateAction<Map<string, string>>>,
-    setFileExistenceMap: React.Dispatch<React.SetStateAction<Map<string, boolean>>>,
-    setComparisonMetrics: React.Dispatch<React.SetStateAction<Map<string, any>>>,
-    setTotalPromptTokens: React.Dispatch<React.SetStateAction<number>>,
-    setEstimatedPromptCost: React.Dispatch<React.SetStateAction<number>>,
-    setCostBreakdown: React.Dispatch<React.SetStateAction<any>>,
-    setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>,
-    setSaveStatus: React.Dispatch<React.SetStateAction<"saved" | "saving" | "unsaved">>,
-    setConnectionMode: React.Dispatch<React.SetStateAction<ConnectionMode>>,
-    setGenerationProgress: React.Dispatch<React.SetStateAction<GenerationProgress[]>>,
-    setTps: React.Dispatch<React.SetStateAction<number>>,
-    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
-    setIsGenerationComplete: React.Dispatch<React.SetStateAction<boolean>>,
-    setMaxCycle: React.Dispatch<React.SetStateAction<number>>,
-    currentCycleId: number | null
+    cycleManagement: CycleManagementHook,
+    tabManagement: TabManagementHook,
+    fileManagement: FileManagementHook,
+    generationManagement: GenerationManagementHook,
+    setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>
 ) => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -22281,22 +22341,22 @@ export const usePcppIpc = (
 
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
-            loadCycleData(cycleData, projectScope);
-            setMaxCycle(cycleData.cycleId);
+            cycleManagement.loadCycleData(cycleData, projectScope);
+            cycleManagement.setMaxCycle(cycleData.cycleId);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
-            if (cycleData) loadCycleData(cycleData, projectScope);
+            if (cycleData) cycleManagement.loadCycleData(cycleData, projectScope);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
+            fileManagement.setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistenceMap(new Map(Object.entries(existenceMap)));
+            fileManagement.setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
@@ -22304,7 +22364,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => {
-            setFileExistenceMap(prevMap => {
+            fileManagement.setFileExistenceMap(prevMap => {
                 const newMap = new Map(prevMap);
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
@@ -22312,13 +22372,11 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
+            fileManagement.setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            setTotalPromptTokens(totalTokens);
-            setEstimatedPromptCost(estimatedCost);
-            setCostBreakdown(breakdown);
+            // Placeholder for cost state update
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
@@ -22339,39 +22397,30 @@ export const usePcppIpc = (
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
             if (cycleId === 0) {
-                setSaveStatus('saved');
+                cycleManagement.setSaveStatus('saved');
             }
-            else if (cycleId === currentCycleId) {
-                setSaveStatus('saved');
+            else if (cycleId === cycleManagement.currentCycle?.cycleId) {
+                cycleManagement.setSaveStatus('saved');
             }
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => {
-            setConnectionMode(settings.connectionMode);
+            generationManagement.setConnectionMode(settings.connectionMode);
         });
         
-        // --- C102 FIX: Make state update atomic ---
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
-            logger.log(`[NavigateToNewGeneratingCycle] Received: newCycleId=${newCycleData.cycleId}`);
-            setMaxCycle(newMaxCycle);
-            // First, update the cycle data
-            loadCycleData(newCycleData);
-            // Then, explicitly update the tab data from the new cycle
-            loadTabData(
-                newCycleData.responses,
-                newCycleData.tabCount || 4,
-                newCycleData.activeTab || 1,
-                newCycleData.isParsedMode || false,
-                newCycleData.isSortedByTokens || false
-            );
+            logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
+            cycleManagement.setMaxCycle(newMaxCycle);
+            // Call both setters to ensure state is updated together
+            cycleManagement.loadCycleData(newCycleData);
+            tabManagement.resetAndLoadTabs(newCycleData.responses);
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
-        // --- END C102 FIX ---
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
-            setGenerationProgress(progress);
-            setTps(tps);
-            setTabs(prevTabs => {
+            generationManagement.setGenerationProgress(progress);
+            generationManagement.setTps(tps);
+            tabManagement.setTabs(prevTabs => {
                 const newTabs = { ...prevTabs };
                 Object.entries(chunks).forEach(([responseId, chunk]) => {
                     const tabIndex = parseInt(responseId, 10);
@@ -22383,7 +22432,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
-            setGenerationProgress(prev => {
+            generationManagement.setGenerationProgress(prev => {
                 const newProgress = [...prev];
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
@@ -22394,7 +22443,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => {
-            setTabs(prev => {
+            tabManagement.setTabs(prev => {
                 const newTabs = { ...prev };
                 const tabId = responseId.toString();
                 const tab = newTabs[tabId];
@@ -22408,27 +22457,30 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
-            setIsGenerationComplete(true);
+            generationManagement.setIsGenerationComplete(true);
         });
 
     }, [
-        clientIpc, loadCycleData, loadTabData, setHighlightedCodeBlocks, setFileExistenceMap, 
-        setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
-        setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
-        currentCycleId, setMaxCycle, setGenerationProgress, setTps, setTabs, setIsGenerationComplete
+        clientIpc, 
+        cycleManagement, 
+        tabManagement, 
+        fileManagement, 
+        generationManagement, 
+        setWorkflowStep
     ]);
 };
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C102 (Export loadTabData function)
+// Updated on: C102 (Remove useEffect and create resetAndLoadTabs)
 import * as React from 'react';
-import { PcppResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import * as path from 'path-browserify';
+import { logger } from '@/client/utils/logger';
 
 export const useTabManagement = (
     initialResponses: { [key: string]: PcppResponse },
@@ -22437,7 +22489,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: any) => void
+    requestAllMetrics: (parsedResponse: ParsedResponse) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -22446,8 +22498,10 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const loadTabData = React.useCallback((responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => {
+    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
+        logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
+        const count = Object.keys(responses).length || initialTabCount;
         for (let i = 1; i <= count; i++) {
             const key = i.toString();
             const response = responses[key];
@@ -22460,14 +22514,14 @@ export const useTabManagement = (
         }
         setTabs(newTabs);
         setTabCount(count);
-        setActiveTab(active);
-        setIsParsedMode(parsed);
-        setIsSortedByTokens(sorted);
-    }, []);
+    }, [initialTabCount]);
 
     React.useEffect(() => {
-        loadTabData(initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted);
-    }, [initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted, loadTabData]);
+        resetAndLoadTabs(initialResponses);
+        setActiveTab(initialActiveTab);
+        setIsParsedMode(initialIsParsedMode);
+        setIsSortedByTokens(initialIsSorted);
+    }, [initialResponses, initialActiveTab, initialIsParsedMode, initialIsSorted, resetAndLoadTabs]);
 
 
     const handleTabSelect = React.useCallback((tabIndex: number) => {
@@ -22590,7 +22644,7 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
-        loadTabData, // Export the new function
+        resetAndLoadTabs, // Export the new function
     };
 };
 </file_artifact>
@@ -22771,7 +22825,11 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C102 (Add Proxy Server Crash on Abort)
+# Updated on: C102 (Add Unhandled AbortError in Express Stream)
+
+- **Key/Value for A0:**
+- **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
+- **Tags:** bugs, regression, troubleshooting, development, best practices
 
 ## 1. Purpose
 
@@ -22781,15 +22839,15 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
-### Case Study 005: Proxy Server Crashes on Stream Abort
+### Case Study 005: Unhandled 'AbortError' Crashes Express.js Proxy Server
 
 -   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
 -   **Cycles Observed:** C102
--   **Symptom:** When the user clicks the "Stop" button during a streaming generation, the `aiascent.game` proxy server process crashes with an "Unhandled 'error' event" for a `DOMException [AbortError]`.
--   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection and calls `AbortController.abort()`. This action causes the underlying `node-fetch` request to the vLLM server to terminate. The `ReadableStream` from the `fetch` response, which is being piped to the client, correctly emits an `error` event with an `AbortError`. However, there was no `.on('error', ...)` handler attached to this stream (`nodeStream`). In Node.js, an unhandled `error` event on any `EventEmitter` (including streams) will bubble up and crash the entire process by default.
+-   **Symptom:** When a client-side "Stop" action aborts a streaming `fetch` request to an Express.js proxy that is piping a response from a downstream service (like vLLM), the entire Node.js process crashes with a `DOMException [AbortError]: This operation was aborted` and an "Unhandled 'error' event".
+-   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection via `res.on('close', ...)` and aborts its own `fetch` request to the downstream service. However, aborting an active `fetch` stream causes the underlying `ReadableStream` to emit an `error` event. In the proxy, the code was piping this stream directly to the client response (`nodeStream.pipe(res)`). When the `nodeStream` emitted the `AbortError`, there was no error handler attached to it (`nodeStream.on('error', ...)`), leading to an unhandled exception that crashed the server.
 -   **Codified Solution & Best Practice:**
-    1.  Any Node.js stream that is part of an abortable operation, or is piped from another stream that can be aborted, **must** have an error event handler (`.on('error', handler)`).
-    2.  This handler should inspect the error. If it is the expected `AbortError`, it can be safely ignored or logged as an informational message. Any other unexpected errors should be logged as true errors. This prevents the expected cancellation signal from causing an unhandled exception that crashes the server.
+    1.  Any Node.js `ReadableStream` that is being piped and has the potential to be aborted or encounter an error **must** have an error handler attached.
+    2.  The correct implementation is to add a `stream.on('error', (error) => { ... });` handler before calling `stream.pipe()`. This handler should check if the error is an expected `AbortError` and handle it gracefully (e.g., by logging an informational message) while throwing or logging any other unexpected errors. This prevents the process from crashing on a controlled cancellation.
 
 ---
 

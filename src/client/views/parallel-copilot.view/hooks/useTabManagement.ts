@@ -1,11 +1,12 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C102 (Export loadTabData function)
+// Updated on: C102 (Remove useEffect and create resetAndLoadTabs)
 import * as React from 'react';
-import { PcppResponse } from '@/common/types/pcpp.types';
+import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import * as path from 'path-browserify';
+import { logger } from '@/client/utils/logger';
 
 export const useTabManagement = (
     initialResponses: { [key: string]: PcppResponse },
@@ -14,7 +15,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: any) => void
+    requestAllMetrics: (parsedResponse: ParsedResponse) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -23,8 +24,10 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const loadTabData = React.useCallback((responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => {
+    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
+        logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
+        const count = Object.keys(responses).length || initialTabCount;
         for (let i = 1; i <= count; i++) {
             const key = i.toString();
             const response = responses[key];
@@ -37,14 +40,14 @@ export const useTabManagement = (
         }
         setTabs(newTabs);
         setTabCount(count);
-        setActiveTab(active);
-        setIsParsedMode(parsed);
-        setIsSortedByTokens(sorted);
-    }, []);
+    }, [initialTabCount]);
 
     React.useEffect(() => {
-        loadTabData(initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted);
-    }, [initialResponses, initialTabCount, initialActiveTab, initialIsParsedMode, initialIsSorted, loadTabData]);
+        resetAndLoadTabs(initialResponses);
+        setActiveTab(initialActiveTab);
+        setIsParsedMode(initialIsParsedMode);
+        setIsSortedByTokens(initialIsSorted);
+    }, [initialResponses, initialActiveTab, initialIsParsedMode, initialIsSorted, resetAndLoadTabs]);
 
 
     const handleTabSelect = React.useCallback((tabIndex: number) => {
@@ -167,6 +170,6 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
-        loadTabData, // Export the new function
+        resetAndLoadTabs, // Export the new function
     };
 };

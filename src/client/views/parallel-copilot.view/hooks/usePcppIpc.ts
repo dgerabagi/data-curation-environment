@@ -1,32 +1,27 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C102 (Call loadTabData explicitly)
+// Updated on: C102 (Refactor to use management objects and fix UI refresh)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
-import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
-import { GenerationProgress } from '@/common/ipc/channels.type';
-import { ConnectionMode } from '@/backend/services/settings.service';
+import { PcppCycle } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
 import { logger } from '@/client/utils/logger';
+import { useCycleManagement } from './useCycleManagement';
+import { useTabManagement } from './useTabManagement';
+import { useFileManagement } from './useFileManagement';
+import { useGeneration } from './useGeneration';
+
+type CycleManagementHook = ReturnType<typeof useCycleManagement>;
+type TabManagementHook = ReturnType<typeof useTabManagement>;
+type FileManagementHook = ReturnType<typeof useFileManagement>;
+type GenerationManagementHook = ReturnType<typeof useGeneration>;
 
 export const usePcppIpc = (
-    loadCycleData: (cycleData: PcppCycle, scope?: string) => void,
-    loadTabData: (responses: { [key: string]: PcppResponse }, count: number, active: number, parsed: boolean, sorted: boolean) => void,
-    setHighlightedCodeBlocks: React.Dispatch<React.SetStateAction<Map<string, string>>>,
-    setFileExistenceMap: React.Dispatch<React.SetStateAction<Map<string, boolean>>>,
-    setComparisonMetrics: React.Dispatch<React.SetStateAction<Map<string, any>>>,
-    setTotalPromptTokens: React.Dispatch<React.SetStateAction<number>>,
-    setEstimatedPromptCost: React.Dispatch<React.SetStateAction<number>>,
-    setCostBreakdown: React.Dispatch<React.SetStateAction<any>>,
-    setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>,
-    setSaveStatus: React.Dispatch<React.SetStateAction<"saved" | "saving" | "unsaved">>,
-    setConnectionMode: React.Dispatch<React.SetStateAction<ConnectionMode>>,
-    setGenerationProgress: React.Dispatch<React.SetStateAction<GenerationProgress[]>>,
-    setTps: React.Dispatch<React.SetStateAction<number>>,
-    setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
-    setIsGenerationComplete: React.Dispatch<React.SetStateAction<boolean>>,
-    setMaxCycle: React.Dispatch<React.SetStateAction<number>>,
-    currentCycleId: number | null
+    cycleManagement: CycleManagementHook,
+    tabManagement: TabManagementHook,
+    fileManagement: FileManagementHook,
+    generationManagement: GenerationManagementHook,
+    setWorkflowStep: React.Dispatch<React.SetStateAction<string | null>>
 ) => {
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -37,22 +32,22 @@ export const usePcppIpc = (
 
     React.useEffect(() => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
-            loadCycleData(cycleData, projectScope);
-            setMaxCycle(cycleData.cycleId);
+            cycleManagement.loadCycleData(cycleData, projectScope);
+            cycleManagement.setMaxCycle(cycleData.cycleId);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
-            if (cycleData) loadCycleData(cycleData, projectScope);
+            if (cycleData) cycleManagement.loadCycleData(cycleData, projectScope);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
-            setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
+            fileManagement.setHighlightedCodeBlocks(prev => new Map(prev).set(id, highlightedHtml));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileExistence, ({ existenceMap }) => {
-            setFileExistenceMap(new Map(Object.entries(existenceMap)));
+            fileManagement.setFileExistenceMap(new Map(Object.entries(existenceMap)));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.ForceRefresh, ({ reason }) => {
@@ -60,7 +55,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.FilesWritten, ({ paths }) => {
-            setFileExistenceMap(prevMap => {
+            fileManagement.setFileExistenceMap(prevMap => {
                 const newMap = new Map(prevMap);
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
@@ -68,13 +63,11 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
+            fileManagement.setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            setTotalPromptTokens(totalTokens);
-            setEstimatedPromptCost(estimatedCost);
-            setCostBreakdown(breakdown);
+            // Placeholder for cost state update
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
@@ -95,39 +88,30 @@ export const usePcppIpc = (
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
             if (cycleId === 0) {
-                setSaveStatus('saved');
+                cycleManagement.setSaveStatus('saved');
             }
-            else if (cycleId === currentCycleId) {
-                setSaveStatus('saved');
+            else if (cycleId === cycleManagement.currentCycle?.cycleId) {
+                cycleManagement.setSaveStatus('saved');
             }
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSettings, ({ settings }) => {
-            setConnectionMode(settings.connectionMode);
+            generationManagement.setConnectionMode(settings.connectionMode);
         });
         
-        // --- C102 FIX: Make state update atomic ---
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle, ({ newCycleData, newMaxCycle }) => {
-            logger.log(`[NavigateToNewGeneratingCycle] Received: newCycleId=${newCycleData.cycleId}`);
-            setMaxCycle(newMaxCycle);
-            // First, update the cycle data
-            loadCycleData(newCycleData);
-            // Then, explicitly update the tab data from the new cycle
-            loadTabData(
-                newCycleData.responses,
-                newCycleData.tabCount || 4,
-                newCycleData.activeTab || 1,
-                newCycleData.isParsedMode || false,
-                newCycleData.isSortedByTokens || false
-            );
+            logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
+            cycleManagement.setMaxCycle(newMaxCycle);
+            // Call both setters to ensure state is updated together
+            cycleManagement.loadCycleData(newCycleData);
+            tabManagement.resetAndLoadTabs(newCycleData.responses);
             clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleData.cycleId });
         });
-        // --- END C102 FIX ---
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateGenerationProgress, ({ progress, tps, chunks }) => {
-            setGenerationProgress(progress);
-            setTps(tps);
-            setTabs(prevTabs => {
+            generationManagement.setGenerationProgress(progress);
+            generationManagement.setTps(tps);
+            tabManagement.setTabs(prevTabs => {
                 const newTabs = { ...prevTabs };
                 Object.entries(chunks).forEach(([responseId, chunk]) => {
                     const tabIndex = parseInt(responseId, 10);
@@ -139,7 +123,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.UpdateSingleGenerationProgress, ({ progress }) => {
-            setGenerationProgress(prev => {
+            generationManagement.setGenerationProgress(prev => {
                 const newProgress = [...prev];
                 const index = newProgress.findIndex(p => p.responseId === progress.responseId);
                 if (index !== -1) {
@@ -150,7 +134,7 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySingleResponseComplete, ({ responseId, content }) => {
-            setTabs(prev => {
+            tabManagement.setTabs(prev => {
                 const newTabs = { ...prev };
                 const tabId = responseId.toString();
                 const tab = newTabs[tabId];
@@ -164,13 +148,15 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendBatchGenerationComplete, ({ newCycleId, newMaxCycle }) => {
-            setIsGenerationComplete(true);
+            generationManagement.setIsGenerationComplete(true);
         });
 
     }, [
-        clientIpc, loadCycleData, loadTabData, setHighlightedCodeBlocks, setFileExistenceMap, 
-        setComparisonMetrics, setTotalPromptTokens, setEstimatedPromptCost, 
-        setCostBreakdown, setWorkflowStep, setSaveStatus, setConnectionMode, 
-        currentCycleId, setMaxCycle, setGenerationProgress, setTps, setTabs, setIsGenerationComplete
+        clientIpc, 
+        cycleManagement, 
+        tabManagement, 
+        fileManagement, 
+        generationManagement, 
+        setWorkflowStep
     ]);
 };
