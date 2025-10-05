@@ -1,9 +1,9 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C98 (No functional changes, just for context)
+// Updated on: C104 (Add 'stopped' status)
 export interface PcppResponse {
     content: string;
     // The single source of truth for the response's state
-    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
     
     // Parsed content, formerly in TabState
     parsedContent?: ParsedResponse | null;
@@ -15,16 +15,6 @@ export interface PcppResponse {
     thinkingTokens?: number;    // Total tokens from the 'thinking' phase
     responseTokens?: number;    // Total tokens from the 'response' phase (the actual content)
 }
-
-// DEPRECATED: This has been merged into PcppResponse to create a single source of truth.
-// The TabState type is no longer exported.
-/*
-export interface TabState {
-    rawContent: string;
-    parsedContent: ParsedResponse | null;
-    status?: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
-}
-*/
 
 export interface PcppCycle {
     cycleId: number;

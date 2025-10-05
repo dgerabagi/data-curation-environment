@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T20:48:49.370Z
+  Date Generated: 2025-10-05T21:02:55.294Z
   ---
   Total Files: 179
-  Approx. Tokens: 246765
+  Approx. Tokens: 245438
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7353 tokens)
 3. src\backend\services\prompt.service.ts (5143 tokens)
-4. src\backend\services\llm.service.ts (4650 tokens)
-5. src\backend\services\file-operation.service.ts (4526 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\backend\services\history.service.ts (3904 tokens)
+4. src\backend\services\file-operation.service.ts (4526 tokens)
+5. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
+7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
+8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+9. src\backend\services\history.service.ts (3904 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (3840 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 348 - Chars: 18598 - Tokens: 4650
+107. src\backend\services\llm.service.ts - Lines: 250 - Chars: 12389 - Tokens: 3098
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -155,7 +155,7 @@
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 96 - Chars: 4237 - Tokens: 1060
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 184 - Chars: 9364 - Tokens: 2341
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1244 - Chars: 29412 - Tokens: 7353
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 268 - Chars: 15359 - Tokens: 3840
@@ -165,12 +165,12 @@
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
 145. src\common\ipc\channels.enum.ts - Lines: 115 - Chars: 6540 - Tokens: 1635
-146. src\common\ipc\channels.type.ts - Lines: 129 - Chars: 9724 - Tokens: 2431
+146. src\common\ipc\channels.type.ts - Lines: 129 - Chars: 9769 - Tokens: 2443
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-151. src\common\types\pcpp.types.ts - Lines: 70 - Chars: 2247 - Tokens: 562
+151. src\common\types\pcpp.types.ts - Lines: 60 - Chars: 1929 - Tokens: 483
 152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 435 - Tokens: 109
 153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -182,7 +182,7 @@
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
 162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
-163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 168 - Chars: 8129 - Tokens: 2033
+163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
@@ -193,12 +193,12 @@
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3355 - Tokens: 839
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 77 - Chars: 3402 - Tokens: 851
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 162 - Chars: 7650 - Tokens: 1913
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 80 - Chars: 8899 - Tokens: 2225
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 90 - Chars: 10357 - Tokens: 2590
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,7 +8630,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C100 (Fix AbortController lifecycle)
+// Updated on: C104 (Refactor to fan-out individual requests for granular stop)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8639,125 +8639,163 @@ import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
+import { Readable } from 'stream';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
-const generationControllers = new Map<number, AbortController>();
+const generationControllers = new Map<string, AbortController>();
 
 export class LlmService {
 
-    public stopGeneration(cycleId: number) {
-        if (generationControllers.has(cycleId)) {
-            Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}.`);
-            generationControllers.get(cycleId)?.abort();
-            // The controller is deleted from the map in the catch/error/end handlers now.
+    public stopSingleGeneration(cycleId: number, responseId: number) {
+        const controllerKey = `${cycleId}_${responseId}`;
+        if (generationControllers.has(controllerKey)) {
+            Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}, response ${responseId}.`);
+            generationControllers.get(controllerKey)?.abort();
+        }
+    }
+
+    public stopBatchGeneration(cycleId: number) {
+        Services.loggerService.log(`[LLM Service] Aborting all generations for cycle ${cycleId}.`);
+        for (const [key, controller] of generationControllers.entries()) {
+            if (key.startsWith(`${cycleId}_`)) {
+                controller.abort();
+            }
         }
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
-        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
+        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null);
 
         const settings = await Services.settingsService.getSettings();
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (!serverIpc) return;
 
         let endpointUrl = '';
-        let requestBody: any = {};
+        let requestBodyBase: any = {};
         const reasoningEffort = 'medium';
 
         switch (settings.connectionMode) {
             case 'demo':
                 endpointUrl = 'https://aiascent.game/api/dce/proxy';
-                requestBody = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], n: 1, max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
+                requestBodyBase = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
-                requestBody = { model: "local-model", messages: [{ role: "user", content: prompt }], n: 1, max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
+                requestBodyBase = { model: "local-model", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
             default: return;
         }
 
         const controller = new AbortController();
-        generationControllers.set(cycleId, controller);
+        const responseId = parseInt(tabId, 10);
+        const controllerKey = `${cycleId}_${responseId}`;
+        generationControllers.set(controllerKey, controller);
 
-        try {
-            const response = await fetch(endpointUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-                signal: controller.signal,
-            });
+        const finalResponse = await this._generateSingleStream(endpointUrl, { ...requestBodyBase, n: 1 }, controller, cycleId, responseId, serverIpc);
+        
+        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, finalResponse);
+        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: finalResponse.content });
+        Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
+    }
 
-            if (!response.ok || !response.body) {
-                const errorBody = await response.text();
-                throw new Error(`API request failed: ${response.status} ${errorBody}`);
-            }
-
-            const stream = response.body;
-            let buffer = '';
+    private _generateSingleStream(url: string, body: any, controller: AbortController, cycleId: number, responseId: number, serverIpc: ServerPostMessageManager): Promise<PcppResponse> {
+        const controllerKey = `${cycleId}_${responseId}`;
+        
+        return new Promise(async (resolve) => {
             let responseContent = '';
             const richResponse: PcppResponse = { content: '', status: 'pending', startTime: Date.now() };
-            const progress: GenerationProgress = { responseId: parseInt(tabId, 10), promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
+            const progress: GenerationProgress = { responseId, promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
 
-            stream.on('data', (chunk) => {
-                buffer += chunk.toString();
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
+                    signal: controller.signal,
+                });
 
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const dataStr = line.substring(6);
-                        if (dataStr.trim() === '[DONE]') continue;
-                        try {
-                            const data = JSON.parse(dataStr);
-                            if (data.choices?.[0]?.finish_reason !== null) {
-                                richResponse.status = 'complete';
-                                richResponse.endTime = Date.now();
-                                progress.status = 'complete';
-                            } else if (data.choices?.[0]?.delta) {
-                                if (data.choices[0].delta.reasoning_content) {
-                                    if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                    const contentChunk = data.choices.delta.reasoning_content;
-                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                    richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                    progress.thinkingTokens += chunkTokens;
+                if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
+                
+                const stream = Readable.fromWeb(response.body as any);
+                let buffer = '';
+
+                stream.on('data', (chunk) => {
+                    buffer += chunk.toString();
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.substring(6);
+                            if (dataStr.trim() === '[DONE]') continue;
+                            try {
+                                const data = JSON.parse(dataStr);
+                                if (data.choices?.[0]?.finish_reason !== null) {
+                                    richResponse.status = 'complete';
+                                    richResponse.endTime = Date.now();
+                                    progress.status = 'complete';
+                                } else if (data.choices?.[0]?.delta) {
+                                    if (data.choices.delta.reasoning_content) {
+                                        if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                        const contentChunk = data.choices.delta.reasoning_content;
+                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                        richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                        progress.thinkingTokens += chunkTokens;
+                                    }
+                                    if (data.choices.delta.content) {
+                                        if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                        const contentChunk = data.choices.delta.content;
+                                        responseContent += contentChunk;
+                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                        richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                        progress.currentTokens += chunkTokens;
+                                    }
                                 }
-                                if (data.choices[0].delta.content) {
-                                    if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                    const contentChunk = data.choices.delta.content;
-                                    responseContent += contentChunk;
-                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                    richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                    progress.currentTokens += chunkTokens;
-                                }
-                            }
-                        } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk for single regen: ${dataStr}`); }
+                            } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`); }
+                        }
                     }
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                });
+
+                stream.on('end', () => {
+                    generationControllers.delete(controllerKey);
+                    richResponse.content = responseContent;
+                    progress.status = 'complete';
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                    resolve(richResponse);
+                });
+
+                stream.on('error', (err) => {
+                    if (err.name === 'AbortError') {
+                        Services.loggerService.log(`[LLM Stream] Stream for C${cycleId}/R${responseId} was aborted.`);
+                        generationControllers.delete(controllerKey);
+                        richResponse.content = responseContent;
+                        richResponse.status = 'stopped';
+                        progress.status = 'stopped';
+                        serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                        resolve(richResponse);
+                    } else {
+                        throw err;
+                    }
+                });
+
+            } catch (error: any) {
+                generationControllers.delete(controllerKey);
+                if (error.name === 'AbortError') {
+                    Services.loggerService.log(`[LLM Fetch] Fetch for C${cycleId}/R${responseId} was aborted.`);
+                    richResponse.content = responseContent;
+                    richResponse.status = 'stopped';
+                    progress.status = 'stopped';
+                } else {
+                    Services.loggerService.error(`Failed to generate single stream for C${cycleId}/R${responseId}: ${error.message}`);
+                    richResponse.status = 'error';
+                    progress.status = 'error';
                 }
                 serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
-            });
-
-            stream.on('end', async () => {
-                generationControllers.delete(cycleId);
-                richResponse.content = responseContent;
-                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, richResponse);
-                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responseContent });
-                Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
-            });
-
-            stream.on('error', (err) => {
-                generationControllers.delete(cycleId);
-                if (!(err instanceof AbortError)) throw err;
-            });
-
-        } catch (error: any) {
-            generationControllers.delete(cycleId);
-            if (error instanceof AbortError) {
-                Services.loggerService.log(`[LLM Service] Single regeneration was aborted.`);
-            } else {
-                Services.loggerService.error(`Failed to generate single response: ${error.message}`);
+                resolve(richResponse);
             }
-        }
+        });
     }
 
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<PcppResponse[]> {
@@ -8766,36 +8804,19 @@ export class LlmService {
         if (!serverIpc) return [];
 
         let endpointUrl = '';
-        let requestBody: any = {};
-        
-        const reasoningEffort = 'medium'; 
+        let requestBodyBase: any = {};
+        const reasoningEffort = 'medium';
 
         switch (settings.connectionMode) {
             case 'demo':
                 endpointUrl = 'https://aiascent.game/api/dce/proxy';
-                requestBody = {
-                    model: "unsloth/gpt-oss-20b",
-                    messages: [{ role: "user", content: prompt }],
-                    n: count,
-                    max_tokens: MAX_TOKENS_PER_RESPONSE,
-                    stream: true,
-                    reasoning_effort: reasoningEffort,
-                };
+                requestBodyBase = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
-                requestBody = {
-                    model: "local-model",
-                    messages: [{ role: "user", content: prompt }],
-                    n: count,
-                    max_tokens: MAX_TOKENS_PER_RESPONSE,
-                    stream: true,
-                    reasoning_effort: reasoningEffort,
-                };
+                requestBodyBase = { model: "local-model", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
-            default:
-                Services.loggerService.error("Attempted to call LLM in manual mode.");
-                return [];
+            default: return [];
         }
 
         if (!endpointUrl) {
@@ -8803,156 +8824,37 @@ export class LlmService {
             return [];
         }
 
-        const controller = new AbortController();
-        generationControllers.set(cycleData.cycleId, controller);
-        
-        return new Promise(async (resolve, reject) => {
-            try {
-                Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
-                const response = await fetch(endpointUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(requestBody),
-                    signal: controller.signal,
-                });
+        const promises = Array.from({ length: count }, (_, i) => {
+            const responseId = i + 1;
+            const controllerKey = `${cycleData.cycleId}_${responseId}`;
+            const controller = new AbortController();
+            generationControllers.set(controllerKey, controller);
 
-                if (!response.ok || !response.body) {
-                    const errorBody = await response.text();
-                    throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
-                }
-
-                const stream = response.body;
-                let buffer = '';
-                let lastTpsUpdateTime = Date.now();
-                let tokensSinceLastUpdate = 0;
-                
-                const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
-                    responseId: i + 1,
-                    promptTokens: 0,
-                    thinkingTokens: 0,
-                    currentTokens: 0,
-                    totalTokens: MAX_TOKENS_PER_RESPONSE,
-                    status: 'pending',
-                    startTime: Date.now(),
-                }));
-                const responseContents: string[] = Array(count).fill('');
-                const richResponses: PcppResponse[] = [...Array(count)].map(() => ({ content: '', status: 'pending', startTime: Date.now() }));
-                const finishedResponses: boolean[] = Array(count).fill(false);
-                let totalFinished = 0;
-
-                const sendProgressUpdate = () => {
-                    const now = Date.now();
-                    const elapsed = (now - lastTpsUpdateTime) / 1000;
-                    if (elapsed > 0) {
-                        const tps = tokensSinceLastUpdate / elapsed;
-                        const chunks: { [key: number]: string } = {};
-                        responseContents.forEach((content, i) => { chunks[i + 1] = content; });
-                        serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, { progress: progressData, tps: Math.round(tps), chunks });
-                        tokensSinceLastUpdate = 0;
-                        lastTpsUpdateTime = now;
-                    }
-                };
-                const throttledSendProgress = this.throttle(sendProgressUpdate, 200);
-
-                stream.on('data', (chunk) => {
-                    buffer += chunk.toString();
-                    
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
-
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            const dataStr = line.substring(6);
-                            if (dataStr.trim() === '[DONE]') continue;
-                            
-                            try {
-                                const data = JSON.parse(dataStr);
-                                const choices = data.choices;
-                                if (Array.isArray(choices)) {
-                                    for (const choice of choices) {
-                                        const responseIndex = choice.index;
-                                        if (responseIndex === undefined || responseIndex >= count) continue;
-
-                                        const richResponse = richResponses[responseIndex];
-
-                                        if (choice.finish_reason !== null) {
-                                            if (!finishedResponses[responseIndex]) {
-                                                Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
-                                                finishedResponses[responseIndex] = true;
-                                                richResponse.status = 'complete';
-                                                richResponse.endTime = Date.now();
-                                                progressData[responseIndex].status = 'complete';
-                                                totalFinished++;
-                                                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
-                                                if (totalFinished === count) {
-                                                    Services.historyService.finalizeCycleStatus(cycleData.cycleId);
-                                                }
-                                            }
-                                        } else if (choice.delta) {
-                                            if (choice.delta.reasoning_content !== undefined) {
-                                                if (richResponse.status !== 'thinking') {
-                                                    richResponse.status = 'thinking';
-                                                    progressData[responseIndex].status = 'thinking';
-                                                }
-                                                const contentChunk = choice.delta.reasoning_content;
-                                                const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                tokensSinceLastUpdate += chunkTokens;
-                                                richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                                progressData[responseIndex].thinkingTokens += chunkTokens;
-                                            }
-                                            
-                                            if (choice.delta.content !== undefined) {
-                                                if (richResponse.status !== 'generating') {
-                                                    richResponse.status = 'generating';
-                                                    richResponse.thinkingEndTime = Date.now();
-                                                    progressData[responseIndex].status = 'generating';
-                                                }
-                                                const contentChunk = choice.delta.content;
-                                                responseContents[responseIndex] += contentChunk;
-                                                const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                tokensSinceLastUpdate += chunkTokens;
-                                                richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                                progressData[responseIndex].currentTokens += chunkTokens;
-                                            }
-                                        }
-                                    }
-                                }
-                            } catch (e) {
-                                Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`);
-                            }
-                        }
-                    }
-                    throttledSendProgress();
-                });
-
-                stream.on('end', async () => {
-                    generationControllers.delete(cycleData.cycleId);
-                    Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
-                    sendProgressUpdate();
-                    richResponses.forEach((rr, i) => {
-                        rr.content = responseContents[i];
-                    });
-                    resolve(richResponses);
-                });
-                
-                stream.on('error', (err) => {
-                    generationControllers.delete(cycleData.cycleId);
-                    if (!(err instanceof AbortError)) {
-                        reject(err);
-                    }
-                });
-
-            } catch (error: any) {
-                generationControllers.delete(cycleData.cycleId);
-                 if (error instanceof AbortError) {
-                    Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
-                    resolve(Array(count).fill({ content: '', status: 'error' }));
-                } else {
-                    Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
-                    reject(error);
-                }
-            }
+            return this._generateSingleStream(
+                endpointUrl,
+                { ...requestBodyBase, n: 1 },
+                controller,
+                cycleData.cycleId,
+                responseId,
+                serverIpc
+            );
         });
+
+        const richResponses = await Promise.all(promises);
+        
+        let allFinished = true;
+        for (const key of generationControllers.keys()) {
+            if (key.startsWith(`${cycleData.cycleId}_`)) {
+                allFinished = false;
+                break;
+            }
+        }
+        
+        if (allFinished) {
+            Services.loggerService.log(`All streams for cycle ${cycleData.cycleId} are complete.`);
+        }
+
+        return richResponses;
     }
 
     private throttle(func: (...args: any[]) => void, limit: number) {
@@ -12494,7 +12396,7 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C80 (No functional changes, just for context)
+// Updated on: C104 (Update RequestStopGeneration handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -12511,18 +12413,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
-        // Log incoming data to debug stale prompt issue
-        loggerService.log(`[Stale Prompt Debug] Incoming cycleData: ${JSON.stringify({
-            cycleId: data.cycleData.cycleId,
-            title: data.cycleData.title,
-            cycleContextLength: data.cycleData.cycleContext.length,
-            ephemeralContextLength: data.cycleData.ephemeralContext.length,
-        })}`);
-
         try {
             const { newCycle, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
-            const newCycleId = newCycle.cycleId;
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle });
+            serverIpc.sendToClient(ServerToClientChannel.NavigateToNewGeneratingCycle, { newCycleData: newCycle, newMaxCycle });
 
             const prompt = await promptService.generatePromptString(data.cycleData);
 
@@ -12533,19 +12426,19 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
                 loggerService.log(`[on-message] Wrote generated prompt for C${data.cycleData.cycleId} to prompt.md`);
             }
             
-            const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycleId });
-            await historyService.updateCycleWithResponses(newCycleId, responses);
+            const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycle.cycleId });
+            await historyService.updateCycleWithResponses(newCycle.cycleId, responses);
             
             const finalHistory = await historyService.getFullHistory();
             const finalMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
-            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle: finalMaxCycle });
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId: newCycle.cycleId, newMaxCycle: finalMaxCycle });
         } catch (error) {
             loggerService.error(`New generation workflow failed: ${error}`);
         }
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
-        llmService.stopGeneration(data.cycleId);
+        llmService.stopSingleGeneration(data.cycleId, data.responseId);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSingleRegeneration, async (data) => {
@@ -14777,7 +14670,7 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C95 (Replace StartGenerationUI)
+// Updated on: C104 (Update RequestStopGeneration payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -14800,7 +14693,7 @@ export interface GenerationProgress {
     totalTokens: number;
     promptTokens: number;
     thinkingTokens: number;
-    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
     startTime: number;
     thinkingStartTime?: number;
     generationStartTime?: number;
@@ -14867,7 +14760,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     T extends ClientToServerChannel.RequestSettings ? {} :
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
-    T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number } :
+    T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number; responseId: number; } :
     T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
@@ -15035,11 +14928,11 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C98 (No functional changes, just for context)
+// Updated on: C104 (Add 'stopped' status)
 export interface PcppResponse {
     content: string;
     // The single source of truth for the response's state
-    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
     
     // Parsed content, formerly in TabState
     parsedContent?: ParsedResponse | null;
@@ -15051,16 +14944,6 @@ export interface PcppResponse {
     thinkingTokens?: number;    // Total tokens from the 'thinking' phase
     responseTokens?: number;    // Total tokens from the 'response' phase (the actual content)
 }
-
-// DEPRECATED: This has been merged into PcppResponse to create a single source of truth.
-// The TabState type is no longer exported.
-/*
-export interface TabState {
-    rawContent: string;
-    parsedContent: ParsedResponse | null;
-    status?: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
-}
-*/
 
 export interface PcppCycle {
     cycleId: number;
@@ -16021,12 +15904,12 @@ export function parseResponse(rawText: string): ParsedResponse {
 
 <file path="src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx">
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C97 (Switch from TabState to PcppResponse)
+// Updated on: C104 (Update onStop signature and add 'stopped' status)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { PcppResponse } from '@/common/types/pcpp.types';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
+import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight, VscError } from 'react-icons/vsc';
 
 interface ResponseTimerProps {
     startTime: number;
@@ -16062,7 +15945,7 @@ interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
     tabs: { [key: string]: PcppResponse };
-    onStop: (cycleId: number) => void;
+    onStop: (cycleId: number, responseId: number) => void;
     onRegenerate: (responseId: number) => void;
     isGenerationComplete: boolean;
     onViewResponses: () => void;
@@ -16112,8 +15995,10 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 return <><VscLoading className="spinner" /> Generating...</>;
             case 'complete':
                 return <><VscCheck className="complete-check" /> Complete</>;
+            case 'stopped':
+                return <><VscStopCircle className="stopped-icon" /> Stopped</>;
             case 'error':
-                return <>Error</>;
+                return <><VscError className="error-icon" /> Error</>;
             default:
                 return <>Pending...</>;
         }
@@ -16135,7 +16020,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
                 const remainingPct = 100 - thinkingPct - generatedPct;
-                const isComplete = p.status === 'complete';
+                const isComplete = p.status === 'complete' || p.status === 'error' || p.status === 'stopped';
                 const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
                 const totalOutputTokens = p.thinkingTokens + p.currentTokens;
 
@@ -16150,8 +16035,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
                                 </span>
-                                <button onClick={() => onStop(cycleId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
-                                <button onClick={() => onRegenerate(p.responseId)} disabled={p.status === 'thinking' || p.status === 'generating'} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
+                                <button onClick={() => onStop(cycleId, p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
+                                <button onClick={() => onRegenerate(p.responseId)} disabled={!isComplete} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
                             </div>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>
@@ -16935,7 +16820,7 @@ export const useFileManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useGeneration.ts">
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C100 (Implement stop handler)
+// Updated on: C104 (Update handleStopGeneration signature)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -16983,8 +16868,8 @@ export const useGeneration = (
         setIsGenerationComplete(false);
     }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
-    const handleStopGeneration = React.useCallback((cycleId: number) => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId });
+    const handleStopGeneration = React.useCallback((cycleId: number, responseId: number) => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId, responseId });
     }, [clientIpc]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {
@@ -17532,17 +17417,27 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C102 (Add Unhandled AbortError in Express Stream)
-
-- **Key/Value for A0:**
-- **Description:** Documents new, complex bugs and their codified solutions to prevent future regressions.
-- **Tags:** bugs, regression, troubleshooting, development, best practices
+# Updated on: C104 (Add "Stop All vs Stop One" case study)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 006: "Stop" Button Aborts All Responses Instead of a Single One
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C103, C104
+-   **Symptom:** In the response generation UI, clicking the "Stop" button for a single in-progress response (e.g., "Resp 3") immediately stops all other generating responses.
+-   **Root Cause Analysis (RCA):** The backend was making a single batch `fetch` request to the vLLM server (with `n > 1`) and managing this single request with a single `AbortController` keyed by the `cycleId`. When a stop request was received for any response within that cycle, it would look up the controller by `cycleId` and abort the entire batch request, terminating the single HTTP stream that carried all the interleaved responses. There is no mechanism in the SSE or HTTP protocol to cancel just one part of an interleaved stream.
+-   **Codified Solution & Best Practice:**
+    1.  To enable granular cancellation, the backend must initiate multiple, independent requests instead of a single batch request.
+    2.  The `generateBatch` method must be refactored to "fan out." It should loop `N` times and create `N` individual `fetch` requests in parallel (e.g., using `Promise.all`), each with `n: 1`.
+    3.  Each of these individual requests must have its own `AbortController`, stored in a map with a more granular key that includes both the `cycleId` and the `responseId` (e.g., `"104_3"`).
+    4.  The "Stop" request from the client must include the specific `responseId` to be cancelled, allowing the backend to find and abort only the intended `fetch` request, leaving the others running.
 
 ---
 

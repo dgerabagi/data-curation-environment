@@ -1,10 +1,10 @@
 // src/client/views/parallel-copilot.view/components/GenerationProgressDisplay.tsx
-// Updated on: C97 (Switch from TabState to PcppResponse)
+// Updated on: C104 (Update onStop signature and add 'stopped' status)
 import * as React from 'react';
 import { formatLargeNumber } from '../../../../common/utils/formatting';
 import { PcppResponse } from '@/common/types/pcpp.types';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight } from 'react-icons/vsc';
+import { VscLoading, VscCheck, VscStopCircle, VscSync, VscListOrdered, VscListUnordered, VscArrowRight, VscError } from 'react-icons/vsc';
 
 interface ResponseTimerProps {
     startTime: number;
@@ -40,7 +40,7 @@ interface GenerationProgressDisplayProps {
     progressData: GenerationProgress[];
     tps: number;
     tabs: { [key: string]: PcppResponse };
-    onStop: (cycleId: number) => void;
+    onStop: (cycleId: number, responseId: number) => void;
     onRegenerate: (responseId: number) => void;
     isGenerationComplete: boolean;
     onViewResponses: () => void;
@@ -90,8 +90,10 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 return <><VscLoading className="spinner" /> Generating...</>;
             case 'complete':
                 return <><VscCheck className="complete-check" /> Complete</>;
+            case 'stopped':
+                return <><VscStopCircle className="stopped-icon" /> Stopped</>;
             case 'error':
-                return <>Error</>;
+                return <><VscError className="error-icon" /> Error</>;
             default:
                 return <>Pending...</>;
         }
@@ -113,7 +115,7 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                 const thinkingPct = (p.thinkingTokens / p.totalTokens) * 100;
                 const generatedPct = (p.currentTokens / p.totalTokens) * 100;
                 const remainingPct = 100 - thinkingPct - generatedPct;
-                const isComplete = p.status === 'complete';
+                const isComplete = p.status === 'complete' || p.status === 'error' || p.status === 'stopped';
                 const unusedTokens = p.totalTokens - p.thinkingTokens - p.currentTokens;
                 const totalOutputTokens = p.thinkingTokens + p.currentTokens;
 
@@ -128,8 +130,8 @@ const GenerationProgressDisplay: React.FC<GenerationProgressDisplayProps> = ({ p
                                 <span className={`status-indicator status-${p.status}`}>
                                     {getStatusIndicator(p.status)}
                                 </span>
-                                <button onClick={() => onStop(cycleId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
-                                <button onClick={() => onRegenerate(p.responseId)} disabled={p.status === 'thinking' || p.status === 'generating'} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
+                                <button onClick={() => onStop(cycleId, p.responseId)} disabled={isComplete} title="Stop Generation" className="styled-button"><VscStopCircle /> Stop</button>
+                                <button onClick={() => onRegenerate(p.responseId)} disabled={!isComplete} title="Regenerate this response" className="styled-button"><VscSync /> Re-generate</button>
                             </div>
                         </div>
                         <div className={`stacked-progress-bar ${isComplete ? 'completed' : ''}`}>

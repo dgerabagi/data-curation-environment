@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C100 (Implement stop handler)
+// Updated on: C104 (Update handleStopGeneration signature)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -47,8 +47,8 @@ export const useGeneration = (
         setIsGenerationComplete(false);
     }, [clientIpc, currentCycle, setTabs, setSaveStatus]);
 
-    const handleStopGeneration = React.useCallback((cycleId: number) => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId });
+    const handleStopGeneration = React.useCallback((cycleId: number, responseId: number) => {
+        clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId, responseId });
     }, [clientIpc]);
 
     const isGenerateResponsesDisabled = React.useMemo(() => {

@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C95 (Replace StartGenerationUI)
+// Updated on: C104 (Update RequestStopGeneration payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle } from "@/common/types/pcpp.types";
@@ -22,7 +22,7 @@ export interface GenerationProgress {
     totalTokens: number;
     promptTokens: number;
     thinkingTokens: number;
-    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error';
+    status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
     startTime: number;
     thinkingStartTime?: number;
     generationStartTime?: number;
@@ -89,7 +89,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveLastViewedCycle ? { cycleId: number | null } :
     T extends ClientToServerChannel.RequestSettings ? {} :
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
-    T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number } :
+    T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number; responseId: number; } :
     T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :

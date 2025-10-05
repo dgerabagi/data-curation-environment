@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C100 (Fix AbortController lifecycle)
+// Updated on: C104 (Refactor to fan-out individual requests for granular stop)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8,125 +8,163 @@ import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
+import { Readable } from 'stream';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
-const generationControllers = new Map<number, AbortController>();
+const generationControllers = new Map<string, AbortController>();
 
 export class LlmService {
 
-    public stopGeneration(cycleId: number) {
-        if (generationControllers.has(cycleId)) {
-            Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}.`);
-            generationControllers.get(cycleId)?.abort();
-            // The controller is deleted from the map in the catch/error/end handlers now.
+    public stopSingleGeneration(cycleId: number, responseId: number) {
+        const controllerKey = `${cycleId}_${responseId}`;
+        if (generationControllers.has(controllerKey)) {
+            Services.loggerService.log(`[LLM Service] Aborting generation for cycle ${cycleId}, response ${responseId}.`);
+            generationControllers.get(controllerKey)?.abort();
+        }
+    }
+
+    public stopBatchGeneration(cycleId: number) {
+        Services.loggerService.log(`[LLM Service] Aborting all generations for cycle ${cycleId}.`);
+        for (const [key, controller] of generationControllers.entries()) {
+            if (key.startsWith(`${cycleId}_`)) {
+                controller.abort();
+            }
         }
     }
     
     public async generateSingle(prompt: string, cycleId: number, tabId: string) {
         Services.loggerService.log(`[LLM Service] Starting single regeneration for cycle ${cycleId}, tab ${tabId}.`);
-        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null); // Set status to 'generating'
+        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, null);
 
         const settings = await Services.settingsService.getSettings();
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (!serverIpc) return;
 
         let endpointUrl = '';
-        let requestBody: any = {};
+        let requestBodyBase: any = {};
         const reasoningEffort = 'medium';
 
         switch (settings.connectionMode) {
             case 'demo':
                 endpointUrl = 'https://aiascent.game/api/dce/proxy';
-                requestBody = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], n: 1, max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
+                requestBodyBase = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
-                requestBody = { model: "local-model", messages: [{ role: "user", content: prompt }], n: 1, max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
+                requestBodyBase = { model: "local-model", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
             default: return;
         }
 
         const controller = new AbortController();
-        generationControllers.set(cycleId, controller);
+        const responseId = parseInt(tabId, 10);
+        const controllerKey = `${cycleId}_${responseId}`;
+        generationControllers.set(controllerKey, controller);
 
-        try {
-            const response = await fetch(endpointUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-                signal: controller.signal,
-            });
+        const finalResponse = await this._generateSingleStream(endpointUrl, { ...requestBodyBase, n: 1 }, controller, cycleId, responseId, serverIpc);
+        
+        await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, finalResponse);
+        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: finalResponse.content });
+        Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
+    }
 
-            if (!response.ok || !response.body) {
-                const errorBody = await response.text();
-                throw new Error(`API request failed: ${response.status} ${errorBody}`);
-            }
-
-            const stream = response.body;
-            let buffer = '';
+    private _generateSingleStream(url: string, body: any, controller: AbortController, cycleId: number, responseId: number, serverIpc: ServerPostMessageManager): Promise<PcppResponse> {
+        const controllerKey = `${cycleId}_${responseId}`;
+        
+        return new Promise(async (resolve) => {
             let responseContent = '';
             const richResponse: PcppResponse = { content: '', status: 'pending', startTime: Date.now() };
-            const progress: GenerationProgress = { responseId: parseInt(tabId, 10), promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
+            const progress: GenerationProgress = { responseId, promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
 
-            stream.on('data', (chunk) => {
-                buffer += chunk.toString();
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
+                    signal: controller.signal,
+                });
 
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const dataStr = line.substring(6);
-                        if (dataStr.trim() === '[DONE]') continue;
-                        try {
-                            const data = JSON.parse(dataStr);
-                            if (data.choices?.[0]?.finish_reason !== null) {
-                                richResponse.status = 'complete';
-                                richResponse.endTime = Date.now();
-                                progress.status = 'complete';
-                            } else if (data.choices?.[0]?.delta) {
-                                if (data.choices[0].delta.reasoning_content) {
-                                    if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                    const contentChunk = data.choices.delta.reasoning_content;
-                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                    richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                    progress.thinkingTokens += chunkTokens;
+                if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
+                
+                const stream = Readable.fromWeb(response.body as any);
+                let buffer = '';
+
+                stream.on('data', (chunk) => {
+                    buffer += chunk.toString();
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.substring(6);
+                            if (dataStr.trim() === '[DONE]') continue;
+                            try {
+                                const data = JSON.parse(dataStr);
+                                if (data.choices?.[0]?.finish_reason !== null) {
+                                    richResponse.status = 'complete';
+                                    richResponse.endTime = Date.now();
+                                    progress.status = 'complete';
+                                } else if (data.choices?.[0]?.delta) {
+                                    if (data.choices.delta.reasoning_content) {
+                                        if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                        const contentChunk = data.choices.delta.reasoning_content;
+                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                        richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                        progress.thinkingTokens += chunkTokens;
+                                    }
+                                    if (data.choices.delta.content) {
+                                        if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                        const contentChunk = data.choices.delta.content;
+                                        responseContent += contentChunk;
+                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                        richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                        progress.currentTokens += chunkTokens;
+                                    }
                                 }
-                                if (data.choices[0].delta.content) {
-                                    if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                    const contentChunk = data.choices.delta.content;
-                                    responseContent += contentChunk;
-                                    const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                    richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                    progress.currentTokens += chunkTokens;
-                                }
-                            }
-                        } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk for single regen: ${dataStr}`); }
+                            } catch (e) { Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`); }
+                        }
                     }
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                });
+
+                stream.on('end', () => {
+                    generationControllers.delete(controllerKey);
+                    richResponse.content = responseContent;
+                    progress.status = 'complete';
+                    serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                    resolve(richResponse);
+                });
+
+                stream.on('error', (err) => {
+                    if (err.name === 'AbortError') {
+                        Services.loggerService.log(`[LLM Stream] Stream for C${cycleId}/R${responseId} was aborted.`);
+                        generationControllers.delete(controllerKey);
+                        richResponse.content = responseContent;
+                        richResponse.status = 'stopped';
+                        progress.status = 'stopped';
+                        serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
+                        resolve(richResponse);
+                    } else {
+                        throw err;
+                    }
+                });
+
+            } catch (error: any) {
+                generationControllers.delete(controllerKey);
+                if (error.name === 'AbortError') {
+                    Services.loggerService.log(`[LLM Fetch] Fetch for C${cycleId}/R${responseId} was aborted.`);
+                    richResponse.content = responseContent;
+                    richResponse.status = 'stopped';
+                    progress.status = 'stopped';
+                } else {
+                    Services.loggerService.error(`Failed to generate single stream for C${cycleId}/R${responseId}: ${error.message}`);
+                    richResponse.status = 'error';
+                    progress.status = 'error';
                 }
                 serverIpc.sendToClient(ServerToClientChannel.UpdateSingleGenerationProgress, { progress });
-            });
-
-            stream.on('end', async () => {
-                generationControllers.delete(cycleId);
-                richResponse.content = responseContent;
-                await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, richResponse);
-                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId, 10), content: responseContent });
-                Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
-            });
-
-            stream.on('error', (err) => {
-                generationControllers.delete(cycleId);
-                if (!(err instanceof AbortError)) throw err;
-            });
-
-        } catch (error: any) {
-            generationControllers.delete(cycleId);
-            if (error instanceof AbortError) {
-                Services.loggerService.log(`[LLM Service] Single regeneration was aborted.`);
-            } else {
-                Services.loggerService.error(`Failed to generate single response: ${error.message}`);
+                resolve(richResponse);
             }
-        }
+        });
     }
 
     public async generateBatch(prompt: string, count: number, cycleData: PcppCycle): Promise<PcppResponse[]> {
@@ -135,36 +173,19 @@ export class LlmService {
         if (!serverIpc) return [];
 
         let endpointUrl = '';
-        let requestBody: any = {};
-        
-        const reasoningEffort = 'medium'; 
+        let requestBodyBase: any = {};
+        const reasoningEffort = 'medium';
 
         switch (settings.connectionMode) {
             case 'demo':
                 endpointUrl = 'https://aiascent.game/api/dce/proxy';
-                requestBody = {
-                    model: "unsloth/gpt-oss-20b",
-                    messages: [{ role: "user", content: prompt }],
-                    n: count,
-                    max_tokens: MAX_TOKENS_PER_RESPONSE,
-                    stream: true,
-                    reasoning_effort: reasoningEffort,
-                };
+                requestBodyBase = { model: "unsloth/gpt-oss-20b", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
             case 'url':
                 endpointUrl = settings.apiUrl || '';
-                requestBody = {
-                    model: "local-model",
-                    messages: [{ role: "user", content: prompt }],
-                    n: count,
-                    max_tokens: MAX_TOKENS_PER_RESPONSE,
-                    stream: true,
-                    reasoning_effort: reasoningEffort,
-                };
+                requestBodyBase = { model: "local-model", messages: [{ role: "user", content: prompt }], max_tokens: MAX_TOKENS_PER_RESPONSE, stream: true, reasoning_effort: reasoningEffort };
                 break;
-            default:
-                Services.loggerService.error("Attempted to call LLM in manual mode.");
-                return [];
+            default: return [];
         }
 
         if (!endpointUrl) {
@@ -172,156 +193,37 @@ export class LlmService {
             return [];
         }
 
-        const controller = new AbortController();
-        generationControllers.set(cycleData.cycleId, controller);
-        
-        return new Promise(async (resolve, reject) => {
-            try {
-                Services.loggerService.log(`Starting STREAMING batch request to: ${endpointUrl}`);
-                const response = await fetch(endpointUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(requestBody),
-                    signal: controller.signal,
-                });
+        const promises = Array.from({ length: count }, (_, i) => {
+            const responseId = i + 1;
+            const controllerKey = `${cycleData.cycleId}_${responseId}`;
+            const controller = new AbortController();
+            generationControllers.set(controllerKey, controller);
 
-                if (!response.ok || !response.body) {
-                    const errorBody = await response.text();
-                    throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
-                }
-
-                const stream = response.body;
-                let buffer = '';
-                let lastTpsUpdateTime = Date.now();
-                let tokensSinceLastUpdate = 0;
-                
-                const progressData: GenerationProgress[] = [...Array(count)].map((_, i) => ({
-                    responseId: i + 1,
-                    promptTokens: 0,
-                    thinkingTokens: 0,
-                    currentTokens: 0,
-                    totalTokens: MAX_TOKENS_PER_RESPONSE,
-                    status: 'pending',
-                    startTime: Date.now(),
-                }));
-                const responseContents: string[] = Array(count).fill('');
-                const richResponses: PcppResponse[] = [...Array(count)].map(() => ({ content: '', status: 'pending', startTime: Date.now() }));
-                const finishedResponses: boolean[] = Array(count).fill(false);
-                let totalFinished = 0;
-
-                const sendProgressUpdate = () => {
-                    const now = Date.now();
-                    const elapsed = (now - lastTpsUpdateTime) / 1000;
-                    if (elapsed > 0) {
-                        const tps = tokensSinceLastUpdate / elapsed;
-                        const chunks: { [key: number]: string } = {};
-                        responseContents.forEach((content, i) => { chunks[i + 1] = content; });
-                        serverIpc.sendToClient(ServerToClientChannel.UpdateGenerationProgress, { progress: progressData, tps: Math.round(tps), chunks });
-                        tokensSinceLastUpdate = 0;
-                        lastTpsUpdateTime = now;
-                    }
-                };
-                const throttledSendProgress = this.throttle(sendProgressUpdate, 200);
-
-                stream.on('data', (chunk) => {
-                    buffer += chunk.toString();
-                    
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
-
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            const dataStr = line.substring(6);
-                            if (dataStr.trim() === '[DONE]') continue;
-                            
-                            try {
-                                const data = JSON.parse(dataStr);
-                                const choices = data.choices;
-                                if (Array.isArray(choices)) {
-                                    for (const choice of choices) {
-                                        const responseIndex = choice.index;
-                                        if (responseIndex === undefined || responseIndex >= count) continue;
-
-                                        const richResponse = richResponses[responseIndex];
-
-                                        if (choice.finish_reason !== null) {
-                                            if (!finishedResponses[responseIndex]) {
-                                                Services.loggerService.log(`[STREAM] Response ${responseIndex + 1} finished.`);
-                                                finishedResponses[responseIndex] = true;
-                                                richResponse.status = 'complete';
-                                                richResponse.endTime = Date.now();
-                                                progressData[responseIndex].status = 'complete';
-                                                totalFinished++;
-                                                serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: responseIndex + 1, content: responseContents[responseIndex] });
-                                                if (totalFinished === count) {
-                                                    Services.historyService.finalizeCycleStatus(cycleData.cycleId);
-                                                }
-                                            }
-                                        } else if (choice.delta) {
-                                            if (choice.delta.reasoning_content !== undefined) {
-                                                if (richResponse.status !== 'thinking') {
-                                                    richResponse.status = 'thinking';
-                                                    progressData[responseIndex].status = 'thinking';
-                                                }
-                                                const contentChunk = choice.delta.reasoning_content;
-                                                const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                tokensSinceLastUpdate += chunkTokens;
-                                                richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                                progressData[responseIndex].thinkingTokens += chunkTokens;
-                                            }
-                                            
-                                            if (choice.delta.content !== undefined) {
-                                                if (richResponse.status !== 'generating') {
-                                                    richResponse.status = 'generating';
-                                                    richResponse.thinkingEndTime = Date.now();
-                                                    progressData[responseIndex].status = 'generating';
-                                                }
-                                                const contentChunk = choice.delta.content;
-                                                responseContents[responseIndex] += contentChunk;
-                                                const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                tokensSinceLastUpdate += chunkTokens;
-                                                richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                                progressData[responseIndex].currentTokens += chunkTokens;
-                                            }
-                                        }
-                                    }
-                                }
-                            } catch (e) {
-                                Services.loggerService.warn(`Could not parse SSE chunk: ${dataStr}`);
-                            }
-                        }
-                    }
-                    throttledSendProgress();
-                });
-
-                stream.on('end', async () => {
-                    generationControllers.delete(cycleData.cycleId);
-                    Services.loggerService.log(`LLM stream ended. Total finished responses: ${totalFinished}/${count}`);
-                    sendProgressUpdate();
-                    richResponses.forEach((rr, i) => {
-                        rr.content = responseContents[i];
-                    });
-                    resolve(richResponses);
-                });
-                
-                stream.on('error', (err) => {
-                    generationControllers.delete(cycleData.cycleId);
-                    if (!(err instanceof AbortError)) {
-                        reject(err);
-                    }
-                });
-
-            } catch (error: any) {
-                generationControllers.delete(cycleData.cycleId);
-                 if (error instanceof AbortError) {
-                    Services.loggerService.log(`[LLM Service] Batch generation was aborted by user.`);
-                    resolve(Array(count).fill({ content: '', status: 'error' }));
-                } else {
-                    Services.loggerService.error(`Failed to generate batch responses via stream: ${error.message}`);
-                    reject(error);
-                }
-            }
+            return this._generateSingleStream(
+                endpointUrl,
+                { ...requestBodyBase, n: 1 },
+                controller,
+                cycleData.cycleId,
+                responseId,
+                serverIpc
+            );
         });
+
+        const richResponses = await Promise.all(promises);
+        
+        let allFinished = true;
+        for (const key of generationControllers.keys()) {
+            if (key.startsWith(`${cycleData.cycleId}_`)) {
+                allFinished = false;
+                break;
+            }
+        }
+        
+        if (allFinished) {
+            Services.loggerService.log(`All streams for cycle ${cycleData.cycleId} are complete.`);
+        }
+
+        return richResponses;
     }
 
     private throttle(func: (...args: any[]) => void, limit: number) {

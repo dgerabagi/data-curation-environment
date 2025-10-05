@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C80 (No functional changes, just for context)
+// Updated on: C104 (Update RequestStopGeneration handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -16,18 +16,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {
         loggerService.log(`Received RequestNewCycleAndGenerate for ${data.count} responses from cycle ${data.cycleData.cycleId}.`);
-        // Log incoming data to debug stale prompt issue
-        loggerService.log(`[Stale Prompt Debug] Incoming cycleData: ${JSON.stringify({
-            cycleId: data.cycleData.cycleId,
-            title: data.cycleData.title,
-            cycleContextLength: data.cycleData.cycleContext.length,
-            ephemeralContextLength: data.cycleData.ephemeralContext.length,
-        })}`);
-
         try {
             const { newCycle, newMaxCycle } = await historyService.createNewCyclePlaceholder(data.count);
-            const newCycleId = newCycle.cycleId;
-            serverIpc.sendToClient(ServerToClientChannel.StartGenerationUI, { newCycleId, newMaxCycle });
+            serverIpc.sendToClient(ServerToClientChannel.NavigateToNewGeneratingCycle, { newCycleData: newCycle, newMaxCycle });
 
             const prompt = await promptService.generatePromptString(data.cycleData);
 
@@ -38,19 +29,19 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
                 loggerService.log(`[on-message] Wrote generated prompt for C${data.cycleData.cycleId} to prompt.md`);
             }
             
-            const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycleId });
-            await historyService.updateCycleWithResponses(newCycleId, responses);
+            const responses = await llmService.generateBatch(prompt, data.count, { ...data.cycleData, cycleId: newCycle.cycleId });
+            await historyService.updateCycleWithResponses(newCycle.cycleId, responses);
             
             const finalHistory = await historyService.getFullHistory();
             const finalMaxCycle = finalHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
-            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId, newMaxCycle: finalMaxCycle });
+            serverIpc.sendToClient(ServerToClientChannel.SendBatchGenerationComplete, { newCycleId: newCycle.cycleId, newMaxCycle: finalMaxCycle });
         } catch (error) {
             loggerService.error(`New generation workflow failed: ${error}`);
         }
     });
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestStopGeneration, (data) => {
-        llmService.stopGeneration(data.cycleId);
+        llmService.stopSingleGeneration(data.cycleId, data.responseId);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestSingleRegeneration, async (data) => {
