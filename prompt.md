@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 106 - `readableStream` error
+Current Cycle 107 - extremely close
+Cycle 106 - `readableStream` error
 Cycle 105 - identified root cause, implementing single stream parallel batching
 Cycle 104 - Stop still stops all responses instead of just the individual response
 Cycle 103 - stop works! but it stopped the entire batch not just the single response as intended
@@ -881,6 +882,49 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 107>
+<Cycle Context>
+okay another test... hold on to your butts...
+
+okay i saw 4 different port channels start up, however the token-streaming effect is not occurring. my thinking tokens and response tokens arent tallying up as they used to be.
+
+other than that issue, i can report that the stop/re-generate is actually functional! its really good. lets see if we can fix this display stuff.
+
+so, i see the response ui, i click `Re-generate` on one of these 'Completed' responses, even though I cannot see them. it does correctly switch to `Pending` and i see that running request. i never see any tokens stream in, it just stays in `Pending` status up until the completion ends, and I see this final token count: `(0 +0 = 0 /16.4K tk)`, same for all responses. additionally, when i go to `Show Response View`, theres no input where it says `Paste AI response here...` so this all points to us not correctly handling the incoming individual responses. do you need logs to see? like if you make some logs in the dce output to show what its getting back from the vllm, that might help you parse it back out. or if you know what to do, ill leave the choice up to you.
+</Cycle Context>
+<Previous Cycle 106 Summary of Actions>
+I have analyzed the two issues from Cycle 105. The primary bug, where the response UI fails to appear, is a critical regression caused by recent refactoring. The logic for initializing the `generationProgress` state array was lost, and the IPC handler responsible for updating it was not robust enough to handle an empty array, leading to a complete failure of the progress display.
+
+The second request is for a UI enhancement: a button to manually toggle between the response generation view and the standard response pane. This is a valuable fallback and debugging tool.
+
+My course of action is to fix the state initialization bug to restore the response UI and then implement the requested view-toggle button.
+
+1.  **Codify the Bug:** I will add a new regression case study to `A111. DCE - New Regression Case Studies.md` titled "Response Progress UI Fails to Render After Fan-Out Refactor."
+    *   **Root Cause Analysis (RCA):** The refactor into custom hooks lost the logic that initialized the `generationProgress` state array when a new generation began. The `UpdateSingleGenerationProgress` IPC handler's logic (`setGenerationProgress(prev => ...)`) used `findIndex` on this empty array, which always returned -1, and it lacked an `else` block to add the new progress item. Consequently, the state array remained empty, and no progress bars were ever rendered.
+    *   **Codified Solution:** The state array must be initialized with placeholder objects when the generation starts. The `NavigateToNewGeneratingCycle` IPC handler is the correct place for this initialization. Additionally, the update handler must be made resilient by adding a case to push a new progress item if its ID is not found in the array.
+
+2.  **Fix Response UI Initialization (`usePcppIpc.ts`):**
+    *   I will modify the message handler for `NavigateToNewGeneratingCycle`.
+    *   After the existing `tabManagement.resetAndLoadTabs` call, I will add new logic to create an initial `GenerationProgress` array. It will map over the `newCycleData.responses` and create a placeholder object for each response with a status of `'pending'`.
+    *   It will then call `generationManagement.setGenerationProgress` with this newly created array, ensuring the `GenerationProgressDisplay` has data to render immediately.
+
+3.  **Harden Progress Update Handler (`usePcppIpc.ts`):**
+    *   I will modify the message handler for `UpdateSingleGenerationProgress`.
+    *   Inside the `setGenerationProgress` callback, I will add an `else` block. If `findIndex` returns -1 (meaning the item is not yet in the array), it will `push` the new progress object onto the array. This makes the handler more robust.
+
+4.  **Implement View Toggle Button:**
+    *   **`view.tsx`:**
+        *   I will add a new local state: `const [forceShowResponseView, setForceShowResponseView] = React.useState(false);`.
+        *   The logic for showing the progress view will be updated to: `const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;`.
+        *   The IPC handlers that load new cycle data (`SendInitialCycleData`, `SendCycleData`, `NavigateToNewGeneratingCycle`) will be updated to reset this state by calling `setForceShowResponseView(false)`.
+        *   I will pass the state and its setter down as props to the `ResponseTabs` component.
+    *   **`ResponseTabs.tsx`:**
+        *   The component will accept the new props: `forceShowResponseView: boolean` and `onToggleForceResponseView: () => void`.
+        *   I will add a new button next to the "Sort" button, likely using a `VscEye` icon. Its `onClick` handler will call `onToggleForceResponseView`. It will be conditionally rendered only when `cycleManagement.currentCycle.status === 'generating'`.
+    *   **`view.scss`:** I will add styling to ensure the new button aligns correctly with the sort button.
+</Previous Cycle 106 Summary of Actions>
+</Cycle 107>
+
 <Cycle 106>
 <Cycle Context>
 okay, interesting. in the pcpp, its showing Error, however the responses are processing just fine in vllm. when i check the dce output it says all streams for cyle 1 are complete, but they arent complete yet, they're still running.
@@ -889,73 +933,6 @@ ah i see some error logs that seem to be indicative of the root cause, something
 
 
 </Cycle Context>
-<Ephemeral Context>
-<vllm logs>
-(APIServer pid=7842) INFO:     127.0.0.1:57950 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=7842) INFO 10-05 16:12:33 [loggers.py:123] Engine 000: Avg prompt throughput: 4541.0 tokens/s, Avg generation throughput: 110.5 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.0%, Prefix cache hit rate: 89.3%
-(APIServer pid=7842) INFO 10-05 16:12:43 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 172.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.6%, Prefix cache hit rate: 89.3%
-(APIServer pid=7842) INFO 10-05 16:12:53 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 171.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.3%, Prefix cache hit rate: 89.3%
-(APIServer pid=7842) INFO 10-05 16:13:03 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 168.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 6.9%, Prefix cache hit rate: 89.3%
-(APIServer pid=7842) INFO 10-05 16:13:13 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 174.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.6%, Prefix cache hit rate: 89.3%
-
-</vllm logs>
-
-<dce output>
-[INFO] [4:12:08 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [4:12:08 PM] Services initializing...
-[INFO] [4:12:08 PM] Services initialized successfully.
-[INFO] [4:12:08 PM] Registering 7 commands.
-[INFO] [4:12:09 PM] Starry Night syntax highlighter initialized.
-[INFO] [4:12:09 PM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [4:12:09 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [4:12:09 PM] Context Chooser view message handler initialized.
-[INFO] [4:12:09 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [4:12:09 PM] [SelectionService] No last selection found in state.
-[INFO] [4:12:09 PM] Persisted current selection of 0 items.
-[INFO] [4:12:09 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:12:09 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:12:13 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [4:12:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [4:12:15 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [4:12:18 PM] Executing dce.openSettingsPanel command.
-[INFO] [4:12:18 PM] Settings view message handler initialized.
-[INFO] [4:12:19 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [4:12:19 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [4:12:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:12:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:12:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:12:20 PM] Settings saved: Mode=demo, URL=undefined
-[INFO] [4:12:20 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:12:22 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [4:12:23 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:12:23 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [4:12:24 PM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [4:12:25 PM] Generating Cycle 0 prompt and starting generation...
-[INFO] [4:12:25 PM] [Prompt Gen] Starting prompt string generation for Cycle 0.
-[INFO] [4:12:25 PM] [SelectionService] No last selection found in state.
-[INFO] [4:12:25 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
-[INFO] [4:12:25 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
-[INFO] [4:12:25 PM] prompt.md file created successfully before sending API request.
-[INFO] [4:12:25 PM] Created new placeholder cycle 1.
-[INFO] [4:12:25 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [4:12:25 PM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [4:12:25 PM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [4:12:25 PM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [4:12:25 PM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense44/src","c:/Projects/TowerDefense44/src/Artifacts","c:/Projects/TowerDefense44/src/Artifacts/DCE_README.md"]
-[INFO] [4:12:25 PM] [SelectionService] No last selection found in state.
-[INFO] [4:12:25 PM] Persisted current selection of 3 items.
-[INFO] [4:12:25 PM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [4:12:25 PM] Persisted current selection of 3 items.
-[ERROR] [4:12:25 PM] Failed to generate single stream for C1/R2: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough
-[ERROR] [4:12:25 PM] Failed to generate single stream for C1/R1: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough
-[ERROR] [4:12:25 PM] Failed to generate single stream for C1/R3: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough
-[ERROR] [4:12:25 PM] Failed to generate single stream for C1/R4: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough
-[INFO] [4:12:25 PM] All streams for cycle 1 are complete.
-[INFO] [4:12:25 PM] Updated cycle 1 with 4 responses and their metrics.
-[INFO] [4:12:27 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-
-</dce output>
-</Ephemeral Context>
 <Previous Cycle 105 Summary of Actions>
 I have analyzed the root cause of the "Stop" button's behavior. You are correct; it is aborting the entire batch of responses instead of the single, intended response. This is because the current implementation uses a single `AbortController` for the entire batch request. When "Stop" is clicked for any response, it aborts the one connection, terminating all in-progress streams.
 
@@ -5350,10 +5327,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T21:15:41.047Z
+  Date Generated: 2025-10-05T21:29:13.672Z
   ---
   Total Files: 179
-  Approx. Tokens: 246113
+  Approx. Tokens: 246615
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5475,7 +5452,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 250 - Chars: 12389 - Tokens: 3098
+107. src\backend\services\llm.service.ts - Lines: 261 - Chars: 12989 - Tokens: 3248
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -5547,7 +5524,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 103 - Chars: 12099 - Tokens: 3025
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 115 - Chars: 13508 - Tokens: 3377
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -13979,7 +13956,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C104 (Refactor to fan-out individual requests for granular stop)
+// Updated on: C106 (Remove incorrect Readable.fromWeb conversion)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -14066,7 +14043,9 @@ export class LlmService {
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
-                const stream = Readable.fromWeb(response.body as any);
+                // C106 FIX: response.body from node-fetch is already a Node.js stream.
+                // Do not use Readable.fromWeb().
+                const stream = response.body;
                 let buffer = '';
 
                 stream.on('data', (chunk) => {
@@ -14186,7 +14165,16 @@ export class LlmService {
                 cycleData.cycleId,
                 responseId,
                 serverIpc
-            );
+            ).catch(error => {
+                Services.loggerService.error(`Error in stream for C${cycleData.cycleId}/R${responseId}: ${error.message}`);
+                // Return an error response object to avoid Promise.all from rejecting early
+                return {
+                    content: `Error generating response: ${error.message}`,
+                    status: 'error' as 'error',
+                    startTime: Date.now(),
+                    endTime: Date.now()
+                };
+            });
         });
 
         const richResponses = await Promise.all(promises);
@@ -22816,13 +22804,25 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C105 (Add Response Progress UI initialization failure)
+# Updated on: C106 (Add ReadableStream TypeError)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 008: TypeError: The "readableStream" argument must be an instance of ReadableStream
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C106
+-   **Symptom:** When generating responses, the backend crashes with the error `TypeError: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough`. No response data is processed by the extension.
+-   **Root Cause Analysis (RCA):** The `_generateSingleStream` function in `llm.service.ts` was incorrectly trying to convert the response body stream from a `node-fetch` call into a Node.js stream using `Readable.fromWeb()`. This function is designed to convert a Web API `ReadableStream` into a Node.js `Readable`. However, the `response.body` from the `node-fetch` library is *already* a Node.js `Readable` stream (in this case, a `PassThrough` stream). Passing a Node.js stream as an argument to `Readable.fromWeb()` results in a `TypeError`.
+-   **Codified Solution & Best Practice:**
+    1.  Verify the stream types being returned by libraries. `node-fetch` provides a Node.js-compatible stream, not a Web Stream, in a Node.js environment.
+    2.  The `Readable.fromWeb()` conversion was unnecessary. The `response.body` object from the `fetch` call should be used directly, as it is already the correct type for attaching Node.js stream event handlers (`.on('data', ...)`).
 
 ---
 
@@ -22886,7 +22886,7 @@ This document serves as a living record of persistent or complex bugs. By docume
 -   **Codified Solution & Best Practice:**
     1.  The lifecycle of a resource tied to a stream (like an `AbortController`) must be managed by the stream's own events, not by a `try/finally` block around the initial `fetch` call.
     2.  The `generationControllers.delete(cycleId)` call must be removed from the `finally` block.
-    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)`, as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
+    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)` as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
 
 ---
 

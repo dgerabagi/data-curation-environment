@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T21:15:41.047Z
+  Date Generated: 2025-10-05T21:29:13.672Z
   ---
   Total Files: 179
-  Approx. Tokens: 246113
+  Approx. Tokens: 246615
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 250 - Chars: 12389 - Tokens: 3098
+107. src\backend\services\llm.service.ts - Lines: 261 - Chars: 12989 - Tokens: 3248
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -198,7 +198,7 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 103 - Chars: 12099 - Tokens: 3025
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 115 - Chars: 13508 - Tokens: 3377
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,7 +8630,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C104 (Refactor to fan-out individual requests for granular stop)
+// Updated on: C106 (Remove incorrect Readable.fromWeb conversion)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8717,7 +8717,9 @@ export class LlmService {
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
-                const stream = Readable.fromWeb(response.body as any);
+                // C106 FIX: response.body from node-fetch is already a Node.js stream.
+                // Do not use Readable.fromWeb().
+                const stream = response.body;
                 let buffer = '';
 
                 stream.on('data', (chunk) => {
@@ -8837,7 +8839,16 @@ export class LlmService {
                 cycleData.cycleId,
                 responseId,
                 serverIpc
-            );
+            ).catch(error => {
+                Services.loggerService.error(`Error in stream for C${cycleData.cycleId}/R${responseId}: ${error.message}`);
+                // Return an error response object to avoid Promise.all from rejecting early
+                return {
+                    content: `Error generating response: ${error.message}`,
+                    status: 'error' as 'error',
+                    startTime: Date.now(),
+                    endTime: Date.now()
+                };
+            });
         });
 
         const richResponses = await Promise.all(promises);
@@ -17467,13 +17478,25 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C105 (Add Response Progress UI initialization failure)
+# Updated on: C106 (Add ReadableStream TypeError)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 008: TypeError: The "readableStream" argument must be an instance of ReadableStream
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C106
+-   **Symptom:** When generating responses, the backend crashes with the error `TypeError: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough`. No response data is processed by the extension.
+-   **Root Cause Analysis (RCA):** The `_generateSingleStream` function in `llm.service.ts` was incorrectly trying to convert the response body stream from a `node-fetch` call into a Node.js stream using `Readable.fromWeb()`. This function is designed to convert a Web API `ReadableStream` into a Node.js `Readable`. However, the `response.body` from the `node-fetch` library is *already* a Node.js `Readable` stream (in this case, a `PassThrough` stream). Passing a Node.js stream as an argument to `Readable.fromWeb()` results in a `TypeError`.
+-   **Codified Solution & Best Practice:**
+    1.  Verify the stream types being returned by libraries. `node-fetch` provides a Node.js-compatible stream, not a Web Stream, in a Node.js environment.
+    2.  The `Readable.fromWeb()` conversion was unnecessary. The `response.body` object from the `fetch` call should be used directly, as it is already the correct type for attaching Node.js stream event handlers (`.on('data', ...)`).
 
 ---
 
@@ -17537,7 +17560,7 @@ This document serves as a living record of persistent or complex bugs. By docume
 -   **Codified Solution & Best Practice:**
     1.  The lifecycle of a resource tied to a stream (like an `AbortController`) must be managed by the stream's own events, not by a `try/finally` block around the initial `fetch` call.
     2.  The `generationControllers.delete(cycleId)` call must be removed from the `finally` block.
-    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)`, as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
+    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)` as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
 
 ---
 

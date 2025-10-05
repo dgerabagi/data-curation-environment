@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C104 (Refactor to fan-out individual requests for granular stop)
+// Updated on: C106 (Remove incorrect Readable.fromWeb conversion)
 import { Services } from './services';
 import fetch, { AbortError } from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -86,7 +86,9 @@ export class LlmService {
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
-                const stream = Readable.fromWeb(response.body as any);
+                // C106 FIX: response.body from node-fetch is already a Node.js stream.
+                // Do not use Readable.fromWeb().
+                const stream = response.body;
                 let buffer = '';
 
                 stream.on('data', (chunk) => {
@@ -206,7 +208,16 @@ export class LlmService {
                 cycleData.cycleId,
                 responseId,
                 serverIpc
-            );
+            ).catch(error => {
+                Services.loggerService.error(`Error in stream for C${cycleData.cycleId}/R${responseId}: ${error.message}`);
+                // Return an error response object to avoid Promise.all from rejecting early
+                return {
+                    content: `Error generating response: ${error.message}`,
+                    status: 'error' as 'error',
+                    startTime: Date.now(),
+                    endTime: Date.now()
+                };
+            });
         });
 
         const richResponses = await Promise.all(promises);
