@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T21:39:57.297Z
+  Date Generated: 2025-10-05T21:55:07.808Z
   ---
   Total Files: 179
-  Approx. Tokens: 247133
+  Approx. Tokens: 247564
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,10 +14,10 @@
 4. src\backend\services\file-operation.service.ts (4526 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
-10. src\backend\services\history.service.ts (3904 tokens)
+7. src\Artifacts\A111. DCE - New Regression Case Studies.md (4251 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 259 - Chars: 12957 - Tokens: 3240
+107. src\backend\services\llm.service.ts - Lines: 259 - Chars: 12970 - Tokens: 3243
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -198,7 +198,7 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 129 - Chars: 15292 - Tokens: 3823
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 145 - Chars: 17004 - Tokens: 4251
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,16 +8630,15 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C107 (Include partial content in progress updates)
+// Updated on: C108 (Implement robust SSE parser)
 import { Services } from './services';
-import fetch, { AbortError } from 'node-fetch';
+import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { Readable } from 'stream';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
@@ -8695,7 +8694,7 @@ export class LlmService {
         const finalResponse = await this._generateSingleStream(endpointUrl, { ...requestBodyBase, n: 1 }, controller, cycleId, responseId, serverIpc);
         
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, finalResponse);
-        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: finalResponse.content });
+        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId), content: finalResponse.content });
         Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
     }
 
@@ -8723,7 +8722,7 @@ export class LlmService {
                 stream.on('data', (chunk) => {
                     buffer += chunk.toString();
                     const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
+                    buffer = lines.pop() || ''; // Keep the last, possibly incomplete line
 
                     for (const line of lines) {
                         if (line.startsWith('data: ')) {
@@ -8736,16 +8735,17 @@ export class LlmService {
                                     richResponse.endTime = Date.now();
                                     progress.status = 'complete';
                                 } else if (data.choices?.[0]?.delta) {
-                                    if (data.choices.delta.reasoning_content) {
+                                    const delta = data.choices.delta;
+                                    if (delta.reasoning_content) {
                                         if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                        const contentChunk = data.choices.delta.reasoning_content;
+                                        const contentChunk = delta.reasoning_content;
                                         const chunkTokens = Math.ceil(contentChunk.length / 4);
                                         richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                         progress.thinkingTokens += chunkTokens;
                                     }
-                                    if (data.choices[0].delta.content) {
+                                    if (delta.content) {
                                         if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                        const contentChunk = data.choices.delta.content;
+                                        const contentChunk = delta.content;
                                         responseContent += contentChunk;
                                         const chunkTokens = Math.ceil(contentChunk.length / 4);
                                         richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
@@ -8766,7 +8766,7 @@ export class LlmService {
                     resolve(richResponse);
                 });
 
-                stream.on('error', (err) => {
+                stream.on('error', (err: any) => {
                     if (err.name === 'AbortError') {
                         Services.loggerService.log(`[LLM Stream] Stream for C${cycleId}/R${responseId} was aborted.`);
                         generationControllers.delete(controllerKey);
@@ -17486,13 +17486,29 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C107 (Add Token Streaming UI Failure)
+# Updated on: C108 (Add SSE Parsing Failure)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 010: Could not parse SSE chunk
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C108
+-   **Symptom:** When generating responses, the DCE output channel is flooded with warnings: `[WARN] Could not parse SSE chunk: {"id":...}`. No token counts or partial content appear in the UI, and the generation appears to hang from the user's perspective.
+-   **Root Cause Analysis (RCA):** After fixing a stream type mismatch in a previous cycle, the stream consumer in `llm.service.ts` was still not correctly parsing the Server-Sent Events (SSE) protocol used by the OpenAI-compatible vLLM endpoint. The `stream.on('data')` handler was receiving raw data chunks but was not processing them according to the SSE format. A single chunk can contain multiple messages, and each message is prefixed with `data: `. The code was likely attempting to `JSON.parse()` the raw chunk, including the prefix, which is invalid JSON and causes the parsing to fail.
+-   **Codified Solution & Best Practice:**
+    1.  When consuming an SSE stream in Node.js, the `data` event handler must act as a proper SSE client parser.
+    2.  The handler must maintain a buffer of incoming data.
+    3.  On each `data` event, append the new chunk to the buffer.
+    4.  Split the buffer by newline characters (`\n`) to process complete lines. The last, potentially incomplete, line should be kept in the buffer for the next chunk.
+    5.  For each complete line, check if it starts with the `data: ` prefix. If so, slice the string to remove the prefix, trim it, and then parse the result as JSON.
+    6.  Handle special SSE messages, such as `data: [DONE]`, to correctly terminate the stream.
 
 ---
 

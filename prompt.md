@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 108 - Could not parse SSE chunk
+Current Cycle 109 - super close!
+Cycle 108 - Could not parse SSE chunk
 Cycle 107 - extremely close
 Cycle 106 - `readableStream` error
 Cycle 105 - identified root cause, implementing single stream parallel batching
@@ -883,20 +884,52 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 109>
+<Cycle Context>
+okay, more progress!! i still get that could not parse see json payload error, however once the thinking process stops and the response begins, i am able to parse those tokens.
+</Cycle Context>
+<Ephemeral Context>
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":"Now"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [4:53:51 PM] Could not parse SSE chunk: {"id":"chatcmpl-12da3ef8537d4885bac40fdf517f33a4","object":"chat.completion.chunk","created":1759701167,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[INFO] [4:54:22 PM] Updated response content and metrics for tab 3 in cycle 1.
+[INFO] [4:54:22 PM] [LLM Service] Single regeneration for C1/T3 complete.
+</Ephemeral Context>
+<Previous Cycle 108 Summary of Actions>
+I have analyzed the feedback from Cycle 107. The core issue is a regression in the client-side stream processing logic. While the stop and re-generation features are working correctly, the UI is failing to display the real-time streaming of tokens and content for new or regenerated responses. This is because the IPC message handler is not correctly updating the state that holds the response content, which is the source for both the token counters and the live text preview.
+
+My course of action is to fix this data flow by ensuring the partial content from the streaming responses is correctly transmitted from the backend to the frontend and then used to update the appropriate UI state.
+
+1.  **Codify the Bug:** I will add a new case study to `A111. DCE - New Regression Case Studies.md` titled "Token Counts and Content Do Not Stream in UI."
+    *   **Root Cause Analysis (RCA):** The refactor to a "fan-out" request architecture in Cycle 105 introduced a new IPC channel, `UpdateSingleGenerationProgress`. The payload for this message correctly sent metric updates but failed to include the accumulating text content of the response. As a result, the frontend could update the progress bar's status but had no data to render the partial text preview or calculate the live token counts, which are derived from the content's length.
+    *   **Codified Solution:** The IPC payload for `UpdateSingleGenerationProgress` must be enhanced to include the partial `content` string. The backend stream handler must accumulate this content. The frontend IPC listener must be updated to use this payload to update both the `generationProgress` state (for metrics) and the `tabs` state (for content) simultaneously.
+
+2.  **Update IPC Payload (`channels.type.ts`):**
+    *   I will modify the `UpdateSingleGenerationProgress` payload to include the partial content: `{ progress: GenerationProgress; content: string; }`.
+
+3.  **Update Backend Stream Handler (`llm.service.ts`):**
+    *   In the `_generateSingleStream` method, I will ensure the `responseContent` variable correctly accumulates the text from each `content` delta.
+    *   Crucially, when sending the `UpdateSingleGenerationProgress` message, I will now include this accumulated `responseContent` in the payload.
+
+4.  **Update Frontend IPC Hook (`usePcppIpc.ts`):**
+    *   The hook's signature will be updated to accept the `setTabs` function from the `useTabManagement` hook.
+    *   The message handler for `UpdateSingleGenerationProgress` will be rewritten. It will now receive `{ progress, content }`.
+    *   It will call `generationManagement.setGenerationProgress(...)` as before to update the metrics.
+    *   It will **also** call `setTabs(...)` to update the `content` and `status` of the specific response tab being streamed. This is the key fix that will restore the live text preview and token counting.
+
+5.  **Update Container (`view.tsx`):**
+    *   I will update the props passed to the `usePcppIpc` hook to include the `setTabs` function from the `useTabManagement` hook, wiring everything together.
+</Previous Cycle 108 Summary of Actions>
+</Cycle 109>
+
 <Cycle 108>
 <Cycle Context>
 okay i saw in the dce output logs something about could not parse SSE chunk, i think thats the root cause.
 </Cycle Context>
-<Ephemeral Context>
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-3ca64d21f79f4d39b90a5597aa5e080c","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":"Tags"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-e792af41e8144beaad80180d52753ef5","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"content":"|"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-67e6eb34e3a34af4aab303b992838eb0","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":"-"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-3ca64d21f79f4d39b90a5597aa5e080c","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":":**"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-e792af41e8144beaad80180d52753ef5","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-12c295f3b7eb413d9c18d281489a5da4","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-67e6eb34e3a34af4aab303b992838eb0","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":" Service"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-[WARN] [4:38:29 PM] Could not parse SSE chunk: {"id":"chatcmpl-3ca64d21f79f4d39b90a5597aa5e080c","object":"chat.completion.chunk","created":1759700280,"model":"unsloth/gpt-oss-20b","choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
-</Ephemeral Context>
 <Previous Cycle 107 Summary of Actions>
 I have analyzed the error logs from Cycle 106. The error `The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough` is the definitive clue. This indicates a type mismatch in our stream handling logic within the backend's `llm.service.ts`.
 
@@ -5354,10 +5387,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T21:39:57.297Z
+  Date Generated: 2025-10-05T21:55:07.808Z
   ---
   Total Files: 179
-  Approx. Tokens: 247133
+  Approx. Tokens: 247564
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5367,10 +5400,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 4. src\backend\services\file-operation.service.ts (4526 tokens)
 5. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 6. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-7. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
-8. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
-10. src\backend\services\history.service.ts (3904 tokens)
+7. src\Artifacts\A111. DCE - New Regression Case Studies.md (4251 tokens)
+8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
+9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -5479,7 +5512,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 259 - Chars: 12957 - Tokens: 3240
+107. src\backend\services\llm.service.ts - Lines: 259 - Chars: 12970 - Tokens: 3243
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -5551,7 +5584,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 129 - Chars: 15292 - Tokens: 3823
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 145 - Chars: 17004 - Tokens: 4251
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -13983,16 +14016,15 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C107 (Include partial content in progress updates)
+// Updated on: C108 (Implement robust SSE parser)
 import { Services } from './services';
-import fetch, { AbortError } from 'node-fetch';
+import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { Readable } from 'stream';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
@@ -14048,7 +14080,7 @@ export class LlmService {
         const finalResponse = await this._generateSingleStream(endpointUrl, { ...requestBodyBase, n: 1 }, controller, cycleId, responseId, serverIpc);
         
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, finalResponse);
-        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: finalResponse.content });
+        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId), content: finalResponse.content });
         Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
     }
 
@@ -14076,7 +14108,7 @@ export class LlmService {
                 stream.on('data', (chunk) => {
                     buffer += chunk.toString();
                     const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
+                    buffer = lines.pop() || ''; // Keep the last, possibly incomplete line
 
                     for (const line of lines) {
                         if (line.startsWith('data: ')) {
@@ -14089,16 +14121,17 @@ export class LlmService {
                                     richResponse.endTime = Date.now();
                                     progress.status = 'complete';
                                 } else if (data.choices?.[0]?.delta) {
-                                    if (data.choices.delta.reasoning_content) {
+                                    const delta = data.choices.delta;
+                                    if (delta.reasoning_content) {
                                         if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                        const contentChunk = data.choices.delta.reasoning_content;
+                                        const contentChunk = delta.reasoning_content;
                                         const chunkTokens = Math.ceil(contentChunk.length / 4);
                                         richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                         progress.thinkingTokens += chunkTokens;
                                     }
-                                    if (data.choices[0].delta.content) {
+                                    if (delta.content) {
                                         if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                        const contentChunk = data.choices.delta.content;
+                                        const contentChunk = delta.content;
                                         responseContent += contentChunk;
                                         const chunkTokens = Math.ceil(contentChunk.length / 4);
                                         richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
@@ -14119,7 +14152,7 @@ export class LlmService {
                     resolve(richResponse);
                 });
 
-                stream.on('error', (err) => {
+                stream.on('error', (err: any) => {
                     if (err.name === 'AbortError') {
                         Services.loggerService.log(`[LLM Stream] Stream for C${cycleId}/R${responseId} was aborted.`);
                         generationControllers.delete(controllerKey);
@@ -22839,13 +22872,29 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C107 (Add Token Streaming UI Failure)
+# Updated on: C108 (Add SSE Parsing Failure)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 010: Could not parse SSE chunk
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C108
+-   **Symptom:** When generating responses, the DCE output channel is flooded with warnings: `[WARN] Could not parse SSE chunk: {"id":...}`. No token counts or partial content appear in the UI, and the generation appears to hang from the user's perspective.
+-   **Root Cause Analysis (RCA):** After fixing a stream type mismatch in a previous cycle, the stream consumer in `llm.service.ts` was still not correctly parsing the Server-Sent Events (SSE) protocol used by the OpenAI-compatible vLLM endpoint. The `stream.on('data')` handler was receiving raw data chunks but was not processing them according to the SSE format. A single chunk can contain multiple messages, and each message is prefixed with `data: `. The code was likely attempting to `JSON.parse()` the raw chunk, including the prefix, which is invalid JSON and causes the parsing to fail.
+-   **Codified Solution & Best Practice:**
+    1.  When consuming an SSE stream in Node.js, the `data` event handler must act as a proper SSE client parser.
+    2.  The handler must maintain a buffer of incoming data.
+    3.  On each `data` event, append the new chunk to the buffer.
+    4.  Split the buffer by newline characters (`\n`) to process complete lines. The last, potentially incomplete, line should be kept in the buffer for the next chunk.
+    5.  For each complete line, check if it starts with the `data: ` prefix. If so, slice the string to remove the prefix, trim it, and then parse the result as JSON.
+    6.  Handle special SSE messages, such as `data: [DONE]`, to correctly terminate the stream.
 
 ---
 

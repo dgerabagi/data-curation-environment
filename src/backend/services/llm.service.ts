@@ -1,14 +1,13 @@
 // src/backend/services/llm.service.ts
-// Updated on: C107 (Include partial content in progress updates)
+// Updated on: C108 (Implement robust SSE parser)
 import { Services } from './services';
-import fetch, { AbortError } from 'node-fetch';
+import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
-import { Readable } from 'stream';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
@@ -64,7 +63,7 @@ export class LlmService {
         const finalResponse = await this._generateSingleStream(endpointUrl, { ...requestBodyBase, n: 1 }, controller, cycleId, responseId, serverIpc);
         
         await Services.historyService.updateSingleResponseInCycle(cycleId, tabId, finalResponse);
-        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId, content: finalResponse.content });
+        serverIpc.sendToClient(ServerToClientChannel.NotifySingleResponseComplete, { responseId: parseInt(tabId), content: finalResponse.content });
         Services.loggerService.log(`[LLM Service] Single regeneration for C${cycleId}/T${tabId} complete.`);
     }
 
@@ -92,7 +91,7 @@ export class LlmService {
                 stream.on('data', (chunk) => {
                     buffer += chunk.toString();
                     const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
+                    buffer = lines.pop() || ''; // Keep the last, possibly incomplete line
 
                     for (const line of lines) {
                         if (line.startsWith('data: ')) {
@@ -105,16 +104,17 @@ export class LlmService {
                                     richResponse.endTime = Date.now();
                                     progress.status = 'complete';
                                 } else if (data.choices?.[0]?.delta) {
-                                    if (data.choices.delta.reasoning_content) {
+                                    const delta = data.choices.delta;
+                                    if (delta.reasoning_content) {
                                         if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                        const contentChunk = data.choices.delta.reasoning_content;
+                                        const contentChunk = delta.reasoning_content;
                                         const chunkTokens = Math.ceil(contentChunk.length / 4);
                                         richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
                                         progress.thinkingTokens += chunkTokens;
                                     }
-                                    if (data.choices[0].delta.content) {
+                                    if (delta.content) {
                                         if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                        const contentChunk = data.choices.delta.content;
+                                        const contentChunk = delta.content;
                                         responseContent += contentChunk;
                                         const chunkTokens = Math.ceil(contentChunk.length / 4);
                                         richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
@@ -135,7 +135,7 @@ export class LlmService {
                     resolve(richResponse);
                 });
 
-                stream.on('error', (err) => {
+                stream.on('error', (err: any) => {
                     if (err.name === 'AbortError') {
                         Services.loggerService.log(`[LLM Stream] Stream for C${cycleId}/R${responseId} was aborted.`);
                         generationControllers.delete(controllerKey);
