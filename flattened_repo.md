@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T23:27:31.346Z
+  Date Generated: 2025-10-06T00:22:37.166Z
   ---
   Total Files: 179
-  Approx. Tokens: 248841
+  Approx. Tokens: 250607
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-3. src\backend\services\prompt.service.ts (5143 tokens)
-4. src\Artifacts\A111. DCE - New Regression Case Studies.md (5002 tokens)
+3. src\Artifacts\A111. DCE - New Regression Case Studies.md (6270 tokens)
+4. src\backend\services\prompt.service.ts (5143 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4181 tokens)
+10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 16012 - Tokens: 4003
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 289 - Chars: 16724 - Tokens: 4181
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -192,13 +192,13 @@
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
-173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 3927 - Tokens: 982
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 192 - Chars: 8845 - Tokens: 2212
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
+173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 4013 - Tokens: 1004
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 169 - Chars: 20006 - Tokens: 5002
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 209 - Chars: 25079 - Tokens: 6270
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -13995,7 +13995,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C107 (Pass setTabs to usePcppIpc hook)
+// Updated on: C111 (Add useMemo for viewableContent)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14096,6 +14096,17 @@ const App = () => {
             };
         }
     }, [cycleManagement.saveStatus]);
+
+    // --- C111 FIX: Derived State for Viewable Content ---
+    const viewableContent = React.useMemo(() => {
+        if (!fileManagement.selectedFilePath) return null;
+        const activeTabData = tabManagement.tabs[tabManagement.activeTab.toString()];
+        const file = activeTabData?.parsedContent?.files.find(f => f.path === fileManagement.selectedFilePath);
+        if (!file) return '// File content not found in parsed response.';
+        const id = `${file.path}::${file.content}`;
+        return fileManagement.highlightedCodeBlocks.get(id) || file.content;
+    }, [fileManagement.selectedFilePath, tabManagement.tabs, tabManagement.activeTab, fileManagement.highlightedCodeBlocks]);
+
 
     // --- Component Logic & Rendering ---
     React.useEffect(() => {
@@ -14254,7 +14265,7 @@ const App = () => {
                             onLinkFile={fileManagement.handleLinkFile}
                             onUnlinkFile={fileManagement.handleUnlinkFile}
                             comparisonMetrics={fileManagement.comparisonMetrics}
-                            viewableContent={""}
+                            viewableContent={viewableContent}
                             onCopyContent={fileManagement.handleCopyContent}
                             leftPaneWidth={0} // Placeholder
                             workflowStep={workflowStep}
@@ -16972,7 +16983,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C107 (Update tab content from progress messages)
+// Updated on: C111 (Fix TPS calculation)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -17120,6 +17131,29 @@ export const usePcppIpc = (
                     newProgress.push(progress);
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
+
+                // --- C111 FIX: Recalculate aggregate TPS ---
+                let totalTokens = 0;
+                let earliestStartTime = Infinity;
+                
+                newProgress.forEach(p => {
+                    if (p.status !== 'complete' && p.status !== 'error' && p.status !== 'stopped') {
+                        if (p.startTime < earliestStartTime) {
+                            earliestStartTime = p.startTime;
+                        }
+                    }
+                    totalTokens += p.thinkingTokens + p.currentTokens;
+                });
+
+                if (earliestStartTime !== Infinity) {
+                    const elapsedSeconds = (Date.now() - earliestStartTime) / 1000;
+                    if (elapsedSeconds > 0) {
+                        const currentTps = Math.round(totalTokens / elapsedSeconds);
+                        generationManagement.setTps(currentTps);
+                    }
+                }
+                // --- END C111 FIX ---
+
                 return newProgress;
             });
 
@@ -17167,7 +17201,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C102 (Remove useEffect and create resetAndLoadTabs)
+// Updated on: C111 (Fix Parse All logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -17291,7 +17325,11 @@ export const useTabManagement = (
     const handleGlobalParseToggle = React.useCallback(() => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        if (!newParseMode) {
+        if (newParseMode) {
+            // C111 FIX: Trigger parsing when switching TO parsed mode
+            parseAllTabs();
+        } else {
+            // Un-parse: clear parsed content
             setTabs(prev => {
                 const newTabs = { ...prev };
                 Object.keys(newTabs).forEach(key => {
@@ -17301,7 +17339,7 @@ export const useTabManagement = (
             });
         }
         setSaveStatus('unsaved');
-    }, [isParsedMode, setSaveStatus]);
+    }, [isParsedMode, setSaveStatus, parseAllTabs]);
 
     const handleSortToggle = React.useCallback(() => {
         setIsSortedByTokens(p => !p);
@@ -17338,7 +17376,7 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
-        resetAndLoadTabs, // Export the new function
+        resetAndLoadTabs,
     };
 };
 </file_artifact>
@@ -17519,13 +17557,53 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C110 (Add JSON Brace Counting case)
+# Updated on: C111 (Add C111 bugs)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 015: "Parse All" Button Shows Raw Text View
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/useTabManagement.ts`
+-   **Cycles Observed:** C111
+-   **Symptom:** After pasting responses, clicking the "Parse All" button correctly updates the UI to show that it is in parsed mode (e.g., the button text changes to "Un-Parse All"), but the content area for the response tab continues to show the raw text `textarea` instead of the structured, parsed view.
+-   **Root Cause Analysis (RCA):** A logic error occurred in the `useTabManagement` hook. The `handleGlobalParseToggle` function, which is triggered by the "Parse All" button, was responsible for setting the `isParsedMode` state to `true`. However, it failed to also call the `parseAllTabs()` function. The UI then attempted to re-render in parsed mode, but the `parsedContent` property on the tab's state object was still `null`. The conditional rendering logic in the `ResponsePane` component correctly saw that `parsedContent` was null and fell back to displaying the raw `textarea`.
+-   **Codified Solution & Best Practice:**
+    1.  UI actions that change the "mode" of a view must also ensure the data required for that mode is generated.
+    2.  The `handleGlobalParseToggle` function must be modified. When the state is transitioning *to* parsed mode (`isParsedMode = true`), it must immediately call the `parseAllTabs()` function to populate the `parsedContent` state for all tabs. This ensures the necessary data is available before the UI re-renders in the new mode.
+
+---
+
+### Case Study 014: Parsed View Does Not Display Selected File Content
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C111
+-   **Symptom:** After parsing an AI response, the "Associated Files" list is displayed correctly. However, clicking on a file in this list does not cause the file's content to be displayed in the code viewer pane on the right. The pane remains empty or shows its default "Select a file" message.
+-   **Root Cause Analysis (RCA):** This was a state propagation issue introduced during the major refactor into custom hooks. The main container component (`view.tsx`) is responsible for orchestrating the flow of data between hooks and down to presentational components. The logic for deriving the `viewableContent` prop (which is passed to the code viewer) from the `selectedFilePath` state (managed in `useFileManagement.ts`) was lost. The container was no longer re-calculating which content to display when the selected file changed.
+-   **Codified Solution & Best Practice:**
+    1.  Container components are responsible for deriving props from state managed by different hooks.
+    2.  A `useMemo` hook must be re-implemented in the `view.tsx` container component. This hook's responsibility is to calculate the `viewableContent` string.
+    3.  Its dependency array must include all relevant state values: `fileManagement.selectedFilePath`, `tabManagement.tabs`, `tabManagement.activeTab`, and `fileManagement.highlightedCodeBlocks`.
+    4.  When `selectedFilePath` changes, the `useMemo` hook will re-run, look up the correct content from the appropriate tab's `parsedContent` or the `highlightedCodeBlocks` cache, and update the `viewableContent` variable. This variable is then passed down through props, ensuring the UI updates correctly.
+
+---
+
+### Case Study 013: Tokens/Sec Calculation Fails with Parallel Streams
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
+-   **Cycles Observed:** C111
+-   **Symptom:** During response generation in the progress UI, the "Tokens/sec" metric remains at 0 or `NaN` and does not update, even though tokens are clearly streaming in for multiple responses.
+-   **Root Cause Analysis (RCA):** The refactor to a "fan-out" architecture, where `N` parallel streams are processed, broke the simple tokens-per-second calculation. The `UpdateSingleGenerationProgress` IPC handler was receiving progress for one stream at a time and updating its state array, but it lacked the logic to then re-aggregate the data from *all* active streams to calculate a global TPS metric. It was no longer sufficient to look at a single stream's progress.
+-   **Codified Solution & Best Practice:**
+    1.  When calculating aggregate metrics from multiple asynchronous data sources, the update handler for any individual source must trigger a re-calculation of the aggregate.
+    2.  The IPC message handler for `UpdateSingleGenerationProgress` must be enhanced. Inside its `setGenerationProgress` callback, after updating the array with the new progress for a single response, it must perform an aggregation step.
+    3.  This step involves iterating over the entire updated progress array to: a) find the earliest `startTime` among all responses that are not yet complete, and b) calculate the sum of `thinkingTokens + currentTokens` across all responses.
+    4.  The global TPS can then be calculated (`totalTokens / elapsedTime`) and the `tps` state updated.
 
 ---
 

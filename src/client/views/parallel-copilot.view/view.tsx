@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C107 (Pass setTabs to usePcppIpc hook)
+// Updated on: C111 (Add useMemo for viewableContent)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -100,6 +100,17 @@ const App = () => {
             };
         }
     }, [cycleManagement.saveStatus]);
+
+    // --- C111 FIX: Derived State for Viewable Content ---
+    const viewableContent = React.useMemo(() => {
+        if (!fileManagement.selectedFilePath) return null;
+        const activeTabData = tabManagement.tabs[tabManagement.activeTab.toString()];
+        const file = activeTabData?.parsedContent?.files.find(f => f.path === fileManagement.selectedFilePath);
+        if (!file) return '// File content not found in parsed response.';
+        const id = `${file.path}::${file.content}`;
+        return fileManagement.highlightedCodeBlocks.get(id) || file.content;
+    }, [fileManagement.selectedFilePath, tabManagement.tabs, tabManagement.activeTab, fileManagement.highlightedCodeBlocks]);
+
 
     // --- Component Logic & Rendering ---
     React.useEffect(() => {
@@ -258,7 +269,7 @@ const App = () => {
                             onLinkFile={fileManagement.handleLinkFile}
                             onUnlinkFile={fileManagement.handleUnlinkFile}
                             comparisonMetrics={fileManagement.comparisonMetrics}
-                            viewableContent={""}
+                            viewableContent={viewableContent}
                             onCopyContent={fileManagement.handleCopyContent}
                             leftPaneWidth={0} // Placeholder
                             workflowStep={workflowStep}

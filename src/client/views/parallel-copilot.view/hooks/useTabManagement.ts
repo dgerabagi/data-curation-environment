@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C102 (Remove useEffect and create resetAndLoadTabs)
+// Updated on: C111 (Fix Parse All logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -123,7 +123,11 @@ export const useTabManagement = (
     const handleGlobalParseToggle = React.useCallback(() => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        if (!newParseMode) {
+        if (newParseMode) {
+            // C111 FIX: Trigger parsing when switching TO parsed mode
+            parseAllTabs();
+        } else {
+            // Un-parse: clear parsed content
             setTabs(prev => {
                 const newTabs = { ...prev };
                 Object.keys(newTabs).forEach(key => {
@@ -133,7 +137,7 @@ export const useTabManagement = (
             });
         }
         setSaveStatus('unsaved');
-    }, [isParsedMode, setSaveStatus]);
+    }, [isParsedMode, setSaveStatus, parseAllTabs]);
 
     const handleSortToggle = React.useCallback(() => {
         setIsSortedByTokens(p => !p);
@@ -170,6 +174,6 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
-        resetAndLoadTabs, // Export the new function
+        resetAndLoadTabs,
     };
 };

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C107 (Update tab content from progress messages)
+// Updated on: C111 (Fix TPS calculation)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -147,6 +147,29 @@ export const usePcppIpc = (
                     newProgress.push(progress);
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
+
+                // --- C111 FIX: Recalculate aggregate TPS ---
+                let totalTokens = 0;
+                let earliestStartTime = Infinity;
+                
+                newProgress.forEach(p => {
+                    if (p.status !== 'complete' && p.status !== 'error' && p.status !== 'stopped') {
+                        if (p.startTime < earliestStartTime) {
+                            earliestStartTime = p.startTime;
+                        }
+                    }
+                    totalTokens += p.thinkingTokens + p.currentTokens;
+                });
+
+                if (earliestStartTime !== Infinity) {
+                    const elapsedSeconds = (Date.now() - earliestStartTime) / 1000;
+                    if (elapsedSeconds > 0) {
+                        const currentTps = Math.round(totalTokens / elapsedSeconds);
+                        generationManagement.setTps(currentTps);
+                    }
+                }
+                // --- END C111 FIX ---
+
                 return newProgress;
             });
 

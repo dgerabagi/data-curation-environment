@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 111 - continue fixing parsing and also tokens/sec calc
+Current Cycle 112 - finalize parsing
+Cycle 111 - continue fixing parsing and also tokens/sec calc
 Cycle 110 - json parsing
 Cycle 109 - super close!
 Cycle 108 - Could not parse SSE chunk
@@ -886,6 +887,91 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 112>
+<Cycle Context>
+nice! okay progress on both accounts. the tokens/sec now shows, and also the files are disaplyed in the response viewer.
+
+it seems we still need one more look at the parsing alignment. we are definitely not parsing correctly. we will take the shortest response and analyze it in the ephemeral context below to ascertain how we need to adjust the parsing. it was 804 tokens, the response, and it came with three files. ill provide you a copy/paste from the response viewer of all three files so you can see how our parser took it, and then also ill paste the un-parsed response so you can see what the raw response looks like. from that, you should be able to adjust our parsing such that we arent butchering the end result.
+</Cycle Context>
+<Ephemeral Context>
+<Tower Defense Game - Master Artifact List.md>
+# Master Artifact List
+# Project: Tower Defense Game
+
+## I. Project Planning & Design
+
+### A1. Tower Defense Game - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plann- **Tags:** project vision, goals, scope, planning
+
+### A2. Tower Defense Game - GitHub Repository Setup Guide
+- **Description:** Guide to set up the Git repo and link to GitHubn- **Tags:** git, github, source control
+
+### A3. Tower Defense Game - Development and Testing Guide
+- **Description:** Standard procedure for running, debugging, and testing the Tower Defense Game locallyn- **Tags:** development workflow, testing, debugging</Tower Defense Game - Master Artifact List.md>
+<Tower Defense Game - Project Vision and Goals.md>
+# Tower Defense Game - Project Vision and Goals
+
+## 1. Project Vision
+
+The vision of **Tower Defense Game** is to provide an engaging, strategy-based arcade experience that allows players to design, upgrade, and defend their base against waves of enemies on a map grid. It aims to provide a compelling mix of real-time action and tactical decision-making that delivers value for both casual and hardcore gamersn
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflown
+### Phase 1: Core Gameplay Mechanics
+
+Goal: Establish foundational gameplay including map grid, enemy waves, and basic tower placement/removaln- Core Functionality: Map grid with selectable tiles, tower placement, and simple enemy typesn- Outcome: Players can place towers and watch automated enemies spawn and navigate toward the basen
+### Phase 2: Tower Upgrades & Game Progression
+
+Goal: Enhance gameplay by adding tower upgrades, power-ups, and dynamic enemy wavesn- Core Functionality: Upgrade paths, enemy scaling, UI for progressing wavesn- Outcome: The player can upgrade towers and manage wave progression with increasing difficultyn
+### Phase 3: Polish & Extensibility
+
+Goal: Polish UI/UX, add high score tracking, refactor for modularity, prepare for releasen- Core Functionality: Animations, sound, leaderboard, API integrationn- Outcome: Fully polished game ready for alpha release.
+</Tower Defense Game - Project Vision and Goals.md>
+<Tower Defense Game - Development and Testing Guide.md>
+# Tower Defense Game - Development and Testing Guide
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locallyn
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npmn```bash
+npm install
+``n
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following commandn```bash
+npm run watch
+``nThis will start the development server and automatically recompile your code when you save a filen
+### Step 3: Running the Application
+
+For a web application, this would involve opening a browser to `http://localhost:3000`n
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. For a browser-based application, this is automatic when launched with the browser's dev toolsn
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following commandn```bash
+npm run test
+``nThis will execute all test files located in the project and report the results to the console.
+</Tower Defense Game - Development and Testing Guide.md>
+<raw response>
+{"summary":"I have analyzed the request and generated a set of documentation artifacts for the Tower Defense Game project.","course_of_action":[{"step":1,"description":"Create Tower Defense Game - Master Artifact List.md containing project overview."},{"step":2,"description":"Create Tower Defense Game - Project Vision and Goals.md outlining vision, phases, and goals."},{"step":3,"description":"Create Tower Defense Game - GitHub Repository Setup Guide.md showing Git init, push, and workflow."},{"step":4,"description":"Create Tower Defense Game - Development and Testing Guide.md with dependency install, run, debug and test instructions."}],"files_updated":["Tower Defense Game - Master Artifact List.md","Tower Defense Game - Project Vision and Goals.md","Tower Defense Game - GitHub Repository Setup Guide.md","Tower Defense Game - Development and Testing Guide.md"],"files":[{"path":"Tower Defense Game - Master Artifact List.md","content":"# Master Artifact List\n# Project: Tower Defense Game\n\n## I. Project Planning & Design\n\n### A1. Tower Defense Game - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plann- **Tags:** project vision, goals, scope, planning\n\n### A2. Tower Defense Game - GitHub Repository Setup Guide\n- **Description:** Guide to set up the Git repo and link to GitHubn- **Tags:** git, github, source control\n\n### A3. Tower Defense Game - Development and Testing Guide\n- **Description:** Standard procedure for running, debugging, and testing the Tower Defense Game locallyn- **Tags:** development workflow, testing, debugging"},{"path":"Tower Defense Game - Project Vision and Goals.md","content":"# Tower Defense Game - Project Vision and Goals\n\n## 1. Project Vision\n\nThe vision of **Tower Defense Game** is to provide an engaging, strategy-based arcade experience that allows players to design, upgrade, and defend their base against waves of enemies on a map grid. It aims to provide a compelling mix of real-time action and tactical decision-making that delivers value for both casual and hardcore gamersn\n## 2. High-Level Goals & Phases\n\nThe project will be developed in distinct phases to ensure an iterative and manageable workflown\n### Phase 1: Core Gameplay Mechanics\n\nGoal: Establish foundational gameplay including map grid, enemy waves, and basic tower placement/removaln- Core Functionality: Map grid with selectable tiles, tower placement, and simple enemy typesn- Outcome: Players can place towers and watch automated enemies spawn and navigate toward the basen\n### Phase 2: Tower Upgrades & Game Progression\n\nGoal: Enhance gameplay by adding tower upgrades, power-ups, and dynamic enemy wavesn- Core Functionality: Upgrade paths, enemy scaling, UI for progressing wavesn- Outcome: The player can upgrade towers and manage wave progression with increasing difficultyn\n### Phase 3: Polish & Extensibility\n\nGoal: Polish UI/UX, add high score tracking, refactor for modularity, prepare for releasen- Core Functionality: Animations, sound, leaderboard, API integrationn- Outcome: Fully polished game ready for alpha release."},{"path":"Tower Defense Game - GitHub Repository Setup Guide.md","content":"# Tower Defense Game - GitHub Repository Setup Guide\n\n## 1. Overview\n\nThis guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCEn\n## 2. Prerequisites\n\n*   You have `git` installed on your machinen*   You have a GitHub accountn\n## 3. Step-by-Step Setup\n\n### Step 1: Create a New Repository on GitHub\n\n1.  Go to [github.com](https://github.com) and log inn2.  In the top-right corner, click the `+` icon and select **\"New repository\"**n3.  **Repository name:** Enter a name for your project (e.g., `tower-defense-game`).n4.  **Description:** (Optional) Provide a brief description of your projectn5.  Choose **\"Private\"** or **\"Public\"**n6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflictsn7.  Click **\"Create repository\"**n\nGitHub will now show you a page with command-line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**n\n### Step 2: Initialize Git in Your Local Project\n\nOpen a terminal and navigate to your project's root directory. Then, run the following commands one by onen\n1.  **Initialize the repository:**n    ```bash\n    git init\n    ```n\n2.  **Add all existing files:**n    ```bash\n    git add .n    ```n\n3.  **Create the first commit:**n    ```bash\n    git commit -m 'Initial commitn    ```n\n4.  **Rename the default branch to `main`:**n    ```bash\n    git branch -M main\n    ```n\n### Step 3: Link and Push to GitHub\n\n1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository pagen    ```bash\n    git remote add origin https://github.com/YOUR_USERNAME/Tower-Defense-Game.git\n    ```n\n2.  **Push your local `main` branch to GitHub:**n    ```bash\n    git push -u origin main\n    ```n\nAfter these commands complete, refresh your GitHub repository page. You should see all of your project filesn\n## 4. Sample Development Workflow with DCE and Git\n\nGit is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your placen\n### Step 1: Start with a Clean State\nBefore starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committedn\n### Step 2: Generate a Prompt and Get Responses\nUse the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI modeln\n### Step 3: Paste and Parse\nPaste the responses into the Parallel Co-Pilot Panel and click \"Parse All\"n\n### Step 4: Accept and Test\n1.  Review the responses and find one that looks promisingn2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspacen3.  Now, compile and test the application. Does it work? Does it have errorsn\n### Step 5: The \"Restore\" Loop\nThis is where Git becomes a powerful part of the workflown\n*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**n    1.  Open the terminal in VS Coden    2.  Run the command: `git restore .n    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commitn    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a **different** AI response, and click \"Accept Selected Files\" again to test the next proposed solutionn\n*   **If the changes are good:**n    1.  Open the Source Control panel in VS Coden    2.  Stage the changes (`git add .`).n    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15").n    4.  Commit the changesn    5.  You are now ready to start the next development cycle from a new, clean staten\nThis iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase."},{"path":"Tower Defense Game - Development and Testing Guide.md","content":"# Tower Defense Game - Development and Testing Guide\n\n## 1. Purpose\n\nThis guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locallyn\n## 2. Development Workflow\n\n### Step 1: Install Dependencies\n\nEnsure all project dependencies are installed using npmn```bash\nnpm install\n``n\n### Step 2: Start the Development Server\n\nTo compile the code and watch for changes, run the following commandn```bash\nnpm run watch\n``nThis will start the development server and automatically recompile your code when you save a filen\n### Step 3: Running the Application\n\nFor a web application, this would involve opening a browser to `http://localhost:3000`n\n### Step 4: Debugging\n\nYou can set breakpoints directly in your source code. For a browser-based application, this is automatic when launched with the browser's dev toolsn\n## 3. Testing\n\nThe project is configured with a testing framework. To run the test suite, use the following commandn```bash\nnpm run test\n``nThis will execute all test files located in the project and report the results to the console."}]}
+</raw response>
+</Ephemeral Context>
+<Previous Cycle 111 Summary of Actions>
+I have analyzed the feedback from Cycle 110 and identified two distinct issues. The primary issue is a bug in the backend's Server-Sent Events (SSE) parser in `llm.service.ts`, which is causing both sporadic JSON parsing errors and truncation of the final response content. The secondary issue is a UI lag when using the "Stop" button, which can be solved with an optimistic state update on the frontend.
+
+My course of action is to first codify the parsing bug in our regression case studies. Then, I will provide the complete, corrected code for `llm.service.ts`, which includes a more robust JSON parser that correctly handles brace characters inside string literals. Finally, I will update the `useGeneration.ts` hook to implement an optimistic UI update for the "Stop" button, providing immediate visual feedback and resolving the perceived lag.
+
+1.  **Update `A111. DCE - New Regression Case Studies.md`:** Add a new case study for the "SSE Parser Fails on JSON Chunks Containing Brace Characters" bug, documenting the root cause (naive brace-counting) and the solution (ignoring braces within string literals).
+2.  **Update `src/backend/services/llm.service.ts`:** Refactor the SSE stream parser in the `_generateSingleStream` method. The logic will be enhanced to track whether it is inside a string literal, ensuring that only structural braces are counted when identifying JSON object boundaries. This will fix both the parsing errors and the response truncation.
+3.  **Update `src/client/views/parallel-copilot.view/hooks/useGeneration.ts`:** Modify the `handleStopGeneration` function to perform an optimistic UI update. It will now immediately set the status of the targeted response to `'stopped'` in the local `generationProgress` state before sending the cancellation request to the backend.
+</Previous Cycle 111 Summary of Actions>
+</Cycle 112>
+
 <Cycle 111>
 <Cycle Context>
 nice! okay it looks like i see the entire response and im not seeing parsing errors anymore.
@@ -894,80 +980,6 @@ for some reason, the response viewer would not show the selected file in the fil
 
 additionally, now that we've separated out the responseses, since we've done that the tokens/sec display has stopped calculating. can you look to that?
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [6:19:35 PM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [6:19:36 PM] Starry Night syntax highlighter initialized.
-[INFO] [6:19:36 PM] Services initializing...
-[INFO] [6:19:36 PM] Services initialized successfully.
-[INFO] [6:19:36 PM] Registering 7 commands.
-[INFO] [6:19:41 PM] Context Chooser view message handler initialized.
-[INFO] [6:19:42 PM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [6:19:42 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [6:19:42 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [6:19:42 PM] Persisted current selection of 3 items.
-[INFO] [6:19:44 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [6:19:44 PM] Parallel Co-Pilot view message handler initialized.
-[INFO] [6:19:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [6:19:44 PM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [6:19:50 PM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [6:19:50 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [6:19:50 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [6:19:50 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [6:19:50 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [6:19:50 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [6:19:50 PM] [on-message] Received request to regenerate tab 1 for cycle 1
-[INFO] [6:19:50 PM] [LLM Service] Starting single regeneration for cycle 1, tab 1.
-[INFO] [6:19:50 PM] Starting regeneration for tab 1 in cycle 1.
-[INFO] [6:19:57 PM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [6:19:57 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [6:19:57 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [6:19:58 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [6:19:58 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [6:19:58 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [6:19:58 PM] [on-message] Received request to regenerate tab 2 for cycle 1
-[INFO] [6:19:58 PM] [LLM Service] Starting single regeneration for cycle 1, tab 2.
-[INFO] [6:19:58 PM] Starting regeneration for tab 2 in cycle 1.
-[INFO] [6:20:01 PM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [6:20:01 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [6:20:01 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [6:20:01 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [6:20:01 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [6:20:01 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [6:20:01 PM] [on-message] Received request to regenerate tab 3 for cycle 1
-[INFO] [6:20:01 PM] [LLM Service] Starting single regeneration for cycle 1, tab 3.
-[INFO] [6:20:01 PM] Starting regeneration for tab 3 in cycle 1.
-[INFO] [6:20:03 PM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [6:20:03 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [6:20:03 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [6:20:03 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [6:20:03 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [6:20:03 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [6:20:03 PM] [on-message] Received request to regenerate tab 4 for cycle 1
-[INFO] [6:20:03 PM] [LLM Service] Starting single regeneration for cycle 1, tab 4.
-[INFO] [6:20:03 PM] Starting regeneration for tab 4 in cycle 1.
-[INFO] [6:20:28 PM] [LLM Service] Aborting generation for cycle 1, response 3.
-[INFO] [6:20:28 PM] [LLM Stream] Stream for C1/R3 was aborted.
-[INFO] [6:20:28 PM] Updated response content and metrics for tab 3 in cycle 1.
-[INFO] [6:20:28 PM] [LLM Service] Single regeneration for C1/T3 complete.
-[INFO] [6:20:34 PM] [Prompt Gen] Starting prompt string generation for Cycle 1.
-[INFO] [6:20:34 PM] [SelectionService] Found 3 paths in persisted state. Validating...
-[INFO] [6:20:34 PM] [SelectionService] Returning 3 valid paths.
-[INFO] [6:20:34 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
-[INFO] [6:20:34 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
-[INFO] [6:20:34 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
-[INFO] [6:20:34 PM] [on-message] Received request to regenerate tab 3 for cycle 1
-[INFO] [6:20:34 PM] [LLM Service] Starting single regeneration for cycle 1, tab 3.
-[INFO] [6:20:34 PM] Starting regeneration for tab 3 in cycle 1.
-[INFO] [6:21:03 PM] Updated response content and metrics for tab 2 in cycle 1.
-[INFO] [6:21:03 PM] [LLM Service] Single regeneration for C1/T2 complete.
-[INFO] [6:21:48 PM] Updated response content and metrics for tab 3 in cycle 1.
-[INFO] [6:21:48 PM] [LLM Service] Single regeneration for C1/T3 complete.
-[INFO] [6:21:55 PM] Updated response content and metrics for tab 1 in cycle 1.
-[INFO] [6:21:55 PM] [LLM Service] Single regeneration for C1/T1 complete.
-[INFO] [6:23:03 PM] Updated response content and metrics for tab 4 in cycle 1.
-[INFO] [6:23:03 PM] [LLM Service] Single regeneration for C1/T4 complete.
-
-</Ephemeral Context>
 <Previous Cycle 110 Summary of Actions>
 I have analyzed the feedback from Cycle 109. The "Could not parse SSE chunk" warning, which occurs during the "thinking" phase but not the "response" phase, points to a specific issue in how the backend's stream parser handles rapid, concatenated JSON objects.
 
@@ -5505,23 +5517,23 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-05T23:27:31.346Z
+  Date Generated: 2025-10-06T00:22:37.166Z
   ---
   Total Files: 179
-  Approx. Tokens: 248841
+  Approx. Tokens: 250607
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
 2. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-3. src\backend\services\prompt.service.ts (5143 tokens)
-4. src\Artifacts\A111. DCE - New Regression Case Studies.md (5002 tokens)
+3. src\Artifacts\A111. DCE - New Regression Case Studies.md (6270 tokens)
+4. src\backend\services\prompt.service.ts (5143 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
-9. src\client\views\context-chooser.view\view.tsx (4033 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4003 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4181 tokens)
+10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -5662,7 +5674,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 278 - Chars: 16012 - Tokens: 4003
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 289 - Chars: 16724 - Tokens: 4181
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -5696,13 +5708,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
-173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4247 - Tokens: 1062
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 3927 - Tokens: 982
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 192 - Chars: 8845 - Tokens: 2212
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 175 - Chars: 7191 - Tokens: 1798
+173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 4013 - Tokens: 1004
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 169 - Chars: 20006 - Tokens: 5002
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 209 - Chars: 25079 - Tokens: 6270
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -19499,7 +19511,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C107 (Pass setTabs to usePcppIpc hook)
+// Updated on: C111 (Add useMemo for viewableContent)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -19600,6 +19612,17 @@ const App = () => {
             };
         }
     }, [cycleManagement.saveStatus]);
+
+    // --- C111 FIX: Derived State for Viewable Content ---
+    const viewableContent = React.useMemo(() => {
+        if (!fileManagement.selectedFilePath) return null;
+        const activeTabData = tabManagement.tabs[tabManagement.activeTab.toString()];
+        const file = activeTabData?.parsedContent?.files.find(f => f.path === fileManagement.selectedFilePath);
+        if (!file) return '// File content not found in parsed response.';
+        const id = `${file.path}::${file.content}`;
+        return fileManagement.highlightedCodeBlocks.get(id) || file.content;
+    }, [fileManagement.selectedFilePath, tabManagement.tabs, tabManagement.activeTab, fileManagement.highlightedCodeBlocks]);
+
 
     // --- Component Logic & Rendering ---
     React.useEffect(() => {
@@ -19758,7 +19781,7 @@ const App = () => {
                             onLinkFile={fileManagement.handleLinkFile}
                             onUnlinkFile={fileManagement.handleUnlinkFile}
                             comparisonMetrics={fileManagement.comparisonMetrics}
-                            viewableContent={""}
+                            viewableContent={viewableContent}
                             onCopyContent={fileManagement.handleCopyContent}
                             leftPaneWidth={0} // Placeholder
                             workflowStep={workflowStep}
@@ -22476,7 +22499,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C107 (Update tab content from progress messages)
+// Updated on: C111 (Fix TPS calculation)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -22624,6 +22647,29 @@ export const usePcppIpc = (
                     newProgress.push(progress);
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
+
+                // --- C111 FIX: Recalculate aggregate TPS ---
+                let totalTokens = 0;
+                let earliestStartTime = Infinity;
+                
+                newProgress.forEach(p => {
+                    if (p.status !== 'complete' && p.status !== 'error' && p.status !== 'stopped') {
+                        if (p.startTime < earliestStartTime) {
+                            earliestStartTime = p.startTime;
+                        }
+                    }
+                    totalTokens += p.thinkingTokens + p.currentTokens;
+                });
+
+                if (earliestStartTime !== Infinity) {
+                    const elapsedSeconds = (Date.now() - earliestStartTime) / 1000;
+                    if (elapsedSeconds > 0) {
+                        const currentTps = Math.round(totalTokens / elapsedSeconds);
+                        generationManagement.setTps(currentTps);
+                    }
+                }
+                // --- END C111 FIX ---
+
                 return newProgress;
             });
 
@@ -22671,7 +22717,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C102 (Remove useEffect and create resetAndLoadTabs)
+// Updated on: C111 (Fix Parse All logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -22795,7 +22841,11 @@ export const useTabManagement = (
     const handleGlobalParseToggle = React.useCallback(() => {
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
-        if (!newParseMode) {
+        if (newParseMode) {
+            // C111 FIX: Trigger parsing when switching TO parsed mode
+            parseAllTabs();
+        } else {
+            // Un-parse: clear parsed content
             setTabs(prev => {
                 const newTabs = { ...prev };
                 Object.keys(newTabs).forEach(key => {
@@ -22805,7 +22855,7 @@ export const useTabManagement = (
             });
         }
         setSaveStatus('unsaved');
-    }, [isParsedMode, setSaveStatus]);
+    }, [isParsedMode, setSaveStatus, parseAllTabs]);
 
     const handleSortToggle = React.useCallback(() => {
         setIsSortedByTokens(p => !p);
@@ -22842,7 +22892,7 @@ export const useTabManagement = (
         handleGlobalParseToggle,
         handleSortToggle,
         sortedTabIds,
-        resetAndLoadTabs, // Export the new function
+        resetAndLoadTabs,
     };
 };
 </file_artifact>
@@ -23023,13 +23073,53 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C110 (Add JSON Brace Counting case)
+# Updated on: C111 (Add C111 bugs)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 015: "Parse All" Button Shows Raw Text View
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/useTabManagement.ts`
+-   **Cycles Observed:** C111
+-   **Symptom:** After pasting responses, clicking the "Parse All" button correctly updates the UI to show that it is in parsed mode (e.g., the button text changes to "Un-Parse All"), but the content area for the response tab continues to show the raw text `textarea` instead of the structured, parsed view.
+-   **Root Cause Analysis (RCA):** A logic error occurred in the `useTabManagement` hook. The `handleGlobalParseToggle` function, which is triggered by the "Parse All" button, was responsible for setting the `isParsedMode` state to `true`. However, it failed to also call the `parseAllTabs()` function. The UI then attempted to re-render in parsed mode, but the `parsedContent` property on the tab's state object was still `null`. The conditional rendering logic in the `ResponsePane` component correctly saw that `parsedContent` was null and fell back to displaying the raw `textarea`.
+-   **Codified Solution & Best Practice:**
+    1.  UI actions that change the "mode" of a view must also ensure the data required for that mode is generated.
+    2.  The `handleGlobalParseToggle` function must be modified. When the state is transitioning *to* parsed mode (`isParsedMode = true`), it must immediately call the `parseAllTabs()` function to populate the `parsedContent` state for all tabs. This ensures the necessary data is available before the UI re-renders in the new mode.
+
+---
+
+### Case Study 014: Parsed View Does Not Display Selected File Content
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
+-   **Cycles Observed:** C111
+-   **Symptom:** After parsing an AI response, the "Associated Files" list is displayed correctly. However, clicking on a file in this list does not cause the file's content to be displayed in the code viewer pane on the right. The pane remains empty or shows its default "Select a file" message.
+-   **Root Cause Analysis (RCA):** This was a state propagation issue introduced during the major refactor into custom hooks. The main container component (`view.tsx`) is responsible for orchestrating the flow of data between hooks and down to presentational components. The logic for deriving the `viewableContent` prop (which is passed to the code viewer) from the `selectedFilePath` state (managed in `useFileManagement.ts`) was lost. The container was no longer re-calculating which content to display when the selected file changed.
+-   **Codified Solution & Best Practice:**
+    1.  Container components are responsible for deriving props from state managed by different hooks.
+    2.  A `useMemo` hook must be re-implemented in the `view.tsx` container component. This hook's responsibility is to calculate the `viewableContent` string.
+    3.  Its dependency array must include all relevant state values: `fileManagement.selectedFilePath`, `tabManagement.tabs`, `tabManagement.activeTab`, and `fileManagement.highlightedCodeBlocks`.
+    4.  When `selectedFilePath` changes, the `useMemo` hook will re-run, look up the correct content from the appropriate tab's `parsedContent` or the `highlightedCodeBlocks` cache, and update the `viewableContent` variable. This variable is then passed down through props, ensuring the UI updates correctly.
+
+---
+
+### Case Study 013: Tokens/Sec Calculation Fails with Parallel Streams
+
+-   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
+-   **Cycles Observed:** C111
+-   **Symptom:** During response generation in the progress UI, the "Tokens/sec" metric remains at 0 or `NaN` and does not update, even though tokens are clearly streaming in for multiple responses.
+-   **Root Cause Analysis (RCA):** The refactor to a "fan-out" architecture, where `N` parallel streams are processed, broke the simple tokens-per-second calculation. The `UpdateSingleGenerationProgress` IPC handler was receiving progress for one stream at a time and updating its state array, but it lacked the logic to then re-aggregate the data from *all* active streams to calculate a global TPS metric. It was no longer sufficient to look at a single stream's progress.
+-   **Codified Solution & Best Practice:**
+    1.  When calculating aggregate metrics from multiple asynchronous data sources, the update handler for any individual source must trigger a re-calculation of the aggregate.
+    2.  The IPC message handler for `UpdateSingleGenerationProgress` must be enhanced. Inside its `setGenerationProgress` callback, after updating the array with the new progress for a single response, it must perform an aggregation step.
+    3.  This step involves iterating over the entire updated progress array to: a) find the earliest `startTime` among all responses that are not yet complete, and b) calculate the sum of `thinkingTokens + currentTokens` across all responses.
+    4.  The global TPS can then be calculated (`totalTokens / elapsedTime`) and the `tps` state updated.
 
 ---
 
