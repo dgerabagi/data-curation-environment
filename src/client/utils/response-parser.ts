@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C65 (Add hybrid JSON/regex fallback parser)
+// Updated on: C113 (Fix newline character stripping)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -30,11 +30,16 @@ export function parseResponse(rawText: string): ParsedResponse {
     try {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'"),
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
+                let content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+                // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
+                // content = content.replace(/n\n/g, '\n'); // REMOVED
+                return {
+                    path: f.path || '',
+                    content: content,
+                    tokenCount: Math.ceil(content.length / 4),
+                };
+            });
 
             const courseOfAction = Array.isArray(jsonResponse.course_of_action)
                 ? jsonResponse.course_of_action
@@ -63,7 +68,9 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            let content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
+            // content = content.replace(/n\n/g, '\n'); // REMOVED
             return {
                 path: match[1] || '',
                 content: content,

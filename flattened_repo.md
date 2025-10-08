@@ -1,16 +1,16 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-06T00:22:37.166Z
+  Date Generated: 2025-10-06T13:11:30.773Z
   ---
   Total Files: 179
-  Approx. Tokens: 250607
+  Approx. Tokens: 251990
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-2. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-3. src\Artifacts\A111. DCE - New Regression Case Studies.md (6270 tokens)
+2. src\Artifacts\A111. DCE - New Regression Case Studies.md (7403 tokens)
+3. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
 4. src\backend\services\prompt.service.ts (5143 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 282 - Chars: 14551 - Tokens: 3638
+107. src\backend\services\llm.service.ts - Lines: 293 - Chars: 14943 - Tokens: 3736
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -155,7 +155,7 @@
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 109 - Chars: 4783 - Tokens: 1196
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 289 - Chars: 16724 - Tokens: 4181
@@ -181,7 +181,7 @@
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
-162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
+162. src\client\utils\response-parser.ts - Lines: 162 - Chars: 7718 - Tokens: 1930
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
@@ -198,7 +198,7 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 209 - Chars: 25079 - Tokens: 6270
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 249 - Chars: 29610 - Tokens: 7403
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,7 +8630,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C110 (Fix JSON parser brace counting)
+// Updated on: C113 (Add custom https agent for connection pooling)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8640,9 +8640,19 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { Readable } from 'stream';
+import { HttpsAgent } from 'agentkeepalive';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
+
+// Create a single, reusable agent to manage connection pooling
+const httpsAgent = new HttpsAgent({
+    maxSockets: 100,
+    maxFreeSockets: 10,
+    timeout: 60000, // active socket timeout
+    freeSocketTimeout: 30000, // free socket timeout
+});
+
 
 export class LlmService {
 
@@ -8713,6 +8723,7 @@ export class LlmService {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                     signal: controller.signal,
+                    agent: httpsAgent, // Use the custom agent for connection pooling
                 });
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
@@ -8752,7 +8763,7 @@ export class LlmService {
                                                     richResponse.endTime = Date.now();
                                                     progress.status = 'complete';
                                                 } else if (data.choices?.[0]?.delta) {
-                                                    const delta = data.choices[0].delta;
+                                                    const delta = data.choices.delta;
                                                     if (delta.reasoning_content) {
                                                         if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
                                                         const contentChunk = delta.reasoning_content;
@@ -15819,7 +15830,7 @@ The workflow for generating AI responses needs to be more flexible and deliberat
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C65 (Add hybrid JSON/regex fallback parser)
+// Updated on: C113 (Fix newline character stripping)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -15850,11 +15861,16 @@ export function parseResponse(rawText: string): ParsedResponse {
     try {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'"),
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
+                let content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+                // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
+                // content = content.replace(/n\n/g, '\n'); // REMOVED
+                return {
+                    path: f.path || '',
+                    content: content,
+                    tokenCount: Math.ceil(content.length / 4),
+                };
+            });
 
             const courseOfAction = Array.isArray(jsonResponse.course_of_action)
                 ? jsonResponse.course_of_action
@@ -15883,7 +15899,9 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            let content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
+            // content = content.replace(/n\n/g, '\n'); // REMOVED
             return {
                 path: match[1] || '',
                 content: content,
@@ -17557,13 +17575,53 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C111 (Add C111 bugs)
+# Updated on: C113 (Add Concurrency and Parsing cases)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 018: Parallel Fetch Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C113
+-   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
+-   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a pool of sockets for connections. While the default `maxSockets` is technically `Infinity`, in practice, factors within the execution environment (like VS Code's extension host) can lead to exhaustion or delays in acquiring new sockets for concurrent requests to the same origin. When the application tries to open several connections at once, the later requests can time out while waiting for a socket to become available.
+-   **Codified Solution & Best Practice:**
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
+    2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
+    3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
+    4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
+
+---
+
+### Case Study 017: Parser Appears to Corrupt Newline Sequences
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112, C113
+-   **Symptom:** Valid double-newline sequences (`\n\n`) in the raw AI response are being rendered incorrectly in the UI as `n\n`. This indicates that a backslash is being stripped at some point during parsing or sanitization.
+-   **Root Cause Analysis (RCA):** The exact cause is unclear, but the primary suspect is an overly aggressive string replacement intended to fix a different model-specific quirk (`n\n`). The logic is likely misinterpreting or incorrectly modifying valid newline escape sequences. A definitive RCA requires observing the data transformation.
+-   **Codified Solution & Best Practice:**
+    1.  When debugging a string manipulation or parsing issue where the output is corrupted, the first step is to inject logging to trace the data's state at each step of the transformation.
+    2.  Add `logger.log` statements in the parser to output the string immediately after it's received and after each significant `replace()` or sanitization operation.
+    3.  This "before and after" logging provides an unambiguous view of how the data is being altered, allowing for the precise correction of the faulty logic.
+
+---
+
+### Case Study 016: Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112
+-   **Symptom:** When parsing a JSON response from the LLM, the final file content in the UI is corrupted. It shows extra `n` characters, for example, rendering `wordn\n` instead of `word\n`, or `wordn- list item` instead of `word\n- list item`.
+-   **Root Cause Analysis (RCA):** The LLM, when instructed to produce JSON output, is not perfectly consistent in how it represents newlines within string values. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts an extra literal `n` character immediately before the newline (`...wordn\n...`) or before a markdown formatting character (`...wordn- list item...`). The existing parser correctly handled the standard `\n` but did not have a sanitization step to clean up these spurious `n` characters, causing them to be passed through to the final rendered output.
+-   **Codified Solution & Best Practice:**
+    1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
+    2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
+    3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
 
 ---
 

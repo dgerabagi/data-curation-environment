@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C110 (Fix JSON parser brace counting)
+// Updated on: C113 (Add custom https agent for connection pooling)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -9,9 +9,19 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { Readable } from 'stream';
+import { HttpsAgent } from 'agentkeepalive';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
+
+// Create a single, reusable agent to manage connection pooling
+const httpsAgent = new HttpsAgent({
+    maxSockets: 100,
+    maxFreeSockets: 10,
+    timeout: 60000, // active socket timeout
+    freeSocketTimeout: 30000, // free socket timeout
+});
+
 
 export class LlmService {
 
@@ -82,6 +92,7 @@ export class LlmService {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                     signal: controller.signal,
+                    agent: httpsAgent, // Use the custom agent for connection pooling
                 });
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
@@ -121,7 +132,7 @@ export class LlmService {
                                                     richResponse.endTime = Date.now();
                                                     progress.status = 'complete';
                                                 } else if (data.choices?.[0]?.delta) {
-                                                    const delta = data.choices[0].delta;
+                                                    const delta = data.choices.delta;
                                                     if (delta.reasoning_content) {
                                                         if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
                                                         const contentChunk = delta.reasoning_content;

@@ -11,7 +11,9 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 112 - finalize parsing
+Current Cycle 114 - analyze logs to fix parser
+Cycle 113 - still issues with parsing also with parallel re-generation
+Cycle 112 - finalize parsing
 Cycle 111 - continue fixing parsing and also tokens/sec calc
 Cycle 110 - json parsing
 Cycle 109 - super close!
@@ -887,80 +889,2728 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 114>
+<Cycle Context>
+okay, starting a new test... clicking `Generate Initial Responses` on the onboarding tab... okay yeah i got some logs i think can help. i grabbed the first 118k dce output logs. hopefully its raw enough that you can see the root cause of our parsing issue.
+
+
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [8:05:51 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [8:05:51 AM] Services initializing...
+[INFO] [8:05:51 AM] Services initialized successfully.
+[INFO] [8:05:51 AM] Registering 7 commands.
+[INFO] [8:05:51 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [8:05:51 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [8:05:51 AM] Starry Night syntax highlighter initialized.
+[INFO] [8:05:51 AM] Context Chooser view message handler initialized.
+[INFO] [8:05:51 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:51 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:51 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [8:05:51 AM] [SelectionService] No last selection found in state.
+[INFO] [8:05:51 AM] Persisted current selection of 0 items.
+[INFO] [8:05:52 AM] Executing dce.openSettingsPanel command.
+[INFO] [8:05:52 AM] Settings view message handler initialized.
+[INFO] [8:05:53 AM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [8:05:53 AM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [8:05:54 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [8:05:54 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [8:05:54 AM] Settings saved: Mode=demo, URL=undefined
+[INFO] [8:05:55 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:55 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [8:05:56 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:05:58 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [8:05:58 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [8:06:00 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [8:06:05 AM] Generating Cycle 0 prompt and starting generation...
+[INFO] [8:06:05 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
+[INFO] [8:06:05 AM] [SelectionService] No last selection found in state.
+[INFO] [8:06:05 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
+[INFO] [8:06:05 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
+[INFO] [8:06:06 AM] prompt.md file created successfully before sending API request.
+[INFO] [8:06:06 AM] Created new placeholder cycle 1.
+[INFO] [8:06:06 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [8:06:06 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [8:06:06 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [8:06:06 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [8:06:06 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense54/src","c:/Projects/TowerDefense54/src/Artifacts","c:/Projects/TowerDefense54/src/Artifacts/DCE_README.md"]
+[INFO] [8:06:06 AM] [SelectionService] No last selection found in state.
+[INFO] [8:06:06 AM] Persisted current selection of 3 items.
+[INFO] [8:06:06 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"role":"assistant","content":""},"logprobs":null,"finish_reason":null}],"prompt_token_ids":null}
+[INFO] [8:06:06 AM] Persisted current selection of 3 items.
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" must"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" output"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" per"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Interaction"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Schema"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We're"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Cycle"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"0"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" generate"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" planning"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" documentation"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifacts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:06 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Must"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" mandatory"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"0"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" +"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" at"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" least"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" two"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" planning"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" docs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" No"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" code"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" The"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" have"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" summary"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" course"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_of"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_action"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" steps"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" curator"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_activity"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" array"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repo"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[INFO] [8:06:07 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:07 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replaced"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"),"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Testing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"),"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"),"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"),"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" other"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" planning"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" docs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" like"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Competitive"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Analysis"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" But"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" at"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" least"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" two"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" like"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" must"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" list"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" all"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifacts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:08 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Update"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" relevant"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" templates"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" five"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifacts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Ensure"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" correct"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replaced"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" make"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" string"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escaped"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"lines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Provide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" paths"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" relative"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" like"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" src"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/docs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_G"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Repo"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_Set"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"up"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_G"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"u"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:09 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" The"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" naming"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" from"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" templates"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" e"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".g"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Let's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_G"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Repo"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_Set"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"up"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_G"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"u"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Similarly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ->"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_Test"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_G"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"u"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ->"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:10 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_Master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ->"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_V"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_G"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"o"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"als"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ->"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"e"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"chn"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_S"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"c"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_P"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"lan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" must"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" adjust"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" within"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:11 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" description"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" parts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" has"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" variable"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" used"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" like"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" we"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"In"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" guidelines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" mention"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \"["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" has"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:12 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" include"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"16"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Developer"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Environment"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" not"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" mandatory"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"But"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" per"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" requirements"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" generate"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"0"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" at"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" least"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" two"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" docs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" They"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" said"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"at"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" least"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" two"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" other"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" planning"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" documents"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"e"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".g"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:13 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" So"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" X"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" those"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" priority"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" mandatory"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"0"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" at"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" least"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" others"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Good"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"No"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" code"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Our"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" contain"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" array"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"5"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" objects"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escape"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"lines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Make"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" summary"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Generated"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" starter"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" documentation"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifacts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:14 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" including"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" &"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" testing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" list"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" scaff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Course"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" of"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" action"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" list"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:15 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"5"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Cur"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ator"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_activity"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" instruct"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repo"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" these"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" docs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Please"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" '"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"'"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" these"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" documentation"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" first"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" we"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" might"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" just"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" deliver"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:16 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"But"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" instruction"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" says"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" no"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" code"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" we"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" can"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" docs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" curator"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_activity"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Please"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" these"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" documentation"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifacts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repo"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Implement"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" based"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" And"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" uses"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" e"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".g"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:17 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"my"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"YOUR"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_USERNAME"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" keep"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Might"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" be"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" better"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" leave"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" user"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" can"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" put"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \"["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Username"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"In"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" something"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" else"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" It's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"https"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"://"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"github"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".com"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/Y"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"OUR"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_USERNAME"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/Y"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"OUR"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"_RE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"POSIT"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:18 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ORY"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Username"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \"["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Username"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" keep"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Description"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" prompts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" like"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Running"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" application"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:19 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" The"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" says"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" we"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" accordingly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" likewise"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" likewise"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Also"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" may"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" fill"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" description"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" For"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" text"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" The"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:20 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" says"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"State"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" problem"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"..."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" fill"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Let's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" fill"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" specifics"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" aims"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" provide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" fast"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-paced"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" strategic"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" unique"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" level"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" design"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" adaptive"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" AI"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" High"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-Level"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Goals"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" &"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Ph"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ases"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phase"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Core"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" gameplay"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" mechanics"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"t"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"owers"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:21 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" waves"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" resource"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" system"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Outcome"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Player"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" can"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" place"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" towers"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" defeat"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" waves"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phase"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Level"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" design"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" AI"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" tuning"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Outcome"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Multiple"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" levels"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" increasing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" difficulty"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phase"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Polish"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" performance"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" deployment"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" description"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Change"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Language"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Type"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Script"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Framework"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Angular"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" But"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" more"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" typical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:22 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phaser"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" choose"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phaser"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Type"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Script"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" So"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" set"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" frameworks"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" accordingly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Thus"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" stack"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Type"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Script"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Framework"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Library"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phaser"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Styling"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" CSS"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Bund"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ler"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" V"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ite"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Assuming"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" web"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Pro"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"posed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" structure"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" maybe"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" src"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" assets"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" games"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" typical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Phaser"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" structure"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:23 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" list"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" of"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" artifacts"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" IDs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"0"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Master"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" List"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"current"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Testing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Vision"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:24 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Goals"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" A"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Technical"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"aff"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"olding"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Plan"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Optional"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"12"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" etc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" not"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" needed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Now"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escape"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"lines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" strings"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" double"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" quotes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" appropriately"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Let's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" construct"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" each"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" carefully"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escape"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" paste"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replacing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" placeholders"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Let's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" construct"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"#"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:25 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Overview"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"This"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" provides"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" necessary"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commands"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" turn"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" local"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" folder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" into"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" link"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" outlines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" sample"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" workflow"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" using"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" alongside"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Data"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" C"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"uration"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Environment"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":").\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Pr"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ere"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"quisites"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"*"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" have"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" installed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" machine"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"*"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" have"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:26 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" account"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" New"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Go"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" https"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"://"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"github"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".com"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" log"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" In"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" top"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-right"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" corner"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" click"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"+"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" icon"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" select"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"New"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Description"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"optional"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"5"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Choose"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:27 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Public"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" or"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Private"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"6"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" IMPORTANT"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Do"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" not"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" README"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ignore"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" or"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" license"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Click"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" will"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" show"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" you"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" page"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" command"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-line"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" instructions"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" will"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" section"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" titled"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \"..."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" or"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" an"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" existing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" from"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" command"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" line"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Local"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Open"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" terminal"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" navigate"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" root"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" directory"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:28 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Then"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" run"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" following"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commands"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" one"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" one"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"```"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" init"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" all"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" existing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"```"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" .\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" first"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"```"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"m"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Initial"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Rename"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" default"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" branch"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"```"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" branch"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"M"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:29 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Link"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" remote"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"```"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" remote"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" origin"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" https"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"://"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"github"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".com"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Username"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]/"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" local"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" branch"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"```"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"bash"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"u"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" origin"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"After"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" these"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commands"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" complete"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" refresh"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" page"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:30 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" see"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" all"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" of"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sample"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Workflow"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" is"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" powerful"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" tool"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" managing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" iterative"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" changes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produced"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" It"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" allows"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" you"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" quickly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" test"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" an"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" AI"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"'s"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" proposed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" solution"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" revert"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" clean"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" if"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" doesn't"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" work"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" without"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" losing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" place"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"...\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" could"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" shorten"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" include"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" key"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" sections"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" only"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":";"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" keep"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" is"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" include"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:31 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" entire"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" perhaps"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" we"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" don't"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" need"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"...\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" we"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" can"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" drop"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" blank"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" lines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" after"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" fine"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Ensure"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" string"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escapes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Similarly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"#"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Testing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Purpose"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"...\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" keep"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" similar"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" template"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" but"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" replace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Ok"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" each"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:32 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Now"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" think"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" about"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escaping"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"lines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" string"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" quotes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" escaped"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Let's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" craft"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" each"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" manually"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"But"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" easier"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" go"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We'll"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" compose"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" plain"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" text"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" then"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" transform"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" JSON"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" string"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Will"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" do"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" each"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" content"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"#"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Artifact"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" T"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"14"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Overview"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"This"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" guide"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" provides"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" necessary"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commands"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" turn"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:33 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" local"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" folder"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" into"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" link"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" outlines"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" sample"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" workflow"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" using"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" alongside"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Data"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" C"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"uration"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Environment"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":").\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Pr"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ere"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"quisites"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"*"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" have"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" installed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" machine"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"*"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" have"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" account"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Setup"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" New"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" on"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:34 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Go"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" https"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"://"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"github"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".com"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" log"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" In"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" top"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-right"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" corner"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" click"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"+"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" icon"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" select"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"New"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" name"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Description"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"optional"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"5"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Choose"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Public"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" or"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Private"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"6"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" IMPORTANT"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Do"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" not"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" README"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ignore"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" or"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" license"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:35 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"7"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Click"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" will"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" show"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" you"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" page"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" command"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-line"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" instructions"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" We"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" will"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" section"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" titled"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \"..."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" or"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" an"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" existing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" from"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" command"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" line"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Local"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Open"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" terminal"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" navigate"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project's"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" root"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" directory"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Then"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" run"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" following"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commands"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" one"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" one"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Initialize"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:36 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" init"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" all"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" existing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" .\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Create"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" first"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"m"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Initial"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commit"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Rename"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" default"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" branch"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" branch"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"M"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Link"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" remote"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" remote"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:37 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" add"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" origin"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" https"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"://"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"github"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".com"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"/["},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Username"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"]/"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Tower"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Defense"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Game"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" local"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" branch"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" push"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" -"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"u"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" origin"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" main"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"``"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"After"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" these"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" commands"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" complete"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" refresh"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Hub"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" repository"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" page"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" see"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" all"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" of"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" project"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Sample"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Development"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Workflow"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" is"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" powerful"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" tool"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" for"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" managing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" iterative"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:38 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" changes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" produced"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" by"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" It"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" allows"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" you"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" quickly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" test"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" an"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" AI"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"'s"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" proposed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" solution"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" revert"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" clean"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" if"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" doesn't"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" work"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" without"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" losing"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" place"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Start"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Clean"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" State"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Before"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" starting"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" new"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" cycle"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ensure"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" working"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" directory"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" is"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" clean"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" You"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" can"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" check"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" this"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" with"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" status"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" All"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" previous"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" changes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" should"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" be"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" committed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:39 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Generate"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Prompt"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Get"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Responses"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" D"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"CE"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" generate"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"prompt"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".md"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" file"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" this"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" prompt"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" get"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" multiple"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" responses"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"e"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".g"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"8"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":")"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" from"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" preferred"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" AI"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" model"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Paste"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Parse"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Paste"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" responses"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" into"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Parallel"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Co"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"-P"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ilot"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Panel"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" click"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Parse"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" All"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:40 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"4"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Accept"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Test"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Review"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" responses"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" find"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" one"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" that"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" looks"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" promising"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Select"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" that"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" response"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" use"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Accept"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Selected"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Files"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" button"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" write"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" AI"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"'s"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" proposed"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" changes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" to"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" workspace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Now"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" compile"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" and"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" test"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" application"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Does"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" work"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Does"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" it"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" have"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" errors"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"?\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"###"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Step"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"5"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" The"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" \""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"Restore"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\""},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Loop"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"This"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" is"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" where"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" becomes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" a"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" powerful"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" part"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" of"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:41 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" workflow"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"*"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" If"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" changes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" are"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" bad"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ("},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"e"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".g"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".,"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" introduce"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" bugs"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" don't"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" work"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" as"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" expected"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"):\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"1"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Open"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" terminal"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" VS"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Code"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":".\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"2"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" Run"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" the"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" command"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":":"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" `"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"git"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" restore"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" ."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"`\n"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" "},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"3"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"."},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" This"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" command"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" instantly"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" disc"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"ards"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" all"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" un"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"comm"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":"itted"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" changes"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" in"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" your"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" workspace"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":","},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+[WARN] [8:06:42 AM] Could not parse JSON object from stream: {"choices":[{"index":0,"delta":{"reasoning_content":" reverting"},"logprobs":null,"finish_reason":null,"token_ids":null}]}
+</Ephemeral Context>
+<Previous Cycle 113 Summary of Actions>
+I have analyzed the parsing issue from Cycle 112. You are correct; the parser is not correctly handling the raw JSON output from the language model, resulting in corrupted text where newlines are being misinterpreted.
+
+The root cause is that the language model is inconsistently generating newline characters within its JSON output. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts a literal `n` character just before a markdown formatting character (like `#` or `-`) or before a newline itself. My current parser handles the valid `\n` but does not sanitize these extra `n` characters, causing them to appear in the final output.
+
+My course of action is to make the parser more robust by adding a sanitization step. After the JSON is parsed, I will apply a series of targeted regular expression replacements to the `content` string to clean up these specific, known inconsistencies. This will correct the malformed newlines without affecting legitimate uses of the letter 'n'. I will also codify this bug and its solution to prevent future regressions.
+
+1.  **Update `A111. DCE - New Regression Case Studies.md`:** I will add a new case study named "Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output." This will document the root cause (the model inconsistently generating `n` characters instead of `\n`) and the solution (adding a post-parsing sanitization step with regular expressions).
+2.  **Update `src/client/utils/response-parser.ts`:** I will modify the `parseResponse` function. Within the `try...catch` block that handles the successful parsing of a JSON object, I will add new logic to clean the `content` string for each file. This will involve using regular expressions to replace patterns like `n\n` with `\n`, and `n` followed by a markdown character (e.g., `n#`, `n-`) with a proper newline.
+</Previous Cycle 113 Summary of Actions>
+</Cycle 114>
+
+<Cycle 113>
+<Cycle Context>
+hmm, okay so when i attempting to start a new project scope and generate the initial prompts, i left the number of responses alone, so it was 4 (default), but when i clicked 'Generate Initial Responses', it seems that only one of the three responses actually triggered generation. i see in vLLM it only ever receives/processes 1 request. the other 3 eventually errored out. perhaps we're still treating something as a batch somewhere when they're individual parallel streams now?
+
+next, i am able to click 'Re-generate', however it seems to only perform one at a time. in other words, when i click 'Re-generate', it does start the response generation, but while in this state, clicking 'Re-generate' on another seems to start a request but it fails out (see ephemeral).
+
+next, i believe you misdiagnosed the issue in the previous cycle with the parser. i have seen the response, it actually is providing `/n/n` and not what we see `n/n`, something in our processing/parsing is cutting the leading /. can you look to see what that could be? if you need to make some logs, please do so.
+
+</Cycle Context>
+<Previous Cycle 112 Summary of Actions>
+I have analyzed the feedback from Cycle 111. The issues with the response viewer, the "Parse All" button's behavior, and the broken tokens/sec calculation all point to state management and logic flaws introduced during the recent, complex refactoring into custom hooks. My course of action is to fix all three bugs by addressing their root causes in the frontend hooks and container component.
+
+First, I will fix the tokens/sec calculation by implementing the correct aggregation logic in the IPC message handler. Next, I will resolve the "Parse All" bug by ensuring the parsing function is actually called when the button is clicked. Finally, I will fix the file viewer by re-introducing the memoized logic that derives the viewable content from the application's state.
+
+1.  **Codify Regressions:** I will add three new case studies to `A111. DCE - New Regression Case Studies.md` to document the root cause and codified solution for each of the three bugs reported in this cycle. This will prevent future regressions of these specific issues.
+
+2.  **Fix Tokens/Sec Calculation (`usePcppIpc.ts`):**
+    *   I will modify the message handler for `UpdateSingleGenerationProgress`.
+    *   Inside the `setGenerationProgress` callback, after the progress for the individual response is updated, I will add new logic to re-calculate the aggregate tokens per second.
+    *   This logic will iterate over the entire updated progress array, find the earliest `startTime`, sum the `thinkingTokens` and `currentTokens` from all active streams, calculate the elapsed time, and compute the new `tps`.
+    *   It will then call `generationManagement.setTps()` to update the UI.
+
+3.  **Fix "Parse All" Bug (`useTabManagement.ts`):**
+    *   I will modify the `handleGlobalParseToggle` function.
+    *   I will add a condition: if the new mode is `true` (i.e., the user is switching *to* parsed mode), the function will now call `parseAllTabs()`. This ensures the response content is parsed and the `parsedContent` state is populated before the UI attempts to render the parsed view, fixing the bug.
+
+4.  **Fix Response Viewer File Selection (`view.tsx`):**
+    *   The `viewableContent` prop, which determines what the `CodeViewer` displays, is not being correctly calculated.
+    *   I will re-introduce a `useMemo` hook in the main `view.tsx` container component.
+    *   This hook will be responsible for deriving the `viewableContent`. It will depend on `fileManagement.selectedFilePath`, `tabManagement.tabs`, `tabManagement.activeTab`, and `fileManagement.highlightedCodeBlocks`.
+    *   When `selectedFilePath` changes, this hook will re-run, find the correct file content (either from the parsed response or the syntax-highlighting cache), and update the `viewableContent` variable.
+    *   This variable will then be correctly passed down as a prop to `ResponsePane`, ensuring the `CodeViewer` displays the selected file's content.
+</Previous Cycle 112 Summary of Actions>
+</Cycle 113>
+
 <Cycle 112>
 <Cycle Context>
 nice! okay progress on both accounts. the tokens/sec now shows, and also the files are disaplyed in the response viewer.
 
 it seems we still need one more look at the parsing alignment. we are definitely not parsing correctly. we will take the shortest response and analyze it in the ephemeral context below to ascertain how we need to adjust the parsing. it was 804 tokens, the response, and it came with three files. ill provide you a copy/paste from the response viewer of all three files so you can see how our parser took it, and then also ill paste the un-parsed response so you can see what the raw response looks like. from that, you should be able to adjust our parsing such that we arent butchering the end result.
 </Cycle Context>
-<Ephemeral Context>
-<Tower Defense Game - Master Artifact List.md>
-# Master Artifact List
-# Project: Tower Defense Game
-
-## I. Project Planning & Design
-
-### A1. Tower Defense Game - Project Vision and Goals
-- **Description:** High-level overview of the project, its purpose, and the development plann- **Tags:** project vision, goals, scope, planning
-
-### A2. Tower Defense Game - GitHub Repository Setup Guide
-- **Description:** Guide to set up the Git repo and link to GitHubn- **Tags:** git, github, source control
-
-### A3. Tower Defense Game - Development and Testing Guide
-- **Description:** Standard procedure for running, debugging, and testing the Tower Defense Game locallyn- **Tags:** development workflow, testing, debugging</Tower Defense Game - Master Artifact List.md>
-<Tower Defense Game - Project Vision and Goals.md>
-# Tower Defense Game - Project Vision and Goals
-
-## 1. Project Vision
-
-The vision of **Tower Defense Game** is to provide an engaging, strategy-based arcade experience that allows players to design, upgrade, and defend their base against waves of enemies on a map grid. It aims to provide a compelling mix of real-time action and tactical decision-making that delivers value for both casual and hardcore gamersn
-## 2. High-Level Goals & Phases
-
-The project will be developed in distinct phases to ensure an iterative and manageable workflown
-### Phase 1: Core Gameplay Mechanics
-
-Goal: Establish foundational gameplay including map grid, enemy waves, and basic tower placement/removaln- Core Functionality: Map grid with selectable tiles, tower placement, and simple enemy typesn- Outcome: Players can place towers and watch automated enemies spawn and navigate toward the basen
-### Phase 2: Tower Upgrades & Game Progression
-
-Goal: Enhance gameplay by adding tower upgrades, power-ups, and dynamic enemy wavesn- Core Functionality: Upgrade paths, enemy scaling, UI for progressing wavesn- Outcome: The player can upgrade towers and manage wave progression with increasing difficultyn
-### Phase 3: Polish & Extensibility
-
-Goal: Polish UI/UX, add high score tracking, refactor for modularity, prepare for releasen- Core Functionality: Animations, sound, leaderboard, API integrationn- Outcome: Fully polished game ready for alpha release.
-</Tower Defense Game - Project Vision and Goals.md>
-<Tower Defense Game - Development and Testing Guide.md>
-# Tower Defense Game - Development and Testing Guide
-
-## 1. Purpose
-
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locallyn
-## 2. Development Workflow
-
-### Step 1: Install Dependencies
-
-Ensure all project dependencies are installed using npmn```bash
-npm install
-``n
-### Step 2: Start the Development Server
-
-To compile the code and watch for changes, run the following commandn```bash
-npm run watch
-``nThis will start the development server and automatically recompile your code when you save a filen
-### Step 3: Running the Application
-
-For a web application, this would involve opening a browser to `http://localhost:3000`n
-### Step 4: Debugging
-
-You can set breakpoints directly in your source code. For a browser-based application, this is automatic when launched with the browser's dev toolsn
-## 3. Testing
-
-The project is configured with a testing framework. To run the test suite, use the following commandn```bash
-npm run test
-``nThis will execute all test files located in the project and report the results to the console.
-</Tower Defense Game - Development and Testing Guide.md>
-<raw response>
-{"summary":"I have analyzed the request and generated a set of documentation artifacts for the Tower Defense Game project.","course_of_action":[{"step":1,"description":"Create Tower Defense Game - Master Artifact List.md containing project overview."},{"step":2,"description":"Create Tower Defense Game - Project Vision and Goals.md outlining vision, phases, and goals."},{"step":3,"description":"Create Tower Defense Game - GitHub Repository Setup Guide.md showing Git init, push, and workflow."},{"step":4,"description":"Create Tower Defense Game - Development and Testing Guide.md with dependency install, run, debug and test instructions."}],"files_updated":["Tower Defense Game - Master Artifact List.md","Tower Defense Game - Project Vision and Goals.md","Tower Defense Game - GitHub Repository Setup Guide.md","Tower Defense Game - Development and Testing Guide.md"],"files":[{"path":"Tower Defense Game - Master Artifact List.md","content":"# Master Artifact List\n# Project: Tower Defense Game\n\n## I. Project Planning & Design\n\n### A1. Tower Defense Game - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plann- **Tags:** project vision, goals, scope, planning\n\n### A2. Tower Defense Game - GitHub Repository Setup Guide\n- **Description:** Guide to set up the Git repo and link to GitHubn- **Tags:** git, github, source control\n\n### A3. Tower Defense Game - Development and Testing Guide\n- **Description:** Standard procedure for running, debugging, and testing the Tower Defense Game locallyn- **Tags:** development workflow, testing, debugging"},{"path":"Tower Defense Game - Project Vision and Goals.md","content":"# Tower Defense Game - Project Vision and Goals\n\n## 1. Project Vision\n\nThe vision of **Tower Defense Game** is to provide an engaging, strategy-based arcade experience that allows players to design, upgrade, and defend their base against waves of enemies on a map grid. It aims to provide a compelling mix of real-time action and tactical decision-making that delivers value for both casual and hardcore gamersn\n## 2. High-Level Goals & Phases\n\nThe project will be developed in distinct phases to ensure an iterative and manageable workflown\n### Phase 1: Core Gameplay Mechanics\n\nGoal: Establish foundational gameplay including map grid, enemy waves, and basic tower placement/removaln- Core Functionality: Map grid with selectable tiles, tower placement, and simple enemy typesn- Outcome: Players can place towers and watch automated enemies spawn and navigate toward the basen\n### Phase 2: Tower Upgrades & Game Progression\n\nGoal: Enhance gameplay by adding tower upgrades, power-ups, and dynamic enemy wavesn- Core Functionality: Upgrade paths, enemy scaling, UI for progressing wavesn- Outcome: The player can upgrade towers and manage wave progression with increasing difficultyn\n### Phase 3: Polish & Extensibility\n\nGoal: Polish UI/UX, add high score tracking, refactor for modularity, prepare for releasen- Core Functionality: Animations, sound, leaderboard, API integrationn- Outcome: Fully polished game ready for alpha release."},{"path":"Tower Defense Game - GitHub Repository Setup Guide.md","content":"# Tower Defense Game - GitHub Repository Setup Guide\n\n## 1. Overview\n\nThis guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCEn\n## 2. Prerequisites\n\n*   You have `git` installed on your machinen*   You have a GitHub accountn\n## 3. Step-by-Step Setup\n\n### Step 1: Create a New Repository on GitHub\n\n1.  Go to [github.com](https://github.com) and log inn2.  In the top-right corner, click the `+` icon and select **\"New repository\"**n3.  **Repository name:** Enter a name for your project (e.g., `tower-defense-game`).n4.  **Description:** (Optional) Provide a brief description of your projectn5.  Choose **\"Private\"** or **\"Public\"**n6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflictsn7.  Click **\"Create repository\"**n\nGitHub will now show you a page with command-line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**n\n### Step 2: Initialize Git in Your Local Project\n\nOpen a terminal and navigate to your project's root directory. Then, run the following commands one by onen\n1.  **Initialize the repository:**n    ```bash\n    git init\n    ```n\n2.  **Add all existing files:**n    ```bash\n    git add .n    ```n\n3.  **Create the first commit:**n    ```bash\n    git commit -m 'Initial commitn    ```n\n4.  **Rename the default branch to `main`:**n    ```bash\n    git branch -M main\n    ```n\n### Step 3: Link and Push to GitHub\n\n1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository pagen    ```bash\n    git remote add origin https://github.com/YOUR_USERNAME/Tower-Defense-Game.git\n    ```n\n2.  **Push your local `main` branch to GitHub:**n    ```bash\n    git push -u origin main\n    ```n\nAfter these commands complete, refresh your GitHub repository page. You should see all of your project filesn\n## 4. Sample Development Workflow with DCE and Git\n\nGit is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your placen\n### Step 1: Start with a Clean State\nBefore starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committedn\n### Step 2: Generate a Prompt and Get Responses\nUse the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI modeln\n### Step 3: Paste and Parse\nPaste the responses into the Parallel Co-Pilot Panel and click \"Parse All\"n\n### Step 4: Accept and Test\n1.  Review the responses and find one that looks promisingn2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspacen3.  Now, compile and test the application. Does it work? Does it have errorsn\n### Step 5: The \"Restore\" Loop\nThis is where Git becomes a powerful part of the workflown\n*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**n    1.  Open the terminal in VS Coden    2.  Run the command: `git restore .n    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commitn    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a **different** AI response, and click \"Accept Selected Files\" again to test the next proposed solutionn\n*   **If the changes are good:**n    1.  Open the Source Control panel in VS Coden    2.  Stage the changes (`git add .`).n    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15").n    4.  Commit the changesn    5.  You are now ready to start the next development cycle from a new, clean staten\nThis iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase."},{"path":"Tower Defense Game - Development and Testing Guide.md","content":"# Tower Defense Game - Development and Testing Guide\n\n## 1. Purpose\n\nThis guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locallyn\n## 2. Development Workflow\n\n### Step 1: Install Dependencies\n\nEnsure all project dependencies are installed using npmn```bash\nnpm install\n``n\n### Step 2: Start the Development Server\n\nTo compile the code and watch for changes, run the following commandn```bash\nnpm run watch\n``nThis will start the development server and automatically recompile your code when you save a filen\n### Step 3: Running the Application\n\nFor a web application, this would involve opening a browser to `http://localhost:3000`n\n### Step 4: Debugging\n\nYou can set breakpoints directly in your source code. For a browser-based application, this is automatic when launched with the browser's dev toolsn\n## 3. Testing\n\nThe project is configured with a testing framework. To run the test suite, use the following commandn```bash\nnpm run test\n``nThis will execute all test files located in the project and report the results to the console."}]}
-</raw response>
-</Ephemeral Context>
 <Previous Cycle 111 Summary of Actions>
 I have analyzed the feedback from Cycle 110 and identified two distinct issues. The primary issue is a bug in the backend's Server-Sent Events (SSE) parser in `llm.service.ts`, which is causing both sporadic JSON parsing errors and truncation of the final response content. The secondary issue is a UI lag when using the "Stop" button, which can be solved with an optimistic state update on the frontend.
 
@@ -5517,16 +8167,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-06T00:22:37.166Z
+  Date Generated: 2025-10-06T13:11:30.773Z
   ---
   Total Files: 179
-  Approx. Tokens: 250607
+  Approx. Tokens: 251990
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-2. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-3. src\Artifacts\A111. DCE - New Regression Case Studies.md (6270 tokens)
+2. src\Artifacts\A111. DCE - New Regression Case Studies.md (7403 tokens)
+3. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
 4. src\backend\services\prompt.service.ts (5143 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
 6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -5642,7 +8292,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 282 - Chars: 14551 - Tokens: 3638
+107. src\backend\services\llm.service.ts - Lines: 293 - Chars: 14943 - Tokens: 3736
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -5671,7 +8321,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 109 - Chars: 4783 - Tokens: 1196
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8816 - Tokens: 2204
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 289 - Chars: 16724 - Tokens: 4181
@@ -5697,7 +8347,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
-162. src\client\utils\response-parser.ts - Lines: 155 - Chars: 7285 - Tokens: 1822
+162. src\client\utils\response-parser.ts - Lines: 162 - Chars: 7718 - Tokens: 1930
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
@@ -5714,7 +8364,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 209 - Chars: 25079 - Tokens: 6270
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 249 - Chars: 29610 - Tokens: 7403
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -14146,7 +16796,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C110 (Fix JSON parser brace counting)
+// Updated on: C113 (Add custom https agent for connection pooling)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -14156,9 +16806,19 @@ import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
 import { GenerationProgress } from '@/common/ipc/channels.type';
 import { Readable } from 'stream';
+import { HttpsAgent } from 'agentkeepalive';
 
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
+
+// Create a single, reusable agent to manage connection pooling
+const httpsAgent = new HttpsAgent({
+    maxSockets: 100,
+    maxFreeSockets: 10,
+    timeout: 60000, // active socket timeout
+    freeSocketTimeout: 30000, // free socket timeout
+});
+
 
 export class LlmService {
 
@@ -14229,6 +16889,7 @@ export class LlmService {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                     signal: controller.signal,
+                    agent: httpsAgent, // Use the custom agent for connection pooling
                 });
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
@@ -14268,7 +16929,7 @@ export class LlmService {
                                                     richResponse.endTime = Date.now();
                                                     progress.status = 'complete';
                                                 } else if (data.choices?.[0]?.delta) {
-                                                    const delta = data.choices[0].delta;
+                                                    const delta = data.choices.delta;
                                                     if (delta.reasoning_content) {
                                                         if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
                                                         const contentChunk = delta.reasoning_content;
@@ -21335,7 +23996,7 @@ The workflow for generating AI responses needs to be more flexible and deliberat
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C65 (Add hybrid JSON/regex fallback parser)
+// Updated on: C113 (Fix newline character stripping)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -21366,11 +24027,16 @@ export function parseResponse(rawText: string): ParsedResponse {
     try {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
-            const files: ParsedFile[] = jsonResponse.files.map((f: any) => ({
-                path: f.path || '',
-                content: (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'"),
-                tokenCount: Math.ceil((f.content || '').length / 4),
-            }));
+            const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
+                let content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+                // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
+                // content = content.replace(/n\n/g, '\n'); // REMOVED
+                return {
+                    path: f.path || '',
+                    content: content,
+                    tokenCount: Math.ceil(content.length / 4),
+                };
+            });
 
             const courseOfAction = Array.isArray(jsonResponse.course_of_action)
                 ? jsonResponse.course_of_action
@@ -21399,7 +24065,9 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            let content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
+            // content = content.replace(/n\n/g, '\n'); // REMOVED
             return {
                 path: match[1] || '',
                 content: content,
@@ -23073,13 +25741,53 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C111 (Add C111 bugs)
+# Updated on: C113 (Add Concurrency and Parsing cases)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 018: Parallel Fetch Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C113
+-   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
+-   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a pool of sockets for connections. While the default `maxSockets` is technically `Infinity`, in practice, factors within the execution environment (like VS Code's extension host) can lead to exhaustion or delays in acquiring new sockets for concurrent requests to the same origin. When the application tries to open several connections at once, the later requests can time out while waiting for a socket to become available.
+-   **Codified Solution & Best Practice:**
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
+    2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
+    3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
+    4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
+
+---
+
+### Case Study 017: Parser Appears to Corrupt Newline Sequences
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112, C113
+-   **Symptom:** Valid double-newline sequences (`\n\n`) in the raw AI response are being rendered incorrectly in the UI as `n\n`. This indicates that a backslash is being stripped at some point during parsing or sanitization.
+-   **Root Cause Analysis (RCA):** The exact cause is unclear, but the primary suspect is an overly aggressive string replacement intended to fix a different model-specific quirk (`n\n`). The logic is likely misinterpreting or incorrectly modifying valid newline escape sequences. A definitive RCA requires observing the data transformation.
+-   **Codified Solution & Best Practice:**
+    1.  When debugging a string manipulation or parsing issue where the output is corrupted, the first step is to inject logging to trace the data's state at each step of the transformation.
+    2.  Add `logger.log` statements in the parser to output the string immediately after it's received and after each significant `replace()` or sanitization operation.
+    3.  This "before and after" logging provides an unambiguous view of how the data is being altered, allowing for the precise correction of the faulty logic.
+
+---
+
+### Case Study 016: Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112
+-   **Symptom:** When parsing a JSON response from the LLM, the final file content in the UI is corrupted. It shows extra `n` characters, for example, rendering `wordn\n` instead of `word\n`, or `wordn- list item` instead of `word\n- list item`.
+-   **Root Cause Analysis (RCA):** The LLM, when instructed to produce JSON output, is not perfectly consistent in how it represents newlines within string values. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts an extra literal `n` character immediately before the newline (`...wordn\n...`) or before a markdown formatting character (`...wordn- list item...`). The existing parser correctly handled the standard `\n` but did not have a sanitization step to clean up these spurious `n` characters, causing them to be passed through to the final rendered output.
+-   **Codified Solution & Best Practice:**
+    1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
+    2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
+    3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
 
 ---
 
