@@ -1,23 +1,23 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-08T14:25:42.972Z
+  Date Generated: 2025-10-08T15:13:10.357Z
   ---
-  Total Files: 179
-  Approx. Tokens: 251973
+  Total Files: 188
+  Approx. Tokens: 296697
 -->
 
 <!-- Top 10 Text Files by Token Count -->
-1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-2. src\Artifacts\A111. DCE - New Regression Case Studies.md (7820 tokens)
-3. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-4. src\backend\services\prompt.service.ts (5143 tokens)
-5. src\backend\services\file-operation.service.ts (4526 tokens)
-6. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-7. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
-8. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (4181 tokens)
-10. src\client\views\context-chooser.view\view.tsx (4033 tokens)
+1. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
+2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
+3. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
+4. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
+5. src\Artifacts\A111. DCE - New Regression Case Studies.md (7886 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
+7. src\backend\services\prompt.service.ts (5240 tokens)
+8. src\backend\services\file-operation.service.ts (4526 tokens)
+9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+10. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -126,9 +126,9 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 275 - Chars: 13624 - Tokens: 3406
+107. src\backend\services\llm.service.ts - Lines: 275 - Chars: 13898 - Tokens: 3475
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
+109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
 112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -181,7 +181,7 @@
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
-162. src\client\utils\response-parser.ts - Lines: 159 - Chars: 7302 - Tokens: 1826
+162. src\client\utils\response-parser.ts - Lines: 159 - Chars: 7460 - Tokens: 1865
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
@@ -198,7 +198,16 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 264 - Chars: 31279 - Tokens: 7820
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 264 - Chars: 31542 - Tokens: 7886
+180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
+181. GPT-OSS-HARMONY-REFERENCE-REPO\custom_python_instruction.py - Lines: 59 - Chars: 1605 - Tokens: 402
+182. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html - Lines: 1323 - Chars: 56615 - Tokens: 14154
+183. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py - Lines: 1396 - Chars: 62225 - Tokens: 15557
+184. GPT-OSS-HARMONY-REFERENCE-REPO\official_python_instruction.py - Lines: 10 - Chars: 742 - Tokens: 186
+185. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json - Lines: 1989 - Chars: 39640 - Tokens: 9910
+186. GPT-OSS-HARMONY-REFERENCE-REPO\python_function_wrapper.py - Lines: 103 - Chars: 3444 - Tokens: 861
+187. GPT-OSS-HARMONY-REFERENCE-REPO\python_tool_wrapper.py - Lines: 164 - Chars: 6624 - Tokens: 1656
+188. GPT-OSS-HARMONY-REFERENCE-REPO\README.md - Lines: 157 - Chars: 3863 - Tokens: 966
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -17815,5 +17824,5353 @@ This document serves as a living record of persistent or complex bugs. By docume
     2.  In the Express.js route handler for the proxy, create a new `AbortController` for the downstream `fetch` request.
     3.  Pass the controller's `signal` to the `fetch` options.
     4.  Register an event listener on the client response object: `res.on('close', () => { controller.abort(); });`. This ensures that if the client hangs up, the server immediately aborts the expensive downstream operation, freeing up resources.
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/builtin_tool_instructions.py">
+#!/usr/bin/env python3
+"""
+Instructions for built-in tools that should be added directly to developer message
+"""
+
+def get_builtin_tools_instruction(include_python=False, include_browser=False):
+    """Get instructions for enabled built-in tools"""
+    if not include_python and not include_browser:
+        return ""
+    
+    sections = ["# Built-in Tools"]
+    
+    if include_python:
+        sections.append("""
+## python
+
+The `python` tool executes Python code for calculations, data processing, and internal reasoning. When asked to perform calculations, generate sequences, or process data, you should use this tool to ensure accuracy.
+
+### Usage
+To use the python tool, send a message in the analysis channel:
+```
+<|channel|>analysis to=python<|message|>
+# Your Python code here
+print(result)  # Use print to see output
+<|end|>
+```
+
+### Important Notes
+- The code runs in a stateless environment - variables don't persist between calls
+- Always use `print()` to see results - return values alone won't be visible
+- The code execution has a 30-second timeout
+- Standard library modules are available (math, datetime, json, etc.)
+- External packages like numpy, pandas are NOT available
+
+### Examples
+
+1. **Mathematical calculations:**
+```
+<|channel|>analysis to=python<|message|>
+import math
+x = 5
+y = 12
+hypotenuse = math.sqrt(x**2 + y**2)
+print(f"The hypotenuse of a {x}-{y} right triangle is {hypotenuse}")
+<|end|>
+```
+
+2. **Date/time operations:**
+```
+<|channel|>analysis to=python<|message|>
+from datetime import datetime, timedelta
+today = datetime.now()
+future = today + timedelta(days=30)
+print(f"30 days from now will be: {future.strftime('%Y-%m-%d')}")
+<|end|>
+```
+
+3. **Data processing:**
+```
+<|channel|>analysis to=python<|message|>
+data = [23, 45, 12, 67, 34, 89, 21]
+average = sum(data) / len(data)
+print(f"Average: {average:.2f}")
+print(f"Max: {max(data)}, Min: {min(data)}")
+<|end|>
+```""")
+    
+    if include_browser:
+        sections.append("""
+## browser
+
+The built-in browser tool allows me to help you find information on the web and browse specific web pages.
+
+I can search the web, open pages, find specific content on pages, and navigate through search results. The browser runs in a stateless mode where each command starts fresh.
+
+### Available Commands
+
+1. **Search the web:**
+```
+<|channel|>analysis to=browser<|message|>
+search [query] [optional: topn=5] [optional: source=web]
+<|end|>
+```
+
+2. **Open a search result or URL:**
+```
+<|channel|>analysis to=browser<|message|>
+open [id or url]
+<|end|>
+```
+
+3. **Find text on the current page:**
+```
+<|channel|>analysis to=browser<|message|>
+find [text]
+<|end|>
+```
+
+### Example Usage
+
+**Searching for information:**
+```
+<|channel|>analysis to=browser<|message|>
+search "latest AI developments" topn=5
+<|end|>
+```
+
+**Opening a specific result:**
+```
+<|channel|>analysis to=browser<|message|>
+open 1
+<|end|>
+```
+
+**Finding specific content:**
+```
+<|channel|>analysis to=browser<|message|>
+find "machine learning"
+<|end|>
+```""")
+    
+    return "\n".join(sections)
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/custom_python_instruction.py">
+#!/usr/bin/env python3
+"""
+Custom Python tool instruction for HARMONY
+"""
+
+PYTHON_INSTRUCTION = """
+## python
+
+The `python` tool executes Python code for calculations, data processing, and internal reasoning. When asked to perform calculations, generate sequences, or process data, you should use this tool to ensure accuracy.
+
+### Usage
+To use the python tool, send a message in the analysis channel:
+```
+<|channel|>analysis to=python<|message|>
+# Your Python code here
+print(result)  # Use print to see output
+<|end|>
+```
+
+### Important Notes
+- The code runs in a stateless environment - variables don't persist between calls
+- Always use `print()` to see results - return values alone won't be visible
+- The code execution has a 30-second timeout
+- Standard library modules are available (math, datetime, json, etc.)
+- External packages like numpy, pandas are NOT available
+
+### Examples
+
+1. **Mathematical calculations:**
+```
+<|channel|>analysis to=python<|message|>
+import math
+x = 5
+y = 12
+hypotenuse = math.sqrt(x**2 + y**2)
+print(f"The hypotenuse of a {x}-{y} right triangle is {hypotenuse}")
+<|end|>
+```
+
+2. **Date/time operations:**
+```
+<|channel|>analysis to=python<|message|>
+from datetime import datetime, timedelta
+today = datetime.now()
+future = today + timedelta(days=30)
+print(f"30 days from now will be: {future.strftime('%Y-%m-%d')}")
+<|end|>
+```
+
+3. **Data processing:**
+```
+<|channel|>analysis to=python<|message|>
+data = [23, 45, 12, 67, 34, 89, 21]
+average = sum(data) / len(data)
+print(f"Average: {average:.2f}")
+print(f"Max: {max(data)}, Min: {min(data)}")
+<|end|>
+```
+""".strip()
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/harmony_educational_demo.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARMONY System - Educational Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #b3d9ff;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .tool-selector {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .tool-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .tool-card.active {
+            background: rgba(255,255,255,0.2);
+            border-color: #4fc3f7;
+            box-shadow: 0 0 20px rgba(79,195,247,0.5);
+        }
+
+        .tool-card .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .tool-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            font-size: 0.9em;
+            color: #b3d9ff;
+        }
+
+        .demo-area {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .demo-area.active {
+            display: block;
+        }
+
+        .flow-visualization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .flow-step {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        .flow-step:nth-child(1) { animation-delay: 0.1s; }
+        .flow-step:nth-child(2) { animation-delay: 0.2s; }
+        .flow-step:nth-child(3) { animation-delay: 0.3s; }
+        .flow-step:nth-child(4) { animation-delay: 0.4s; }
+
+        .flow-step h4 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #4fc3f7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #4fc3f7;
+            color: #1e3c72;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 15px;
+        }
+
+        .code-block.prompt {
+            background: rgba(0,0,0,0.4);
+            border-color: #4fc3f7;
+        }
+
+        .prompt-display {
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #4fc3f7;
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .prompt-header {
+            background: rgba(79,195,247,0.2);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(79,195,247,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prompt-header h5 {
+            margin: 0;
+            color: #4fc3f7;
+            font-size: 1.1em;
+        }
+
+        .token-count {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #ffd54f;
+        }
+
+        .prompt-content {
+            padding: 20px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .prompt-tag {
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .prompt-section {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            white-space: pre-wrap;
+        }
+
+        .prompt-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .highlight {
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+
+        .channel-tag {
+            color: #ffd54f;
+        }
+
+        .tool-definition {
+            background: rgba(79,195,247,0.1);
+            border: 1px solid rgba(79,195,247,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .result-display {
+            background: rgba(76,175,80,0.1);
+            border: 1px solid rgba(76,175,80,0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .arrow-down {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            color: #4fc3f7;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid #4fc3f7;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h5 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+        }
+
+        .loading-animation {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #4fc3f7;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .channel-breakdown {
+            background: rgba(0,0,0,0.4);
+            border: 2px solid rgba(79,195,247,0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .channel-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4fc3f7;
+        }
+
+        .channel-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .channel-section h5 {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .channel-icon {
+            background: rgba(79,195,247,0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .channel-content {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .tool-execution {
+            background: rgba(76,175,80,0.1);
+            border: 1px solid rgba(76,175,80,0.3);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+
+        .tool-call {
+            color: #ffd54f;
+        }
+
+        .tool-result {
+            color: #81c784;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .tool-selector {
+                gap: 15px;
+            }
+            
+            .tool-card {
+                min-width: 150px;
+                padding: 20px;
+            }
+            
+            .demo-area {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>HARMONY System</h1>
+            <p>Understanding OpenAI's Structured Generation System Through Interactive Examples</p>
+            <div style="margin-top: 30px;">
+                <p style="font-size: 1.1em; color: #ffd54f;">✨ Click on any tool below to explore how HARMONY works!</p>
+            </div>
+        </header>
+
+        <div class="tool-selector">
+            <div class="tool-card" onclick="showDemo('python')" id="python-card">
+                <div class="icon">🐍</div>
+                <h3>Python Tool</h3>
+                <p>Execute Python code in a secure Docker environment</p>
+            </div>
+            
+            <div class="tool-card" onclick="showDemo('weather')" id="weather-card">
+                <div class="icon">🌤️</div>
+                <h3>Weather Tool</h3>
+                <p>Get current weather information for any location</p>
+            </div>
+            
+            <div class="tool-card" onclick="showDemo('browser')" id="browser-card">
+                <div class="icon">🌐</div>
+                <h3>Vision Browser</h3>
+                <p>Navigate and extract content from websites</p>
+            </div>
+        </div>
+
+        <!-- Python Tool Demo -->
+        <div class="demo-area" id="python-demo">
+            <h2>Python Tool: Rolling a D20 Dice</h2>
+            
+            <div class="info-box">
+                <h5>About the Python Tool</h5>
+                <p>The Python tool allows the model to execute Python code in a secure, sandboxed Docker environment. This ensures safe code execution while providing powerful computational capabilities.</p>
+            </div>
+
+            <div class="flow-visualization">
+                <div class="flow-step">
+                    <h4><span class="step-number">1</span> Initial LLM Call</h4>
+                    <p>The user asks the model to roll a D20 dice using Python:</p>
+                    
+                    <div class="prompt-display">
+                        <div class="prompt-header">
+                            <h5>Initial Prompt</h5>
+                            <span class="token-count">227 tokens</span>
+                        </div>
+                        <div class="prompt-content">
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;system&lt;|message|&gt;</span>You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2024-06
+Current date: 2025-08-17
+
+Reasoning: high
+
+# Valid channels: analysis, commentary, final. Channel must be included for every message.
+Calls to these tools must go to the commentary channel: 'functions'.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;developer&lt;|message|&gt;</span># Instructions
+
+Use a friendly tone and be helpful.
+
+# Tools
+
+## functions
+
+namespace functions {
+
+// Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output. The code runs in a stateless environment. Example: print(random.randint(1,20)) NOT just random.randint(1,20)
+type python = (_: {
+// Python code to execute. ALWAYS use print() to show results. Example: print(random.randint(1,20)) will output the number. Just random.randint(1,20) will output nothing.
+code: string,
+}) => any;
+
+} // namespace functions<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;user&lt;|message|&gt;</span>Use the python tool to roll a D20 dice and tell me what I rolled.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">2</span> Model's Response</h4>
+                    <p>The model analyzes the request and calls the Python tool via the functions namespace:</p>
+                    <div class="code-block">
+<span class="channel-tag">&lt;|channel|&gt;analysis&lt;|message|&gt;</span>
+The user says: "Use the python tool to roll a D20 dice and tell me what I rolled." 
+I should use the python tool. That is allowed: The user request is to roll a 
+20-sided die. So I will write code to print a random roll between 1 and 20. 
+I must use print(). Also likely I should import random. According to the tool 
+spec: The code to be executed is provided in a string. I need to return output 
+from the python tool.
+
+Thus, I should construct the python code string "import random\nprint(random.randint(1, 20))" 
+and call the function. The result will be the roll. I should output the result. 
+Use the code snippet.
+
+I will just do that. And my final answer: "You rolled X." Where X is the number 
+from python. That will be dynamic. But with the tool, we call function to produce 
+output. So need to produce the code string. Let me do that.
+
+We have to respond with the function call. The expected output will incorporate 
+the function invocation. So I should produce code that calls functions.python({code: 
+"import random\nprint(random.randint(1, 20))"}).
+
+Thus final output should be a JSON function invocation.
+<span class="channel-tag">&lt;|end|&gt;</span>
+<span class="channel-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=functions.python &lt;|constrain|&gt;json&lt;|message|&gt;</span>
+{"code":"import random\nprint(random.randint(1, 20))"}
+<span class="channel-tag">&lt;|call|&gt;</span>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">3</span> Second LLM Call (After Tool)</h4>
+                    <p>After the Python tool executes, the LLM is called again with the result:</p>
+                    
+                    <div class="prompt-display">
+                        <div class="prompt-header">
+                            <h5>Continuation After Tool Call</h5>
+                            <span class="token-count">538 tokens</span>
+                        </div>
+                        <div class="prompt-content">
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;system&lt;|message|&gt;</span>You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2024-06
+Current date: 2025-08-17
+
+Reasoning: high
+
+# Valid channels: analysis, commentary, final. Channel must be included for every message.
+Calls to these tools must go to the commentary channel: 'functions'.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;developer&lt;|message|&gt;</span># Instructions
+
+Use a friendly tone and be helpful.
+
+# Tools
+
+## functions
+
+namespace functions {
+
+// Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output. The code runs in a stateless environment. Example: print(random.randint(1,20)) NOT just random.randint(1,20)
+type python = (_: {
+// Python code to execute. ALWAYS use print() to show results. Example: print(random.randint(1,20)) will output the number. Just random.randint(1,20) will output nothing.
+code: string,
+}) => any;
+
+} // namespace functions<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;user&lt;|message|&gt;</span>Use the python tool to roll a D20 dice and tell me what I rolled.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;analysis&lt;|message|&gt;</span>The user says: "Use the python tool to roll a D20 dice and tell me what I rolled." 
+I should use the python tool. That is allowed: The user request is to roll a 
+20-sided die. So I will write code to print a random roll between 1 and 20. 
+I must use print(). Also likely I should import random. According to the tool 
+spec: The code to be executed is provided in a string. I need to return output 
+from the python tool.
+
+Thus, I should construct the python code string "import random\nprint(random.randint(1, 20))" 
+and call the function. The result will be the roll. I should output the result. 
+Use the code snippet.
+
+I will just do that. And my final answer: "You rolled X." Where X is the number 
+from python. That will be dynamic. But with the tool, we call function to produce 
+output. So need to produce the code string. Let me do that.
+
+We have to respond with the function call. The expected output will incorporate 
+the function invocation. So I should produce code that calls functions.python({code: 
+"import random\nprint(random.randint(1, 20))"}).
+
+Thus final output should be a JSON function invocation.<span class="prompt-tag">&lt;|end|&gt;</span>
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=functions.python &lt;|constrain|&gt;json&lt;|message|&gt;</span>{"code":"import random\nprint(random.randint(1, 20))"}<span class="prompt-tag">&lt;|call|&gt;</span>
+<span class="prompt-tag">&lt;|start|&gt;functions.python to=assistant&lt;|channel|&gt;commentary&lt;|message|&gt;</span>{"output": "15\n"}<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|message|&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">4</span> Final Response</h4>
+                    <p>The model formats the result into a user-friendly response:</p>
+                    <div class="result-display">
+                        <strong>Assistant:</strong> I rolled the D20 dice for you using Python, and you got a <strong>15</strong>!<br><br>
+                        That's a great roll! Well above average (the average on a D20 is 10.5). In most 
+                        tabletop RPGs, a 15 would likely succeed on many challenging tasks. Nice one! 🎲
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down">↓</div>
+
+            <div class="channel-breakdown">
+                <h4 style="text-align: center; color: #ffd54f; margin-bottom: 30px;">Complete Channel Flow Breakdown</h4>
+                
+                <div class="channel-section">
+                    <h5><span class="channel-icon">💭</span> Analysis Channel</h5>
+                    <div class="channel-content">
+                        The user says: "Use the python tool to roll a D20 dice and tell me what I rolled." 
+                        I should use the python tool. That is allowed: The user request is to roll a 
+                        20-sided die. So I will write code to print a random roll between 1 and 20. 
+                        I must use print(). Also likely I should import random. According to the tool 
+                        spec: The code to be executed is provided in a string. I need to return output 
+                        from the python tool.
+                        <br><br>
+                        Thus, I should construct the python code string "import random\nprint(random.randint(1, 20))" 
+                        and call the function. The result will be the roll. I should output the result.
+                    </div>
+                </div>
+
+                <div class="channel-section">
+                    <h5><span class="channel-icon">🔧</span> Commentary Channel</h5>
+                    <div class="channel-content">
+                        <div class="tool-execution">
+                            <div class="tool-call">
+                                <strong>Tool Call:</strong> to=functions.python<br>
+                                <strong>Parameters:</strong><br>
+                                {<br>
+                                &nbsp;&nbsp;"code": "import random\nprint(random.randint(1, 20))"<br>
+                                }
+                            </div>
+                            <div class="tool-result">
+                                <strong>Tool Response:</strong><br>
+                                {"output": "15\n"}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="channel-section">
+                    <h5><span class="channel-icon">✅</span> Final Channel</h5>
+                    <div class="channel-content">
+                        I rolled the D20 dice for you using Python, and you got a <strong style="color: #4fc3f7;">15</strong>!
+                        <br><br>
+                        That's a great roll! Well above average (the average on a D20 is 10.5). In most 
+                        tabletop RPGs, a 15 would likely succeed on many challenging tasks. Nice one! 🎲
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-definition">
+                <h5>Tool Definition in TypeScript</h5>
+                <div class="code-block">
+namespace functions {
+    // Execute Python code and return the output. 
+    // IMPORTANT: You MUST use print() to produce output. 
+    // The code runs in a stateless environment.
+    type python = (_: {
+        // Python code to execute. ALWAYS use print() to show results.
+        code: string,
+    }) => any;
+}
+                </div>
+                <p style="margin-top: 15px; color: #b3d9ff;">
+                    <strong>Note:</strong> The Python tool is called via <code>functions.python</code> through the commentary channel, 
+                    not through a dedicated Python channel. This is an important distinction in the HARMONY system.
+                </p>
+            </div>
+        </div>
+
+        <!-- Weather Tool Demo -->
+        <div class="demo-area" id="weather-demo">
+            <h2>Weather Tool: Getting NYC Weather</h2>
+            
+            <div class="info-box">
+                <h5>About the Weather Tool</h5>
+                <p>The Weather tool provides real-time weather information for any location. It's a function-based tool that the model can call with specific parameters.</p>
+            </div>
+
+            <div class="flow-visualization">
+                <div class="flow-step">
+                    <h4><span class="step-number">1</span> Initial LLM Call</h4>
+                    <p>The user asks about the weather in New York City:</p>
+                    
+                    <div class="prompt-display">
+                        <div class="prompt-header">
+                            <h5>Initial Prompt</h5>
+                            <span class="token-count">172 tokens</span>
+                        </div>
+                        <div class="prompt-content">
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;system&lt;|message|&gt;</span>You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2024-06
+Current date: 2025-08-17
+
+Reasoning: high
+
+# Valid channels: analysis, commentary, final. Channel must be included for every message.
+Calls to these tools must go to the commentary channel: 'functions'.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;developer&lt;|message|&gt;</span># Instructions
+
+Use a friendly tone and be helpful.
+
+# Tools
+
+## functions
+
+namespace functions {
+
+// Gets the current weather in the provided location
+type get_current_weather = (_: {
+// The city or location to get weather for
+location: string,
+// Temperature format (default: celsius)
+format?: "celsius" | "fahrenheit",
+}) => any;
+
+} // namespace functions<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;user&lt;|message|&gt;</span>What is the weather like in New York City?<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">2</span> Model's Response</h4>
+                    <p>The model analyzes the request and calls the weather function:</p>
+                    <div class="code-block">
+<span class="channel-tag">&lt;|channel|&gt;analysis&lt;|message|&gt;</span>
+We need to fetch current weather in New York City. Use function 
+get_current_weather with location "New York City". Also maybe 
+specify default temperature format? Likely default celsius. 
+We'll call function.
+<span class="channel-tag">&lt;|end|&gt;</span>
+<span class="channel-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=functions.get_current_weather &lt;|constrain|&gt;json&lt;|message|&gt;</span>
+{"location":"New York City"}
+<span class="channel-tag">&lt;|call|&gt;</span>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">3</span> Second LLM Call (After Tool)</h4>
+                    <p>After the weather function returns data, the LLM is called again with the result:</p>
+                    
+                    <div class="prompt-display">
+                        <div class="prompt-header">
+                            <h5>Continuation After Tool Call</h5>
+                            <span class="token-count">285 tokens</span>
+                        </div>
+                        <div class="prompt-content">
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;system&lt;|message|&gt;</span>You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2024-06
+Current date: 2025-08-17
+
+Reasoning: high
+
+# Valid channels: analysis, commentary, final. Channel must be included for every message.
+Calls to these tools must go to the commentary channel: 'functions'.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;developer&lt;|message|&gt;</span># Instructions
+
+Use a friendly tone and be helpful.
+
+# Tools
+
+## functions
+
+namespace functions {
+
+// Gets the current weather in the provided location
+type get_current_weather = (_: {
+// The city or location to get weather for
+location: string,
+// Temperature format (default: celsius)
+format?: "celsius" | "fahrenheit",
+}) => any;
+
+} // namespace functions<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;user&lt;|message|&gt;</span>What is the weather like in New York City?<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;analysis&lt;|message|&gt;</span>We need to fetch current weather in New York City. Use function 
+get_current_weather with location "New York City". Also maybe 
+specify default temperature format? Likely default celsius. 
+We'll call function.<span class="prompt-tag">&lt;|end|&gt;</span>
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=functions.get_current_weather &lt;|constrain|&gt;json&lt;|message|&gt;</span>{"location":"New York City"}<span class="prompt-tag">&lt;|call|&gt;</span>
+<span class="prompt-tag">&lt;|return|&gt;</span>{"temperature": 12, "unit": "celsius", "condition": "rainy", "humidity": 88, "wind_speed": 22, "location": "New York City"}<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|message|&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">4</span> Final Response</h4>
+                    <p>The model formats the weather data into a friendly response:</p>
+                    <div class="result-display">
+                        <strong>Here's the latest weather snapshot for New York City (as of the most recent update):</strong><br><br>
+                        
+                        - <strong>Temperature:</strong> 12 °C (about 54 °F)<br>
+                        - <strong>Condition:</strong> Light rain – a few clouds with scattered showers.<br>
+                        - <strong>Humidity:</strong> ~88 % – a bit muggy.<br>
+                        - <strong>Wind:</strong> 22 km/h (≈ 14 mph) from the southeast, so keep an umbrella handy.<br><br>
+                        
+                        It's a typical rainy weekday, so if you're heading out, a waterproof jacket and a sturdy pair of shoes will keep you comfortable. Let me know if you'd like a forecast for the next few days or tips on indoor activities!
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down">↓</div>
+
+            <div class="channel-breakdown">
+                <h4 style="text-align: center; color: #ffd54f; margin-bottom: 30px;">Complete Channel Flow Breakdown</h4>
+                
+                <div class="channel-section">
+                    <h5><span class="channel-icon">💭</span> Analysis Channel</h5>
+                    <div class="channel-content">
+                        We need to fetch current weather in New York City. Use function 
+                        get_current_weather with location "New York City". Also maybe 
+                        specify default temperature format? Likely default celsius. 
+                        We'll call function.
+                    </div>
+                </div>
+
+                <div class="channel-section">
+                    <h5><span class="channel-icon">🔧</span> Commentary Channel</h5>
+                    <div class="channel-content">
+                        <div class="tool-execution">
+                            <div class="tool-call">
+                                <strong>Tool Call:</strong> to=functions.get_current_weather<br>
+                                <strong>Parameters:</strong><br>
+                                {<br>
+                                &nbsp;&nbsp;"location": "New York City"<br>
+                                }
+                            </div>
+                            <div class="tool-result">
+                                <strong>Tool Response:</strong><br>
+                                {<br>
+                                &nbsp;&nbsp;"temperature": 12,<br>
+                                &nbsp;&nbsp;"unit": "celsius",<br>
+                                &nbsp;&nbsp;"condition": "rainy",<br>
+                                &nbsp;&nbsp;"humidity": 88,<br>
+                                &nbsp;&nbsp;"wind_speed": 22,<br>
+                                &nbsp;&nbsp;"location": "New York City"<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="channel-section">
+                    <h5><span class="channel-icon">✅</span> Final Channel</h5>
+                    <div class="channel-content">
+                        Here's the latest weather snapshot for New York City (as of the most recent update):<br><br>
+                        
+                        - <strong>Temperature:</strong> 12 °C (about 54 °F)<br>
+                        - <strong>Condition:</strong> Light rain – a few clouds with scattered showers.<br>
+                        - <strong>Humidity:</strong> ~88 % – a bit muggy.<br>
+                        - <strong>Wind:</strong> 22 km/h (≈ 14 mph) from the southeast, so keep an umbrella handy.<br><br>
+                        
+                        It's a typical rainy weekday, so if you're heading out, a waterproof jacket and a 
+                        sturdy pair of shoes will keep you comfortable. Let me know if you'd like a forecast 
+                        for the next few days or tips on indoor activities!
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-definition">
+                <h5>Tool Definition in TypeScript</h5>
+                <div class="code-block">
+namespace functions {
+    // Gets the current weather in the provided location
+    type get_current_weather = (_: {
+        // The city or location to get weather for
+        location: string,
+        // Temperature format (default: celsius)
+        format?: "celsius" | "fahrenheit",
+    }) => any;
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- Browser Tool Demo -->
+        <div class="demo-area" id="browser-demo">
+            <h2>Vision Browser Tool: Browsing Hacker News</h2>
+            
+            <div class="info-box">
+                <h5>About the Vision Browser Tool</h5>
+                <p>The Vision Browser tool allows the model to navigate to websites and extract their content. It operates through a channel-based communication system and can interact with web pages programmatically.</p>
+            </div>
+
+            <div class="flow-visualization">
+                <div class="flow-step">
+                    <h4><span class="step-number">1</span> Initial LLM Call</h4>
+                    <p>The user asks to check Hacker News:</p>
+                    
+                    <div class="prompt-display">
+                        <div class="prompt-header">
+                            <h5>Initial Prompt</h5>
+                            <span class="token-count">166 tokens</span>
+                        </div>
+                        <div class="prompt-content">
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;system&lt;|message|&gt;</span>You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2024-06
+Current date: 2025-08-17
+
+Reasoning: high
+
+# Valid channels: analysis, commentary, final. Channel must be included for every message.
+Calls to these tools must go to the commentary channel: 'browser'.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;developer&lt;|message|&gt;</span># Instructions
+
+Use a friendly tone and be helpful.
+
+# Browser tool
+
+## browser
+
+namespace browser {
+
+type navigate = (_: {
+// URL to navigate to
+url: string,
+}) => any;
+
+} // namespace browser<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;user&lt;|message|&gt;</span>Please browse to Hacker News (news.ycombinator.com) and tell me what is currently on the front page. The browser will automatically extract the text content when you navigate there.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">2</span> Model's Response</h4>
+                    <p>The model analyzes the request and calls the browser tool:</p>
+                    <div class="code-block">
+<span class="channel-tag">&lt;|channel|&gt;analysis&lt;|message|&gt;</span>
+The user: "Please browse to Hacker News (news.ycombinator.com) 
+and tell me what is currently on the front page. The browser 
+will automatically extract the text content when you navigate 
+there."
+
+We have a browser tool. They want the current front page. We 
+need to navigate to news.ycombinator.com, then read the content. 
+The browser tool will extract the text content. So we can call 
+browser.navigate with url: "https://news.ycombinator.com/".
+<span class="channel-tag">&lt;|end|&gt;</span>
+<span class="channel-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=browser.navigate &lt;|constrain|&gt;json&lt;|message|&gt;</span>
+{"url":"https://news.ycombinator.com/"}
+<span class="channel-tag">&lt;|call|&gt;</span>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">3</span> Second LLM Call (After Tool)</h4>
+                    <p>After the browser extracts the page content, the LLM is called again:</p>
+                    
+                    <div class="prompt-display">
+                        <div class="prompt-header">
+                            <h5>Continuation After Tool Call</h5>
+                            <span class="token-count">372 tokens</span>
+                        </div>
+                        <div class="prompt-content">
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;system&lt;|message|&gt;</span>You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2024-06
+Current date: 2025-08-17
+
+Reasoning: high
+
+# Valid channels: analysis, commentary, final. Channel must be included for every message.
+Calls to these tools must go to the commentary channel: 'browser'.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;developer&lt;|message|&gt;</span># Instructions
+
+Use a friendly tone and be helpful.
+
+# Browser tool
+
+## browser
+
+namespace browser {
+
+type navigate = (_: {
+// URL to navigate to
+url: string,
+}) => any;
+
+} // namespace browser<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;user&lt;|message|&gt;</span>Please browse to Hacker News (news.ycombinator.com) and tell me what is currently on the front page. The browser will automatically extract the text content when you navigate there.<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;analysis&lt;|message|&gt;</span>The user: "Please browse to Hacker News (news.ycombinator.com) 
+and tell me what is currently on the front page. The browser 
+will automatically extract the text content when you navigate 
+there."
+
+We have a browser tool. They want the current front page. We 
+need to navigate to news.ycombinator.com, then read the content. 
+The browser tool will extract the text content. So we can call 
+browser.navigate with url: "https://news.ycombinator.com/".<span class="prompt-tag">&lt;|end|&gt;</span>
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=browser.navigate &lt;|constrain|&gt;json&lt;|message|&gt;</span>{"url":"https://news.ycombinator.com/"}<span class="prompt-tag">&lt;|call|&gt;</span>
+<span class="prompt-tag">&lt;|return|&gt;</span>[Extracted page content with front page stories, comments, and metadata...]<span class="prompt-tag">&lt;|end|&gt;</span>
+                            </div>
+                            <div class="prompt-section">
+<span class="prompt-tag">&lt;|start|&gt;assistant&lt;|message|&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">4</span> Final Response</h4>
+                    <p>The model formats a helpful summary of the front page:</p>
+                    <div class="result-display">
+                        <strong>Current Hacker News Front Page Highlights:</strong><br><br>
+                        <strong>Top Stories:</strong><br>
+                        1. <strong>"Why I'm Building in Rust in 2025"</strong> (234 points, 89 comments)<br>
+                           <span style="color: #b3d9ff;">A developer shares their journey choosing Rust for a new startup</span><br><br>
+                        
+                        2. <strong>"OpenAI Announces GPT-5 Timeline"</strong> (189 points, 156 comments)<br>
+                           <span style="color: #b3d9ff;">Breaking news about the next generation of language models</span><br><br>
+                        
+                        3. <strong>"The Hidden Cost of Microservices"</strong> (167 points, 43 comments)<br>
+                           <span style="color: #b3d9ff;">An engineering team's lessons learned from their architecture migration</span><br><br>
+                        
+                        4. <strong>"Show HN: I Built a Terminal-Based Email Client"</strong> (145 points, 67 comments)<br>
+                           <span style="color: #b3d9ff;">A developer showcases their minimalist email solution</span><br><br>
+                        
+                        5. <strong>"PostgreSQL 17 Performance Improvements"</strong> (132 points, 28 comments)<br>
+                           <span style="color: #b3d9ff;">Deep dive into the latest database performance enhancements</span><br><br>
+                        
+                        The front page shows strong interest in systems programming (Rust), AI developments, 
+                        and architectural discussions. The community is particularly engaged with the OpenAI 
+                        announcement, with over 150 comments discussing implications for the industry! 🚀
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down">↓</div>
+
+            <div class="channel-breakdown">
+                <h4 style="text-align: center; color: #ffd54f; margin-bottom: 30px;">Complete Channel Flow Breakdown</h4>
+                
+                <div class="channel-section">
+                    <h5><span class="channel-icon">💭</span> Analysis Channel</h5>
+                    <div class="channel-content">
+                        The user: "Please browse to Hacker News (news.ycombinator.com) 
+                        and tell me what is currently on the front page. The browser 
+                        will automatically extract the text content when you navigate 
+                        there."<br><br>
+                        
+                        We have a browser tool. They want the current front page. We 
+                        need to navigate to news.ycombinator.com, then read the content. 
+                        The browser tool will extract the text content. So we can call 
+                        browser.navigate with url: "https://news.ycombinator.com/".
+                    </div>
+                </div>
+
+                <div class="channel-section">
+                    <h5><span class="channel-icon">🔧</span> Commentary Channel</h5>
+                    <div class="channel-content">
+                        <div class="tool-execution">
+                            <div class="tool-call">
+                                <strong>Tool Call:</strong> to=browser.navigate<br>
+                                <strong>Parameters:</strong><br>
+                                {<br>
+                                &nbsp;&nbsp;"url": "https://news.ycombinator.com/"<br>
+                                }
+                            </div>
+                            <div class="tool-result">
+                                <strong>Tool Response:</strong><br>
+                                [Page content with front page stories extracted...]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="channel-section">
+                    <h5><span class="channel-icon">✅</span> Final Channel</h5>
+                    <div class="channel-content">
+                        Current Hacker News Front Page Highlights:<br><br>
+                        
+                        <strong>Top Stories:</strong><br>
+                        1. <strong>"Why I'm Building in Rust in 2025"</strong> (234 points, 89 comments)<br>
+                        2. <strong>"OpenAI Announces GPT-5 Timeline"</strong> (189 points, 156 comments)<br>
+                        3. <strong>"The Hidden Cost of Microservices"</strong> (167 points, 43 comments)<br>
+                        4. <strong>"Show HN: I Built a Terminal-Based Email Client"</strong> (145 points, 67 comments)<br>
+                        5. <strong>"PostgreSQL 17 Performance Improvements"</strong> (132 points, 28 comments)<br><br>
+                        
+                        The front page shows strong interest in systems programming (Rust), AI developments, 
+                        and architectural discussions. The community is particularly engaged with the OpenAI 
+                        announcement, with over 150 comments discussing implications for the industry! 🚀
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-definition">
+                <h5>Tool Definition in TypeScript</h5>
+                <div class="code-block">
+namespace browser {
+    // Navigate to a URL and extract content
+    type navigate = (_: {
+        // URL to navigate to
+        url: string,
+    }) => {
+        content: string,     // Extracted text content
+        title: string,       // Page title
+        links: string[],     // Available links on page
+        status: number       // HTTP status code
+    };
+    
+    // Additional browser capabilities
+    type click = (_: { selector: string }) => any;
+    type type = (_: { selector: string, text: string }) => any;
+    type screenshot = () => { image: string };
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Concepts Summary -->
+        <div class="demo-area" id="concepts-summary" style="display: block; margin-top: 60px;">
+            <h2>🎯 Key HARMONY Concepts</h2>
+            
+            <div class="flow-visualization">
+                <div class="flow-step">
+                    <h4><span class="step-number">📚</span> Channels</h4>
+                    <p>HARMONY uses channels to organize different types of model outputs:</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li><strong>analysis</strong> - Internal reasoning and planning</li>
+                        <li><strong>commentary</strong> - Tool invocations and interactions</li>
+                        <li><strong>final</strong> - User-facing responses</li>
+                        <li><strong>python/browser</strong> - Channel-based tool communication</li>
+                    </ul>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">🔧</span> Tool Types</h4>
+                    <p>HARMONY supports two main types of tools:</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li><strong>Function Tools</strong> - Called via commentary channel to the functions namespace (e.g., functions.python, functions.get_current_weather)</li>
+                        <li><strong>Channel Tools</strong> - Have dedicated channels for direct communication (e.g., browser channel for vision browser)</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-style: italic; color: #b3d9ff;">
+                        Note: In this demo, Python is actually a function tool (functions.python), not a channel tool!
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">🔄</span> Generation Flow</h4>
+                    <p>The typical HARMONY generation flow:</p>
+                    <ol style="margin-top: 10px; padding-left: 20px;">
+                        <li>Analyze request in analysis channel</li>
+                        <li>Invoke tools via appropriate channels</li>
+                        <li>Process tool results</li>
+                        <li>Generate final response for user</li>
+                    </ol>
+                </div>
+
+                <div class="flow-step">
+                    <h4><span class="step-number">🛡️</span> Safety & Control</h4>
+                    <p>HARMONY provides structured control over model behavior:</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Explicit tool definitions and constraints</li>
+                        <li>Sandboxed execution environments</li>
+                        <li>Clear separation of reasoning and actions</li>
+                        <li>Traceable decision-making process</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box" style="margin-top: 40px;">
+                <h5>Learn More</h5>
+                <p>This demo showcases just a small part of HARMONY's capabilities. The system supports many more tools, complex multi-step workflows, and sophisticated reasoning patterns. The channel-based architecture ensures transparency and control while enabling powerful AI assistance.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDemo = null;
+
+        function showDemo(tool) {
+            // Hide all demos
+            document.querySelectorAll('.demo-area').forEach(area => {
+                area.classList.remove('active');
+            });
+            
+            // Remove active state from all cards
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Show selected demo
+            const demoId = `${tool}-demo`;
+            const demo = document.getElementById(demoId);
+            const card = document.getElementById(`${tool}-card`);
+            
+            if (demo && card) {
+                demo.classList.add('active');
+                card.classList.add('active');
+                
+                // Reset animations
+                demo.querySelectorAll('.flow-step').forEach((step, index) => {
+                    step.style.animation = 'none';
+                    setTimeout(() => {
+                        step.style.animation = `slideUp 0.5s ease-out forwards`;
+                        step.style.animationDelay = `${(index + 1) * 0.1}s`;
+                    }, 10);
+                });
+            }
+            
+            currentDemo = tool;
+        }
+        
+        // Add hover effects for code blocks
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                block.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.transition = 'transform 0.2s ease';
+                });
+                
+                block.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Add copy functionality (visual only for this demo)
+            codeBlocks.forEach(block => {
+                const copyButton = document.createElement('div');
+                copyButton.innerHTML = '📋';
+                copyButton.style.cssText = `
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    cursor: pointer;
+                    opacity: 0;
+                    transition: opacity 0.2s;
+                    background: rgba(79,195,247,0.2);
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                `;
+                
+                block.style.position = 'relative';
+                block.appendChild(copyButton);
+                
+                block.addEventListener('mouseenter', () => {
+                    copyButton.style.opacity = '1';
+                });
+                
+                block.addEventListener('mouseleave', () => {
+                    copyButton.style.opacity = '0';
+                });
+                
+                copyButton.addEventListener('click', () => {
+                    copyButton.innerHTML = '✅';
+                    setTimeout(() => {
+                        copyButton.innerHTML = '📋';
+                    }, 1000);
+                });
+            });
+        });
+        
+        // Smooth scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/harmony_vllm_app.py">
+#!/usr/bin/env python3
+"""
+HARMONY vLLM Demo Application
+Uses OpenAI's official harmony renderer library to properly format prompts
+"""
+
+from flask import Flask, render_template, request, jsonify, Response, send_from_directory
+import json
+import requests
+from typing import List, Dict, Any, Optional
+import logging
+from dataclasses import dataclass, asdict
+from datetime import datetime
+import random
+import re
+import asyncio
+# from browser_tool_wrapper import browser_tool_wrapper  # Removed old browser
+# from custom_browser_instruction import BROWSER_INSTRUCTION  # Removed old browser
+from python_tool_wrapper import python_tool_wrapper
+from python_function_wrapper import PythonFunctionTool
+from custom_python_instruction import PYTHON_INSTRUCTION
+from official_python_instruction import OFFICIAL_PYTHON_INSTRUCTION
+# from official_browser_instruction import OFFICIAL_BROWSER_INSTRUCTION  # Removed old browser
+from builtin_tool_instructions import get_builtin_tools_instruction
+
+# Import harmony components
+from openai_harmony import (
+    Author,
+    Conversation,
+    DeveloperContent,
+    HarmonyEncodingName,
+    Message,
+    Role,
+    SystemContent,
+    ToolDescription,
+    load_harmony_encoding,
+    ReasoningEffort,
+    StreamableParser
+)
+
+app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+
+# vLLM server configuration
+VLLM_BASE_URL = "http://localhost:8000"
+MODEL_NAME = "openai/gpt-oss-20b"
+
+# Load harmony encoding
+try:
+    encoding = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+    logging.info("Harmony encoding loaded successfully")
+    
+    # Debug: Check available attributes
+    logging.info(f"Encoding attributes: {dir(encoding)}")
+    
+    # Try to get special tokens
+    if hasattr(encoding, 'special_tokens'):
+        logging.info(f"Has special_tokens method")
+    elif hasattr(encoding, 'special_tokens_set'):
+        logging.info(f"Has special_tokens_set attribute")
+    else:
+        logging.warning("No special tokens attribute found")
+        
+except Exception as e:
+    logging.error(f"Failed to load harmony encoding: {e}")
+    encoding = None
+
+@dataclass
+class ConversationState:
+    """Maintains conversation state"""
+    messages: List[Message]
+    system_config: Dict[str, Any]
+    developer_config: Dict[str, Any]
+    
+conversation_state = ConversationState(messages=[], system_config={}, developer_config={})
+
+# Vision browser instance will be created on demand
+_vision_browser_instance = None
+
+
+# Removed old browser system message function
+
+
+def create_system_message_with_builtin_tools(data: Dict[str, Any]) -> str:
+    """Create system message with built-in tools in the correct format"""
+    model_identity = data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.')
+    knowledge_cutoff = data.get('knowledge_cutoff', '2024-06')
+    current_date = data.get('current_date', datetime.now().strftime("%Y-%m-%d"))
+    reasoning_level = data.get('reasoning_level', 'HIGH')
+    
+    # Build the system message parts
+    system_parts = []
+    system_parts.append(model_identity)
+    system_parts.append(f"\nKnowledge cutoff: {knowledge_cutoff}")
+    system_parts.append(f"\nCurrent date: {current_date}")
+    
+    # Add reasoning level only if not "o1" (default)
+    if reasoning_level and reasoning_level.upper() != "O1":
+        system_parts.append(f"\nReasoning: {reasoning_level.lower()}")
+    
+    # Add valid channels line
+    system_parts.append("\n\n# Valid channels: analysis, commentary, final. Channel must be included for every message.")
+    
+    # Add the tools line if there are function tools
+    tools = data.get('tools', [])
+    if tools:
+        system_parts.append("\nCalls to these tools must go to the commentary channel: 'functions'.")
+    
+    return "".join(system_parts)
+
+# Update Python timeout constant
+PYTHON_TIMEOUT = 120  # 120 seconds as per spec
+
+# Fake weather database
+WEATHER_DATA = {
+    "San Francisco, CA": {"temp_c": 18, "temp_f": 64, "condition": "foggy", "humidity": 75, "wind_speed": 15},
+    "New York, NY": {"temp_c": 22, "temp_f": 72, "condition": "partly cloudy", "humidity": 60, "wind_speed": 10},
+    "Tokyo": {"temp_c": 26, "temp_f": 79, "condition": "sunny", "humidity": 55, "wind_speed": 8},
+    "London": {"temp_c": 16, "temp_f": 61, "condition": "rainy", "humidity": 85, "wind_speed": 20},
+    "Paris": {"temp_c": 20, "temp_f": 68, "condition": "cloudy", "humidity": 65, "wind_speed": 12},
+    "Sydney": {"temp_c": 24, "temp_f": 75, "condition": "sunny", "humidity": 50, "wind_speed": 18},
+}
+
+def get_fake_weather(location: str, format: str = "celsius") -> Dict[str, Any]:
+    """Get fake weather data for a location"""
+    # Normalize location
+    location = location.strip()
+    
+    # Check if we have data for this location
+    if location in WEATHER_DATA:
+        data = WEATHER_DATA[location]
+    else:
+        # Generate random weather for unknown locations
+        data = {
+            "temp_c": random.randint(10, 35),
+            "temp_f": random.randint(50, 95),
+            "condition": random.choice(["sunny", "cloudy", "rainy", "foggy", "partly cloudy"]),
+            "humidity": random.randint(30, 90),
+            "wind_speed": random.randint(5, 25),
+        }
+    
+    # Format response based on requested format
+    if format == "fahrenheit":
+        return {
+            "temperature": data["temp_f"],
+            "unit": "fahrenheit",
+            "condition": data["condition"],
+            "humidity": data["humidity"],
+            "wind_speed": data["wind_speed"],
+            "location": location
+        }
+    else:
+        return {
+            "temperature": data["temp_c"],
+            "unit": "celsius",
+            "condition": data["condition"],
+            "humidity": data["humidity"],
+            "wind_speed": data["wind_speed"],
+            "location": location
+        }
+
+def validate_weather_params(params: Dict[str, Any]) -> tuple[bool, Optional[str]]:
+    """Validate weather API parameters"""
+    if not isinstance(params, dict):
+        return False, "Parameters must be a JSON object"
+    
+    if "location" not in params:
+        return False, "Missing required parameter: location"
+    
+    if not isinstance(params["location"], str):
+        return False, "Location must be a string"
+    
+    if "format" in params and params["format"] not in ["celsius", "fahrenheit"]:
+        return False, f"Invalid format: {params['format']}. Must be 'celsius' or 'fahrenheit'"
+    
+    return True, None
+
+# Removed old browser tool execution function
+
+def execute_tool_call(tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """Execute a tool call and return the result"""
+    
+    # Handle Python tool (built-in)
+    if tool_name == "python":
+        script = params.get("script", params.get("code", ""))
+        if not script:
+            return {"error": "Python tool requires 'script' parameter"}
+        
+        # Run async function in sync context
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            result = loop.run_until_complete(
+                python_tool_wrapper.execute(script)
+            )
+            return {"output": result}
+        finally:
+            loop.close()
+    
+    # Handle Python as a function tool
+    elif tool_name == "functions.python":
+        python_func_tool = PythonFunctionTool()
+        return python_func_tool.handle_tool_call(params)
+    
+    # Handle vision browser tool
+    elif tool_name == "functions.browser":
+        try:
+            from vision_browser_wrapper import VisionBrowserWrapper
+            # Use a global instance to maintain browser state
+            global _vision_browser_instance
+            if _vision_browser_instance is None:
+                _vision_browser_instance = VisionBrowserWrapper(mock_mode=False)  # Use real browser
+            return _vision_browser_instance.execute(params)
+        except ImportError:
+            return {"error": "Vision browser tool not available. Install with: pip install selenium helium pillow"}
+    
+    # Handle weather functions
+    elif tool_name == "functions.get_current_weather":
+        valid, error = validate_weather_params(params)
+        if not valid:
+            return {"error": error}
+        
+        location = params["location"]
+        format = params.get("format", "celsius")
+        return get_fake_weather(location, format)
+    
+    elif tool_name == "functions.get_location":
+        # Fake user location
+        return {"location": "San Francisco, CA", "country": "United States"}
+    
+    elif tool_name == "functions.get_multiple_weathers":
+        if "locations" not in params:
+            return {"error": "Missing required parameter: locations"}
+        
+        if not isinstance(params["locations"], list):
+            return {"error": "Locations must be an array"}
+        
+        format = params.get("format", "celsius")
+        results = []
+        for location in params["locations"]:
+            if isinstance(location, str):
+                results.append(get_fake_weather(location, format))
+            else:
+                results.append({"error": f"Invalid location: {location}"})
+        
+        return {"locations": results}
+    
+    # Removed old browser tool calls
+    
+    else:
+        return {"error": f"Unknown tool: {tool_name}"}
+
+def extract_tool_calls(text: str) -> List[Dict[str, Any]]:
+    """Extract tool calls from model output"""
+    tool_calls = []
+    
+    # Pattern for commentary channel (functions.*)
+    # More lenient - capture everything after <|message|> until we hit another <|start|> or end
+    commentary_pattern = r'<\|channel\|>commentary\s+to=([\w\.]+).*?<\|message\|>(.*?)(?:<\|call\|>|<\|end\|>|<\|start\|>|$)'
+    
+    # Pattern for analysis channel (browser.*)
+    analysis_pattern = r'<\|channel\|>analysis\s+to=([\w\.]+).*?<\|message\|>(.*?)(?:<\|call\|>|<\|end\|>|<\|start\|>|$)'
+    
+    # Find all matches for both patterns
+    all_matches = []
+    
+    # Commentary channel matches
+    matches = re.findall(commentary_pattern, text, re.DOTALL)
+    for recipient, content in matches:
+        all_matches.append((recipient, content, "commentary"))
+    
+    # Analysis channel matches
+    matches = re.findall(analysis_pattern, text, re.DOTALL)
+    for recipient, content in matches:
+        all_matches.append((recipient, content, "analysis"))
+    
+    for recipient, content, channel in all_matches:
+        content = content.strip()
+        
+        # Special handling for Python tool - it takes raw code, not JSON
+        if recipient == "python":
+            tool_calls.append({
+                "tool": recipient,
+                "params": {"script": content},
+                "raw_content": content,
+                "channel": channel
+            })
+            continue
+        
+        # Clean up content - sometimes it includes extra protocol text
+        # Try to extract JSON - look for balanced braces
+        brace_count = 0
+        json_start = -1
+        json_end = -1
+        
+        for i, char in enumerate(content):
+            if char == '{':
+                if json_start == -1:
+                    json_start = i
+                brace_count += 1
+            elif char == '}':
+                brace_count -= 1
+                if brace_count == 0 and json_start != -1:
+                    json_end = i + 1
+                    break
+        
+        if json_start != -1 and json_end != -1:
+            json_content = content[json_start:json_end]
+            try:
+                params = json.loads(json_content)
+                tool_calls.append({
+                    "tool": recipient,
+                    "params": params,
+                    "raw_content": content,
+                    "channel": channel
+                })
+                continue
+            except json.JSONDecodeError:
+                pass
+        
+        # If not valid JSON, skip this tool call
+        logging.warning(f"Skipping invalid tool call for {recipient}: {content[:100]}...")
+    
+    logging.info(f"Extracted {len(tool_calls)} tool calls from text")
+    if tool_calls:
+        logging.info(f"Tool calls: {tool_calls}")
+    return tool_calls
+
+def extract_final_content(raw_response: str) -> str:
+    """Extract only the final channel content from raw HARMONY response"""
+    # First try to find content in final channel
+    pattern = r'<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)'
+    matches = re.findall(pattern, raw_response, re.DOTALL)
+    if matches:
+        return matches[-1].strip()
+    
+    # If no final channel, check if this is a continuation response
+    # Look for content after the last <|end|>
+    if '<|end|>' in raw_response:
+        parts = raw_response.split('<|end|>')
+        # Get the last non-empty part
+        for part in reversed(parts):
+            clean_part = part.strip()
+            # Skip if it's empty or starts with special tokens
+            if clean_part and not clean_part.startswith('<|') and not clean_part.startswith('{'):
+                # This is likely the final user-facing message
+                return clean_part
+    
+    return ""
+
+def filter_cot_from_content(content: str) -> str:
+    """Remove analysis channel content from assistant messages for conversation history"""
+    # Remove everything between <|channel|>analysis and <|channel|>final
+    pattern = r'<\|channel\|>analysis.*?(?=<\|channel\|>final)'
+    filtered = re.sub(pattern, '', content, flags=re.DOTALL)
+    
+    # Also remove standalone analysis blocks
+    pattern2 = r'<\|channel\|>analysis.*?<\|end\|>'
+    filtered = re.sub(pattern2, '', filtered, flags=re.DOTALL)
+    
+    return filtered.strip()
+
+def normalize_stop_token(response: str) -> str:
+    """Normalize stop tokens - convert <|return|> to <|end|>"""
+    return response.replace('<|return|>', '<|end|>')
+
+@app.route('/')
+def index():
+    """Serve the main HTML interface"""
+    return render_template('harmony_demo.html')
+
+@app.route('/test')
+def test():
+    """Serve the test page"""
+    return send_from_directory('.', 'test_tools.html')
+
+@app.route('/test2')
+def test2():
+    """Serve the frontend test page"""
+    return send_from_directory('.', 'test_frontend.html')
+
+@app.route('/demos/d20')
+def d20_demo():
+    """Serve the D20 demo"""
+    return send_from_directory('.', 'd20_demo.html')
+
+@app.route('/demos/d20-detailed')
+def d20_demo_detailed():
+    """Serve the detailed D20 demo"""
+    return send_from_directory('.', 'd20_demo_detailed.html')
+
+@app.route('/demos/compare')
+def serve_compare():
+    """Serve the comparison HTML"""
+    return send_from_directory('.', 'compare_approaches.html')
+
+@app.route('/demos/d20-cycling')
+def serve_d20_cycling():
+    """Serve the D20 demo with cycling examples"""
+    return send_from_directory('.', 'd20_demo_cycling.html')
+
+@app.route('/api/check_server', methods=['GET'])
+def check_server():
+    """Check if vLLM server is accessible"""
+    try:
+        response = requests.get(f"{VLLM_BASE_URL}/v1/models")
+        return jsonify({
+            "status": "connected",
+            "models": response.json()
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "error": str(e)
+        }), 500
+
+@app.route('/api/tokenize', methods=['POST'])
+def tokenize():
+    """Tokenize text using harmony encoding"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    try:
+        text = request.json.get('text', '')
+        # Try different methods to encode with special tokens
+        try:
+            # Try the encode method with allowed_special parameter
+            tokens = list(encoding.encode(text, allowed_special="all"))
+        except:
+            try:
+                # Try just encode without parameters
+                tokens = list(encoding.encode(text))
+            except Exception as e:
+                return jsonify({"error": f"Failed to encode text: {str(e)}"}), 500
+        
+        token_texts = [encoding.decode([t]) for t in tokens]
+        
+        # Get special tokens if available
+        special_tokens = {}
+        if hasattr(encoding, 'special_tokens'):
+            try:
+                special_tokens = {k: v for k, v in encoding.special_tokens().items()}
+            except:
+                special_tokens = list(encoding.special_tokens) if hasattr(encoding.special_tokens, '__iter__') else {}
+        elif hasattr(encoding, 'special_tokens_set'):
+            # It's a set, not a dict
+            special_tokens = list(encoding.special_tokens_set)
+        
+        return jsonify({
+            "tokens": tokens,
+            "token_texts": token_texts,
+            "special_tokens": special_tokens
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+def safe_json_serialize(obj):
+    """Convert objects to JSON-serializable format"""
+    if hasattr(obj, '__dict__'):
+        return obj.__dict__
+    elif hasattr(obj, '_asdict'):
+        return obj._asdict()
+    else:
+        return str(obj)
+
+@app.route('/api/render_prompt', methods=['POST'])
+def render_prompt():
+    """Render the full prompt using harmony"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    try:
+        data = request.json
+        
+        # Check if built-in tools are enabled
+        include_python = data.get('include_python', False)
+        include_browser = data.get('include_browser', False)
+        
+        if include_python or include_browser:
+            # Use custom system message with built-in tools
+            system_text = create_system_message_with_builtin_tools(data)
+            system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+        else:
+            # Use standard system message
+            system_message = (
+                SystemContent.new()
+                .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                .with_required_channels(["analysis", "commentary", "final"])
+            )
+        
+        # Create developer message
+        developer_message = DeveloperContent.new()
+        
+        # Add regular instructions
+        instructions_parts = []
+        if data.get('instructions'):
+            instructions_parts.append(data['instructions'])
+        
+        # Add built-in tool instructions if enabled
+        if include_python or include_browser:
+            from builtin_tool_instructions import get_builtin_tools_instruction
+            builtin_instructions = get_builtin_tools_instruction(
+                include_python=include_python,
+                include_browser=include_browser
+            )
+            if builtin_instructions:
+                instructions_parts.append(builtin_instructions)
+        
+        # Combine all instructions
+        if instructions_parts:
+            combined_instructions = '\n\n'.join(instructions_parts)
+            developer_message = developer_message.with_instructions(combined_instructions)
+        
+        # Get function tool descriptions for developer message
+        tools = data.get('tools', [])
+        
+        tool_descriptions = []
+        for tool in tools:
+            td = ToolDescription.new(
+                tool['name'],
+                tool['description'],
+                parameters=tool.get('parameters', {})
+            )
+            tool_descriptions.append(td)
+        
+        # Add function tools to developer message if any are available
+        if tool_descriptions:
+            # Try different method names
+            try:
+                developer_message = developer_message.with_function_tools(tool_descriptions)
+            except AttributeError:
+                try:
+                    developer_message = developer_message.with_tools(tool_descriptions)
+                except AttributeError:
+                    logging.warning("Could not add tools to developer message")
+        
+        # Build conversation
+        if include_python or include_browser:
+            # system_message is already a Message object
+            messages = [
+                system_message,
+                Message.from_role_and_content(Role.DEVELOPER, developer_message)
+            ]
+        else:
+            messages = [
+                Message.from_role_and_content(Role.SYSTEM, system_message),
+                Message.from_role_and_content(Role.DEVELOPER, developer_message)
+            ]
+        
+        # Add conversation history with CoT filtering
+        for msg in data.get('conversation_history', []):
+            if msg['role'] == 'user':
+                messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+            elif msg['role'] == 'assistant':
+                # Filter out CoT from assistant messages
+                filtered_content = filter_cot_from_content(msg['content'])
+                if filtered_content:  # Only add if there's content after filtering
+                    assistant_msg = Message.from_role_and_content(Role.ASSISTANT, filtered_content)
+                    if 'channel' in msg:
+                        assistant_msg = assistant_msg.with_channel(msg['channel'])
+                    if 'recipient' in msg:
+                        assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                    if 'content_type' in msg:
+                        assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                    messages.append(assistant_msg)
+            elif msg['role'] == 'tool':
+                # Handle tool messages
+                tool_msg = Message.from_author_and_content(
+                    Author.new(Role.TOOL, msg.get('name', 'tool')),
+                    msg['content']
+                )
+                if 'recipient' in msg:
+                    tool_msg = tool_msg.with_recipient(msg['recipient'])
+                if 'channel' in msg:
+                    tool_msg = tool_msg.with_channel(msg['channel'])
+                messages.append(tool_msg)
+        
+        # Add current user message or messages array
+        if data.get('current_message'):
+            messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+        elif data.get('messages'):
+            # Handle messages array format
+            for msg in data['messages']:
+                if msg['role'] == 'user':
+                    messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+        
+        # Create conversation
+        conversation = Conversation.from_messages(messages)
+        
+        # Render to tokens
+        tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+        
+        # Convert tokens to text for display
+        prompt_text = encoding.decode(tokens)
+        
+        # Don't add constrain token - we want the model to use channel format, not JSON
+        
+        # Also get token details
+        token_texts = [encoding.decode([t]) for t in tokens]
+        
+        # Ensure everything is JSON serializable
+        response_data = {
+            "prompt": prompt_text,
+            "tokens": [int(t) for t in tokens],  # Ensure tokens are ints
+            "token_texts": token_texts,
+            "token_count": len(tokens)
+        }
+        
+        return jsonify(response_data)
+        
+    except Exception as e:
+        logging.error(f"Error rendering prompt: {e}")
+        logging.error(f"Error type: {type(e)}")
+        import traceback
+        logging.error(f"Traceback: {traceback.format_exc()}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/execute_tool', methods=['POST'])
+def execute_tool():
+    """Execute a tool call"""
+    try:
+        data = request.json
+        tool_name = data.get('tool')
+        params = data.get('params', {})
+        
+        if not tool_name:
+            return jsonify({"error": "Missing tool name"}), 400
+        
+        result = execute_tool_call(tool_name, params)
+        
+        return jsonify({
+            "tool": tool_name,
+            "params": params,
+            "result": result
+        })
+    except Exception as e:
+        logging.error(f"Error executing tool: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    """Send chat request to vLLM server with harmony formatting"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    # Track all prompts sent during this request
+    prompts_sent = []
+    
+    try:
+        data = request.json
+        
+        # Don't call render_prompt() directly as it creates a Flask response
+        # Instead, inline the rendering logic here
+        try:
+            # Check if built-in tools are enabled
+            include_python = data.get('include_python', False)
+            include_browser = data.get('include_browser', False)
+            
+            if include_python or include_browser:
+                # Use custom system message with built-in tools
+                system_text = create_system_message_with_builtin_tools(data)
+                system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+            else:
+                # Use standard system message
+                system_message = (
+                    SystemContent.new()
+                    .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                    .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                    .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                    .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                    .with_required_channels(["analysis", "commentary", "final"])
+                )
+            
+            # Create developer message
+            developer_message = DeveloperContent.new()
+            if data.get('instructions'):
+                developer_message = developer_message.with_instructions(data['instructions'])
+            
+            # Get function tool descriptions
+            tools = data.get('tools', [])
+            
+            # Add vision browser to tools if include_browser is True
+            if include_browser:
+                # Add vision browser to tools list if not already present
+                if not any(t.get('name') == 'browser' for t in tools):
+                    from vision_browser_wrapper import VisionBrowserWrapper
+                    wrapper = VisionBrowserWrapper(mock_mode=False)  # Use real browser
+                    browser_def = wrapper.get_tool_definition()
+                    tools.append(browser_def)
+            
+            tool_descriptions = []
+            for tool in tools:
+                td = ToolDescription.new(
+                    tool['name'],
+                    tool['description'],
+                    parameters=tool.get('parameters', {})
+                )
+                tool_descriptions.append(td)
+            
+            # Add function tools to developer message if any are available
+            if tool_descriptions:
+                try:
+                    developer_message = developer_message.with_function_tools(tool_descriptions)
+                except AttributeError:
+                    try:
+                        developer_message = developer_message.with_tools(tool_descriptions)
+                    except AttributeError:
+                        logging.warning("Could not add tools to developer message")
+            
+            # Build conversation
+            if include_python or include_browser:
+                # system_message is already a Message object
+                messages = [
+                    system_message,
+                    Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                ]
+            else:
+                messages = [
+                    Message.from_role_and_content(Role.SYSTEM, system_message),
+                    Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                ]
+            
+            # Add conversation history with CoT filtering
+            for msg in data.get('conversation_history', []):
+                if msg['role'] == 'user':
+                    messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+                elif msg['role'] == 'assistant':
+                    # Filter out CoT from assistant messages
+                    filtered_content = filter_cot_from_content(msg['content'])
+                    if filtered_content:  # Only add if there's content after filtering
+                        assistant_msg = Message.from_role_and_content(Role.ASSISTANT, filtered_content)
+                        if 'channel' in msg:
+                            assistant_msg = assistant_msg.with_channel(msg['channel'])
+                        if 'recipient' in msg:
+                            assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                        if 'content_type' in msg:
+                            assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                        messages.append(assistant_msg)
+                elif msg['role'] == 'tool':
+                    tool_msg = Message.from_author_and_content(
+                        Author.new(Role.TOOL, msg.get('name', 'tool')),
+                        msg['content']
+                    )
+                    if 'recipient' in msg:
+                        tool_msg = tool_msg.with_recipient(msg['recipient'])
+                    if 'channel' in msg:
+                        tool_msg = tool_msg.with_channel(msg['channel'])
+                    messages.append(tool_msg)
+            
+            # Add current user message or messages array
+            if data.get('current_message'):
+                messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+            elif data.get('messages'):
+                # Handle messages array format
+                for msg in data['messages']:
+                    if msg['role'] == 'user':
+                        messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+            
+            # Create conversation and render
+            conversation = Conversation.from_messages(messages)
+            tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+            prompt = encoding.decode(tokens)
+            
+            # Don't add constrain token - we want the model to use channel format, not JSON
+            
+        except Exception as e:
+            logging.error(f"Error rendering prompt in chat: {e}")
+            return jsonify({"error": f"Failed to render prompt: {str(e)}"}), 500
+        
+        # Track this initial prompt (will add response later)
+        initial_prompt_info = {
+            "stage": "initial",
+            "prompt": prompt,
+            "token_count": len(tokens),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        # Send to vLLM
+        vllm_response = requests.post(
+            f"{VLLM_BASE_URL}/v1/completions",
+            json={
+                "model": MODEL_NAME,
+                "prompt": prompt,
+                "max_tokens": data.get('max_tokens', 2048),
+                "temperature": data.get('temperature', 0.7),
+                "stop": ["<|return|>", "<|call|>"],
+                "stream": False,
+                "skip_special_tokens": False,
+                "logprobs": 1
+            }
+        )
+        
+        if vllm_response.status_code != 200:
+            return jsonify({"error": f"vLLM error: {vllm_response.text}"}), 500
+        
+        vllm_data = vllm_response.json()
+        response_text = vllm_data['choices'][0]['text']
+        finish_reason = vllm_data['choices'][0].get('finish_reason', 'unknown')
+        
+        logging.info(f"vLLM finish_reason: {finish_reason}")
+        logging.info(f"Response length: {len(response_text)}")
+        logging.info(f"Response ends with: {response_text[-50:] if len(response_text) > 50 else response_text}")
+        
+        # Check if response contains tool calls
+        tool_calls = extract_tool_calls(response_text)
+        logging.info(f"Initial response extracted {len(tool_calls)} tool calls: {tool_calls}")
+        logging.info(f"Initial response text ends with: ...{repr(response_text[-200:])}")
+        
+        # If stopped because of <|call|>, append it
+        if finish_reason == 'stop' and not response_text.endswith('<|call|>'):
+            response_text += '<|call|>'
+            logging.info("Appended <|call|> because finish_reason was 'stop'")
+        
+        # Add response to initial prompt info and track it
+        initial_prompt_info['response'] = response_text
+        prompts_sent.append(initial_prompt_info)
+        
+        # Handle multiple rounds of tool calls
+        all_tool_responses = []
+        current_prompt = prompt
+        current_response = response_text
+        max_rounds = 3  # Prevent infinite loops - reduced from 10
+        round_count = 0
+        
+        while tool_calls and round_count < max_rounds:
+            round_count += 1
+            logging.info(f"Processing tool calls round {round_count}: {len(tool_calls)} calls")
+            
+            # Execute tool calls for this round
+            tool_responses = []
+            
+            for tool_call in tool_calls:
+                tool_name = tool_call['tool']
+                params = tool_call['params']
+                channel = tool_call.get('channel', 'commentary')
+                
+                logging.info(f"Executing tool: {tool_name} with params: {params}")
+                
+                # Execute the tool
+                result = execute_tool_call(tool_name, params)
+                
+                # Format tool response in HARMONY format
+                # Use the same channel as the request (analysis for browser, commentary for others)
+                # Built-in tools (python, browser) return raw output, functions return JSON
+                if tool_name in ['python', 'browser']:
+                    # Built-in tools return raw output
+                    tool_response = f'<|return|>{result}<|end|>'
+                else:
+                    # Function tools return JSON
+                    tool_response = f'<|return|>{json.dumps(result)}<|end|>'
+                tool_responses.append({
+                    'tool': tool_name,
+                    'params': params,
+                    'result': result,
+                    'formatted_response': tool_response
+                })
+            
+            all_tool_responses.extend(tool_responses)
+            
+            # Append tool responses to the conversation and continue
+            continued_prompt = current_prompt + current_response
+            for tr in tool_responses:
+                continued_prompt += tr['formatted_response']
+            continued_prompt += '<|start|>assistant<|message|>'
+            
+            # Prepare continuation prompt info (will add response later)
+            continuation_prompt_info = {
+                "stage": f"continuation_round_{round_count}",
+                "prompt": continued_prompt,
+                "token_count": len(list(encoding.encode(continued_prompt, allowed_special="all"))),
+                "timestamp": datetime.now().isoformat(),
+                "tool_calls": tool_calls
+            }
+            
+            # Make another request to vLLM to continue after tool execution
+            continue_response = requests.post(
+                f"{VLLM_BASE_URL}/v1/completions",
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": continued_prompt,
+                    "max_tokens": data.get('max_tokens', 2048),
+                    "temperature": data.get('temperature', 0.7),
+                    "stop": ["<|return|>", "<|call|>", "<|end|>"],  # Stop on return, call, or end
+                    "stream": False,
+                    "skip_special_tokens": False,
+                    "logprobs": 1
+                }
+            )
+            
+            if continue_response.status_code == 200:
+                continue_data = continue_response.json()
+                continued_text = continue_data['choices'][0]['text']
+                finish_reason = continue_data['choices'][0].get('finish_reason', 'unknown')
+                
+                logging.info(f"Round {round_count} finish_reason: {finish_reason}")
+                logging.info(f"Round {round_count} response ends with: {continued_text[-50:] if len(continued_text) > 50 else continued_text}")
+                
+                # Check if we have an incomplete tool call at the end
+                if finish_reason == 'stop' and not continued_text.endswith('<|call|>'):
+                    # Check for tool call patterns
+                    if any(pattern in continued_text[-150:] for pattern in ['to=browser.', 'to=functions.']):
+                        continued_text += '<|call|>'
+                        logging.info("Appended <|call|> to incomplete tool call")
+                
+                # Add response to continuation prompt info and track it
+                continuation_prompt_info['response'] = continued_text
+                prompts_sent.append(continuation_prompt_info)
+                
+                # Update for next iteration
+                current_prompt = continued_prompt
+                current_response = continued_text
+                
+                # Check for more tool calls in the continued response
+                tool_calls = extract_tool_calls(continued_text)
+                logging.info(f"Round {round_count} found {len(tool_calls)} new tool calls")
+                logging.info(f"Round {round_count} continued text: {continued_text}")
+                
+                # If no more tool calls, we're done
+                if not tool_calls:
+                    break
+            else:
+                logging.error(f"Failed to continue after tool execution: {continue_response.text}")
+                # Still track the failed continuation
+                continuation_prompt_info['response'] = f"[Error: {continue_response.status_code}]"
+                continuation_prompt_info['error'] = continue_response.text
+                prompts_sent.append(continuation_prompt_info)
+                break
+        
+        # Build the complete response from all rounds
+        full_response = response_text
+        for tr in all_tool_responses:
+            full_response += tr['formatted_response']
+        if round_count > 0:  # If we did any continuations
+            full_response += current_response
+        
+        # Parse the complete response
+        try:
+            response_tokens = list(encoding.encode(full_response, allowed_special="all"))
+        except:
+            response_tokens = list(encoding.encode(full_response))
+        
+        try:
+            parsed_messages = encoding.parse_messages_from_completion_tokens(response_tokens, Role.ASSISTANT)
+        except Exception as e:
+            logging.warning(f"Failed to parse messages: {e}")
+            parsed_messages = []
+        
+        # Extract structured information
+        channels = {}
+        for msg in parsed_messages:
+            channel = getattr(msg, 'channel', 'default')
+            
+            # Skip tool messages - we don't want to display these in the channels
+            if hasattr(msg, 'author') and hasattr(msg.author, 'role') and msg.author.role == Role.TOOL:
+                continue
+                
+            if channel not in channels:
+                channels[channel] = []
+            
+            # Extract content as string
+            content_str = ""
+            if hasattr(msg, 'content'):
+                if isinstance(msg.content, str):
+                    content_str = msg.content
+                elif isinstance(msg.content, list):
+                    # Extract text from TextContent objects
+                    for item in msg.content:
+                        if hasattr(item, 'text'):
+                            content_str += item.text
+                        else:
+                            content_str += str(item)
+                else:
+                    content_str = str(msg.content)
+            else:
+                content_str = str(msg)
+            
+            # Skip if this is a code/JSON message (tool call)
+            recipient = getattr(msg, 'recipient', None)
+            content_type = getattr(msg, 'content_type', None)
+            
+            # Filter out JSON tool calls from display
+            if recipient and '.' in str(recipient) and content_type == 'code':
+                # This is a tool call, skip it
+                continue
+                
+            channels[channel].append({
+                'content': content_str,
+                'recipient': recipient,
+                'content_type': content_type
+            })
+        
+        # Extract final content for conversation history
+        final_content = extract_final_content(full_response)
+        
+        logging.info(f"Sending response with {len(full_response)} chars, {round_count} rounds, {len(all_tool_responses)} tool calls")
+        logging.info(f"Full response ends with: {repr(full_response[-100:])}")
+        
+        return jsonify({
+            "raw_response": full_response,
+            "final_content": final_content,
+            "tokens": response_tokens,
+            "parsed_messages": channels,
+            "tool_calls": all_tool_responses,
+            "prompts_sent": prompts_sent,
+            "rounds": round_count,
+            "logprobs": vllm_data['choices'][0].get('logprobs', {})
+        })
+        
+    except Exception as e:
+        logging.error(f"Error in chat: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/stream', methods=['POST'])
+def stream():
+    """Stream chat responses with live parsing"""
+    if not encoding:
+        return jsonify({"error": "Harmony encoding not loaded"}), 500
+    
+    # Get data before entering the generator
+    data = request.get_json()
+    
+    # Track all prompts sent during this streaming request
+    prompts_sent = []
+    
+    def generate(data):
+        try:
+            
+            # Inline prompt rendering (same as in chat endpoint)
+            try:
+                # Check if built-in tools are enabled
+                include_python = data.get('include_python', False)
+                include_browser = data.get('include_browser', False)
+                
+                if include_python or include_browser:
+                    # Use custom system message with built-in tools
+                    system_text = create_system_message_with_builtin_tools(data)
+                    system_message = Message.from_role_and_content(Role.SYSTEM, system_text)
+                else:
+                    # Use standard system message
+                    system_message = (
+                        SystemContent.new()
+                        .with_model_identity(data.get('model_identity', 'You are ChatGPT, a large language model trained by OpenAI.'))
+                        .with_reasoning_effort(ReasoningEffort[data.get('reasoning_level', 'HIGH').upper()])
+                        .with_conversation_start_date(data.get('current_date', datetime.now().strftime("%Y-%m-%d")))
+                        .with_knowledge_cutoff(data.get('knowledge_cutoff', '2024-06'))
+                        .with_required_channels(["analysis", "commentary", "final"])
+                    )
+                
+                # Create developer message
+                developer_message = DeveloperContent.new()
+                
+                # Add regular instructions
+                instructions_parts = []
+                if data.get('instructions'):
+                    instructions_parts.append(data['instructions'])
+                
+                # Add built-in tool instructions if enabled
+                if include_python or include_browser:
+                    from builtin_tool_instructions import get_builtin_tools_instruction
+                    builtin_instructions = get_builtin_tools_instruction(
+                        include_python=include_python,
+                        include_browser=include_browser
+                    )
+                    if builtin_instructions:
+                        instructions_parts.append(builtin_instructions)
+                
+                # Combine all instructions
+                if instructions_parts:
+                    combined_instructions = '\n\n'.join(instructions_parts)
+                    developer_message = developer_message.with_instructions(combined_instructions)
+                
+                # Get function tool descriptions
+                tools = data.get('tools', [])
+                
+                tool_descriptions = []
+                for tool in tools:
+                    td = ToolDescription.new(
+                        tool['name'],
+                        tool['description'],
+                        parameters=tool.get('parameters', {})
+                    )
+                    tool_descriptions.append(td)
+                
+                # Add function tools to developer message if any are available
+                if tool_descriptions:
+                    try:
+                        developer_message = developer_message.with_function_tools(tool_descriptions)
+                    except AttributeError:
+                        try:
+                            developer_message = developer_message.with_tools(tool_descriptions)
+                        except AttributeError:
+                            logging.warning("Could not add tools to developer message")
+                
+                # Build conversation
+                if include_python or include_browser:
+                    # system_message is already a Message object
+                    messages = [
+                        system_message,
+                        Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                    ]
+                else:
+                    messages = [
+                        Message.from_role_and_content(Role.SYSTEM, system_message),
+                        Message.from_role_and_content(Role.DEVELOPER, developer_message)
+                    ]
+                
+                # Add conversation history - properly handle raw content
+                for msg in data.get('conversation_history', []):
+                    if msg['role'] == 'user':
+                        messages.append(Message.from_role_and_content(Role.USER, msg['content']))
+                    elif msg['role'] == 'assistant':
+                        # If we have raw content, just append it directly to prompt
+                        if 'rawContent' in msg:
+                            # We'll handle this differently - store for later
+                            pass
+                        else:
+                            # Old format compatibility
+                            assistant_msg = Message.from_role_and_content(Role.ASSISTANT, msg.get('content', ''))
+                            if 'channel' in msg:
+                                assistant_msg = assistant_msg.with_channel(msg['channel'])
+                            if 'recipient' in msg:
+                                assistant_msg = assistant_msg.with_recipient(msg['recipient'])
+                            if 'content_type' in msg:
+                                assistant_msg = assistant_msg.with_content_type(msg['content_type'])
+                            messages.append(assistant_msg)
+                    elif msg['role'] == 'tool':
+                        tool_msg = Message.from_author_and_content(
+                            Author.new(Role.TOOL, msg.get('name', 'tool')),
+                            msg['content']
+                        )
+                        if 'recipient' in msg:
+                            tool_msg = tool_msg.with_recipient(msg['recipient'])
+                        if 'channel' in msg:
+                            tool_msg = tool_msg.with_channel(msg['channel'])
+                        messages.append(tool_msg)
+                
+                # Add current user message
+                messages.append(Message.from_role_and_content(Role.USER, data['current_message']))
+                
+                # Create conversation and render
+                conversation = Conversation.from_messages(messages)
+                tokens = encoding.render_conversation_for_completion(conversation, Role.ASSISTANT)
+                prompt = encoding.decode(tokens)
+                
+            except Exception as e:
+                yield f"data: {json.dumps({'error': f'Failed to render prompt: {str(e)}'})}\n\n"
+                return
+            
+            # Track the initial prompt (will add response later)
+            initial_prompt_info = {
+                "stage": "initial",
+                "prompt": prompt,
+                "token_count": len(tokens),
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # Create streaming parser
+            parser = StreamableParser(encoding, role=Role.ASSISTANT)
+            accumulated_text = ""  # Accumulate text to handle partial special tokens
+            
+            # Send streaming request to vLLM
+            with requests.post(
+                f"{VLLM_BASE_URL}/v1/completions",
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": prompt,
+                    "max_tokens": data.get('max_tokens', 2048),
+                    "temperature": data.get('temperature', 0.7),
+                    "stop": ["<|return|>"],
+                    "stream": True,
+                    "skip_special_tokens": False,
+                    "logprobs": 1
+                },
+                stream=True
+            ) as response:
+                
+                for line in response.iter_lines():
+                    if line:
+                        line = line.decode('utf-8')
+                        if line.startswith('data: '):
+                            chunk_data = line[6:]
+                            if chunk_data == '[DONE]':
+                                break
+                            
+                            try:
+                                chunk = json.loads(chunk_data)
+                                if 'choices' in chunk and chunk['choices']:
+                                    text = chunk['choices'][0].get('text', '')
+                                    
+                                    if text:
+                                        accumulated_text += text
+                                        
+                                        # Send update with accumulated text
+                                        yield f"data: {json.dumps({
+                                            'text': text,
+                                            'accumulated': accumulated_text,
+                                            'current_role': 'assistant',
+                                            'current_channel': None,
+                                            'last_content_delta': text,
+                                            'current_content': accumulated_text,
+                                            'current_recipient': None,
+                                            'current_content_type': None
+                                        })}\n\n"
+                                        
+                            except json.JSONDecodeError:
+                                continue
+                
+                # Add initial response to prompt info
+                initial_prompt_info['response'] = accumulated_text
+                prompts_sent.append(initial_prompt_info)
+                
+                # Check if response contains tool calls
+                tool_calls = extract_tool_calls(accumulated_text)
+                
+                # If the stream stopped but we have a tool call pattern, append <|call|>
+                if tool_calls and not accumulated_text.endswith('<|call|>'):
+                    for tc in tool_calls:
+                        if tc['tool'] and tc['params']:
+                            accumulated_text += '<|call|>'
+                            logging.info("Appended <|call|> to streaming response")
+                            break
+                
+                if tool_calls and '<|call|>' in accumulated_text:
+                    # Execute tool calls and continue the conversation
+                    tool_responses = []
+                    
+                    for tool_call in tool_calls:
+                        tool_name = tool_call['tool']
+                        params = tool_call['params']
+                        channel = tool_call.get('channel', 'commentary')
+                        
+                        # Execute the tool
+                        result = execute_tool_call(tool_name, params)
+                        
+                        # Format tool response
+                        # Use the same channel as the request (analysis for browser, commentary for others)
+                        tool_response = f'<|start|>{tool_name} to=assistant<|channel|>{channel}<|message|>{json.dumps(result)}<|end|>'
+                        tool_responses.append({
+                            'tool': tool_name,
+                            'params': params,
+                            'result': result,
+                            'formatted_response': tool_response
+                        })
+                        
+                        # Send tool execution info
+                        yield f"data: {json.dumps({
+                            'tool_executed': {
+                                'tool': tool_name,
+                                'params': params,
+                                'result': result
+                            }
+                        })}\n\n"
+                    
+                    # Continue the conversation with tool responses
+                    continued_prompt = prompt + accumulated_text
+                    for tr in tool_responses:
+                        continued_prompt += tr['formatted_response']
+                    continued_prompt += '<|start|>assistant<|message|>'
+                    
+                    # Prepare continuation prompt info (will add response later)
+                    continuation_prompt_info = {
+                        "stage": "continuation_after_tools",
+                        "prompt": continued_prompt,
+                        "token_count": len(list(encoding.encode(continued_prompt, allowed_special="all"))),
+                        "timestamp": datetime.now().isoformat(),
+                        "tool_calls": tool_calls
+                    }
+                    
+                    # Add tool responses to accumulated text for complete raw response
+                    for tr in tool_responses:
+                        accumulated_text += tr['formatted_response']
+                    
+                    # Stream the continuation
+                    yield f"data: {json.dumps({'continuing_after_tools': True})}\n\n"
+                    
+                    with requests.post(
+                        f"{VLLM_BASE_URL}/v1/completions",
+                        json={
+                            "model": MODEL_NAME,
+                            "prompt": continued_prompt,
+                            "max_tokens": data.get('max_tokens', 2048),
+                            "temperature": data.get('temperature', 0.7),
+                            "stop": ["<|return|>"],
+                            "stream": True,
+                            "skip_special_tokens": False,
+                            "logprobs": 1
+                        },
+                        stream=True
+                    ) as continue_response:
+                        
+                        for line in continue_response.iter_lines():
+                            if line:
+                                line = line.decode('utf-8')
+                                if line.startswith('data: '):
+                                    chunk_data = line[6:]
+                                    if chunk_data == '[DONE]':
+                                        break
+                                    
+                                    try:
+                                        chunk = json.loads(chunk_data)
+                                        if 'choices' in chunk and chunk['choices']:
+                                            text = chunk['choices'][0].get('text', '')
+                                            
+                                            if text:
+                                                accumulated_text += text
+                                                
+                                                yield f"data: {json.dumps({
+                                                    'text': text,
+                                                    'accumulated': accumulated_text,
+                                                    'is_continuation': True
+                                                })}\n\n"
+                                                
+                                    except json.JSONDecodeError:
+                                        continue
+                        
+                        # Add continuation response to prompt info
+                        if 'continuation_prompt_info' in locals():
+                            # Get the continuation response text by finding what was added after the prompt
+                            continuation_start = len(continuation_prompt_info['prompt'])
+                            continuation_response = accumulated_text[continuation_start:] if len(accumulated_text) > continuation_start else accumulated_text
+                            continuation_prompt_info['response'] = continuation_response
+                            prompts_sent.append(continuation_prompt_info)
+                
+                # Parse the complete accumulated text
+                if accumulated_text:
+                    # Extract all content manually
+                    parsed_messages = []
+                    
+                    # Extract channel content using regex
+                    import re
+                    
+                    # Find all analysis messages
+                    for match in re.finditer(r'<\|channel\|>analysis<\|message\|>(.*?)(?=<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'analysis',
+                            'content': match.group(1).strip(),
+                            'recipient': None,
+                            'content_type': None
+                        })
+                    
+                    # Find all commentary/tool calls
+                    for match in re.finditer(r'<\|channel\|>commentary(?:\s+to=([\w\.]+))?.*?<\|message\|>(.*?)(?=<\|call\|>|<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'commentary',
+                            'content': match.group(2).strip() if match.group(2) else '',
+                            'recipient': match.group(1) if match.group(1) else None,
+                            'content_type': None
+                        })
+                    
+                    # Find all final messages
+                    for match in re.finditer(r'<\|channel\|>final<\|message\|>(.*?)(?=<\|return\|>|<\|end\|>|<\|start\|>|$)', accumulated_text, re.DOTALL):
+                        parsed_messages.append({
+                            'role': 'assistant',
+                            'channel': 'final',
+                            'content': match.group(1).strip(),
+                            'recipient': None,
+                            'content_type': None
+                        })
+                else:
+                    parsed_messages = []
+                
+                # Build the complete raw response including tool responses
+                if 'tool_responses' in locals() and tool_responses:
+                    # We had tool calls, so build the full response
+                    full_raw_response = accumulated_text
+                    # Note: accumulated_text already includes everything because we accumulated
+                    # from both the initial response AND the continuation after tools
+                else:
+                    # No tool calls, just the direct response
+                    full_raw_response = accumulated_text
+                
+                # Extract final content for conversation history
+                final_content = extract_final_content(full_raw_response) if full_raw_response else ""
+                
+                # Send final parsed messages with tool info and all prompts
+                yield f"data: {json.dumps({
+                    'done': True,
+                    'raw_response': full_raw_response,  # Include the complete raw response
+                    'final_content': final_content,  # Add clean content for frontend
+                    'parsed_messages': parsed_messages,
+                    'tool_calls': tool_responses if 'tool_responses' in locals() else [],
+                    'prompts_sent': prompts_sent  # All prompts sent during streaming
+                })}\n\n"
+                
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)})}\n\n"
+    
+    return Response(generate(data), mimetype='text/event-stream')
+
+if __name__ == '__main__':
+    app.run(debug=False, port=5000)
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/official_python_instruction.py">
+#!/usr/bin/env python3
+"""
+Official Python tool instruction from OpenAI documentation
+"""
+
+OFFICIAL_PYTHON_INSTRUCTION = """## python
+
+Use this tool to execute Python code in your chain of thought. The code will not be shown to the user. This tool should be used for internal reasoning, but not for code that is intended to be visible to the user (e.g. when creating plots, tables, or files).
+
+When you send a message containing Python code to python, it will be executed in a stateful Jupyter notebook environment. python will respond with the output of the execution or time out after 120.0 seconds. The drive at '/mnt/data' can be used to save and persist user files. Internet access for this session is UNKNOWN. Depends on the cluster."""
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/python_d20_response.json">
+{
+  "final_content": "You rolled a **9**! 🎲 If you want to roll again or need help with anything else, just let me know.",
+  "logprobs": {
+    "text_offset": [
+      0,
+      11,
+      19,
+      30,
+      33,
+      38,
+      44,
+      47,
+      52,
+      54,
+      56,
+      58,
+      63,
+      69,
+      76,
+      81,
+      82,
+      85,
+      90,
+      92,
+      101,
+      103,
+      112,
+      119,
+      120,
+      125,
+      129,
+      137,
+      144,
+      149,
+      150,
+      153,
+      158,
+      161,
+      165,
+      168,
+      169,
+      173,
+      180,
+      187,
+      190,
+      194,
+      201,
+      204,
+      208,
+      213,
+      214,
+      218,
+      223,
+      228,
+      230,
+      233,
+      237,
+      244,
+      249,
+      252,
+      257,
+      259,
+      261,
+      263,
+      268,
+      272,
+      277,
+      280,
+      285,
+      287,
+      294,
+      298,
+      300,
+      305,
+      308,
+      316,
+      321,
+      325,
+      332,
+      333,
+      336,
+      343,
+      351,
+      353,
+      362,
+      363,
+      371,
+      376,
+      377,
+      383,
+      386,
+      388,
+      395,
+      402,
+      407,
+      408,
+      412,
+      419,
+      426,
+      427,
+      431,
+      433,
+      439,
+      447,
+      448,
+      449,
+      450,
+      452,
+      453,
+      455,
+      460,
+      466,
+      470,
+      477,
+      478,
+      483,
+      489,
+      493,
+      495,
+      504,
+      512,
+      513,
+      519,
+      527,
+      529,
+      534,
+      542,
+      543,
+      545,
+      551,
+      558,
+      559,
+      565,
+      572,
+      580,
+      581,
+      582,
+      583,
+      585,
+      587,
+      589,
+      594,
+      597,
+      602,
+      606,
+      615,
+      616,
+      621,
+      628,
+      633,
+      636,
+      641,
+      645,
+      652,
+      653,
+      657,
+      662,
+      668,
+      671,
+      676,
+      681,
+      686,
+      693,
+      694,
+      698,
+      707,
+      715,
+      719,
+      726,
+      727,
+      730,
+      732,
+      737,
+      740,
+      745,
+      749,
+      758,
+      759,
+      763,
+      772,
+      779,
+      782,
+      792,
+      797,
+      798,
+      800,
+      803,
+      810,
+      812,
+      814,
+      816,
+      822,
+      825,
+      830,
+      833,
+      835,
+      842,
+      847,
+      851,
+      860,
+      865,
+      870,
+      871,
+      873,
+      879,
+      886,
+      887,
+      893,
+      900,
+      908,
+      909,
+      910,
+      911,
+      913,
+      915,
+      917,
+      922,
+      930,
+      937,
+      938,
+      943,
+      951,
+      956,
+      960,
+      967,
+      968,
+      973,
+      976,
+      980,
+      984,
+      986,
+      995,
+      1000,
+      1003,
+      1008,
+      1011,
+      1014,
+      1015,
+      1022,
+      1031,
+      1040,
+      1051,
+      1058,
+      1061,
+      1064,
+      1065,
+      1074,
+      1081,
+      1082,
+      1095,
+      1099,
+      1110,
+      1112,
+      1116,
+      1119,
+      1125,
+      1132,
+      1134,
+      1139,
+      1146,
+      1154,
+      1155,
+      1156,
+      1157,
+      1159,
+      1161,
+      1163
+    ],
+    "token_logprobs": [
+      0.0,
+      -0.0000014305104514278355,
+      -0.0000023841830625315197,
+      -0.5021612644195557,
+      -0.005668517667800188,
+      -0.44623950123786926,
+      -0.6331477165222168,
+      -0.3504091501235962,
+      -0.001479246304370463,
+      -0.03840949386358261,
+      -0.000003814689989667386,
+      -0.1669493317604065,
+      -0.8566287755966187,
+      -1.258791208267212,
+      -0.9118664264678955,
+      -0.30533909797668457,
+      -0.7634432911872864,
+      -3.0959320068359375,
+      -1.056497573852539,
+      -0.6759012937545776,
+      -2.4477310180664062,
+      -0.010139504447579384,
+      -0.0001248043408850208,
+      -0.2478417456150055,
+      -0.31394344568252563,
+      -1.1552653312683105,
+      -0.2666826546192169,
+      -0.3436475992202759,
+      -0.024248916655778885,
+      -0.484874963760376,
+      -0.44809630513191223,
+      -0.578332245349884,
+      -0.0013936578761786222,
+      -1.7602343559265137,
+      -0.9655080437660217,
+      -0.911755383014679,
+      -0.973003625869751,
+      -3.2221412658691406,
+      -0.48691269755363464,
+      -0.3849881887435913,
+      -0.791709840297699,
+      -0.8095232844352722,
+      -0.47542595863342285,
+      -0.5857812166213989,
+      -0.4604445993900299,
+      -0.19667352735996246,
+      -2.020930290222168,
+      -0.43839526176452637,
+      -1.5641875267028809,
+      -0.3615289330482483,
+      -0.16715268790721893,
+      -0.0046846638433635235,
+      -0.0013584204716607928,
+      -0.00000822540732769994,
+      -0.005823550280183554,
+      -0.00005113947918289341,
+      -0.0008487674640491605,
+      -0.00032145579461939633,
+      -0.0000066756979322235566,
+      -0.0003420721332076937,
+      -0.0011845960980281234,
+      -0.000015020257706055418,
+      -0.000012874520507466514,
+      -0.000005125986263010418,
+      -0.00020740265608765185,
+      -0.000002622600959512056,
+      -1.6152384281158447,
+      -0.2155437171459198,
+      -0.9069991707801819,
+      -0.007905268110334873,
+      -2.966367721557617,
+      -0.36046358942985535,
+      -0.3868066370487213,
+      -0.5242849588394165,
+      -0.3521595299243927,
+      -1.2403961420059204,
+      -1.1579608917236328,
+      -2.7362473011016846,
+      -0.7965713739395142,
+      -0.5862614512443542,
+      -4.573948383331299,
+      -0.0023185533937066793,
+      -0.18453188240528107,
+      -0.2982434928417206,
+      -3.909069061279297,
+      -1.4734309911727905,
+      -1.7771528959274292,
+      -1.548107624053955,
+      -0.8328418135643005,
+      -0.4312725365161896,
+      -1.409864902496338,
+      -1.1156580448150635,
+      -1.030858039855957,
+      -1.3486216068267822,
+      -0.5274865627288818,
+      -2.265993356704712,
+      -1.1429075002670288,
+      -0.5717008113861084,
+      -0.00020001317898277193,
+      -0.0004175029753241688,
+      -0.0000015497195136049413,
+      -0.000005006777428206988,
+      -0.16025792062282562,
+      -0.7577946186065674,
+      -0.005458332132548094,
+      -1.0310304164886475,
+      -0.05994144454598427,
+      -0.4543205499649048,
+      -0.16189298033714294,
+      -0.2537778615951538,
+      -4.08930778503418,
+      -1.107706069946289,
+      -3.1880686283111572,
+      -0.5655558705329895,
+      -0.9752489328384399,
+      -2.5157063007354736,
+      -0.7223377227783203,
+      -2.3851633071899414,
+      -1.7679078578948975,
+      -2.271402359008789,
+      -1.547097086906433,
+      -0.659358561038971,
+      -1.499436855316162,
+      -0.43461117148399353,
+      -0.06422805786132812,
+      -8.344646857949556E-7,
+      -0.02894587442278862,
+      -0.147955060005188,
+      -0.015608293004333973,
+      -0.0000015497195136049413,
+      -0.0000034570634852570947,
+      0.0,
+      -0.000002622600959512056,
+      -0.038054268807172775,
+      -0.0003337303060106933,
+      -0.18303699791431427,
+      -1.285758376121521,
+      -1.582822322845459,
+      -0.6879647374153137,
+      -0.16119901835918427,
+      -0.14344088733196259,
+      -0.4728378653526306,
+      -1.585758924484253,
+      -2.5428547859191895,
+      -1.8890693187713623,
+      -0.1660861372947693,
+      -3.0850322246551514,
+      -0.2565041780471802,
+      -0.18998681008815765,
+      -0.3393598198890686,
+      -2.2877650260925293,
+      -0.9298760890960693,
+      -0.8648821711540222,
+      -1.1880831718444824,
+      -0.1659773886203766,
+      -0.17880241572856903,
+      -0.3792691230773926,
+      -0.00026639728457666934,
+      -0.1847642958164215,
+      -3.0201330184936523,
+      -1.3669168949127197,
+      -1.3499581813812256,
+      -0.43393513560295105,
+      -0.3108014464378357,
+      -0.7283381819725037,
+      -1.7649762630462646,
+      -4.137181282043457,
+      -1.301693081855774,
+      -0.0017020514933392406,
+      -0.4330275058746338,
+      -0.2814036011695862,
+      -0.08338115364313126,
+      -1.0498874187469482,
+      -1.8836281299591064,
+      -2.3508172035217285,
+      -0.6815555691719055,
+      -1.0225071907043457,
+      -2.244016170501709,
+      -0.009974281303584576,
+      -1.1991792917251587,
+      -0.14073750376701355,
+      -0.23533819615840912,
+      -0.0007687236065976322,
+      -0.39437419176101685,
+      -0.29117441177368164,
+      -0.9297659397125244,
+      -2.595134973526001,
+      -0.4875585436820984,
+      -0.23079973459243774,
+      -0.9168754816055298,
+      -0.6283866167068481,
+      -2.0688281059265137,
+      -1.409548044204712,
+      -0.13952378928661346,
+      -0.17395415902137756,
+      -1.544694423675537,
+      -0.8140366077423096,
+      -0.9967893362045288,
+      -0.46714532375335693,
+      -0.023633915930986404,
+      -0.0000014305104514278355,
+      -0.15231822431087494,
+      -0.025193607434630394,
+      -0.0018356868531554937,
+      -0.000011801649634435307,
+      -0.000006198863957251888,
+      -0.000001311301275563892,
+      -0.000004410734163684538,
+      -0.0619942806661129,
+      -0.00033623288618400693,
+      -0.20074109733104706,
+      -0.5822531580924988,
+      -2.310135841369629,
+      -0.8913963437080383,
+      -0.1714928150177002,
+      -0.6917365193367004,
+      -0.700528621673584,
+      -1.3009377717971802,
+      -1.6596020460128784,
+      -0.8461418151855469,
+      -0.3962723910808563,
+      -3.392880439758301,
+      -2.3577380180358887,
+      -0.8411431312561035,
+      -0.893915593624115,
+      -0.8145565986633301,
+      -0.1819618195295334,
+      -1.2913388013839722,
+      -1.7289620637893677,
+      -1.8279283046722412,
+      -0.6512448191642761,
+      -0.7315858006477356,
+      -0.1150626391172409,
+      -0.013744357042014599,
+      0.0,
+      0.0,
+      -3.576278118089249E-7,
+      0.0,
+      0.0,
+      -0.0005838358192704618,
+      0.0,
+      0.0,
+      -2.3841855067985307E-7,
+      -0.007662665098905563,
+      0.0,
+      -0.00030012393835932016,
+      -0.00018809456378221512,
+      -0.0010711177019402385,
+      -0.000003576272320060525,
+      -0.00012361239350866526,
+      -0.000007867782187531702,
+      0.0,
+      -0.018298272043466568,
+      -0.0017370387213304639,
+      -0.00007283422019099817,
+      0.0,
+      0.0,
+      0.0,
+      -4.768370445162873E-7,
+      -0.03805059567093849,
+      -0.000006437280717364047,
+      -0.0006660388899035752,
+      0.0
+    ],
+    "tokens": [
+      "<|channel|>",
+      "analysis",
+      "<|message|>",
+      "The",
+      " user",
+      " wants",
+      " to",
+      " roll",
+      " a",
+      " D",
+      "20",
+      " dice",
+      " using",
+      " Python",
+      " tool",
+      ".",
+      " We",
+      " have",
+      " a",
+      " function",
+      " `",
+      "functions",
+      ".python",
+      "`",
+      " that",
+      " can",
+      " execute",
+      " Python",
+      " code",
+      ".",
+      " We",
+      " need",
+      " to",
+      " use",
+      " it",
+      ".",
+      " The",
+      " output",
+      " should",
+      " be",
+      " the",
+      " result",
+      " of",
+      " the",
+      " roll",
+      ".",
+      " The",
+      " user",
+      " says",
+      " \"",
+      "Use",
+      " the",
+      " python",
+      " tool",
+      " to",
+      " roll",
+      " a",
+      " D",
+      "20",
+      " dice",
+      " and",
+      " tell",
+      " me",
+      " what",
+      " I",
+      " rolled",
+      ".\"\n\n",
+      "We",
+      " need",
+      " to",
+      " respond",
+      " with",
+      " the",
+      " result",
+      ".",
+      " We",
+      " should",
+      " produce",
+      " a",
+      " friendly",
+      ",",
+      " helpful",
+      " tone",
+      ".",
+      " Let's",
+      " do",
+      " a",
+      " simple",
+      " random",
+      " roll",
+      ".",
+      " Use",
+      " random",
+      " module",
+      ".",
+      " Use",
+      " `",
+      "random",
+      ".randint",
+      "(",
+      "1",
+      ",",
+      "20",
+      ")",
+      "`.",
+      " Then",
+      " print",
+      " the",
+      " result",
+      ".",
+      " Also",
+      " maybe",
+      " add",
+      " a",
+      " friendly",
+      " comment",
+      ".",
+      " Let's",
+      " produce",
+      " a",
+      " code",
+      " snippet",
+      ":",
+      " `",
+      "import",
+      " random",
+      ";",
+      " print",
+      "(random",
+      ".randint",
+      "(",
+      "1",
+      ",",
+      "20",
+      "))",
+      "`.",
+      " Then",
+      " we",
+      " call",
+      " the",
+      " function",
+      ".",
+      " Then",
+      " output",
+      " will",
+      " be",
+      " just",
+      " the",
+      " number",
+      ".",
+      " The",
+      " user",
+      " wants",
+      " to",
+      " know",
+      " what",
+      " they",
+      " rolled",
+      ".",
+      " The",
+      " function",
+      " returns",
+      " the",
+      " output",
+      ".",
+      " So",
+      " I",
+      " need",
+      " to",
+      " call",
+      " the",
+      " function",
+      ".",
+      " The",
+      " response",
+      " should",
+      " be",
+      " something",
+      " like",
+      ":",
+      " \"",
+      "You",
+      " rolled",
+      " a",
+      " X",
+      ".\"",
+      " Let's",
+      " do",
+      " that",
+      ".\n\n",
+      "We",
+      " should",
+      " call",
+      " the",
+      " function",
+      " with",
+      " code",
+      ":",
+      " `",
+      "import",
+      " random",
+      ";",
+      " print",
+      "(random",
+      ".randint",
+      "(",
+      "1",
+      ",",
+      "20",
+      "))",
+      "`.",
+      " Then",
+      " capture",
+      " output",
+      ".",
+      " Then",
+      " respond",
+      " with",
+      " the",
+      " number",
+      ".",
+      " Also",
+      " we",
+      " can",
+      " add",
+      " a",
+      " friendly",
+      " tone",
+      ".\n\n",
+      "Let's",
+      " do",
+      " it",
+      ".",
+      "<|end|>",
+      "<|start|>",
+      "assistant",
+      "<|channel|>",
+      "comment",
+      "ary",
+      " to",
+      "=",
+      "functions",
+      ".python",
+      " ",
+      "<|constrain|>",
+      "json",
+      "<|message|>",
+      "{\"",
+      "code",
+      "\":\"",
+      "import",
+      " random",
+      "\\n",
+      "print",
+      "(random",
+      ".randint",
+      "(",
+      "1",
+      ",",
+      "20",
+      "))",
+      "\"}",
+      "<|call|>"
+    ],
+    "top_logprobs": [
+      {
+        "<|channel|>": 0.0
+      },
+      {
+        "analysis": -0.0000014305104514278355
+      },
+      {
+        "<|message|>": -0.0000023841830625315197
+      },
+      {
+        "The": -0.5021612644195557
+      },
+      {
+        " user": -0.005668517667800188
+      },
+      {
+        " wants": -0.44623950123786926
+      },
+      {
+        " to": -0.6331477165222168
+      },
+      {
+        " roll": -0.3504091501235962
+      },
+      {
+        " a": -0.001479246304370463
+      },
+      {
+        " D": -0.03840949386358261
+      },
+      {
+        "20": -0.000003814689989667386
+      },
+      {
+        " dice": -0.1669493317604065
+      },
+      {
+        " using": -0.8566287755966187
+      },
+      {
+        " Python": -1.258791208267212,
+        " the": -0.6337912678718567
+      },
+      {
+        " tool": -0.9118664264678955
+      },
+      {
+        ".": -0.30533909797668457
+      },
+      {
+        " We": -0.7634432911872864
+      },
+      {
+        " have": -3.0959320068359375,
+        " need": -0.5959319472312927
+      },
+      {
+        " a": -1.056497573852539,
+        " to": -0.6814975738525391
+      },
+      {
+        " function": -0.6759012937545776
+      },
+      {
+        " `": -2.4477310180664062,
+        " to": -1.1977310180664062
+      },
+      {
+        "functions": -0.010139504447579384
+      },
+      {
+        ".python": -0.0001248043408850208
+      },
+      {
+        "`": -0.2478417456150055
+      },
+      {
+        " that": -0.31394344568252563
+      },
+      {
+        " can": -1.1552653312683105
+      },
+      {
+        " execute": -0.2666826546192169
+      },
+      {
+        " Python": -0.3436475992202759
+      },
+      {
+        " code": -0.024248916655778885
+      },
+      {
+        ".": -0.484874963760376
+      },
+      {
+        " We": -0.44809630513191223
+      },
+      {
+        " need": -0.578332245349884
+      },
+      {
+        " to": -0.0013936578761786222
+      },
+      {
+        " produce": -1.5102343559265137,
+        " use": -1.7602343559265137
+      },
+      {
+        " it": -0.9655080437660217
+      },
+      {
+        ".": -0.911755383014679
+      },
+      {
+        " The": -0.973003625869751
+      },
+      {
+        " output": -3.2221412658691406,
+        " user": -0.9721412658691406
+      },
+      {
+        " should": -0.48691269755363464
+      },
+      {
+        " be": -0.3849881887435913
+      },
+      {
+        " the": -0.791709840297699
+      },
+      {
+        " result": -0.8095232844352722
+      },
+      {
+        " of": -0.47542595863342285
+      },
+      {
+        " the": -0.5857812166213989
+      },
+      {
+        " roll": -0.4604445993900299
+      },
+      {
+        ".": -0.19667352735996246
+      },
+      {
+        " The": -2.020930290222168,
+        " We": -1.020930290222168
+      },
+      {
+        " user": -0.43839526176452637
+      },
+      {
+        " says": -1.5641875267028809,
+        " wants": -1.1891875267028809
+      },
+      {
+        " \"": -0.3615289330482483
+      },
+      {
+        "Use": -0.16715268790721893
+      },
+      {
+        " the": -0.0046846638433635235
+      },
+      {
+        " python": -0.0013584204716607928
+      },
+      {
+        " tool": -0.00000822540732769994
+      },
+      {
+        " to": -0.005823550280183554
+      },
+      {
+        " roll": -0.00005113947918289341
+      },
+      {
+        " a": -0.0008487674640491605
+      },
+      {
+        " D": -0.00032145579461939633
+      },
+      {
+        "20": -0.0000066756979322235566
+      },
+      {
+        " dice": -0.0003420721332076937
+      },
+      {
+        " and": -0.0011845960980281234
+      },
+      {
+        " tell": -0.000015020257706055418
+      },
+      {
+        " me": -0.000012874520507466514
+      },
+      {
+        " what": -0.000005125986263010418
+      },
+      {
+        " I": -0.00020740265608765185
+      },
+      {
+        " rolled": -0.000002622600959512056
+      },
+      {
+        ".\"": -0.24023836851119995,
+        ".\"\n\n": -1.6152384281158447
+      },
+      {
+        "We": -0.2155437171459198
+      },
+      {
+        " need": -0.9069991707801819
+      },
+      {
+        " to": -0.007905268110334873
+      },
+      {
+        " produce": -1.0913677215576172,
+        " respond": -2.966367721557617
+      },
+      {
+        " with": -0.36046358942985535
+      },
+      {
+        " the": -0.3868066370487213
+      },
+      {
+        " result": -0.5242849588394165
+      },
+      {
+        ".": -0.3521595299243927
+      },
+      {
+        " We": -1.2403961420059204
+      },
+      {
+        " should": -1.1579608917236328
+      },
+      {
+        " call": -1.3612473011016846,
+        " produce": -2.7362473011016846
+      },
+      {
+        " a": -0.7965713739395142
+      },
+      {
+        " friendly": -0.5862614512443542
+      },
+      {
+        " tone": -0.07394839078187943,
+        ",": -4.573948383331299
+      },
+      {
+        " helpful": -0.0023185533937066793
+      },
+      {
+        " tone": -0.18453188240528107
+      },
+      {
+        ".": -0.2982434928417206
+      },
+      {
+        " Let's": -3.909069061279297,
+        " We": -1.2840690612792969
+      },
+      {
+        " do": -1.4734309911727905
+      },
+      {
+        " a": -1.7771528959274292,
+        " it": -1.2771528959274292
+      },
+      {
+        " random": -0.9231075644493103,
+        " simple": -1.548107624053955
+      },
+      {
+        " random": -0.8328418135643005
+      },
+      {
+        " roll": -0.4312725365161896
+      },
+      {
+        ".": -1.409864902496338,
+        ":": -0.7848649024963379
+      },
+      {
+        " Use": -1.1156580448150635
+      },
+      {
+        " random": -1.030858039855957
+      },
+      {
+        " module": -1.3486216068267822,
+        ".randint": -0.34862157702445984
+      },
+      {
+        ".": -0.5274865627288818
+      },
+      {
+        " Use": -2.265993356704712,
+        " We'll": -2.078493356704712
+      },
+      {
+        " `": -1.1429075002670288
+      },
+      {
+        "random": -0.5717008113861084
+      },
+      {
+        ".randint": -0.00020001317898277193
+      },
+      {
+        "(": -0.0004175029753241688
+      },
+      {
+        "1": -0.0000015497195136049413
+      },
+      {
+        ",": -0.000005006777428206988
+      },
+      {
+        "20": -0.16025792062282562
+      },
+      {
+        ")": -0.7577946186065674,
+        ")`": -0.6327946186065674
+      },
+      {
+        "`.": -0.005458332132548094
+      },
+      {
+        " Then": -1.0310304164886475
+      },
+      {
+        " print": -0.05994144454598427
+      },
+      {
+        " the": -0.4543205499649048
+      },
+      {
+        " result": -0.16189298033714294
+      },
+      {
+        ".": -0.2537778615951538
+      },
+      {
+        " Also": -4.08930778503418,
+        " The": -1.8393075466156006
+      },
+      {
+        " maybe": -1.107706069946289
+      },
+      {
+        " add": -3.1880686283111572,
+        " mention": -1.7505686283111572
+      },
+      {
+        " a": -0.5655558705329895
+      },
+      {
+        " friendly": -0.9752489328384399
+      },
+      {
+        " comment": -2.5157063007354736,
+        " message": -0.5157062411308289
+      },
+      {
+        ".": -0.7223377227783203
+      },
+      {
+        " Let's": -2.3851633071899414,
+        " The": -1.6351633071899414
+      },
+      {
+        " do": -1.0179078578948975,
+        " produce": -1.7679078578948975
+      },
+      {
+        " a": -2.271402359008789,
+        " the": -1.1464024782180786
+      },
+      {
+        " code": -1.547097086906433,
+        " single": -1.297097086906433
+      },
+      {
+        " snippet": -0.659358561038971
+      },
+      {
+        " that": -1.374436855316162,
+        ":": -1.499436855316162
+      },
+      {
+        " `": -0.43461117148399353
+      },
+      {
+        "import": -0.06422805786132812
+      },
+      {
+        " random": -8.344646857949556E-7
+      },
+      {
+        ";": -0.02894587442278862
+      },
+      {
+        " print": -0.147955060005188
+      },
+      {
+        "(random": -0.015608293004333973
+      },
+      {
+        ".randint": -0.0000015497195136049413
+      },
+      {
+        "(": -0.0000034570634852570947
+      },
+      {
+        "1": 0.0
+      },
+      {
+        ",": -0.000002622600959512056
+      },
+      {
+        "20": -0.038054268807172775
+      },
+      {
+        "))": -0.0003337303060106933
+      },
+      {
+        "`.": -0.18303699791431427
+      },
+      {
+        " Then": -1.285758376121521
+      },
+      {
+        " call": -1.332822322845459,
+        " we": -1.582822322845459
+      },
+      {
+        " call": -0.6879647374153137
+      },
+      {
+        " the": -0.16119901835918427
+      },
+      {
+        " function": -0.14344088733196259
+      },
+      {
+        ".": -0.4728378653526306
+      },
+      {
+        " The": -1.335758924484253,
+        " Then": -1.585758924484253
+      },
+      {
+        " output": -2.5428547859191895,
+        " we": -0.5428548455238342
+      },
+      {
+        " the": -0.8890692591667175,
+        " will": -1.8890693187713623
+      },
+      {
+        " be": -0.1660861372947693
+      },
+      {
+        " just": -3.0850322246551514,
+        " the": -0.8350322842597961
+      },
+      {
+        " the": -0.2565041780471802
+      },
+      {
+        " number": -0.18998681008815765
+      },
+      {
+        ".": -0.3393598198890686
+      },
+      {
+        " The": -2.2877650260925293,
+        " We": -1.4127650260925293
+      },
+      {
+        " user": -0.9298760890960693
+      },
+      {
+        " wants": -0.8648821711540222
+      },
+      {
+        " the": -1.0630831718444824,
+        " to": -1.1880831718444824
+      },
+      {
+        " know": -0.1659773886203766
+      },
+      {
+        " what": -0.17880241572856903
+      },
+      {
+        " they": -0.3792691230773926
+      },
+      {
+        " rolled": -0.00026639728457666934
+      },
+      {
+        ".": -0.1847642958164215
+      },
+      {
+        " So": -0.6451329588890076,
+        " The": -3.0201330184936523
+      },
+      {
+        " function": -1.3669168949127197
+      },
+      {
+        " returns": -1.3499581813812256,
+        " will": -0.5999582409858704
+      },
+      {
+        " the": -0.43393513560295105
+      },
+      {
+        " output": -0.3108014464378357
+      },
+      {
+        ".": -0.7283381819725037
+      },
+      {
+        " So": -1.7649762630462646,
+        " We": -1.1399762630462646
+      },
+      {
+        " I": -4.137181282043457,
+        " we": -0.2621810734272003
+      },
+      {
+        " need": -1.301693081855774,
+        " will": -1.176693081855774
+      },
+      {
+        " to": -0.0017020514933392406
+      },
+      {
+        " call": -0.4330275058746338
+      },
+      {
+        " the": -0.2814036011695862
+      },
+      {
+        " function": -0.08338115364313126
+      },
+      {
+        ".": -1.0498874187469482
+      },
+      {
+        " The": -1.8836281299591064,
+        " Then": -1.7586281299591064
+      },
+      {
+        " output": -1.975817322731018,
+        " response": -2.3508172035217285
+      },
+      {
+        " should": -0.6815555691719055
+      },
+      {
+        " be": -1.0225071907043457
+      },
+      {
+        " something": -2.244016170501709,
+        " the": -0.7440162897109985
+      },
+      {
+        " like": -0.009974281303584576
+      },
+      {
+        " \"": -1.0741792917251587,
+        ":": -1.1991792917251587
+      },
+      {
+        " \"": -0.14073750376701355
+      },
+      {
+        "You": -0.23533819615840912
+      },
+      {
+        " rolled": -0.0007687236065976322
+      },
+      {
+        " a": -0.39437419176101685
+      },
+      {
+        " X": -0.29117441177368164
+      },
+      {
+        ".\"": -0.9297659397125244
+      },
+      {
+        " But": -1.407634973526001,
+        " Let's": -2.595134973526001
+      },
+      {
+        " do": -0.4875585436820984
+      },
+      {
+        " that": -0.23079973459243774
+      },
+      {
+        ".": -0.5418754816055298,
+        ".\n\n": -0.9168754816055298
+      },
+      {
+        "We": -0.6283866167068481
+      },
+      {
+        " need": -0.8188282251358032,
+        " should": -2.0688281059265137
+      },
+      {
+        " call": -1.409548044204712
+      },
+      {
+        " the": -0.13952378928661346
+      },
+      {
+        " function": -0.17395415902137756
+      },
+      {
+        " with": -1.544694423675537,
+        ".": -1.169694423675537
+      },
+      {
+        " code": -0.8140366077423096
+      },
+      {
+        ":": -0.9967893362045288
+      },
+      {
+        " `": -0.46714532375335693
+      },
+      {
+        "import": -0.023633915930986404
+      },
+      {
+        " random": -0.0000014305104514278355
+      },
+      {
+        ";": -0.15231822431087494
+      },
+      {
+        " print": -0.025193607434630394
+      },
+      {
+        "(random": -0.0018356868531554937
+      },
+      {
+        ".randint": -0.000011801649634435307
+      },
+      {
+        "(": -0.000006198863957251888
+      },
+      {
+        "1": -0.000001311301275563892
+      },
+      {
+        ",": -0.000004410734163684538
+      },
+      {
+        "20": -0.0619942806661129
+      },
+      {
+        "))": -0.00033623288618400693
+      },
+      {
+        "`.": -0.20074109733104706
+      },
+      {
+        " Then": -0.5822531580924988
+      },
+      {
+        " capture": -2.310135841369629,
+        " we": -1.4351359605789185
+      },
+      {
+        " output": -0.8913963437080383,
+        " the": -0.6413963437080383
+      },
+      {
+        ".": -0.1714928150177002
+      },
+      {
+        " Then": -0.6917365193367004
+      },
+      {
+        " respond": -0.700528621673584
+      },
+      {
+        " with": -1.3009377717971802,
+        ".": -1.3009377717971802
+      },
+      {
+        " \"": -0.9096020460128784,
+        " the": -1.6596020460128784
+      },
+      {
+        " number": -0.8461418151855469
+      },
+      {
+        ".": -0.3962723910808563
+      },
+      {
+        " Also": -3.392880439758301,
+        " Let's": -1.8928804397583008
+      },
+      {
+        " maybe": -1.4827381372451782,
+        " we": -2.3577380180358887
+      },
+      {
+        " can": -0.8411431312561035
+      },
+      {
+        " add": -0.893915593624115
+      },
+      {
+        " a": -0.8145565986633301
+      },
+      {
+        " friendly": -0.1819618195295334
+      },
+      {
+        " tone": -1.2913388013839722
+      },
+      {
+        ".": -0.9789620637893677,
+        ".\n\n": -1.7289620637893677
+      },
+      {
+        "Let's": -1.8279283046722412,
+        "We": -1.5779283046722412
+      },
+      {
+        " do": -0.6512448191642761
+      },
+      {
+        " it": -0.7315858006477356
+      },
+      {
+        ".": -0.1150626391172409
+      },
+      {
+        "<|end|>": -0.013744357042014599
+      },
+      {
+        "<|start|>": 0.0
+      },
+      {
+        "assistant": 0.0
+      },
+      {
+        "<|channel|>": -3.576278118089249E-7
+      },
+      {
+        "comment": 0.0
+      },
+      {
+        "ary": 0.0
+      },
+      {
+        " to": -0.0005838358192704618
+      },
+      {
+        "=": 0.0
+      },
+      {
+        "functions": 0.0
+      },
+      {
+        ".python": -2.3841855067985307E-7
+      },
+      {
+        " ": -0.007662665098905563
+      },
+      {
+        "<|constrain|>": 0.0
+      },
+      {
+        "json": -0.00030012393835932016
+      },
+      {
+        "<|message|>": -0.00018809456378221512
+      },
+      {
+        "{\"": -0.0010711177019402385
+      },
+      {
+        "code": -0.000003576272320060525
+      },
+      {
+        "\":\"": -0.00012361239350866526
+      },
+      {
+        "import": -0.000007867782187531702
+      },
+      {
+        " random": 0.0
+      },
+      {
+        "\\n": -0.018298272043466568
+      },
+      {
+        "print": -0.0017370387213304639
+      },
+      {
+        "(random": -0.00007283422019099817
+      },
+      {
+        ".randint": 0.0
+      },
+      {
+        "(": 0.0
+      },
+      {
+        "1": 0.0
+      },
+      {
+        ",": -4.768370445162873E-7
+      },
+      {
+        "20": -0.03805059567093849
+      },
+      {
+        "))": -0.000006437280717364047
+      },
+      {
+        "\"}": -0.0006660388899035752
+      },
+      {
+        "<|call|>": 0.0
+      }
+    ]
+  },
+  "parsed_messages": {},
+  "prompts_sent": [
+    {
+      "prompt": "<|start|>system<|message|>You are ChatGPT, a large language model trained by OpenAI.\nKnowledge cutoff: 2024-06\nCurrent date: 2025-08-17\n\nReasoning: high\n\n# Valid channels: analysis, commentary, final. Channel must be included for every message.\nCalls to these tools must go to the commentary channel: 'functions'.<|end|><|start|>developer<|message|># Instructions\n\nUse a friendly tone and be helpful.\n\n# Tools\n\n## functions\n\nnamespace functions {\n\n// Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output.\ntype python = (_: {\n// Python code to execute. ALWAYS use print() to show results.\ncode: string,\n}) => any;\n\n} // namespace functions<|end|><|start|>user<|message|>Use the python tool to roll a D20 dice and tell me what I rolled.<|end|><|start|>assistant",
+      "response": "<|channel|>analysis<|message|>The user wants to roll a D20 dice using Python tool. We have a function `functions.python` that can execute Python code. We need to use it. The output should be the result of the roll. The user says \"Use the python tool to roll a D20 dice and tell me what I rolled.\"\n\nWe need to respond with the result. We should produce a friendly, helpful tone. Let's do a simple random roll. Use random module. Use `random.randint(1,20)`. Then print the result. Also maybe add a friendly comment. Let's produce a code snippet: `import random; print(random.randint(1,20))`. Then we call the function. Then output will be just the number. The user wants to know what they rolled. The function returns the output. So I need to call the function. The response should be something like: \"You rolled a X.\" Let's do that.\n\nWe should call the function with code: `import random; print(random.randint(1,20))`. Then capture output. Then respond with the number. Also we can add a friendly tone.\n\nLet's do it.<|end|><|start|>assistant<|channel|>commentary to=functions.python <|constrain|>json<|message|>{\"code\":\"import random\\nprint(random.randint(1,20))\"}<|call|>",
+      "stage": "initial",
+      "timestamp": "2025-08-16T19:31:01.167409",
+      "token_count": 172
+    },
+    {
+      "prompt": "<|start|>system<|message|>You are ChatGPT, a large language model trained by OpenAI.\nKnowledge cutoff: 2024-06\nCurrent date: 2025-08-17\n\nReasoning: high\n\n# Valid channels: analysis, commentary, final. Channel must be included for every message.\nCalls to these tools must go to the commentary channel: 'functions'.<|end|><|start|>developer<|message|># Instructions\n\nUse a friendly tone and be helpful.\n\n# Tools\n\n## functions\n\nnamespace functions {\n\n// Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output.\ntype python = (_: {\n// Python code to execute. ALWAYS use print() to show results.\ncode: string,\n}) => any;\n\n} // namespace functions<|end|><|start|>user<|message|>Use the python tool to roll a D20 dice and tell me what I rolled.<|end|><|start|>assistant<|channel|>analysis<|message|>The user wants to roll a D20 dice using Python tool. We have a function `functions.python` that can execute Python code. We need to use it. The output should be the result of the roll. The user says \"Use the python tool to roll a D20 dice and tell me what I rolled.\"\n\nWe need to respond with the result. We should produce a friendly, helpful tone. Let's do a simple random roll. Use random module. Use `random.randint(1,20)`. Then print the result. Also maybe add a friendly comment. Let's produce a code snippet: `import random; print(random.randint(1,20))`. Then we call the function. Then output will be just the number. The user wants to know what they rolled. The function returns the output. So I need to call the function. The response should be something like: \"You rolled a X.\" Let's do that.\n\nWe should call the function with code: `import random; print(random.randint(1,20))`. Then capture output. Then respond with the number. Also we can add a friendly tone.\n\nLet's do it.<|end|><|start|>assistant<|channel|>commentary to=functions.python <|constrain|>json<|message|>{\"code\":\"import random\\nprint(random.randint(1,20))\"}<|call|><|return|>{\"output\": \"9\\n\"}<|end|><|start|>assistant<|message|>",
+      "response": "You rolled a **9**! 🎲 If you want to roll again or need help with anything else, just let me know.",
+      "stage": "continuation_round_1",
+      "timestamp": "2025-08-16T19:31:04.064851",
+      "token_count": 447,
+      "tool_calls": [
+        {
+          "channel": "commentary",
+          "params": {
+            "code": "import random\nprint(random.randint(1,20))"
+          },
+          "raw_content": "{\"code\":\"import random\\nprint(random.randint(1,20))\"}",
+          "tool": "functions.python"
+        }
+      ]
+    }
+  ],
+  "raw_response": "<|channel|>analysis<|message|>The user wants to roll a D20 dice using Python tool. We have a function `functions.python` that can execute Python code. We need to use it. The output should be the result of the roll. The user says \"Use the python tool to roll a D20 dice and tell me what I rolled.\"\n\nWe need to respond with the result. We should produce a friendly, helpful tone. Let's do a simple random roll. Use random module. Use `random.randint(1,20)`. Then print the result. Also maybe add a friendly comment. Let's produce a code snippet: `import random; print(random.randint(1,20))`. Then we call the function. Then output will be just the number. The user wants to know what they rolled. The function returns the output. So I need to call the function. The response should be something like: \"You rolled a X.\" Let's do that.\n\nWe should call the function with code: `import random; print(random.randint(1,20))`. Then capture output. Then respond with the number. Also we can add a friendly tone.\n\nLet's do it.<|end|><|start|>assistant<|channel|>commentary to=functions.python <|constrain|>json<|message|>{\"code\":\"import random\\nprint(random.randint(1,20))\"}<|call|><|return|>{\"output\": \"9\\n\"}<|end|>You rolled a **9**! 🎲 If you want to roll again or need help with anything else, just let me know.",
+  "rounds": 1,
+  "tokens": [
+    200005,
+    35644,
+    200008,
+    976,
+    1825,
+    10648,
+    316,
+    8465,
+    261,
+    415,
+    455,
+    22078,
+    2360,
+    26534,
+    4584,
+    13,
+    1416,
+    679,
+    261,
+    1114,
+    2700,
+    44580,
+    100236,
+    63,
+    484,
+    665,
+    15792,
+    26534,
+    3490,
+    13,
+    1416,
+    1309,
+    316,
+    1199,
+    480,
+    13,
+    623,
+    4733,
+    1757,
+    413,
+    290,
+    1534,
+    328,
+    290,
+    8465,
+    13,
+    623,
+    1825,
+    5003,
+    392,
+    8470,
+    290,
+    22752,
+    4584,
+    316,
+    8465,
+    261,
+    415,
+    455,
+    22078,
+    326,
+    5485,
+    668,
+    1412,
+    357,
+    38841,
+    6635,
+    2167,
+    1309,
+    316,
+    9570,
+    483,
+    290,
+    1534,
+    13,
+    1416,
+    1757,
+    10635,
+    261,
+    11888,
+    11,
+    10297,
+    23206,
+    13,
+    41021,
+    621,
+    261,
+    4705,
+    7526,
+    8465,
+    13,
+    7649,
+    7526,
+    8827,
+    13,
+    7649,
+    2700,
+    22568,
+    55817,
+    7,
+    16,
+    11,
+    455,
+    8,
+    62102,
+    7801,
+    2123,
+    290,
+    1534,
+    13,
+    8820,
+    10112,
+    1147,
+    261,
+    11888,
+    5375,
+    13,
+    41021,
+    10635,
+    261,
+    3490,
+    88814,
+    25,
+    2700,
+    561,
+    7526,
+    26,
+    2123,
+    48459,
+    55817,
+    7,
+    16,
+    11,
+    455,
+    915,
+    62102,
+    7801,
+    581,
+    2421,
+    290,
+    1114,
+    13,
+    7801,
+    4733,
+    738,
+    413,
+    1327,
+    290,
+    2086,
+    13,
+    623,
+    1825,
+    10648,
+    316,
+    1761,
+    1412,
+    1023,
+    38841,
+    13,
+    623,
+    1114,
+    7377,
+    290,
+    4733,
+    13,
+    2632,
+    357,
+    1309,
+    316,
+    2421,
+    290,
+    1114,
+    13,
+    623,
+    3322,
+    1757,
+    413,
+    3543,
+    1299,
+    25,
+    392,
+    3575,
+    38841,
+    261,
+    2127,
+    3692,
+    41021,
+    621,
+    484,
+    364,
+    2167,
+    1757,
+    2421,
+    290,
+    1114,
+    483,
+    3490,
+    25,
+    2700,
+    561,
+    7526,
+    26,
+    2123,
+    48459,
+    55817,
+    7,
+    16,
+    11,
+    455,
+    915,
+    62102,
+    7801,
+    19374,
+    4733,
+    13,
+    7801,
+    9570,
+    483,
+    290,
+    2086,
+    13,
+    8820,
+    581,
+    665,
+    1147,
+    261,
+    11888,
+    23206,
+    364,
+    58369,
+    621,
+    480,
+    13,
+    200007,
+    200006,
+    173781,
+    200005,
+    12606,
+    815,
+    316,
+    28,
+    44580,
+    100236,
+    220,
+    200003,
+    4108,
+    200008,
+    10848,
+    3056,
+    7534,
+    561,
+    7526,
+    3392,
+    1598,
+    48459,
+    55817,
+    7,
+    16,
+    11,
+    455,
+    915,
+    18583,
+    200012,
+    200002,
+    10848,
+    6130,
+    1243,
+    392,
+    24,
+    3392,
+    18583,
+    200007,
+    3575,
+    38841,
+    261,
+    6240,
+    24,
+    410,
+    0,
+    139786,
+    110,
+    1843,
+    481,
+    1682,
+    316,
+    8465,
+    2418,
+    503,
+    1309,
+    1652,
+    483,
+    6137,
+    1203,
+    11,
+    1327,
+    1632,
+    668,
+    1761,
+    13
+  ],
+  "tool_calls": [
+    {
+      "formatted_response": "<|return|>{\"output\": \"9\\n\"}<|end|>",
+      "params": {
+        "code": "import random\nprint(random.randint(1,20))"
+      },
+      "result": {
+        "output": "9\n"
+      },
+      "tool": "functions.python"
+    }
+  ]
+}
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/python_function_wrapper.py">
+#!/usr/bin/env python3
+"""
+Python as a Function Tool Wrapper
+Based on OpenAI's gpt-oss implementation but adapted for function namespace
+"""
+
+import asyncio
+import subprocess
+import tempfile
+import os
+import sys
+import json
+from typing import Dict, Any
+
+class PythonFunctionTool:
+    """Python tool that works in the functions namespace"""
+    
+    def __init__(self, timeout=120):
+        self.timeout = timeout
+        
+    def get_tool_definition(self) -> Dict[str, Any]:
+        """Return the tool definition for the functions namespace"""
+        return {
+            "name": "python",
+            "description": "Execute Python code and return the output. IMPORTANT: You MUST use print() to produce output. The code runs in a stateless environment. Example: print(random.randint(1,20)) NOT just random.randint(1,20)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Python code to execute. ALWAYS use print() to show results. Example: print(random.randint(1,20)) will output the number. Just random.randint(1,20) will output nothing."
+                    }
+                },
+                "required": ["code"]
+            }
+        }
+    
+    def execute(self, code: str) -> Dict[str, Any]:
+        """Execute Python code and return the result"""
+        try:
+            # Create a temporary file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(code)
+                temp_file = f.name
+            
+            # Execute the script
+            result = subprocess.run(
+                [sys.executable, temp_file],
+                capture_output=True,
+                text=True,
+                timeout=self.timeout
+            )
+            
+            # Clean up
+            os.unlink(temp_file)
+            
+            # Prepare output
+            output = result.stdout
+            if result.stderr:
+                output += f"\n[STDERR]\n{result.stderr}"
+                
+            return {"output": output if output else "[No output]"}
+            
+        except subprocess.TimeoutExpired:
+            return {"error": f"Code execution timed out after {self.timeout} seconds"}
+        except Exception as e:
+            return {"error": f"Execution error: {str(e)}"}
+    
+    def handle_tool_call(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle a tool call from the model"""
+        code = params.get('code', '')
+        if not code:
+            return {"error": "No code provided"}
+        
+        return self.execute(code)
+
+
+# Integration helper
+def add_python_to_functions(existing_tools: list) -> list:
+    """Add Python tool to the functions list"""
+    python_tool = PythonFunctionTool()
+    tools = existing_tools.copy()
+    tools.append(python_tool.get_tool_definition())
+    return tools
+
+
+# Test if run directly
+if __name__ == "__main__":
+    tool = PythonFunctionTool()
+    
+    # Test the tool
+    test_code = """
+import random
+result = random.randint(1, 20)
+print(f"D20 roll: {result}")
+"""
+    
+    print("Testing Python as Function Tool")
+    print("="*60)
+    print(f"Tool definition: {json.dumps(tool.get_tool_definition(), indent=2)}")
+    print(f"\nExecuting test code:")
+    print(test_code)
+    print(f"\nResult: {tool.handle_tool_call({'code': test_code})}")
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/python_tool_wrapper.py">
+#!/usr/bin/env python3
+"""
+Wrapper to make Python execution work with our string-based system
+Can use either Docker-based execution or direct subprocess execution
+"""
+
+import asyncio
+import subprocess
+import tempfile
+import os
+import sys
+from typing import Dict, Any, AsyncIterator
+from openai_harmony import Message, TextContent
+
+
+class PythonToolWrapper:
+    """Wrapper around Python execution to provide string-based interface"""
+    
+    def __init__(self, use_docker=None):
+        # Auto-detect Docker if not specified
+        if use_docker is None:
+            try:
+                # Check if Docker is available
+                result = subprocess.run(['docker', '--version'], capture_output=True, text=True)
+                self.use_docker = result.returncode == 0
+            except:
+                self.use_docker = False
+        else:
+            self.use_docker = use_docker
+        if use_docker:
+            try:
+                import docker
+                self.docker_client = docker.from_env()
+                # Try to pull python:3.11 image if not present
+                try:
+                    self.docker_client.images.get("python:3.11")
+                except:
+                    print("Pulling python:3.11 Docker image...")
+                    self.docker_client.images.pull("python:3.11")
+            except Exception as e:
+                print(f"Docker not available: {e}. Falling back to subprocess.")
+                self.use_docker = False
+                self.docker_client = None
+        else:
+            self.docker_client = None
+    
+    def instruction(self) -> str:
+        """Get the Python tool instruction"""
+        sandbox_info = "Docker container" if self.use_docker else "subprocess"
+        return f"""
+Use this tool to execute Python code in your chain of thought. The code will not be shown to the user. This tool should be used for internal reasoning, calculations, and data processing.
+When you send a message containing python code to python, it will be executed in a {"sandboxed Docker container with no network access and limited resources" if self.use_docker else "stateless subprocess environment"}, and the stdout of that process will be returned to you. You have to use print statements to access the output.
+        """.strip()
+    
+    def _execute_subprocess(self, script: str) -> str:
+        """Execute Python script using subprocess"""
+        try:
+            # Create a temporary file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(script)
+                temp_file = f.name
+            
+            # Execute the script
+            result = subprocess.run(
+                [sys.executable, temp_file],
+                capture_output=True,
+                text=True,
+                timeout=120  # 120 second timeout as per spec
+            )
+            
+            # Clean up
+            os.unlink(temp_file)
+            
+            # Combine stdout and stderr
+            output = result.stdout
+            if result.stderr:
+                output += f"\n[STDERR]\n{result.stderr}"
+            
+            return output if output else "[No output]"
+            
+        except subprocess.TimeoutExpired:
+            return "[Error: Script execution timed out after 30 seconds]"
+        except Exception as e:
+            return f"[Error executing script: {str(e)}]"
+    
+    def _execute_docker(self, script: str) -> str:
+        """Execute Python script using Docker"""
+        if not self.docker_client:
+            return self._execute_subprocess(script)
+        
+        try:
+            import io
+            import tarfile
+            
+            # Create a temporary tar archive containing the script
+            script_name = "script.py"
+            tarstream = io.BytesIO()
+            with tarfile.open(fileobj=tarstream, mode="w") as tar:
+                script_bytes = script.encode("utf-8")
+                tarinfo = tarfile.TarInfo(name=script_name)
+                tarinfo.size = len(script_bytes)
+                tar.addfile(tarinfo, io.BytesIO(script_bytes))
+            tarstream.seek(0)
+            
+            # Start the container with security restrictions
+            container = self.docker_client.containers.create(
+                "python:3.11-slim",  # Use slim image
+                command="sleep infinity", 
+                detach=True,
+                mem_limit="512m",  # Limit memory to 512MB
+                cpu_period=100000,
+                cpu_quota=50000,  # Limit to 50% of one CPU
+                network_mode="none",  # No network access
+                # read_only=True,  # Can't use this - prevents copying script
+                tmpfs={'/tmp': 'size=100M,mode=1777'},  # /tmp is writable (100MB limit)
+                security_opt=["no-new-privileges"]  # Security hardening
+            )
+            
+            try:
+                container.start()
+                # Put the script into the container
+                container.put_archive(path="/tmp", data=tarstream.read())
+                # Execute the script with timeout
+                exec_result = container.exec_run(
+                    f"python /tmp/{script_name}",
+                    demux=True
+                )
+                
+                # Get stdout and stderr
+                stdout, stderr = exec_result.output
+                output = ""
+                
+                if stdout:
+                    output = stdout.decode("utf-8")
+                if stderr:
+                    output += f"\n[STDERR]\n{stderr.decode('utf-8')}"
+                
+                return output if output else "[No output]"
+                
+            finally:
+                container.remove(force=True)
+                
+        except Exception as e:
+            return f"[Docker execution error: {str(e)}. Falling back to subprocess.]"
+    
+    async def execute(self, script: str) -> str:
+        """Execute Python script asynchronously"""
+        try:
+            # Run execution in thread pool to avoid blocking
+            loop = asyncio.get_event_loop()
+            
+            if self.use_docker:
+                result = await loop.run_in_executor(None, self._execute_docker, script)
+            else:
+                result = await loop.run_in_executor(None, self._execute_subprocess, script)
+            
+            return result
+            
+        except Exception as e:
+            return f"[Execution error: {str(e)}]"
+
+
+# Global instance - auto-detect Docker, fallback to subprocess if not available
+python_tool_wrapper = PythonToolWrapper(use_docker=None)
+</file_artifact>
+
+<file path="GPT-OSS-HARMONY-REFERENCE-REPO/README.md">
+# Harmony VLLM App
+
+A Flask web application that demonstrates the OpenAI Harmony format with VLLM backend, featuring browser automation and sandboxed Python execution.
+
+## Features
+
+- **OpenAI Harmony Format**: Implements the Harmony prompt format for tool use
+- **VLLM Integration**: Uses VLLM for fast local LLM inference
+- **Vision Browser Tool**: Selenium-based browser automation with screenshot capabilities
+- **Sandboxed Python Tool**: Docker-sandboxed Python execution for safety
+- **Real-time Streaming**: Server-sent events for streaming responses
+- **Dark Mode UI**: Modern interface with dark mode support
+
+## Prerequisites
+
+- Python 3.11+
+- Docker (for sandboxed Python execution)
+- Chrome/Chromium browser (for browser tool)
+- VLLM-compatible GPU (for local inference)
+
+## Installation
+
+Clone the repository
+
+Install dependencies:
+
+Install ChromeDriver:
+```bash
+# On Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install chromium-chromedriver
+
+# On macOS with Homebrew
+brew install chromedriver
+
+# Or download manually from https://chromedriver.chromium.org/
+```
+
+Pull Docker Python image (for sandboxed execution):
+```bash
+docker pull python:3.11-slim
+```
+
+## Configuration
+
+1. Set up your OpenAI API key (if using OpenAI backend):
+```bash
+export OPENAI_API_KEY="your-api-key-here"
+```
+
+2. For VLLM backend, ensure your model is loaded:
+```bash
+# Example for loading a model with VLLM
+python -m vllm.entrypoints.openai.api_server \
+  --model meta-llama/Llama-3.2-3B-Instruct \
+  --port 5001
+```
+
+## Usage
+
+1. Start the Flask application:
+```bash
+python harmony_vllm_app.py
+```
+
+2. Open your browser to `http://localhost:5002`
+
+3. Select your desired tools:
+   - **Vision Browser Tool**: For web browsing and screenshots
+   - **Python Tool**: For calculations and data processing
+
+4. Start chatting! The AI will use the enabled tools to help with your requests.
+
+## Tool Details
+
+### Vision Browser Tool
+- Uses Selenium WebDriver for browser automation
+- Captures screenshots for visual analysis
+- Extracts text content from web pages
+- **Note**: Many sites have anti-bot protection (Cloudflare, etc.)
+
+### Python Tool
+- Executes Python code in Docker containers
+- Security restrictions:
+  - No network access
+  - 512MB memory limit
+  - 50% CPU limit
+  - Read-only filesystem (except /tmp)
+- Falls back to subprocess if Docker unavailable
+
+## Security Considerations
+
+1. **Python Execution**: Always runs in sandboxed environment
+2. **Browser Tool**: Uses separate browser profile, no access to personal data
+3. **API Keys**: Never commit API keys to repository
+4. **Docker**: Ensure Docker daemon is properly secured
+
+## Architecture
+
+- `harmony_vllm_app.py`: Main Flask application
+- `vision_browser_wrapper.py`: Browser tool wrapper
+- `python_tool_wrapper.py`: Python execution wrapper
+- `templates/harmony_demo.html`: Frontend UI
+- `python/openai_harmony/`: Harmony format types
+
+## Development
+
+Run tests:
+```bash
+pytest
+```
+
+Format code:
+```bash
+black .
+```
+
+Lint code:
+```bash
+flake8 .
+```
+
+## Troubleshooting
+
+### Browser Tool Issues
+- Ensure ChromeDriver is installed and in PATH
+- Check Chrome/Chromium version compatibility
+- Some sites block automated browsers
+
+### Python Tool Issues
+- Verify Docker is installed: `docker --version`
+- Check Docker permissions: `docker ps`
+- Ensure python:3.11-slim image is pulled
+
+### VLLM Issues
+- Check GPU availability: `nvidia-smi`
+- Verify VLLM server is running on correct port
+- Monitor memory usage for large models
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see LICENSE file for details.
+
+## Acknowledgments
+
+- OpenAI for the Harmony format specification
+- VLLM team for the inference engine
+- Selenium project for browser automation
 </file_artifact>
 
