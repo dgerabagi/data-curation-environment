@@ -1,15 +1,15 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-06T13:11:30.773Z
+  Date Generated: 2025-10-08T14:25:42.972Z
   ---
   Total Files: 179
-  Approx. Tokens: 251990
+  Approx. Tokens: 251973
 -->
 
 <!-- Top 10 Text Files by Token Count -->
 1. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-2. src\Artifacts\A111. DCE - New Regression Case Studies.md (7403 tokens)
+2. src\Artifacts\A111. DCE - New Regression Case Studies.md (7820 tokens)
 3. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
 4. src\backend\services\prompt.service.ts (5143 tokens)
 5. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -126,7 +126,7 @@
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
 106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
-107. src\backend\services\llm.service.ts - Lines: 293 - Chars: 14943 - Tokens: 3736
+107. src\backend\services\llm.service.ts - Lines: 275 - Chars: 13624 - Tokens: 3406
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20572 - Tokens: 5143
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
@@ -181,7 +181,7 @@
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
-162. src\client\utils\response-parser.ts - Lines: 162 - Chars: 7718 - Tokens: 1930
+162. src\client\utils\response-parser.ts - Lines: 159 - Chars: 7302 - Tokens: 1826
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
@@ -198,7 +198,7 @@
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 249 - Chars: 29610 - Tokens: 7403
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 264 - Chars: 31279 - Tokens: 7820
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8630,7 +8630,7 @@ export class HistoryService {
 
 <file path="src/backend/services/llm.service.ts">
 // src/backend/services/llm.service.ts
-// Updated on: C113 (Add custom https agent for connection pooling)
+// Updated on: C114 (Refactor stream consumer to be a proper SSE parser)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -8645,14 +8645,12 @@ import { HttpsAgent } from 'agentkeepalive';
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
 
-// Create a single, reusable agent to manage connection pooling
 const httpsAgent = new HttpsAgent({
     maxSockets: 100,
     maxFreeSockets: 10,
-    timeout: 60000, // active socket timeout
-    freeSocketTimeout: 30000, // free socket timeout
+    timeout: 60000,
+    freeSocketTimeout: 30000,
 });
-
 
 export class LlmService {
 
@@ -8716,6 +8714,7 @@ export class LlmService {
             let responseContent = '';
             const richResponse: PcppResponse = { content: '', status: 'pending', startTime: Date.now() };
             const progress: GenerationProgress = { responseId, promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
+            let buffer = '';
 
             try {
                 const response = await fetch(url, {
@@ -8723,68 +8722,52 @@ export class LlmService {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                     signal: controller.signal,
-                    agent: httpsAgent, // Use the custom agent for connection pooling
+                    agent: httpsAgent,
                 });
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
                 const stream = response.body;
-                let buffer = '';
 
                 stream.on('data', (chunk) => {
                     buffer += chunk.toString();
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
-
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            let dataStr = line.substring(6).trim();
-                            if (dataStr === '[DONE]') continue;
-
-                            let braceCount = 0;
-                            let lastSlice = 0;
-                            let inString = false;
-                            for (let i = 0; i < dataStr.length; i++) {
-                                if (dataStr[i] === '"' && (i === 0 || dataStr[i-1] !== '\\')) {
-                                    inString = !inString;
-                                }
-                                if (!inString) {
-                                    if (dataStr[i] === '{') {
-                                        braceCount++;
-                                    } else if (dataStr[i] === '}') {
-                                        braceCount--;
-                                        if (braceCount === 0) {
-                                            const jsonObjectStr = dataStr.substring(lastSlice, i + 1);
-                                            lastSlice = i + 1;
-                                            try {
-                                                const data = JSON.parse(jsonObjectStr);
-                                                if (data.choices?.[0]?.finish_reason !== null) {
-                                                    richResponse.status = 'complete';
-                                                    richResponse.endTime = Date.now();
-                                                    progress.status = 'complete';
-                                                } else if (data.choices?.[0]?.delta) {
-                                                    const delta = data.choices.delta;
-                                                    if (delta.reasoning_content) {
-                                                        if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                                        const contentChunk = delta.reasoning_content;
-                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                        richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                                        progress.thinkingTokens += chunkTokens;
-                                                    }
-                                                    if (delta.content) {
-                                                        if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                                        const contentChunk = delta.content;
-                                                        responseContent += contentChunk;
-                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                        richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                                        progress.currentTokens += chunkTokens;
-                                                    }
-                                                }
-                                            } catch (e) {
-                                                Services.loggerService.warn(`Could not parse JSON object from stream: ${jsonObjectStr}`);
-                                            }
+                    let boundaryIndex;
+                    while ((boundaryIndex = buffer.indexOf('\n\n')) !== -1) {
+                        const message = buffer.substring(0, boundaryIndex);
+                        buffer = buffer.substring(boundaryIndex + 2);
+                        
+                        const lines = message.split('\n');
+                        for (const line of lines) {
+                            if (line.startsWith('data: ')) {
+                                const dataStr = line.substring(6).trim();
+                                if (dataStr === '[DONE]') continue;
+                                
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    if (data.choices?.[0]?.finish_reason !== null) {
+                                        richResponse.status = 'complete';
+                                        richResponse.endTime = Date.now();
+                                        progress.status = 'complete';
+                                    } else if (data.choices?.[0]?.delta) {
+                                        const delta = data.choices[0].delta;
+                                        if (delta.reasoning_content) {
+                                            if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                            const contentChunk = delta.reasoning_content;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                            progress.thinkingTokens += chunkTokens;
+                                        }
+                                        if (delta.content) {
+                                            if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                            const contentChunk = delta.content;
+                                            responseContent += contentChunk;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                            progress.currentTokens += chunkTokens;
                                         }
                                     }
+                                } catch (e) {
+                                    Services.loggerService.warn(`Could not parse JSON object from stream message: ${dataStr}`);
                                 }
                             }
                         }
@@ -8873,7 +8856,6 @@ export class LlmService {
                 serverIpc
             ).catch(error => {
                 Services.loggerService.error(`Error in stream for C${cycleData.cycleId}/R${responseId}: ${error.message}`);
-                // Return an error response object to avoid Promise.all from rejecting early
                 return {
                     content: `Error generating response: ${error.message}`,
                     status: 'error' as 'error',
@@ -15830,7 +15812,7 @@ The workflow for generating AI responses needs to be more flexible and deliberat
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C113 (Fix newline character stripping)
+// Updated on: C114 (Final review of newline logic)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -15862,9 +15844,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
-                let content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
-                // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
-                // content = content.replace(/n\n/g, '\n'); // REMOVED
+                // This correctly un-escapes newlines and quotes from the JSON string value.
+                const content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
                 return {
                     path: f.path || '',
                     content: content,
@@ -15899,9 +15880,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            let content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
-            // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
-            // content = content.replace(/n\n/g, '\n'); // REMOVED
+            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
             return {
                 path: match[1] || '',
                 content: content,
@@ -17575,13 +17554,28 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C113 (Add Concurrency and Parsing cases)
+# Updated on: C114 (Add Backend SSE Parser case)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 019: Backend SSE Parser Fails on Fragmented Data Chunks
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C108, C109, C110, C114
+-   **Symptom:** The DCE output log is flooded with `Could not parse JSON object from stream` warnings during response generation. The final response content is often corrupted or incomplete.
+-   **Root Cause Analysis (RCA):** The stream consumer in `llm.service.ts` was not correctly buffering incoming data from the vLLM server. It processed each `data` event from the stream as if it contained one or more complete, newline-terminated messages. However, a single logical SSE message from the server can be fragmented and sent across multiple TCP packets, resulting in the `data` event firing with an incomplete piece of a message. The parser would then attempt to parse this incomplete fragment, which is invalid JSON, leading to the error.
+-   **Codified Solution & Best Practice:**
+    1.  Stream consumers for protocols like SSE must be designed to handle fragmented messages. They cannot assume that each `data` event contains a complete message.
+    2.  The correct implementation is to maintain a persistent buffer outside the `stream.on('data')` handler.
+    3.  Each incoming chunk should be appended to this buffer.
+    4.  The buffer should then be processed in a loop, searching for the standard SSE message terminator (`\n\n`).
+    5.  Only the complete messages found before the terminator should be extracted and parsed. Any remaining text after the last terminator is an incomplete message and must be kept in the buffer to be prepended to the next incoming chunk.
 
 ---
 

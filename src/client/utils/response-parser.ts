@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C113 (Fix newline character stripping)
+// Updated on: C114 (Final review of newline logic)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -31,9 +31,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
-                let content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
-                // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
-                // content = content.replace(/n\n/g, '\n'); // REMOVED
+                // This correctly un-escapes newlines and quotes from the JSON string value.
+                const content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
                 return {
                     path: f.path || '',
                     content: content,
@@ -68,9 +67,7 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            let content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
-            // C113 Fix: Remove specific sanitization that was stripping legitimate 'n' before newlines
-            // content = content.replace(/n\n/g, '\n'); // REMOVED
+            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
             return {
                 path: match[1] || '',
                 content: content,

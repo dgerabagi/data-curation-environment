@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C113 (Add custom https agent for connection pooling)
+// Updated on: C114 (Refactor stream consumer to be a proper SSE parser)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -14,14 +14,12 @@ import { HttpsAgent } from 'agentkeepalive';
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
 
-// Create a single, reusable agent to manage connection pooling
 const httpsAgent = new HttpsAgent({
     maxSockets: 100,
     maxFreeSockets: 10,
-    timeout: 60000, // active socket timeout
-    freeSocketTimeout: 30000, // free socket timeout
+    timeout: 60000,
+    freeSocketTimeout: 30000,
 });
-
 
 export class LlmService {
 
@@ -85,6 +83,7 @@ export class LlmService {
             let responseContent = '';
             const richResponse: PcppResponse = { content: '', status: 'pending', startTime: Date.now() };
             const progress: GenerationProgress = { responseId, promptTokens: 0, thinkingTokens: 0, currentTokens: 0, totalTokens: MAX_TOKENS_PER_RESPONSE, status: 'pending', startTime: Date.now() };
+            let buffer = '';
 
             try {
                 const response = await fetch(url, {
@@ -92,68 +91,52 @@ export class LlmService {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                     signal: controller.signal,
-                    agent: httpsAgent, // Use the custom agent for connection pooling
+                    agent: httpsAgent,
                 });
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
                 
                 const stream = response.body;
-                let buffer = '';
 
                 stream.on('data', (chunk) => {
                     buffer += chunk.toString();
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
-
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            let dataStr = line.substring(6).trim();
-                            if (dataStr === '[DONE]') continue;
-
-                            let braceCount = 0;
-                            let lastSlice = 0;
-                            let inString = false;
-                            for (let i = 0; i < dataStr.length; i++) {
-                                if (dataStr[i] === '"' && (i === 0 || dataStr[i-1] !== '\\')) {
-                                    inString = !inString;
-                                }
-                                if (!inString) {
-                                    if (dataStr[i] === '{') {
-                                        braceCount++;
-                                    } else if (dataStr[i] === '}') {
-                                        braceCount--;
-                                        if (braceCount === 0) {
-                                            const jsonObjectStr = dataStr.substring(lastSlice, i + 1);
-                                            lastSlice = i + 1;
-                                            try {
-                                                const data = JSON.parse(jsonObjectStr);
-                                                if (data.choices?.[0]?.finish_reason !== null) {
-                                                    richResponse.status = 'complete';
-                                                    richResponse.endTime = Date.now();
-                                                    progress.status = 'complete';
-                                                } else if (data.choices?.[0]?.delta) {
-                                                    const delta = data.choices.delta;
-                                                    if (delta.reasoning_content) {
-                                                        if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
-                                                        const contentChunk = delta.reasoning_content;
-                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                        richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
-                                                        progress.thinkingTokens += chunkTokens;
-                                                    }
-                                                    if (delta.content) {
-                                                        if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
-                                                        const contentChunk = delta.content;
-                                                        responseContent += contentChunk;
-                                                        const chunkTokens = Math.ceil(contentChunk.length / 4);
-                                                        richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
-                                                        progress.currentTokens += chunkTokens;
-                                                    }
-                                                }
-                                            } catch (e) {
-                                                Services.loggerService.warn(`Could not parse JSON object from stream: ${jsonObjectStr}`);
-                                            }
+                    let boundaryIndex;
+                    while ((boundaryIndex = buffer.indexOf('\n\n')) !== -1) {
+                        const message = buffer.substring(0, boundaryIndex);
+                        buffer = buffer.substring(boundaryIndex + 2);
+                        
+                        const lines = message.split('\n');
+                        for (const line of lines) {
+                            if (line.startsWith('data: ')) {
+                                const dataStr = line.substring(6).trim();
+                                if (dataStr === '[DONE]') continue;
+                                
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    if (data.choices?.[0]?.finish_reason !== null) {
+                                        richResponse.status = 'complete';
+                                        richResponse.endTime = Date.now();
+                                        progress.status = 'complete';
+                                    } else if (data.choices?.[0]?.delta) {
+                                        const delta = data.choices[0].delta;
+                                        if (delta.reasoning_content) {
+                                            if (richResponse.status !== 'thinking') { richResponse.status = 'thinking'; progress.status = 'thinking'; }
+                                            const contentChunk = delta.reasoning_content;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            richResponse.thinkingTokens = (richResponse.thinkingTokens || 0) + chunkTokens;
+                                            progress.thinkingTokens += chunkTokens;
+                                        }
+                                        if (delta.content) {
+                                            if (richResponse.status !== 'generating') { richResponse.status = 'generating'; progress.status = 'generating'; richResponse.thinkingEndTime = Date.now(); }
+                                            const contentChunk = delta.content;
+                                            responseContent += contentChunk;
+                                            const chunkTokens = Math.ceil(contentChunk.length / 4);
+                                            richResponse.responseTokens = (richResponse.responseTokens || 0) + chunkTokens;
+                                            progress.currentTokens += chunkTokens;
                                         }
                                     }
+                                } catch (e) {
+                                    Services.loggerService.warn(`Could not parse JSON object from stream message: ${dataStr}`);
                                 }
                             }
                         }
@@ -242,7 +225,6 @@ export class LlmService {
                 serverIpc
             ).catch(error => {
                 Services.loggerService.error(`Error in stream for C${cycleData.cycleId}/R${responseId}: ${error.message}`);
-                // Return an error response object to avoid Promise.all from rejecting early
                 return {
                     content: `Error generating response: ${error.message}`,
                     status: 'error' as 'error',
