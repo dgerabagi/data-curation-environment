@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C114 (Final review of newline logic)
+// Updated on: C115 (Implement robust JSON un-escaping)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -14,6 +14,18 @@ const HYBRID_COA_REGEX = /"course_of_action"\s*:\s*(\[[\s\S]*?\])/;
 const HYBRID_CURATOR_REGEX = /"curator_activity"\s*:\s*"((?:\\"|[^"])*)"/;
 const HYBRID_FILE_OBJ_REGEX = /\{\s*"path"\s*:\s*"((?:\\"|[^"])*)"\s*,\s*"content"\s*:\s*"((?:\\"|[^"])*)"\s*\}/g;
 
+function unescapeJsonString(s: string): string {
+    if (!s) return "";
+    // This handles the double-escaped strings from the LLM.
+    // \\" -> \"
+    // \" -> "
+    // \\n -> \n
+    // \n -> newline
+    return s.replace(/\\\\/g, '\\')
+            .replace(/\\n/g, '\n')
+            .replace(/\\t/g, '\t')
+            .replace(/\\"/g, '"');
+}
 
 export function parseResponse(rawText: string): ParsedResponse {
     let textToParse = rawText.trim();
@@ -31,8 +43,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
-                // This correctly un-escapes newlines and quotes from the JSON string value.
-                const content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+                // JSON.parse already handles the first level of un-escaping.
+                const content = f.content || '';
                 return {
                     path: f.path || '',
                     content: content,
@@ -67,9 +79,9 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            const content = unescapeJsonString(match[2] || '');
             return {
-                path: match[1] || '',
+                path: unescapeJsonString(match[1] || ''),
                 content: content,
                 tokenCount: Math.ceil(content.length / 4)
             };
@@ -84,9 +96,9 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
 
         return {
-            summary: (summaryMatchHybrid[1] || '').replace(/\\"/g, '"'),
+            summary: unescapeJsonString(summaryMatchHybrid[1] || ''),
             courseOfAction,
-            curatorActivity: (curatorMatchHybrid?.[1] || '').replace(/\\"/g, '"'),
+            curatorActivity: unescapeJsonString(curatorMatchHybrid?.[1] || ''),
             filesUpdated: files.map(f => f.path),
             files,
             totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),

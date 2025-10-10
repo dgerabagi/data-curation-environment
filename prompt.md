@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 115 - more parsing adjustments
+Current Cycle 116 - finalize local llm, encryption, ui adjustment
+Cycle 115 - more parsing adjustments
 Cycle 114 - analyze logs to fix parser
 Cycle 113 - still issues with parsing also with parallel re-generation
 Cycle 112 - finalize parsing
@@ -890,6 +891,1146 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 116>
+<Cycle Context>
+1. still only a single response was generated, see <1. error> in ephemeral below
+
+2. the parsing is almost perfect. theres still a single case with `\"` or an escape before a quotation. ill provide the input/output, or the <2. raw response text> and the <2. dce output logs> of the parsing process so you can see how to update it one final time.
+
+3. once we fix #1 and #2, we are complete with the local llm demo integration. i believe we have one issue that will occur for our users with out current approach, which is we do not want to lock in our users to a specific mode. in other words, a user should be able to generate one cycle using the manual method, and then should be able to generate another cycle with the demo method. the way we can do that is if we add a drop down menu to our pcpp which contains all the available options. then, the settings radio buttons can simply set the default option for when a new cycle is created. this is because local llm requires different parsing than the manual method, or might some of the other methods require. lets make sure to update our documentation for that.
+
+4. there is this vertical separator, or vertical bar in our pcpp between the file viewer and the associated files. we tried to make it adjustable but failed and opted to make it fixed. we need to make this adjustable because different monitors/screens are different sizes. additionally, we did some middle-truncation on the file names in the assocaited files, can we remove that?
+
+5. now that we are finalizing the local llm we want to encrype these api calls, i believe we already have an artifact (A93) for this. please review and implement.
+</Cycle Context>
+<Ephemeral Context>
+<1. error>
+[ERROR] [10:24:41 AM] Failed to generate single stream for C1/R2: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
+[ERROR] [10:24:41 AM] Failed to generate single stream for C1/R3: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
+[ERROR] [10:24:41 AM] Failed to generate single stream for C1/R4: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
+</1. error>
+
+<2. raw response text>
+{"summary":"Generated core documentation artifacts for Tower Defense Game project.","course_of_action":[{"step":1,"description":"Create Master Artifact List (A0) documenting all planning and documentation artifacts."},{"step":2,"description":"Generate Project Vision and Goals document to define the overall aims and phases."},{"step":3,"description":"Create GitHub Repository Setup guide based on T14, tailored for Tower Defense Game."},{"step":4,"description":"Create Development and Testing guide based on T7, customized for Tower Defense Game."},{"step":5,"description":"Create Technical Scaffolding Plan based on T4, providing the file structure and tech stack."}],"curator_activity":"Please review the generated documentation in the docs folder and adjust any placeholders or missing details.","files":[{"path":"docs/Master_Artifact_List.md","content":"# Artifact T1: Template - Master Artifact List\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \\\"Source of Truth\\\" documents.\n\n## 2. Formatting Rules for Parsing\n\n*   Lines beginning with `#` are comments and are ignored.\n*   `##` denotes a major category header and is ignored.\n*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.\n*   Lines beginning with `- **Description:**` provide context for the project.\n*   Lines beginning with `- **Tags:**` provide keywords for Inference.\n\n## 3. Example Structure\n\n## I. Project Planning & Design\n\n### A1. Tower Defense Game - Project Vision and Goals\n- **Description:** High-level overview of the project, its purpose, and the development plan.\n- **Tags:** project vision, goals, scope, planning\n\n### A2. Tower Defense Game - Phase 1 - Requirements & Design\n- **Description:** Detailed functional and technical requirements for the first phase of the project.\n- **Tags:** requirements, design, phase 1, features"},{"path":"docs/Project_Vision_and_Goals.md","content":"# Artifact T2: Template - Project Vision and Goals\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a Project Vision and Goals document.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Project Vision\n\nThe vision of **Tower Defense Game** is to create an engaging, strategic experience where players defend their base against waves of enemies using a variety of towers and upgrades. The game emphasizes tactical decision‑making, resource management, and progressive difficulty.\n\n## 2. High-Level Goals & Phases\n\nThe project will be developed in distinct phases to ensure an iterative and manageable workflow.\n\n### Phase 1: Core Mechanics\n\nThe goal of this phase is to establish the foundational gameplay elements.\n-   **Core Functionality:** Implement the player base, basic enemy wave system, tower placement, and damage mechanics.\n-   **Outcome:** Players can spawn towers, enemies spawn in waves, and damage is correctly applied.\n\n### Phase 2: Expansion & Polish\n\nThis phase will build upon the foundation by adding more content.\n-   **Core Functionality:** Add tower upgrades, new enemy types, UI overlays, and difficulty scaling.\n-   **Outcome:** A more varied and engaging experience with incremental difficulty.\n\n### Phase 3: Optimization & Release\n\nThis phase focuses on refining performance and preparing for distribution.\n-   **Core Functionality:** Optimize game loop, improve asset performance, generate build artifacts, and complete documentation.\n-   **Outcome:** One final polished, publish‑ready version of the Tower Defense Game."},{"path":"docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","content":"# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide\n# Date Created: C152\n# Author: AI Model & Curator\n# Updated on: C160 (Add Sample Development Workflow section)\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\n- **Tags:** template, cycle 0, git, github, version control, workflow\n\n## 1. Overview\n\nThis guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\n\n## 2. Prerequisites\n\n*   You have `git` installed on your machine.\n*   You have a GitHub account.\n\n## 3. Step-by-Step Setup\n\n### Step 1: Create a New Repository on GitHub\n\n1.  Go to [github.com](https://github.com) and log in.\n2.  In the top-right corner, click the `+` icon and select **\\\"New repository\\\"**.\n3.  **Repository name:** Enter `tower-defense-game`.\n4.  **Description:** (Optional) Provide a brief description of your project.\n5.  Choose **\\\"Private\\\"** or **\\\"Public\\\"**.\n6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.\n7.  Click **\\\"Create repository\\\"**.\n\nGitHub will now show you a page with command-line instructions. We will use the section titled **\\\"...or push an existing repository from the command line\\\"**.\n\n### Step 2: Initialize Git in Your Local Project\n\nOpen a terminal and navigate to your project's root directory. Then, run the following commands one by one.\n\n1.  **Initialize the repository:**\n    ```bash\n    git init\n    ```\n\n2.  **Add all existing files:**\n    ```bash\n    git add .\n    ```\n\n3.  **Create the first commit:**\n    ```bash\n    git commit -m \\\"Initial commit\\\"\n    ```\n\n4.  **Rename the default branch to `main`:**\n    ```bash\n    git branch -M main\n    ```\n\n### Step 3: Link and Push to GitHub\n\n1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.\n    ```bash\n    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git\n    ```\n\n2.  **Push your local `main` branch to GitHub:**\n    ```bash\n    git push -u origin main\n    ```\n\nAfter these commands complete, refresh your GitHub repository page. You should see all of your project files.\n\n## 4. Sample Development Workflow with DCE and Git\n\nGit is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\n\n### Step 1: Start with a Clean State\nBefore starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.\n\n### Step 2: Generate a Prompt and Get Responses\nUse the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\n\n### Step 3: Paste and Parse\nPaste the responses into the Parallel Co-Pilot Panel and click \"Parse All\".\n\n### Step 4: Accept and Test\n1.  Review the responses and find one that looks promising.\n2.  Select that response and use the **\\\"Accept Selected Files\\\"** button to write the AI's proposed changes to your workspace.\n3.  Now, compile and test the application. Does it work? Does it have errors?\n\n### Step 5: The \\\"Restore\\\" Loop\nThis is where Git becomes a powerful part of the workflow.\n\n*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**\n    1.  Open the terminal in VS Code.\n    2.  Run the command: `git restore .`\n    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\n    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click \"Accept Selected Files\" again to test the next proposed solution.\n\n*   **If the changes are good:**\n    1.  Open the Source Control panel in VS Code.\n    2.  Stage the changes (`git add .`).\n    3.  Write a commit message (e.g., \\\"Feat: Implement user login via AI suggestion C15\\\").\n    4.  Commit the changes.\n    5.  You are now ready to start the next development cycle from a new, clean state.\n\nThis iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase."},{"path":"docs/Tower-Defense-Game-Development_and_Testing_Guide.md","content":"# Artifact T7: Template - Development and Testing Guide\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a development and testing guide.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Purpose\n\nThis guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.\n\n## 2. Development Workflow\n\n### Step 1: Install Dependencies\n\nEnsure all project dependencies are installed using npm.\n```bash\nnpm install\n```\n\n### Step 2: Start the Development Server\n\nTo compile the code and watch for changes, run the following command:\n```bash\nnpm run watch\n```\nThis will start the development server and automatically recompile your code when you save a file.\n\n### Step 3: Running the Application\n\n[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]\n\n### Step 4: Debugging\n\nYou can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]\n\n## 3. Testing\n\nThe project is configured with a testing framework. To run the test suite, use the following command:\n```bash\nnpm run test\n```\nThis will execute all test files located in the project and report the results to the console."},{"path":"docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md","content":"# Artifact T4: Template - Technical Scaffolding Plan\n# Date Created: C139\n# Author: AI Model & Curator\n\n- **Key/Value for A0:**\n- **Description:** A generic template for a technical scaffolding plan.\n- **Tags:** template, cycle 0, documentation, project setup\n\n## 1. Overview\n\nThis document outlines the proposed technical scaffolding and file structure for **Tower Defense Game**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.\n\n## 2. Technology Stack\n\n-   **Language:** [e.g., TypeScript]\n-   **Framework/Library:** [e.g., React, Node.js with Express]\n-   **Styling:** [e.g., SCSS, TailwindCSS]\n-   **Bundler:** [e.g., Webpack, Vite]\n\n## 3. Proposed File Structure\n\nThe project will adhere to a standard, feature-driven directory structure:\n\n```\n.\n├── src/\n│   ├── components/       # Reusable UI components (e.g., Button, Modal)\n│   │\n│   ├── features/         # Feature-specific modules\n│   │   └── [feature-one]/\n│   │       ├── index.ts\n│   │       └── components/\n│   │\n│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)\n│   │\n│   ├── types/            # Shared TypeScript type definitions\n│   │\n│   └── main.ts           # Main application entry point\n│\n├── package.json          # Project manifest and dependencies\n└── tsconfig.json         # TypeScript configuration\n```\n\n## 4. Key Architectural Concepts\n\n-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.\n-   **Component-Based UI:** The UI will be built by composing small, reusable components.\n-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.\n-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience."}]}
+</2. raw response text>
+<2. dce output logs>
+[INFO] [10:23:59 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [10:23:59 AM] Services initializing...
+[INFO] [10:23:59 AM] Services initialized successfully.
+[INFO] [10:23:59 AM] Registering 7 commands.
+[INFO] [10:23:59 AM] Starry Night syntax highlighter initialized.
+[INFO] [10:23:59 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [10:23:59 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [10:23:59 AM] Context Chooser view message handler initialized.
+[INFO] [10:24:00 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [10:24:00 AM] [SelectionService] No last selection found in state.
+[INFO] [10:24:00 AM] Persisted current selection of 0 items.
+[INFO] [10:24:00 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [10:24:00 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [10:24:10 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [10:24:10 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [10:24:11 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [10:24:15 AM] Executing dce.openSettingsPanel command.
+[INFO] [10:24:15 AM] Settings view message handler initialized.
+[INFO] [10:24:15 AM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [10:24:15 AM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [10:24:16 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [10:24:16 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [10:24:16 AM] Settings saved: Mode=demo, URL=undefined
+[INFO] [10:24:16 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [10:24:16 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [10:24:17 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [10:24:17 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [10:24:18 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [10:24:20 AM] Generating Cycle 0 prompt and starting generation...
+[INFO] [10:24:20 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
+[INFO] [10:24:20 AM] [SelectionService] No last selection found in state.
+[INFO] [10:24:20 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
+[INFO] [10:24:20 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
+[INFO] [10:24:20 AM] prompt.md file created successfully before sending API request.
+[INFO] [10:24:20 AM] Created new placeholder cycle 1.
+[INFO] [10:24:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
+[INFO] [10:24:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[INFO] [10:24:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [10:24:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [10:24:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [10:24:20 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense58/src","c:/Projects/TowerDefense58/src/Artifacts","c:/Projects/TowerDefense58/src/Artifacts/DCE_README.md"]
+[INFO] [10:24:20 AM] [SelectionService] No last selection found in state.
+[INFO] [10:24:20 AM] Persisted current selection of 3 items.
+[INFO] [10:24:20 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [10:24:20 AM] Persisted current selection of 3 items.
+[INFO] [10:24:21 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[ERROR] [10:24:41 AM] Failed to generate single stream for C1/R2: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
+[ERROR] [10:24:41 AM] Failed to generate single stream for C1/R3: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
+[ERROR] [10:24:41 AM] Failed to generate single stream for C1/R4: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
+[INFO] [10:27:34 AM] All streams for cycle 1 are complete.
+[INFO] [10:27:34 AM] Updated cycle 1 with 4 responses and their metrics.
+[INFO] [10:28:29 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Master_Artifact_List.md::# Artifact T1: Template - Master Artifact List
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.
+
+## 2. Formatting Rules for Parsing
+
+*   Lines beginning with `#` are comments and are ignored.
+*   `##` denotes a major category header and is ignored.
+*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+*   Lines beginning with `- **Description:**` provide context for the project.
+*   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3. Example Structure
+
+## I. Project Planning & Design
+
+### A1. Tower Defense Game - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plan.
+- **Tags:** project vision, goals, scope, planning
+
+### A2. Tower Defense Game - Phase 1 - Requirements & Design
+- **Description:** Detailed functional and technical requirements for the first phase of the project.
+- **Tags:** requirements, design, phase 1, features
+[INFO] [10:28:30 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Project_Vision_and_Goals.md::# Artifact T2: Template - Project Vision and Goals
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Project Vision and Goals document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Project Vision
+
+The vision of **Tower Defense Game** is to create an engaging, strategic experience where players defend their base against waves of enemies using a variety of towers and upgrades. The game emphasizes tactical decision‑making, resource management, and progressive difficulty.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflow.
+
+### Phase 1: Core Mechanics
+
+The goal of this phase is to establish the foundational gameplay elements.
+-   **Core Functionality:** Implement the player base, basic enemy wave system, tower placement, and damage mechanics.
+-   **Outcome:** Players can spawn towers, enemies spawn in waves, and damage is correctly applied.
+
+### Phase 2: Expansion & Polish
+
+This phase will build upon the foundation by adding more content.
+-   **Core Functionality:** Add tower upgrades, new enemy types, UI overlays, and difficulty scaling.
+-   **Outcome:** A more varied and engaging experience with incremental difficulty.
+
+### Phase 3: Optimization & Release
+
+This phase focuses on refining performance and preparing for distribution.
+-   **Core Functionality:** Optimize game loop, improve asset performance, generate build artifacts, and complete documentation.
+-   **Outcome:** One final polished, publish‑ready version of the Tower Defense Game.
+[INFO] [10:28:30 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
+
+## 1. Overview
+
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
+
+## 2. Prerequisites
+
+*   You have `git` installed on your machine.
+*   You have a GitHub account.
+
+## 3. Step-by-Step Setup
+
+### Step 1: Create a New Repository on GitHub
+
+1.  Go to [github.com](https://github.com) and log in.
+2.  In the top-right corner, click the `+` icon and select **\"New repository\"**.
+3.  **Repository name:** Enter `tower-defense-game`.
+4.  **Description:** (Optional) Provide a brief description of your project.
+5.  Choose **\"Private\"** or **\"Public\"**.
+6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
+7.  Click **\"Create repository\"**.
+
+GitHub will now show you a page with command-line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**.
+
+### Step 2: Initialize Git in Your Local Project
+
+Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
+
+1.  **Initialize the repository:**
+    ```bash
+    git init
+    ```
+
+2.  **Add all existing files:**
+    ```bash
+    git add .
+    ```
+
+3.  **Create the first commit:**
+    ```bash
+    git commit -m \"Initial commit\"
+    ```
+
+4.  **Rename the default branch to `main`:**
+    ```bash
+    git branch -M main
+    ```
+
+### Step 3: Link and Push to GitHub
+
+1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
+    ```bash
+    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
+    ```
+
+2.  **Push your local `main` branch to GitHub:**
+    ```bash
+    git push -u origin main
+    ```
+
+After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The \"Restore\" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15\").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
+[INFO] [10:28:30 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Development_and_Testing_Guide.md::# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:
+```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+[INFO] [10:28:30 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md::# Artifact T4: Template - Technical Scaffolding Plan
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a technical scaffolding plan.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the proposed technical scaffolding and file structure for **Tower Defense Game**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
+
+## 2. Technology Stack
+
+-   **Language:** [e.g., TypeScript]
+-   **Framework/Library:** [e.g., React, Node.js with Express]
+-   **Styling:** [e.g., SCSS, TailwindCSS]
+-   **Bundler:** [e.g., Webpack, Vite]
+
+## 3. Proposed File Structure
+
+The project will adhere to a standard, feature-driven directory structure:
+
+```
+.
+├── src/
+│   ├── components/       # Reusable UI components (e.g., Button, Modal)
+│   │
+│   ├── features/         # Feature-specific modules
+│   │   └── [feature-one]/
+│   │       ├── index.ts
+│   │       └── components/
+│   │
+│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
+│   │
+│   ├── types/            # Shared TypeScript type definitions
+│   │
+│   └── main.ts           # Main application entry point
+│
+├── package.json          # Project manifest and dependencies
+└── tsconfig.json         # TypeScript configuration
+```
+
+## 4. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
+-   **Component-Based UI:** The UI will be built by composing small, reusable components.
+-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
+-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
+[INFO] [10:28:30 AM] [File Existence] Received request to check paths: ["docs/Master_Artifact_List.md","docs/Project_Vision_and_Goals.md","docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","docs/Tower-Defense-Game-Development_and_Testing_Guide.md","docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md"]
+[INFO] [10:29:04 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Master_Artifact_List.md::# Artifact T1: Template - Master Artifact List
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.
+
+## 2. Formatting Rules for Parsing
+
+*   Lines beginning with `#` are comments and are ignored.
+*   `##` denotes a major category header and is ignored.
+*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+*   Lines beginning with `- **Description:**` provide context for the project.
+*   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3. Example Structure
+
+## I. Project Planning & Design
+
+### A1. Tower Defense Game - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plan.
+- **Tags:** project vision, goals, scope, planning
+
+### A2. Tower Defense Game - Phase 1 - Requirements & Design
+- **Description:** Detailed functional and technical requirements for the first phase of the project.
+- **Tags:** requirements, design, phase 1, features
+[INFO] [10:29:04 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Project_Vision_and_Goals.md::# Artifact T2: Template - Project Vision and Goals
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Project Vision and Goals document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Project Vision
+
+The vision of **Tower Defense Game** is to create an engaging, strategic experience where players defend their base against waves of enemies using a variety of towers and upgrades. The game emphasizes tactical decision‑making, resource management, and progressive difficulty.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflow.
+
+### Phase 1: Core Mechanics
+
+The goal of this phase is to establish the foundational gameplay elements.
+-   **Core Functionality:** Implement the player base, basic enemy wave system, tower placement, and damage mechanics.
+-   **Outcome:** Players can spawn towers, enemies spawn in waves, and damage is correctly applied.
+
+### Phase 2: Expansion & Polish
+
+This phase will build upon the foundation by adding more content.
+-   **Core Functionality:** Add tower upgrades, new enemy types, UI overlays, and difficulty scaling.
+-   **Outcome:** A more varied and engaging experience with incremental difficulty.
+
+### Phase 3: Optimization & Release
+
+This phase focuses on refining performance and preparing for distribution.
+-   **Core Functionality:** Optimize game loop, improve asset performance, generate build artifacts, and complete documentation.
+-   **Outcome:** One final polished, publish‑ready version of the Tower Defense Game.
+[INFO] [10:29:04 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
+
+## 1. Overview
+
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
+
+## 2. Prerequisites
+
+*   You have `git` installed on your machine.
+*   You have a GitHub account.
+
+## 3. Step-by-Step Setup
+
+### Step 1: Create a New Repository on GitHub
+
+1.  Go to [github.com](https://github.com) and log in.
+2.  In the top-right corner, click the `+` icon and select **\"New repository\"**.
+3.  **Repository name:** Enter `tower-defense-game`.
+4.  **Description:** (Optional) Provide a brief description of your project.
+5.  Choose **\"Private\"** or **\"Public\"**.
+6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
+7.  Click **\"Create repository\"**.
+
+GitHub will now show you a page with command-line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**.
+
+### Step 2: Initialize Git in Your Local Project
+
+Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
+
+1.  **Initialize the repository:**
+    ```bash
+    git init
+    ```
+
+2.  **Add all existing files:**
+    ```bash
+    git add .
+    ```
+
+3.  **Create the first commit:**
+    ```bash
+    git commit -m \"Initial commit\"
+    ```
+
+4.  **Rename the default branch to `main`:**
+    ```bash
+    git branch -M main
+    ```
+
+### Step 3: Link and Push to GitHub
+
+1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
+    ```bash
+    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
+    ```
+
+2.  **Push your local `main` branch to GitHub:**
+    ```bash
+    git push -u origin main
+    ```
+
+After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The \"Restore\" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15\").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
+[INFO] [10:29:04 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Development_and_Testing_Guide.md::# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:
+```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+[INFO] [10:29:04 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md::# Artifact T4: Template - Technical Scaffolding Plan
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a technical scaffolding plan.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the proposed technical scaffolding and file structure for **Tower Defense Game**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
+
+## 2. Technology Stack
+
+-   **Language:** [e.g., TypeScript]
+-   **Framework/Library:** [e.g., React, Node.js with Express]
+-   **Styling:** [e.g., SCSS, TailwindCSS]
+-   **Bundler:** [e.g., Webpack, Vite]
+
+## 3. Proposed File Structure
+
+The project will adhere to a standard, feature-driven directory structure:
+
+```
+.
+├── src/
+│   ├── components/       # Reusable UI components (e.g., Button, Modal)
+│   │
+│   ├── features/         # Feature-specific modules
+│   │   └── [feature-one]/
+│   │       ├── index.ts
+│   │       └── components/
+│   │
+│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
+│   │
+│   ├── types/            # Shared TypeScript type definitions
+│   │
+│   └── main.ts           # Main application entry point
+│
+├── package.json          # Project manifest and dependencies
+└── tsconfig.json         # TypeScript configuration
+```
+
+## 4. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
+-   **Component-Based UI:** The UI will be built by composing small, reusable components.
+-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
+-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
+[INFO] [10:29:04 AM] [File Existence] Received request to check paths: ["docs/Master_Artifact_List.md","docs/Project_Vision_and_Goals.md","docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","docs/Tower-Defense-Game-Development_and_Testing_Guide.md","docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md"]
+[INFO] [10:29:18 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Master_Artifact_List.md::# Artifact T1: Template - Master Artifact List
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.
+
+## 2. Formatting Rules for Parsing
+
+*   Lines beginning with `#` are comments and are ignored.
+*   `##` denotes a major category header and is ignored.
+*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+*   Lines beginning with `- **Description:**` provide context for the project.
+*   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3. Example Structure
+
+## I. Project Planning & Design
+
+### A1. Tower Defense Game - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plan.
+- **Tags:** project vision, goals, scope, planning
+
+### A2. Tower Defense Game - Phase 1 - Requirements & Design
+- **Description:** Detailed functional and technical requirements for the first phase of the project.
+- **Tags:** requirements, design, phase 1, features
+[INFO] [10:29:18 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Project_Vision_and_Goals.md::# Artifact T2: Template - Project Vision and Goals
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Project Vision and Goals document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Project Vision
+
+The vision of **Tower Defense Game** is to create an engaging, strategic experience where players defend their base against waves of enemies using a variety of towers and upgrades. The game emphasizes tactical decision‑making, resource management, and progressive difficulty.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflow.
+
+### Phase 1: Core Mechanics
+
+The goal of this phase is to establish the foundational gameplay elements.
+-   **Core Functionality:** Implement the player base, basic enemy wave system, tower placement, and damage mechanics.
+-   **Outcome:** Players can spawn towers, enemies spawn in waves, and damage is correctly applied.
+
+### Phase 2: Expansion & Polish
+
+This phase will build upon the foundation by adding more content.
+-   **Core Functionality:** Add tower upgrades, new enemy types, UI overlays, and difficulty scaling.
+-   **Outcome:** A more varied and engaging experience with incremental difficulty.
+
+### Phase 3: Optimization & Release
+
+This phase focuses on refining performance and preparing for distribution.
+-   **Core Functionality:** Optimize game loop, improve asset performance, generate build artifacts, and complete documentation.
+-   **Outcome:** One final polished, publish‑ready version of the Tower Defense Game.
+[INFO] [10:29:18 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
+
+## 1. Overview
+
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
+
+## 2. Prerequisites
+
+*   You have `git` installed on your machine.
+*   You have a GitHub account.
+
+## 3. Step-by-Step Setup
+
+### Step 1: Create a New Repository on GitHub
+
+1.  Go to [github.com](https://github.com) and log in.
+2.  In the top-right corner, click the `+` icon and select **\"New repository\"**.
+3.  **Repository name:** Enter `tower-defense-game`.
+4.  **Description:** (Optional) Provide a brief description of your project.
+5.  Choose **\"Private\"** or **\"Public\"**.
+6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
+7.  Click **\"Create repository\"**.
+
+GitHub will now show you a page with command-line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**.
+
+### Step 2: Initialize Git in Your Local Project
+
+Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
+
+1.  **Initialize the repository:**
+    ```bash
+    git init
+    ```
+
+2.  **Add all existing files:**
+    ```bash
+    git add .
+    ```
+
+3.  **Create the first commit:**
+    ```bash
+    git commit -m \"Initial commit\"
+    ```
+
+4.  **Rename the default branch to `main`:**
+    ```bash
+    git branch -M main
+    ```
+
+### Step 3: Link and Push to GitHub
+
+1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
+    ```bash
+    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
+    ```
+
+2.  **Push your local `main` branch to GitHub:**
+    ```bash
+    git push -u origin main
+    ```
+
+After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The \"Restore\" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15\").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
+[INFO] [10:29:18 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Development_and_Testing_Guide.md::# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:
+```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+[INFO] [10:29:18 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md::# Artifact T4: Template - Technical Scaffolding Plan
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a technical scaffolding plan.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the proposed technical scaffolding and file structure for **Tower Defense Game**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
+
+## 2. Technology Stack
+
+-   **Language:** [e.g., TypeScript]
+-   **Framework/Library:** [e.g., React, Node.js with Express]
+-   **Styling:** [e.g., SCSS, TailwindCSS]
+-   **Bundler:** [e.g., Webpack, Vite]
+
+## 3. Proposed File Structure
+
+The project will adhere to a standard, feature-driven directory structure:
+
+```
+.
+├── src/
+│   ├── components/       # Reusable UI components (e.g., Button, Modal)
+│   │
+│   ├── features/         # Feature-specific modules
+│   │   └── [feature-one]/
+│   │       ├── index.ts
+│   │       └── components/
+│   │
+│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
+│   │
+│   ├── types/            # Shared TypeScript type definitions
+│   │
+│   └── main.ts           # Main application entry point
+│
+├── package.json          # Project manifest and dependencies
+└── tsconfig.json         # TypeScript configuration
+```
+
+## 4. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
+-   **Component-Based UI:** The UI will be built by composing small, reusable components.
+-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
+-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
+[INFO] [10:29:18 AM] [File Existence] Received request to check paths: ["docs/Master_Artifact_List.md","docs/Project_Vision_and_Goals.md","docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","docs/Tower-Defense-Game-Development_and_Testing_Guide.md","docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md"]
+[INFO] [10:33:48 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Master_Artifact_List.md::# Artifact T1: Template - Master Artifact List
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Master Artifact List, to be used as static context in the Cycle 0 prompt.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This file serves as the definitive, parseable list of all documentation artifacts for your project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the \"Source of Truth\" documents.
+
+## 2. Formatting Rules for Parsing
+
+*   Lines beginning with `#` are comments and are ignored.
+*   `##` denotes a major category header and is ignored.
+*   `###` denotes an artifact entry. The text following it is the artifact's full name and ID.
+*   Lines beginning with `- **Description:**` provide context for the project.
+*   Lines beginning with `- **Tags:**` provide keywords for Inference.
+
+## 3. Example Structure
+
+## I. Project Planning & Design
+
+### A1. Tower Defense Game - Project Vision and Goals
+- **Description:** High-level overview of the project, its purpose, and the development plan.
+- **Tags:** project vision, goals, scope, planning
+
+### A2. Tower Defense Game - Phase 1 - Requirements & Design
+- **Description:** Detailed functional and technical requirements for the first phase of the project.
+- **Tags:** requirements, design, phase 1, features
+[INFO] [10:33:48 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Project_Vision_and_Goals.md::# Artifact T2: Template - Project Vision and Goals
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a Project Vision and Goals document.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Project Vision
+
+The vision of **Tower Defense Game** is to create an engaging, strategic experience where players defend their base against waves of enemies using a variety of towers and upgrades. The game emphasizes tactical decision‑making, resource management, and progressive difficulty.
+
+## 2. High-Level Goals & Phases
+
+The project will be developed in distinct phases to ensure an iterative and manageable workflow.
+
+### Phase 1: Core Mechanics
+
+The goal of this phase is to establish the foundational gameplay elements.
+-   **Core Functionality:** Implement the player base, basic enemy wave system, tower placement, and damage mechanics.
+-   **Outcome:** Players can spawn towers, enemies spawn in waves, and damage is correctly applied.
+
+### Phase 2: Expansion & Polish
+
+This phase will build upon the foundation by adding more content.
+-   **Core Functionality:** Add tower upgrades, new enemy types, UI overlays, and difficulty scaling.
+-   **Outcome:** A more varied and engaging experience with incremental difficulty.
+
+### Phase 3: Optimization & Release
+
+This phase focuses on refining performance and preparing for distribution.
+-   **Core Functionality:** Optimize game loop, improve asset performance, generate build artifacts, and complete documentation.
+-   **Outcome:** One final polished, publish‑ready version of the Tower Defense Game.
+[INFO] [10:33:48 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide
+# Date Created: C152
+# Author: AI Model & Curator
+# Updated on: C160 (Add Sample Development Workflow section)
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.
+- **Tags:** template, cycle 0, git, github, version control, workflow
+
+## 1. Overview
+
+This guide provides the necessary commands to turn your local project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).
+
+## 2. Prerequisites
+
+*   You have `git` installed on your machine.
+*   You have a GitHub account.
+
+## 3. Step-by-Step Setup
+
+### Step 1: Create a New Repository on GitHub
+
+1.  Go to [github.com](https://github.com) and log in.
+2.  In the top-right corner, click the `+` icon and select **\"New repository\"**.
+3.  **Repository name:** Enter `tower-defense-game`.
+4.  **Description:** (Optional) Provide a brief description of your project.
+5.  Choose **\"Private\"** or **\"Public\"**.
+6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.
+7.  Click **\"Create repository\"**.
+
+GitHub will now show you a page with command-line instructions. We will use the section titled **\"...or push an existing repository from the command line\"**.
+
+### Step 2: Initialize Git in Your Local Project
+
+Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.
+
+1.  **Initialize the repository:**
+    ```bash
+    git init
+    ```
+
+2.  **Add all existing files:**
+    ```bash
+    git add .
+    ```
+
+3.  **Create the first commit:**
+    ```bash
+    git commit -m \"Initial commit\"
+    ```
+
+4.  **Rename the default branch to `main`:**
+    ```bash
+    git branch -M main
+    ```
+
+### Step 3: Link and Push to GitHub
+
+1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.
+    ```bash
+    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git
+    ```
+
+2.  **Push your local `main` branch to GitHub:**
+    ```bash
+    git push -u origin main
+    ```
+
+After these commands complete, refresh your GitHub repository page. You should see all of your project files.
+
+## 4. Sample Development Workflow with DCE and Git
+
+Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.
+
+### Step 1: Start with a Clean State
+Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.
+
+### Step 2: Generate a Prompt and Get Responses
+Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.
+
+### Step 3: Paste and Parse
+Paste the responses into the Parallel Co-Pilot Panel and click "Parse All".
+
+### Step 4: Accept and Test
+1.  Review the responses and find one that looks promising.
+2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspace.
+3.  Now, compile and test the application. Does it work? Does it have errors?
+
+### Step 5: The \"Restore\" Loop
+This is where Git becomes a powerful part of the workflow.
+
+*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**
+    1.  Open the terminal in VS Code.
+    2.  Run the command: `git restore .`
+    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.
+    4.  You are now back to a clean state and can go back to the Parallel Co-Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.
+
+*   **If the changes are good:**
+    1.  Open the Source Control panel in VS Code.
+    2.  Stage the changes (`git add .`).
+    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15\").
+    4.  Commit the changes.
+    5.  You are now ready to start the next development cycle from a new, clean state.
+
+This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI-generated solutions without fear of corrupting your codebase.
+[INFO] [10:33:48 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Development_and_Testing_Guide.md::# Artifact T7: Template - Development and Testing Guide
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a development and testing guide.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Purpose
+
+This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.
+
+## 2. Development Workflow
+
+### Step 1: Install Dependencies
+
+Ensure all project dependencies are installed using npm.
+```bash
+npm install
+```
+
+### Step 2: Start the Development Server
+
+To compile the code and watch for changes, run the following command:
+```bash
+npm run watch
+```
+This will start the development server and automatically recompile your code when you save a file.
+
+### Step 3: Running the Application
+
+[Describe the specific steps to launch the application. For a VS Code extension, this would involve pressing F5 to launch the Extension Development Host. For a web app, it would be opening a browser to `http://localhost:3000`.]
+
+### Step 4: Debugging
+
+You can set breakpoints directly in your source code. [Describe how to attach a debugger. For a VS Code extension, this is automatic when launched with F5.]
+
+## 3. Testing
+
+The project is configured with a testing framework. To run the test suite, use the following command:
+```bash
+npm run test
+```
+This will execute all test files located in the project and report the results to the console.
+[INFO] [10:33:48 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md::# Artifact T4: Template - Technical Scaffolding Plan
+# Date Created: C139
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A generic template for a technical scaffolding plan.
+- **Tags:** template, cycle 0, documentation, project setup
+
+## 1. Overview
+
+This document outlines the proposed technical scaffolding and file structure for **Tower Defense Game**. This plan serves as a blueprint for the initial project setup, ensuring a clean, scalable, and maintainable architecture from the start.
+
+## 2. Technology Stack
+
+-   **Language:** [e.g., TypeScript]
+-   **Framework/Library:** [e.g., React, Node.js with Express]
+-   **Styling:** [e.g., SCSS, TailwindCSS]
+-   **Bundler:** [e.g., Webpack, Vite]
+
+## 3. Proposed File Structure
+
+The project will adhere to a standard, feature-driven directory structure:
+
+```
+.
+├── src/
+│   ├── components/       # Reusable UI components (e.g., Button, Modal)
+│   │
+│   ├── features/         # Feature-specific modules
+│   │   └── [feature-one]/
+│   │       ├── index.ts
+│   │       └── components/
+│   │
+│   ├── services/         # Core backend or client-side services (e.g., api.service.ts)
+│   │
+│   ├── types/            # Shared TypeScript type definitions
+│   │
+│   └── main.ts           # Main application entry point
+│
+├── package.json          # Project manifest and dependencies
+└── tsconfig.json         # TypeScript configuration
+```
+
+## 4. Key Architectural Concepts
+
+-   **Separation of Concerns:** The structure separates UI components, feature logic, and core services.
+-   **Component-Based UI:** The UI will be built by composing small, reusable components.
+-   **Service Layer:** Business logic and external communication (e.g., API calls) will be encapsulated in services to keep components clean.
+-   **Strong Typing:** TypeScript will be used throughout the project to ensure type safety and improve developer experience.
+[INFO] [10:33:48 AM] [File Existence] Received request to check paths: ["docs/Master_Artifact_List.md","docs/Project_Vision_and_Goals.md","docs/Tower-Defense-Game-GitHub-Repository-Setup-Guide.md","docs/Tower-Defense-Game-Development_and_Testing_Guide.md","docs/Tower-Defense-Game-Technical_Scaffolding_Plan.md"]
+
+</2. dce output logs>
+</Ephemeral Context>
+<Previous Cycle 115 Summary of Actions>
+I have analyzed the logs provided in Cycle 114 and identified the root cause of the persistent parsing failures. The issue originates in the backend's `llm.service.ts`, where the logic for consuming the Server-Sent Events (SSE) stream from the vLLM was flawed. It was not correctly buffering data chunks, leading it to attempt parsing incomplete JSON fragments and causing the `Could not parse JSON object from stream` errors seen in the logs.
+
+My course of action is to fix this by refactoring the stream consumer in `llm.service.ts` to be a proper SSE parser. It will now maintain a persistent buffer, search for the correct message terminators (`\n\n`), and only process complete messages, which will resolve the parsing errors. I will also add a regression case study to document this fix and prevent future occurrences. Finally, I will review the frontend parser to ensure no logic interferes with the correct handling of newline characters.
+
+1.  **Update `A111. DCE - New Regression Case Studies.md`:** I will add a new case study named "Backend SSE Parser Fails on Fragmented Data Chunks" to document the root cause and the new, correct buffering strategy.
+2.  **Refactor `src/backend/services/llm.service.ts`:** I will rewrite the `stream.on('data')` handler within the `_generateSingleStream` method. The new implementation will use a persistent buffer to accumulate incoming data chunks. It will search for the SSE message terminator (`\n\n`) to identify and process only complete messages, ensuring `JSON.parse` is never called on an incomplete data fragment. This is the core fix that will resolve the stream of parsing errors.
+3.  **Review `src/client/utils/response-parser.ts`:** I will conduct a final review of the frontend parser to confirm that once it receives a valid JSON string from the corrected backend, its logic for un-escaping newline characters (`\\n` to `\n`) is sound and that no other string replacements are inadvertently corrupting the final output.
+</Previous Cycle 115 Summary of Actions>
+</Cycle 116>
+
 <Cycle 115>
 <Cycle Context>
 okay... so for some reason, despite my having the number of response set to 4, when i click `Generate Initial Responses` from the onboarding tab, only a single response gets requested in vllm, instead of the 4.
@@ -898,681 +2039,6 @@ as for the parsing, i believe you've almost nailed it. everything seems almost p
 
 update: ah, below the raw response, ill place the <dce output logs> as well.
 </Cycle Context>
-<Ephemeral Context>
-<vllm logs showing 1 response instead of 4>
-(APIServer pid=7842) INFO:     127.0.0.1:41830 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=7842) INFO 10-08 09:13:30 [loggers.py:123] Engine 000: Avg prompt throughput: 1135.2 tokens/s, Avg generation throughput: 5.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.4%, Prefix cache hit rate: 92.4%
-(APIServer pid=7842) INFO 10-08 09:13:40 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 66.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.6%, Prefix cache hit rate: 92.4%
-(APIServer pid=7842) INFO 10-08 09:13:50 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 79.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.9%, Prefix cache hit rate: 92.4%
-(APIServer pid=7842) INFO 10-08 09:14:00 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 80.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.2%, Prefix cache hit rate: 92.4%
-(APIServer pid=7842) INFO 10-08 09:14:10 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 78.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.6%, Prefix cache hit rate: 92.4%
-(APIServer pid=7842) INFO 10-08 09:14:20 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 57.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 92.4%
-(APIServer pid=7842) INFO 10-08 09:14:30 [loggers.py:123] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 92.4%
-</vllm logs showing 1 response instead of 4>
-
-<response 1 raw text>
-{"summary":"Generated core project documentation for the Tower Defense Game, including a Master Artifact List, Project Vision & Goals, GitHub Repository Setup Guide, and Development & Testing Guide, positioning the project for immediate start.","course_of_action":[{"step":1,"description":"Create Master Artifact List at `docs/A0.md` outlining all core artifacts for the project."},{"step":2,"description":"Generate Project Vision and Goals at `docs/A1.md` to define scope, goals, and phases."},{"step":3,"description":"Prepare GitHub Repository Setup Guide at `docs/T14.md` based on the provided template, tailored to the Tower Defense Game."},{"step":4,"description":"Prepare Development and Testing Guide at `docs/T7.md` based on the provided template, tailored to the Tower Defense Game."}],"files":[{"path":"docs/A0.md","content":"# Artifact A0: Tower Defense Game - Master Artifact List\\n# Date Created: C260\\n# Author: AI Model & Curator\\n\\n- **Key/Value for A0:**\\n- **Description:** A comprehensive, parseable list of all documentation artifacts for the *Tower Defense Game* project.\\n- **Tags:** project planning, artifact list, documentation\\n\\n## I. Project Planning & Design\\n\\n### A1. Tower Defense Game - Project Vision and Goals\\n- **Description:** High‑level goals and phases for the Tower Defense Game.\\n- **Tags:** project vision, goals, scope, planning\\n\\n### A2. Tower Defense Game - Technical Scaffolding Plan\\n- **Description:** Defines the core file structure, technology stack, and architecture.\\n- **Tags:** technical scaffold, architecture, planning\\n\\n### A3. Tower Defense Game - GitHub Repository Setup Guide\\n- **Description:** Step‑by‑step instructions to initialize a Git repository and connect it to GitHub.\\n- **Tags:** git, github, setup\\n\\n### A4. Tower Defense Game - Development and Testing Guide\\n- **Description:** Procedures for installing dependencies, running the app, and executing tests.\\n- **Tags:** development workflow, testing\\n\\n### A5. Tower Defense Game - Competitive Analysis (Optional)\\n- **Description:** Analysis of existing tower defense games and related tools.\\n- **Tags:** competitive analysis, research"},"{"path":"docs/A1.md","content":"# Artifact T2: Tower Defense Game - Project Vision and Goals\\n# Date Created: C260\\n# Author: AI Model & Curator\\n\\n- **Key/Value for A0:**\\n- **Description:** A generic template for a Project Vision and Goals document.\\n- **Tags:** template, cycle 0, documentation, project setup\\n\\n## 1. Project Vision\\nThe vision of **Tower Defense Game** is to create an engaging, strategic gameplay experience where players design and manage defense towers to repel waves of enemies. The game will emphasize resource management, unit variety, and dynamic level design, delivering a balance between depth and accessibility.\\n\\n## 2. High‑Level Goals & Phases\\nThe project will be developed in distinct phases to ensure iterative progress and risk mitigation.\\n\\n### Phase 1: Core Gameplay Engine\\n- **Core Functionality:** Build the tower placement system, enemy wave spawning, and damage calculation.\\n- **Outcome:** A playable demo where players can place towers, spawn enemies, and see combat outcomes.\\n\\n### Phase 2: Level Editor and Difficulty Scaling\\n- **Core Functionality:** Add a level editor for designing custom maps and implement enemy difficulty scaling.\\n- **Outcome:** Players can create and share custom levels with adjustable difficulty parameters.\\n\\n### Phase 3: Polish, Multiplayer, and Release\\n- **Core Functionality:** Refine UI, add multiplayer matchmaking, and prepare the game for release.\\n- **Outcome:** A polished, play‑tested, and network‑capable tower defense game ready for distribution."},"{"path":"docs/T14.md","content":"# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide\\n# Date Created: C260\\n# Author: AI Model & Curator\\n\\n- **Key/Value for A0:**\\n- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\\n- **Tags:** template, cycle 0, git, github, version control, workflow\\n\\n## 1. Overview\\nThis guide provides the necessary commands to turn your local *Tower Defense Game* project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\\n\\n## 2. Prerequisites\\n\\n* You have `git` installed on your machine.\\n* You have a GitHub account.\\n\\n## 3. Step‑by‑Step Setup\\n\\n### Step 1: Create a New Repository on GitHub\\n\\n1.  Go to [github.com](https://github.com) and log in.\\n2.  In the top‑right corner, click the `+` icon and select **\"New repository\"**.\\n3.  **Repository name:** Enter a name for your project, e.g., `tower-defense-game`.\\n4.  **Description:** (Optional) Provide a brief description of your project.\\n5.  Choose **\"Private\"** or **\"Public\"**.\\n6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.\\n7.  Click **\"Create repository\"**.\\n\\nGitHub will now show you a page with command‑line instructions. We will use the section titled **\"…or push an existing repository from the command line\"**.\\n\\n### Step 2: Initialize Git in Your Local Project\\n\\nOpen a terminal and navigate to your project's root directory. Then, run the following commands one by one.\\n\\n1.  **Initialize the repository:**\\n    ```bash\\n    git init\\n    ```\\n\\n2.  **Add all existing files:**\\n    ```bash\\n    git add .\\n    ```\\n\\n3.  **Create the first commit:**\\n    ```bash\\n    git commit -m \\\"Initial commit\\\"\\n    ```\\n\\n4.  **Rename the default branch to `main`:**\\n    ```bash\\n    git branch -M main\\n    ```\\n\\n### Step 3: Link and Push to GitHub\\n\\n1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.\\n    ```bash\\n    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git\\n    ```\\n\\n2.  **Push your local `main` branch to GitHub:**\\n    ```bash\\n    git push -u origin main\\n    ```\\n\\nAfter these commands complete, refresh your GitHub repository page. You should see all of your project files.\\n\\n## 4. Sample Development Workflow with DCE and Git\\n\\nGit is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\\n\\n### Step 1: Start with a Clean State\\nBefore starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.\\n\\n### Step 2: Generate a Prompt and Get Responses\\nUse the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\\n\\n### Step 3: Paste and Parse\\nPaste the responses into the Parallel Co‑Pilot Panel and click \"Parse All\".\\n\\n### Step 4: Accept and Test\\n1.  Review the responses and find one that looks promising.\\n2.  Select that response and use the **\"Accept Selected Files\"** button to write the AI's proposed changes to your workspace.\\n3.  Now, compile and test the application. Does it work? Does it have errors?\\n\\n### Step 5: The \"Restore\" Loop\\nThis is where Git becomes a powerful part of the workflow.\\n\\n*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**\\n    1.  Open the terminal in VS Code.\\n    2.  Run the command: `git restore .`\\n    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\\n    4.  You are now back to a clean state and can go back to the Parallel Co‑Pilot Panel, select a *different* AI response, and click \"Accept Selected Files\" again to test the next proposed solution.\\n\\n*   **If the changes are good:**\\n    1.  Open the Source Control panel in VS Code.\\n    2.  Stage the changes (`git add .`).\\n    3.  Write a commit message (e.g., \"Feat: Implement user login via AI suggestion C15\").\\n    4.  Commit the changes.\\n    5.  You are now ready to start the next development cycle from a new, clean state.\\n\\nThis iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI‑generated solutions without fear of corrupting your codebase."},"{"path":"docs/T7.md","content":"# Artifact T7: Tower Defense Game - Development and Testing Guide\\n# Date Created: C260\\n# Author: AI Model & Curator\\n\\n- **Key/Value for A0:**\\n- **Description:** A generic template for a development and testing guide.\\n- **Tags:** template, cycle 0, documentation, project setup\\n\\n## 1. Purpose\\nThis guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.\\n\\n## 2. Development Workflow\\n\\n### Step 1: Install Dependencies\\n\\nEnsure all project dependencies are installed using npm.\\n```bash\\nnpm install\\n```\\n\\n### Step 2: Start the Development Server\\n\\nTo compile the code and watch for changes, run the following command:```bash\\nnpm run watch\\n```\\nThis will start the development server and automatically recompile your code when you save a file.\\n\\n### Step 3: Running the Application\\n\\nFor a web application, open a browser and navigate to `http://localhost:3000`. The tower placement interface and enemy wave system should be visible.\\n\\n### Step 4: Debugging\\n\\nYou can set breakpoints directly in your source code. For a web app, open the browser developer tools and use the Sources panel to pause execution, inspect variables, and step through code.\\n\\n## 3. Testing\\nThe project is configured with a testing framework. To run the test suite, use the following command:\\n```bash\\nnpm run test\\n```\\nThis will execute all test files located in the project and report the results to the console.\\n\\nFor a high‑level overview of the test strategy, refer to the \"Unit & Integration Testing\" section of the project documentation."}]}
-</response 1 raw text>
-
-<dce output logs>
-[INFO] [9:13:12 AM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [9:13:12 AM] Services initializing...
-[INFO] [9:13:12 AM] Services initialized successfully.
-[INFO] [9:13:12 AM] Registering 7 commands.
-[INFO] [9:13:13 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
-[INFO] [9:13:13 AM] Parallel Co-Pilot view message handler initialized.
-[INFO] [9:13:13 AM] Starry Night syntax highlighter initialized.
-[INFO] [9:13:13 AM] Context Chooser view message handler initialized.
-[INFO] [9:13:13 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [9:13:13 AM] [SelectionService] No last selection found in state.
-[INFO] [9:13:13 AM] Persisted current selection of 0 items.
-[INFO] [9:13:13 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [9:13:13 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [9:13:17 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [9:13:18 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [9:13:19 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
-[INFO] [9:13:20 AM] Executing dce.openSettingsPanel command.
-[INFO] [9:13:20 AM] Settings view message handler initialized.
-[INFO] [9:13:20 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [9:13:21 AM] Attempting to read README from extension path: c:\Projects\DCE\README.md
-[INFO] [9:13:21 AM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
-[INFO] [9:13:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [9:13:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [9:13:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [9:13:22 AM] Settings saved: Mode=demo, URL=undefined
-[INFO] [9:13:22 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [9:13:24 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [9:13:24 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [9:13:24 AM] [FTV Refresh] Full refresh triggered. Reason: file change: settings.json
-[INFO] [9:13:24 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [9:13:25 AM] Generating Cycle 0 prompt and starting generation...
-[INFO] [9:13:25 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
-[INFO] [9:13:25 AM] [SelectionService] No last selection found in state.
-[INFO] [9:13:25 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
-[INFO] [9:13:25 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 36
-[INFO] [9:13:25 AM] prompt.md file created successfully before sending API request.
-[INFO] [9:13:25 AM] Created new placeholder cycle 1.
-[INFO] [9:13:25 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
-[INFO] [9:13:25 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
-[INFO] [9:13:25 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
-[INFO] [9:13:25 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
-[INFO] [9:13:25 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/TowerDefense55/src","c:/Projects/TowerDefense55/src/Artifacts","c:/Projects/TowerDefense55/src/Artifacts/DCE_README.md"]
-[INFO] [9:13:25 AM] [SelectionService] No last selection found in state.
-[INFO] [9:13:25 AM] Persisted current selection of 3 items.
-[INFO] [9:13:25 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
-[INFO] [9:13:25 AM] Persisted current selection of 3 items.
-[INFO] [9:13:27 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[ERROR] [9:13:46 AM] Failed to generate single stream for C1/R3: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
-[ERROR] [9:13:46 AM] Failed to generate single stream for C1/R4: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
-[ERROR] [9:13:46 AM] Failed to generate single stream for C1/R2: request to https://aiascent.game/api/dce/proxy failed, reason: connect ETIMEDOUT 99.6.242.219:443
-[INFO] [9:14:18 AM] All streams for cycle 1 are complete.
-[INFO] [9:14:18 AM] Updated cycle 1 with 4 responses and their metrics.
-[INFO] [9:15:15 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/A0.md::# Artifact A0: Tower Defense Game - Master Artifact List\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A comprehensive, parseable list of all documentation artifacts for the *Tower Defense Game* project.\
-- **Tags:** project planning, artifact list, documentation\
-\
-## I. Project Planning & Design\
-\
-### A1. Tower Defense Game - Project Vision and Goals\
-- **Description:** High‑level goals and phases for the Tower Defense Game.\
-- **Tags:** project vision, goals, scope, planning\
-\
-### A2. Tower Defense Game - Technical Scaffolding Plan\
-- **Description:** Defines the core file structure, technology stack, and architecture.\
-- **Tags:** technical scaffold, architecture, planning\
-\
-### A3. Tower Defense Game - GitHub Repository Setup Guide\
-- **Description:** Step‑by‑step instructions to initialize a Git repository and connect it to GitHub.\
-- **Tags:** git, github, setup\
-\
-### A4. Tower Defense Game - Development and Testing Guide\
-- **Description:** Procedures for installing dependencies, running the app, and executing tests.\
-- **Tags:** development workflow, testing\
-\
-### A5. Tower Defense Game - Competitive Analysis (Optional)\
-- **Description:** Analysis of existing tower defense games and related tools.\
-- **Tags:** competitive analysis, research
-[INFO] [9:15:15 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/A1.md::# Artifact T2: Tower Defense Game - Project Vision and Goals\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a Project Vision and Goals document.\
-- **Tags:** template, cycle 0, documentation, project setup\
-\
-## 1. Project Vision\
-The vision of **Tower Defense Game** is to create an engaging, strategic gameplay experience where players design and manage defense towers to repel waves of enemies. The game will emphasize resource management, unit variety, and dynamic level design, delivering a balance between depth and accessibility.\
-\
-## 2. High‑Level Goals & Phases\
-The project will be developed in distinct phases to ensure iterative progress and risk mitigation.\
-\
-### Phase 1: Core Gameplay Engine\
-- **Core Functionality:** Build the tower placement system, enemy wave spawning, and damage calculation.\
-- **Outcome:** A playable demo where players can place towers, spawn enemies, and see combat outcomes.\
-\
-### Phase 2: Level Editor and Difficulty Scaling\
-- **Core Functionality:** Add a level editor for designing custom maps and implement enemy difficulty scaling.\
-- **Outcome:** Players can create and share custom levels with adjustable difficulty parameters.\
-\
-### Phase 3: Polish, Multiplayer, and Release\
-- **Core Functionality:** Refine UI, add multiplayer matchmaking, and prepare the game for release.\
-- **Outcome:** A polished, play‑tested, and network‑capable tower defense game ready for distribution.
-[INFO] [9:15:15 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/T14.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\
-- **Tags:** template, cycle 0, git, github, version control, workflow\
-\
-## 1. Overview\
-This guide provides the necessary commands to turn your local *Tower Defense Game* project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\
-\
-## 2. Prerequisites\
-\
-* You have `git` installed on your machine.\
-* You have a GitHub account.\
-\
-## 3. Step‑by‑Step Setup\
-\
-### Step 1: Create a New Repository on GitHub\
-\
-1.  Go to [github.com](https://github.com) and log in.\
-2.  In the top‑right corner, click the `+` icon and select **"New repository"**.\
-3.  **Repository name:** Enter a name for your project, e.g., `tower-defense-game`.\
-4.  **Description:** (Optional) Provide a brief description of your project.\
-5.  Choose **"Private"** or **"Public"**.\
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.\
-7.  Click **"Create repository"**.\
-\
-GitHub will now show you a page with command‑line instructions. We will use the section titled **"…or push an existing repository from the command line"**.\
-\
-### Step 2: Initialize Git in Your Local Project\
-\
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.\
-\
-1.  **Initialize the repository:**\
-    ```bash\
-    git init\
-    ```\
-\
-2.  **Add all existing files:**\
-    ```bash\
-    git add .\
-    ```\
-\
-3.  **Create the first commit:**\
-    ```bash\
-    git commit -m \\"Initial commit\\"\
-    ```\
-\
-4.  **Rename the default branch to `main`:**\
-    ```bash\
-    git branch -M main\
-    ```\
-\
-### Step 3: Link and Push to GitHub\
-\
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.\
-    ```bash\
-    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git\
-    ```\
-\
-2.  **Push your local `main` branch to GitHub:**\
-    ```bash\
-    git push -u origin main\
-    ```\
-\
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.\
-\
-## 4. Sample Development Workflow with DCE and Git\
-\
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\
-\
-### Step 1: Start with a Clean State\
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.\
-\
-### Step 2: Generate a Prompt and Get Responses\
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\
-\
-### Step 3: Paste and Parse\
-Paste the responses into the Parallel Co‑Pilot Panel and click "Parse All".\
-\
-### Step 4: Accept and Test\
-1.  Review the responses and find one that looks promising.\
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.\
-3.  Now, compile and test the application. Does it work? Does it have errors?\
-\
-### Step 5: The "Restore" Loop\
-This is where Git becomes a powerful part of the workflow.\
-\
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**\
-    1.  Open the terminal in VS Code.\
-    2.  Run the command: `git restore .`\
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\
-    4.  You are now back to a clean state and can go back to the Parallel Co‑Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.\
-\
-*   **If the changes are good:**\
-    1.  Open the Source Control panel in VS Code.\
-    2.  Stage the changes (`git add .`).\
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").\
-    4.  Commit the changes.\
-    5.  You are now ready to start the next development cycle from a new, clean state.\
-\
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI‑generated solutions without fear of corrupting your codebase.
-[INFO] [9:15:15 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/T7.md::# Artifact T7: Tower Defense Game - Development and Testing Guide\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a development and testing guide.\
-- **Tags:** template, cycle 0, documentation, project setup\
-\
-## 1. Purpose\
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.\
-\
-## 2. Development Workflow\
-\
-### Step 1: Install Dependencies\
-\
-Ensure all project dependencies are installed using npm.\
-```bash\
-npm install\
-```\
-\
-### Step 2: Start the Development Server\
-\
-To compile the code and watch for changes, run the following command:```bash\
-npm run watch\
-```\
-This will start the development server and automatically recompile your code when you save a file.\
-\
-### Step 3: Running the Application\
-\
-For a web application, open a browser and navigate to `http://localhost:3000`. The tower placement interface and enemy wave system should be visible.\
-\
-### Step 4: Debugging\
-\
-You can set breakpoints directly in your source code. For a web app, open the browser developer tools and use the Sources panel to pause execution, inspect variables, and step through code.\
-\
-## 3. Testing\
-The project is configured with a testing framework. To run the test suite, use the following command:\
-```bash\
-npm run test\
-```\
-This will execute all test files located in the project and report the results to the console.\
-\
-For a high‑level overview of the test strategy, refer to the "Unit & Integration Testing" section of the project documentation.
-[INFO] [9:15:15 AM] [File Existence] Received request to check paths: ["docs/A0.md","docs/A1.md","docs/T14.md","docs/T7.md"]
-[INFO] [9:16:59 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/A0.md::# Artifact A0: Tower Defense Game - Master Artifact List\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A comprehensive, parseable list of all documentation artifacts for the *Tower Defense Game* project.\
-- **Tags:** project planning, artifact list, documentation\
-\
-## I. Project Planning & Design\
-\
-### A1. Tower Defense Game - Project Vision and Goals\
-- **Description:** High‑level goals and phases for the Tower Defense Game.\
-- **Tags:** project vision, goals, scope, planning\
-\
-### A2. Tower Defense Game - Technical Scaffolding Plan\
-- **Description:** Defines the core file structure, technology stack, and architecture.\
-- **Tags:** technical scaffold, architecture, planning\
-\
-### A3. Tower Defense Game - GitHub Repository Setup Guide\
-- **Description:** Step‑by‑step instructions to initialize a Git repository and connect it to GitHub.\
-- **Tags:** git, github, setup\
-\
-### A4. Tower Defense Game - Development and Testing Guide\
-- **Description:** Procedures for installing dependencies, running the app, and executing tests.\
-- **Tags:** development workflow, testing\
-\
-### A5. Tower Defense Game - Competitive Analysis (Optional)\
-- **Description:** Analysis of existing tower defense games and related tools.\
-- **Tags:** competitive analysis, research
-[INFO] [9:16:59 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/A1.md::# Artifact T2: Tower Defense Game - Project Vision and Goals\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a Project Vision and Goals document.\
-- **Tags:** template, cycle 0, documentation, project setup\
-\
-## 1. Project Vision\
-The vision of **Tower Defense Game** is to create an engaging, strategic gameplay experience where players design and manage defense towers to repel waves of enemies. The game will emphasize resource management, unit variety, and dynamic level design, delivering a balance between depth and accessibility.\
-\
-## 2. High‑Level Goals & Phases\
-The project will be developed in distinct phases to ensure iterative progress and risk mitigation.\
-\
-### Phase 1: Core Gameplay Engine\
-- **Core Functionality:** Build the tower placement system, enemy wave spawning, and damage calculation.\
-- **Outcome:** A playable demo where players can place towers, spawn enemies, and see combat outcomes.\
-\
-### Phase 2: Level Editor and Difficulty Scaling\
-- **Core Functionality:** Add a level editor for designing custom maps and implement enemy difficulty scaling.\
-- **Outcome:** Players can create and share custom levels with adjustable difficulty parameters.\
-\
-### Phase 3: Polish, Multiplayer, and Release\
-- **Core Functionality:** Refine UI, add multiplayer matchmaking, and prepare the game for release.\
-- **Outcome:** A polished, play‑tested, and network‑capable tower defense game ready for distribution.
-[INFO] [9:16:59 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/T14.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\
-- **Tags:** template, cycle 0, git, github, version control, workflow\
-\
-## 1. Overview\
-This guide provides the necessary commands to turn your local *Tower Defense Game* project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\
-\
-## 2. Prerequisites\
-\
-* You have `git` installed on your machine.\
-* You have a GitHub account.\
-\
-## 3. Step‑by‑Step Setup\
-\
-### Step 1: Create a New Repository on GitHub\
-\
-1.  Go to [github.com](https://github.com) and log in.\
-2.  In the top‑right corner, click the `+` icon and select **"New repository"**.\
-3.  **Repository name:** Enter a name for your project, e.g., `tower-defense-game`.\
-4.  **Description:** (Optional) Provide a brief description of your project.\
-5.  Choose **"Private"** or **"Public"**.\
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.\
-7.  Click **"Create repository"**.\
-\
-GitHub will now show you a page with command‑line instructions. We will use the section titled **"…or push an existing repository from the command line"**.\
-\
-### Step 2: Initialize Git in Your Local Project\
-\
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.\
-\
-1.  **Initialize the repository:**\
-    ```bash\
-    git init\
-    ```\
-\
-2.  **Add all existing files:**\
-    ```bash\
-    git add .\
-    ```\
-\
-3.  **Create the first commit:**\
-    ```bash\
-    git commit -m \\"Initial commit\\"\
-    ```\
-\
-4.  **Rename the default branch to `main`:**\
-    ```bash\
-    git branch -M main\
-    ```\
-\
-### Step 3: Link and Push to GitHub\
-\
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.\
-    ```bash\
-    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git\
-    ```\
-\
-2.  **Push your local `main` branch to GitHub:**\
-    ```bash\
-    git push -u origin main\
-    ```\
-\
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.\
-\
-## 4. Sample Development Workflow with DCE and Git\
-\
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\
-\
-### Step 1: Start with a Clean State\
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.\
-\
-### Step 2: Generate a Prompt and Get Responses\
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\
-\
-### Step 3: Paste and Parse\
-Paste the responses into the Parallel Co‑Pilot Panel and click "Parse All".\
-\
-### Step 4: Accept and Test\
-1.  Review the responses and find one that looks promising.\
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.\
-3.  Now, compile and test the application. Does it work? Does it have errors?\
-\
-### Step 5: The "Restore" Loop\
-This is where Git becomes a powerful part of the workflow.\
-\
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**\
-    1.  Open the terminal in VS Code.\
-    2.  Run the command: `git restore .`\
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\
-    4.  You are now back to a clean state and can go back to the Parallel Co‑Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.\
-\
-*   **If the changes are good:**\
-    1.  Open the Source Control panel in VS Code.\
-    2.  Stage the changes (`git add .`).\
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").\
-    4.  Commit the changes.\
-    5.  You are now ready to start the next development cycle from a new, clean state.\
-\
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI‑generated solutions without fear of corrupting your codebase.
-[INFO] [9:16:59 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/T7.md::# Artifact T7: Tower Defense Game - Development and Testing Guide\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a development and testing guide.\
-- **Tags:** template, cycle 0, documentation, project setup\
-\
-## 1. Purpose\
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.\
-\
-## 2. Development Workflow\
-\
-### Step 1: Install Dependencies\
-\
-Ensure all project dependencies are installed using npm.\
-```bash\
-npm install\
-```\
-\
-### Step 2: Start the Development Server\
-\
-To compile the code and watch for changes, run the following command:```bash\
-npm run watch\
-```\
-This will start the development server and automatically recompile your code when you save a file.\
-\
-### Step 3: Running the Application\
-\
-For a web application, open a browser and navigate to `http://localhost:3000`. The tower placement interface and enemy wave system should be visible.\
-\
-### Step 4: Debugging\
-\
-You can set breakpoints directly in your source code. For a web app, open the browser developer tools and use the Sources panel to pause execution, inspect variables, and step through code.\
-\
-## 3. Testing\
-The project is configured with a testing framework. To run the test suite, use the following command:\
-```bash\
-npm run test\
-```\
-This will execute all test files located in the project and report the results to the console.\
-\
-For a high‑level overview of the test strategy, refer to the "Unit & Integration Testing" section of the project documentation.
-[INFO] [9:16:59 AM] [File Existence] Received request to check paths: ["docs/A0.md","docs/A1.md","docs/T14.md","docs/T7.md"]
-[INFO] [9:22:46 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/A0.md::# Artifact A0: Tower Defense Game - Master Artifact List\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A comprehensive, parseable list of all documentation artifacts for the *Tower Defense Game* project.\
-- **Tags:** project planning, artifact list, documentation\
-\
-## I. Project Planning & Design\
-\
-### A1. Tower Defense Game - Project Vision and Goals\
-- **Description:** High‑level goals and phases for the Tower Defense Game.\
-- **Tags:** project vision, goals, scope, planning\
-\
-### A2. Tower Defense Game - Technical Scaffolding Plan\
-- **Description:** Defines the core file structure, technology stack, and architecture.\
-- **Tags:** technical scaffold, architecture, planning\
-\
-### A3. Tower Defense Game - GitHub Repository Setup Guide\
-- **Description:** Step‑by‑step instructions to initialize a Git repository and connect it to GitHub.\
-- **Tags:** git, github, setup\
-\
-### A4. Tower Defense Game - Development and Testing Guide\
-- **Description:** Procedures for installing dependencies, running the app, and executing tests.\
-- **Tags:** development workflow, testing\
-\
-### A5. Tower Defense Game - Competitive Analysis (Optional)\
-- **Description:** Analysis of existing tower defense games and related tools.\
-- **Tags:** competitive analysis, research
-[INFO] [9:22:46 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/A1.md::# Artifact T2: Tower Defense Game - Project Vision and Goals\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a Project Vision and Goals document.\
-- **Tags:** template, cycle 0, documentation, project setup\
-\
-## 1. Project Vision\
-The vision of **Tower Defense Game** is to create an engaging, strategic gameplay experience where players design and manage defense towers to repel waves of enemies. The game will emphasize resource management, unit variety, and dynamic level design, delivering a balance between depth and accessibility.\
-\
-## 2. High‑Level Goals & Phases\
-The project will be developed in distinct phases to ensure iterative progress and risk mitigation.\
-\
-### Phase 1: Core Gameplay Engine\
-- **Core Functionality:** Build the tower placement system, enemy wave spawning, and damage calculation.\
-- **Outcome:** A playable demo where players can place towers, spawn enemies, and see combat outcomes.\
-\
-### Phase 2: Level Editor and Difficulty Scaling\
-- **Core Functionality:** Add a level editor for designing custom maps and implement enemy difficulty scaling.\
-- **Outcome:** Players can create and share custom levels with adjustable difficulty parameters.\
-\
-### Phase 3: Polish, Multiplayer, and Release\
-- **Core Functionality:** Refine UI, add multiplayer matchmaking, and prepare the game for release.\
-- **Outcome:** A polished, play‑tested, and network‑capable tower defense game ready for distribution.
-[INFO] [9:22:46 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/T14.md::# Artifact T14: Tower Defense Game - GitHub Repository Setup Guide\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a guide on setting up a new project with Git and GitHub, including a sample workflow.\
-- **Tags:** template, cycle 0, git, github, version control, workflow\
-\
-## 1. Overview\
-This guide provides the necessary commands to turn your local *Tower Defense Game* project folder into a Git repository, link it to a new repository on GitHub, and outlines a sample workflow for using Git alongside the Data Curation Environment (DCE).\
-\
-## 2. Prerequisites\
-\
-* You have `git` installed on your machine.\
-* You have a GitHub account.\
-\
-## 3. Step‑by‑Step Setup\
-\
-### Step 1: Create a New Repository on GitHub\
-\
-1.  Go to [github.com](https://github.com) and log in.\
-2.  In the top‑right corner, click the `+` icon and select **"New repository"**.\
-3.  **Repository name:** Enter a name for your project, e.g., `tower-defense-game`.\
-4.  **Description:** (Optional) Provide a brief description of your project.\
-5.  Choose **"Private"** or **"Public"**.\
-6.  **IMPORTANT:** Do **not** initialize the repository with a `README`, `.gitignore`, or `license`. We will be pushing our existing files, and this will prevent conflicts.\
-7.  Click **"Create repository"**.\
-\
-GitHub will now show you a page with command‑line instructions. We will use the section titled **"…or push an existing repository from the command line"**.\
-\
-### Step 2: Initialize Git in Your Local Project\
-\
-Open a terminal and navigate to your project's root directory. Then, run the following commands one by one.\
-\
-1.  **Initialize the repository:**\
-    ```bash\
-    git init\
-    ```\
-\
-2.  **Add all existing files:**\
-    ```bash\
-    git add .\
-    ```\
-\
-3.  **Create the first commit:**\
-    ```bash\
-    git commit -m \\"Initial commit\\"\
-    ```\
-\
-4.  **Rename the default branch to `main`:**\
-    ```bash\
-    git branch -M main\
-    ```\
-\
-### Step 3: Link and Push to GitHub\
-\
-1.  **Add the remote repository:** Replace the placeholder URL with the one from your GitHub repository page.\
-    ```bash\
-    git remote add origin https://github.com/YOUR_USERNAME/tower-defense-game.git\
-    ```\
-\
-2.  **Push your local `main` branch to GitHub:**\
-    ```bash\
-    git push -u origin main\
-    ```\
-\
-After these commands complete, refresh your GitHub repository page. You should see all of your project files.\
-\
-## 4. Sample Development Workflow with DCE and Git\
-\
-Git is a powerful tool for managing the iterative changes produced by the DCE. It allows you to quickly test an AI's proposed solution and revert it cleanly if it doesn't work, without losing your place.\
-\
-### Step 1: Start with a Clean State\
-Before starting a new cycle, ensure your working directory is clean. You can check this with `git status`. All your previous changes should be committed.\
-\
-### Step 2: Generate a Prompt and Get Responses\
-Use the DCE to generate a `prompt.md` file. Use this prompt to get multiple responses (e.g., 4 to 8) from your preferred AI model.\
-\
-### Step 3: Paste and Parse\
-Paste the responses into the Parallel Co‑Pilot Panel and click "Parse All".\
-\
-### Step 4: Accept and Test\
-1.  Review the responses and find one that looks promising.\
-2.  Select that response and use the **"Accept Selected Files"** button to write the AI's proposed changes to your workspace.\
-3.  Now, compile and test the application. Does it work? Does it have errors?\
-\
-### Step 5: The "Restore" Loop\
-This is where Git becomes a powerful part of the workflow.\
-\
-*   **If the changes are bad (e.g., introduce bugs, don't work as expected):**\
-    1.  Open the terminal in VS Code.\
-    2.  Run the command: `git restore .`\
-    3.  This command instantly discards all uncommitted changes in your workspace, reverting your files to the state of your last commit.\
-    4.  You are now back to a clean state and can go back to the Parallel Co‑Pilot Panel, select a *different* AI response, and click "Accept Selected Files" again to test the next proposed solution.\
-\
-*   **If the changes are good:**\
-    1.  Open the Source Control panel in VS Code.\
-    2.  Stage the changes (`git add .`).\
-    3.  Write a commit message (e.g., "Feat: Implement user login via AI suggestion C15").\
-    4.  Commit the changes.\
-    5.  You are now ready to start the next development cycle from a new, clean state.\
-\
-This iterative loop of `accept -> test -> restore` allows you to rapidly audition multiple AI‑generated solutions without fear of corrupting your codebase.
-[INFO] [9:22:46 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: docs/T7.md::# Artifact T7: Tower Defense Game - Development and Testing Guide\
-# Date Created: C260\
-# Author: AI Model & Curator\
-\
-- **Key/Value for A0:**\
-- **Description:** A generic template for a development and testing guide.\
-- **Tags:** template, cycle 0, documentation, project setup\
-\
-## 1. Purpose\
-This guide provides the standard procedure for running, debugging, and testing the **Tower Defense Game** application locally.\
-\
-## 2. Development Workflow\
-\
-### Step 1: Install Dependencies\
-\
-Ensure all project dependencies are installed using npm.\
-```bash\
-npm install\
-```\
-\
-### Step 2: Start the Development Server\
-\
-To compile the code and watch for changes, run the following command:```bash\
-npm run watch\
-```\
-This will start the development server and automatically recompile your code when you save a file.\
-\
-### Step 3: Running the Application\
-\
-For a web application, open a browser and navigate to `http://localhost:3000`. The tower placement interface and enemy wave system should be visible.\
-\
-### Step 4: Debugging\
-\
-You can set breakpoints directly in your source code. For a web app, open the browser developer tools and use the Sources panel to pause execution, inspect variables, and step through code.\
-\
-## 3. Testing\
-The project is configured with a testing framework. To run the test suite, use the following command:\
-```bash\
-npm run test\
-```\
-This will execute all test files located in the project and report the results to the console.\
-\
-For a high‑level overview of the test strategy, refer to the "Unit & Integration Testing" section of the project documentation.
-[INFO] [9:22:46 AM] [File Existence] Received request to check paths: ["docs/A0.md","docs/A1.md","docs/T14.md","docs/T7.md"]
-
-</dce output logs>
-</Ephemeral Context>
 <Previous Cycle 114 Summary of Actions>
 Could not parse summary.
 
@@ -6210,10 +6676,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-08T15:13:10.357Z
+  Date Generated: 2025-10-08T15:55:59.175Z
   ---
   Total Files: 188
-  Approx. Tokens: 296697
+  Approx. Tokens: 287250
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6221,12 +6687,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-5. src\Artifacts\A111. DCE - New Regression Case Studies.md (7886 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-7. src\backend\services\prompt.service.ts (5240 tokens)
-8. src\backend\services\file-operation.service.ts (4526 tokens)
-9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
+6. src\backend\services\prompt.service.ts (5240 tokens)
+7. src\backend\services\file-operation.service.ts (4526 tokens)
+8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4286 tokens)
+10. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -6365,9 +6831,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 289 - Chars: 16724 - Tokens: 4181
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 296 - Chars: 17143 - Tokens: 4286
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -6390,10 +6856,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
-162. src\client\utils\response-parser.ts - Lines: 159 - Chars: 7460 - Tokens: 1865
+162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7539 - Tokens: 1885
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 13 - Chars: 558 - Tokens: 140
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -6402,12 +6868,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 4013 - Tokens: 1004
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 264 - Chars: 31542 - Tokens: 7886
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 95 - Chars: 10037 - Tokens: 2510
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
 181. GPT-OSS-HARMONY-REFERENCE-REPO\custom_python_instruction.py - Lines: 59 - Chars: 1605 - Tokens: 402
 182. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html - Lines: 1323 - Chars: 56615 - Tokens: 14154
@@ -18830,7 +19296,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C68 (Refactor to use new backend-driven workflow)
+// Updated on: C115 (Use props for response count)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -18846,6 +19312,8 @@ interface OnboardingViewProps {
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
     onStartGeneration: (projectScope: string, responseCount: number) => void;
+    responseCount: number;
+    onResponseCountChange: (count: number) => void;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -18860,9 +19328,19 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ 
+    projectScope, 
+    onScopeChange, 
+    onNavigateToCycle, 
+    latestCycleId, 
+    workflowStep, 
+    saveStatus, 
+    connectionMode, 
+    onStartGeneration,
+    responseCount,
+    onResponseCountChange
+}) => {
     const [promptGenerated, setPromptGenerated] = React.useState(false);
-    const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
@@ -18923,7 +19401,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                                 id="onboarding-response-count" 
                                 min="1" max="20" 
                                 value={responseCount} 
-                                onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                                onChange={e => onResponseCountChange(parseInt(e.target.value, 10) || 1)} 
                             />
                         </div>
                     )}
@@ -20206,7 +20684,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C111 (Add useMemo for viewableContent)
+// Updated on: C115 (Lift responseCount state)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -20248,10 +20726,11 @@ const App = () => {
     const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
 
     // --- State & Hooks Initialization ---
+    const [responseCount, setResponseCount] = React.useState(4); // LIFTED STATE
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, initialData.cycle?.tabCount || 4, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     // --- IPC Message Handling ---
@@ -20264,13 +20743,13 @@ const App = () => {
     );
 
     // --- Core Save Logic ---
-    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
-    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
+    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount });
+    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount };
 
     saveStateRef.current = React.useCallback(() => {
-        const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+        const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount } = stateRef.current;
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
-        const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+        const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
         if (currentCycle === null) return;
@@ -20286,7 +20765,7 @@ const App = () => {
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount,
+            tabCount: responseCount, // Use unified responseCount for saving
             activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides),
@@ -20324,9 +20803,13 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
             setForceShowResponseView(false);
+            if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
-            if (cycleData) setForceShowResponseView(false);
+            if (cycleData) {
+                setForceShowResponseView(false);
+                if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
+            }
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
@@ -20349,6 +20832,8 @@ const App = () => {
             saveStatus={cycleManagement.saveStatus} 
             connectionMode={generationManagement.connectionMode} 
             onStartGeneration={generationManagement.handleStartGeneration} 
+            responseCount={responseCount}
+            onResponseCountChange={setResponseCount}
         />; 
     }
     
@@ -20384,7 +20869,7 @@ const App = () => {
             </div>
             <div className="tab-count-input">
                 <label htmlFor="tab-count">Responses:</label>
-                <input type="number" id="tab-count" min="1" max="20" value={tabManagement.tabCount} onChange={e => tabManagement.setTabCount(parseInt(e.target.value, 10) || 1)} />
+                <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => cycleManagement.setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
@@ -22030,7 +22515,7 @@ The workflow for generating AI responses needs to be more flexible and deliberat
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C114 (Final review of newline logic)
+// Updated on: C115 (Implement robust JSON un-escaping)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -22045,6 +22530,18 @@ const HYBRID_COA_REGEX = /"course_of_action"\s*:\s*(\[[\s\S]*?\])/;
 const HYBRID_CURATOR_REGEX = /"curator_activity"\s*:\s*"((?:\\"|[^"])*)"/;
 const HYBRID_FILE_OBJ_REGEX = /\{\s*"path"\s*:\s*"((?:\\"|[^"])*)"\s*,\s*"content"\s*:\s*"((?:\\"|[^"])*)"\s*\}/g;
 
+function unescapeJsonString(s: string): string {
+    if (!s) return "";
+    // This handles the double-escaped strings from the LLM.
+    // \\" -> \"
+    // \" -> "
+    // \\n -> \n
+    // \n -> newline
+    return s.replace(/\\\\/g, '\\')
+            .replace(/\\n/g, '\n')
+            .replace(/\\t/g, '\t')
+            .replace(/\\"/g, '"');
+}
 
 export function parseResponse(rawText: string): ParsedResponse {
     let textToParse = rawText.trim();
@@ -22062,8 +22559,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
-                // This correctly un-escapes newlines and quotes from the JSON string value.
-                const content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+                // JSON.parse already handles the first level of un-escaping.
+                const content = f.content || '';
                 return {
                     path: f.path || '',
                     content: content,
@@ -22098,9 +22595,9 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            const content = unescapeJsonString(match[2] || '');
             return {
-                path: match[1] || '',
+                path: unescapeJsonString(match[1] || ''),
                 content: content,
                 tokenCount: Math.ceil(content.length / 4)
             };
@@ -22115,9 +22612,9 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
 
         return {
-            summary: (summaryMatchHybrid[1] || '').replace(/\\"/g, '"'),
+            summary: unescapeJsonString(summaryMatchHybrid[1] || ''),
             courseOfAction,
-            curatorActivity: (curatorMatchHybrid?.[1] || '').replace(/\\"/g, '"'),
+            curatorActivity: unescapeJsonString(curatorMatchHybrid?.[1] || ''),
             filesUpdated: files.map(f => f.path),
             files,
             totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
@@ -22425,138 +22922,7 @@ This document serves as a living record of persistent or complex bugs that have 
 ## 2. Case Studies
 
 ---
-
-### Case Study 049: Onboarding Auto-Save Spinner Gets Stuck
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
--   **Cycles Observed:** C92, C94 (Regression)
--   **Symptom:** When a user types in the "Project Scope" text area in the onboarding view (Cycle 0), the auto-save indicator changes to a spinning animation but never reverts to the "saved" (green checkmark) state. The UI only corrects itself if the user navigates away from the VS Code tab and back again.
--   **Root Cause Analysis (RCA):** A race condition exists on the frontend during the initial load of the PCPP. The `NotifySaveComplete` message, sent from the backend after a successful save for Cycle 0, can arrive at the frontend *before* the component's state has been fully initialized and the `currentCycleId` state variable has been updated from `null` to `0`. This causes the listener's check (`if (cycleId === currentCycleId)`) to fail (`0 === null` is false), so the `saveStatus` is never updated to `'saved'`.
--   **Codified Solution & Best Practice:**
-    1.  IPC listeners for global, unambiguous events should not rely on potentially uninitialized state.
-    2.  The listener for `NotifySaveComplete` must be made more robust. It should include a specific, unconditional check for `cycleId === 0`. Since there is only one "Cycle 0" context (the onboarding view), a save notification for this cycle is unambiguous and can be trusted without needing to compare it against the component's current cycle state. This makes the listener resilient to the initialization race condition.
-
----
-
-### Case Study 048: Stuck Auto-Save Spinner After Hook Refactor
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
--   **Cycles Observed:** C93
--   **Symptom:** After a save is triggered (e.g., by typing in a text field), the save status indicator changes to a spinning animation but never reverts to the "saved" (checkmark) state, even though the backend confirms the save was successful.
--   **Root Cause Analysis (RCA):** The debouncing logic implemented after the major refactor to custom hooks was flawed. The container component (`view.tsx`) was passing a function to the `useCycleManagement` hook that was intended to be a debounced trigger. However, the implementation was incorrect, leading to an unreliable side-effect chain. This broke the final step where the UI state should be updated to `'saved'` upon receiving the `NotifySaveComplete` message from the backend.
--   **Codified Solution & Best Practice:**
-    1.  The responsibility for managing side-effects like debounced API calls should reside in the container component, not within a state-management hook.
-    2.  The state-managing hook (`useCycleManagement`) should only be responsible for managing its own state and exposing a status (e.g., `'unsaved'`).
-    3.  The container component (`view.tsx`) should use a `useEffect` hook to watch for this `'unsaved'` status. When detected, the effect should be responsible for initiating the debounced action (e.g., via `setTimeout`), which calls the main save function. This cleanly separates state management from side-effect orchestration and is a standard, robust React pattern.
-
----
-
-### Case Study 047: README File Fails to Open on Initial Generation
-
--   **Artifacts Affected:** `src/backend/services/prompt.service.ts`
--   **Cycles Observed:** C93
--   **Symptom:** During project initialization (Cycle 0), clicking the "Generate Initial Artifacts Prompt" button correctly creates both `prompt.md` and `src/Artifacts/DCE_README.md`, but it only opens `prompt.md` in the editor.
--   **Root Cause Analysis (RCA):** The logic for handling the initial prompt generation was consolidated into the `generatePromptFile` method in `prompt.service.ts`. This method correctly contained the logic to create both files. However, at the end of the function, it only contained a single call to `fileOperationService.handleOpenFileRequest` for the `prompt.md` file. The corresponding call to open the newly created `DCE_README.md` was missing.
--   **Codified Solution & Best Practice:**
-    1.  When a user action is expected to result in the creation and display of multiple files, ensure that the responsible service method includes calls to open *all* relevant files.
-    2.  In `prompt.service.ts`, the `generatePromptFile` method must call `handleOpenFileRequest` for both the `prompt.md` path and, in the case of Cycle 0, the `DCE_README.md` path.
-
----
-
-### Case Study 046: Prompt Generation Fails for Cycle 0
-
--   **Artifacts Affected:** `src/backend/services/prompt.service.ts`
--   **Cycles Observed:** C92
--   **Symptom:** In a new workspace, clicking "Generate Initial Artifacts Prompt" fails with the error `Failed to generate prompt.md: Could not find data for current cycle (0) in history.`
--   **Root Cause Analysis (RCA):** The prompt generation logic was designed to fetch a cycle object from the `cycles` array in `dce_history.json`. For a new project, this array is empty. The logic did not account for the special case of Cycle 0, which doesn't exist as a formal cycle entry but whose context is derived from the top-level `projectScope` property in the history file. The service tried to find `cycles[0]`, failed, and threw an error.
--   **Codified Solution & Best Practice:**
-    1.  Services handling cycle data must treat Cycle 0 as a special case.
-    2.  When a prompt is requested for Cycle 0, the service must not query the `cycles` array. Instead, it should read the `projectScope` from the history file and construct a temporary, in-memory `PcppCycle` object with `cycleId: 0` and `cycleContext: projectScope`.
-    3.  This temporary object can then be passed to the downstream prompt-building functions, which can then operate on a consistent data structure.
-
----
-
-### Case Study 045: Onboarding View State Is Not Persistent
-
--   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
--   **Cycles Observed:** C92
--   **Symptom:** In the onboarding view (Cycle 0), typing in the "Project Scope" text area causes the auto-save indicator to spin indefinitely. If the user navigates to another VS Code tab and returns, the text they entered has disappeared.
--   **Root Cause Analysis (RCA):** This was a two-part failure.
-    1.  **Backend:** The `saveCycleData` method in `history.service.ts` had a specific branch for `cycleId === 0` that would save the `projectScope` but would then `return` before sending the `NotifySaveComplete` message back to the client. This left the frontend UI stuck in a "saving" state.
-    2.  **Frontend:** The `loadCycleData` function in the `useCycleManagement` hook was designed to populate its state from a full `PcppCycle` object. For Cycle 0, the initial object from the backend has an empty `cycleContext`. When the view re-initializes (on tab switch), it doesn't correctly re-load the `projectScope` from the backend into the `cycleContext` state, causing the UI to display an empty string.
--   **Codified Solution & Best Practice:**
-    1.  Backend services must provide consistent acknowledgment. The `saveCycleData` function must always send the `NotifySaveComplete` message, regardless of the `cycleId`.
-    2.  Frontend state initialization must be robust. The `loadCycleData` function must explicitly handle the Cycle 0 case, ensuring that `cycleContext` is populated from the `projectScope` property received from the backend, not just from the initial `PcppCycle` object.
-
----
-
-### Case Study 044: Auto-Save Fails After Refactor to Custom Hooks
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
--   **Cycles Observed:** C90
--   **Symptom:** After the major refactor of `view.tsx` into a container/hooks architecture, the auto-save functionality stopped working. Typing in any persisted field (e.g., Project Scope, Cycle Context) correctly updates the UI and sets the save status indicator to "unsaved" (caution icon), but the save operation is never triggered, and the indicator never changes to "saving" or "saved".
--   **Root Cause Analysis (RCA):** The refactor successfully moved state management into custom hooks (like `useCycleManagement`). However, the core logic for the debounced save operation, which gathers state from all hooks and sends it to the backend, was lost from the main `view.tsx` container. The `useCycleManagement` hook was correctly detecting state changes and attempting to call a `saveState` function, but the function being passed to it from the container was an empty placeholder, resulting in no action being taken.
--   **Codified Solution & Best Practice:**
-    1.  The container component (`view.tsx`) is responsible for orchestrating state from all its child hooks. Therefore, it is also responsible for implementing the master `saveCurrentCycleState` function that aggregates this data.
-    2.  This master save function should be wrapped in a `useDebounce` hook within the container to create a stable, debounced version.
-    3.  The debounced save function must then be passed down as a prop to any custom hook that needs to trigger a save (e.g., `useCycleManagement`).
-    4.  The custom hook's `useEffect` should then call this function prop when its local state becomes "dirty." This pattern correctly separates the concerns of state management (in the hook) from the concern of state persistence orchestration (in the container).
-
----
-
-### Case Study 043: State Corruption on Cycle Navigation
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C79
--   **Symptom:** After a batch of responses finishes generating for Cycle `N`, if the user navigates to a different cycle (e.g., `N-1`) and then navigates back to Cycle `N`, the UI for Cycle `N` is stuck in the "generating responses" view for all tabs, and the data is inaccessible. Manually inspecting `dce_history.json` reveals that the `status` for Cycle `N` is still `'generating'`.
--   **Root Cause Analysis (RCA):** The backend process correctly updates the status of individual responses to `'complete'` as they finish, but it fails to perform a final update on the parent *cycle* object. When the last response stream ends, the `status` of the `PcppCycle` object in `dce_history.json` is never transitioned from `'generating'` to `'complete'`. When the user navigates away and back, the UI re-reads this stale, incorrect status and incorrectly re-mounts the generation progress view.
--   **Codified Solution & Best Practice:**
-    1.  The service responsible for consuming the LLM stream (`llm.service.ts`) must track the completion of the *entire batch*.
-    2.  When the final response in the batch is marked as complete, the stream consumer must explicitly call a dedicated method (e.g., `historyService.finalizeCycleStatus(cycleId)`) to update the parent cycle's status in the persistent storage.
-    3.  This ensures that the persisted state is always consistent and prevents the UI from loading into a corrupted or invalid state on reload or navigation.
-
----
-
-### Case Study 042: UI Fails to Advance to New Cycle on Subsequent Generations
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`, `src/common/ipc/channels.type.ts`
--   **Cycles Observed:** C74
--   **Symptom:** After successfully completing an initial cycle (e.g., Cycle 1), clicking "Generate responses" correctly creates a `prompt.md` and sends requests to the LLM, but the DCE panel UI remains on Cycle 1. It does not navigate to the new cycle (e.g., Cycle 2) and does not show the generation progress UI.
--   **Root Cause Analysis (RCA):** The backend successfully creates a placeholder for the new cycle, but the frontend's state is stale. The `maxCycle` state variable on the client is not updated after the new cycle is created. When the frontend receives the `StartGenerationUI` message with the `newCycleId`, its internal navigation logic (`handleCycleChange`) prevents the navigation because `newCycleId` is greater than its known `maxCycle`.
--   **Codified Solution & Best Practice:**
-    1.  When a new cycle placeholder is created on the backend, the service must return both the `newCycleId` and the new `newMaxCycle` count.
-    2.  The IPC message that tells the client to start the generation UI (`StartGenerationUI`) must include both `newCycleId` and `newMaxCycle` in its payload.
-    3.  The frontend message handler for `StartGenerationUI` **must** update its `maxCycle` state with the new value *before* it attempts to call the navigation function. This ensures the UI's state is synchronized with the backend's state before any navigation is attempted.
-
----
-
-### Case Study 041: PCPP View State Lost on Tab Switch
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/common/types/vscode-webview.d.ts`
--   **Cycles Observed:** C67, C72
--   **Symptom:** When the user is viewing a specific UI state within the Parallel Co-Pilot Panel (e.g., the "Generation Progress" view), and they switch to another VS Code tab and then return, the panel's view resets to its default state (the main response pane). The user's intended view is lost.
--   **Root Cause Analysis (RCA):** VS Code webviews can be destroyed when they become hidden to conserve resources. When the user returns, the webview is completely re-initialized. Any UI state managed solely within React's `useState` is therefore lost. The correct way to persist UI-specific state for a webview is to use the `acquireVsCodeApi()`'s `getState()` and `setState()` methods, which are managed by the VS Code host and survive the webview's destruction.
--   **Codified Solution & Best Practice:**
-    1.  Identify any transient UI state that needs to be persisted (e.g., `activeView: 'main' | 'progress'`).
-    2.  Add this state to the `ViewState` interface in `vscode-webview.d.ts`.
-    3.  On component mount, use a `useEffect` hook to call `vscode.getState()` to retrieve and restore the persisted UI state.
-    4.  Use another `useEffect` hook that listens for changes to that state variable and calls `vscode.setState()` to save it whenever it changes. This ensures the view state is always preserved by the VS Code host.
-
----
-
-### Case Study 040: Stale Prompt Context in Automated Generation Workflow
-
--   **Artifacts Affected:** `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/on-message.ts`, `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C67, C71
--   **Symptom:** When using the "Generate responses" button for a new cycle (e.g., Cycle 2), the responses received from the LLM are based on the context of a much older cycle (e.g., Cycle 0), completely ignoring the new information provided by the user in the current cycle (e.g., Cycle 1). Additionally, the UI fails to automatically navigate to the new cycle after generation is complete.
--   **Root Cause Analysis (RCA):** This is a critical workflow failure with two main causes:
-    1.  **Stale Data:** The `prompt.service.ts` was not correctly combining the fresh, in-memory `cycleData` (for Cycle `N`) sent from the frontend with the full history read from disk. A logic error caused it to ignore the new `cycleContext` and build the prompt using only the older, persisted data for Cycle `N`.
-    2.  **Navigation Failure:** The frontend's message handler for `SendBatchGenerationComplete` was not reliably triggering the navigation to the new cycle (`N+1`), leaving the user on the old cycle view.
--   **Codified Solution & Best Practice:**
-    1.  The backend handler for `RequestNewCycleAndGenerate` must use the `cycleData` from the client as the absolute source of truth for the current cycle.
-    2.  The `prompt.service.ts` must ensure its logic correctly overwrites any stale data from the history file with the fresh data from the client before assembling the prompt.
-    3.  As a best practice for transparency, the generated prompt string should be written to `prompt.md` in the workspace before being sent to the LLM.
-    4.  The frontend's `SendBatchGenerationComplete` handler must reliably call the navigation logic to switch the view to the `newCycleId`.
+old cases removed (deprecated)
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -23108,7 +23474,7 @@ export const useFileManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useGeneration.ts">
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C110 (Add optimistic UI update for stop button)
+// Updated on: C115 (Use responseCount prop)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -23122,10 +23488,10 @@ export const useGeneration = (
     isReadyForNextCycle: boolean,
     newCycleButtonDisabledReason: string,
     setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
-    setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void
+    setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
+    responseCount: number // Use prop
 ) => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
-    const [responseCount, setResponseCount] = React.useState(4);
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
     const [tps, setTps] = React.useState(0);
     const [isGenerationComplete, setIsGenerationComplete] = React.useState(false);
@@ -23178,8 +23544,6 @@ export const useGeneration = (
     return {
         connectionMode,
         setConnectionMode,
-        responseCount,
-        setResponseCount,
         generationProgress,
         setGenerationProgress,
         tps,
@@ -23772,13 +24136,40 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C114 (Add Backend SSE Parser case)
+# Updated on: C115 (Add JSON double-escaping and ETIMEDOUT cases)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 021: Incorrect Un-escaping of Double-Escaped JSON String Content
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C115
+-   **Symptom:** When parsing a JSON response from the vLLM, the final content in the UI is corrupted with extra backslashes. For example, newlines appear as `\` instead of being processed, and quotes appear as `\"` or `\\"`.
+-   **Root Cause Analysis (RCA):** The LLM, when generating a JSON object as a string, sometimes "double-escapes" characters within its string values to ensure they are valid. For example, a newline becomes `\\n` and a quote becomes `\\\"`. The parser's logic for handling this was flawed. `JSON.parse` correctly handles the first level of escaping, but the subsequent manual `.replace()` calls in the hybrid parser were too simplistic and did not correctly handle the remaining escape sequences, leading to the visual artifacts.
+-   **Codified Solution & Best Practice:**
+    1.  When processing string values from an LLM-generated JSON, assume they may be double-escaped.
+    2.  Implement a robust, multi-step un-escaping sequence. The correct order is to first replace `\\\\` with `\\` (to handle literal backslashes), then replace `\\n` with a newline, `\\t` with a tab, and finally `\\"` with `"`.
+    3.  This sequence, applied after the main JSON structure is parsed, correctly reduces the escape levels and produces a clean, readable string for the UI.
+
+---
+
+### Case Study 020: Parallel Onboarding Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `llm.service.ts`, `OnboardingView.tsx`, `useGeneration.ts`, `view.tsx`
+-   **Cycles Observed:** C113, C115 (Regression)
+-   **Symptom:** When clicking "Generate Initial Responses" from the onboarding view with the number of responses set to > 1, only one response is successfully generated. The other requests fail with `connect ETIMEDOUT` errors in the logs.
+-   **Root Cause Analysis (RCA):** This is a complex issue with two contributing factors.
+    1.  **State Mismatch:** The `OnboardingView.tsx` component managed its own local state for the `responseCount`. This was separate from the `tabCount` state managed by the main PCPP view. While the value was correctly passed to the backend, this state divergence made the system harder to debug and reason about.
+    2.  **Connection Pooling:** The underlying issue is the `ETIMEDOUT` error, which indicates a client-side bottleneck in establishing concurrent connections to the proxy server, despite a previous fix (`agentkeepalive`) intended to solve this. Unifying the state is a prerequisite to ensure the correct parameters are being sent before further debugging of the connection pooling issue can be effective.
+-   **Codified Solution & Best Practice:**
+    1.  Avoid state divergence for critical parameters. The number of responses should be a single piece of state managed by a higher-order component or hook (`view.tsx` or `useGeneration.ts`). This state should be passed down as props to any child component that needs to read or modify it, ensuring a single source of truth.
+    2.  The `ETIMEDOUT` error points to a persistent issue with Node.js connection pooling in the extension host environment. The `agentkeepalive` solution needs to be re-verified or a different strategy for managing parallel long-lived connections may be required.
 
 ---
 
@@ -23836,203 +24227,6 @@ This document serves as a living record of persistent or complex bugs. By docume
     3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
 
 ---
-
-### Case Study 015: "Parse All" Button Shows Raw Text View
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/useTabManagement.ts`
--   **Cycles Observed:** C111
--   **Symptom:** After pasting responses, clicking the "Parse All" button correctly updates the UI to show that it is in parsed mode (e.g., the button text changes to "Un-Parse All"), but the content area for the response tab continues to show the raw text `textarea` instead of the structured, parsed view.
--   **Root Cause Analysis (RCA):** A logic error occurred in the `useTabManagement` hook. The `handleGlobalParseToggle` function, which is triggered by the "Parse All" button, was responsible for setting the `isParsedMode` state to `true`. However, it failed to also call the `parseAllTabs()` function. The UI then attempted to re-render in parsed mode, but the `parsedContent` property on the tab's state object was still `null`. The conditional rendering logic in the `ResponsePane` component correctly saw that `parsedContent` was null and fell back to displaying the raw `textarea`.
--   **Codified Solution & Best Practice:**
-    1.  UI actions that change the "mode" of a view must also ensure the data required for that mode is generated.
-    2.  The `handleGlobalParseToggle` function must be modified. When the state is transitioning *to* parsed mode (`isParsedMode = true`), it must immediately call the `parseAllTabs()` function to populate the `parsedContent` state for all tabs. This ensures the necessary data is available before the UI re-renders in the new mode.
-
----
-
-### Case Study 014: Parsed View Does Not Display Selected File Content
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C111
--   **Symptom:** After parsing an AI response, the "Associated Files" list is displayed correctly. However, clicking on a file in this list does not cause the file's content to be displayed in the code viewer pane on the right. The pane remains empty or shows its default "Select a file" message.
--   **Root Cause Analysis (RCA):** This was a state propagation issue introduced during the major refactor into custom hooks. The main container component (`view.tsx`) is responsible for orchestrating the flow of data between hooks and down to presentational components. The logic for deriving the `viewableContent` prop (which is passed to the code viewer) from the `selectedFilePath` state (managed in `useFileManagement.ts`) was lost. The container was no longer re-calculating which content to display when the selected file changed.
--   **Codified Solution & Best Practice:**
-    1.  Container components are responsible for deriving props from state managed by different hooks.
-    2.  A `useMemo` hook must be re-implemented in the `view.tsx` container component. This hook's responsibility is to calculate the `viewableContent` string.
-    3.  Its dependency array must include all relevant state values: `fileManagement.selectedFilePath`, `tabManagement.tabs`, `tabManagement.activeTab`, and `fileManagement.highlightedCodeBlocks`.
-    4.  When `selectedFilePath` changes, the `useMemo` hook will re-run, look up the correct content from the appropriate tab's `parsedContent` or the `highlightedCodeBlocks` cache, and update the `viewableContent` variable. This variable is then passed down through props, ensuring the UI updates correctly.
-
----
-
-### Case Study 013: Tokens/Sec Calculation Fails with Parallel Streams
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
--   **Cycles Observed:** C111
--   **Symptom:** During response generation in the progress UI, the "Tokens/sec" metric remains at 0 or `NaN` and does not update, even though tokens are clearly streaming in for multiple responses.
--   **Root Cause Analysis (RCA):** The refactor to a "fan-out" architecture, where `N` parallel streams are processed, broke the simple tokens-per-second calculation. The `UpdateSingleGenerationProgress` IPC handler was receiving progress for one stream at a time and updating its state array, but it lacked the logic to then re-aggregate the data from *all* active streams to calculate a global TPS metric. It was no longer sufficient to look at a single stream's progress.
--   **Codified Solution & Best Practice:**
-    1.  When calculating aggregate metrics from multiple asynchronous data sources, the update handler for any individual source must trigger a re-calculation of the aggregate.
-    2.  The IPC message handler for `UpdateSingleGenerationProgress` must be enhanced. Inside its `setGenerationProgress` callback, after updating the array with the new progress for a single response, it must perform an aggregation step.
-    3.  This step involves iterating over the entire updated progress array to: a) find the earliest `startTime` among all responses that are not yet complete, and b) calculate the sum of `thinkingTokens + currentTokens` across all responses.
-    4.  The global TPS can then be calculated (`totalTokens / elapsedTime`) and the `tps` state updated.
-
----
-
-### Case Study 012: SSE Parser Fails on JSON Chunks Containing Brace Characters
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C110
--   **Symptom:** During response generation, the logs show sporadic `Could not parse JSON object from stream` warnings. The final, assembled response content in the UI is truncated, missing its beginning characters (e.g., missing the leading `{`).
--   **Root Cause Analysis (RCA):** The parser designed to handle concatenated JSON objects in an SSE stream used a naive brace-counting (`{}`) algorithm to find object boundaries. This algorithm failed when the `delta.content` from the vLLM contained brace characters as part of its string value (e.g., `{"content": "{\\"some\\": \\"json\\"}"}`). The parser would incorrectly count the brace inside the string literal and prematurely slice the stream, attempting to parse an incomplete JSON fragment. This resulted in both the parsing error and the loss of the initial content chunks.
--   **Codified Solution & Best Practice:**
-    1.  Manual parsers for structured text formats like JSON must account for the language's syntax, such as string literals.
-    2.  The brace-counting logic must be enhanced to be "string-aware." The parser should track whether its iterator is currently inside a double-quoted string. Brace characters (`{` and `}`) should only be counted towards object boundary detection when the iterator is *not* inside a string. This ensures that only structural braces are considered, making the parser robust.
-
----
-
-### Case Study 011: SSE Parser Fails on Concatenated JSON Objects
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C109
--   **Symptom:** The log shows "Could not parse SSE chunk" for what appears to be valid JSON. This happens frequently during the "thinking" phase of generation where many small `reasoning_content` updates are sent. The UI does not update with streaming tokens for this phase.
--   **Root Cause Analysis (RCA):** The SSE stream parser correctly splits messages by newline and removes the `data: ` prefix. However, it assumed the remaining string is a single JSON object. The vLLM server, especially when sending rapid, small updates, can concatenate multiple JSON objects into a single `data:` payload (e.g., `data: {"id":1}{"id":2}`). Attempting to `JSON.parse()` this concatenated string is a syntax error, causing the parser to fail.
--   **Codified Solution & Best Practice:**
-    1.  The SSE `data` payload should not be assumed to be a single JSON object.
-    2.  Implement a more robust parser that can handle a stream of concatenated JSON objects. A simple and effective method is to iterate through the string, use a counter to track the nesting level of braces (`{}`), and slice out and parse each complete top-level object when its brace count returns to zero. This makes the parser resilient to variations in how the server batches data within SSE messages.
-
----
-
-### Case Study 010: Could not parse SSE chunk
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C108
--   **Symptom:** When generating responses, the DCE output channel is flooded with warnings: `[WARN] Could not parse SSE chunk: {"id":...}`. No token counts or partial content appear in the UI, and the generation appears to hang from the user's perspective.
--   **Root Cause Analysis (RCA):** After fixing a stream type mismatch in a previous cycle, the stream consumer in `llm.service.ts` was still not correctly parsing the Server-Sent Events (SSE) protocol used by the OpenAI-compatible vLLM endpoint. The `stream.on('data')` handler was receiving raw data chunks but was not processing them according to the SSE format. A single chunk can contain multiple messages, and each message is prefixed with `data: `. The code was likely attempting to `JSON.parse()` the raw chunk, including the prefix, which is invalid JSON and causes the parsing to fail.
--   **Codified Solution & Best Practice:**
-    1.  When consuming an SSE stream in Node.js, the `data` event handler must act as a proper SSE client parser.
-    2.  The handler must maintain a buffer of incoming data.
-    3.  On each `data` event, append the new chunk to the buffer.
-    4.  Split the buffer by newline characters (`\n`) to process complete lines. The last, potentially incomplete, line should be kept in the buffer for the next chunk.
-    5.  For each complete line, check if it starts with the `data: ` prefix. If so, slice the string to remove the prefix, trim it, and then parse the result as JSON.
-    6.  Handle special SSE messages, such as `data: [DONE]`, to correctly terminate the stream.
-
----
-
-### Case Study 009: Token Counts and Content Do Not Stream in UI
-
--   **Artifacts Affected:** `llm.service.ts`, `channels.type.ts`, `usePcppIpc.ts`
--   **Cycles Observed:** C107
--   **Symptom:** In the "Generating Responses" UI, the progress bars correctly change status (e.g., to 'thinking', 'generating'), but the token counters remain at zero, and the partial text preview is empty. The UI only updates when the entire response is complete.
--   **Root Cause Analysis (RCA):** The refactor to a "fan-out" request architecture in Cycle 105 introduced a new IPC channel, `UpdateSingleGenerationProgress`. The payload for this message correctly sent metric updates (like the response `status`) but failed to include the accumulating text `content` of the response. The frontend UI relied on this `content` string to derive the live token counts and to display the partial text preview. Without the streaming content, these UI elements could not be updated in real-time.
--   **Codified Solution & Best Practice:**
-    1.  When designing IPC messages for streaming data, ensure the payload contains all necessary information for the UI to reconstruct its state, including both metrics and the partial data itself.
-    2.  The IPC payload for `UpdateSingleGenerationProgress` must be enhanced to include the partial `content` string: `{ progress: GenerationProgress; content: string; }`.
-    3.  The backend stream handler (`llm.service.ts`) must accumulate the content as chunks arrive and include it in every progress message.
-    4.  The frontend IPC listener (`usePcppIpc.ts`) must be updated to use this complete payload to update all relevant pieces of state simultaneously—in this case, both the `generationProgress` state (for metrics) and the `tabs` state (for content).
-
----
-
-### Case Study 008: TypeError: The "readableStream" argument must be an instance of ReadableStream
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C106
--   **Symptom:** When generating responses, the backend crashes with the error `TypeError: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough`. No response data is processed by the extension.
--   **Root Cause Analysis (RCA):** The `_generateSingleStream` function in `llm.service.ts` was incorrectly trying to convert the response body stream from a `node-fetch` call into a Node.js stream using `Readable.fromWeb()`. This function is designed to convert a Web API `ReadableStream` into a Node.js `Readable`. However, the `response.body` from the `node-fetch` library is *already* a Node.js `Readable` stream (in this case, a `PassThrough` stream). Passing a Node.js stream as an argument to `Readable.fromWeb()` results in a `TypeError`.
--   **Codified Solution & Best Practice:**
-    1.  Verify the stream types being returned by libraries. `node-fetch` provides a Node.js-compatible stream, not a Web Stream, in a Node.js environment.
-    2.  The `Readable.fromWeb()` conversion was unnecessary. The `response.body` object from the `fetch` call should be used directly, as it is already the correct type for attaching Node.js stream event handlers (`.on('data', ...)`).
-
----
-
-### Case Study 007: Response Progress UI Fails to Render After Fan-Out Refactor
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
--   **Cycles Observed:** C105
--   **Symptom:** When a new generation is started, the UI correctly switches to the "Generating Responses..." view, but the `GenerationProgressDisplay` component remains empty. No progress bars or response items ever appear, despite vLLM processing the requests.
--   **Root Cause Analysis (RCA):** This was a state initialization failure. The `generationProgress` state array in the `useGeneration` hook was initialized as an empty array (`[]`). The IPC handler that received `UpdateSingleGenerationProgress` messages was designed to *update* existing items in this array using `findIndex`. Because the array was empty, `findIndex` always returned -1, and the handler lacked an `else` block to `push` the new progress item into the array. Consequently, the state array remained perpetually empty, and the UI had nothing to render.
--   **Codified Solution & Best Practice:**
-    1.  State for dynamic lists that are populated by asynchronous events must be properly initialized.
-    2.  The `NavigateToNewGeneratingCycle` IPC handler, which is the event that starts the generation process, is the correct place to initialize the `generationProgress` state. It must create a placeholder `GenerationProgress` object for each expected response (e.g., with a `'pending'` status) and set this as the initial state.
-    3.  As a defensive measure, state update handlers for array data should be resilient. They should handle the case where an item is not found, either by adding it or logging an error, rather than failing silently.
-
----
-
-### Case Study 006: "Stop" Button Aborts All Responses Instead of a Single One
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C103, C104
--   **Symptom:** In the response generation UI, clicking the "Stop" button for a single in-progress response (e.g., "Resp 3") immediately stops all other generating responses.
--   **Root Cause Analysis (RCA):** The backend was making a single batch `fetch` request to the vLLM server (with `n > 1`) and managing this single request with a single `AbortController` keyed by the `cycleId`. When a stop request was received for any response within that cycle, it would look up the controller by `cycleId` and abort the entire batch request, terminating the single HTTP stream that carried all the interleaved responses. There is no mechanism in the SSE or HTTP protocol to cancel just one part of an interleaved stream.
--   **Codified Solution & Best Practice:**
-    1.  To enable granular cancellation, the backend must initiate multiple, independent requests instead of a single batch request.
-    2.  The `generateBatch` method must be refactored to "fan out." It should loop `N` times and create `N` individual `fetch` requests in parallel (e.g., using `Promise.all`), each with `n: 1`.
-    3.  Each of these individual requests must have its own `AbortController`, stored in a map with a more granular key that includes both the `cycleId` and the `responseId` (e.g., `"104_3"`).
-    4.  The "Stop" request from the client must include the specific `responseId` to be cancelled, allowing the backend to find and abort only the intended `fetch` request, leaving the others running.
-
----
-
-### Case Study 005: Unhandled 'AbortError' Crashes Express.js Proxy Server
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C102
--   **Symptom:** When a client-side "Stop" action aborts a streaming `fetch` request to an Express.js proxy that is piping a response from a downstream service (like vLLM), the entire Node.js process crashes with a `DOMException [AbortError]: This operation was aborted` and an "Unhandled 'error' event".
--   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection via `res.on('close', ...)` and aborts its own `fetch` request to the downstream service. However, aborting an active `fetch` stream causes the underlying `ReadableStream` to emit an `error` event. In the proxy, the code was piping this stream directly to the client response (`nodeStream.pipe(res)`). When the `nodeStream` emitted the `AbortError`, there was no error handler attached to it (`nodeStream.on('error', ...)`), leading to an unhandled exception that crashed the server.
--   **Codified Solution & Best Practice:**
-    1.  Any Node.js `ReadableStream` that is being piped and has the potential to be aborted or encounter an error **must** have an error handler attached.
-    2.  The correct implementation is to add a `stream.on('error', (error) => { ... });` handler before calling `stream.pipe()`. This handler should check if the error is an expected `AbortError` and handle it gracefully (e.g., by logging an informational message) while throwing or logging any other unexpected errors. This prevents the process from crashing on a controlled cancellation.
-
----
-
-### Case Study 004: Proxy Server Aborts vLLM Stream Prematurely
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C100, C101
--   **Symptom:** When the DCE extension sends a streaming request to the vLLM via the proxy server, the connection is immediately aborted. The proxy logs show "Client closed the connection. Aborting request to vLLM," even though the client is still waiting for a response.
--   **Root Cause Analysis (RCA):** The logic to handle client-side cancellation was implemented by attaching an event listener to the Express.js `request` object (`req.on('close', ...)`). For a standard HTTP request, the `req` object represents the incoming data from the client. Once the request body is fully received, the `req` stream is finished. However, for a *streaming response*, the long-lived connection is represented by the `response` object (`res`). The `req.on('close')` event was firing prematurely because the initial POST request from the client was completing, which the server misinterpreted as the client disconnecting entirely. The correct event to listen for is `res.on('close')`, which fires only when the client that is *receiving* the streamed response actually closes the connection.
--   **Codified Solution & Best Practice:**
-    1.  When implementing cancellation logic for a streaming HTTP response in Express.js, the event listener to detect a client disconnection **must** be attached to the `response` (`res`) object.
-    2.  The correct implementation is to use `res.on('close', () => { controller.abort(); });`. This ensures the cancellation is only triggered when the downstream client terminates the connection.
-
----
-
-### Case Study 003: `AbortController` Lifecycle Bug Causes Unstable Cancellations
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C100
--   **Symptom:** When generating responses, the connection is sometimes aborted immediately and unexpectedly. Furthermore, the manual "Stop Generation" button is unreliable. The root cause is a flaw in how the `AbortController` for the `fetch` request is managed.
--   **Root Cause Analysis (RCA):** The logic for managing streaming `fetch` requests in `generateBatch` and `generateSingle` placed the cleanup code (`generationControllers.delete(cycleId)`) in a `finally` block. For a streaming request, the `await fetch()` promise resolves as soon as the headers are received, allowing the code to proceed while the body streams in asynchronously. Consequently, the `finally` block was executing almost immediately, removing the `AbortController` from the tracking map while the stream was still in progress. This made it impossible to manually cancel the request later and could contribute to unstable connections.
--   **Codified Solution & Best Practice:**
-    1.  The lifecycle of a resource tied to a stream (like an `AbortController`) must be managed by the stream's own events, not by a `try/finally` block around the initial `fetch` call.
-    2.  The `generationControllers.delete(cycleId)` call must be removed from the `finally` block.
-    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)` as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
-
----
-
-### Case Study 002: "Re-generate" Button is Non-Functional
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C75, C99
--   **Symptom:** Clicking the "Re-generate" button on a response tab correctly updates the UI to show a loading/spinning state, but no request is ever sent to the vLLM server, and no new response is generated.
--   **Root Cause Analysis (RCA):** The backend method responsible for this feature, `llm.service.ts::generateSingle`, was an unimplemented stub. The entire frontend and IPC message-passing infrastructure was correctly wired up to call this function, but the function itself contained only placeholder logic to update the UI state to "generating" and did not contain any `fetch` call to actually initiate a new LLM request.
--   **Codified Solution & Best Practice:**
-    1.  Ensure all backend service methods intended for user-facing features are fully implemented and not just stubs.
-    2.  The `generateSingle` method must be implemented to mirror the core logic of `generateBatch`, but for a single response (`n: 1`).
-    3.  It must create and execute a streaming `fetch` request to the configured LLM endpoint.
-    4.  It must be able to process the resulting Server-Sent Events (SSE) stream and send granular progress updates back to the client using a dedicated IPC channel (e.g., `UpdateSingleGenerationProgress`) to avoid disrupting the state of other, non-regenerating responses.
-    5.  Upon completion, it must persist the final, complete response and its metrics via the `HistoryService`.
-
----
-
-### Case Study 001: "Stop Generation" Does Not Cancel vLLM Request
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C70, C75, C99
--   **Symptom:** Clicking the "Stop" button in the response generation UI correctly closes the connection from the DCE extension, but the vLLM server continues to process the request, consuming GPU resources unnecessarily.
--   **Root Cause Analysis (RCA):** The architecture involves the DCE extension making a request to a proxy server, which in turn makes a request to the vLLM server. The `AbortController` in the DCE extension's `llm.service.ts` only aborts the initial request (DCE -> Proxy). The proxy server did not have logic to detect this client-side disconnection and propagate the cancellation to its own downstream request (Proxy -> vLLM). The Express.js response object (`res`) emits a `'close'` event when the client disconnects, which can be used to trigger this cancellation.
--   **Codified Solution & Best Practice:**
-    1.  When proxying streaming requests, always propagate client cancellation.
-    2.  In the Express.js route handler for the proxy, create a new `AbortController` for the downstream `fetch` request.
-    3.  Pass the controller's `signal` to the `fetch` options.
-    4.  Register an event listener on the client response object: `res.on('close', () => { controller.abort(); });`. This ensures that if the client hangs up, the server immediately aborts the expensive downstream operation, freeing up resources.
 </file_artifact>
 
 <file path="GPT-OSS-HARMONY-REFERENCE-REPO/builtin_tool_instructions.py">

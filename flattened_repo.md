@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-08T15:13:10.357Z
+  Date Generated: 2025-10-08T15:55:59.175Z
   ---
   Total Files: 188
-  Approx. Tokens: 296697
+  Approx. Tokens: 287250
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,12 +12,12 @@
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 4. src\Artifacts\A0. DCE Master Artifact List.md (9721 tokens)
-5. src\Artifacts\A111. DCE - New Regression Case Studies.md (7886 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
-7. src\backend\services\prompt.service.ts (5240 tokens)
-8. src\backend\services\file-operation.service.ts (4526 tokens)
-9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\Artifacts\A11. DCE - Regression Case Studies.md (4285 tokens)
+5. src\client\views\parallel-copilot.view\view.scss (7069 tokens)
+6. src\backend\services\prompt.service.ts (5240 tokens)
+7. src\backend\services\file-operation.service.ts (4526 tokens)
+8. src\client\components\tree-view\TreeView.tsx (4422 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4286 tokens)
+10. src\Artifacts\A90. AI Ascent - server.ts (Reference).md (4214 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 568 - Chars: 38883 - Tokens: 9721
@@ -156,9 +156,9 @@
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
-137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 119 - Chars: 6076 - Tokens: 1519
+137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1251 - Chars: 28275 - Tokens: 7069
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 289 - Chars: 16724 - Tokens: 4181
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 296 - Chars: 17143 - Tokens: 4286
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -181,10 +181,10 @@
 159. src\Artifacts\A78. DCE - Whitepaper - Process as Asset.md - Lines: 108 - Chars: 9820 - Tokens: 2455
 160. src\Artifacts\A98. DCE - Harmony JSON Output Schema Plan.md - Lines: 88 - Chars: 4228 - Tokens: 1057
 161. src\Artifacts\A99. DCE - Response Regeneration Workflow Plan.md - Lines: 44 - Chars: 5381 - Tokens: 1346
-162. src\client\utils\response-parser.ts - Lines: 159 - Chars: 7460 - Tokens: 1865
+162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7539 - Tokens: 1885
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 144 - Chars: 17138 - Tokens: 4285
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 13 - Chars: 558 - Tokens: 140
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -193,12 +193,12 @@
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 87 - Chars: 4013 - Tokens: 1004
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 264 - Chars: 31542 - Tokens: 7886
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 95 - Chars: 10037 - Tokens: 2510
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
 181. GPT-OSS-HARMONY-REFERENCE-REPO\custom_python_instruction.py - Lines: 59 - Chars: 1605 - Tokens: 402
 182. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html - Lines: 1323 - Chars: 56615 - Tokens: 14154
@@ -12621,7 +12621,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
 
 <file path="src/client/views/parallel-copilot.view/OnboardingView.tsx">
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C68 (Refactor to use new backend-driven workflow)
+// Updated on: C115 (Use props for response count)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -12637,6 +12637,8 @@ interface OnboardingViewProps {
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
     onStartGeneration: (projectScope: string, responseCount: number) => void;
+    responseCount: number;
+    onResponseCountChange: (count: number) => void;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -12651,9 +12653,19 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ 
+    projectScope, 
+    onScopeChange, 
+    onNavigateToCycle, 
+    latestCycleId, 
+    workflowStep, 
+    saveStatus, 
+    connectionMode, 
+    onStartGeneration,
+    responseCount,
+    onResponseCountChange
+}) => {
     const [promptGenerated, setPromptGenerated] = React.useState(false);
-    const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
@@ -12714,7 +12726,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                                 id="onboarding-response-count" 
                                 min="1" max="20" 
                                 value={responseCount} 
-                                onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                                onChange={e => onResponseCountChange(parseInt(e.target.value, 10) || 1)} 
                             />
                         </div>
                     )}
@@ -13997,7 +14009,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C111 (Add useMemo for viewableContent)
+// Updated on: C115 (Lift responseCount state)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14039,10 +14051,11 @@ const App = () => {
     const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
 
     // --- State & Hooks Initialization ---
+    const [responseCount, setResponseCount] = React.useState(4); // LIFTED STATE
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, initialData.cycle?.tabCount || 4, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     // --- IPC Message Handling ---
@@ -14055,13 +14068,13 @@ const App = () => {
     );
 
     // --- Core Save Logic ---
-    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
-    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
+    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount });
+    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount };
 
     saveStateRef.current = React.useCallback(() => {
-        const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+        const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount } = stateRef.current;
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
-        const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+        const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
         if (currentCycle === null) return;
@@ -14077,7 +14090,7 @@ const App = () => {
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount,
+            tabCount: responseCount, // Use unified responseCount for saving
             activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides),
@@ -14115,9 +14128,13 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
             setForceShowResponseView(false);
+            if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
-            if (cycleData) setForceShowResponseView(false);
+            if (cycleData) {
+                setForceShowResponseView(false);
+                if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
+            }
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
@@ -14140,6 +14157,8 @@ const App = () => {
             saveStatus={cycleManagement.saveStatus} 
             connectionMode={generationManagement.connectionMode} 
             onStartGeneration={generationManagement.handleStartGeneration} 
+            responseCount={responseCount}
+            onResponseCountChange={setResponseCount}
         />; 
     }
     
@@ -14175,7 +14194,7 @@ const App = () => {
             </div>
             <div className="tab-count-input">
                 <label htmlFor="tab-count">Responses:</label>
-                <input type="number" id="tab-count" min="1" max="20" value={tabManagement.tabCount} onChange={e => tabManagement.setTabCount(parseInt(e.target.value, 10) || 1)} />
+                <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => cycleManagement.setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
@@ -15821,7 +15840,7 @@ The workflow for generating AI responses needs to be more flexible and deliberat
 
 <file path="src/client/utils/response-parser.ts">
 // src/client/utils/response-parser.ts
-// Updated on: C114 (Final review of newline logic)
+// Updated on: C115 (Implement robust JSON un-escaping)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -15836,6 +15855,18 @@ const HYBRID_COA_REGEX = /"course_of_action"\s*:\s*(\[[\s\S]*?\])/;
 const HYBRID_CURATOR_REGEX = /"curator_activity"\s*:\s*"((?:\\"|[^"])*)"/;
 const HYBRID_FILE_OBJ_REGEX = /\{\s*"path"\s*:\s*"((?:\\"|[^"])*)"\s*,\s*"content"\s*:\s*"((?:\\"|[^"])*)"\s*\}/g;
 
+function unescapeJsonString(s: string): string {
+    if (!s) return "";
+    // This handles the double-escaped strings from the LLM.
+    // \\" -> \"
+    // \" -> "
+    // \\n -> \n
+    // \n -> newline
+    return s.replace(/\\\\/g, '\\')
+            .replace(/\\n/g, '\n')
+            .replace(/\\t/g, '\t')
+            .replace(/\\"/g, '"');
+}
 
 export function parseResponse(rawText: string): ParsedResponse {
     let textToParse = rawText.trim();
@@ -15853,8 +15884,8 @@ export function parseResponse(rawText: string): ParsedResponse {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
-                // This correctly un-escapes newlines and quotes from the JSON string value.
-                const content = (f.content || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+                // JSON.parse already handles the first level of un-escaping.
+                const content = f.content || '';
                 return {
                     path: f.path || '',
                     content: content,
@@ -15889,9 +15920,9 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
-            const content = (match[2] || '').replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\'/g, "'");
+            const content = unescapeJsonString(match[2] || '');
             return {
-                path: match[1] || '',
+                path: unescapeJsonString(match[1] || ''),
                 content: content,
                 tokenCount: Math.ceil(content.length / 4)
             };
@@ -15906,9 +15937,9 @@ export function parseResponse(rawText: string): ParsedResponse {
         }
 
         return {
-            summary: (summaryMatchHybrid[1] || '').replace(/\\"/g, '"'),
+            summary: unescapeJsonString(summaryMatchHybrid[1] || ''),
             courseOfAction,
-            curatorActivity: (curatorMatchHybrid?.[1] || '').replace(/\\"/g, '"'),
+            curatorActivity: unescapeJsonString(curatorMatchHybrid?.[1] || ''),
             filesUpdated: files.map(f => f.path),
             files,
             totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
@@ -16216,138 +16247,7 @@ This document serves as a living record of persistent or complex bugs that have 
 ## 2. Case Studies
 
 ---
-
-### Case Study 049: Onboarding Auto-Save Spinner Gets Stuck
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
--   **Cycles Observed:** C92, C94 (Regression)
--   **Symptom:** When a user types in the "Project Scope" text area in the onboarding view (Cycle 0), the auto-save indicator changes to a spinning animation but never reverts to the "saved" (green checkmark) state. The UI only corrects itself if the user navigates away from the VS Code tab and back again.
--   **Root Cause Analysis (RCA):** A race condition exists on the frontend during the initial load of the PCPP. The `NotifySaveComplete` message, sent from the backend after a successful save for Cycle 0, can arrive at the frontend *before* the component's state has been fully initialized and the `currentCycleId` state variable has been updated from `null` to `0`. This causes the listener's check (`if (cycleId === currentCycleId)`) to fail (`0 === null` is false), so the `saveStatus` is never updated to `'saved'`.
--   **Codified Solution & Best Practice:**
-    1.  IPC listeners for global, unambiguous events should not rely on potentially uninitialized state.
-    2.  The listener for `NotifySaveComplete` must be made more robust. It should include a specific, unconditional check for `cycleId === 0`. Since there is only one "Cycle 0" context (the onboarding view), a save notification for this cycle is unambiguous and can be trusted without needing to compare it against the component's current cycle state. This makes the listener resilient to the initialization race condition.
-
----
-
-### Case Study 048: Stuck Auto-Save Spinner After Hook Refactor
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
--   **Cycles Observed:** C93
--   **Symptom:** After a save is triggered (e.g., by typing in a text field), the save status indicator changes to a spinning animation but never reverts to the "saved" (checkmark) state, even though the backend confirms the save was successful.
--   **Root Cause Analysis (RCA):** The debouncing logic implemented after the major refactor to custom hooks was flawed. The container component (`view.tsx`) was passing a function to the `useCycleManagement` hook that was intended to be a debounced trigger. However, the implementation was incorrect, leading to an unreliable side-effect chain. This broke the final step where the UI state should be updated to `'saved'` upon receiving the `NotifySaveComplete` message from the backend.
--   **Codified Solution & Best Practice:**
-    1.  The responsibility for managing side-effects like debounced API calls should reside in the container component, not within a state-management hook.
-    2.  The state-managing hook (`useCycleManagement`) should only be responsible for managing its own state and exposing a status (e.g., `'unsaved'`).
-    3.  The container component (`view.tsx`) should use a `useEffect` hook to watch for this `'unsaved'` status. When detected, the effect should be responsible for initiating the debounced action (e.g., via `setTimeout`), which calls the main save function. This cleanly separates state management from side-effect orchestration and is a standard, robust React pattern.
-
----
-
-### Case Study 047: README File Fails to Open on Initial Generation
-
--   **Artifacts Affected:** `src/backend/services/prompt.service.ts`
--   **Cycles Observed:** C93
--   **Symptom:** During project initialization (Cycle 0), clicking the "Generate Initial Artifacts Prompt" button correctly creates both `prompt.md` and `src/Artifacts/DCE_README.md`, but it only opens `prompt.md` in the editor.
--   **Root Cause Analysis (RCA):** The logic for handling the initial prompt generation was consolidated into the `generatePromptFile` method in `prompt.service.ts`. This method correctly contained the logic to create both files. However, at the end of the function, it only contained a single call to `fileOperationService.handleOpenFileRequest` for the `prompt.md` file. The corresponding call to open the newly created `DCE_README.md` was missing.
--   **Codified Solution & Best Practice:**
-    1.  When a user action is expected to result in the creation and display of multiple files, ensure that the responsible service method includes calls to open *all* relevant files.
-    2.  In `prompt.service.ts`, the `generatePromptFile` method must call `handleOpenFileRequest` for both the `prompt.md` path and, in the case of Cycle 0, the `DCE_README.md` path.
-
----
-
-### Case Study 046: Prompt Generation Fails for Cycle 0
-
--   **Artifacts Affected:** `src/backend/services/prompt.service.ts`
--   **Cycles Observed:** C92
--   **Symptom:** In a new workspace, clicking "Generate Initial Artifacts Prompt" fails with the error `Failed to generate prompt.md: Could not find data for current cycle (0) in history.`
--   **Root Cause Analysis (RCA):** The prompt generation logic was designed to fetch a cycle object from the `cycles` array in `dce_history.json`. For a new project, this array is empty. The logic did not account for the special case of Cycle 0, which doesn't exist as a formal cycle entry but whose context is derived from the top-level `projectScope` property in the history file. The service tried to find `cycles[0]`, failed, and threw an error.
--   **Codified Solution & Best Practice:**
-    1.  Services handling cycle data must treat Cycle 0 as a special case.
-    2.  When a prompt is requested for Cycle 0, the service must not query the `cycles` array. Instead, it should read the `projectScope` from the history file and construct a temporary, in-memory `PcppCycle` object with `cycleId: 0` and `cycleContext: projectScope`.
-    3.  This temporary object can then be passed to the downstream prompt-building functions, which can then operate on a consistent data structure.
-
----
-
-### Case Study 045: Onboarding View State Is Not Persistent
-
--   **Artifacts Affected:** `src/backend/services/history.service.ts`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
--   **Cycles Observed:** C92
--   **Symptom:** In the onboarding view (Cycle 0), typing in the "Project Scope" text area causes the auto-save indicator to spin indefinitely. If the user navigates to another VS Code tab and returns, the text they entered has disappeared.
--   **Root Cause Analysis (RCA):** This was a two-part failure.
-    1.  **Backend:** The `saveCycleData` method in `history.service.ts` had a specific branch for `cycleId === 0` that would save the `projectScope` but would then `return` before sending the `NotifySaveComplete` message back to the client. This left the frontend UI stuck in a "saving" state.
-    2.  **Frontend:** The `loadCycleData` function in the `useCycleManagement` hook was designed to populate its state from a full `PcppCycle` object. For Cycle 0, the initial object from the backend has an empty `cycleContext`. When the view re-initializes (on tab switch), it doesn't correctly re-load the `projectScope` from the backend into the `cycleContext` state, causing the UI to display an empty string.
--   **Codified Solution & Best Practice:**
-    1.  Backend services must provide consistent acknowledgment. The `saveCycleData` function must always send the `NotifySaveComplete` message, regardless of the `cycleId`.
-    2.  Frontend state initialization must be robust. The `loadCycleData` function must explicitly handle the Cycle 0 case, ensuring that `cycleContext` is populated from the `projectScope` property received from the backend, not just from the initial `PcppCycle` object.
-
----
-
-### Case Study 044: Auto-Save Fails After Refactor to Custom Hooks
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts`
--   **Cycles Observed:** C90
--   **Symptom:** After the major refactor of `view.tsx` into a container/hooks architecture, the auto-save functionality stopped working. Typing in any persisted field (e.g., Project Scope, Cycle Context) correctly updates the UI and sets the save status indicator to "unsaved" (caution icon), but the save operation is never triggered, and the indicator never changes to "saving" or "saved".
--   **Root Cause Analysis (RCA):** The refactor successfully moved state management into custom hooks (like `useCycleManagement`). However, the core logic for the debounced save operation, which gathers state from all hooks and sends it to the backend, was lost from the main `view.tsx` container. The `useCycleManagement` hook was correctly detecting state changes and attempting to call a `saveState` function, but the function being passed to it from the container was an empty placeholder, resulting in no action being taken.
--   **Codified Solution & Best Practice:**
-    1.  The container component (`view.tsx`) is responsible for orchestrating state from all its child hooks. Therefore, it is also responsible for implementing the master `saveCurrentCycleState` function that aggregates this data.
-    2.  This master save function should be wrapped in a `useDebounce` hook within the container to create a stable, debounced version.
-    3.  The debounced save function must then be passed down as a prop to any custom hook that needs to trigger a save (e.g., `useCycleManagement`).
-    4.  The custom hook's `useEffect` should then call this function prop when its local state becomes "dirty." This pattern correctly separates the concerns of state management (in the hook) from the concern of state persistence orchestration (in the container).
-
----
-
-### Case Study 043: State Corruption on Cycle Navigation
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`, `src/backend/services/history.service.ts`
--   **Cycles Observed:** C79
--   **Symptom:** After a batch of responses finishes generating for Cycle `N`, if the user navigates to a different cycle (e.g., `N-1`) and then navigates back to Cycle `N`, the UI for Cycle `N` is stuck in the "generating responses" view for all tabs, and the data is inaccessible. Manually inspecting `dce_history.json` reveals that the `status` for Cycle `N` is still `'generating'`.
--   **Root Cause Analysis (RCA):** The backend process correctly updates the status of individual responses to `'complete'` as they finish, but it fails to perform a final update on the parent *cycle* object. When the last response stream ends, the `status` of the `PcppCycle` object in `dce_history.json` is never transitioned from `'generating'` to `'complete'`. When the user navigates away and back, the UI re-reads this stale, incorrect status and incorrectly re-mounts the generation progress view.
--   **Codified Solution & Best Practice:**
-    1.  The service responsible for consuming the LLM stream (`llm.service.ts`) must track the completion of the *entire batch*.
-    2.  When the final response in the batch is marked as complete, the stream consumer must explicitly call a dedicated method (e.g., `historyService.finalizeCycleStatus(cycleId)`) to update the parent cycle's status in the persistent storage.
-    3.  This ensures that the persisted state is always consistent and prevents the UI from loading into a corrupted or invalid state on reload or navigation.
-
----
-
-### Case Study 042: UI Fails to Advance to New Cycle on Subsequent Generations
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/backend/services/history.service.ts`, `src/common/ipc/channels.type.ts`
--   **Cycles Observed:** C74
--   **Symptom:** After successfully completing an initial cycle (e.g., Cycle 1), clicking "Generate responses" correctly creates a `prompt.md` and sends requests to the LLM, but the DCE panel UI remains on Cycle 1. It does not navigate to the new cycle (e.g., Cycle 2) and does not show the generation progress UI.
--   **Root Cause Analysis (RCA):** The backend successfully creates a placeholder for the new cycle, but the frontend's state is stale. The `maxCycle` state variable on the client is not updated after the new cycle is created. When the frontend receives the `StartGenerationUI` message with the `newCycleId`, its internal navigation logic (`handleCycleChange`) prevents the navigation because `newCycleId` is greater than its known `maxCycle`.
--   **Codified Solution & Best Practice:**
-    1.  When a new cycle placeholder is created on the backend, the service must return both the `newCycleId` and the new `newMaxCycle` count.
-    2.  The IPC message that tells the client to start the generation UI (`StartGenerationUI`) must include both `newCycleId` and `newMaxCycle` in its payload.
-    3.  The frontend message handler for `StartGenerationUI` **must** update its `maxCycle` state with the new value *before* it attempts to call the navigation function. This ensures the UI's state is synchronized with the backend's state before any navigation is attempted.
-
----
-
-### Case Study 041: PCPP View State Lost on Tab Switch
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`, `src/common/types/vscode-webview.d.ts`
--   **Cycles Observed:** C67, C72
--   **Symptom:** When the user is viewing a specific UI state within the Parallel Co-Pilot Panel (e.g., the "Generation Progress" view), and they switch to another VS Code tab and then return, the panel's view resets to its default state (the main response pane). The user's intended view is lost.
--   **Root Cause Analysis (RCA):** VS Code webviews can be destroyed when they become hidden to conserve resources. When the user returns, the webview is completely re-initialized. Any UI state managed solely within React's `useState` is therefore lost. The correct way to persist UI-specific state for a webview is to use the `acquireVsCodeApi()`'s `getState()` and `setState()` methods, which are managed by the VS Code host and survive the webview's destruction.
--   **Codified Solution & Best Practice:**
-    1.  Identify any transient UI state that needs to be persisted (e.g., `activeView: 'main' | 'progress'`).
-    2.  Add this state to the `ViewState` interface in `vscode-webview.d.ts`.
-    3.  On component mount, use a `useEffect` hook to call `vscode.getState()` to retrieve and restore the persisted UI state.
-    4.  Use another `useEffect` hook that listens for changes to that state variable and calls `vscode.setState()` to save it whenever it changes. This ensures the view state is always preserved by the VS Code host.
-
----
-
-### Case Study 040: Stale Prompt Context in Automated Generation Workflow
-
--   **Artifacts Affected:** `src/backend/services/prompt.service.ts`, `src/client/views/parallel-copilot.view/on-message.ts`, `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C67, C71
--   **Symptom:** When using the "Generate responses" button for a new cycle (e.g., Cycle 2), the responses received from the LLM are based on the context of a much older cycle (e.g., Cycle 0), completely ignoring the new information provided by the user in the current cycle (e.g., Cycle 1). Additionally, the UI fails to automatically navigate to the new cycle after generation is complete.
--   **Root Cause Analysis (RCA):** This is a critical workflow failure with two main causes:
-    1.  **Stale Data:** The `prompt.service.ts` was not correctly combining the fresh, in-memory `cycleData` (for Cycle `N`) sent from the frontend with the full history read from disk. A logic error caused it to ignore the new `cycleContext` and build the prompt using only the older, persisted data for Cycle `N`.
-    2.  **Navigation Failure:** The frontend's message handler for `SendBatchGenerationComplete` was not reliably triggering the navigation to the new cycle (`N+1`), leaving the user on the old cycle view.
--   **Codified Solution & Best Practice:**
-    1.  The backend handler for `RequestNewCycleAndGenerate` must use the `cycleData` from the client as the absolute source of truth for the current cycle.
-    2.  The `prompt.service.ts` must ensure its logic correctly overwrites any stale data from the history file with the fresh data from the client before assembling the prompt.
-    3.  As a best practice for transparency, the generated prompt string should be written to `prompt.md` in the workspace before being sent to the LLM.
-    4.  The frontend's `SendBatchGenerationComplete` handler must reliably call the navigation logic to switch the view to the `newCycleId`.
+old cases removed (deprecated)
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -16899,7 +16799,7 @@ export const useFileManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useGeneration.ts">
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C110 (Add optimistic UI update for stop button)
+// Updated on: C115 (Use responseCount prop)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -16913,10 +16813,10 @@ export const useGeneration = (
     isReadyForNextCycle: boolean,
     newCycleButtonDisabledReason: string,
     setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
-    setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void
+    setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
+    responseCount: number // Use prop
 ) => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
-    const [responseCount, setResponseCount] = React.useState(4);
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
     const [tps, setTps] = React.useState(0);
     const [isGenerationComplete, setIsGenerationComplete] = React.useState(false);
@@ -16969,8 +16869,6 @@ export const useGeneration = (
     return {
         connectionMode,
         setConnectionMode,
-        responseCount,
-        setResponseCount,
         generationProgress,
         setGenerationProgress,
         tps,
@@ -17563,13 +17461,40 @@ This allows the UI to correctly show the progress view for a tab that is activel
 # Artifact A111: DCE - New Regression Case Studies
 # Date Created: C99
 # Author: AI Model & Curator
-# Updated on: C114 (Add Backend SSE Parser case)
+# Updated on: C115 (Add JSON double-escaping and ETIMEDOUT cases)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 021: Incorrect Un-escaping of Double-Escaped JSON String Content
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C115
+-   **Symptom:** When parsing a JSON response from the vLLM, the final content in the UI is corrupted with extra backslashes. For example, newlines appear as `\` instead of being processed, and quotes appear as `\"` or `\\"`.
+-   **Root Cause Analysis (RCA):** The LLM, when generating a JSON object as a string, sometimes "double-escapes" characters within its string values to ensure they are valid. For example, a newline becomes `\\n` and a quote becomes `\\\"`. The parser's logic for handling this was flawed. `JSON.parse` correctly handles the first level of escaping, but the subsequent manual `.replace()` calls in the hybrid parser were too simplistic and did not correctly handle the remaining escape sequences, leading to the visual artifacts.
+-   **Codified Solution & Best Practice:**
+    1.  When processing string values from an LLM-generated JSON, assume they may be double-escaped.
+    2.  Implement a robust, multi-step un-escaping sequence. The correct order is to first replace `\\\\` with `\\` (to handle literal backslashes), then replace `\\n` with a newline, `\\t` with a tab, and finally `\\"` with `"`.
+    3.  This sequence, applied after the main JSON structure is parsed, correctly reduces the escape levels and produces a clean, readable string for the UI.
+
+---
+
+### Case Study 020: Parallel Onboarding Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `llm.service.ts`, `OnboardingView.tsx`, `useGeneration.ts`, `view.tsx`
+-   **Cycles Observed:** C113, C115 (Regression)
+-   **Symptom:** When clicking "Generate Initial Responses" from the onboarding view with the number of responses set to > 1, only one response is successfully generated. The other requests fail with `connect ETIMEDOUT` errors in the logs.
+-   **Root Cause Analysis (RCA):** This is a complex issue with two contributing factors.
+    1.  **State Mismatch:** The `OnboardingView.tsx` component managed its own local state for the `responseCount`. This was separate from the `tabCount` state managed by the main PCPP view. While the value was correctly passed to the backend, this state divergence made the system harder to debug and reason about.
+    2.  **Connection Pooling:** The underlying issue is the `ETIMEDOUT` error, which indicates a client-side bottleneck in establishing concurrent connections to the proxy server, despite a previous fix (`agentkeepalive`) intended to solve this. Unifying the state is a prerequisite to ensure the correct parameters are being sent before further debugging of the connection pooling issue can be effective.
+-   **Codified Solution & Best Practice:**
+    1.  Avoid state divergence for critical parameters. The number of responses should be a single piece of state managed by a higher-order component or hook (`view.tsx` or `useGeneration.ts`). This state should be passed down as props to any child component that needs to read or modify it, ensuring a single source of truth.
+    2.  The `ETIMEDOUT` error points to a persistent issue with Node.js connection pooling in the extension host environment. The `agentkeepalive` solution needs to be re-verified or a different strategy for managing parallel long-lived connections may be required.
 
 ---
 
@@ -17627,203 +17552,6 @@ This document serves as a living record of persistent or complex bugs. By docume
     3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
 
 ---
-
-### Case Study 015: "Parse All" Button Shows Raw Text View
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/useTabManagement.ts`
--   **Cycles Observed:** C111
--   **Symptom:** After pasting responses, clicking the "Parse All" button correctly updates the UI to show that it is in parsed mode (e.g., the button text changes to "Un-Parse All"), but the content area for the response tab continues to show the raw text `textarea` instead of the structured, parsed view.
--   **Root Cause Analysis (RCA):** A logic error occurred in the `useTabManagement` hook. The `handleGlobalParseToggle` function, which is triggered by the "Parse All" button, was responsible for setting the `isParsedMode` state to `true`. However, it failed to also call the `parseAllTabs()` function. The UI then attempted to re-render in parsed mode, but the `parsedContent` property on the tab's state object was still `null`. The conditional rendering logic in the `ResponsePane` component correctly saw that `parsedContent` was null and fell back to displaying the raw `textarea`.
--   **Codified Solution & Best Practice:**
-    1.  UI actions that change the "mode" of a view must also ensure the data required for that mode is generated.
-    2.  The `handleGlobalParseToggle` function must be modified. When the state is transitioning *to* parsed mode (`isParsedMode = true`), it must immediately call the `parseAllTabs()` function to populate the `parsedContent` state for all tabs. This ensures the necessary data is available before the UI re-renders in the new mode.
-
----
-
-### Case Study 014: Parsed View Does Not Display Selected File Content
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/view.tsx`
--   **Cycles Observed:** C111
--   **Symptom:** After parsing an AI response, the "Associated Files" list is displayed correctly. However, clicking on a file in this list does not cause the file's content to be displayed in the code viewer pane on the right. The pane remains empty or shows its default "Select a file" message.
--   **Root Cause Analysis (RCA):** This was a state propagation issue introduced during the major refactor into custom hooks. The main container component (`view.tsx`) is responsible for orchestrating the flow of data between hooks and down to presentational components. The logic for deriving the `viewableContent` prop (which is passed to the code viewer) from the `selectedFilePath` state (managed in `useFileManagement.ts`) was lost. The container was no longer re-calculating which content to display when the selected file changed.
--   **Codified Solution & Best Practice:**
-    1.  Container components are responsible for deriving props from state managed by different hooks.
-    2.  A `useMemo` hook must be re-implemented in the `view.tsx` container component. This hook's responsibility is to calculate the `viewableContent` string.
-    3.  Its dependency array must include all relevant state values: `fileManagement.selectedFilePath`, `tabManagement.tabs`, `tabManagement.activeTab`, and `fileManagement.highlightedCodeBlocks`.
-    4.  When `selectedFilePath` changes, the `useMemo` hook will re-run, look up the correct content from the appropriate tab's `parsedContent` or the `highlightedCodeBlocks` cache, and update the `viewableContent` variable. This variable is then passed down through props, ensuring the UI updates correctly.
-
----
-
-### Case Study 013: Tokens/Sec Calculation Fails with Parallel Streams
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
--   **Cycles Observed:** C111
--   **Symptom:** During response generation in the progress UI, the "Tokens/sec" metric remains at 0 or `NaN` and does not update, even though tokens are clearly streaming in for multiple responses.
--   **Root Cause Analysis (RCA):** The refactor to a "fan-out" architecture, where `N` parallel streams are processed, broke the simple tokens-per-second calculation. The `UpdateSingleGenerationProgress` IPC handler was receiving progress for one stream at a time and updating its state array, but it lacked the logic to then re-aggregate the data from *all* active streams to calculate a global TPS metric. It was no longer sufficient to look at a single stream's progress.
--   **Codified Solution & Best Practice:**
-    1.  When calculating aggregate metrics from multiple asynchronous data sources, the update handler for any individual source must trigger a re-calculation of the aggregate.
-    2.  The IPC message handler for `UpdateSingleGenerationProgress` must be enhanced. Inside its `setGenerationProgress` callback, after updating the array with the new progress for a single response, it must perform an aggregation step.
-    3.  This step involves iterating over the entire updated progress array to: a) find the earliest `startTime` among all responses that are not yet complete, and b) calculate the sum of `thinkingTokens + currentTokens` across all responses.
-    4.  The global TPS can then be calculated (`totalTokens / elapsedTime`) and the `tps` state updated.
-
----
-
-### Case Study 012: SSE Parser Fails on JSON Chunks Containing Brace Characters
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C110
--   **Symptom:** During response generation, the logs show sporadic `Could not parse JSON object from stream` warnings. The final, assembled response content in the UI is truncated, missing its beginning characters (e.g., missing the leading `{`).
--   **Root Cause Analysis (RCA):** The parser designed to handle concatenated JSON objects in an SSE stream used a naive brace-counting (`{}`) algorithm to find object boundaries. This algorithm failed when the `delta.content` from the vLLM contained brace characters as part of its string value (e.g., `{"content": "{\\"some\\": \\"json\\"}"}`). The parser would incorrectly count the brace inside the string literal and prematurely slice the stream, attempting to parse an incomplete JSON fragment. This resulted in both the parsing error and the loss of the initial content chunks.
--   **Codified Solution & Best Practice:**
-    1.  Manual parsers for structured text formats like JSON must account for the language's syntax, such as string literals.
-    2.  The brace-counting logic must be enhanced to be "string-aware." The parser should track whether its iterator is currently inside a double-quoted string. Brace characters (`{` and `}`) should only be counted towards object boundary detection when the iterator is *not* inside a string. This ensures that only structural braces are considered, making the parser robust.
-
----
-
-### Case Study 011: SSE Parser Fails on Concatenated JSON Objects
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C109
--   **Symptom:** The log shows "Could not parse SSE chunk" for what appears to be valid JSON. This happens frequently during the "thinking" phase of generation where many small `reasoning_content` updates are sent. The UI does not update with streaming tokens for this phase.
--   **Root Cause Analysis (RCA):** The SSE stream parser correctly splits messages by newline and removes the `data: ` prefix. However, it assumed the remaining string is a single JSON object. The vLLM server, especially when sending rapid, small updates, can concatenate multiple JSON objects into a single `data:` payload (e.g., `data: {"id":1}{"id":2}`). Attempting to `JSON.parse()` this concatenated string is a syntax error, causing the parser to fail.
--   **Codified Solution & Best Practice:**
-    1.  The SSE `data` payload should not be assumed to be a single JSON object.
-    2.  Implement a more robust parser that can handle a stream of concatenated JSON objects. A simple and effective method is to iterate through the string, use a counter to track the nesting level of braces (`{}`), and slice out and parse each complete top-level object when its brace count returns to zero. This makes the parser resilient to variations in how the server batches data within SSE messages.
-
----
-
-### Case Study 010: Could not parse SSE chunk
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C108
--   **Symptom:** When generating responses, the DCE output channel is flooded with warnings: `[WARN] Could not parse SSE chunk: {"id":...}`. No token counts or partial content appear in the UI, and the generation appears to hang from the user's perspective.
--   **Root Cause Analysis (RCA):** After fixing a stream type mismatch in a previous cycle, the stream consumer in `llm.service.ts` was still not correctly parsing the Server-Sent Events (SSE) protocol used by the OpenAI-compatible vLLM endpoint. The `stream.on('data')` handler was receiving raw data chunks but was not processing them according to the SSE format. A single chunk can contain multiple messages, and each message is prefixed with `data: `. The code was likely attempting to `JSON.parse()` the raw chunk, including the prefix, which is invalid JSON and causes the parsing to fail.
--   **Codified Solution & Best Practice:**
-    1.  When consuming an SSE stream in Node.js, the `data` event handler must act as a proper SSE client parser.
-    2.  The handler must maintain a buffer of incoming data.
-    3.  On each `data` event, append the new chunk to the buffer.
-    4.  Split the buffer by newline characters (`\n`) to process complete lines. The last, potentially incomplete, line should be kept in the buffer for the next chunk.
-    5.  For each complete line, check if it starts with the `data: ` prefix. If so, slice the string to remove the prefix, trim it, and then parse the result as JSON.
-    6.  Handle special SSE messages, such as `data: [DONE]`, to correctly terminate the stream.
-
----
-
-### Case Study 009: Token Counts and Content Do Not Stream in UI
-
--   **Artifacts Affected:** `llm.service.ts`, `channels.type.ts`, `usePcppIpc.ts`
--   **Cycles Observed:** C107
--   **Symptom:** In the "Generating Responses" UI, the progress bars correctly change status (e.g., to 'thinking', 'generating'), but the token counters remain at zero, and the partial text preview is empty. The UI only updates when the entire response is complete.
--   **Root Cause Analysis (RCA):** The refactor to a "fan-out" request architecture in Cycle 105 introduced a new IPC channel, `UpdateSingleGenerationProgress`. The payload for this message correctly sent metric updates (like the response `status`) but failed to include the accumulating text `content` of the response. The frontend UI relied on this `content` string to derive the live token counts and to display the partial text preview. Without the streaming content, these UI elements could not be updated in real-time.
--   **Codified Solution & Best Practice:**
-    1.  When designing IPC messages for streaming data, ensure the payload contains all necessary information for the UI to reconstruct its state, including both metrics and the partial data itself.
-    2.  The IPC payload for `UpdateSingleGenerationProgress` must be enhanced to include the partial `content` string: `{ progress: GenerationProgress; content: string; }`.
-    3.  The backend stream handler (`llm.service.ts`) must accumulate the content as chunks arrive and include it in every progress message.
-    4.  The frontend IPC listener (`usePcppIpc.ts`) must be updated to use this complete payload to update all relevant pieces of state simultaneously—in this case, both the `generationProgress` state (for metrics) and the `tabs` state (for content).
-
----
-
-### Case Study 008: TypeError: The "readableStream" argument must be an instance of ReadableStream
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C106
--   **Symptom:** When generating responses, the backend crashes with the error `TypeError: The "readableStream" argument must be an instance of ReadableStream. Received an instance of PassThrough`. No response data is processed by the extension.
--   **Root Cause Analysis (RCA):** The `_generateSingleStream` function in `llm.service.ts` was incorrectly trying to convert the response body stream from a `node-fetch` call into a Node.js stream using `Readable.fromWeb()`. This function is designed to convert a Web API `ReadableStream` into a Node.js `Readable`. However, the `response.body` from the `node-fetch` library is *already* a Node.js `Readable` stream (in this case, a `PassThrough` stream). Passing a Node.js stream as an argument to `Readable.fromWeb()` results in a `TypeError`.
--   **Codified Solution & Best Practice:**
-    1.  Verify the stream types being returned by libraries. `node-fetch` provides a Node.js-compatible stream, not a Web Stream, in a Node.js environment.
-    2.  The `Readable.fromWeb()` conversion was unnecessary. The `response.body` object from the `fetch` call should be used directly, as it is already the correct type for attaching Node.js stream event handlers (`.on('data', ...)`).
-
----
-
-### Case Study 007: Response Progress UI Fails to Render After Fan-Out Refactor
-
--   **Artifacts Affected:** `src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts`
--   **Cycles Observed:** C105
--   **Symptom:** When a new generation is started, the UI correctly switches to the "Generating Responses..." view, but the `GenerationProgressDisplay` component remains empty. No progress bars or response items ever appear, despite vLLM processing the requests.
--   **Root Cause Analysis (RCA):** This was a state initialization failure. The `generationProgress` state array in the `useGeneration` hook was initialized as an empty array (`[]`). The IPC handler that received `UpdateSingleGenerationProgress` messages was designed to *update* existing items in this array using `findIndex`. Because the array was empty, `findIndex` always returned -1, and the handler lacked an `else` block to `push` the new progress item into the array. Consequently, the state array remained perpetually empty, and the UI had nothing to render.
--   **Codified Solution & Best Practice:**
-    1.  State for dynamic lists that are populated by asynchronous events must be properly initialized.
-    2.  The `NavigateToNewGeneratingCycle` IPC handler, which is the event that starts the generation process, is the correct place to initialize the `generationProgress` state. It must create a placeholder `GenerationProgress` object for each expected response (e.g., with a `'pending'` status) and set this as the initial state.
-    3.  As a defensive measure, state update handlers for array data should be resilient. They should handle the case where an item is not found, either by adding it or logging an error, rather than failing silently.
-
----
-
-### Case Study 006: "Stop" Button Aborts All Responses Instead of a Single One
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C103, C104
--   **Symptom:** In the response generation UI, clicking the "Stop" button for a single in-progress response (e.g., "Resp 3") immediately stops all other generating responses.
--   **Root Cause Analysis (RCA):** The backend was making a single batch `fetch` request to the vLLM server (with `n > 1`) and managing this single request with a single `AbortController` keyed by the `cycleId`. When a stop request was received for any response within that cycle, it would look up the controller by `cycleId` and abort the entire batch request, terminating the single HTTP stream that carried all the interleaved responses. There is no mechanism in the SSE or HTTP protocol to cancel just one part of an interleaved stream.
--   **Codified Solution & Best Practice:**
-    1.  To enable granular cancellation, the backend must initiate multiple, independent requests instead of a single batch request.
-    2.  The `generateBatch` method must be refactored to "fan out." It should loop `N` times and create `N` individual `fetch` requests in parallel (e.g., using `Promise.all`), each with `n: 1`.
-    3.  Each of these individual requests must have its own `AbortController`, stored in a map with a more granular key that includes both the `cycleId` and the `responseId` (e.g., `"104_3"`).
-    4.  The "Stop" request from the client must include the specific `responseId` to be cancelled, allowing the backend to find and abort only the intended `fetch` request, leaving the others running.
-
----
-
-### Case Study 005: Unhandled 'AbortError' Crashes Express.js Proxy Server
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C102
--   **Symptom:** When a client-side "Stop" action aborts a streaming `fetch` request to an Express.js proxy that is piping a response from a downstream service (like vLLM), the entire Node.js process crashes with a `DOMException [AbortError]: This operation was aborted` and an "Unhandled 'error' event".
--   **Root Cause Analysis (RCA):** The proxy server correctly detects the client disconnection via `res.on('close', ...)` and aborts its own `fetch` request to the downstream service. However, aborting an active `fetch` stream causes the underlying `ReadableStream` to emit an `error` event. In the proxy, the code was piping this stream directly to the client response (`nodeStream.pipe(res)`). When the `nodeStream` emitted the `AbortError`, there was no error handler attached to it (`nodeStream.on('error', ...)`), leading to an unhandled exception that crashed the server.
--   **Codified Solution & Best Practice:**
-    1.  Any Node.js `ReadableStream` that is being piped and has the potential to be aborted or encounter an error **must** have an error handler attached.
-    2.  The correct implementation is to add a `stream.on('error', (error) => { ... });` handler before calling `stream.pipe()`. This handler should check if the error is an expected `AbortError` and handle it gracefully (e.g., by logging an informational message) while throwing or logging any other unexpected errors. This prevents the process from crashing on a controlled cancellation.
-
----
-
-### Case Study 004: Proxy Server Aborts vLLM Stream Prematurely
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C100, C101
--   **Symptom:** When the DCE extension sends a streaming request to the vLLM via the proxy server, the connection is immediately aborted. The proxy logs show "Client closed the connection. Aborting request to vLLM," even though the client is still waiting for a response.
--   **Root Cause Analysis (RCA):** The logic to handle client-side cancellation was implemented by attaching an event listener to the Express.js `request` object (`req.on('close', ...)`). For a standard HTTP request, the `req` object represents the incoming data from the client. Once the request body is fully received, the `req` stream is finished. However, for a *streaming response*, the long-lived connection is represented by the `response` object (`res`). The `req.on('close')` event was firing prematurely because the initial POST request from the client was completing, which the server misinterpreted as the client disconnecting entirely. The correct event to listen for is `res.on('close')`, which fires only when the client that is *receiving* the streamed response actually closes the connection.
--   **Codified Solution & Best Practice:**
-    1.  When implementing cancellation logic for a streaming HTTP response in Express.js, the event listener to detect a client disconnection **must** be attached to the `response` (`res`) object.
-    2.  The correct implementation is to use `res.on('close', () => { controller.abort(); });`. This ensures the cancellation is only triggered when the downstream client terminates the connection.
-
----
-
-### Case Study 003: `AbortController` Lifecycle Bug Causes Unstable Cancellations
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C100
--   **Symptom:** When generating responses, the connection is sometimes aborted immediately and unexpectedly. Furthermore, the manual "Stop Generation" button is unreliable. The root cause is a flaw in how the `AbortController` for the `fetch` request is managed.
--   **Root Cause Analysis (RCA):** The logic for managing streaming `fetch` requests in `generateBatch` and `generateSingle` placed the cleanup code (`generationControllers.delete(cycleId)`) in a `finally` block. For a streaming request, the `await fetch()` promise resolves as soon as the headers are received, allowing the code to proceed while the body streams in asynchronously. Consequently, the `finally` block was executing almost immediately, removing the `AbortController` from the tracking map while the stream was still in progress. This made it impossible to manually cancel the request later and could contribute to unstable connections.
--   **Codified Solution & Best Practice:**
-    1.  The lifecycle of a resource tied to a stream (like an `AbortController`) must be managed by the stream's own events, not by a `try/finally` block around the initial `fetch` call.
-    2.  The `generationControllers.delete(cycleId)` call must be removed from the `finally` block.
-    3.  It must be moved into the terminal event handlers for the stream: `stream.on('end', ...)` and `stream.on('error', ...)` as well as into the main `catch` block that would handle a failure of the initial `fetch` itself. This ensures the controller is only deregistered when the operation is definitively complete or has failed.
-
----
-
-### Case Study 002: "Re-generate" Button is Non-Functional
-
--   **Artifacts Affected:** `src/backend/services/llm.service.ts`
--   **Cycles Observed:** C75, C99
--   **Symptom:** Clicking the "Re-generate" button on a response tab correctly updates the UI to show a loading/spinning state, but no request is ever sent to the vLLM server, and no new response is generated.
--   **Root Cause Analysis (RCA):** The backend method responsible for this feature, `llm.service.ts::generateSingle`, was an unimplemented stub. The entire frontend and IPC message-passing infrastructure was correctly wired up to call this function, but the function itself contained only placeholder logic to update the UI state to "generating" and did not contain any `fetch` call to actually initiate a new LLM request.
--   **Codified Solution & Best Practice:**
-    1.  Ensure all backend service methods intended for user-facing features are fully implemented and not just stubs.
-    2.  The `generateSingle` method must be implemented to mirror the core logic of `generateBatch`, but for a single response (`n: 1`).
-    3.  It must create and execute a streaming `fetch` request to the configured LLM endpoint.
-    4.  It must be able to process the resulting Server-Sent Events (SSE) stream and send granular progress updates back to the client using a dedicated IPC channel (e.g., `UpdateSingleGenerationProgress`) to avoid disrupting the state of other, non-regenerating responses.
-    5.  Upon completion, it must persist the final, complete response and its metrics via the `HistoryService`.
-
----
-
-### Case Study 001: "Stop Generation" Does Not Cancel vLLM Request
-
--   **Artifacts Affected:** `A90. AI Ascent - server.ts (Reference).md`
--   **Cycles Observed:** C70, C75, C99
--   **Symptom:** Clicking the "Stop" button in the response generation UI correctly closes the connection from the DCE extension, but the vLLM server continues to process the request, consuming GPU resources unnecessarily.
--   **Root Cause Analysis (RCA):** The architecture involves the DCE extension making a request to a proxy server, which in turn makes a request to the vLLM server. The `AbortController` in the DCE extension's `llm.service.ts` only aborts the initial request (DCE -> Proxy). The proxy server did not have logic to detect this client-side disconnection and propagate the cancellation to its own downstream request (Proxy -> vLLM). The Express.js response object (`res`) emits a `'close'` event when the client disconnects, which can be used to trigger this cancellation.
--   **Codified Solution & Best Practice:**
-    1.  When proxying streaming requests, always propagate client cancellation.
-    2.  In the Express.js route handler for the proxy, create a new `AbortController` for the downstream `fetch` request.
-    3.  Pass the controller's `signal` to the `fetch` options.
-    4.  Register an event listener on the client response object: `res.on('close', () => { controller.abort(); });`. This ensures that if the client hangs up, the server immediately aborts the expensive downstream operation, freeing up resources.
 </file_artifact>
 
 <file path="GPT-OSS-HARMONY-REFERENCE-REPO/builtin_tool_instructions.py">

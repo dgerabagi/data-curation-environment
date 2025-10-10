@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C111 (Add useMemo for viewableContent)
+// Updated on: C115 (Lift responseCount state)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -41,10 +41,11 @@ const App = () => {
     const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
 
     // --- State & Hooks Initialization ---
+    const [responseCount, setResponseCount] = React.useState(4); // LIFTED STATE
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, initialData.cycle?.tabCount || 4, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus);
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     // --- IPC Message Handling ---
@@ -57,13 +58,13 @@ const App = () => {
     );
 
     // --- Core Save Logic ---
-    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep });
-    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep };
+    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount });
+    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount };
 
     saveStateRef.current = React.useCallback(() => {
-        const { cycleManagement, tabManagement, fileManagement, workflowStep } = stateRef.current;
+        const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount } = stateRef.current;
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
-        const { tabs, tabCount, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
+        const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
         if (currentCycle === null) return;
@@ -79,7 +80,7 @@ const App = () => {
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount,
+            tabCount: responseCount, // Use unified responseCount for saving
             activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides),
@@ -117,9 +118,13 @@ const App = () => {
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
             setForceShowResponseView(false);
+            if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
-            if (cycleData) setForceShowResponseView(false);
+            if (cycleData) {
+                setForceShowResponseView(false);
+                if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
+            }
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
@@ -142,6 +147,8 @@ const App = () => {
             saveStatus={cycleManagement.saveStatus} 
             connectionMode={generationManagement.connectionMode} 
             onStartGeneration={generationManagement.handleStartGeneration} 
+            responseCount={responseCount}
+            onResponseCountChange={setResponseCount}
         />; 
     }
     
@@ -177,7 +184,7 @@ const App = () => {
             </div>
             <div className="tab-count-input">
                 <label htmlFor="tab-count">Responses:</label>
-                <input type="number" id="tab-count" min="1" max="20" value={tabManagement.tabCount} onChange={e => tabManagement.setTabCount(parseInt(e.target.value, 10) || 1)} />
+                <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
         <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => cycleManagement.setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>

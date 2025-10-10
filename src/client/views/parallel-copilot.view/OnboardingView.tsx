@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C68 (Refactor to use new backend-driven workflow)
+// Updated on: C115 (Use props for response count)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -15,6 +15,8 @@ interface OnboardingViewProps {
     saveStatus: 'saved' | 'saving' | 'unsaved';
     connectionMode: string;
     onStartGeneration: (projectScope: string, responseCount: number) => void;
+    responseCount: number;
+    onResponseCountChange: (count: number) => void;
 }
 
 const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved' }> = ({ saveStatus }) => {
@@ -29,9 +31,19 @@ const SaveStatusIndicator: React.FC<{ saveStatus: 'saved' | 'saving' | 'unsaved'
     return <div className="save-status-indicator" title={title}>{icon}</div>;
 };
 
-const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeChange, onNavigateToCycle, latestCycleId, workflowStep, saveStatus, connectionMode, onStartGeneration }) => {
+const OnboardingView: React.FC<OnboardingViewProps> = ({ 
+    projectScope, 
+    onScopeChange, 
+    onNavigateToCycle, 
+    latestCycleId, 
+    workflowStep, 
+    saveStatus, 
+    connectionMode, 
+    onStartGeneration,
+    responseCount,
+    onResponseCountChange
+}) => {
     const [promptGenerated, setPromptGenerated] = React.useState(false);
-    const [responseCount, setResponseCount] = React.useState(4);
     const clientIpc = ClientPostMessageManager.getInstance();
 
     const isNavigatingBack = latestCycleId > 0;
@@ -92,7 +104,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({ projectScope, onScopeCh
                                 id="onboarding-response-count" 
                                 min="1" max="20" 
                                 value={responseCount} 
-                                onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} 
+                                onChange={e => onResponseCountChange(parseInt(e.target.value, 10) || 1)} 
                             />
                         </div>
                     )}

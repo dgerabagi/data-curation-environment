@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C110 (Add optimistic UI update for stop button)
+// Updated on: C115 (Use responseCount prop)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -13,10 +13,10 @@ export const useGeneration = (
     isReadyForNextCycle: boolean,
     newCycleButtonDisabledReason: string,
     setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
-    setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void
+    setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
+    responseCount: number // Use prop
 ) => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
-    const [responseCount, setResponseCount] = React.useState(4);
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
     const [tps, setTps] = React.useState(0);
     const [isGenerationComplete, setIsGenerationComplete] = React.useState(false);
@@ -69,8 +69,6 @@ export const useGeneration = (
     return {
         connectionMode,
         setConnectionMode,
-        responseCount,
-        setResponseCount,
         generationProgress,
         setGenerationProgress,
         tps,
