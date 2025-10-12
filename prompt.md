@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 117 - new website to promote dce--lets create a FAQ artifact for it
+Current Cycle 118 - consolidate rough draft kb FAQ lists
+Cycle 117 - new website to promote dce--lets create a FAQ artifact for it
 Cycle 116 - finalize local llm, encryption, ui adjustment
 Cycle 115 - more parsing adjustments
 Cycle 114 - analyze logs to fix parser
@@ -323,7 +324,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C116 (Add A112)
+# Updated on: C117 (Add A117)
 
 ## 1. Purpose
 
@@ -589,10 +590,6 @@ No project scope defined.
 - **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
 - **Tags:** feature plan, phase 2, ui, ux, history, cycle management
 
-### A58. DCE - WinMerge Source Code Analysis
-- **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
-- **Tags:** research, analysis, diff, winmerge, source code
-
 ### A59. DCE - Phase 2 - Debugging and State Logging
 - **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
 - **Tags:** feature plan, phase 2, ui, ux, debugging, logging, state management
@@ -605,25 +602,9 @@ No project scope defined.
 - **Description:** Outlines the plan to allow users to save and load their entire cycle history (`dce_history.json`), enabling them to manage multiple development threads or back up their work.
 - **Tags:** feature plan, phase 2, history, import, export, cycle management
 
-### A62. DCE - Cycle 157 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 157, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 157
-
-### A63. DCE - Cycle 158 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 158
-
-### A64. DCE - Cycle 159 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 159, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 159
-
 ### A65. DCE - Universal Task Checklist
 - **Description:** A universal checklist for organizing development tasks by file, focusing on complexity in terms of token count and estimated cycles for completion.
 - **Tags:** process, checklist, task management, planning, workflow
-
-### A66. DCE - Cycle 1 - Task Tracker
-- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
-- **Tags:** bugs, tracking, issues, backlog, cycle 1
 
 ### A67. DCE - PCPP View Refactoring Plan
 - **Description:** A plan to refactor the large `parallel-copilot.view.tsx` into smaller, more manageable components to improve maintainability.
@@ -688,14 +669,6 @@ No project scope defined.
 ### A82. DCE - Advanced Exclusion Management Plan
 - **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
 - **Tags:** feature plan, context menu, exclusion, ignore, ux
-
-### A83. DCE - Universal Task Checklist for Cycle 6
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
-- **Tags:** process, checklist, task management, planning, workflow
-
-### A84. DCE - Universal Task Checklist for Cycle 10+
-- **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
-- **Tags:** process, checklist, task management, planning, workflow
 
 ### A85. DCE - Model Card Management Plan
 - **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
@@ -765,17 +738,9 @@ No project scope defined.
 - **Description:** Documents the new, more robust workflow for generating responses. This involves creating a new cycle with a "generating" status first, which provides a persistent state container for the asynchronous LLM call, making the UI state recoverable on reload.
 - **Tags:** plan, architecture, workflow, persistence, asynchronous, state management
 
-### A102. DCE - Universal Task Checklist for Cycle 70
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from Cycle 70.
-- **Tags:** process, checklist, task management, planning, workflow
-
 ### A103. DCE - Consolidated Response UI Plan
 - **Description:** Details the user flow where generating responses navigates to a new cycle, and selecting any tab in that "generating" cycle displays the progress UI.
 - **Tags:** feature plan, ui, ux, workflow, refactor
-
-### A104. DCE - Universal Task Checklist for Cycle 76
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from Cycle 76.
-- **Tags:** process, checklist, task management, planning, workflow
 
 ### A105. DCE - PCPP View Refactoring Plan for Cycle 76
 - **Description:** Provides a detailed plan for refactoring the monolithic `parallel-copilot.view/view.tsx` component into smaller, more manageable sub-components to improve maintainability and reduce token count.
@@ -784,18 +749,6 @@ No project scope defined.
 ### A106. DCE - vLLM Performance and Quantization Guide
 - **Description:** A guide explaining the performance warnings from the vLLM logs and detailing the various model quantization options available.
 - **Tags:** guide, vllm, performance, quantization, llm
-
-### A107. DCE - Universal Task Checklist for Cycle 77
-- **Description:** A tracking document for the feedback items and tasks from Cycle 77.
-- **Tags:** bugs, tracking, issues, backlog, cycle 77
-
-### A108. DCE - Universal Task Checklist for Cycle 78
-- **Description:** A tracking document for the feedback items and tasks from Cycle 78.
-- **Tags:** bugs, tracking, issues, backlog, cycle 78
-
-### A109. DCE - Universal Task Checklist for Cycle 79
-- **Description:** A tracking document for the feedback items and tasks from Cycle 79.
-- **Tags:** bugs, tracking, issues, backlog, cycle 79
 
 ### A110. DCE - Response UI State Persistence and Workflow Plan
 - **Description:** A plan to fix the response UI state loss by expanding the data model to include generation metrics and refactoring the UI to be driven by a per-response status.
@@ -808,6 +761,10 @@ No project scope defined.
 ### A112. DCE - Per-Cycle Connection Mode Plan
 - **Description:** A plan for a dropdown in the PCPP to allow users to select a generation mode for the current cycle, overriding the global default from the settings panel.
 - **Tags:** feature plan, ui, ux, llm, configuration
+
+### A117. DCE - FAQ for aiascent.dev Knowledge Base
+- **Description:** A comprehensive Frequently Asked Questions (FAQ) document created to serve as the primary knowledge base for the `aiascent.dev` website's RAG chatbot, Ascentia.
+- **Tags:** documentation, faq, knowledge base, rag, user guide
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -896,6 +853,45 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 118>
+<Cycle Context>
+okay, ive created 11 artifacts of FAQ questions. please organize/consolidate all of them into a single FAQ document, devoid of duplicate questions, along with the consideration of the following:
+
+1. the DCE is currently not on the marketplace. it is a .vsix file that is downloadable from the website. instead, provide appropriate instructions to install an extension from a .vsix file in vs code (eg. activity bar -> extensions, ellipsis, install from vsix...) (ah i see some of the responses speak to installation in this way, so in the de-duplication, you would only provide a single question on how to install, and it would adopt the appropriate response)
+
+2. one of the biggest points of this process is it allows you to leverage AI Studio (free) to code. any other API based solution will cost money.
+
+3. review each of the artifacts to make sure we first have a complete list of categories, then seek to combine/de-duplicate the questions for each category. be thorough and complete. i will be selecting the response which provides me with the most tokens.
+</Cycle Context>
+<Previous Cycle 117 Summary of Actions>
+I have analyzed the five issues from Cycle 116. My course of action is to address the critical bugs, implement the requested UI enhancements, create the necessary planning artifacts for future work, and clarify the existing encryption implementation.
+
+The `ETIMEDOUT` error is a Node.js connection pooling issue I have encountered before; the fix is to ensure a persistent `agentkeepalive` instance is used for all concurrent `fetch` requests. The JSON parsing failure is due to the LLM "double-escaping" quotes within its string content (`\\"`); the fix is to apply a robust un-escaping function after the initial `JSON.parse` operation. For the UI, I will implement the resizable vertical pane as planned in `A50` and remove the filename truncation.
+
+Finally, I will create a new planning artifact for the requested per-cycle connection mode feature and explain in my summary that the traffic-in-transit is already encrypted via the `aiascent.game` HTTPS proxy, fulfilling the requirement of `A93`.
+
+1.  **Documentation (Planning & Codification):**
+    *   Create a new artifact, **`A112. DCE - Per-Cycle Connection Mode Plan.md`**, to formally document the user story and technical plan for the new dropdown in the PCPP that will allow users to select a generation mode for the current cycle, overriding the global setting.
+    *   Update **`A0. DCE Master Artifact List.md`** to include the new `A112` artifact.
+    *   Update **`A111. DCE - New Regression Case Studies.md`** with a new case study for the "Parallel Requests Fail with ETIMEDOUT" bug, codifying the use of a shared `agentkeepalive` instance as the definitive solution.
+    *   Update **`A50. DCE - UI Component Plan (Resizable Panes & Inner Editors).md`** to mark the resizable pane feature as implemented.
+
+2.  **Fix `ETIMEDOUT` Error (`llm.service.ts`):**
+    *   I will ensure a single, shared `HttpsAgent` instance from `agentkeepalive` is defined at the module level with an increased `maxSockets` value.
+    *   I will modify the `_generateSingleStream` method to explicitly use this shared agent in its `fetch` call. This will resolve the connection timeout errors when generating multiple responses in parallel.
+
+3.  **Fix JSON Parsing (`response-parser.ts`):**
+    *   I will modify the `parseResponse` function. In the main `try` block that handles the successful parsing of a valid JSON object, I will now explicitly apply the `unescapeJsonString` utility to the `content` of each file object. This will correctly handle the double-escaped quotes and newlines from the LLM, fixing the parsing corruption.
+
+4.  **Implement UI Enhancements:**
+    *   **Resizable Pane (`ParsedView.tsx`, `view.scss`, `view.tsx`, `pcpp.types.ts`):** I will implement the resizable vertical divider between the left and right panes of the parsed view. This involves adding state for the pane width, adding `onMouseDown`, `onMouseMove`, and `onMouseUp` event handlers to a new "resizer" element, and updating the component styles to use `flex-basis`. The pane width will be persisted as part of the cycle data.
+    *   **Remove Path Truncation (`ParsedView.tsx`):** I will remove the call to the `truncatePath` utility when rendering file paths in the "Associated Files" list, allowing them to display their full length.
+
+5.  **Review Encryption Implementation:**
+    *   I will confirm that since all "Demo Mode" traffic goes to the `https://aiascent.game/api/dce/proxy` endpoint, and that server uses Caddy for HTTPS, the traffic between the extension and the proxy is already encrypted in transit, fulfilling the requirements outlined in `A93`. I will explain this in my summary.
+</Previous Cycle 117 Summary of Actions>
+</Cycle 118>
+
 <Cycle 117>
 <Cycle Context>
 <updated cycle 117>
@@ -933,95 +929,6 @@ all the items you select and the artifacts you create will be placed in `aiascen
 finally, to confirm, i've purchased aiascent.dev, it was $7/yr.
 </original cycle 117>
 </Cycle Context>
-<Ephemeral Context>
-# Artifact A28: aiascent.dev - Dual Embedding RAG Architecture
-
-# Date Created: C26
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A guide for implementing and managing a dual-embedding RAG system, allowing the chat assistant to use different knowledge bases for different sections of the website.
-- **Tags:** documentation, rag, chat, ascentia, embeddings, faiss, architecture, multi-tenancy
-
-## 1. Overview and Goal
-
-The `aiascent.dev` website features two distinct interactive reports: the main "Ascent Report" on the `/showcase` page and the "Process as Asset" whitepaper on the homepage. Each requires a different knowledge base for the "Ask @Ascentia" RAG feature to function correctly.
-
-The goal of this plan is to implement a dual-embedding architecture that allows the backend chat API to dynamically load the correct knowledge base based on where the user's request originates.
-
-## 2. Knowledge Base Definitions
-
-The system will support two distinct knowledge bases:
-
-1.  **`report`:**
-    *   **Content:** Based on research about the "fissured workplace," cognitive security, and geopolitical AI strategy.
-    *   **Usage:** For the `/showcase` page.
-    *   **Files:** `report_faiss.index`, `report_chunks.json`.
-
-2.  **`dce`:**
-    *   **Content:** Based on the collection of documentation artifacts (`A*.md` files) that describe the Data Curation Environment (DCE) tool, its workflow, and its philosophy.
-    *   **Usage:** For the interactive whitepaper on the homepage.
-    *   **Files:** `dce_faiss.index`, `dce_chunks.json`.
-
-## 3. Curator Action: Creating the `dce` Embedding
-
-1.  **Generate Source File:** Create a single flattened markdown file (e.g., `dce_artifacts.md`) that concatenates the content of all relevant DCE documentation artifacts.
-2.  **Run Embedding Script:** Use the `create_report_embedding.js` script to process this new source file.
-    ```bash
-    node context/aiascentgame/scripts/create_report_embedding.js path/to/your/dce_artifacts.md
-    ```
-3.  **Rename Output:** The script will output `report_faiss.index` and `report_chunks.json`. **Rename these files** to `dce_faiss.index` and `dce_chunks.json` respectively.
-4.  **Place Files:** Place all four embedding files (`report_*` and `dce_*`) into the `public/data/embeddings/` directory.
-
-## 4. Technical Implementation Plan
-
-### 4.1. Backend API (`/api/chat/route.ts`) Modification
-
-The chat API will be updated to be "knowledge base aware."
-
-1.  **Update Request Body:** The `POST` request handler will be modified to accept a new field: `knowledgeBase: 'report' | 'dce'`.
-2.  **Dynamic File Loading:** The handler will use this new field to dynamically construct the paths to the correct embedding files.
-    ```typescript
-    // Example logic in /api/chat/route.ts
-    const { prompt, pageContext, knowledgeBase = 'report' } = await request.json();
-
-    const faissFile = `${knowledgeBase}_faiss.index`;
-    const chunksFile = `${knowledgeBase}_chunks.json`;
-
-    const faissPath = path.join(process.cwd(), 'public', 'data', 'embeddings', faissFile);
-    const chunksPath = path.join(process.cwd(), 'public', 'data', 'embeddings', chunksFile);
-    
-    // ... proceed to load these files
-    ```
-3.  **Dynamic System Prompt:** The API will also use the `knowledgeBase` value to select the correct system prompt for Ascentia's persona, as defined in `A27`.
-
-### 4.2. Frontend Component Modifications
-
-The frontend needs to be updated to send the `knowledgeBase` identifier with each request.
-
-1.  **`ReportViewer.tsx`:**
-    *   This component already accepts a `reportName` prop (`"showcase"` or `"whitepaper"`). It will be modified to pass this prop down to its child, `ReportChatPanel`.
-
-2.  **`ReportChatPanel.tsx`:**
-    *   It will accept the `reportName` prop.
-    *   In its `handleSend` function, it will map this prop to the `knowledgeBase` identifier and include it in the JSON body of the `fetch` request.
-    ```typescript
-    // Example logic in ReportChatPanel.tsx handleSend function
-    const knowledgeBase = reportName === 'whitepaper' ? 'dce' : 'report';
-
-    const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            prompt: trimmedInput, 
-            pageContext,
-            knowledgeBase: knowledgeBase // Send the identifier
-        }),
-    });
-    ```
-
-This architecture provides a clean and scalable way to support multiple, distinct knowledge bases, making the "Ask @Ascentia" feature more powerful and contextually accurate across the entire website.
-</Ephemeral Context>
 <Previous Cycle 116 Summary of Actions>
 I have analyzed the two critical issues: the failure to generate more than one response due to concurrency timeouts, and the incorrect parsing of double-escaped JSON strings from the language model.
 
@@ -5701,10 +5608,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-10-12T19:48:38.553Z
+  Date Generated: 2025-10-12T20:21:34.426Z
   ---
-  Total Files: 200
-  Approx. Tokens: 347926
+  Total Files: 211
+  Approx. Tokens: 368493
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5712,7 +5619,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (9790 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (9158 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7090 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -5720,7 +5627,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 10. src\client\views\parallel-copilot.view\view.tsx (4376 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 572 - Chars: 39159 - Tokens: 9790
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 528 - Chars: 36632 - Tokens: 9158
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -5920,12 +5827,23 @@ This file-centric approach helps in planning and prioritizing work, especially i
 198. src\Artifacts\aiascent-dev-A3-Technical-Scaffolding-Plan.md - Lines: 62 - Chars: 2734 - Tokens: 684
 199. src\Artifacts\aiascent-dev-A7-Development-and-Testing-Guide.md - Lines: 48 - Chars: 1658 - Tokens: 415
 200. src\Artifacts\aiascent-dev-A9-GitHub-Repository-Setup-Guide.md - Lines: 68 - Chars: 2465 - Tokens: 617
+201. src\Artifacts\A117.1. DCE - FAQ for aiascent.dev Knowledge Base.md - Lines: 137 - Chars: 9414 - Tokens: 2354
+202. src\Artifacts\A117.2. DCE - Frequently Asked Questions (FAQ).md - Lines: 120 - Chars: 9224 - Tokens: 2306
+203. src\Artifacts\A117.3. DCE - Frequently Asked Questions (FAQ).md - Lines: 99 - Chars: 8380 - Tokens: 2095
+204. src\Artifacts\A117.4. DCE - Frequently Asked Questions (FAQ).md - Lines: 93 - Chars: 7935 - Tokens: 1984
+205. src\Artifacts\A117.5. DCE - Frequently Asked Questions (FAQ).md - Lines: 82 - Chars: 7894 - Tokens: 1974
+206. src\Artifacts\A117.6. DCE - Website FAQ.md - Lines: 90 - Chars: 7664 - Tokens: 1916
+207. src\Artifacts\A117.7. DCE - Website FAQ.md - Lines: 107 - Chars: 7308 - Tokens: 1827
+208. src\Artifacts\A117.8. DCE - Frequently Asked Questions (FAQ).md - Lines: 74 - Chars: 6923 - Tokens: 1731
+209. src\Artifacts\A117.9. DCE - Website FAQ.md - Lines: 97 - Chars: 6851 - Tokens: 1713
+210. src\Artifacts\A117.10. DCE - FAQ for aiascent.dev.md - Lines: 91 - Chars: 6809 - Tokens: 1703
+211. src\Artifacts\A117.11. DCE - Frequently Asked Questions (FAQ).md - Lines: 73 - Chars: 6381 - Tokens: 1596
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C116 (Add A112)
+# Updated on: C117 (Add A117)
 
 ## 1. Purpose
 
@@ -6191,10 +6109,6 @@ This file-centric approach helps in planning and prioritizing work, especially i
 - **Description:** Details the plan for adding critical cycle management features to the Parallel Co-Pilot panel, including deleting the current cycle and resetting the entire history.
 - **Tags:** feature plan, phase 2, ui, ux, history, cycle management
 
-### A58. DCE - WinMerge Source Code Analysis
-- **Description:** Documents the key files and concepts from the WinMerge source code that are relevant to building a high-quality diff viewer.
-- **Tags:** research, analysis, diff, winmerge, source code
-
 ### A59. DCE - Phase 2 - Debugging and State Logging
 - **Description:** Documents the plan for a "Log State" button that outputs critical state information (cycle history, current inputs) to the debug channel to accelerate troubleshooting.
 - **Tags:** feature plan, phase 2, ui, ux, debugging, logging, state management
@@ -6207,25 +6121,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 - **Description:** Outlines the plan to allow users to save and load their entire cycle history (`dce_history.json`), enabling them to manage multiple development threads or back up their work.
 - **Tags:** feature plan, phase 2, history, import, export, cycle management
 
-### A62. DCE - Cycle 157 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 157, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 157
-
-### A63. DCE - Cycle 158 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 158, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 158
-
-### A64. DCE - Cycle 159 - Task Tracker
-- **Description:** A tracking document for the large number of feedback items and tasks from Cycle 159, used to manage the backlog for subsequent cycles.
-- **Tags:** bugs, tracking, issues, backlog, cycle 159
-
 ### A65. DCE - Universal Task Checklist
 - **Description:** A universal checklist for organizing development tasks by file, focusing on complexity in terms of token count and estimated cycles for completion.
 - **Tags:** process, checklist, task management, planning, workflow
-
-### A66. DCE - Cycle 1 - Task Tracker
-- **Description:** A tracking document for the feedback items and tasks from the first cycle of using the DCE to build itself.
-- **Tags:** bugs, tracking, issues, backlog, cycle 1
 
 ### A67. DCE - PCPP View Refactoring Plan
 - **Description:** A plan to refactor the large `parallel-copilot.view.tsx` into smaller, more manageable components to improve maintainability.
@@ -6290,14 +6188,6 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A82. DCE - Advanced Exclusion Management Plan
 - **Description:** A plan for a feature allowing users to right-click files or folders and add them to a persistent exclusion list, preventing them from being automatically selected or flattened.
 - **Tags:** feature plan, context menu, exclusion, ignore, ux
-
-### A83. DCE - Universal Task Checklist for Cycle 6
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from the "laundry list" provided in Cycle 6.
-- **Tags:** process, checklist, task management, planning, workflow
-
-### A84. DCE - Universal Task Checklist for Cycle 10+
-- **Description:** A structured checklist for organizing the next phase of development tasks, focusing on feature parity with the native VS Code explorer.
-- **Tags:** process, checklist, task management, planning, workflow
 
 ### A85. DCE - Model Card Management Plan
 - **Description:** A plan for an enhanced settings panel where users can create and manage "model cards" to easily switch between different LLM providers and configurations.
@@ -6367,17 +6257,9 @@ This file-centric approach helps in planning and prioritizing work, especially i
 - **Description:** Documents the new, more robust workflow for generating responses. This involves creating a new cycle with a "generating" status first, which provides a persistent state container for the asynchronous LLM call, making the UI state recoverable on reload.
 - **Tags:** plan, architecture, workflow, persistence, asynchronous, state management
 
-### A102. DCE - Universal Task Checklist for Cycle 70
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from Cycle 70.
-- **Tags:** process, checklist, task management, planning, workflow
-
 ### A103. DCE - Consolidated Response UI Plan
 - **Description:** Details the user flow where generating responses navigates to a new cycle, and selecting any tab in that "generating" cycle displays the progress UI.
 - **Tags:** feature plan, ui, ux, workflow, refactor
-
-### A104. DCE - Universal Task Checklist for Cycle 76
-- **Description:** A structured checklist for organizing the development tasks, feedback, and bugs from Cycle 76.
-- **Tags:** process, checklist, task management, planning, workflow
 
 ### A105. DCE - PCPP View Refactoring Plan for Cycle 76
 - **Description:** Provides a detailed plan for refactoring the monolithic `parallel-copilot.view/view.tsx` component into smaller, more manageable sub-components to improve maintainability and reduce token count.
@@ -6386,18 +6268,6 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A106. DCE - vLLM Performance and Quantization Guide
 - **Description:** A guide explaining the performance warnings from the vLLM logs and detailing the various model quantization options available.
 - **Tags:** guide, vllm, performance, quantization, llm
-
-### A107. DCE - Universal Task Checklist for Cycle 77
-- **Description:** A tracking document for the feedback items and tasks from Cycle 77.
-- **Tags:** bugs, tracking, issues, backlog, cycle 77
-
-### A108. DCE - Universal Task Checklist for Cycle 78
-- **Description:** A tracking document for the feedback items and tasks from Cycle 78.
-- **Tags:** bugs, tracking, issues, backlog, cycle 78
-
-### A109. DCE - Universal Task Checklist for Cycle 79
-- **Description:** A tracking document for the feedback items and tasks from Cycle 79.
-- **Tags:** bugs, tracking, issues, backlog, cycle 79
 
 ### A110. DCE - Response UI State Persistence and Workflow Plan
 - **Description:** A plan to fix the response UI state loss by expanding the data model to include generation metrics and refactoring the UI to be driven by a per-response status.
@@ -6410,6 +6280,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A112. DCE - Per-Cycle Connection Mode Plan
 - **Description:** A plan for a dropdown in the PCPP to allow users to select a generation mode for the current cycle, overriding the global default from the settings panel.
 - **Tags:** feature plan, ui, ux, llm, configuration
+
+### A117. DCE - FAQ for aiascent.dev Knowledge Base
+- **Description:** A comprehensive Frequently Asked Questions (FAQ) document created to serve as the primary knowledge base for the `aiascent.dev` website's RAG chatbot, Ascentia.
+- **Tags:** documentation, faq, knowledge base, rag, user guide
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -30832,6 +30706,1102 @@ Open a terminal and navigate to your project's root directory (`C:\Projects\aias
     ```
 
 Your new project is now set up with version control and linked to GitHub. You can now use the DCE's Git-integrated features like "Baseline" and "Restore" as you develop the website.
+</file_artifact>
+
+<file path="src/Artifacts/A117.1. DCE - FAQ for aiascent.dev Knowledge Base.md">
+# Artifact A117.1: DCE - FAQ for aiascent.dev Knowledge Base
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive Frequently Asked Questions (FAQ) document created to serve as the primary knowledge base for the `aiascent.dev` website's RAG chatbot, Ascentia.
+- **Tags:** documentation, faq, knowledge base, rag, user guide
+
+## 1. Purpose
+
+This document provides a comprehensive list of frequently asked questions about the Data Curation Environment (DCE). It is intended to be the primary source of information for new and existing users, and will be used to create an embedding for the AI-powered chatbot on the `aiascent.dev` website.
+
+---
+
+## **I. General Questions**
+
+### **Q: What is the Data Curation Environment (DCE)?**
+
+**A:** The Data Curation Environment (DCE) is a VS Code extension designed to streamline and enhance the workflow of AI-assisted development. It provides an integrated toolset for selecting, managing, and packaging the context (code files, documents, etc.) you provide to Large Language Models (LLMs), and for managing the multiple responses you get back.
+
+### **Q: What problem does DCE solve?**
+
+**A:** DCE solves the problem of "context management." Interacting effectively with an LLM requires providing it with the right information. Manually copying and pasting files, tracking which files you've included, and comparing different AI suggestions is a cumbersome and error-prone process. DCE automates this, allowing you to focus on the creative and strategic aspects of development.
+
+### **Q: Who is DCE for?**
+
+**A:** DCE is for any developer, researcher, or creator who uses LLMs as part of their workflow. It's particularly useful for those working on complex projects with large codebases who want a more structured and efficient way to collaborate with AI.
+
+### **Q: What is the core philosophy behind DCE?**
+
+**A:** The core philosophy is "Documentation First" and treating the human-AI interaction as a structured, iterative process. Before writing code, you and your AI partner should first create or update documentation artifacts that describe the plan. This ensures clarity, alignment, and creates a persistent, auditable history of the project's evolution.
+
+---
+
+## **II. Getting Started**
+
+### **Q: How do I install the DCE extension?**
+
+**A:** You can install the DCE extension from the Visual Studio Code Marketplace. Open VS Code, go to the Extensions view, search for "Data Curation Environment," and click "Install."
+
+### **Q: I've installed the extension. What do I do first?**
+
+**A:** The first step is to open a new, empty folder in VS Code. The DCE will detect that it's a new project and automatically open the Parallel Co-Pilot Panel (PCPP) to a "Welcome" screen. Here, you'll write your high-level "Project Scope."
+
+### **Q: What is the "Project Scope"?**
+
+**A:** The Project Scope is a natural language description of what you want to build. This is your first instruction to the AI. Once you've written it, you'll click "Generate Initial Artifacts Prompt," and the DCE will create a `prompt.md` file designed to have an AI generate your initial project documentation.
+
+### **Q: Why does DCE create documentation first instead of code?**
+
+**A:** This is part of the "Documentation First" philosophy. By establishing a clear plan, vision, and set of requirements in documentation artifacts, you provide a stable "source of truth" that guides all subsequent code generation. This leads to more coherent and aligned results from the AI.
+
+### **Q: Do I need to have Git installed?**
+
+**A:** It is highly recommended. DCE has deep integration with Git, allowing you to create "Baselines" (commits) and "Restore" your workspace with a single click. This makes it easy and safe to test AI-generated code. The extension will guide you through initializing a Git repository if you haven't already.
+
+---
+
+## **III. Core Concepts**
+
+### **Q: What is an "Artifact"?**
+
+**A:** In the DCE workflow, an Artifact is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of them as the official blueprints, plans, and records that guide development. They are stored in the `src/Artifacts` directory.
+
+### **Q: What are "Cycles"?**
+
+**A:** Development in DCE is organized into "Cycles." A cycle represents a single turn of the iterative development loop: you provide context and instructions, the AI generates responses, you review and integrate a response, and then you begin the next cycle. The DCE helps you manage this history with the Cycle Navigator.
+
+### **Q: What is "Flattening"?**
+
+**A:** Flattening is the process of taking all the files you've selected (checked) in the File Tree View and concatenating their content into a single file, `flattened_repo.md`. This file, along with your cycle history and instructions, becomes part of the `prompt.md` that you send to the AI.
+
+### **Q: What is the "Parallel Co-Pilot Panel" (PCPP)?**
+
+**A:** The PCPP is the main interface of the DCE. It's a multi-tabbed panel where you can paste multiple different AI responses to the same prompt. It provides tools to parse, compare, diff, and accept the code from these responses into your workspace.
+
+### **Q: What is "Demo Mode"?**
+
+**A:** "Demo Mode" is a setting that allows the DCE to connect directly to a locally hosted LLM (like one running via vLLM). In this mode, instead of manually copying and pasting, you can click "Generate responses," and the DCE will automatically send the prompt and stream the responses back into the PCPP.
+
+---
+
+## **IV. Features & Workflow**
+
+### **Q: How do I select files to include in the context for the AI?**
+
+**A:** You use the File Tree View (FTV), which is the panel with the spiral icon. It shows your entire workspace with checkboxes next to each file and folder. Simply check the items you want to include. The FTV also shows you token counts and other useful metadata.
+
+### **Q: What's the difference between "checking" a file and "selecting" a file?**
+
+**A:** "Checking" a file (clicking its checkbox) adds it to the list for the "Flatten Context" operation. "Selecting" or "Highlighting" a file (clicking the file name) is for performing actions like rename, delete, or copy path from the right-click context menu.
+
+### **Q: How do I use the Parallel Co-Pilot Panel (PCPP)?**
+
+**A:** The typical workflow is:
+1.  Generate a `prompt.md` file.
+2.  Copy the content and get multiple responses from your preferred LLM.
+3.  Paste each response into a separate "Resp" tab in the PCPP.
+4.  Click "Parse All." The DCE will structure the responses, showing you the AI's summary, plan, and a list of "Associated Files."
+5.  Review the responses. You can click on any associated file to see a diff between your current code and the AI's suggestion.
+6.  Choose the best response by clicking "Select This Response."
+7.  Optionally, create a Git baseline by clicking "Baseline (Commit)."
+8.  Check the files you want to accept from the "Associated Files" list and click "Accept Selected."
+9.  Write your notes for the next cycle in the "Cycle Context" and give it a title.
+10. Click "Generate prompt.md" again to start the next cycle.
+
+### **Q: What does the "Baseline (Commit)" button do?**
+
+**A:** It creates a Git commit of the current state of your workspace. This gives you a safe restore point. If you accept an AI's changes and they break your code, you can simply click "Restore Baseline" to instantly revert all files to the state they were in before you accepted the changes.
+
+### **Q: Can DCE work with local models?**
+
+**A:** Yes. The "Demo Mode" is designed specifically for this. By selecting "API (URL)" in the settings, you can point the DCE to any OpenAI-compatible API endpoint, such as one provided by vLLM, Ollama, or LM Studio.
+
+### **Q: Can I undo a file operation like a move or delete?**
+
+**A:** Yes. The DCE file tree supports undo/redo (`Ctrl+Z` / `Ctrl+Y`) for file move operations performed within its view.
+
+---
+
+## **V. Troubleshooting**
+
+### **Q: Why are some folders or files grayed out and un-selectable?**
+
+**A:** The DCE automatically excludes common directories that shouldn't be included in an AI's context, such as `node_modules`, `.git`, `.vscode`, and build output folders like `dist`. This is to keep your context focused and to prevent errors.
+
+### **Q: My file tree is flashing or constantly refreshing. How do I fix it?**
+
+**A:** This is almost always caused by the DCE's auto-save feature writing to the `.vscode/dce_history.json` file, which then triggers the file watcher to refresh the tree. To fix this, you must add `.vscode/` to your project's `.gitignore` file.
+
+### **Q: The extension is giving me an error about a command already existing on startup.**
+
+**A:** This can happen during development or after a faulty installation. The best first step is to restart VS Code completely. If the problem persists, try reinstalling the extension.
+
+### **Q: I'm seeing duplicate files in my `flattened_repo.md`. Why?**
+
+**A:** This can happen due to a race condition with the "auto-add new files" feature or if the selection state becomes desynchronized. A reliable way to fix this is to go to the "Selected Items" panel in the File Tree View, select all items (`Ctrl+A`), press the `Delete` key to clear the list, and then re-check the files and folders you want from the main tree.
+</file_artifact>
+
+<file path="src/Artifacts/A117.2. DCE - Frequently Asked Questions (FAQ).md">
+# Artifact A117.2: DCE - Frequently Asked Questions (FAQ)
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive list of frequently asked questions and answers about the Data Curation Environment (DCE) VS Code extension, intended for use in a user-facing knowledge base.
+- **Tags:** documentation, faq, help, onboarding, knowledge base, rag
+
+## 1. Overview
+
+This document provides answers to frequently asked questions about the Data Curation Environment (DCE) VS Code extension. It is designed to help new and existing users understand the purpose, features, and workflow of the DCE.
+
+---
+
+## I. General Concepts
+
+### **Q: What is the Data Curation Environment (DCE)?**
+
+**A:** The Data Curation Environment is a VS Code extension designed to streamline and enhance the workflow of AI-assisted development. It provides an integrated toolset for selecting, managing, and packaging the "context" (code files, documents, etc.) you provide to a Large Language Model (LLM), and for managing the multiple responses you get back.
+
+### **Q: What problem does DCE solve?**
+
+**A:** DCE solves the problem of "context management." Modern AI development requires providing the AI with a precise and comprehensive set of files and information (the context). Manually collecting these files, copying their content, and pasting them into a prompt is tedious, error-prone, and inefficient. DCE automates this entire process, allowing you to focus on the creative and strategic aspects of development.
+
+### **Q: Who is DCE for?**
+
+**A:** DCE is for any developer, project manager, or technical writer who uses Large Language Models as part of their workflow. It is particularly useful for those working on complex projects with large codebases, where managing the context for the AI is a significant challenge.
+
+### **Q: What is "Vibecoding"?**
+
+**A:** "Vibecoding" is a term for the intuitive, conversational, and iterative process of collaborating with an AI to generate code or other content. It starts with a high-level goal or "vibe" and progressively refines it into a functional product through a human-machine partnership. DCE is the ideal tool for this workflow.
+
+### **Q: What is the "Process as Asset" philosophy?**
+
+**A:** This is the core idea that the *process* of developing with AI—the curated context, the prompts, the multiple AI responses, and the developer's final choice—is itself a valuable, auditable, and reusable asset. DCE is built to capture this process in a structured way through its "Cycle" system, creating a persistent knowledge graph of your project's evolution.
+
+---
+
+## II. Core Features
+
+### **Q: What is the Context Chooser (File Tree View)?**
+
+**A:** The Context Chooser is the panel with the spiral icon. It displays a file tree of your entire workspace with checkboxes next to every file and folder. This is the primary interface for selecting which files you want to include in the context that gets sent to the AI.
+
+### **Q: What does the "Flatten Context" button do?**
+
+**A:** The "Flatten Context" button takes all the files and folders you have "checked" in the Context Chooser, reads their content, and combines them into a single, formatted `flattened_repo.md` file in your project's root directory. This file is then ready to be used in your prompt.
+
+### **Q: Can DCE handle different file types like PDFs or Excel sheets?**
+
+**A:** Yes. DCE has built-in extractors for various file types. When you check a `.pdf`, `.docx` (Word), or `.xlsx`/`.csv` (Excel) file, DCE automatically extracts the textual content and converts it into a readable format (like Markdown for tables) to be included in the flattened context.
+
+### **Q: What is the Parallel Co-Pilot Panel (PCPP)?**
+
+**A:** The Parallel Co-Pilot Panel is the main multi-tabbed interface in DCE. It's where you manage your development "Cycles," write your prompts (Cycle Context), and, most importantly, paste and compare multiple different responses from your AI.
+
+### **Q: What is a "Cycle"?**
+
+**A:** A "Cycle" represents one iteration of the development loop: you write a prompt, get responses from the AI, select the best one, and integrate it into your codebase. The PCPP's Cycle Navigator allows you to move back and forth through your project's entire history, reviewing the exact context and AI responses from any previous cycle.
+
+### **Q: What does the "Parse All" button do?**
+
+**A:** After you paste raw responses from your AI into the response tabs, the "Parse All" button processes them. It automatically identifies the AI's summary, its plan, and any code blocks, transforming the raw text into a structured, easy-to-read view with syntax highlighting and file association.
+
+### **Q: What are "Associated Files" and the `✓` / `✗` icons?**
+
+**A:** When a response is parsed, DCE lists all the files the AI intended to create or modify under "Associated Files." It then checks your workspace to see if those files actually exist. A green checkmark (`✓`) means the file exists. A red 'x' (`✗`) means the file does not exist, which could indicate the AI is suggesting a new file or has "hallucinated" a file path.
+
+### **Q: How does the native diff integration work?**
+
+**A:** In the "Associated Files" list, you can click the "Open Changes" icon next to any existing file. This will open VS Code's built-in, side-by-side diff viewer, showing you a precise comparison between your current workspace file and the version suggested by the AI.
+
+### **Q: What do the "Baseline (Commit)" and "Restore Baseline" buttons do?**
+
+**A:** These buttons integrate DCE with Git. "Baseline" creates a Git commit of your current work, creating a safe restore point. After you "Accept" an AI's changes to test them, you can click "Restore Baseline" to instantly discard all those changes and revert your workspace to that safe point, allowing you to test another response without manual cleanup.
+
+---
+
+## III. Workflow & Usage
+
+### **Q: How do I start a new project with DCE?**
+
+**A:** Simply open a new, empty folder in VS Code. The DCE panel will automatically open to an "Onboarding" view. Describe your project's goal in the "Project Scope" text area and click "Generate Initial Artifacts Prompt." This will create a `prompt.md` file that you can use to ask an AI to generate the initial planning documents for your project.
+
+### **Q: What is the recommended "perfect loop" workflow?**
+
+**A:** The ideal workflow is a guided, iterative process:
+1.  **Paste & Parse:** Get multiple AI responses and use "Parse All".
+2.  **Select:** Review the parsed responses and click "Select This Response" on the best one.
+3.  **Baseline:** Create a `git commit` restore point with the "Baseline" button.
+4.  **Accept & Test:** In the "Associated Files" list, check the files you want to apply and click "Accept Selected". Then, test the changes in your application.
+5.  **(If needed) Restore:** If the changes are bad, click "Restore Baseline" to revert everything instantly.
+6.  **Finalize:** Once you're happy with the changes, write your notes for the next task in the "Cycle Context" and "Cycle Title" fields.
+7.  **Generate & Repeat:** Click "Generate prompt.md" and then the `+` button to start the next cycle.
+
+### **Q: Why should I use multiple responses?**
+
+**A:** LLMs are non-deterministic. Asking for the same thing multiple times can yield vastly different solutions. The Parallel Co-Pilot Panel is designed to manage this, allowing you to generate 4, 8, or more responses at once and quickly compare them to find the most elegant, efficient, or creative solution.
+
+### **Q: What is the difference between "Cycle Context" and "Ephemeral Context"?**
+
+**A:**
+*   **Cycle Context:** This is for your main instructions and goals for the current cycle. This content is saved and becomes part of the permanent history of your project.
+*   **Ephemeral Context:** This is for temporary information that is only relevant for the *current* prompt generation, such as error logs or a snippet of code you want the AI to analyze. This content is **not** saved in the cycle history.
+
+---
+
+## IV. Local LLM & Demo Mode
+
+### **Q: Can I use DCE with a local LLM?**
+
+**A:** Yes. DCE supports connecting to any OpenAI-compatible API endpoint. You can run a model locally using a tool like vLLM or LM Studio, and then enter its URL (e.g., `http://localhost:8000/v1`) in the DCE settings panel to have the extension communicate directly with your local model.
+
+### **Q: What is "Demo Mode"?**
+
+**A:** "Demo Mode" is a pre-configured setting that connects the DCE extension to a specific, high-performance vLLM instance. When in this mode, the "Generate prompt.md" button is replaced with a "Generate responses" button, which fully automates the process of sending the prompt and streaming the responses back into the UI in real-time.
+
+### **Q: What is the Response Progress UI?**
+
+**A:** When using an automated connection mode like "Demo Mode," a special UI appears during generation. It shows real-time progress bars for each parallel response, token-per-second metrics, status indicators ("Thinking," "Generating," "Complete"), and timers. This gives you full visibility into the generation process.
+</file_artifact>
+
+<file path="src/Artifacts/A117.3. DCE - Frequently Asked Questions (FAQ).md">
+# Artifact A117.3: DCE - Frequently Asked Questions (FAQ)
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive list of frequently asked questions about the Data Curation Environment (DCE) to be used as a knowledge base for the new promotional website.
+- **Tags:** documentation, faq, knowledge base, guide, onboarding
+
+## 1. General / What is DCE?
+
+**Q: What is the Data Curation Environment (DCE)?**
+
+**A:** The Data Curation Environment (DCE) is a VS Code extension designed to streamline and accelerate AI-assisted development. It provides a suite of tools to help developers and curators precisely select, manage, and package the code and documents (the "context") they provide to Large Language Models (LLMs). Its core feature is a "Parallel Co-Pilot Panel" that allows users to manage, compare, and test multiple AI-generated responses simultaneously.
+
+**Q: Who is DCE for?**
+
+**A:** DCE is for any developer, researcher, or project manager who uses Large Language Models as part of their workflow. It's particularly useful for those working on complex projects who need to provide large, multi-file contexts to an AI and want a more structured, efficient, and auditable process than manually copying and pasting into a chat window.
+
+**Q: What problem does DCE solve?**
+
+**A:** DCE solves the "context problem" in AI-assisted development. Manually selecting files, copying their content, and managing the prompt you send to an AI is tedious, error-prone, and not easily repeatable. DCE automates the process of gathering and packaging this context. It also solves the "single-threaded" nature of AI interaction by allowing you to work with multiple AI responses in parallel, dramatically speeding up the iterative cycle of testing and refining AI-generated code.
+
+**Q: Is DCE a replacement for GitHub Copilot?**
+
+**A:** No, DCE is a complementary tool. While Copilot excels at inline code completion and chat-based assistance, DCE is focused on the higher-level workflow of managing large contexts and orchestrating multiple, complex, multi-file responses from an AI. You can use DCE to generate a prompt, get responses from your preferred AI (including those you might get from a tool like Copilot Chat), and then use DCE's panel to manage and test those responses.
+
+## 2. Core Concepts & Workflow
+
+**Q: What is the "artifact-driven workflow"?**
+
+**A:** This is the core philosophy of DCE, summarized as "Documentation First." Before writing code, you and your AI partner first create or update a documentation "Artifact" that describes the plan. These artifacts (like Project Vision, Requirements, etc.) serve as the "source of truth" for the project, ensuring that both human and AI are aligned. DCE's onboarding experience helps you bootstrap this process.
+
+**Q: What is a "Cycle"?**
+
+**A:** A "Cycle" is the fundamental unit of work in the DCE workflow. A typical cycle involves:
+1.  Writing your plan for the cycle (the "Cycle Context").
+2.  Generating a complete `prompt.md` file that includes your plan, project history, and all relevant code.
+3.  Getting multiple responses from an AI.
+4.  Pasting those responses into the Parallel Co-Pilot Panel.
+5.  Parsing, comparing, and selecting the best response.
+6.  Accepting the AI's changes into your codebase and testing them.
+7.  Starting the next cycle.
+
+**Q: What is the "Parallel Co-Pilot Panel" (PCPP)?**
+
+**A:** The PCPP is the main UI of the DCE. It's a multi-tabbed panel inside VS Code where you can paste, parse, compare, and test multiple AI-generated responses in parallel. It includes features like a cycle navigator to review history, an integrated diff viewer, and a Git-powered "Baseline/Restore" workflow for safe testing.
+
+**Q: What does "Flatten Context" mean?**
+
+**A:** "Flattening" is the process of taking all the files and folders you've selected in the File Tree View and concatenating their content into a single, large text file (`flattened_repo.md`). This file, combined with your project's history and plans, becomes the `prompt.md` that you send to the LLM, giving it a comprehensive view of your project.
+
+## 3. Features & Functionality
+
+**Q: What kind of files can DCE handle?**
+
+**A:** DCE is designed to handle a wide variety of text-based files, including source code in any language. It also has specialized support for extracting text from `.pdf`, `.docx` (Microsoft Word), and `.xlsx` / `.csv` (Excel/CSV) files, converting their content into a format that an LLM can understand. For binary files like images, it includes metadata (path, size) instead of raw content.
+
+**Q: How does the Git-integrated testing work?**
+
+**A:** The PCPP includes "Baseline (Commit)" and "Restore Baseline" buttons.
+*   **Baseline:** Creates a Git commit of your current workspace state, giving you a safe restore point.
+*   **Accept:** You can then "Accept" an AI's proposed file changes, which overwrites your local files.
+*   **Test & Restore:** You can test the new code. If it doesn't work, a single click on "Restore Baseline" uses `git restore` to instantly revert all changes, allowing you to cleanly test a different AI response without manual cleanup.
+
+**Q: Can I use DCE with my own local LLM?**
+
+**A:** Yes. DCE is designed for this. The "Demo Mode" connects to a local vLLM instance with an OpenAI-compatible API out of the box. You can also configure the extension in the settings to point to any custom URL, allowing you to use other local model servers like Ollama or LM Studio, as long as they expose an OpenAI-compatible endpoint.
+
+**Q: What is the "Animated Workflow Guide"?**
+
+**A:** To help new users learn the process, DCE features an optional animated guide. It places a subtle "pulsing glow" on the UI element that represents the next logical step in the workflow (e.g., after pasting responses, the "Parse All" button will glow).
+
+## 4. Local LLM / Demo Mode
+
+**Q: What is "Demo Mode"?**
+
+**A:** "Demo Mode" is a pre-configured setting that allows DCE to connect to a locally running LLM that exposes an OpenAI-compatible API (like vLLM). When in this mode, the "Generate prompt.md" button is replaced with a "Generate responses" button, which fully automates the process of creating the prompt, sending it to the local LLM, and streaming the responses back into the PCPP.
+
+**Q: What is vLLM and why do you recommend it?**
+
+**A:** vLLM is a high-throughput serving engine for LLMs. We recommend it for local use because of its performance and its support for parallel processing ("continuous batching"). This allows vLLM to generate multiple responses simultaneously with very high speed (tokens/second), which pairs perfectly with DCE's parallel response panel.
+
+**Q: Do I have to use vLLM?**
+
+**A:** No. While the "Demo Mode" is pre-configured with vLLM in mind, you can use the "API (URL)" mode in the settings to point DCE to any OpenAI-compatible API endpoint, including those provided by other tools like Ollama, LM Studio, or a custom server.
+
+## 5. Troubleshooting & Common Issues
+
+**Q: Why are my newly created files showing up with a red '✗' in the "Associated Files" list?**
+
+**A:** This usually happens due to a slight delay between when the file is written to disk and when the UI receives the update. If it persists, a simple refresh of the panel or ensuring the file is saved should resolve it. The "Link" feature can also be used to manually associate the AI's response with the correct file path if needed.
+
+**Q: I'm seeing data loss when I navigate between cycles quickly.**
+
+**A:** This can happen if you navigate away from a cycle while it is in the middle of an auto-save operation. The UI includes a save status indicator (a checkmark that turns into a caution or spinning icon). To prevent this, wait for the indicator to return to a green checkmark before navigating to a different cycle. The navigation buttons are automatically disabled during the saving process to help prevent this.
+
+**Q: The File Tree View (FTV) keeps flashing or refreshing.**
+
+**A:** This is often caused by a file watcher reacting to frequent file changes. A common culprit is the DCE's own history file (`.vscode/dce_history.json`). Ensuring that the `.vscode` directory is added to your project's `.gitignore` file can often resolve this issue, as it signals to the file watcher to ignore changes within that directory.
+</file_artifact>
+
+<file path="src/Artifacts/A117.4. DCE - Frequently Asked Questions (FAQ).md">
+# Artifact A117.4: DCE - Frequently Asked Questions (FAQ)
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive list of frequently asked questions and answers about the Data Curation Environment (DCE) VS Code extension, intended for a public-facing knowledge base.
+- **Tags:** documentation, faq, onboarding, user guide, knowledge base
+
+## 1. General Concepts
+
+### Q: What is the Data Curation Environment (DCE)?
+**A:** The Data Curation Environment (DCE) is a VS Code extension designed to streamline and accelerate AI-assisted software development. It provides a suite of tools to help you precisely select and manage the code and documents (the "context") you provide to a Large Language Model (LLM), and to efficiently review, test, and integrate the AI's generated responses.
+
+### Q: What problem does DCE solve?
+**A:** DCE solves the "context problem" in AI development. Manually copying and pasting code into an AI chat is inefficient, error-prone, and doesn't scale for complex tasks. DCE replaces this with a structured, repeatable, and powerful workflow directly inside your code editor, transforming your development process into a series of auditable "cycles."
+
+### Q: What is the core workflow of DCE?
+**A:** The DCE workflow is an iterative loop:
+1.  **Curate Context:** Use the File Tree View (FTV) to select the relevant files and folders for your task.
+2.  **Generate Prompt:** Click "Generate prompt.md" to package your context, project history, and instructions into a single file.
+3.  **Get AI Responses:** Copy the content of `prompt.md` and paste it into your preferred AI (like Gemini, Claude, or ChatGPT) to get multiple solutions.
+4.  **Review & Compare:** Paste the AI's responses into the Parallel Co-Pilot Panel (PCPP) to parse, compare, and diff them side-by-side.
+5.  **Test & Accept:** Use the Git-integrated "Baseline" and "Restore" features to safely test an AI's proposed code. Once satisfied, "Accept" the changes into your workspace.
+6.  **Start New Cycle:** Write notes for the next task and repeat the process.
+
+### Q: What is a "Cycle"?
+**A:** A "Cycle" in DCE represents one complete turn of the development loop—from writing a prompt to receiving and integrating an AI response. The extension saves your work for each cycle, creating a persistent and navigable history of your project's evolution.
+
+## 2. Installation & Setup
+
+### Q: How do I install the DCE extension?
+**A:** The DCE extension is installed from a `.vsix` file. You can install it by going to the Extensions view in VS Code (Ctrl+Shift+X), clicking the "..." menu, and selecting "Install from VSIX...".
+
+### Q: What are the prerequisites?
+**A:** You need to have Visual Studio Code and `git` installed on your machine. The extension works best when your project is a Git repository, as this enables the powerful "Baseline" and "Restore" features.
+
+### Q: How do I start a new project with DCE?
+**A:** Simply open a new, empty folder in VS Code. The DCE will automatically detect that it's a new project and present you with the "Onboarding" view. Just describe your project's goals in the text box and click "Generate Initial Artifacts Prompt" to begin the process.
+
+## 3. Features: Context Curation (File Tree View)
+
+### Q: What is the "File Tree View" (FTV)?
+**A:** The FTV is the main panel for context curation, accessible via the spiral icon in the activity bar. It shows your entire workspace as a file tree with checkboxes, allowing you to select files and folders to be included in your prompt.
+
+### Q: What does "Flatten Context" do?
+**A:** The "Flatten Context" button takes all the files you have checked in the FTV, reads their content, and combines them into a single `flattened_repo.md` file. This file is then used as part of the `prompt.md` sent to the AI.
+
+### Q: What is the "Selected Items" panel?
+**A:** This panel at the bottom of the FTV shows a list of all individual files that are currently checked. It's a great way to review your selection and see which files are contributing the most tokens. You can also sort this list and remove items in batches.
+
+### Q: What does "Automatically add new files to selection" do?
+**A:** When this option is enabled, any new file created in your workspace will be automatically checked and added to your selection. This is useful when you are actively developing and want to ensure new work is included in the next AI prompt.
+
+## 4. Features: Parallel Co-Pilot Panel (PCPP)
+
+### Q: What is the Parallel Co-Pilot Panel (PCPP)?
+**A:** The PCPP is the multi-tabbed environment where you manage AI responses. You can open it using the `DCE: Open Parallel Co-Pilot` command or by clicking the icon in the FTV header.
+
+### Q: How do I use the response tabs?
+**A:** You can paste a different AI-generated response into each "Resp #" tab. This allows you to keep multiple potential solutions organized in one place.
+
+### Q: What does the "Parse All" button do?
+**A:** After you paste raw responses into the tabs, clicking "Parse All" instructs the DCE to read the content in every tab and structure it. It separates the AI's summary and plan from the code files, displays a list of "Associated Files," and enables syntax highlighting and diffing.
+
+### Q: What are "Associated Files"?
+**A:** This is a list of all the files that the AI's response intends to create or modify. The DCE shows you a `✓` if the file exists in your project and an `✗` if it doesn't, helping you spot new files or AI "hallucinations."
+
+### Q: How do I see the changes an AI is proposing?
+**A:** After parsing, you can simply click on any file in the "Associated Files" list. This will open a diff view that shows a side-by-side comparison of your current file and the AI's suggested version.
+
+### Q: What do "Baseline (Commit)" and "Restore Baseline" do?
+**A:** These buttons provide a safe way to test AI code.
+*   **Baseline (Commit):** Creates a `git commit` of your project in its current state, saving a safe restore point.
+*   **Restore Baseline:** Reverts all changes in your workspace back to the last baseline you created. This is perfect for undoing an AI's changes if they don't work as expected.
+
+### Q: What does "Accept Selected" do?
+**A:** In the "Associated Files" list, you can check the box next to each file whose changes you want to apply. Clicking "Accept Selected" will overwrite the files in your workspace with the AI-generated versions for only the files you have checked.
+
+## 5. Local LLM / Demo Mode
+
+### Q: What is "Demo Mode"?
+**A:** "Demo Mode" is a setting that configures the DCE to connect to a pre-configured local Large Language Model (LLM) instead of requiring you to manually copy and paste. When in this mode, the "Generate prompt.md" button is replaced with a "Generate responses" button that automates the entire process.
+
+### Q: Can I connect DCE to my own local LLM?
+**A:** Yes. The settings panel allows you to switch from "Manual" or "Demo" mode to "API (URL)" mode. Here, you can enter the endpoint URL for your own local LLM (e.g., one running via Ollama, LM Studio, or vLLM), as long as it exposes an OpenAI-compatible API.
+
+## 6. Troubleshooting
+
+### Q: My `prompt.md` seems stale and isn't including my latest notes. What's wrong?
+**A:** Make sure you are clicking the "Generate prompt.md" button from the correct cycle. The prompt is generated based on the cycle you are currently viewing. Also, ensure your "Cycle Title" and "Cycle Context" fields are filled out, as this is a prerequisite for generating the prompt for the next cycle.
+
+### Q: Parsing failed or looks incorrect. What can I do?
+**A:** Parsing failures can happen if the AI doesn't format its response correctly. You can click "Un-Parse All" to return to the raw text view. Often, you can fix the issue by manually adding a missing tag (like `<summary>...</summary>`) or correcting a malformed file tag (`<file path="...">...
+</file_artifact>
+
+<file path="src/Artifacts/A117.5. DCE - Frequently Asked Questions (FAQ).md">
+# Artifact A117.5: DCE - Frequently Asked Questions (FAQ)
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive list of frequently asked questions about the Data Curation Environment (DCE) to serve as a knowledge base for the promotional website.
+- **Tags:** documentation, faq, knowledge base, rag, onboarding, support
+
+## 1. Purpose
+
+This document serves as the primary knowledge base for the Data Curation Environment (DCE) VS Code extension. Its purpose is to provide clear, concise answers to common questions that new and existing users may have. This FAQ is a core component of the embedding file used for the Retrieval-Augmented Generation (RAG) feature on the `aiascent.dev` website.
+
+## 2. Frequently Asked Questions
+
+### I. General & Core Concepts
+
+**Q: What is the Data Curation Environment (DCE)?**
+A: The DCE is a Visual Studio Code extension designed to streamline and enhance AI-assisted development. It solves the problem of manually managing the context (code files, documents, etc.) you provide to Large Language Models (LLMs). It provides an integrated toolset for selecting context, managing multiple AI responses in parallel, and testing AI-generated code efficiently.
+
+**Q: What core problem does DCE solve?**
+A: It solves the "context problem." Effective AI assistance requires providing the right background information (the "context"). Manually collecting files, copying their content, and pasting them into a prompt is tedious, error-prone, and inefficient. DCE automates this entire process, allowing you to manage your AI context with a few clicks.
+
+**Q: What is an "Artifact" in the DCE workflow?**
+A: An "Artifact" is a formal, written document that serves as a "source of truth" for your project. These are your blueprints, plans, and requirements documents (like this FAQ). The core philosophy of DCE is "Documentation First"—planning in artifacts before writing code.
+
+**Q: What are "Cycles"?**
+A: A "Cycle" represents one complete iteration of the development loop: you define a task, generate a prompt, get responses from an AI, and integrate the chosen solution. The DCE organizes your entire project history into these numbered cycles, creating a navigable "knowledge graph" of your project's evolution.
+
+**Q: What does "Flattening Context" mean?**
+A: "Flattening" is the process where the DCE takes all the files and folders you've selected, reads their content, and combines them into a single, large text file (`flattened_repo.md`). This file, along with your cycle history and instructions, is then used to create the final `prompt.md` that you send to the AI.
+
+### II. Phase 1: The Context Chooser (File Tree View)
+
+**Q: How do I select files to include in my AI prompt?**
+A: The DCE adds a custom view to your VS Code activity bar (with a spiral icon). This view contains a file tree of your entire workspace. Simply click the checkbox next to any file or folder to include it in your context for the AI.
+
+**Q: What do the token and file counts next to folders mean?**
+A: The DCE automatically calculates and displays statistics for your project. Next to each folder, you'll see the total number of files within it and the approximate token count of all the text-based files. This helps you manage the size of your context to fit within your AI model's context window.
+
+**Q: What are "Selection Sets"?**
+A: If you frequently use the same group of files for different tasks, you can save your current selection as a named "Selection Set." This allows you to quickly load a specific context without having to manually re-select all the files.
+
+### III. Phase 2: The Parallel Co-Pilot Panel (PCPP)
+
+**Q: What is the Parallel Co-Pilot Panel?**
+A: The PCPP is the main interface for managing the iterative development workflow. It's a custom panel that opens in the main editor area and allows you to manage multiple AI responses side-by-side in a tabbed view.
+
+**Q: How does the workflow in the PCPP work?**
+A: The workflow is a guided, multi-step process:
+1.  **Paste & Parse:** You paste the raw responses from your AI into the different response tabs and click "Parse All."
+2.  **Review & Select:** The DCE parses the responses, showing you a summary, a course of action, and a list of "Associated Files" for each. You review them and "Select" the best one.
+3.  **Test:** You can use the integrated "Accept Selected Files" button to write the AI's proposed code directly into your workspace for testing.
+4.  **Baseline & Restore:** Using Git integration, you can create a "Baseline" (a commit) before testing and "Restore" your workspace with one click if the AI's code doesn't work.
+5.  **Iterate:** Once you're satisfied, you write your notes for the next task in the "Cycle Context" field and generate the prompt for the next cycle.
+
+**Q: What is the "Associated Files" list?**
+A: When the DCE parses an AI response, it detects all the files the AI intends to create or modify. This list is displayed in the "Associated Files" section. The extension cross-references this list with your workspace, showing you with a checkmark (`✓`) or an 'x' (`✗`) whether each file exists. This helps you immediately spot AI "hallucinations" (references to non-existent files).
+
+**Q: What is the integrated Diff Viewer?**
+A: You can click an "Open Changes" button next to any file in the "Associated Files" list. This will open VS Code's native, side-by-side diff viewer, showing you the exact changes the AI is proposing compared to your current file.
+
+### IV. Local LLM / Demo Mode
+
+**Q: Can I use DCE with my own local Large Language Model?**
+A: Yes. The DCE supports connecting to any local LLM that provides an OpenAI-compatible API endpoint (e.g., models run with vLLM, Ollama, or LM Studio). You can enter the URL of your local server in the DCE settings panel.
+
+**Q: What is "Demo Mode"?**
+A: "Demo Mode" is a pre-configured setting that connects the DCE to a specific local vLLM setup. When in this mode, the "Generate prompt.md" button is replaced with a "Generate responses" button. This automates the entire workflow: the DCE generates the prompt, sends it to the local LLM in a batch request, and streams the responses directly back into the PCPP, complete with a progress UI.
+
+**Q: What is the Response Progress UI?**
+A: When using an automated mode like "Demo Mode," a special UI appears while the AI is generating responses. It shows real-time progress bars for each parallel response, token counts, generation speed (tokens/second), and elapsed time.
+
+### V. Troubleshooting
+
+**Q: Why are my cycles getting wiped or my data being lost?**
+A: This was a critical bug in early versions related to a "race condition" during the auto-save process. The issue has been resolved by implementing a "navigation locking" feature. The UI now displays a save status indicator (a checkmark, a caution sign, or a spinner), and navigation between cycles is disabled until all changes are safely saved to the `dce_history.json` file.
+
+**Q: Why is the parser failing on my AI's response?**
+A: The parser expects the AI's response to follow a specific format (using tags like `<summary>` and `<file path="...">`). While the parser has fallbacks for common model errors, a severely malformed response can cause it to fail. When using "Demo Mode" with a supported local model, the DCE requests a structured JSON output, which is much more reliable and less prone to parsing failures.
+
+**Q: Why does the File Tree View (FTV) sometimes flash or refresh?**
+A: The FTV automatically refreshes when it detects changes to your workspace files. In some cases, frequent auto-saves (like the extension saving its own history file) could trigger this. This has been largely mitigated by adding specific exclusions to the file watcher, but if you experience this, ensuring `.vscode/` is in your `.gitignore` file can help.
+</file_artifact>
+
+<file path="src/Artifacts/A117.6. DCE - Website FAQ.md">
+# Artifact A117.6: DCE - Website FAQ
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A Frequently Asked Questions (FAQ) document for the Data Curation Environment (DCE) website, designed to serve as a comprehensive knowledge base for new users.
+- **Tags:** documentation, faq, knowledge base, onboarding, user guide
+
+## 1. Overview
+
+This document provides answers to frequently asked questions about the Data Curation Environment (DCE) VS Code Extension. It is intended to help new users understand the purpose, features, and workflow of the DCE.
+
+---
+
+## I. General & Getting Started
+
+### Q: What is the Data Curation Environment (DCE)?
+**A:** The Data Curation Environment is a VS Code extension designed to streamline and enhance the workflow of AI-assisted development. It provides an integrated toolset for managing the context (code, documents, etc.) you provide to Large Language Models (LLMs), comparing multiple AI responses in parallel, and safely testing AI-generated code.
+
+### Q: Who is the DCE for?
+**A:** The DCE is for any developer, researcher, or project manager who uses Large Language Models as part of their development process. It's particularly useful for those working on complex projects who need to maintain high-quality, consistent context for their AI interactions and want to manage multiple AI suggestions efficiently.
+
+### Q: How do I install the DCE?
+**A:** The DCE is packaged as a `.vsix` file. You can install it in VS Code by going to the **Extensions** view, clicking the **...** (More Actions) menu, and selecting **"Install from VSIX..."**. For a detailed guide, please refer to `A28. DCE - Packaging and Distribution Guide.md`.
+
+### Q: Is there a "demo" mode?
+**A:** Yes. The DCE includes a "Demo Mode" that connects to a local, open-source LLM running via vLLM. This allows you to experience the full automated workflow, including response streaming and parallel generation, without needing your own API keys. See `A94. DCE - Connecting to a Local LLM Guide.md` for setup instructions.
+
+---
+
+## II. Core Concepts & Workflow
+
+### Q: What is an "Artifact"?
+**A:** In the DCE workflow, an "Artifact" is a formal, written document (like a project plan, requirements document, or even this FAQ) that serves as a "source of truth." The core principle of DCE is "Documentation First"—you and your AI partner should create or update these artifacts to define a plan before writing code.
+
+### Q: What is a "Cycle"?
+**A:** A "Cycle" represents one complete iteration of the development loop: you provide context to the AI, you receive responses, you select the best one, and you integrate its changes. The DCE's Parallel Co-Pilot Panel allows you to navigate through your project's history, cycle by cycle.
+
+### Q: What is the "Source of Truth"?
+**A:** The "Source of Truth" refers to your collection of documentation artifacts. These documents are the blueprints that guide the project. When you need to make a change or add a feature, you update the relevant artifact first, and then use that updated plan to instruct the AI on what code to write.
+
+### Q: What is the "Perfect Loop" workflow?
+**A:** The "Perfect Loop" is the guided workflow within the Parallel Co-Pilot Panel. The UI uses a subtle blue glow to highlight the next logical step you should take, guiding you from parsing responses, to selecting one, creating a baseline, accepting files, and finally preparing the context for your next cycle.
+
+---
+
+## III. The File Tree View (FTV) / Context Chooser
+
+### Q: What is the main purpose of the File Tree View?
+**A:** The File Tree View (also known as the Context Chooser) is the heart of Phase 1 of the DCE. It replaces the tedious and error-prone process of manually listing files for your AI's context. You can use the checkboxes to intuitively select exactly which files and folders should be included when you generate your `flattened_repo.md` file.
+
+### Q: What do the numbers next to the files and folders mean?
+**A:** These are live statistics to help you manage your context size. For each file and folder, you can see the total number of files it contains and its approximate token count. This helps you quickly identify which parts of your project are the largest and make informed decisions about what to include.
+
+### Q: Can I save a set of selected files?
+**A:** Yes. You can save your current selection of checked files as a named "Selection Set." This is useful when you are working on multiple features that require different contexts. You can quickly load these sets later without having to manually re-select all the files.
+
+---
+
+## IV. The Parallel Co-Pilot Panel (PCPP)
+
+### Q: Why use a "Parallel" Co-Pilot?
+**A:** Relying on a single AI response can be risky. The PCPP is designed to manage multiple, parallel responses to the same prompt. This allows you to compare different solutions from an AI, see how it approaches the problem in various ways, and select the best possible implementation.
+
+### Q: What does "Parse All" do?
+**A:** When you paste raw AI responses into the tabs, they are just plain text. Clicking "Parse All" instructs the DCE to read the content in every tab and structure it. The extension looks for specific tags (like `<summary>` and `<file path="...">`) to separate the AI's plan from its code, enabling features like syntax highlighting and file diffing.
+
+### Q: What is the "Associated Files" list?
+**A:** After parsing, this list shows all the files that the AI's response intends to create or modify. It includes a checkmark (`✓`) or an 'x' (`✗`) to show you if that file already exists in your workspace. This is a quick way to spot if the AI is hallucinating file paths or suggesting new files.
+
+### Q: How does the "Accept Selected" button work?
+**A:** This is a key part of the workflow. After you check the boxes next to the files you want in the "Associated Files" list, clicking "Accept Selected" will write the AI-generated code from the response directly into your workspace files, overwriting their current content.
+
+### Q: What do the "Baseline" and "Restore" buttons do?
+**A:** These buttons integrate with Git to create a safe testing loop.
+*   **Baseline (Commit):** Creates a Git commit of your current workspace state, giving you a safe restore point.
+*   **Restore Baseline:** Reverts all changes made since the last baseline, including deleting any newly created files. This allows you to quickly undo an AI's changes if they don't work and test a different response.
+
+---
+
+## V. Troubleshooting
+
+### Q: Why is the File Tree View (FTV) flashing or constantly refreshing?
+**A:** This is almost always caused by the extension's auto-save feature interacting with a file watcher. Ensure that the `.vscode/` directory is added to your project's `.gitignore` file. This tells the file watcher to ignore changes to the DCE's own history file, which prevents the refresh loop.
+
+### Q: I'm seeing duplicate files in my `flattened_repo.md`. Why?
+**A:** This can happen if the selection state becomes desynchronized, often related to the "Automatically add new files to selection" feature. The quickest fix is to use the "Deselect All Across all Responses" button in the PCPP or to manually clear the "Selected Items" list in the FTV, and then re-select your files.
+
+### Q: My estimated prompt cost is always $0.00. Is it broken?
+**A:** This was a bug that has been fixed. The cost calculation should now trigger correctly whenever a cycle is loaded or its context is changed. If it's still showing zero, try clicking the "Log State" button in the PCPP header and review the output logs for any calculation errors.
+</file_artifact>
+
+<file path="src/Artifacts/A117.7. DCE - Website FAQ.md">
+# Artifact A117.7: DCE - Website FAQ
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A Frequently Asked Questions (FAQ) document designed for the `aiascent.dev` website to serve as a knowledge base for new and prospective users of the Data Curation Environment (DCE).
+- **Tags:** documentation, faq, website, knowledge base, onboarding
+
+## 1. Purpose
+
+This document provides answers to common questions about the Data Curation Environment (DCE). Its goal is to help new users understand the "why" behind the tool, its core features, and how to get the most out of its unique workflow.
+
+---
+
+## I. General & Core Concepts
+
+### Q: What is the Data Curation Environment (DCE)?
+
+**A:** The Data Curation Environment is a VS Code extension designed to streamline and accelerate AI-assisted development. It provides an integrated toolset for managing the context (code, documents, etc.) you provide to Large Language Models (LLMs), comparing multiple AI-generated responses in parallel, and safely testing those responses in your live workspace.
+
+### Q: What problem does DCE solve?
+
+**A:** DCE solves the "context problem." The quality of any AI's output is directly dependent on the quality of the input context. Manually collecting files, copying their content, and pasting them into a prompt is slow, error-prone, and inefficient. DCE automates this entire process, allowing you to curate a perfect, high-fidelity context with just a few clicks. It also solves the "single-threaded" problem of standard AI chats by allowing you to manage, compare, and test multiple AI solutions simultaneously.
+
+### Q: Who is DCE for?
+
+**A:** DCE is for any developer, researcher, or writer who uses LLMs as part of their workflow. It's particularly powerful for those working on complex projects who need to provide large amounts of context to an AI, and for "Citizen Architects"—individuals who orchestrate AI to build sophisticated systems.
+
+### Q: What is "Vibecoding"?
+
+**A:** "Vibecoding" is the intuitive, conversational process of collaborating with an AI to create something new. It starts with a high-level goal or "vibe" and progressively refines it into a functional product through a human-machine partnership. DCE is the professional toolset for serious vibecoding.
+
+### Q: What is the "Process as Asset" philosophy?
+
+**A:** This is the core idea that the *process* of developing with AI is as valuable as the final product. DCE captures your entire development history—your prompts, the AI's suggestions, and your decisions—as a persistent, auditable "knowledge graph." This history becomes a reusable asset for training, onboarding, and future development.
+
+---
+
+## II. Getting Started
+
+### Q: How do I install DCE?
+
+**A:** DCE will be available on the Visual Studio Code Marketplace. Once published, you can install it by searching for "Data Curation Environment" in the Extensions view (Ctrl+Shift+X) and clicking "Install."
+
+### Q: How do I start a new project with DCE?
+
+**A:** Simply open a new, empty folder in VS Code. The DCE panel will automatically open to an "Onboarding" view. Describe your project's goals in the "Project Scope" text area and click "Generate Initial Artifacts Prompt." DCE will create a `prompt.md` file and a set of starter planning documents for you.
+
+### Q: Do I need my own API key?
+
+**A:** No. The default "Free Mode" is a manual workflow where DCE helps you generate a `prompt.md` file that you can copy and paste into any AI chat interface you already use (like Google's AI Studio, ChatGPT, etc.). You then paste the AI's responses back into DCE for analysis.
+
+### Q: What is "Demo Mode"?
+
+**A:** "Demo Mode" is an included feature that connects to a local, open-source LLM running on your machine (via vLLM). It allows you to experience the full, automated workflow—sending prompts and receiving streaming responses directly within VS Code—without needing a paid API key. It's a way to demonstrate the full power of the extension.
+
+---
+
+## III. The DCE Workflow
+
+### Q: What is the "Context Chooser"?
+
+**A:** The Context Chooser is the file tree view with checkboxes. It's the primary interface for selecting the files and folders you want to include in your prompt. When you click "Flatten Context," it gathers all the checked files into a single `flattened_repo.md` file.
+
+### Q: What is the "Parallel Co-Pilot Panel" (PCPP)?
+
+**A:** The PCPP is the multi-tabbed editor where you manage AI responses. You can paste a different AI response into each tab. This allows for side-by-side comparison of different solutions to the same problem.
+
+### Q: What does "Parse All" do?
+
+**A:** After you paste raw AI responses into the tabs, the "Parse All" button processes them. It identifies the AI's summary, its plan, and most importantly, all the code files it generated. This transforms the raw text into a structured, interactive view.
+
+### Q: What are "Associated Files"?
+
+**A:** This is a list of all the files that the AI's response intends to create or modify. The DCE automatically checks if these files exist in your workspace and shows you a `✓` or `✗` next to each one, so you can immediately spot if the AI is referencing a file correctly or "hallucinating" a path.
+
+### Q: How do I test an AI's code?
+
+**A:** The PCPP features a "Git-Integrated Testing Workflow."
+1.  **Baseline (Commit):** Creates a safe restore point of your current work.
+2.  **Accept Selected:** Overwrites your local files with the AI-generated code.
+3.  **Test:** You run your code to see if it works.
+4.  **Restore Baseline:** If the AI's code is buggy, one click on this button instantly reverts all changes, allowing you to safely test another response.
+
+### Q: What is a "Cycle"?
+
+**A:** A "Cycle" represents one full loop of the development process: writing a prompt, generating responses, and accepting a solution. The DCE saves every cycle, allowing you to navigate back in time to review the exact state of the project and the AI suggestions at any point in its history.
+
+---
+
+## IV. Advanced Features
+
+### Q: Can DCE handle files other than code?
+
+**A:** Yes. DCE has built-in extractors for `.pdf`, `.docx`, and `.xlsx`/`.csv` files. When you check one of these files, DCE extracts its textual content on-the-fly and includes it in the context, allowing you to use documents and spreadsheets as source material for your prompts.
+
+### Q: How does the native diff integration work?
+
+**A:** In the "Associated Files" list, you can click the "Open Changes" button next to any file. This opens VS Code's powerful, built-in diff viewer, showing you a color-coded, side-by-side comparison of your original file and the AI's proposed changes.
+
+### Q: Can I connect DCE to my own LLM?
+
+**A:** Yes. In the settings, you can switch to "API (URL)" mode and provide the endpoint for any OpenAI-compatible API, such as one you host yourself with vLLM, Ollama, or another tool.
+
+### Q: Is my data and code secure?
+
+**A:** In "Free Mode," you are in complete control. DCE only prepares prompt files on your local machine; you decide where to send them. In "Demo Mode" or "API (URL)" mode, the extension makes direct calls from your machine to the endpoint you specify. Your code does not pass through any third-party servers controlled by the extension.
+</file_artifact>
+
+<file path="src/Artifacts/A117.8. DCE - Frequently Asked Questions (FAQ).md">
+# Artifact A117.8: DCE - Frequently Asked Questions (FAQ)
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive list of frequently asked questions about the Data Curation Environment (DCE), its features, workflow, and core concepts. This artifact is intended to be used as a primary source for a user-facing knowledge base.
+- **Tags:** documentation, faq, help, onboarding, user guide
+
+## 1. Purpose
+
+This document provides answers to common questions about the Data Curation Environment (DCE) VS Code extension. It is designed to help new and existing users understand the purpose, features, and workflow of the tool.
+
+## 2. General Concepts & Workflow
+
+### What is the Data Curation Environment (DCE)?
+The Data Curation Environment is a VS Code extension designed to streamline and enhance the workflow of AI-assisted development. Its primary goal is to solve the problem of "context management"—the difficult and manual process of selecting, packaging, and managing the code and documents you provide to a Large Language Model (LLM) to get high-quality, relevant responses.
+
+### What is the "artifact-driven workflow"?
+This is the core philosophy of the DCE. It's a "documentation-first" approach where you create or update planning documents (called "Artifacts") before you write code. These artifacts act as the "source of truth" for your project, ensuring that both you and your AI collaborator are always aligned on the project's goals and architecture.
+
+### What are "Cycles"?
+Cycles are the primary unit of work and history in the DCE. Every time you prepare a prompt, get responses from an AI, and integrate the changes, you are completing a cycle. The Parallel Co-Pilot Panel allows you to navigate through your project's history, cycle by cycle, to see how it has evolved.
+
+### What is the purpose of `prompt.md`?
+The `prompt.md` file is the final, assembled context that you provide to an LLM. The DCE helps you generate this file by combining your project scope, cycle history, interaction rules, and the "flattened" content of all the files you've selected.
+
+## 3. Phase 1: The Context Chooser (File Tree View)
+
+### How do I select files to include in my prompt?
+The Context Chooser is the file tree view marked with a spiral icon. You can include files and folders in your prompt context by simply clicking the checkbox next to their name. Checking a folder will automatically check all the files and subfolders within it.
+
+### What does the "Flatten Context" button do?
+This button takes all the files you have "checked" in the file tree, reads their content, and concatenates them into a single file called `flattened_repo.md` in your project's root directory. This file is then used as part of the `prompt.md`.
+
+### Why do some files and folders have a grayed-out checkbox?
+These are items that are excluded by default to keep your context clean and relevant. This includes directories like `.git`, `node_modules`, and `dist`, as well as specific files like `package-lock.json`. This prevents large, unnecessary, or build-related files from being included in your prompt.
+
+### Can I save a set of selected files to use later?
+Yes. The toolbar in the Context Chooser view has "Save," "Load," and "Manage" buttons for "Selection Sets." This allows you to save a specific group of checked files with a name (e.g., "Frontend Components") and quickly load that selection back in a future session.
+
+## 4. Phase 2: The Parallel Co-Pilot Panel (PCPP)
+
+### What is the Parallel Co-Pilot Panel?
+The PCPP is the main interface for managing the iterative cycle-based workflow. It's a multi-tabbed environment where you can paste, parse, compare, and test multiple different responses from an AI for a single prompt.
+
+### How do I use the PCPP?
+1.  **Paste Responses:** After getting responses from your LLM (using the generated `prompt.md`), you paste each full response into a separate "Resp #" tab.
+2.  **Parse:** Click the "Parse All" button. The DCE will read the raw text in each tab and structure it, separating the AI's summary and plan from the code files it generated.
+3.  **Review & Compare:** You can now easily switch between tabs to compare the different solutions. The UI shows you which files were modified and provides a similarity score.
+4.  **Diff:** Click on any file in the "Associated Files" list to open a native VS Code diff view, showing you the exact changes the AI is proposing.
+5.  **Accept & Test:** Use the "Accept Selected" button to write the AI's proposed file changes directly into your workspace, allowing you to immediately test them.
+6.  **Baseline/Restore:** The Git-integrated "Baseline" and "Restore" buttons allow you to create a safe save point before accepting changes and instantly revert your workspace if you don't like the AI's suggestion.
+
+### What is the "animated workflow guide"?
+This is a feature that highlights the next logical button you should press in the UI with a pulsing blue glow. It's designed to guide new users through the standard development cycle, from parsing responses to generating the prompt for the next cycle.
+
+## 5. Local LLM / "Demo Mode"
+
+### Can I use the DCE with a local LLM?
+Yes. The DCE is designed to support different "Connection Modes." While the default is "Manual" (copy/paste), you can configure it to connect to a local LLM that exposes an OpenAI-compatible API endpoint (like vLLM or LM Studio).
+
+### What is "Demo Mode"?
+"Demo Mode" is a pre-configured setting that connects the DCE to a specific local vLLM instance running on the `aiascent.game` server. When this mode is active, the "Generate prompt.md" button is replaced with a "Generate responses" button, which automates the entire process of sending the prompt and receiving the responses directly within the extension.
+
+### What is the Response Progress UI?
+When you use an automated connection mode like "Demo Mode," a special UI appears while the responses are being generated. It shows real-time progress bars for each response, token counts, and performance metrics like tokens-per-second, providing feedback during the generation process.
+
+## 6. Setup & Troubleshooting
+
+### How do I get started with a new project?
+When you open a new, empty folder with the DCE installed, the Parallel Co-Pilot Panel will automatically open to an "Onboarding View." Simply describe your project's goals in the text box and click "Generate Initial Artifacts Prompt." This will create a starter set of planning documents and the `prompt.md` file you need for your first cycle.
+
+### Why is the File Tree View (FTV) flashing or constantly refreshing?
+This can happen if the file watcher is reacting to frequent file changes. A common cause is the `dce_history.json` file being saved in the `.vscode` directory, which is not ignored by default. Adding `.vscode/` to your project's `.gitignore` file usually resolves this issue.
+</file_artifact>
+
+<file path="src/Artifacts/A117.9. DCE - Website FAQ.md">
+# Artifact A117.9: DCE - Website FAQ
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A Frequently Asked Questions (FAQ) document for the new DCE promotional website, designed to answer common questions from new users.
+- **Tags:** documentation, faq, website, onboarding, community
+
+## 1. Purpose
+
+This document provides answers to frequently asked questions about the Data Curation Environment (DCE) VS Code extension. It is intended to be used as a knowledge base for the new `aiascent.dev` promotional website.
+
+## 2. Frequently Asked Questions
+
+### General Concepts
+
+**Q: What is the Data Curation Environment (DCE)?**
+
+A: The Data Curation Environment (DCE) is a VS Code extension designed to streamline and enhance the workflow of AI-assisted software development. It provides an integrated toolset for selecting, managing, and packaging the context (code files, documents, etc.) you provide to Large Language Models (LLMs), and for managing the responses you get back.
+
+**Q: What problem does DCE solve?**
+
+A: DCE solves the problem of "context management." Modern AI development requires providing the AI with a precise and comprehensive set of files as context. Manually creating and updating this context is tedious, error-prone, and inefficient. DCE automates this process, allowing you to focus on the creative and strategic aspects of development.
+
+**Q: Who is DCE for?**
+
+A: DCE is for any developer, project manager, or technical writer who uses AI to help build, document, or manage software projects. It is particularly powerful for those who engage in an iterative, conversational workflow with AI and want to bring structure, efficiency, and auditability to that process.
+
+### Core Features
+
+**Q: What is the "Context Chooser"?**
+
+A: The Context Chooser is the file tree view provided by DCE. It allows you to select files and folders for your AI context using simple checkboxes, replacing the need to manually manage a list of files. It also provides valuable metadata, like token counts and Git status, for each file.
+
+**Q: What does the "Flatten Context" button do?**
+
+A: This button takes all the files and folders you have "checked" in the Context Chooser, reads their content, and packages them into a single, formatted `flattened_repo.md` file. This file, along with your instructions, becomes the input for the AI.
+
+**Q: What is the "Parallel Co-Pilot Panel" (PCPP)?**
+
+A: The PCPP is the main interface for managing the iterative development workflow. It allows you to paste multiple, parallel responses from an AI into different tabs for side-by-side comparison. It includes features for parsing responses, diffing them against your local files, and accepting the AI's changes into your workspace.
+
+**Q: What are "Cycles"?**
+
+A: A "Cycle" represents one complete loop of the development process: writing a prompt (your "Cycle Context"), getting AI responses, and integrating the chosen solution. The DCE organizes your entire project history into these cycles, creating a navigable "knowledge graph" of your project's evolution.
+
+### Workflow
+
+**Q: What is the recommended workflow with DCE?**
+
+A: The core workflow, which we call the "perfect loop," is:
+1.  **Curate Context:** Use the Context Chooser to select the relevant files.
+2.  **Generate Prompt:** Use the "Generate prompt.md" button to package your context and instructions.
+3.  **Get Responses:** Use the generated prompt with your preferred AI model (e.g., via AI Studio, ChatGPT).
+4.  **Paste & Parse:** Paste the AI's responses into the Parallel Co-Pilot Panel and parse them.
+5.  **Review & Select:** Compare the responses, review the diffs, and select the best one.
+6.  **Baseline & Accept:** Create a Git baseline (a safe restore point) and accept the AI's changes into your code.
+7.  **Test & Iterate:** Test the new code. If it's not right, use the "Restore" button to revert and try a different response.
+8.  **Start New Cycle:** Once you're satisfied, write your notes for the next task and begin the next cycle.
+
+**Q: What are "Artifacts"?**
+
+A: Artifacts are formal, written documents (like plans, guides, and requirements) that serve as the "source of truth" for your project. The DCE workflow is built on the principle of "Documentation First," where you and the AI collaborate to create and update these artifacts before writing code.
+
+**Q: How does DCE work with Git?**
+
+A: DCE is designed to work hand-in-hand with Git. The "Baseline (Commit)" and "Restore Baseline" features leverage Git to allow you to safely test AI-generated code. You can create a commit as a restore point before accepting changes, and then instantly revert your entire workspace if the changes don't work as expected.
+
+### Local LLM / Demo Mode
+
+**Q: Can I use DCE with my own local AI model?**
+
+A: Yes. DCE has a "Demo Mode" that is pre-configured to connect to a local vLLM instance with an OpenAI-compatible API. You can also configure it in the settings to point to any custom OpenAI-compatible endpoint URL.
+
+**Q: What is "vLLM" and why is it used?**
+
+A: vLLM is a high-throughput serving engine for LLMs. We use it for our "Demo Mode" because its parallel processing capabilities allow the DCE to generate multiple, simultaneous responses with very low latency, showcasing the full power of the parallel workflow.
+
+**Q: What is the difference between "Manual Mode" and "Demo Mode"?**
+
+A:
+*   **Manual Mode:** This is the default, free mode. You generate a `prompt.md` file and manually copy/paste it to your preferred AI service. You then paste the AI's response back into the DCE.
+*   **Demo Mode:** This is an automated mode. When you click "Generate responses," the DCE sends the prompt directly to your configured local LLM, and the responses are streamed back into the UI in real-time.
+
+### Troubleshooting & Technical
+
+**Q: Why do my AI responses sometimes fail to parse?**
+
+A: The DCE's parser expects the AI's response to follow a specific format (e.g., using `<summary>` and `<file path="...">` tags). If the AI deviates from this format, parsing can fail. The "Harmony" interaction schema (used in Demo Mode) is designed to be more robust by requesting a structured JSON output, which significantly reduces parsing errors.
+
+**Q: Where is my project data (cycles, responses) stored?**
+
+A: All of your project's cycle history, including your notes and the raw AI responses, is stored locally in a single file: `.vscode/dce_history.json` within your project's workspace. This file is not checked into Git by default.
+
+**Q: Is DCE free?**
+
+A: Yes, the DCE extension is free to use. When using it in "Manual Mode," any costs are related to the AI service you choose to use (many, like Google's AI Studio, have generous free tiers). When using it with a local LLM, the only "cost" is the hardware to run the model.
+</file_artifact>
+
+<file path="src/Artifacts/A117.10. DCE - FAQ for aiascent.dev.md">
+# Artifact A117.10: DCE - FAQ for aiascent.dev
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A Frequently Asked Questions (FAQ) document for the `aiascent.dev` website to serve as a public-facing knowledge base for the Data Curation Environment (DCE) extension.
+- **Tags:** documentation, faq, knowledge base, public-facing
+
+## 1. Purpose
+
+This document provides answers to common questions about the Data Curation Environment (DCE) VS Code extension. It is intended to be used as the primary knowledge base for the `aiascent.dev` website, helping new users understand the purpose, workflow, and features of the tool.
+
+## Frequently Asked Questions
+
+### General / What is DCE?
+
+**Q: What is the Data Curation Environment (DCE)?**
+
+**A:** The Data Curation Environment is a VS Code extension designed to streamline and enhance the workflow of AI-assisted software development. It provides a suite of tools to help developers manage the context they provide to Large Language Models (LLMs), compare multiple AI-generated responses, and safely test those responses in their local workspace.
+
+**Q: Who is DCE for?**
+
+**A:** DCE is for any developer, project manager, or "Citizen Architect" who uses AI to help them write code or documentation. It's especially useful for those who find themselves manually copying and pasting files into prompts, managing multiple AI conversations, and struggling to keep track of different AI suggestions.
+
+**Q: Is DCE free?**
+
+**A:** Yes, the DCE extension is free to use. It operates in a "manual mode" by default, where you generate a complete prompt file (`prompt.md`) and use it with your preferred AI model (like Google's AI Studio, ChatGPT, etc.) via copy and paste. This allows you to leverage the powerful context management and response comparison features without any API keys or costs.
+
+**Q: Does DCE replace GitHub Copilot or other AI assistants?**
+
+**A:** No, DCE is a collaborator with, not a replacement for, AI coding assistants. While tools like Copilot are excellent for inline code completion, DCE is designed for larger, more architectural tasks. It helps you manage the high-level conversation with an AI about multi-file changes, new features, or complex refactors.
+
+### Core Workflow
+
+**Q: What is the main workflow in DCE?**
+
+**A:** The DCE workflow is organized into "Cycles" and follows a "Documentation First" principle. A typical cycle looks like this:
+1.  **Curate Context:** Use the File Tree View (FTV) to check the files and folders you want the AI to know about.
+2.  **Generate Prompt:** Write your instructions for the current cycle and click "Generate prompt.md". The DCE packages your instructions, the curated files, and the project history into a single prompt file.
+3.  **Get Responses:** Copy the content of `prompt.md` and paste it into your favorite AI model's interface, generating multiple responses.
+4.  **Compare & Test:** Paste the AI's responses back into the DCE's Parallel Co-Pilot Panel (PCPP). Here you can parse, compare, and diff the responses. Use the "Accept" and "Restore" features to safely test the AI's code in your workspace.
+5.  **Start New Cycle:** Once you've accepted a solution, you write a summary for the next cycle and repeat the process.
+
+**Q: What are "Artifacts"?**
+
+**A:** Artifacts are formal project documents (like this FAQ!) stored in your project's `src/Artifacts` directory. They serve as the "source of truth" for your project's plans, requirements, and architecture. The DCE workflow encourages updating these documents before writing code.
+
+### Key Features
+
+**Q: What is the File Tree View (FTV) or "Context Chooser"?**
+
+**A:** The FTV is a custom file explorer within VS Code. It has checkboxes next to every file and folder, allowing you to quickly select the exact context you want to include in your prompt. It also shows you token counts and other metadata to help you manage your context size.
+
+**Q: What is the Parallel Co-Pilot Panel (PCPP)?**
+
+**A:** The PCPP is the main hub for managing your interaction with the AI. It's a multi-tabbed panel where you can:
+*   Write your instructions for each development "Cycle".
+*   Paste and compare multiple AI responses side-by-side.
+*   View diffs between the AI's suggestions and your current code.
+*   Use Git-integrated "Baseline" and "Restore" buttons to safely test AI-generated code.
+*   Navigate through your project's entire development history, cycle by cycle.
+
+**Q: What does the "Baseline" and "Restore" functionality do?**
+
+**A:** This is a powerful, Git-integrated testing feature.
+*   **Baseline (Commit):** Before you test an AI's code, you can click "Baseline". This creates a Git commit of your current work, giving you a safe restore point.
+*   **Restore Baseline:** If the AI's code doesn't work or you want to try a different response, clicking "Restore" will instantly discard all changes, reverting your files to the state of your last baseline. This allows for rapid, risk-free testing of multiple AI solutions.
+
+### Local LLM / Demo Mode
+
+**Q: Does DCE support local LLMs?**
+
+**A:** Yes. In addition to the manual workflow, you can configure the DCE to connect to a local LLM that exposes an OpenAI-compatible API (like one running via vLLM or LM Studio). This enables a more automated workflow.
+
+**Q: What is "Demo Mode"?**
+
+**A:** "Demo Mode" is a pre-configured setting that connects the DCE to a local vLLM instance running on the `aiascent.game` server. When this mode is active, the "Generate prompt.md" button is replaced with a "Generate responses" button, which automates the entire process of sending the prompt and receiving responses.
+
+**Q: Do I need a powerful GPU to use the local LLM features?**
+
+**A:** To run a powerful local LLM yourself, you will generally need a modern NVIDIA GPU with a significant amount of VRAM (e.g., 12GB+). However, the "Demo Mode" is designed to connect to an existing server, so you can experience the automated workflow without needing to run the model on your own machine.
+
+### Philosophy
+
+**Q: What do you mean by "Process as Asset"?**
+
+**A:** This is a core philosophy of the DCE. The tool is designed to capture the entire iterative development process—the context, the prompts, the multiple AI suggestions, and the developer's final decisions—as a persistent, structured history. This history (the "process") becomes a valuable asset for auditing, training, and future development.
+
+**Q: What is a "Citizen Architect"?**
+
+**A:** A "Citizen Architect" is an individual who can orchestrate AI to build complex, valuable systems. Their primary skill is not writing code line-by-line, but rather high-level orchestration, curation, and validation of AI's output. The DCE is a tool built to empower this new class of creator.
+</file_artifact>
+
+<file path="src/Artifacts/A117.11. DCE - Frequently Asked Questions (FAQ).md">
+# Artifact A116: DCE - Frequently Asked Questions (FAQ)
+# Date Created: C117
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A comprehensive list of frequently asked questions and answers about the Data Curation Environment (DCE) for a public-facing knowledge base.
+- **Tags:** documentation, faq, knowledge base, user guide, dce
+
+## 1. General Concepts
+
+### Q: What is the Data Curation Environment (DCE)?
+**A:** The Data Curation Environment is a VS Code extension designed to streamline AI-assisted development. It helps you manage the files and context you provide to Large Language Models (LLMs), compare multiple AI-generated responses side-by-side, and integrate the AI's suggestions back into your codebase in a structured and efficient way.
+
+### Q: What problem does DCE solve?
+**A:** DCE solves the problem of "context management." When working with AI on a large project, it's difficult to manually copy and paste all the relevant code into a prompt. DCE provides a user interface to select files and folders, "flatten" them into a single context file (`prompt.md`), and manage the entire iterative workflow of prompting, reviewing, and testing AI-generated code.
+
+### Q: Who is DCE for?
+**A:** DCE is for any developer, researcher, or creator who uses Large Language Models as part of their workflow. It's particularly useful for those working on complex, multi-file projects who want a more structured and efficient way to collaborate with an AI.
+
+### Q: What is the "artifact-driven workflow"?
+**A:** This is the core philosophy of DCE. It means that before writing code, you first write a planning document (an "artifact") that describes the goals, requirements, or design. This "documentation-first" approach ensures that both you and the AI are aligned on the objective, leading to better, more consistent results.
+
+## 2. Getting Started
+
+### Q: How do I install the DCE extension?
+**A:** You can install the DCE extension from the Visual Studio Code Marketplace. Search for "Data Curation Environment" and click "Install."
+
+### Q: I've installed the extension. What's the first thing I should do?
+**A:** When you open a new, empty folder, the DCE's "Parallel Co-Pilot Panel" will open to an onboarding screen. The first step is to describe your project's high-level goals in the "Project Scope" text area. From there, the extension will guide you to generate your initial set of planning documents.
+
+### Q: What is `prompt.md`?
+**A:** The `prompt.md` file is the final, assembled prompt that you copy and paste into your AI model's chat interface. The DCE automatically generates this file for you by combining your project artifacts, cycle history, and the flattened code from your selected files.
+
+### Q: Do I need to use Git?
+**A:** While not strictly required, using Git is highly recommended. DCE has integrated features like "Baseline (Commit)" and "Restore Baseline" that leverage Git to allow you to safely test AI-generated code and instantly revert any changes if they don't work.
+
+## 3. Core Features
+
+### Q: What is the "Context Chooser" (File Tree View)?
+**A:** This is the panel with the spiral icon. It shows your entire project's file tree with checkboxes next to each file and folder. You use these checkboxes to select which files you want to include in your flattened context for the AI.
+
+### Q: What is the "Parallel Co-Pilot Panel" (PCPP)?
+**A:** This is the main interface for managing the AI workflow. It's a multi-tabbed panel where you can paste different AI responses, parse them into a structured view, compare them, and accept their changes into your codebase.
+
+### Q: What are "Cycles"?
+**A:** A "Cycle" represents one round of the iterative development process: you write a prompt, get AI responses, and select one to integrate. The PCPP has a "Cycle Navigator" that lets you move back and forth through your project's history to see the context and AI suggestions from previous cycles.
+
+### Q: What does "Parse All" do?
+**A:** When you paste raw responses from your AI into the PCPP tabs, they are just plain text. Clicking "Parse All" tells the extension to read the text in all tabs and process it into a structured view, separating the AI's summary, its course of action, and the individual code files it generated. This makes the response much easier to review.
+
+### Q: What does "Accept Selected Files" do?
+**A:** After you parse a response, you'll see a list of "Associated Files" that the AI generated. You can check the boxes next to the files you like and then click "Accept Selected Files" to have the DCE write those files directly into your workspace.
+
+## 4. Workflow Questions
+
+### Q: What is the difference between "Manual Mode" and "Demo Mode"?
+**A:**
+*   **Manual Mode** is the default. It's a "bring your own AI" model where you generate a `prompt.md` file, copy it to your preferred AI (like Gemini, Claude, etc.), and then paste the AI's response back into the DCE.
+*   **Demo Mode** is an automated workflow that connects the DCE directly to a locally running LLM. In this mode, a "Generate responses" button sends the prompt directly to the model and streams the responses back into the PCPP automatically.
+
+### Q: How do I choose between multiple AI responses?
+**A:** The PCPP is designed for this. After parsing, you can quickly switch between tabs to see each AI's plan and code. The UI shows you metadata like how many files were changed and the total token count. Once you find the best response, you click "Select This Response" to mark it as the chosen solution for that cycle.
+
+### Q: Can I regenerate just one bad response?
+**A:** Yes. Each response tab has a "Regenerate" (refresh icon) button. This allows you to re-run the prompt for just that one slot without affecting the other responses you received.
+
+## 5. Advanced Topics & Troubleshooting
+
+### Q: Why do some files in the file tree have a grayed-out checkbox?
+**A:** The DCE automatically excludes certain files and folders that are generally not useful for an AI's context. This includes directories like `.git`, `node_modules`, `dist`, and build artifacts like `package-lock.json`. This helps keep your context clean and focused.
+
+### Q: My AI's response won't parse correctly. What can I do?
+**A:** Parsing failures usually happen when the AI doesn't follow the required output format (e.g., it forgets a closing `
 </file_artifact>
 
 
