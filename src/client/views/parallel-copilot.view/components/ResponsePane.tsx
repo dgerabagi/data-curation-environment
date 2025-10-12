@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponsePane.tsx
-// Updated on: C97 (Switch from TabState to PcppResponse)
+// Updated on: C117 (Add onPaneResize prop)
 import * as React from 'react';
 import ParsedView from './ParsedView';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
@@ -27,6 +27,7 @@ interface ResponsePaneProps {
     viewableContent: string | undefined | null;
     onCopyContent: () => void;
     leftPaneWidth: number;
+    onPaneResize: (width: number) => void; // Added this prop
     workflowStep: string | null;
 }
 
@@ -63,6 +64,7 @@ const ResponsePane: React.FC<ResponsePaneProps> = (props) => {
             onCopyContent={props.onCopyContent}
             leftPaneWidth={props.leftPaneWidth}
             workflowStep={props.workflowStep}
+            onPaneResize={props.onPaneResize} // Pass the prop down
         />
     );
 };

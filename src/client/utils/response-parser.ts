@@ -1,5 +1,5 @@
 // src/client/utils/response-parser.ts
-// Updated on: C115 (Implement robust JSON un-escaping)
+// Updated on: C116 (Apply un-escaping to successful JSON parse path)
 import { ParsedResponse, ParsedFile } from '@/common/types/pcpp.types';
 
 const SUMMARY_REGEX = /<summary>([\s\S]*?)<\/summary>/;
@@ -17,10 +17,8 @@ const HYBRID_FILE_OBJ_REGEX = /\{\s*"path"\s*:\s*"((?:\\"|[^"])*)"\s*,\s*"conten
 function unescapeJsonString(s: string): string {
     if (!s) return "";
     // This handles the double-escaped strings from the LLM.
-    // \\" -> \"
-    // \" -> "
-    // \\n -> \n
-    // \n -> newline
+    // \\" -> \" -> "
+    // \\n -> \n -> newline
     return s.replace(/\\\\/g, '\\')
             .replace(/\\n/g, '\n')
             .replace(/\\t/g, '\t')
@@ -43,10 +41,11 @@ export function parseResponse(rawText: string): ParsedResponse {
         const jsonResponse = JSON.parse(textToParse);
         if (jsonResponse.summary && jsonResponse.course_of_action && Array.isArray(jsonResponse.files)) {
             const files: ParsedFile[] = jsonResponse.files.map((f: any) => {
-                // JSON.parse already handles the first level of un-escaping.
-                const content = f.content || '';
+                // C116 FIX: Apply the same un-escaping logic to the content from the successfully parsed JSON.
+                // The LLM double-escapes content within the JSON string values.
+                const content = unescapeJsonString(f.content || '');
                 return {
-                    path: f.path || '',
+                    path: unescapeJsonString(f.path || ''),
                     content: content,
                     tokenCount: Math.ceil(content.length / 4),
                 };
@@ -54,14 +53,14 @@ export function parseResponse(rawText: string): ParsedResponse {
 
             const courseOfAction = Array.isArray(jsonResponse.course_of_action)
                 ? jsonResponse.course_of_action
-                    .map((step: any) => `* **Step ${step.step}:** ${step.description}`)
+                    .map((step: any) => `* **Step ${step.step}:** ${unescapeJsonString(step.description)}`)
                     .join('\n')
-                : jsonResponse.course_of_action;
+                : unescapeJsonString(jsonResponse.course_of_action);
 
             return {
-                summary: jsonResponse.summary,
+                summary: unescapeJsonString(jsonResponse.summary),
                 courseOfAction: courseOfAction,
-                curatorActivity: jsonResponse.curator_activity || '',
+                curatorActivity: unescapeJsonString(jsonResponse.curator_activity || ''),
                 filesUpdated: files.map(f => f.path),
                 files: files,
                 totalTokens: files.reduce((sum, file) => sum + file.tokenCount, 0),
@@ -79,9 +78,10 @@ export function parseResponse(rawText: string): ParsedResponse {
 
     if (summaryMatchHybrid && fileMatchesHybrid.length > 0) {
         const files: ParsedFile[] = fileMatchesHybrid.map(match => {
+            const path = unescapeJsonString(match[1] || '');
             const content = unescapeJsonString(match[2] || '');
             return {
-                path: unescapeJsonString(match[1] || ''),
+                path: path,
                 content: content,
                 tokenCount: Math.ceil(content.length / 4)
             };
@@ -91,7 +91,7 @@ export function parseResponse(rawText: string): ParsedResponse {
         if (coaMatchHybrid?.[1]) {
             try {
                 const coaArray = JSON.parse(coaMatchHybrid[1]);
-                courseOfAction = coaArray.map((step: any) => `* **Step ${step.step}:** ${step.description}`).join('\n');
+                courseOfAction = coaArray.map((step: any) => `* **Step ${step.step}:** ${unescapeJsonString(step.description)}`).join('\n');
             } catch { /* ignore parse error */ }
         }
 

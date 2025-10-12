@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C104 (Add 'stopped' status)
+// Updated on: C116 (Add leftPaneWidth for persistence)
 export interface PcppResponse {
     content: string;
     // The single source of truth for the response's state

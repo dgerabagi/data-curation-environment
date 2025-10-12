@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C115 (Lift responseCount state)
+// Updated on: C116 (Add state for resizable pane)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -39,9 +39,10 @@ const App = () => {
     const [initialData, setInitialData] = React.useState<{cycle: PcppCycle | null, scope: string | undefined, maxCycle: number}>({cycle: null, scope: '', maxCycle: 0});
     const saveStateRef = React.useRef<() => void>(() => {});
     const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
+    const [leftPaneWidth, setLeftPaneWidth] = React.useState(initialData.cycle?.leftPaneWidth || 33);
 
     // --- State & Hooks Initialization ---
-    const [responseCount, setResponseCount] = React.useState(4); // LIFTED STATE
+    const [responseCount, setResponseCount] = React.useState(4); 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
@@ -58,11 +59,11 @@ const App = () => {
     );
 
     // --- Core Save Logic ---
-    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount });
-    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount };
+    const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth });
+    stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth };
 
     saveStateRef.current = React.useCallback(() => {
-        const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount } = stateRef.current;
+        const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth } = stateRef.current;
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
         const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
@@ -80,12 +81,13 @@ const App = () => {
             isParsedMode,
             selectedResponseId,
             selectedFilesForReplacement: Array.from(selectedFilesForReplacement),
-            tabCount: responseCount, // Use unified responseCount for saving
+            tabCount: responseCount, 
             activeTab,
             isSortedByTokens,
             pathOverrides: Object.fromEntries(pathOverrides),
             activeWorkflowStep: workflowStep || undefined,
-            isEphemeralContextCollapsed
+            isEphemeralContextCollapsed,
+            leftPaneWidth,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
@@ -102,7 +104,6 @@ const App = () => {
         }
     }, [cycleManagement.saveStatus]);
 
-    // --- C111 FIX: Derived State for Viewable Content ---
     const viewableContent = React.useMemo(() => {
         if (!fileManagement.selectedFilePath) return null;
         const activeTabData = tabManagement.tabs[tabManagement.activeTab.toString()];
@@ -119,11 +120,13 @@ const App = () => {
             setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
             setForceShowResponseView(false);
             if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
+            if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
             if (cycleData) {
                 setForceShowResponseView(false);
                 if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
+                if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
@@ -278,7 +281,8 @@ const App = () => {
                             comparisonMetrics={fileManagement.comparisonMetrics}
                             viewableContent={viewableContent}
                             onCopyContent={fileManagement.handleCopyContent}
-                            leftPaneWidth={0} // Placeholder
+                            leftPaneWidth={leftPaneWidth} 
+                            onPaneResize={(width) => { setLeftPaneWidth(width); cycleManagement.setSaveStatus('unsaved'); }}
                             workflowStep={workflowStep}
                         />
                     </div>

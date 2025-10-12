@@ -1,12 +1,12 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C28 (No functional changes, only minor class name consistency)
+// Updated on: C117 (No functional changes, verified onPaneResize prop)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
 import { ComparisonMetrics } from '@/common/ipc/channels.type';
-import { formatLargeNumber, truncatePath } from '@/common/utils/formatting';
+import { formatLargeNumber } from '@/common/utils/formatting';
 import CodeViewer from './CodeViewer';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -44,6 +44,7 @@ interface ParsedViewProps {
     onCopyContent: () => void;
     workflowStep: string | null;
     leftPaneWidth: number;
+    onPaneResize: (width: number) => void;
 }
 
 const ParsedView: React.FC<ParsedViewProps> = (props) => {
@@ -54,6 +55,8 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
     const [contextMenu, setContextMenu] = React.useState<{ x: number, y: number, path: string } | null>(null);
     const clientIpc = ClientPostMessageManager.getInstance();
     const menuRef = React.useRef<HTMLDivElement>(null);
+    const resizerRef = React.useRef<HTMLDivElement>(null);
+    const leftPaneRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -64,6 +67,24 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
+        e.preventDefault();
+        const handleMouseMove = (moveEvent: MouseEvent) => {
+            if (leftPaneRef.current) {
+                const containerWidth = leftPaneRef.current.parentElement?.clientWidth || window.innerWidth;
+                const newLeftWidth = moveEvent.clientX - (leftPaneRef.current.parentElement?.getBoundingClientRect().left || 0);
+                const newWidthPercent = Math.max(15, Math.min(85, (newLeftWidth / containerWidth) * 100));
+                props.onPaneResize(newWidthPercent);
+            }
+        };
+        const handleMouseUp = () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
+    }, [props.onPaneResize]);
 
     const handleContextMenu = (event: React.MouseEvent, path: string) => {
         event.preventDefault();
@@ -95,7 +116,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
 
     return (
         <div className="parsed-view-grid">
-            <div className="parsed-view-left" style={{ flexBasis: `${props.leftPaneWidth}%` }}>
+            <div className="parsed-view-left" ref={leftPaneRef} style={{ flexBasis: `${props.leftPaneWidth}%` }}>
                 <CollapsibleSection title="Associated Files" isCollapsed={isAssociatedFilesCollapsed} onToggle={() => setAssociatedFilesCollapsed(p => !p)} className={props.workflowStep === 'awaitingFileSelect' ? 'workflow-highlight' : ''}>
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
@@ -107,7 +128,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
-                                <span className="file-path-text" title={file}>{truncatePath(file, 40)}</span>
+                                <span className="file-path-text" title={file}>{file}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                                 {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                             </div>
@@ -125,7 +146,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     </CollapsibleSection>
                 )}
             </div>
-            <div className="resizer" />
+            <div className="resizer" ref={resizerRef} onMouseDown={handleMouseDown} />
             <div className="parsed-view-right">
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>

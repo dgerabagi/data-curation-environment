@@ -1,5 +1,5 @@
 // src/backend/services/llm.service.ts
-// Updated on: C114 (Refactor stream consumer to be a proper SSE parser)
+// Updated on: C116 (Ensure shared agentkeepalive is used for all requests)
 import { Services } from './services';
 import fetch from 'node-fetch';
 import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
@@ -14,6 +14,7 @@ import { HttpsAgent } from 'agentkeepalive';
 const MAX_TOKENS_PER_RESPONSE = 16384;
 const generationControllers = new Map<string, AbortController>();
 
+// C116 FIX: Create a single, shared agent instance to be used for all requests.
 const httpsAgent = new HttpsAgent({
     maxSockets: 100,
     maxFreeSockets: 10,
@@ -91,7 +92,7 @@ export class LlmService {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                     signal: controller.signal,
-                    agent: httpsAgent,
+                    agent: httpsAgent, // C116 FIX: Ensure the shared agent is used here
                 });
 
                 if (!response.ok || !response.body) { throw new Error(`API request failed: ${response.status} ${await response.text()}`); }
@@ -174,7 +175,7 @@ export class LlmService {
                     richResponse.status = 'stopped';
                     progress.status = 'stopped';
                 } else {
-                    Services.loggerService.error(`Failed to generate single stream for C${cycleId}/R${responseId}: ${error.message}`);
+                    Services.loggerService.error(`Failed to generate single stream for C${cycleId}/R${responseId}: ${error.message || error}`);
                     richResponse.status = 'error';
                     progress.status = 'error';
                 }
