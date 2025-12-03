@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T01:17:10.591Z
+  Date Generated: 2025-12-03T03:02:06.182Z
   ---
-  Total Files: 209
-  Approx. Tokens: 361841
+  Total Files: 210
+  Approx. Tokens: 362807
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,7 +12,7 @@
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (9234 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (9295 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7090 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -20,7 +20,7 @@
 10. src\client\views\parallel-copilot.view\view.tsx (4403 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 532 - Chars: 36936 - Tokens: 9234
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 536 - Chars: 37177 - Tokens: 9295
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -125,7 +125,7 @@
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 303 - Chars: 12214 - Tokens: 3054
+106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12672 - Tokens: 3168
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 133 - Chars: 14156 - Tokens: 3539
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 15114 - Tokens: 3779
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -224,17 +224,18 @@
 202. webpack.config.js - Lines: 113 - Chars: 3039 - Tokens: 760
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-205. package.json - Lines: 172 - Chars: 5617 - Tokens: 1405
+205. package.json - Lines: 174 - Chars: 5725 - Tokens: 1432
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
-208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 94 - Chars: 5333 - Tokens: 1334
+208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 97 - Chars: 5552 - Tokens: 1388
 209. src\backend\services\database.service.ts - Lines: 292 - Chars: 13671 - Tokens: 3418
+210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 38 - Chars: 1879 - Tokens: 470
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C118 (Add A118 Database Plan)
+# Updated on: C121 (Add A119 Checklist)
 
 ## 1. Purpose
 
@@ -679,6 +680,10 @@
 ### A118. DCE - Database Integration Plan
 - **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
 - **Tags:** plan, architecture, database, sqlite, persistence, data integrity
+
+### A119. DCE - Universal Task Checklist for Cycle 122+
+- **Description:** A structured checklist for the next phase of development, focusing on stabilizing the new SQLite database integration.
+- **Tags:** checklist, planning, database, sqlite
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -8259,7 +8264,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C119 (Cleanup legacy file I/O logic)
+// Updated on: C121 (Fix default cycle connection mode initialization)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -8312,6 +8317,9 @@ export class HistoryService {
             isFreshEnvironment = false;
         } catch (e) { isFreshEnvironment = true; }
         
+        // Fetch global settings to initialize connectionMode correctly
+        const settings = await Services.settingsService.getSettings();
+
         const defaultCycle: PcppCycle = {
             cycleId: isFreshEnvironment ? 0 : 1, 
             timestamp: new Date().toISOString(), 
@@ -8330,6 +8338,7 @@ export class HistoryService {
             activeWorkflowStep: null,
             status: 'complete',
             isEphemeralContextCollapsed: true,
+            connectionMode: settings.connectionMode, // Initialize with global default
         };
 
         if (isFreshEnvironment) {
@@ -8339,6 +8348,7 @@ export class HistoryService {
         const cycles = Services.databaseService.getAllCycles();
 
         if (cycles.length === 0) {
+            // If no cycles exist in DB (e.g., fresh install or cleared DB), create default
             Services.databaseService.saveCycle(defaultCycle);
             return defaultCycle;
         }
@@ -8357,8 +8367,9 @@ export class HistoryService {
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         if (cycleId === 0) {
             const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
+            const settings = await Services.settingsService.getSettings();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -16209,7 +16220,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C120 (Add Native Module Version Mismatch)
+# Updated on: C122 (Add Electron Rebuild Error)
 
 ## 1. Purpose
 
@@ -16219,17 +16230,29 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
+### Case Study 025: `electron-rebuild` Fails with "Unable to find electron's version number"
+
+-   **Artifacts Affected:** `package.json`, `node_modules`
+-   **Cycles Observed:** C122
+-   **Symptom:** Running `npm run rebuild` (which executes `electron-rebuild`) fails with the error: `Error: Unable to find electron's version number, either install it or specify an explicit version`.
+-   **Root Cause Analysis (RCA):** `electron-rebuild` attempts to detect the target Electron version by looking for the `electron` package in the project's dependencies. Since VS Code extensions typically only depend on the `vscode` engine and not `electron` directly, this check fails. Without a target version, the build cannot proceed.
+-   **Codified Solution & Best Practice:**
+    1.  Explicitly add `electron` to `devDependencies` in `package.json`.
+    2.  The version should match the Electron version used by the target VS Code version (e.g., `^33.0.0` for VS Code 1.96+ or to match ABI 136).
+    3.  Run `npm install` to fetch the package, then `npm run rebuild`.
+
+---
+
 ### Case Study 024: Native Module Version Mismatch (`better-sqlite3`)
 
 -   **Artifacts Affected:** `node_modules`
--   **Cycles Observed:** C120
+-   **Cycles Observed:** C120, C121
 -   **Symptom:** The extension fails to activate or initialize the database service, throwing an error: `The module .../better_sqlite3.node was compiled against a different Node.js version using NODE_MODULE_VERSION 127. This version of Node.js requires NODE_MODULE_VERSION 136.`
 -   **Root Cause Analysis (RCA):** VS Code extensions run within an Electron environment, which uses a specific version of Node.js (and thus a specific ABI version, e.g., 136). When `npm install` is run in a standard terminal, it compiles native modules like `better-sqlite3` for the system's installed Node.js version (e.g., ABI 127). This mismatch prevents the module from loading in the extension host.
 -   **Codified Solution & Best Practice:**
     1.  Native modules must be rebuilt specifically for the Electron version used by VS Code.
-    2.  Run `npm rebuild better-sqlite3` (sometimes sufficient if prebuilds are available).
-    3.  For a robust fix, use `@electron/rebuild`: `npm install --save-dev @electron/rebuild` followed by `.\node_modules\.bin\electron-rebuild`.
-    4.  This step is required whenever the dependency is installed or updated, or if the VS Code version changes significantly.
+    2.  Use the `@electron/rebuild` package. Add it to `devDependencies` and create a script: `"rebuild": "electron-rebuild"`.
+    3.  Run `npm run rebuild` after installing dependencies. This ensures the binary matches the runtime environment of VS Code.
 
 ---
 
@@ -16339,6 +16362,8 @@ This document serves as a living record of persistent or complex bugs. By docume
     1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
     2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
     3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
+
+---
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -25645,11 +25670,13 @@ To run the extension locally for development:
         "compile": "webpack",
         "watch": "webpack --watch",
         "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
+        "lint": "eslint src --ext ts",
+        "rebuild": "electron-rebuild"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.24.7",
         "@babel/preset-typescript": "^7.24.7",
+        "@electron/rebuild": "^3.6.0",
         "@types/better-sqlite3": "^7.6.10",
         "@types/node": "18.x",
         "@types/path-browserify": "^1.0.2",
@@ -25661,6 +25688,7 @@ To run the extension locally for development:
         "babel-loader": "^9.1.3",
         "copy-webpack-plugin": "^12.0.2",
         "css-loader": "^7.1.2",
+        "electron": "^33.0.0",
         "eslint": "^8.57.0",
         "mini-css-extract-plugin": "^2.9.0",
         "path-browserify": "^1.0.1",
@@ -25764,7 +25792,7 @@ All notable changes to the "Data Curation Environment" extension will be documen
 # Artifact A118: DCE - Database Integration Plan
 # Date Created: C118
 # Author: AI Model & Curator
-# Updated on: C120 (Add native module build instructions)
+# Updated on: C122 (Clarify native module rebuild process)
 
 - **Key/Value for A0:**
 - **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
@@ -25790,7 +25818,10 @@ The `dce_history.json` format will be retained solely for **Import/Export** func
 -   **Library:** `better-sqlite3`. This library provides a synchronous API that is highly performant and fits well with the VS Code extension architecture (running in the Node.js Extension Host).
 -   **File Location:** `.vscode/dce.db` (inside the user's workspace).
 -   **Build Configuration (C119):** Because `better-sqlite3` is a native Node.js module, it **must** be excluded from the Webpack bundle. We will add it to the `externals` section of `webpack.config.js`.
--   **Native Module Compatibility (C120):** `better-sqlite3` must be compiled against the specific Electron version used by VS Code, not the system's Node.js version. This requires running `npm rebuild better-sqlite3` or using `@electron/rebuild` in the extension directory.
+-   **Native Module Compatibility (C122):** `better-sqlite3` must be compiled against the specific Electron version used by VS Code.
+    -   **Dependency:** Add `@electron/rebuild` and `electron` (matching the target ABI, e.g., `^33.0.0`) to `devDependencies`.
+    -   **Script:** Add `"rebuild": "electron-rebuild"` to `package.json`.
+    -   **Action:** Run `npm install` followed by `npm run rebuild` whenever native dependencies are added or updated.
 
 ### 3.2. Schema Design
 
@@ -25844,7 +25875,7 @@ Stores the AI responses associated with each cycle.
 
 ## 4. Implementation Plan
 
-1.  **Install Dependency:** `npm install better-sqlite3` (Curator action).
+1.  **Install Dependencies:** `npm install better-sqlite3`, `npm install --save-dev @electron/rebuild electron`.
 2.  **Configure Webpack:** Update `webpack.config.js` to add `better-sqlite3` to `externals`.
 3.  **Create `DatabaseService`:** Implement the connection, schema creation, migration logic, and CRUD operations.
 4.  **Refactor `HistoryService`:**
@@ -26150,5 +26181,46 @@ export class DatabaseService {
         this.db.exec('DELETE FROM cycles; DELETE FROM responses; DELETE FROM key_value_store;');
     }
 }
+</file_artifact>
+
+<file path="src/Artifacts/A119. DCE - Universal Task Checklist for Cycle 122+.md">
+# Artifact A119: DCE - Universal Task Checklist for Cycle 122+
+# Date Created: C121
+# Author: AI Model & Curator
+
+## 1. Purpose
+
+This artifact provides a structured checklist for the next phase of development, focusing on stabilizing the new SQLite database integration and resolving the remaining data migration and UI issues.
+
+## Task List
+
+## T-1: Stabilize SQLite Integration
+- **Files Involved:**
+    - `src/backend/services/database.service.ts`
+    - `src/backend/services/history.service.ts`
+    - `package.json`
+- **Total Tokens:** ~5,000
+- **More than one cycle?** No
+- **Status:** In Progress
+
+- [ ] **Task (T-ID: 1.1):** Verify that `npm run rebuild` correctly compiles `better-sqlite3` for the Electron environment.
+- [ ] **Task (T-ID: 1.2):** Confirm that `DatabaseService` correctly initializes and creates the `.vscode/dce.db` file.
+- [ ] **Task (T-ID: 1.3):** Verify that the migration logic in `DatabaseService` correctly imports data from an existing `dce_history.json` and renames it to `.bak`.
+- [ ] **Task (T-ID: 1.4):** Ensure that `HistoryService` correctly reads and writes to the database, and that the UI reflects the persisted state (e.g., cycle count, responses).
+
+### Verification Steps
+1.  Open a workspace with an existing `dce_history.json`.
+2.  Run the extension.
+3.  **Expected:** A `.vscode/dce.db` file is created. `dce_history.json` is renamed to `dce_history.json.bak`. The PCPP loads with the correct cycle history.
+4.  Make a change (e.g., edit cycle context) and navigate to another cycle.
+5.  **Expected:** The change is persisted and visible when navigating back.
+
+## T-2: Plan for Next Cycle
+- **Files Involved:**
+    - `src/Artifacts/A120-New-Checklist.md`
+- **Total Tokens:** ~500
+- **More than one cycle?** No
+
+- [ ] **Task (T-ID: 2.1):** Create the Universal Task Checklist for the next cycle based on current progress and backlog.
 </file_artifact>
 
