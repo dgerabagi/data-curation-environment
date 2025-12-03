@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C119 (Cleanup legacy file I/O logic)
+// Updated on: C121 (Fix default cycle connection mode initialization)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -52,6 +52,9 @@ export class HistoryService {
             isFreshEnvironment = false;
         } catch (e) { isFreshEnvironment = true; }
         
+        // Fetch global settings to initialize connectionMode correctly
+        const settings = await Services.settingsService.getSettings();
+
         const defaultCycle: PcppCycle = {
             cycleId: isFreshEnvironment ? 0 : 1, 
             timestamp: new Date().toISOString(), 
@@ -70,6 +73,7 @@ export class HistoryService {
             activeWorkflowStep: null,
             status: 'complete',
             isEphemeralContextCollapsed: true,
+            connectionMode: settings.connectionMode, // Initialize with global default
         };
 
         if (isFreshEnvironment) {
@@ -79,6 +83,7 @@ export class HistoryService {
         const cycles = Services.databaseService.getAllCycles();
 
         if (cycles.length === 0) {
+            // If no cycles exist in DB (e.g., fresh install or cleared DB), create default
             Services.databaseService.saveCycle(defaultCycle);
             return defaultCycle;
         }
@@ -97,8 +102,9 @@ export class HistoryService {
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         if (cycleId === 0) {
             const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
+            const settings = await Services.settingsService.getSettings();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode
             };
         }
         return Services.databaseService.getCycle(cycleId);

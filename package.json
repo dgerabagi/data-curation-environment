@@ -121,11 +121,13 @@
         "compile": "webpack",
         "watch": "webpack --watch",
         "package": "webpack --mode production --devtool hidden-source-map",
-        "lint": "eslint src --ext ts"
+        "lint": "eslint src --ext ts",
+        "rebuild": "electron-rebuild"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.24.7",
         "@babel/preset-typescript": "^7.24.7",
+        "@electron/rebuild": "^3.7.2",
         "@types/better-sqlite3": "^7.6.10",
         "@types/node": "18.x",
         "@types/path-browserify": "^1.0.2",
