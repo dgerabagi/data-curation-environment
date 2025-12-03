@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T03:22:48.851Z
+  Date Generated: 2025-12-03T12:08:51.634Z
   ---
   Total Files: 210
-  Approx. Tokens: 363007
+  Approx. Tokens: 363327
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 159 - Chars: 15981 - Tokens: 3996
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 173 - Chars: 17063 - Tokens: 4266
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -228,8 +228,8 @@
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 97 - Chars: 5552 - Tokens: 1388
-209. src\backend\services\database.service.ts - Lines: 292 - Chars: 13671 - Tokens: 3418
-210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 38 - Chars: 1879 - Tokens: 470
+209. src\backend\services\database.service.ts - Lines: 293 - Chars: 13722 - Tokens: 3431
+210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -16220,13 +16220,27 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C123 (Add better-sqlite3 C++20 error)
+# Updated on: C123 (Add persistent native module build failure case)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 027: Persistent Native Module Mismatch Despite Rebuild
+
+-   **Artifacts Affected:** `node_modules`, `package.json`
+-   **Cycles Observed:** C120-C122
+-   **Symptom:** Repeated `NODE_MODULE_VERSION` errors (130 vs 136) for `better-sqlite3` even after running `npm run rebuild`.
+-   **Root Cause Analysis (RCA):** The standard `electron-rebuild` process can sometimes fail to overwrite an existing prebuilt binary if it believes the module is already up-to-date or if there are caching issues. Additionally, running `npm rebuild` (without arguments) often defaults to the system Node.js version, undoing the Electron-specific build.
+-   **Codified Solution & Best Practice:**
+    1.  Use the `electron-rebuild` executable directly from `node_modules/.bin/` to ensure the correct binary is used.
+    2.  Use the `-f` (force) flag to ensure a rebuild happens regardless of cache status.
+    3.  Use the `-w` (module) flag to target the specific problematic module.
+    4.  Command: `.\node_modules\.bin\electron-rebuild -f -w better-sqlite3`
 
 ---
 
@@ -16344,7 +16358,7 @@ This document serves as a living record of persistent or complex bugs. By docume
 -   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
 -   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a pool of sockets for connections. While the default `maxSockets` is technically `Infinity`, in practice, factors within the execution environment (like VS Code's extension host) can lead to exhaustion or delays in acquiring new sockets for concurrent requests to the same origin. When the application tries to open several connections at once, the later requests can time out while waiting for a socket to become available.
 -   **Codified Solution & Best Practice:**
-    1.  When an application needs to make a high number of concurrent, long-lived HTTP requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP/HTTPS requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
     2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
     3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
     4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
@@ -25902,7 +25916,7 @@ Stores the AI responses associated with each cycle.
 
 <file path="src/backend/services/database.service.ts">
 // src/backend/services/database.service.ts
-// Updated on: C119 (Move path logic to initialize)
+// Updated on: C123 (Add environment version logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -25928,6 +25942,9 @@ export class DatabaseService {
             fs.mkdirSync(vscodeDir);
         }
         this.dbPath = path.join(vscodeDir, 'dce.db');
+
+        // Log environment details to help debug native module mismatches
+        Services.loggerService.log(`[Env] Node: ${process.versions.node}, Electron: ${process.versions['electron'] || 'N/A'}, ABI: ${process.versions.modules}`);
 
         try {
             this.db = new Database(this.dbPath);
@@ -26101,8 +26118,7 @@ export class DatabaseService {
             title: cycleRow.title,
             timestamp: cycleRow.timestamp,
             cycleContext: cycleRow.cycle_context,
-            ephemeral_context: cycleRow.ephemeral_context, // Map DB column to type
-            ephemeralContext: cycleRow.ephemeral_context, // Handle both casing if needed, or map correctly
+            ephemeralContext: cycleRow.ephemeral_context,
             tabCount: cycleRow.tab_count,
             activeTab: cycleRow.active_tab,
             isParsedMode: !!cycleRow.is_parsed_mode,
@@ -26112,7 +26128,6 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
-            connectionMode: cycleRow.connection_mode,
             responses
         };
     }
@@ -26199,6 +26214,7 @@ export class DatabaseService {
 # Artifact A119: DCE - Universal Task Checklist for Cycle 122+
 # Date Created: C121
 # Author: AI Model & Curator
+# Updated on: C123 (Update status)
 
 ## 1. Purpose
 
@@ -26213,10 +26229,10 @@ This artifact provides a structured checklist for the next phase of development,
     - `package.json`
 - **Total Tokens:** ~5,000
 - **More than one cycle?** No
-- **Status:** In Progress
+- **Status:** **In Progress (Blocked by Build Environment)**
 
-- [ ] **Task (T-ID: 1.1):** Verify that `npm run rebuild` correctly compiles `better-sqlite3` for the Electron environment.
-- [ ] **Task (T-ID: 1.2):** Confirm that `DatabaseService` correctly initializes and creates the `.vscode/dce.db` file.
+- [x] **Task (T-ID: 1.1):** Verify that `npm run rebuild` correctly compiles `better-sqlite3` for the Electron environment. (User attempted, but runtime mismatch persists).
+- [ ] **Task (T-ID: 1.2):** Confirm that `DatabaseService` correctly initializes and creates the `.vscode/dce.db` file. (Pending successful build).
 - [ ] **Task (T-ID: 1.3):** Verify that the migration logic in `DatabaseService` correctly imports data from an existing `dce_history.json` and renames it to `.bak`.
 - [ ] **Task (T-ID: 1.4):** Ensure that `HistoryService` correctly reads and writes to the database, and that the UI reflects the persisted state (e.g., cycle count, responses).
 

@@ -1,5 +1,5 @@
 // src/backend/services/database.service.ts
-// Updated on: C119 (Move path logic to initialize)
+// Updated on: C123 (Add environment version logging)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -25,6 +25,9 @@ export class DatabaseService {
             fs.mkdirSync(vscodeDir);
         }
         this.dbPath = path.join(vscodeDir, 'dce.db');
+
+        // Log environment details to help debug native module mismatches
+        Services.loggerService.log(`[Env] Node: ${process.versions.node}, Electron: ${process.versions['electron'] || 'N/A'}, ABI: ${process.versions.modules}`);
 
         try {
             this.db = new Database(this.dbPath);
@@ -198,8 +201,7 @@ export class DatabaseService {
             title: cycleRow.title,
             timestamp: cycleRow.timestamp,
             cycleContext: cycleRow.cycle_context,
-            ephemeral_context: cycleRow.ephemeral_context, // Map DB column to type
-            ephemeralContext: cycleRow.ephemeral_context, // Handle both casing if needed, or map correctly
+            ephemeralContext: cycleRow.ephemeral_context,
             tabCount: cycleRow.tab_count,
             activeTab: cycleRow.active_tab,
             isParsedMode: !!cycleRow.is_parsed_mode,
@@ -209,7 +211,6 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
-            connectionMode: cycleRow.connection_mode,
             responses
         };
     }
