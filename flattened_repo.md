@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T12:08:51.634Z
+  Date Generated: 2025-12-03T12:54:54.430Z
   ---
   Total Files: 210
-  Approx. Tokens: 363327
+  Approx. Tokens: 363772
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -15,9 +15,9 @@
 5. src\Artifacts\A0. DCE Master Artifact List.md (9295 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7090 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
-8. src\backend\services\file-operation.service.ts (4526 tokens)
-9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4395 tokens)
+8. src\Artifacts\A11. DCE - Regression Case Studies.md (4636 tokens)
+9. src\backend\services\file-operation.service.ts (4526 tokens)
+10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 536 - Chars: 37177 - Tokens: 9295
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 173 - Chars: 17063 - Tokens: 4266
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 187 - Chars: 18541 - Tokens: 4636
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -224,10 +224,10 @@
 202. webpack.config.js - Lines: 113 - Chars: 3039 - Tokens: 760
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-205. package.json - Lines: 174 - Chars: 5726 - Tokens: 1432
+205. package.json - Lines: 174 - Chars: 5715 - Tokens: 1429
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
-208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 97 - Chars: 5552 - Tokens: 1388
+208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 98 - Chars: 5862 - Tokens: 1466
 209. src\backend\services\database.service.ts - Lines: 293 - Chars: 13722 - Tokens: 3431
 210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
 
@@ -16220,13 +16220,27 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C123 (Add persistent native module build failure case)
+# Updated on: C123 (Add ABI Mismatch case study)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 028: ABI Mismatch with Non-Standard Electron Versions
+
+-   **Artifacts Affected:** `node_modules`, `package.json`
+-   **Cycles Observed:** C123
+-   **Symptom:** Native module (e.g., `better-sqlite3`) fails to load with `NODE_MODULE_VERSION` mismatch (e.g., 130 vs 136), even after running `npm run rebuild`. The runtime Electron version reported in logs (e.g., 37.7.0) is significantly different from the standard stable version (e.g., 33.0.0).
+-   **Root Cause Analysis (RCA):** The user is likely running a custom or nightly build of VS Code (or a fork like Cursor) that uses a newer or non-standard version of Electron. The standard `electron-rebuild` command infers the target version from the `electron` package in `devDependencies` (e.g., v33), resulting in a binary compiled for ABI 131/132, while the runtime requires ABI 136.
+-   **Codified Solution & Best Practice:**
+    1.  Identify the *exact* Electron version of the runtime environment. This can be found in the extension's logs (if logged via `process.versions.electron`) or VS Code's "About" dialog.
+    2.  Force `electron-rebuild` to target that specific version using the `-v` flag.
+    3.  Command: `npm run rebuild -- -v <VERSION> -f` (e.g., `npm run rebuild -- -v 37.7.0 -f`).
+    4.  If the specific version is not available in the public registry (causing 404s), try targeting the closest standard Electron version that shares the same Node.js ABI version (e.g., Electron 34 beta for Node 22/ABI 136).
 
 ---
 
@@ -25579,6 +25593,7 @@ To run the extension locally for development:
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
     "version": "0.2.0",
+    "icon": "public/spiral.svg",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -25590,7 +25605,6 @@ To run the extension locally for development:
         "Other"
     ],
     "activationEvents": [
-        "onView:data-curation-environment",
         "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",
@@ -25818,7 +25832,7 @@ All notable changes to the "Data Curation Environment" extension will be documen
 # Artifact A118: DCE - Database Integration Plan
 # Date Created: C118
 # Author: AI Model & Curator
-# Updated on: C122 (Clarify native module rebuild process)
+# Updated on: C123 (Add troubleshooting for ABI mismatch)
 
 - **Key/Value for A0:**
 - **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
@@ -25848,6 +25862,7 @@ The `dce_history.json` format will be retained solely for **Import/Export** func
     -   **Dependency:** Add `@electron/rebuild` and `electron` (matching the target ABI, e.g., `^33.0.0`) to `devDependencies`.
     -   **Script:** Add `"rebuild": "electron-rebuild"` to `package.json`.
     -   **Action:** Run `npm install` followed by `npm run rebuild` whenever native dependencies are added or updated.
+    -   **Troubleshooting (C123):** If `NODE_MODULE_VERSION` errors persist, check the "Data Curation Environment" output channel for the `[Env]` log. This log reveals the *exact* Electron version the extension is running in. Run `npm run rebuild -- -v <VERSION> -f` to force a build for that specific version.
 
 ### 3.2. Schema Design
 

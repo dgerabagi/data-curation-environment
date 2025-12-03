@@ -4,6 +4,7 @@
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
     "version": "0.2.0",
+    "icon": "public/spiral.svg",
     "repository": {
         "type": "git",
         "url": "https://github.com/dgerabagi/data-curation-environment.git"
@@ -15,7 +16,6 @@
         "Other"
     ],
     "activationEvents": [
-        "onView:data-curation-environment",
         "onCommand:dce.showParallelCopilot"
     ],
     "main": "./dist/extension.js",
