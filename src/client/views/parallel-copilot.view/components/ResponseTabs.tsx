@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C120 (Conditionally render regenerate button based on connection mode)
+// Updated on: C123 (Hide regenerate button in manual mode)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
@@ -20,7 +20,7 @@ interface ResponseTabsProps {
     isGenerating: boolean;
     forceShowResponseView: boolean;
     onToggleForceResponseView: () => void;
-    connectionMode: ConnectionMode; // New Prop
+    connectionMode: ConnectionMode;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({

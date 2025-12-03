@@ -11,7 +11,7 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 122 - even more progress? new error
+Current Cycle 122 - even more prog
 Cycle 121 - almost working?
 Cycle 120 - project seems to be runnable via F5, but does not seem to be making a db yet
 Cycle 119 - trying to implement sqlite
@@ -867,746 +867,31 @@ No project scope defined.
 
 <Cycle 122>
 <Cycle Context>
-okay i think we made even more progress? I'm seeing a new error now at the end of the ephermal context, where it says `✖ Rebuild Failed`. see below.
+still even more progress, in that we got the npm run rebuild to execute, however i still got the node_module_version mismatch, however its a closer mismatch than last time:
+
+```
+PS C:\Projects\DCE> npm run rebuild
+
+> data-curation-environment@0.2.0 rebuild
+> electron-rebuild
+
+✔ Rebuild Complete
+PS C:\Projects\DCE>
+```
+
+<this time>
+[ERROR] [9:16:17 PM] Failed to initialize database: Error: The module '\\?\c:\Projects\DCE\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 130. This version of Node.js requires
+NODE_MODULE_VERSION 136. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+</this time>
+
+<last time>
+NODE_MODULE_VERSION 127. This version of Node.js requires
+NODE_MODULE_VERSION 136. Please try re-compiling or re-installing
+</last time>
 </Cycle Context>
-<Ephemeral Context>
-PS C:\Projects\DCE> npm install better-sqlite3
-
-added 33 packages, and audited 528 packages in 36s
-
-169 packages are looking for funding
-  run `npm fund` for details
-
-4 vulnerabilities (3 moderate, 1 high)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-PS C:\Projects\DCE> npm rebuild better-sqlite3
-rebuilt dependencies successfully
-PS C:\Projects\DCE> npm install --save-dev @electron/rebuild
-npm warn skipping integrity check for git dependency ssh://git@github.com/electron/node-gyp.git
-npm warn deprecated @npmcli/move-file@2.0.1: This functionality has been moved to @npmcli/fs
-npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
-
-added 123 packages, and audited 639 packages in 9s
-
-186 packages are looking for funding
-  run `npm fund` for details
-
-4 vulnerabilities (3 moderate, 1 high)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-PS C:\Projects\DCE> npm run rebuild
-
-> data-curation-environment@0.2.0 rebuild
-> electron-rebuild
-
-
-An unhandled error occurred inside electron-rebuild
-Unable to find electron's version number, either install it or specify an explicit version
-
-Error: Unable to find electron's version number, either install it or specify an explicit version
-    at C:\Projects\DCE\node_modules\@electron\rebuild\lib\cli.js:95:19
-PS C:\Projects\DCE> npm i
-
-up to date, audited 639 packages in 2s
-
-186 packages are looking for funding
-  run `npm fund` for details
-
-4 vulnerabilities (3 moderate, 1 high)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-PS C:\Projects\DCE> npm install
-npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-
-added 35 packages, and audited 674 packages in 11s
-
-193 packages are looking for funding
-  run `npm fund` for details
-
-5 vulnerabilities (4 moderate, 1 high)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-To address all issues possible (including breaking changes), run:
-  npm audit fix --force
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-PS C:\Projects\DCE> npm run rebuild
-
-> data-curation-environment@0.2.0 rebuild
-> electron-rebuild
-
-⠧ Building module: better-sqlite3, Completed: 0gyp verb clean removing "build" directory
-gyp verb download using dist-url https://www.electronjs.org/headers
-gyp verb find Python Python is not set from command line or npm configuration
-gyp verb find Python Python is not set from environment variable PYTHON
-gyp verb find Python checking if the py launcher can be used to find Python 3
-gyp verb find Python - executing "py.exe" to get Python 3 executable path
-gyp sill find Python execFile: exec = "py.exe"
-gyp sill find Python execFile: args = ["-3","-c","import sys; sys.stdout.buffer.write(sys.executable.encode('utf-8'));"]
-gyp sill find Python execFile: opts = {"env":{"ACSetupSvcPort":"23210","ACSvcPort":"17532","ALLUSERSPROFILE":"C:\\ProgramData","APPDATA":"C:\\Users\\dgera\\AppData\\Roaming","BUNDLED_DEBUGPY_PATH":"c:\\Users\\dgera\\.vscode\\extensions\\ms-python.debugpy-2025.10.0-win32-x64\\bundled\\libs\\debugpy","ChocolateyInstall":"C:\\ProgramData\\chocolatey","ChocolateyLastPathUpdate":"133888718735678949","CHROME_CRASHPAD_PIPE_NAME":"\\\\.\\pipe\\crashpad_8080_VDLMOBTTLDFQDGKB","COLOR":"1","COLORTERM":"truecolor","CommonProgramFiles":"C:\\Program Files\\Common Files","CommonProgramFiles(x86)":"C:\\Program Files (x86)\\Common Files","CommonProgramW6432":"C:\\Program Files\\Common Files","COMPUTERNAME":"TUFBOOK","ComSpec":"C:\\WINDOWS\\system32\\cmd.exe","DriverData":"C:\\Windows\\System32\\Drivers\\DriverData","EDITOR":"C:\\WINDOWS\\notepad.exe","EnableLog":"INFO","GIT_ASKPASS":"c:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh","HOME":"C:\\Users\\dgera","HOMEDRIVE":"C:","HOMEPATH":"\\Users\\dgera","INIT_CWD":"C:\\Projects\\DCE","JAVA_HOME":"C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\","LANG":"en_US.UTF-8","LOCALAPPDATA":"C:\\Users\\dgera\\AppData\\Local","LOGONSERVER":"\\\\TUFBOOK","NODE":"C:\\Program Files\\nodejs\\node.exe","npm_command":"run","npm_config_cache":"C:\\Users\\dgera\\AppData\\Local\\npm-cache","npm_config_globalconfig":"C:\\Users\\dgera\\AppData\\Roaming\\npm\\etc\\npmrc","npm_config_global_prefix":"C:\\Users\\dgera\\AppData\\Roaming\\npm","npm_config_init_module":"C:\\Users\\dgera\\.npm-init.js","npm_config_local_prefix":"C:\\Projects\\DCE","npm_config_node_gyp":"C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js","npm_config_noproxy":"","npm_config_npm_version":"11.4.2","npm_config_prefix":"C:\\Users\\dgera\\AppData\\Roaming\\npm","npm_config_userconfig":"C:\\Users\\dgera\\.npmrc","npm_config_user_agent":"npm/11.4.2 node/v22.14.0 win32 x64 workspaces/false","npm_execpath":"C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js","npm_lifecycle_event":"rebuild","npm_lifecycle_script":"electron-rebuild","npm_node_execpath":"C:\\Program Files\\nodejs\\node.exe","npm_package_engines_vscode":"^1.90.0","npm_package_json":"C:\\Projects\\DCE\\package.json","npm_package_name":"data-curation-environment","npm_package_version":"0.2.0","NUMBER_OF_PROCESSORS":"16","OculusBase":"C:\\Program Files\\Oculus\\","OneDrive":"C:\\Users\\dgera\\OneDrive","OneDriveConsumer":"C:\\Users\\dgera\\OneDrive","ORIGINAL_XDG_CURRENT_DESKTOP":"undefined","OS":"Windows_NT","Path":"C:\\Projects\\DCE\\node_modules\\.bin;C:\\Projects\\node_modules\\.bin;C:\\node_modules\\.bin;C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\@npmcli\\run-script\\lib\\node-gyp-bin;c:\\Users\\dgera\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand;c:\\Users\\dgera\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli;C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\bin;C:\\Program Files\\Oculus\\Support\\oculus-runtime;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\Program Files\\dotnet\\;C:\\Program Files\\Process Lasso\\;C:\\Program Files\\GitHub CLI\\;C:\\Users\\dgera\\AppData\\Local\\Muse Hub\\lib;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Git\\cmd;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\dgera\\AppData\\Local\\Programs\\Ollama;C:\\Users\\dgera\\.lmstudio\\bin;C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\dgera\\AppData\\Roaming\\npm;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Projects\\Reference Projects\\apache-maven-3.9.9\\apache-maven\\src\\bin;;c:\\Users\\dgera\\.vscode\\extensions\\ms-python.debugpy-2025.10.0-win32-x64\\bundled\\scripts\\noConfigScripts","PATHEXT":".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL","PROCESSOR_ARCHITECTURE":"AMD64","PROCESSOR_IDENTIFIER":"AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD","PROCESSOR_LEVEL":"25","PROCESSOR_REVISION":"4401","ProgramData":"C:\\ProgramData","ProgramFiles":"C:\\Program Files","ProgramFiles(x86)":"C:\\Program Files (x86)","ProgramW6432":"C:\\Program Files","PROMPT":"$P$G","PSModulePath":"C:\\Users\\dgera\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules","PUBLIC":"C:\\Users\\Public","PYDEVD_DISABLE_FILE_VALIDATION":"1","PYTHONSTARTUP":"c:\\Users\\dgera\\AppData\\Roaming\\Code\\User\\workspaceStorage\\3b3e4c0ba1c8369a7c982a2a4261dbc3\\ms-python.python\\pythonrc.py","PYTHON_BASIC_REPL":"1","RlsSvcPort":"22112","SESSIONNAME":"Console","SystemDrive":"C:","SystemRoot":"C:\\WINDOWS","TEMP":"C:\\Users\\dgera\\AppData\\Local\\Temp","TERM_PROGRAM":"vscode","TERM_PROGRAM_VERSION":"1.106.3","TMP":"C:\\Users\\dgera\\AppData\\Local\\Temp","USERDOMAIN":"TUFBOOK","USERDOMAIN_ROAMINGPROFILE":"TUFBOOK","USERNAME":"dgera","USERPROFILE":"C:\\Users\\dgera","VSCODE_DEBUGPY_ADAPTER_ENDPOINTS":"c:\\Users\\dgera\\.vscode\\extensions\\ms-python.debugpy-2025.10.0-win32-x64\\.noConfigDebugAdapterEndpoints\\endpoint-d599d39b4e7705ac.txt","VSCODE_GIT_ASKPASS_EXTRA_ARGS":"","VSCODE_GIT_ASKPASS_MAIN":"c:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js","VSCODE_GIT_ASKPASS_NODE":"C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe","VSCODE_GIT_IPC_HANDLE":"\\\\.\\pipe\\vscode-git-6ff3ed5fcc-sock","VSCODE_INJECTION":"1","VSCODE_PYTHON_AUTOACTIVATE_GUARD":"1","windir":"C:\\WINDOWS","WSLENV":"WT_SESSION:WT_PROFILE_ID:","WT_PROFILE_ID":"{61c54bbd-c2c6-5271-96e7-009a87ff44bf}","WT_SESSION":"4a75fc0e-7073-4063-8026-5b475b969b10","TERM":"dumb"},"shell":false}
-gyp sill find Python execFile result: err = null
-gyp sill find Python execFile result: stdout = "C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe"
-gyp sill find Python execFile result: stderr = ""
-gyp verb find Python - executable path is "C:\Users\dgera\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe"
-gyp verb find Python - executing "C:\Users\dgera\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe" to get version
-gyp sill find Python execFile: exec = "C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe"
-gyp sill find Python execFile: args = ["-c","import sys; print(\"%s.%s.%s\" % sys.version_info[:3]);"]
-gyp sill find Python execFile: opts = {"env":{"ACSetupSvcPort":"23210","ACSvcPort":"17532","ALLUSERSPROFILE":"C:\\ProgramData","APPDATA":"C:\\Users\\dgera\\AppData\\Roaming","BUNDLED_DEBUGPY_PATH":"c:\\Users\\dgera\\.vscode\\extensions\\ms-python.debugpy-2025.10.0-win32-x64\\bundled\\libs\\debugpy","ChocolateyInstall":"C:\\ProgramData\\chocolatey","ChocolateyLastPathUpdate":"133888718735678949","CHROME_CRASHPAD_PIPE_NAME":"\\\\.\\pipe\\crashpad_8080_VDLMOBTTLDFQDGKB","COLOR":"1","COLORTERM":"truecolor","CommonProgramFiles":"C:\\Program Files\\Common Files","CommonProgramFiles(x86)":"C:\\Program Files (x86)\\Common Files","CommonProgramW6432":"C:\\Program Files\\Common Files","COMPUTERNAME":"TUFBOOK","ComSpec":"C:\\WINDOWS\\system32\\cmd.exe","DriverData":"C:\\Windows\\System32\\Drivers\\DriverData","EDITOR":"C:\\WINDOWS\\notepad.exe","EnableLog":"INFO","GIT_ASKPASS":"c:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh","HOME":"C:\\Users\\dgera","HOMEDRIVE":"C:","HOMEPATH":"\\Users\\dgera","INIT_CWD":"C:\\Projects\\DCE","JAVA_HOME":"C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\","LANG":"en_US.UTF-8","LOCALAPPDATA":"C:\\Users\\dgera\\AppData\\Local","LOGONSERVER":"\\\\TUFBOOK","NODE":"C:\\Program Files\\nodejs\\node.exe","npm_command":"run","npm_config_cache":"C:\\Users\\dgera\\AppData\\Local\\npm-cache","npm_config_globalconfig":"C:\\Users\\dgera\\AppData\\Roaming\\npm\\etc\\npmrc","npm_config_global_prefix":"C:\\Users\\dgera\\AppData\\Roaming\\npm","npm_config_init_module":"C:\\Users\\dgera\\.npm-init.js","npm_config_local_prefix":"C:\\Projects\\DCE","npm_config_node_gyp":"C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js","npm_config_noproxy":"","npm_config_npm_version":"11.4.2","npm_config_prefix":"C:\\Users\\dgera\\AppData\\Roaming\\npm","npm_config_userconfig":"C:\\Users\\dgera\\.npmrc","npm_config_user_agent":"npm/11.4.2 node/v22.14.0 win32 x64 workspaces/false","npm_execpath":"C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js","npm_lifecycle_event":"rebuild","npm_lifecycle_script":"electron-rebuild","npm_node_execpath":"C:\\Program Files\\nodejs\\node.exe","npm_package_engines_vscode":"^1.90.0","npm_package_json":"C:\\Projects\\DCE\\package.json","npm_package_name":"data-curation-environment","npm_package_version":"0.2.0","NUMBER_OF_PROCESSORS":"16","OculusBase":"C:\\Program Files\\Oculus\\","OneDrive":"C:\\Users\\dgera\\OneDrive","OneDriveConsumer":"C:\\Users\\dgera\\OneDrive","ORIGINAL_XDG_CURRENT_DESKTOP":"undefined","OS":"Windows_NT","Path":"C:\\Projects\\DCE\\node_modules\\.bin;C:\\Projects\\node_modules\\.bin;C:\\node_modules\\.bin;C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\@npmcli\\run-script\\lib\\node-gyp-bin;c:\\Users\\dgera\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand;c:\\Users\\dgera\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli;C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\bin;C:\\Program Files\\Oculus\\Support\\oculus-runtime;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\Program Files\\dotnet\\;C:\\Program Files\\Process Lasso\\;C:\\Program Files\\GitHub CLI\\;C:\\Users\\dgera\\AppData\\Local\\Muse Hub\\lib;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Git\\cmd;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\dgera\\AppData\\Local\\Programs\\Ollama;C:\\Users\\dgera\\.lmstudio\\bin;C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\dgera\\AppData\\Roaming\\npm;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Projects\\Reference Projects\\apache-maven-3.9.9\\apache-maven\\src\\bin;;c:\\Users\\dgera\\.vscode\\extensions\\ms-python.debugpy-2025.10.0-win32-x64\\bundled\\scripts\\noConfigScripts","PATHEXT":".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL","PROCESSOR_ARCHITECTURE":"AMD64","PROCESSOR_IDENTIFIER":"AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD","PROCESSOR_LEVEL":"25","PROCESSOR_REVISION":"4401","ProgramData":"C:\\ProgramData","ProgramFiles":"C:\\Program Files","ProgramFiles(x86)":"C:\\Program Files (x86)","ProgramW6432":"C:\\Program Files","PROMPT":"$P$G","PSModulePath":"C:\\Users\\dgera\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules","PUBLIC":"C:\\Users\\Public","PYDEVD_DISABLE_FILE_VALIDATION":"1","PYTHONSTARTUP":"c:\\Users\\dgera\\AppData\\Roaming\\Code\\User\\workspaceStorage\\3b3e4c0ba1c8369a7c982a2a4261dbc3\\ms-python.python\\pythonrc.py","PYTHON_BASIC_REPL":"1","RlsSvcPort":"22112","SESSIONNAME":"Console","SystemDrive":"C:","SystemRoot":"C:\\WINDOWS","TEMP":"C:\\Users\\dgera\\AppData\\Local\\Temp","TERM_PROGRAM":"vscode","TERM_PROGRAM_VERSION":"1.106.3","TMP":"C:\\Users\\dgera\\AppData\\Local\\Temp","USERDOMAIN":"TUFBOOK","USERDOMAIN_ROAMINGPROFILE":"TUFBOOK","USERNAME":"dgera","USERPROFILE":"C:\\Users\\dgera","VSCODE_DEBUGPY_ADAPTER_ENDPOINTS":"c:\\Users\\dgera\\.vscode\\extensions\\ms-python.debugpy-2025.10.0-win32-x64\\.noConfigDebugAdapterEndpoints\\endpoint-d599d39b4e7705ac.txt","VSCODE_GIT_ASKPASS_EXTRA_ARGS":"","VSCODE_GIT_ASKPASS_MAIN":"c:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js","VSCODE_GIT_ASKPASS_NODE":"C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe","VSCODE_GIT_IPC_HANDLE":"\\\\.\\pipe\\vscode-git-6ff3ed5fcc-sock","VSCODE_INJECTION":"1","VSCODE_PYTHON_AUTOACTIVATE_GUARD":"1","windir":"C:\\WINDOWS","WSLENV":"WT_SESSION:WT_PROFILE_ID:","WT_PROFILE_ID":"{61c54bbd-c2c6-5271-96e7-009a87ff44bf}","WT_SESSION":"4a75fc0e-7073-4063-8026-5b475b969b10","TERM":"dumb"},"shell":false}
-gyp sill find Python execFile result: err = null
-gyp sill find Python execFile result: stdout = "3.13.9\r\n"
-gyp sill find Python execFile result: stderr = ""
-gyp verb find Python - version is "3.13.9"
-gyp info find Python using Python version 3.13.9 found at "C:\Users\dgera\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe"
-gyp verb get node dir compiling against --target node version: 33.4.11
-
-gyp verb download using dist-url https://www.electronjs.org/headers
-gyp verb install input version string "33.4.11"
-gyp verb install installing version: 33.4.11
-gyp verb install --ensure was passed, so won't reinstall if already installed
-gyp verb install version not already installed, continuing with install 33.4.11
-gyp verb ensuring devDir is created C:\Users\dgera\.electron-gyp\33.4.11
-gyp verb created devDir \\?\C:\Users\dgera\.electron-gyp
-gyp http GET https://www.electronjs.org/headers/v33.4.11/node-v33.4.11-headers.tar.gz
-gyp http 200 https://artifacts.electronjs.org/headers/dist/v33.4.11/node-v33.4.11-headers.tar.gz
-gyp sill ignoring from tarball node_headers/
-gyp sill ignoring from tarball node_headers/include/
-gyp sill ignoring from tarball node_headers/include/node/
-gyp verb extracted file from tarball node_headers/include/node/common.gypi
-gyp verb extracted file from tarball node_headers/include/node/config.gypi
-gyp sill ignoring from tarball node_headers/include/node/cppgc/
-gyp verb extracted file from tarball node_headers/include/node/cppgc/allocation.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/common.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/cross-thread-persistent.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/custom-space.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/default-platform.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/ephemeron-pair.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/explicit-management.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/garbage-collected.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/heap-consistency.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/heap-handle.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/heap-state.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/heap-statistics.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/heap.h
-gyp sill ignoring from tarball node_headers/include/node/cppgc/internal/
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/api-constants.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/atomic-entry-flag.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/base-page-handle.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/caged-heap-local-data.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/caged-heap.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/compiler-specific.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/finalizer-trait.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/gc-info.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/logging.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/member-storage.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/name-trait.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/persistent-node.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/pointer-policies.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/internal/write-barrier.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/liveness-broker.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/macros.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/member.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/name-provider.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/object-size-trait.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/persistent.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/platform.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/prefinalizer.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/process-heap-statistics.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/sentinel-pointer.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/source-location.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/testing.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/trace-trait.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/type-traits.h
-gyp verb extracted file from tarball node_headers/include/node/cppgc/visitor.h
-gyp verb extracted file from tarball node_headers/include/node/js_native_api.h
-gyp verb extracted file from tarball node_headers/include/node/js_native_api_types.h
-gyp sill ignoring from tarball node_headers/include/node/libplatform/
-gyp verb extracted file from tarball node_headers/include/node/libplatform/libplatform-export.h
-gyp verb extracted file from tarball node_headers/include/node/libplatform/libplatform.h
-gyp verb extracted file from tarball node_headers/include/node/libplatform/v8-tracing.h
-gyp verb extracted file from tarball node_headers/include/node/node.h
-gyp verb extracted file from tarball node_headers/include/node/node_api.h
-gyp verb extracted file from tarball node_headers/include/node/node_api_types.h
-gyp verb extracted file from tarball node_headers/include/node/node_buffer.h
-gyp verb extracted file from tarball node_headers/include/node/node_object_wrap.h
-gyp verb extracted file from tarball node_headers/include/node/node_version.h
-gyp sill ignoring from tarball node_headers/include/node/uv/
-gyp verb extracted file from tarball node_headers/include/node/uv/aix.h
-gyp verb extracted file from tarball node_headers/include/node/uv/bsd.h
-gyp verb extracted file from tarball node_headers/include/node/uv/darwin.h
-gyp verb extracted file from tarball node_headers/include/node/uv/errno.h
-gyp verb extracted file from tarball node_headers/include/node/uv/linux.h
-gyp verb extracted file from tarball node_headers/include/node/uv/os390.h
-gyp verb extracted file from tarball node_headers/include/node/uv/posix.h
-gyp verb extracted file from tarball node_headers/include/node/uv/sunos.h
-gyp verb extracted file from tarball node_headers/include/node/uv/threadpool.h
-gyp verb extracted file from tarball node_headers/include/node/uv/tree.h
-gyp verb extracted file from tarball node_headers/include/node/uv/unix.h
-gyp verb extracted file from tarball node_headers/include/node/uv/version.h
-gyp verb extracted file from tarball node_headers/include/node/uv/win.h
-gyp verb extracted file from tarball node_headers/include/node/uv.h
-gyp verb extracted file from tarball node_headers/include/node/v8-array-buffer.h
-gyp verb extracted file from tarball node_headers/include/node/v8-callbacks.h
-gyp verb extracted file from tarball node_headers/include/node/v8-container.h
-gyp verb extracted file from tarball node_headers/include/node/v8-context.h
-gyp verb extracted file from tarball node_headers/include/node/v8-cppgc.h
-gyp verb extracted file from tarball node_headers/include/node/v8-data.h
-gyp verb extracted file from tarball node_headers/include/node/v8-date.h
-gyp verb extracted file from tarball node_headers/include/node/v8-debug.h
-gyp verb extracted file from tarball node_headers/include/node/v8-embedder-heap.h
-gyp verb extracted file from tarball node_headers/include/node/v8-embedder-state-scope.h
-gyp verb extracted file from tarball node_headers/include/node/v8-exception.h
-gyp verb extracted file from tarball node_headers/include/node/v8-extension.h
-gyp verb extracted file from tarball node_headers/include/node/v8-external.h
-gyp verb extracted file from tarball node_headers/include/node/v8-forward.h
-gyp verb extracted file from tarball node_headers/include/node/v8-function-callback.h
-gyp verb extracted file from tarball node_headers/include/node/v8-function.h
-gyp verb extracted file from tarball node_headers/include/node/v8-handle-base.h
-gyp verb extracted file from tarball node_headers/include/node/v8-initialization.h
-gyp verb extracted file from tarball node_headers/include/node/v8-internal.h
-gyp verb extracted file from tarball node_headers/include/node/v8-isolate.h
-gyp verb extracted file from tarball node_headers/include/node/v8-json.h
-gyp verb extracted file from tarball node_headers/include/node/v8-local-handle.h
-gyp verb extracted file from tarball node_headers/include/node/v8-locker.h
-gyp verb extracted file from tarball node_headers/include/node/v8-maybe.h
-gyp verb extracted file from tarball node_headers/include/node/v8-memory-span.h
-gyp verb extracted file from tarball node_headers/include/node/v8-message.h
-gyp verb extracted file from tarball node_headers/include/node/v8-microtask-queue.h
-gyp verb extracted file from tarball node_headers/include/node/v8-microtask.h
-gyp verb extracted file from tarball node_headers/include/node/v8-object.h
-gyp verb extracted file from tarball node_headers/include/node/v8-persistent-handle.h
-gyp verb extracted file from tarball node_headers/include/node/v8-platform.h
-gyp verb extracted file from tarball node_headers/include/node/v8-primitive-object.h
-gyp verb extracted file from tarball node_headers/include/node/v8-primitive.h
-gyp verb extracted file from tarball node_headers/include/node/v8-profiler.h
-gyp verb extracted file from tarball node_headers/include/node/v8-promise.h
-gyp verb extracted file from tarball node_headers/include/node/v8-proxy.h
-gyp verb extracted file from tarball node_headers/include/node/v8-regexp.h
-gyp verb extracted file from tarball node_headers/include/node/v8-sandbox.h
-gyp verb extracted file from tarball node_headers/include/node/v8-script.h
-gyp verb extracted file from tarball node_headers/include/node/v8-snapshot.h
-gyp verb extracted file from tarball node_headers/include/node/v8-source-location.h
-gyp verb extracted file from tarball node_headers/include/node/v8-statistics.h
-gyp verb extracted file from tarball node_headers/include/node/v8-template.h
-gyp verb extracted file from tarball node_headers/include/node/v8-traced-handle.h
-gyp verb extracted file from tarball node_headers/include/node/v8-typed-array.h
-gyp verb extracted file from tarball node_headers/include/node/v8-unwinder.h
-gyp verb extracted file from tarball node_headers/include/node/v8-value-serializer.h
-gyp verb extracted file from tarball node_headers/include/node/v8-value.h
-gyp verb extracted file from tarball node_headers/include/node/v8-version.h
-gyp verb extracted file from tarball node_headers/include/node/v8-wasm.h
-gyp verb extracted file from tarball node_headers/include/node/v8-weak-callback-info.h
-gyp verb extracted file from tarball node_headers/include/node/v8.h
-gyp verb extracted file from tarball node_headers/include/node/v8config.h
-gyp verb extracted file from tarball node_headers/include/node/zconf.h
-gyp verb extracted file from tarball node_headers/include/node/zlib.h
-gyp verb content checksum node-v33.4.11-headers.tar.gz 9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372
-gyp verb tarball done parsing tarball
-gyp verb on Windows; need to download `node.lib`...
-gyp verb x64 node.lib dir C:\Users\dgera\AppData\Local\Temp\node-gyp-tmp-2ohBh0\x64
-gyp verb x64 node.lib url https://www.electronjs.org/headers/v33.4.11/win-x64/node.lib
-gyp verb check download content checksum, need to download `SHASUMS256.txt`...
-gyp verb checksum url https://www.electronjs.org/headers/v33.4.11/SHASUMS256.txt
-gyp http GET https://www.electronjs.org/headers/v33.4.11/SHASUMS256.txt
-gyp verb streaming x64 node.lib to: C:\Users\dgera\AppData\Local\Temp\node-gyp-tmp-2ohBh0\x64\node.lib
-gyp http GET https://www.electronjs.org/headers/v33.4.11/win-x64/node.lib
-gyp http 200 https://artifacts.electronjs.org/headers/dist/v33.4.11/SHASUMS256.txt
-gyp verb checksum data {"node-v33.4.11.tar.gz":"9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372","node-v33.4.11-headers.tar.gz":"9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372","iojs-v33.4.11.tar.gz":"9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372","iojs-v33.4.11-headers.tar.gz":"9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372","node.lib":"8634834c017b6fad52e4c10862c55d1c667a67e282eb8b300334094e45d3c5c7","x64/node.lib":"7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b","win-x86/iojs.lib":"8634834c017b6fad52e4c10862c55d1c667a67e282eb8b300334094e45d3c5c7","win-x64/iojs.lib":"7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b","win-x86/node.lib":"8634834c017b6fad52e4c10862c55d1c667a67e282eb8b300334094e45d3c5c7","win-x64/node.lib":"7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b","arm64/node.lib":"904c4cafe2ecd74eab200dc858e52064c506abeec5e2ced1dff27409abd67fc8","win-arm64/iojs.lib":"904c4cafe2ecd74eab200dc858e52064c506abeec5e2ced1dff27409abd67fc8","win-arm64/node.lib":"904c4cafe2ecd74eab200dc858e52064c506abeec5e2ced1dff27409abd67fc8"}
-gyp http 200 https://artifacts.electronjs.org/headers/dist/v33.4.11/win-x64/node.lib
-gyp verb content checksum win-x64/node.lib 7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b
-gyp verb download contents checksum {"node-v33.4.11-headers.tar.gz":"9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372","win-x64/node.lib":"7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b"}
-gyp verb validating download checksum for node-v33.4.11-headers.tar.gz (9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372 == 9ac9fade85ebab6e710992aa2c890768b0e82d3031fc408383d0c1ed358e2372)
-gyp verb validating download checksum for win-x64/node.lib (7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b == 7f6621834235e1fe9f1912685be2339ef64342bc8a5b2154efc6d23d50c10a4b)
-gyp verb get node dir target node version installed: 33.4.11
-gyp verb build dir attempting to create "build" dir: C:\Projects\DCE\node_modules\better-sqlite3\build
-gyp verb build dir "build" dir needed to be created? Yes
-gyp verb find VS msvs_version not set from command line or npm config
-gyp verb find VS VCINSTALLDIR not set, not running in VS Command Prompt
-gyp sill find VS Running C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe [
-gyp sill find VS '-NoProfile',
-gyp sill find VS '-Command',
-gyp sill find VS '&{@(Get-Module -ListAvailable -Name VSSetup).Version.ToString()}'
-gyp sill find VS ]
-gyp sill find VS Running C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe [
-gyp sill find VS '-NoProfile',
-gyp sill find VS '-Command',
-gyp sill find VS '&{Get-VSSetupInstance  | ConvertTo-Json -Depth 3}'
-gyp sill find VS ]
-gyp sill find VS PS stderr = "Get-VSSetupInstance : The term 'Get-VSSetupInstance' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a \r\npath was included, verify that the path is correct and try again.\r\nAt line:1 char:3\r\n+ &{Get-VSSetupInstance  | ConvertTo-Json -Depth 3}\r\n+   ~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (Get-VSSetupInstance:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException\r\n \r\n"
-gyp sill find VS PS stdout = ""
-gyp sill find VS SyntaxError: Unexpected end of JSON input
-gyp sill find VS at JSON.parse (<anonymous>)
-gyp sill find VS at VisualStudioFinder.parseData (C:\Projects\DCE\node_modules\@electron\node-gyp\lib\find-visualstudio.js:286:21)
-gyp sill find VS at VisualStudioFinder.findNewVSUsingSetupModule (C:\Projects\DCE\node_modules\@electron\node-gyp\lib\find-visualstudio.js:202:27)
-gyp sill find VS at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-gyp sill find VS at async VisualStudioFinder.findVisualStudio (C:\Projects\DCE\node_modules\@electron\node-gyp\lib\find-visualstudio.js:68:20)
-gyp sill find VS at async createBuildDir (C:\Projects\DCE\node_modules\@electron\node-gyp\lib\configure.js:112:18)
-gyp sill find VS at async process.<anonymous> (C:\Projects\DCE\node_modules\@electron\rebuild\lib\module-type\node-gyp\worker.js:27:13)
-gyp verb find VS could not use PowerShell to find Visual Studio 2017 or newer, try re-running with '--loglevel silly' for more details.
-gyp verb find VS
-gyp verb find VS Failure details: undefined
-gyp sill find VS Running C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe [
-gyp sill find VS '-ExecutionPolicy',
-gyp sill find VS 'Unrestricted',
-gyp sill find VS '-NoProfile',
-gyp sill find VS '-Command',
-gyp sill find VS "&{Add-Type -Path 'C:\\Projects\\DCE\\node_modules\\@electron\\node-gyp\\lib\\Find-VisualStudio.cs';[VisualStudioConfiguration.Main]::PrintJson()}"
-gyp sill find VS ]
-gyp sill find VS PS stderr = ""
-gyp sill find VS processing installation: "C:\Program Files\Microsoft Visual Studio\2022\Community"
-gyp sill find VS - version match = ["17.14.36401.2","17","14"]
-gyp sill find VS - found VC.Tools.x86.x64
-gyp sill find VS - found Win10/11SDK: 26100
-gyp sill find VS vsInfo: [
-gyp sill find VS {
-gyp sill find VS version: '17.14.36401.2',
-gyp sill find VS versionMajor: 17,
-gyp sill find VS versionMinor: 14,
-gyp sill find VS versionYear: 2022,
-gyp sill find VS path: 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community',
-gyp sill find VS msBuild: 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe',
-gyp sill find VS toolset: 'v143',
-gyp sill find VS sdk: '10.0.26100.0'
-gyp sill find VS }
-gyp sill find VS ]
-gyp verb find VS checking VS2022 (17.14.36401.2) found at:
-gyp verb find VS "C:\Program Files\Microsoft Visual Studio\2022\Community"
-gyp verb find VS - found "Visual Studio C++ core features"
-gyp verb find VS - found VC++ toolset: v143
-gyp verb find VS - found Windows SDK: 10.0.26100.0
-gyp info find VS using VS2022 (17.14.36401.2) found at:
-gyp info find VS "C:\Program Files\Microsoft Visual Studio\2022\Community"
-gyp info find VS run with --verbose for detailed information
-gyp verb build/config.gypi creating config file
-gyp sill build/config.gypi {
-gyp sill build/config.gypi target_defaults: {
-gyp sill build/config.gypi cflags: [],
-gyp sill build/config.gypi default_configuration: 'Release',
-gyp sill build/config.gypi defines: [],
-gyp sill build/config.gypi include_dirs: [],
-gyp sill build/config.gypi libraries: [],
-gyp sill build/config.gypi msbuild_toolset: 'v143',
-gyp sill build/config.gypi msvs_windows_target_platform_version: '10.0.26100.0'
-gyp sill build/config.gypi },
-gyp sill build/config.gypi variables: {
-gyp sill build/config.gypi arm_fpu: 'neon',
-gyp sill build/config.gypi asan: 0,
-gyp sill build/config.gypi build_v8_with_gn: 'false',
-gyp sill build/config.gypi built_with_electron: 1,
-gyp sill build/config.gypi coverage: 'false',
-gyp sill build/config.gypi dcheck_always_on: 0,
-gyp sill build/config.gypi debug_nghttp2: 'false',
-gyp sill build/config.gypi debug_node: 'false',
-gyp sill build/config.gypi enable_lto: 'false',
-gyp sill build/config.gypi enable_pgo_generate: 'false',
-gyp sill build/config.gypi enable_pgo_use: 'false',
-gyp sill build/config.gypi error_on_warn: 'false',
-gyp sill build/config.gypi force_dynamic_crt: 0,
-gyp sill build/config.gypi host_arch: 'x64',
-gyp sill build/config.gypi icu_data_in: '..\\..\\deps\\icu-tmp\\icudt75l.dat',
-gyp sill build/config.gypi icu_endianness: 'l',
-gyp sill build/config.gypi icu_gyp_path: 'tools/icu/icu-generic.gyp',
-gyp sill build/config.gypi icu_path: 'deps/icu-small',
-gyp sill build/config.gypi icu_small: 'false',
-gyp sill build/config.gypi icu_ver_major: '75',
-gyp sill build/config.gypi is_debug: 0,
-gyp sill build/config.gypi libdir: 'lib',
-gyp sill build/config.gypi llvm_version: '0.0',
-gyp sill build/config.gypi napi_build_version: '9',
-gyp sill build/config.gypi node_builtin_shareable_builtins: [
-gyp sill build/config.gypi 'deps/cjs-module-lexer/lexer.js',
-gyp sill build/config.gypi 'deps/cjs-module-lexer/dist/lexer.js',
-gyp sill build/config.gypi 'deps/undici/undici.js'
-gyp sill build/config.gypi ],
-gyp sill build/config.gypi node_byteorder: 'little',
-gyp sill build/config.gypi node_debug_lib: 'false',
-gyp sill build/config.gypi node_enable_d8: 'false',
-gyp sill build/config.gypi node_enable_v8_vtunejit: 'false',
-gyp sill build/config.gypi node_fipsinstall: 'false',
-gyp sill build/config.gypi node_install_corepack: 'true',
-gyp sill build/config.gypi node_install_npm: 'true',
-gyp sill build/config.gypi node_library_files: [
-gyp sill build/config.gypi 'lib/_http_agent.js',
-gyp sill build/config.gypi 'lib/_http_client.js',
-gyp sill build/config.gypi 'lib/_http_common.js',
-gyp sill build/config.gypi 'lib/_http_incoming.js',
-gyp sill build/config.gypi 'lib/_http_outgoing.js',
-gyp sill build/config.gypi 'lib/_http_server.js',
-gyp sill build/config.gypi 'lib/_stream_duplex.js',
-gyp sill build/config.gypi 'lib/_stream_passthrough.js',
-gyp sill build/config.gypi 'lib/_stream_readable.js',
-gyp sill build/config.gypi 'lib/_stream_transform.js',
-gyp sill build/config.gypi 'lib/_stream_wrap.js',
-gyp sill build/config.gypi 'lib/_stream_writable.js',
-gyp sill build/config.gypi 'lib/_tls_common.js',
-gyp sill build/config.gypi 'lib/_tls_wrap.js',
-gyp sill build/config.gypi 'lib/assert.js',
-gyp sill build/config.gypi 'lib/assert/strict.js',
-gyp sill build/config.gypi 'lib/async_hooks.js',
-gyp sill build/config.gypi 'lib/buffer.js',
-gyp sill build/config.gypi 'lib/child_process.js',
-gyp sill build/config.gypi 'lib/cluster.js',
-gyp sill build/config.gypi 'lib/console.js',
-gyp sill build/config.gypi 'lib/constants.js',
-gyp sill build/config.gypi 'lib/crypto.js',
-gyp sill build/config.gypi 'lib/dgram.js',
-gyp sill build/config.gypi 'lib/diagnostics_channel.js',
-gyp sill build/config.gypi 'lib/dns.js',
-gyp sill build/config.gypi 'lib/dns/promises.js',
-gyp sill build/config.gypi 'lib/domain.js',
-gyp sill build/config.gypi 'lib/events.js',
-gyp sill build/config.gypi 'lib/fs.js',
-gyp sill build/config.gypi 'lib/fs/promises.js',
-gyp sill build/config.gypi 'lib/http.js',
-gyp sill build/config.gypi 'lib/http2.js',
-gyp sill build/config.gypi 'lib/https.js',
-gyp sill build/config.gypi 'lib/inspector.js',
-gyp sill build/config.gypi 'lib/inspector/promises.js',
-gyp sill build/config.gypi 'lib/internal/abort_controller.js',
-gyp sill build/config.gypi 'lib/internal/assert.js',
-gyp sill build/config.gypi 'lib/internal/assert/assertion_error.js',
-gyp sill build/config.gypi 'lib/internal/assert/calltracker.js',
-gyp sill build/config.gypi 'lib/internal/assert/utils.js',
-gyp sill build/config.gypi 'lib/internal/async_hooks.js',
-gyp sill build/config.gypi 'lib/internal/blob.js',
-gyp sill build/config.gypi 'lib/internal/blocklist.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/node.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/realm.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/shadow_realm.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/switches/does_not_own_process_state.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/switches/does_own_process_state.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/switches/is_main_thread.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/switches/is_not_main_thread.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/web/exposed-wildcard.js',
-gyp sill build/config.gypi 'lib/internal/bootstrap/web/exposed-window-or-worker.js',
-gyp sill build/config.gypi 'lib/internal/buffer.js',
-gyp sill build/config.gypi 'lib/internal/child_process.js',
-gyp sill build/config.gypi 'lib/internal/child_process/serialization.js',
-gyp sill build/config.gypi 'lib/internal/cli_table.js',
-gyp sill build/config.gypi 'lib/internal/cluster/child.js',
-gyp sill build/config.gypi 'lib/internal/cluster/primary.js',
-gyp sill build/config.gypi 'lib/internal/cluster/round_robin_handle.js',
-gyp sill build/config.gypi 'lib/internal/cluster/shared_handle.js',
-gyp sill build/config.gypi 'lib/internal/cluster/utils.js',
-gyp sill build/config.gypi 'lib/internal/cluster/worker.js',
-gyp sill build/config.gypi 'lib/internal/console/constructor.js',
-gyp sill build/config.gypi 'lib/internal/console/global.js',
-gyp sill build/config.gypi 'lib/internal/constants.js',
-gyp sill build/config.gypi 'lib/internal/crypto/aes.js',
-gyp sill build/config.gypi 'lib/internal/crypto/certificate.js',
-gyp sill build/config.gypi 'lib/internal/crypto/cfrg.js',
-gyp sill build/config.gypi 'lib/internal/crypto/cipher.js',
-gyp sill build/config.gypi 'lib/internal/crypto/diffiehellman.js',
-gyp sill build/config.gypi 'lib/internal/crypto/ec.js',
-gyp sill build/config.gypi 'lib/internal/crypto/hash.js',
-gyp sill build/config.gypi 'lib/internal/crypto/hashnames.js',
-gyp sill build/config.gypi 'lib/internal/crypto/hkdf.js',
-gyp sill build/config.gypi 'lib/internal/crypto/keygen.js',
-gyp sill build/config.gypi 'lib/internal/crypto/keys.js',
-gyp sill build/config.gypi 'lib/internal/crypto/mac.js',
-gyp sill build/config.gypi 'lib/internal/crypto/pbkdf2.js',
-gyp sill build/config.gypi 'lib/internal/crypto/random.js',
-gyp sill build/config.gypi 'lib/internal/crypto/rsa.js',
-gyp sill build/config.gypi 'lib/internal/crypto/scrypt.js',
-gyp sill build/config.gypi 'lib/internal/crypto/sig.js',
-gyp sill build/config.gypi 'lib/internal/crypto/util.js',
-gyp sill build/config.gypi 'lib/internal/crypto/webcrypto.js',
-gyp sill build/config.gypi 'lib/internal/crypto/webidl.js',
-gyp sill build/config.gypi 'lib/internal/crypto/x509.js',
-gyp sill build/config.gypi 'lib/internal/debugger/inspect.js',
-gyp sill build/config.gypi 'lib/internal/debugger/inspect_client.js',
-gyp sill build/config.gypi 'lib/internal/debugger/inspect_repl.js',
-gyp sill build/config.gypi 'lib/internal/dgram.js',
-gyp sill build/config.gypi 'lib/internal/dns/callback_resolver.js',
-gyp sill build/config.gypi 'lib/internal/dns/promises.js',
-gyp sill build/config.gypi 'lib/internal/dns/utils.js',
-gyp sill build/config.gypi 'lib/internal/encoding.js',
-gyp sill build/config.gypi 'lib/internal/error_serdes.js',
-gyp sill build/config.gypi 'lib/internal/errors.js',
-gyp sill build/config.gypi 'lib/internal/event_target.js',
-gyp sill build/config.gypi 'lib/internal/events/abort_listener.js',
-gyp sill build/config.gypi 'lib/internal/events/symbols.js',
-gyp sill build/config.gypi ... 218 more items
-gyp sill build/config.gypi ],
-gyp sill build/config.gypi node_module_version: 130,
-gyp sill build/config.gypi node_no_browser_globals: 'false',
-gyp sill build/config.gypi node_prefix: '\\usr\\local',
-gyp sill build/config.gypi node_release_urlbase: '',
-gyp sill build/config.gypi node_shared: 'false',
-gyp sill build/config.gypi node_shared_ada: 'false',
-gyp sill build/config.gypi node_shared_brotli: 'false',
-gyp sill build/config.gypi node_shared_cares: 'false',
-gyp sill build/config.gypi node_shared_http_parser: 'false',
-gyp sill build/config.gypi node_shared_libuv: 'false',
-gyp sill build/config.gypi node_shared_nghttp2: 'false',
-gyp sill build/config.gypi node_shared_nghttp3: 'false',
-gyp sill build/config.gypi node_shared_ngtcp2: 'false',
-gyp sill build/config.gypi node_shared_openssl: 'false',
-gyp sill build/config.gypi node_shared_simdjson: 'false',
-gyp sill build/config.gypi node_shared_simdutf: 'false',
-gyp sill build/config.gypi node_shared_uvwasi: 'false',
-gyp sill build/config.gypi node_shared_zlib: 'false',
-gyp sill build/config.gypi node_tag: '',
-gyp sill build/config.gypi node_target_type: 'executable',
-gyp sill build/config.gypi node_use_bundled_v8: 'true',
-gyp sill build/config.gypi node_use_node_code_cache: 'false',
-gyp sill build/config.gypi node_use_node_snapshot: 'false',
-gyp sill build/config.gypi node_use_openssl: 'true',
-gyp sill build/config.gypi node_use_v8_platform: 'true',
-gyp sill build/config.gypi node_with_ltcg: 'true',
-gyp sill build/config.gypi node_without_node_options: 'false',
-gyp sill build/config.gypi node_write_snapshot_as_array_literals: 'true',
-gyp sill build/config.gypi openssl_is_fips: 'false',
-gyp sill build/config.gypi openssl_no_asm: 1,
-gyp sill build/config.gypi openssl_quic: 'true',
-gyp sill build/config.gypi ossfuzz: 'false',
-gyp sill build/config.gypi shlib_suffix: 'so.115',
-gyp sill build/config.gypi single_executable_application: 'true',
-gyp sill build/config.gypi target_arch: 'x64',
-gyp sill build/config.gypi ubsan: 0,
-gyp sill build/config.gypi use_prefix_to_find_headers: 'false',
-gyp sill build/config.gypi using_electron_config_gypi: 1,
-gyp sill build/config.gypi v8_enable_31bit_smis_on_64bit_arch: 1,
-gyp sill build/config.gypi v8_enable_extensible_ro_snapshot: 0,
-gyp sill build/config.gypi v8_enable_gdbjit: 0,
-gyp sill build/config.gypi v8_enable_hugepage: 0,
-gyp sill build/config.gypi v8_enable_i18n_support: 1,
-gyp sill build/config.gypi v8_enable_inspector: 1,
-gyp sill build/config.gypi v8_enable_javascript_promise_hooks: 1,
-gyp sill build/config.gypi v8_enable_lite_mode: 0,
-gyp sill build/config.gypi v8_enable_maglev: 0,
-gyp sill build/config.gypi v8_enable_object_print: 1,
-gyp sill build/config.gypi v8_enable_pointer_compression: 1,
-gyp sill build/config.gypi v8_enable_sandbox: 1,
-gyp sill build/config.gypi v8_enable_shared_ro_heap: 0,
-gyp sill build/config.gypi v8_enable_v8_checks: 0,
-gyp sill build/config.gypi v8_enable_webassembly: 1,
-gyp sill build/config.gypi v8_no_strict_aliasing: 1,
-gyp sill build/config.gypi v8_optimized_debug: 1,
-gyp sill build/config.gypi v8_promise_internal_field_count: 1,
-gyp sill build/config.gypi v8_random_seed: 0,
-gyp sill build/config.gypi v8_trace_maps: 0,
-gyp sill build/config.gypi v8_use_siphash: 1,
-gyp sill build/config.gypi want_separate_host_toolset: 1,
-gyp sill build/config.gypi nodedir: 'C:\\Users\\dgera\\.electron-gyp\\33.4.11',
-gyp sill build/config.gypi python: 'C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe',
-gyp sill build/config.gypi standalone_static_library: 1,
-gyp sill build/config.gypi msbuild_path: 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe',
-gyp sill build/config.gypi runtime: 'electron',
-gyp sill build/config.gypi target: '33.4.11',
-gyp sill build/config.gypi build_from_source: true,
-gyp sill build/config.gypi cache: 'C:\\Users\\dgera\\AppData\\Local\\npm-cache',
-gyp sill build/config.gypi globalconfig: 'C:\\Users\\dgera\\AppData\\Roaming\\npm\\etc\\npmrc',
-gyp sill build/config.gypi global_prefix: 'C:\\Users\\dgera\\AppData\\Roaming\\npm',
-gyp sill build/config.gypi init_module: 'C:\\Users\\dgera\\.npm-init.js',
-gyp sill build/config.gypi local_prefix: 'C:\\Projects\\DCE',
-gyp sill build/config.gypi node_gyp: 'C:\\Users\\dgera\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js',
-gyp sill build/config.gypi npm_version: '11.4.2',
-gyp sill build/config.gypi prefix: 'C:\\Users\\dgera\\AppData\\Roaming\\npm',
-gyp sill build/config.gypi userconfig: 'C:\\Users\\dgera\\.npmrc',
-gyp sill build/config.gypi user_agent: 'npm/11.4.2 node/v22.14.0 win32 x64 workspaces/false'
-gyp sill build/config.gypi }
-gyp sill build/config.gypi }
-gyp verb build/config.gypi writing out config file: C:\Projects\DCE\node_modules\better-sqlite3\build\config.gypi
-gyp verb config.gypi checking for gypi file: C:\Projects\DCE\node_modules\better-sqlite3\config.gypi
-gyp verb common.gypi checking for gypi file: C:\Projects\DCE\node_modules\better-sqlite3\common.gypi
-gyp verb gyp gyp format was not specified; forcing "msvs"
-gyp info spawn C:\Users\dgera\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
-gyp info spawn args [
-gyp info spawn args 'C:\\Projects\\DCE\\node_modules\\@electron\\node-gyp\\gyp\\gyp_main.py',
-gyp info spawn args 'binding.gyp',
-gyp info spawn args '-f',
-gyp info spawn args 'msvs',
-gyp info spawn args '-I',
-gyp info spawn args 'C:\\Projects\\DCE\\node_modules\\better-sqlite3\\build\\config.gypi',
-gyp info spawn args '-I',
-gyp info spawn args 'C:\\Projects\\DCE\\node_modules\\@electron\\node-gyp\\addon.gypi',
-gyp info spawn args '-I',
-gyp info spawn args 'C:\\Users\\dgera\\.electron-gyp\\33.4.11\\include\\node\\common.gypi',
-gyp info spawn args '-Dlibrary=shared_library',
-gyp info spawn args '-Dvisibility=default',
-gyp info spawn args '-Dnode_root_dir=C:\\Users\\dgera\\.electron-gyp\\33.4.11',
-gyp info spawn args '-Dnode_gyp_dir=C:\\Projects\\DCE\\node_modules\\@electron\\node-gyp',
-gyp info spawn args '-Dnode_lib_file=C:\\\\Users\\\\dgera\\\\.electron-gyp\\\\33.4.11\\\\<(target_arch)\\\\node.lib',
-gyp info spawn args '-Dmodule_root_dir=C:\\Projects\\DCE\\node_modules\\better-sqlite3',
-gyp info spawn args '-Dnode_engine=v8',
-gyp info spawn args '--depth=.',
-gyp info spawn args '--no-parallel',
-gyp info spawn args '--generator-output',
-gyp info spawn args 'C:\\Projects\\DCE\\node_modules\\better-sqlite3\\build',
-gyp info spawn args '-Goutput_dir=.'
-gyp info spawn args ]
-gyp verb build type Release
-gyp verb architecture x64
-gyp verb node dev dir C:\Users\dgera\.electron-gyp\33.4.11
-gyp verb python C:\Users\dgera\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
-gyp verb found first Solution file build/binding.sln
-gyp verb using MSBuild: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe
-gyp info spawn C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe
-gyp info spawn args [
-gyp info spawn args 'build/binding.sln',
-gyp info spawn args '/nologo',
-gyp info spawn args '/p:Configuration=Release;Platform=x64',
-gyp info spawn args map: [Function (anonymous)]
-gyp info spawn args ]
-Build started 12/2/2025 8:59:52 PM.
-
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\binding.sln" on node 1 (default targets).
-ValidateSolutionConfiguration:
-  Building solution configuration "Release|x64".
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\binding.sln" (1) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj.metaproj" (2) on node 1 (default targets).
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj.metaproj" (2) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\sqlite3.vcxproj.metaproj" (3) on node 1 (default targets).
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\sqlite3.vcxproj.metaproj" (3) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\locate_sqlite3.vcxproj" (4) on node 1 (default targets).
-PrepareForBuild:
-  Creating directory "Release\obj\locate_sqlite3\".
-  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-  Creating directory "C:\Projects\DCE\node_modules\better-sqlite3\build\Release\".
-  Creating directory "Release\obj\locate_sqlite3\locate_sqlite3.tlog\".
-InitializeBuildStatus:
-  Creating "Release\obj\locate_sqlite3\locate_sqlite3.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-  Touching "Release\obj\locate_sqlite3\locate_sqlite3.tlog\unsuccessfulbuild".
-ComputeCustomBuildOutput:
-  Creating directory "C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\global_intermediate\sqlite3\".
-CustomBuild:
-  copy_builtin_sqlite3
-FinalizeBuildStatus:
-  Deleting file "Release\obj\locate_sqlite3\locate_sqlite3.tlog\unsuccessfulbuild".
-  Touching "Release\obj\locate_sqlite3\locate_sqlite3.tlog\locate_sqlite3.lastbuildstate".
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\locate_sqlite3.vcxproj" (default targets).
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\sqlite3.vcxproj.metaproj" (3) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\sqlite3.vcxproj" (5) on node 1 (default targets).
-PrepareForBuild:
-  Creating directory "Release\obj\sqlite3\".
-  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-  Creating directory "Release\obj\sqlite3\sqlite3.tlog\".
-InitializeBuildStatus:
-  Creating "Release\obj\sqlite3\sqlite3.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-  Touching "Release\obj\sqlite3\sqlite3.tlog\unsuccessfulbuild".
-MakeDirsForCl:
-  Creating directory "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\Release\obj\sqlite3\obj\global_intermediate\sqlite3".
-ClCompile:
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe /c /I"C:\Users\dgera\.electron-gyp\33.4.11\include\node" /I"C:\Users\dgera\.electron-gyp\33.4.11\src" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\config" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\openssl\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\uv\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\zlib" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\v8\include" /I"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\global_intermediate\sqlite3" /Z7 /nologo /W3 /WX- /diagnostics:column /MP /Ox /Ob2 /Oi /Ot /Oy /GL /D NODE_GYP_MODULE_NAME=sqlite3 /D USING_UV_SHARED=1 /D USING_V8_SHARED=1 /D V8_DEPRECATION_WARNINGS=1 /D _GLIBCXX_USE_CXX11_ABI=1 /D ELECTRON_ENSURE_CONFIG_GYPI /D USING_ELECTRON_CONFIG_GYPI /D V8_COMPRESS_POINTERS /D V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE /D V8_31BIT_SMIS_ON_64BIT_ARCH /D V8_ENABLE_SANDBOX /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D OPENSSL_NO_PINSHARED /D OPENSSL_THREADS /D OPENSSL_NO_ASM /D HAVE_INT16_T=1 /D HAVE_INT32_T=1 /D HAVE_INT8_T=1 /D HAVE_STDINT_H=1 /D HAVE_UINT16_T=1 /D HAVE_UINT32_T=1 /D HAVE_UINT8_T=1 /D HAVE_USLEEP=1 /D "SQLITE_DEFAULT_CACHE_SIZE=-16000" /D SQLITE_DEFAULT_FOREIGN_KEYS=1 /D SQLITE_DEFAULT_MEMSTATUS=0 /D SQLITE_DEFAULT_WAL_SYNCHRONOUS=1 /D SQLITE_DQS=0 /D SQLITE_ENABLE_COLUMN_METADATA /D SQLITE_ENABLE_DESERIALIZE /D SQLITE_ENABLE_FTS3 /D SQLITE_ENABLE_FTS3_PARENTHESIS /D SQLITE_ENABLE_FTS4 /D SQLITE_ENABLE_FTS5 /D SQLITE_ENABLE_GEOPOLY /D SQLITE_ENABLE_JSON1 /D SQLITE_ENABLE_MATH_FUNCTIONS /D SQLITE_ENABLE_RTREE /D SQLITE_ENABLE_STAT4 /D SQLITE_ENABLE_UPDATE_DELETE_LIMIT /D SQLITE_LIKE_DOESNT_MATCH_BLOBS /D SQLITE_OMIT_DEPRECATED /D SQLITE_OMIT_PROGRESS_CALLBACK /D SQLITE_OMIT_SHARED_CACHE /D SQLITE_OMIT_TCL_VARIABLE /D SQLITE_SOUNDEX /D SQLITE_THREADSAFE=2 /D SQLITE_TRACE_SIZE_LIMIT=32 /D SQLITE_USE_URI=0 /D "HOST_BINARY=\"node.exe\"" /D NDEBUG /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR- /Fo"Release\obj\sqlite3\\obj\global_intermediate\sqlite3\sqlite3.obj" /Fd"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\sqlite3.pdb" /external:W3 /Gd /TC /wd4351 /wd4355 /wd4800 /wd4251 /wd4275 /wd4244 /wd4267 /FC /errorReport:queue /Zc:__cplusplus -std:c++20 "C:\Projects\DCE\node_modules\better-sqlite3\build\Release\\obj\global_intermediate\sqlite3\sqlite3.c"
-  sqlite3.c
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe /c /I"C:\Users\dgera\.electron-gyp\33.4.11\include\node" /I"C:\Users\dgera\.electron-gyp\33.4.11\src" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\config" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\openssl\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\uv\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\zlib" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\v8\include" /I"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\global_intermediate\sqlite3" /Z7 /nologo /W3 /WX- /diagnostics:column /MP /Ox /Ob2 /Oi /Ot /Oy /GL /D NODE_GYP_MODULE_NAME=sqlite3 /D USING_UV_SHARED=1 /D USING_V8_SHARED=1 /D V8_DEPRECATION_WARNINGS=1 /D _GLIBCXX_USE_CXX11_ABI=1 /D ELECTRON_ENSURE_CONFIG_GYPI /D USING_ELECTRON_CONFIG_GYPI /D V8_COMPRESS_POINTERS /D V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE /D V8_31BIT_SMIS_ON_64BIT_ARCH /D V8_ENABLE_SANDBOX /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D OPENSSL_NO_PINSHARED /D OPENSSL_THREADS /D OPENSSL_NO_ASM /D HAVE_INT16_T=1 /D HAVE_INT32_T=1 /D HAVE_INT8_T=1 /D HAVE_STDINT_H=1 /D HAVE_UINT16_T=1 /D HAVE_UINT32_T=1 /D HAVE_UINT8_T=1 /D HAVE_USLEEP=1 /D "SQLITE_DEFAULT_CACHE_SIZE=-16000" /D SQLITE_DEFAULT_FOREIGN_KEYS=1 /D SQLITE_DEFAULT_MEMSTATUS=0 /D SQLITE_DEFAULT_WAL_SYNCHRONOUS=1 /D SQLITE_DQS=0 /D SQLITE_ENABLE_COLUMN_METADATA /D SQLITE_ENABLE_DESERIALIZE /D SQLITE_ENABLE_FTS3 /D SQLITE_ENABLE_FTS3_PARENTHESIS /D SQLITE_ENABLE_FTS4 /D SQLITE_ENABLE_FTS5 /D SQLITE_ENABLE_GEOPOLY /D SQLITE_ENABLE_JSON1 /D SQLITE_ENABLE_MATH_FUNCTIONS /D SQLITE_ENABLE_RTREE /D SQLITE_ENABLE_STAT4 /D SQLITE_ENABLE_UPDATE_DELETE_LIMIT /D SQLITE_LIKE_DOESNT_MATCH_BLOBS /D SQLITE_OMIT_DEPRECATED /D SQLITE_OMIT_PROGRESS_CALLBACK /D SQLITE_OMIT_SHARED_CACHE /D SQLITE_OMIT_TCL_VARIABLE /D SQLITE_SOUNDEX /D SQLITE_THREADSAFE=2 /D SQLITE_TRACE_SIZE_LIMIT=32 /D SQLITE_USE_URI=0 /D "HOST_BINARY=\"node.exe\"" /D NDEBUG /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR- /Fo"Release\obj\sqlite3\\" /Fd"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\sqlite3.pdb" /external:W3 /Gd /TP /wd4351 /wd4355 /wd4800 /wd4251 /wd4275 /wd4244 /wd4267 /FC /errorReport:queue /Zc:__cplusplus -std:c++20 "C:\Projects\DCE\node_modules\@electron\node-gyp\src\win_delay_load_hook.cc"
-  win_delay_load_hook.cc
-Lib:
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\Lib.exe /OUT:"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\sqlite3.lib" /NOLOGO /MACHINE:X64 /LTCG:INCREMENTAL Release\obj\sqlite3\win_delay_load_hook.obj
-  Release\obj\sqlite3\\obj\global_intermediate\sqlite3\sqlite3.obj
-  sqlite3.vcxproj -> C:\Projects\DCE\node_modules\better-sqlite3\build\Release\\sqlite3.lib
-FinalizeBuildStatus:
-  Deleting file "Release\obj\sqlite3\sqlite3.tlog\unsuccessfulbuild".
-  Touching "Release\obj\sqlite3\sqlite3.tlog\sqlite3.lastbuildstate".
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\sqlite3.vcxproj" (default targets).
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\deps\sqlite3.vcxproj.metaproj" (default targets).
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj.metaproj" (2) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj" (6) on node 1 (default targets).
-PrepareForBuild:
-  Creating directory "Release\obj\better_sqlite3\".
-  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-  Creating directory "Release\obj\better_sqlite3\better_sqlite3.tlog\".
-InitializeBuildStatus:
-  Creating "Release\obj\better_sqlite3\better_sqlite3.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-  Touching "Release\obj\better_sqlite3\better_sqlite3.tlog\unsuccessfulbuild".
-MakeDirsForCl:
-  Creating directory "C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\better_sqlite3\src".
-ClCompile:
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe /c /I"C:\Users\dgera\.electron-gyp\33.4.11\include\node" /I"C:\Users\dgera\.electron-gyp\33.4.11\src" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\config" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\openssl\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\uv\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\zlib" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\v8\include" /I"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\global_intermediate\sqlite3" /Z7 /nologo /W3 /WX- /diagnostics:column /MP /Ox /Ob2 /Oi /Ot /Oy /GL /D NODE_GYP_MODULE_NAME=better_sqlite3 /D USING_UV_SHARED=1 /D USING_V8_SHARED=1 /D V8_DEPRECATION_WARNINGS=1 /D _GLIBCXX_USE_CXX11_ABI=1 /D ELECTRON_ENSURE_CONFIG_GYPI /D USING_ELECTRON_CONFIG_GYPI /D V8_COMPRESS_POINTERS /D V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE /D V8_31BIT_SMIS_ON_64BIT_ARCH /D V8_ENABLE_SANDBOX /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D OPENSSL_NO_PINSHARED /D OPENSSL_THREADS /D OPENSSL_NO_ASM /D BUILDING_NODE_EXTENSION /D "HOST_BINARY=\"node.exe\"" /D NDEBUG /D _WINDLL /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR- /Fo"Release\obj\better_sqlite3\\src\better_sqlite3.obj" /Fd"Release\obj\better_sqlite3\vc143.pdb" /external:W3 /Gd /TP /wd4351 /wd4355 /wd4800 /wd4251 /wd4275 /wd4244 /wd4267 /FC /errorReport:queue /Zc:__cplusplus -std:c++20 /std:c++17 ..\src\better_sqlite3.cpp
-cl : command line  warning D9025: overriding '/std:c++20' with '/std:c++17' [C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj]
-  better_sqlite3.cpp
-C:\Users\dgera\.electron-gyp\33.4.11\include\node\v8config.h(13,1): error C1189: #error:  "C++20 or later required." [C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj]
-  (compiling source file '../src/better_sqlite3.cpp')
-
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj" (default targets) -- FAILED.
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj.metaproj" (default targets) -- FAILED.
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\binding.sln" (1) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\test_extension.vcxproj.metaproj" (7) on node 1 (default targets).
-Project "C:\Projects\DCE\node_modules\better-sqlite3\build\test_extension.vcxproj.metaproj" (7) is building "C:\Projects\DCE\node_modules\better-sqlite3\build\test_extension.vcxproj" (8) on node 1 (default targets).
-PrepareForBuild:
-  Creating directory "Release\obj\test_extension\".
-  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-  Creating directory "Release\obj\test_extension\test_extension.tlog\".
-InitializeBuildStatus:
-  Creating "Release\obj\test_extension\test_extension.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-  Touching "Release\obj\test_extension\test_extension.tlog\unsuccessfulbuild".
-MakeDirsForCl:
-  Creating directory "C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\test_extension\deps".
-ClCompile:
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe /c /I"C:\Users\dgera\.electron-gyp\33.4.11\include\node" /I"C:\Users\dgera\.electron-gyp\33.4.11\src" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\config" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\openssl\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\uv\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\zlib" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\v8\include" /I"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\global_intermediate\sqlite3" /Z7 /nologo /W3 /WX- /diagnostics:column /MP /Ox /Ob2 /Oi /Ot /Oy /GL /D NODE_GYP_MODULE_NAME=test_extension /D USING_UV_SHARED=1 /D USING_V8_SHARED=1 /D V8_DEPRECATION_WARNINGS=1 /D _GLIBCXX_USE_CXX11_ABI=1 /D ELECTRON_ENSURE_CONFIG_GYPI /D USING_ELECTRON_CONFIG_GYPI /D V8_COMPRESS_POINTERS /D V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE /D V8_31BIT_SMIS_ON_64BIT_ARCH /D V8_ENABLE_SANDBOX /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D OPENSSL_NO_PINSHARED /D OPENSSL_THREADS /D OPENSSL_NO_ASM /D BUILDING_NODE_EXTENSION /D "HOST_BINARY=\"node.exe\"" /D NDEBUG /D _WINDLL /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR- /Fo"Release\obj\test_extension\\deps\test_extension.obj" /Fd"Release\obj\test_extension\vc143.pdb" /external:W3 /Gd /TC /wd4351 /wd4355 /wd4800 /wd4251 /wd4275 /wd4244 /wd4267 /FC /errorReport:queue /Zc:__cplusplus -std:c++20 ..\deps\test_extension.c
-  test_extension.c
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\CL.exe /c /I"C:\Users\dgera\.electron-gyp\33.4.11\include\node" /I"C:\Users\dgera\.electron-gyp\33.4.11\src" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\config" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\openssl\openssl\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\uv\include" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\zlib" /I"C:\Users\dgera\.electron-gyp\33.4.11\deps\v8\include" /I"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\obj\global_intermediate\sqlite3" /Z7 /nologo /W3 /WX- /diagnostics:column /MP /Ox /Ob2 /Oi /Ot /Oy /GL /D NODE_GYP_MODULE_NAME=test_extension /D USING_UV_SHARED=1 /D USING_V8_SHARED=1 /D V8_DEPRECATION_WARNINGS=1 /D _GLIBCXX_USE_CXX11_ABI=1 /D ELECTRON_ENSURE_CONFIG_GYPI /D USING_ELECTRON_CONFIG_GYPI /D V8_COMPRESS_POINTERS /D V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE /D V8_31BIT_SMIS_ON_64BIT_ARCH /D V8_ENABLE_SANDBOX /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _HAS_EXCEPTIONS=0 /D NOMINMAX /D OPENSSL_NO_PINSHARED /D OPENSSL_THREADS /D OPENSSL_NO_ASM /D BUILDING_NODE_EXTENSION /D "HOST_BINARY=\"node.exe\"" /D NDEBUG /D _WINDLL /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR- /Fo"Release\obj\test_extension\\" /Fd"Release\obj\test_extension\vc143.pdb" /external:W3 /Gd /TP /wd4351 /wd4355 /wd4800 /wd4251 /wd4275 /wd4244 /wd4267 /FC /errorReport:queue /Zc:__cplusplus -std:c++20 "C:\Projects\DCE\node_modules\@electron\node-gyp\src\win_delay_load_hook.cc"
-  win_delay_load_hook.cc
-Link:
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\test_extension.node" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib DelayImp.lib "C:\\Users\\dgera\\.electron-gyp\\33.4.11\\x64\\node.lib" Delayimp.lib /DELAYLOAD:node.exe /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Projects\DCE\node_modules\better-sqlite3\build\Release\test_extension.pdb" /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X64 /LTCG:INCREMENTAL /ignore:4199 /DLL Release\obj\test_extension\win_delay_load_hook.obj
-  Release\obj\test_extension\\deps\test_extension.obj
-  "C:\Projects\DCE\node_modules\better-sqlite3\build\Release\sqlite3.lib"
-     Creating library C:\Projects\DCE\node_modules\better-sqlite3\build\Release\test_extension.lib and object C:\Projects\DCE\node_modules\better-sqlite3\build\Release\test_extension.exp
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 3 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  test_extension.vcxproj -> C:\Projects\DCE\node_modules\better-sqlite3\build\Release\\test_extension.node
-FinalizeBuildStatus:
-  Deleting file "Release\obj\test_extension\test_extension.tlog\unsuccessfulbuild".
-  Touching "Release\obj\test_extension\test_extension.tlog\test_extension.lastbuildstate".
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\test_extension.vcxproj" (default targets).
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\test_extension.vcxproj.metaproj" (default targets).
-Done Building Project "C:\Projects\DCE\node_modules\better-sqlite3\build\binding.sln" (default targets) -- FAILED.
-
-Build FAILED.
-
-"C:\Projects\DCE\node_modules\better-sqlite3\build\binding.sln" (default target) (1) ->
-"C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj.metaproj" (default target) (2) ->
-"C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj" (default target) (6) ->
-(ClCompile target) ->
-  cl : command line  warning D9025: overriding '/std:c++20' with '/std:c++17' [C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj]
-
-
-"C:\Projects\DCE\node_modules\better-sqlite3\build\binding.sln" (default target) (1) ->
-"C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj.metaproj" (default target) (2) ->
-"C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj" (default target) (6) ->
-(ClCompile target) ->
-  C:\Users\dgera\.electron-gyp\33.4.11\include\node\v8config.h(13,1): error C1189: #error:  "C++20 or later required." [C:\Projects\DCE\node_modules\better-sqlite3\build\better_sqlite3.vcxproj]
-
-    1 Warning(s)
-    1 Error(s)
-
-Time Elapsed 00:00:05.99
-Error: `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe` failed with exit code: 1
-    at ChildProcess.<anonymous> (C:\Projects\DCE\node_modules\@electron\node-gyp\lib\build.js:215:23)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
-
-✖ Rebuild Failed
-
-An unhandled error occurred inside electron-rebuild
-node-gyp failed to rebuild 'C:\Projects\DCE\node_modules\better-sqlite3'
-
-Error: node-gyp failed to rebuild 'C:\Projects\DCE\node_modules\better-sqlite3'
-    at ChildProcess.<anonymous> (C:\Projects\DCE\node_modules\@electron\rebuild\lib\module-type\node-gyp\node-gyp.js:121:24)
-    at ChildProcess.emit (node:events:518:28)
-    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
-PS C:\Projects\DCE> 
-</Ephemeral Context>
 <Previous Cycle 121 Summary of Actions>
 I have analyzed the logs and the observed behaviors.
 
@@ -6476,10 +5761,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T03:02:06.182Z
+  Date Generated: 2025-12-03T03:22:48.851Z
   ---
   Total Files: 210
-  Approx. Tokens: 362807
+  Approx. Tokens: 363007
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6492,7 +5777,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 7. src\backend\services\prompt.service.ts (5240 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
 9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4403 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (4395 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 536 - Chars: 37177 - Tokens: 9295
@@ -6627,13 +5912,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 171 - Chars: 11043 - Tokens: 2761
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5192 - Tokens: 1298
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1256 - Chars: 28357 - Tokens: 7090
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17610 - Tokens: 4403
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17577 - Tokens: 4395
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -6659,7 +5944,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 15114 - Tokens: 3779
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 159 - Chars: 15981 - Tokens: 3996
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -6699,7 +5984,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 202. webpack.config.js - Lines: 113 - Chars: 3039 - Tokens: 760
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-205. package.json - Lines: 174 - Chars: 5725 - Tokens: 1432
+205. package.json - Lines: 174 - Chars: 5726 - Tokens: 1432
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 97 - Chars: 5552 - Tokens: 1388
@@ -18661,7 +17946,7 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C120 (Conditionally render regenerate button based on connection mode)
+// Updated on: C123 (Hide regenerate button in manual mode)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
@@ -18682,7 +17967,7 @@ interface ResponseTabsProps {
     isGenerating: boolean;
     forceShowResponseView: boolean;
     onToggleForceResponseView: () => void;
-    connectionMode: ConnectionMode; // New Prop
+    connectionMode: ConnectionMode;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -20461,7 +19746,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C120 (Pass connectionMode to ResponseTabs)
+// Updated on: C123 (Pass connectionMode to ResponseTabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -20694,7 +19979,7 @@ const App = () => {
                 isGenerating={cycleManagement.currentCycle.status === 'generating'}
                 forceShowResponseView={forceShowResponseView}
                 onToggleForceResponseView={() => setForceShowResponseView(p => !p)}
-                connectionMode={generationManagement.connectionMode} // C120 FIX: Pass connectionMode
+                connectionMode={generationManagement.connectionMode}
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 
@@ -22695,13 +21980,25 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C122 (Add Electron Rebuild Error)
+# Updated on: C123 (Add better-sqlite3 C++20 error)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 026: `better-sqlite3` Build Failure with C++20 Error
+
+-   **Artifacts Affected:** `package.json`, `node_modules`
+-   **Cycles Observed:** C122
+-   **Symptom:** `npm run rebuild` fails with `error C1189: #error: "C++20 or later required."` when compiling `better-sqlite3`.
+-   **Root Cause Analysis (RCA):** Electron 33 (and other recent versions) uses a newer V8 engine that mandates C++20 support. Older versions of `better-sqlite3` (e.g., v9.x) are configured to build with C++17, causing a compilation error when including the V8 headers provided by Electron.
+-   **Codified Solution & Best Practice:**
+    1.  Upgrade `better-sqlite3` to a version that supports the newer Node.js/Electron environment (v11.x or later).
+    2.  Ensure `electron-rebuild` is run after the upgrade to recompile the native bindings with the correct standard.
 
 ---
 
@@ -23696,7 +22993,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C120 (Fix tab count initialization logic)
+// Updated on: C123 (Fix tab count initialization logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -23724,7 +23021,7 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        // C120 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
+        // C123 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
         for (let i = 1; i <= count; i++) {
@@ -32181,7 +31478,7 @@ To run the extension locally for development:
         "@types/diff": "^5.2.1",
         "@wooorm/starry-night": "^3.8.0",
         "agentkeepalive": "^4.5.0",
-        "better-sqlite3": "^9.6.0",
+        "better-sqlite3": "^11.5.0",
         "diff": "^5.2.0",
         "hast-util-to-html": "^9.0.1",
         "mammoth": "^1.8.0",

@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T03:02:06.182Z
+  Date Generated: 2025-12-03T03:22:48.851Z
   ---
   Total Files: 210
-  Approx. Tokens: 362807
+  Approx. Tokens: 363007
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -17,7 +17,7 @@
 7. src\backend\services\prompt.service.ts (5240 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
 9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4403 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (4395 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 536 - Chars: 37177 - Tokens: 9295
@@ -152,13 +152,13 @@
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 171 - Chars: 11043 - Tokens: 2761
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5192 - Tokens: 1298
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1256 - Chars: 28357 - Tokens: 7090
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17610 - Tokens: 4403
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17577 - Tokens: 4395
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 147 - Chars: 15114 - Tokens: 3779
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 159 - Chars: 15981 - Tokens: 3996
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -224,7 +224,7 @@
 202. webpack.config.js - Lines: 113 - Chars: 3039 - Tokens: 760
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-205. package.json - Lines: 174 - Chars: 5725 - Tokens: 1432
+205. package.json - Lines: 174 - Chars: 5726 - Tokens: 1432
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 97 - Chars: 5552 - Tokens: 1388
@@ -12186,7 +12186,7 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C120 (Conditionally render regenerate button based on connection mode)
+// Updated on: C123 (Hide regenerate button in manual mode)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
@@ -12207,7 +12207,7 @@ interface ResponseTabsProps {
     isGenerating: boolean;
     forceShowResponseView: boolean;
     onToggleForceResponseView: () => void;
-    connectionMode: ConnectionMode; // New Prop
+    connectionMode: ConnectionMode;
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -13986,7 +13986,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C120 (Pass connectionMode to ResponseTabs)
+// Updated on: C123 (Pass connectionMode to ResponseTabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14219,7 +14219,7 @@ const App = () => {
                 isGenerating={cycleManagement.currentCycle.status === 'generating'}
                 forceShowResponseView={forceShowResponseView}
                 onToggleForceResponseView={() => setForceShowResponseView(p => !p)}
-                connectionMode={generationManagement.connectionMode} // C120 FIX: Pass connectionMode
+                connectionMode={generationManagement.connectionMode}
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 
@@ -16220,13 +16220,25 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C122 (Add Electron Rebuild Error)
+# Updated on: C123 (Add better-sqlite3 C++20 error)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 026: `better-sqlite3` Build Failure with C++20 Error
+
+-   **Artifacts Affected:** `package.json`, `node_modules`
+-   **Cycles Observed:** C122
+-   **Symptom:** `npm run rebuild` fails with `error C1189: #error: "C++20 or later required."` when compiling `better-sqlite3`.
+-   **Root Cause Analysis (RCA):** Electron 33 (and other recent versions) uses a newer V8 engine that mandates C++20 support. Older versions of `better-sqlite3` (e.g., v9.x) are configured to build with C++17, causing a compilation error when including the V8 headers provided by Electron.
+-   **Codified Solution & Best Practice:**
+    1.  Upgrade `better-sqlite3` to a version that supports the newer Node.js/Electron environment (v11.x or later).
+    2.  Ensure `electron-rebuild` is run after the upgrade to recompile the native bindings with the correct standard.
 
 ---
 
@@ -17221,7 +17233,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C120 (Fix tab count initialization logic)
+// Updated on: C123 (Fix tab count initialization logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -17249,7 +17261,7 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        // C120 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
+        // C123 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
         for (let i = 1; i <= count; i++) {
@@ -25706,7 +25718,7 @@ To run the extension locally for development:
         "@types/diff": "^5.2.1",
         "@wooorm/starry-night": "^3.8.0",
         "agentkeepalive": "^4.5.0",
-        "better-sqlite3": "^9.6.0",
+        "better-sqlite3": "^11.5.0",
         "diff": "^5.2.0",
         "hast-util-to-html": "^9.0.1",
         "mammoth": "^1.8.0",

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C120 (Fix tab count initialization logic)
+// Updated on: C123 (Fix tab count initialization logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -27,7 +27,7 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        // C120 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
+        // C123 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
         for (let i = 1; i <= count; i++) {

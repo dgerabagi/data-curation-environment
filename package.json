@@ -157,7 +157,7 @@
         "@types/diff": "^5.2.1",
         "@wooorm/starry-night": "^3.8.0",
         "agentkeepalive": "^4.5.0",
-        "better-sqlite3": "^9.6.0",
+        "better-sqlite3": "^11.5.0",
         "diff": "^5.2.0",
         "hast-util-to-html": "^9.0.1",
         "mammoth": "^1.8.0",
