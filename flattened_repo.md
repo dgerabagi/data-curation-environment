@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T00:26:53.744Z
+  Date Generated: 2025-12-03T01:17:10.591Z
   ---
   Total Files: 209
-  Approx. Tokens: 361289
+  Approx. Tokens: 361841
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -17,7 +17,7 @@
 7. src\backend\services\prompt.service.ts (5240 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
 9. src\client\components\tree-view\TreeView.tsx (4422 tokens)
-10. src\client\views\parallel-copilot.view\view.tsx (4376 tokens)
+10. src\client\views\parallel-copilot.view\view.tsx (4403 tokens)
 
 <!-- Full File List -->
 1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 532 - Chars: 36936 - Tokens: 9234
@@ -152,13 +152,13 @@
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 171 - Chars: 11043 - Tokens: 2761
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 109 - Chars: 4783 - Tokens: 1196
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5192 - Tokens: 1298
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1256 - Chars: 28357 - Tokens: 7090
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 300 - Chars: 17501 - Tokens: 4376
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17610 - Tokens: 4403
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 119 - Chars: 12814 - Tokens: 3204
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 133 - Chars: 14156 - Tokens: 3539
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -195,7 +195,7 @@
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 179 - Chars: 7314 - Tokens: 1829
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7388 - Tokens: 1847
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11529 - Tokens: 2883
@@ -227,7 +227,7 @@
 205. package.json - Lines: 172 - Chars: 5617 - Tokens: 1405
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
-208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 93 - Chars: 5056 - Tokens: 1264
+208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 94 - Chars: 5333 - Tokens: 1334
 209. src\backend\services\database.service.ts - Lines: 292 - Chars: 13671 - Tokens: 3418
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
@@ -12175,11 +12175,12 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C105 (Add view toggle button)
+// Updated on: C120 (Conditionally render regenerate button based on connection mode)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import { ConnectionMode } from '@/backend/services/settings.service';
 
 interface ResponseTabsProps {
     sortedTabIds: number[];
@@ -12195,6 +12196,7 @@ interface ResponseTabsProps {
     isGenerating: boolean;
     forceShowResponseView: boolean;
     onToggleForceResponseView: () => void;
+    connectionMode: ConnectionMode; // New Prop
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -12211,6 +12213,7 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     isGenerating,
     forceShowResponseView,
     onToggleForceResponseView,
+    connectionMode,
 }) => {
     const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
     const confirmTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -12235,6 +12238,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     };
 
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
+    
+    // Only show regenerate button if NOT in manual mode
+    const showRegenerateButton = connectionMode !== 'manual';
 
     return (
         <div className="tab-bar-container">
@@ -12254,9 +12260,11 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                             <div className="tab-title">
                                 Resp {tabIndex}
                                 {isLoading && <VscLoading className="spinner" />}
-                                <button className="regenerate-tab-button" onClick={(e) => handleRegenerateClick(e, tabIndex)} title={isConfirmingRegen ? "Click again to confirm" : "Regenerate this response"}>
-                                    {isConfirmingRegen ? <VscCheck /> : <VscSync />}
-                                </button>
+                                {showRegenerateButton && (
+                                    <button className="regenerate-tab-button" onClick={(e) => handleRegenerateClick(e, tabIndex)} title={isConfirmingRegen ? "Click again to confirm" : "Regenerate this response"}>
+                                        {isConfirmingRegen ? <VscCheck /> : <VscSync />}
+                                    </button>
+                                )}
                             </div>
                             {isParsedMode && parsedData && (
                                 <div className="tab-metadata">
@@ -13967,7 +13975,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C116 (Add state for resizable pane)
+// Updated on: C120 (Pass connectionMode to ResponseTabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14200,6 +14208,7 @@ const App = () => {
                 isGenerating={cycleManagement.currentCycle.status === 'generating'}
                 forceShowResponseView={forceShowResponseView}
                 onToggleForceResponseView={() => setForceShowResponseView(p => !p)}
+                connectionMode={generationManagement.connectionMode} // C120 FIX: Pass connectionMode
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 
@@ -16200,13 +16209,27 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C119 (Add Webpack Native Module Hang)
+# Updated on: C120 (Add Native Module Version Mismatch)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 024: Native Module Version Mismatch (`better-sqlite3`)
+
+-   **Artifacts Affected:** `node_modules`
+-   **Cycles Observed:** C120
+-   **Symptom:** The extension fails to activate or initialize the database service, throwing an error: `The module .../better_sqlite3.node was compiled against a different Node.js version using NODE_MODULE_VERSION 127. This version of Node.js requires NODE_MODULE_VERSION 136.`
+-   **Root Cause Analysis (RCA):** VS Code extensions run within an Electron environment, which uses a specific version of Node.js (and thus a specific ABI version, e.g., 136). When `npm install` is run in a standard terminal, it compiles native modules like `better-sqlite3` for the system's installed Node.js version (e.g., ABI 127). This mismatch prevents the module from loading in the extension host.
+-   **Codified Solution & Best Practice:**
+    1.  Native modules must be rebuilt specifically for the Electron version used by VS Code.
+    2.  Run `npm rebuild better-sqlite3` (sometimes sufficient if prebuilds are available).
+    3.  For a robust fix, use `@electron/rebuild`: `npm install --save-dev @electron/rebuild` followed by `.\node_modules\.bin\electron-rebuild`.
+    4.  This step is required whenever the dependency is installed or updated, or if the VS Code version changes significantly.
 
 ---
 
@@ -17173,7 +17196,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C111 (Fix Parse All logic)
+// Updated on: C120 (Fix tab count initialization logic)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -17201,7 +17224,9 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        const count = Object.keys(responses).length || initialTabCount;
+        // C120 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
+        const count = Math.max(Object.keys(responses).length, initialTabCount);
+        
         for (let i = 1; i <= count; i++) {
             const key = i.toString();
             const response = responses[key];
@@ -17298,7 +17323,6 @@ export const useTabManagement = (
         const newParseMode = !isParsedMode;
         setIsParsedMode(newParseMode);
         if (newParseMode) {
-            // C111 FIX: Trigger parsing when switching TO parsed mode
             parseAllTabs();
         } else {
             // Un-parse: clear parsed content
@@ -25740,7 +25764,7 @@ All notable changes to the "Data Curation Environment" extension will be documen
 # Artifact A118: DCE - Database Integration Plan
 # Date Created: C118
 # Author: AI Model & Curator
-# Updated on: C119 (Add Webpack external configuration)
+# Updated on: C120 (Add native module build instructions)
 
 - **Key/Value for A0:**
 - **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
@@ -25766,6 +25790,7 @@ The `dce_history.json` format will be retained solely for **Import/Export** func
 -   **Library:** `better-sqlite3`. This library provides a synchronous API that is highly performant and fits well with the VS Code extension architecture (running in the Node.js Extension Host).
 -   **File Location:** `.vscode/dce.db` (inside the user's workspace).
 -   **Build Configuration (C119):** Because `better-sqlite3` is a native Node.js module, it **must** be excluded from the Webpack bundle. We will add it to the `externals` section of `webpack.config.js`.
+-   **Native Module Compatibility (C120):** `better-sqlite3` must be compiled against the specific Electron version used by VS Code, not the system's Node.js version. This requires running `npm rebuild better-sqlite3` or using `@electron/rebuild` in the extension directory.
 
 ### 3.2. Schema Design
 

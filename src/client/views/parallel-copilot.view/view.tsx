@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C116 (Add state for resizable pane)
+// Updated on: C120 (Pass connectionMode to ResponseTabs)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -232,6 +232,7 @@ const App = () => {
                 isGenerating={cycleManagement.currentCycle.status === 'generating'}
                 forceShowResponseView={forceShowResponseView}
                 onToggleForceResponseView={() => setForceShowResponseView(p => !p)}
+                connectionMode={generationManagement.connectionMode} // C120 FIX: Pass connectionMode
             />
             {showProgressView ? (
                 <GenerationProgressDisplay 

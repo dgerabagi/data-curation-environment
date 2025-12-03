@@ -1,9 +1,10 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C105 (Add view toggle button)
+// Updated on: C120 (Conditionally render regenerate button based on connection mode)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
 import { formatLargeNumber } from '@/common/utils/formatting';
+import { ConnectionMode } from '@/backend/services/settings.service';
 
 interface ResponseTabsProps {
     sortedTabIds: number[];
@@ -19,6 +20,7 @@ interface ResponseTabsProps {
     isGenerating: boolean;
     forceShowResponseView: boolean;
     onToggleForceResponseView: () => void;
+    connectionMode: ConnectionMode; // New Prop
 }
 
 const ResponseTabs: React.FC<ResponseTabsProps> = ({
@@ -35,6 +37,7 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     isGenerating,
     forceShowResponseView,
     onToggleForceResponseView,
+    connectionMode,
 }) => {
     const [regenConfirmTabId, setRegenConfirmTabId] = React.useState<number | null>(null);
     const confirmTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -59,6 +62,9 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
     };
 
     const nextPasteTab = workflowStep?.startsWith('awaitingResponsePaste') ? parseInt(workflowStep.split('_')[1], 10) : -1;
+    
+    // Only show regenerate button if NOT in manual mode
+    const showRegenerateButton = connectionMode !== 'manual';
 
     return (
         <div className="tab-bar-container">
@@ -78,9 +84,11 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                             <div className="tab-title">
                                 Resp {tabIndex}
                                 {isLoading && <VscLoading className="spinner" />}
-                                <button className="regenerate-tab-button" onClick={(e) => handleRegenerateClick(e, tabIndex)} title={isConfirmingRegen ? "Click again to confirm" : "Regenerate this response"}>
-                                    {isConfirmingRegen ? <VscCheck /> : <VscSync />}
-                                </button>
+                                {showRegenerateButton && (
+                                    <button className="regenerate-tab-button" onClick={(e) => handleRegenerateClick(e, tabIndex)} title={isConfirmingRegen ? "Click again to confirm" : "Regenerate this response"}>
+                                        {isConfirmingRegen ? <VscCheck /> : <VscSync />}
+                                    </button>
+                                )}
                             </div>
                             {isParsedMode && parsedData && (
                                 <div className="tab-metadata">
