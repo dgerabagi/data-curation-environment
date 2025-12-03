@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 124 - Eureka!
+Current Cycle 125 - observations and new ideas
+Cycle 124 - Eureka!
 Cycle 123 - exact same node version discrepency (130 v 136)
 Cycle 122 - even more prog
 Cycle 121 - almost working?
@@ -867,6 +868,61 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 125>
+<Cycle Context>
+okay, i implemented the previous cycle updates, and here are my observations:
+<observations>
+1. the associated files are still not recognized.
+
+2. i am detecting a new issue with the `Select All` button, in that it is not working. perhaps due to the new TabId? just guessing, no idea. i am able to individually select files via their checkmark in the associated files section, but clicking `Select All` does not select all of the currently selected responses associated files like it should.
+
+2.1. this issue is related to the selection of associated files. ive observed that, if i select some associated files, if i navigate away from, and back to the pcpp, i am detecting that those selected associated files are no longer selected! we should never have a users file selection get wiped like that. please look into it.
+
+2.2. in addition, this is related to the above in the sense of remembering user actions. currently, if i minimize the cycle & context section to give more space to view the responses, when i navigate away from and back to the pcpp, the cycle & context section is expanded once again, despite my recalling have minimizing it, causing me to have to minimize it again.
+
+3. the `Accept Selected (4)` button seems not to be working what so ever. in my current selection of four files, two are new, two already exist in my codebase. when i click `Accept Selected (4)`, the new files never appear, and the existing files dont get changed.
+
+4. currently, i have a markdown file selected, but i still see the raw version.
+
+5. currently, i have a json file selected, but i do not see its starry night coloration; all of the text in the raw field is white. why is this? isnt this supposed to be colored?
+</observations>
+<new requests>
+okay, now that we have this database working, im gonna need an artifact which describes how i maintain/manage this database. what i mean is, there are certain typical database operations that i may have to enact or implmenet during development depending on the current change being worked. for instance, i had not database previously i just had a json file. if i need to add or change the db structure, i need to rebuild something else somewhere now that i have a db. that the instruction i need for our specific implementation at this point in time.
+
+next... okay now heres the big one... ive realized that one severe limiting factor that is purely a design flaw is our handling of the master artifact list. that will be next, before the parallel inference.
+
+as i was discovering the notion of artifacts as a source of truth, i began also understanding the maxim of lists of lists. in doing so, i started having the AI make a master list and then had the idea to have the AI keep that list up to date. later, i had the idea to add descriptions and tags and then realized i could have those in the master artifact list too, and it was basically at that point i began to be in a position to realize that actually, if we just alter our interaction schema in this way, we can automate the creation/management of the master artifact list in a much more systematic and robust way, and heres how:
+
+if we make sure that we have the description and the tags safely created in our artifacts (so updating our interaction schema and the template artifacts to make sure they are all in alignment with this) then we can programmatically construct a master artifact list from any of those that we find. in addition, we can further improve this master artifacts list by making it state-aware, state-aware in the fact of the state of the selected/curated files. it can be the case that i decide that there are certain documentation artifacts that i want to keep but i do NOT want to have in my projects current context. so i de-select them. am i sure that those are getting removed from the master artifact list? i figured it didnt matter too much, and left it to the AI to manage. but now we could make it state aware and could keep it updated relative to the users selection set.
+
+ah okay, and this is one change i would -love- to see. as a power dce-user, the best way i have found to use it, is to have one vertical monitor, and one horizontal. on the vertical monitor, i place the dce pcpp in its own vscode window. in the horizontal monitor i have vs code proper, where i navigate, review, read all files.
+
+this is what would be ideal... if, in the associated files, i could instantly open one of those files that are present (in my vertical monitor) by double clicking or otherwise a button, over in my vs code proper window, (the horizontal monitor), as what i do when i need to see that file, is i manually track down its directory, which is time consuming and if its already associated could be done at the click of a button instead.
+</new requests>
+<cycle plan>
+while im writing down new requests, thats just becuase i had the idea now and am attempting to 'capture the genie' by writing down the idea when i get it. the main focus however, is to clean up what we've done currently still with the db before we move on to any new request. if you wish to codify the new request, you can do so in such manner: in our task list artifact(s).
+
+the main focus is on the observations and getting those resolved. they are critical issues currently that we cannot progress without resolution.
+</cycle plan>
+</Cycle Context>
+<Previous Cycle 124 Summary of Actions>
+I have analyzed the persistent `better-sqlite3` build failure. The error `NODE_MODULE_VERSION 130` vs `136` confirms a mismatch between the compiled binary (ABI 130) and the runtime environment (ABI 136).
+
+The logs reveal that your extension host environment is running **Electron 37.7.0** (Node 22.20.0), which utilizes **ABI 136**. However, the default `electron-rebuild` process (likely using the `electron` version specified in `devDependencies`, which is v33) is targeting an older ABI (130).
+
+To resolve this, we must force `electron-rebuild` to target the *exact* version of Electron reported by your environment (`37.7.0`).
+
+I will also address the two warnings in your `package.json` (missing icon and redundant activation event) and update the documentation to reflect this advanced troubleshooting step.
+
+1.  **Update `package.json`:**
+    *   Add the `"icon"` property pointing to `public/spiral.svg`.
+    *   Remove the redundant `"onView:data-curation-environment"` from `activationEvents`.
+2.  **Update `src/Artifacts/A118. DCE - Database Integration Plan.md`:** Add a specific troubleshooting step for identifying the runtime Electron version via logs and forcing a rebuild for that version.
+3.  **Update `src/Artifacts/A11. DCE - Regression Case Studies.md`:** Add a case study for "ABI Mismatch with Non-Standard Electron Versions".
+4.  **Curator Activity:** Run the specific rebuild command targeting Electron 37.7.0.
+</Previous Cycle 124 Summary of Actions>
+</Cycle 125>
+
 <Cycle 124>
 <Cycle Context>
 okay, ran the commands, deleted package-lock.json manually, then ran the rebuild command, saw rebuild complete, now i am pressing F5 while monitoring the usual channels... but this time including the <DCE Output>, as i saw it has relevant logs in there just this last cycle.
@@ -908,4639 +964,6 @@ next, assuming we get the associated files mismatch/discrepency/regression resol
 
 finally, the second thing, and probably the most impactful, will be, for markdown files (aka our artifacts), when those are being viewed in the right-side where we show the responses files contents (with the line numbers, we show the raw file/markdown with our starry night coloration). well it would be fantastic for those, we displayed them using the built-in `Open Preview` option that i recently discovered in VSCode; when i view a markdown file, and i hold down the ALT button, the two-panel-magnifying glass icon in VSCode turns in to what looks to be for lack of a better visual description, a newspaper icon. when i hover over it, it says `Open Preview (Ctrl + Shift + V)` and what opens is much easier for the human eye to read. we can simply add a button near the copy button we have that is the copy raw markdown, to add there to copy markdown version (with formatting) vs. copy raw when its a markdown.
 </Cycle Context>
-<Ephemeral Context>
-[INFO] [6:38:03 AM] Congratulations, your extension "Data Curation Environment" is now active!
-[INFO] [6:38:04 AM] Starry Night syntax highlighter initialized.
-[INFO] [6:38:04 AM] Services initializing...
-[INFO] [6:38:04 AM] [Env] Node: 22.20.0, Electron: 37.7.0, ABI: 136
-[INFO] [6:38:04 AM] Migrating legacy dce_history.json to SQLite...
-[INFO] [6:38:04 AM] Migration complete. Legacy file renamed to .bak
-[INFO] [6:38:04 AM] Database initialized at c:\Projects\anguilla-project\.vscode\dce.db
-[INFO] [6:38:04 AM] Services initialized successfully.
-[INFO] [6:38:04 AM] Registering 7 commands.
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-shm
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-wal
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-journal
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-shm
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-wal
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-wal
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-shm
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-journal
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce_history.json.bak
-[INFO] [6:38:05 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce_history.json.bak
-[INFO] [6:38:05 AM] Context Chooser view message handler initialized.
-[INFO] [6:38:06 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [6:38:06 AM] [SelectionService] Found 59 paths in persisted state. Validating...
-[INFO] [6:38:06 AM] [SelectionService] Returning 59 valid paths.
-[INFO] [6:38:06 AM] Persisted current selection of 59 items.
-[INFO] [6:38:06 AM] [FTV Refresh] Full refresh triggered. Reason: git repo opened
-[INFO] [6:38:07 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-wal
-[INFO] [6:38:07 AM] [FTV Refresh] Full refresh triggered. Reason: file change: dce.db-wal
-[INFO] [6:38:09 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
-[INFO] [6:38:30 AM] Executing dce.openParallelCopilot command to open WebviewPanel.
-[INFO] [6:38:30 AM] Parallel Co-Pilot view message handler initialized.
-[INFO] [6:38:31 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [6:38:31 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Shift to Interactive Presentation)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [ ] **Build Interactive Presentation:**
-    - [x] **Content Generation:** Create `reportContent.json` mirroring the A207 narrative.
-    - [x] **Asset Manifest:** Create `imageManifest.json` for visual assets.
-    - [ ] **App Scaffolding:** Deploy the `report-viewer` code (Next.js/React) to render the JSON content.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Interactive Presentation Strategy
-- **Decision:** Shifted from a traditional slide deck to an **Interactive Report** (using the `report-viewer` codebase). This aligns with the "Show, Don't Tell" strategy by demonstrating a product built with the very methodology we are pitching.
-- **Data Integration:** The presentation now includes hard metrics derived from the `00-initial-research` folder (e.g., $32M revenue, 80% water loss).
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and technical implementation for the **Anguilla Project**. This initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Structure
-
-This project follows the **Data Curation Environment (DCE)** methodology, separating "Source of Truth" documentation from executable code.
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201...         # Vision and Master Plan
-│   ├── A202-A206...    # Deep Research Proposals (Infrastructure, Education, Gov, Climate, Regs)
-│   └── A207...         # Strategic Presentation Guide
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # The Interactive Presentation App
-│   ├── reportContent.json  # The narrative content for the presentation
-│   ├── imageManifest.json  # Visual assets for the presentation
-│   └── ...                 # (Future) Next.js application code
-└── src/                # Future prototype code for the Micro-Pilot
-```
-
-## The Interactive Presentation
-
-Instead of a static slide deck, the strategic pitch for this project is delivered via an **Interactive Report Viewer**. This web application demonstrates the power of the V2V methodology by presenting the proposal as a living, navigable digital artifact.
-
-### How to Run the Presentation
-
-1.  **Install Dependencies:**
-    Navigate to the root directory and run:
-    ```bash
-    npm install
-    ```
-
-2.  **Start the Development Server:**
-    ```bash
-    npm run dev
-    ```
-
-3.  **View the Report:**
-    Open your browser to `http://localhost:3000`.
-
-## Key Strategy Documents
-
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The narrative arc for the pitch.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/reportContent.json::{
-  "reportId": "anguilla-strategy-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "The Vision",
-      "subSections": [
-        {
-          "subSectionId": "opportunity",
-          "subSectionTitle": "The Opportunity",
-          "pages": [
-            {
-              "pageId": "slide-01",
-              "pageTitle": "From Domain Rent to Sovereign Infrastructure",
-              "tldr": "Anguilla owns the most valuable digital real estate in the world. It's time to convert that temporary rent into permanent power.",
-              "content": "# The .ai Windfall\n\nMinister, Anguilla currently owns the most valuable address in the digital world: **.ai**.\n\nIn 2023 alone, this asset generated **$32 million USD**—nearly **20%** of your government's total revenue. This is an unprecedented economic anomaly.\n\n## The Challenge\n\nRight now, that revenue is just 'rent.' We are the landlords, but we don't own the building. We are passive beneficiaries of a boom driven by Silicon Valley.\n\n## The Proposal\n\nMy proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**.",
-              "imageGroupIds": ["group_slide_01_intro"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "poly-crisis",
-          "subSectionTitle": "The Poly-Crisis",
-          "pages": [
-            {
-              "pageId": "slide-02",
-              "pageTitle": "The Poly-Crisis: Why We Must Act",
-              "tldr": "We face a convergence of threats: water scarcity, energy insecurity, and climate vulnerability. Traditional methods cannot solve this.",
-              "content": "# A Convergence of Threats\n\nThis vision is not a luxury; it is a survival strategy. Our research has identified a 'poly-crisis' that threatens the island's viability:\n\n1.  **Water Security:** We are losing up to **80%** of our desalinated water to leakage (Non-Revenue Water). This is a financial hemorrhage.\n2.  **Energy Insecurity:** Electricity costs are **~$0.42/kWh** due to near-total reliance on imported diesel. This suffocates economic growth.\n3.  **Climate Vulnerability:** As a low-lying island, we are on the front lines of rising sea levels and intensifying hurricanes.\n\nWe cannot solve these 21st-century problems with 20th-century tools.",
-              "imageGroupIds": ["group_slide_02_crisis"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "strategy",
-      "sectionTitle": "The Strategy",
-      "subSections": [
-        {
-          "subSectionId": "pillars",
-          "subSectionTitle": "Strategic Pillars",
-          "pages": [
-            {
-              "pageId": "slide-03",
-              "pageTitle": "Pillar 1: The AI Capital (Sovereignty)",
-              "tldr": "Investing the .ai windfall into a Sovereign AI Cloud—green, hurricane-proof, and owned by Anguilla.",
-              "content": "# Economic Sovereignty\n\nWe propose a **Digital Wealth Fund** funded by 50% of domain revenues. This fund will finance the **Sovereign AI Cloud**.\n\n*   **Hurricane-Hardened:** Data centers built to withstand Category 5 storms, ensuring our digital economy never goes offline.\n*   **Green Energy:** Powered by solar and wind, breaking our addiction to diesel.\n*   **Data Sovereignty:** Keeping Anguillian government and citizen data on Anguillian soil (or sovereign cloud), protected by our laws.\n\nWe stop exporting capital to AWS and Azure, and start building our own assets.",
-              "imageGroupIds": ["group_slide_03_capital"]
-            },
-            {
-              "pageId": "slide-04",
-              "pageTitle": "Pillar 2: The Cognitive Citizenry (Culture)",
-              "tldr": "A national upskilling program to turn every citizen into a 'Citizen Architect' and preserve our culture.",
-              "content": "# Cognitive Capital\n\nWe will implement a national upskilling program based on the **Vibecoding to Virtuosity (V2V)** methodology.\n\n*   **The Citizen Architect:** We don't need 16,000 coders. We need 16,000 citizens who can *direct* AI to solve problems.\n*   **Cultural Heritage AI:** We will train a sovereign model on Anguillian history, dialect, and folklore. It will speak *our* language and preserve our stories for the next generation.\n*   **No One Left Behind:** From high school students to civil servants, everyone gets a personal AI tutor.",
-              "imageGroupIds": ["group_slide_04_citizenry"]
-            },
-            {
-              "pageId": "slide-05",
-              "pageTitle": "Pillar 3: The Automated State (Governance)",
-              "tldr": "Creating a frictionless, automated government that survives any storm.",
-              "content": "# Next-Gen Governance\n\nWe will reimagine the civil service with the **Anguilla Civil Service AI (ACSA)**.\n\n*   **Frictionless Services:** Work permits, land licenses, and incorporations handled by secure, automated agents. Reduce wait times from months to minutes.\n*   **Data Embassy:** Modeled on Estonia, we will back up our critical national registries to secure servers abroad. Even if a hurricane destroys the physical ministry, the *State* survives in the cloud.\n*   **Continuity of Government:** Ensuring that governance, aid distribution, and communication continue uninterrupted during any crisis.",
-              "imageGroupIds": ["group_slide_05_governance"]
-            },
-            {
-              "pageId": "slide-06",
-              "pageTitle": "Pillar 4: Resilient Island Systems (Survival)",
-              "tldr": "Using a Digital Twin to fix the water leaks and balance the grid.",
-              "content": "# Smart Island Infrastructure\n\nWe will deploy a **National Digital Twin**—a live, AI-powered simulation of our island.\n\n*   **Fixing the Leaks:** Using AI and IoT sensors to detect water leaks in real-time, aiming to reduce that 80% loss to under 20%.\n*   **Smart Grid:** Balancing renewable energy loads to stabilize the grid and lower costs.\n*   **Predictive Resilience:** Simulating hurricane impacts before they happen to optimize emergency response and protect heritage sites.",
-              "imageGroupIds": ["group_slide_06_resilience"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "ask",
-      "sectionTitle": "The Proposal",
-      "subSections": [
-        {
-          "subSectionId": "micro-pilot",
-          "subSectionTitle": "The Micro-Pilot",
-          "pages": [
-            {
-              "pageId": "slide-07",
-              "pageTitle": "The 16,000 Advantage",
-              "tldr": "Our small size is our greatest asset. We can move faster than any other nation.",
-              "content": "# Why Anguilla?\n\nYou might think, 'We are too small.' I tell you: **You are the perfect size.**\n\nLarge nations are Titanic ships; they cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student. We can secure every land deed.\n\nYou are not a small island; you are a **Model Organism** for the future of humanity. A proof that a nation can be high-tech, culturally rich, and climate-resilient all at once.",
-              "imageGroupIds": ["group_slide_07_advantage"]
-            },
-            {
-              "pageId": "slide-08",
-              "pageTitle": "The Ask: A 90-Day Micro-Pilot",
-              "tldr": "Give us one cohort. 90 days. We will prove the model.",
-              "content": "# The Proposal\n\nMinister, I am not asking for a massive contract today. I am asking for the mandate to run a **Micro-Pilot**.\n\n**The Plan:**\n1.  **One Cohort:** Give us one class of students or one government department.\n2.  **The Tools:** We will equip them with the Data Curation Environment and the V2V curriculum.\n3.  **The Goal:** In 90 days, they will build functional AI tools to solve real local problems.\n\nIf we succeed, we scale. If we don't, we walk away. Let us prove that we can build the **AI Capital of the World**.",
-              "imageGroupIds": ["group_slide_08_ask"]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/imageManifest.json::{
-  "manifestId": "anguilla-presentation-assets",
-  "basePath": "/assets/images/presentation/",
-  "imageGroups": {
-    "group_slide_01_intro": {
-      "path": "intro/",
-      "baseFileName": "ai_capital_vision",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A futuristic, hopeful visualization of Anguilla. A beautiful Caribbean island with integrated, green technology. Solar panels blending with nature, sleek data centers covered in greenery, and a digital overlay representing connectivity and intelligence. Golden hour lighting.",
-      "alt": "Vision of Anguilla as an AI-Native Nation"
-    },
-    "group_slide_02_crisis": {
-      "path": "crisis/",
-      "baseFileName": "poly_crisis_diagram",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A schematic diagram showing three intersecting circles labeled 'Water Scarcity', 'Energy Cost', and 'Climate Risk'. The intersection is glowing red, labeled 'The Poly-Crisis'. Background is a subtle map of Anguilla.",
-      "alt": "Diagram of the Poly-Crisis"
-    },
-    "group_slide_03_capital": {
-      "path": "pillars/",
-      "baseFileName": "sovereign_cloud",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "Architectural rendering of a hurricane-proof data center in Anguilla. Reinforced concrete structure, partially underground, powered by a surrounding solar farm. Modern, secure, and resilient.",
-      "alt": "The Sovereign AI Cloud Facility"
-    },
-    "group_slide_04_citizenry": {
-      "path": "pillars/",
-      "baseFileName": "cognitive_citizenry",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A diverse group of Anguillian citizens—students, elders, professionals—collaborating in a high-tech learning hub. They are using tablets and holographic interfaces to build software. A sense of empowerment and community.",
-      "alt": "Anguillians as Citizen Architects"
-    },
-    "group_slide_05_governance": {
-      "path": "pillars/",
-      "baseFileName": "automated_state",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A visualization of the 'Cloud State'. A digital map of Anguilla connected by glowing lines to a secure server vault in a cold climate (representing the Data Embassy). Icons of digital IDs and secure documents floating in the network.",
-      "alt": "The Automated State and Data Embassy"
-    },
-    "group_slide_06_resilience": {
-      "path": "pillars/",
-      "baseFileName": "digital_twin",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A 'Digital Twin' dashboard view of Anguilla. A realistic 3D map of the island with data overlays showing water flow, energy grid status, and weather patterns. Alerts for leaks and grid stability are visible.",
-      "alt": "The Anguilla Digital Twin Dashboard"
-    },
-    "group_slide_07_advantage": {
-      "path": "ask/",
-      "baseFileName": "model_organism",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A conceptual image of a small, agile speedboat outpacing a massive, slow ocean liner. The speedboat represents Anguilla, agile and high-tech. The liner represents large nations.",
-      "alt": "The Agility of the Small Nation"
-    },
-    "group_slide_08_ask": {
-      "path": "ask/",
-      "baseFileName": "micro_pilot",
-      "fileExtension": ".png",
-      "imageCount": 1,
-      "prompt": "A roadmap graphic showing the 90-day Micro-Pilot timeline. Icons for 'Cohort Selection', 'Training', 'Building', and 'Launch'. The path leads to a glowing future city.",
-      "alt": "The 90-Day Micro-Pilot Roadmap"
-    }
-  }
-}
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C3 (Update Presentation Status)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [x] **Develop Presentation Deck:** Create visual slides/interactive report based on the narrative in `A207`. (Status: **Complete - See `public/data/anguilla_presentation.json`**)
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 2: Presentation Generation
-- **Action:** Created the interactive presentation data (`anguilla_presentation.json`) combining the strategic narrative with the hard data points found in the research (e.g., 80% NRW, $32M Revenue).
-- **Tech:** Ported the Report Viewer engine to render this data as an interactive application.
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: public/data/anguilla_presentation.json::{
-  "reportId": "anguilla-presentation-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "intro",
-      "sectionTitle": "The Vision",
-      "pages": [
-        {
-          "pageId": "slide-1",
-          "pageTitle": "From Domain Rent to Sovereign Infrastructure",
-          "tldr": "Anguilla stands at a historic crossroads. We can remain a passive landlord of the .ai domain, or we can become the active capital of the AI economy.",
-          "content": "## The Opportunity\n\nAnguilla currently owns the most valuable address in the digital world: **.ai**. \n\nIn 2023, this asset generated **$32 million USD**—nearly **20%** of the government's total revenue. This is a historic windfall, but currently, it is just 'rent'. We are the landlords, but we do not own the building.\n\n## The Vision\n\nWe propose a bold strategy to convert this transient digital capital into permanent **Sovereign Infrastructure**. \n\nWe will build the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and automated, and where the economy is resilient against both climate and market storms.",
-          "imageGroupIds": []
-        }
-      ]
-    },
-    {
-      "sectionId": "crisis",
-      "sectionTitle": "The Poly-Crisis",
-      "pages": [
-        {
-          "pageId": "slide-2",
-          "pageTitle": "The Cost of Inaction",
-          "tldr": "We face a convergence of threats: Water scarcity, Energy insecurity, and Climate vulnerability. Traditional methods are failing.",
-          "content": "## The Reality on the Ground\n\nWhile we celebrate the digital revenue, our physical reality is fragile. We face a 'Poly-Crisis' that threatens our long-term viability.\n\n*   **Water Security:** We are currently losing up to **80%** of our desalinated water to leakage (Non-Revenue Water). This is a catastrophic waste of money and energy.\n*   **Energy Insecurity:** Our electricity costs are among the highest in the region at approx. **$0.42/kWh**, driven by a 99% reliance on imported diesel.\n*   **Climate Vulnerability:** As a low-lying island, we are on the front lines of rising sea levels and intensifying hurricanes. \n\nWe cannot build a digital future on a fragile physical foundation.",
-          "imageGroupIds": []
-        }
-      ]
-    },
-    {
-      "sectionId": "strategy",
-      "sectionTitle": "The Strategy",
-      "pages": [
-        {
-          "pageId": "slide-3",
-          "pageTitle": "The 5 Pillars of Resilience",
-          "tldr": "Our strategy rests on five pillars designed to solve our physical problems using our digital advantages.",
-          "content": "To transform Anguilla, we propose five interconnected strategic initiatives:\n\n1.  **The AI Capital (Sovereign Infrastructure):** Establishing a Digital Wealth Fund to finance a hurricane-proof, solar-powered Sovereign Cloud. We will own the compute, not just the domain.\n2.  **Resilient Island Systems (Digital Twin):** Deploying an AI-powered Digital Twin to monitor water leaks and energy grids in real-time, aiming to reduce water loss from 80% to 20%.\n3.  **The Cognitive Citizenry (Human Capital):** A national upskilling program (V2V) to turn our population into 'Citizen Architects' capable of building their own AI tools.\n4.  **The Automated State (Governance):** Creating a 'Data Embassy' to ensure our government exists in the cloud, immune to Category 5 storms, and automating routine services for a frictionless citizen experience.\n5.  **The Global AI Sandbox (Regulation):** Positioning Anguilla as the premier jurisdiction for ethical, safe AI development and testing.",
-          "imageGroupIds": []
-        }
-      ]
-    },
-    {
-      "sectionId": "micropilot",
-      "sectionTitle": "The Micro-Pilot",
-      "pages": [
-        {
-          "pageId": "slide-4",
-          "pageTitle": "The 16,000 Advantage",
-          "tldr": "Our small size is our greatest asset. We can move faster than any other nation.",
-          "content": "## Why Anguilla?\n\nYou might think we are too small. In the age of AI, small is agile. Large nations are Titanic ships; they cannot pivot. Anguilla is a speedboat.\n\nWith a population of **16,000**, we can touch everyone. \n\n*   We can give a personal AI tutor to every single student.\n*   We can digitize every single land deed.\n*   We can upskill our entire civil service in months, not years.\n\nWe are not just a small island; we are a **Model Organism** for the future of humanity. A proof-of-concept for a high-tech, culturally rich, and climate-resilient society.",
-          "imageGroupIds": []
-        }
-      ]
-    },
-    {
-      "sectionId": "ask",
-      "sectionTitle": "The Ask",
-      "pages": [
-        {
-          "pageId": "slide-5",
-          "pageTitle": "Proposal: The 90-Day Micro-Pilot",
-          "tldr": "We are asking for the mandate to run a controlled pilot to prove this vision works.",
-          "content": "## The Proposal\n\nWe are not asking for a massive contract today. We are asking for the mandate to run a **Micro-Pilot**.\n\n**The Goal:** Prove the efficacy of the 'Vibecoding to Virtuosity' (V2V) methodology.\n\n**The Scope:**\n1.  **One Cohort:** Give us one class of students or one government department.\n2.  **One Problem:** Let us solve one high-friction problem (e.g., The Work Permit Queue or Water Leak Detection data analysis).\n3.  **90 Days:** Give us 90 days to demonstrate measurable results.\n\nIf we succeed, we scale. If we fail, you lose nothing. But when we succeed, we begin the journey to becoming the AI Capital of the World.",
-          "imageGroupIds": []
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:24 AM] [SYNTAX-HIGHLIGHT] Received request for lang: ts, id: src/state/reportStore.ts::import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-
-// --- Types ---
-
-interface ReportImage {
-    imageId: string;
-    url: string;
-    prompt: string;
-    alt: string;
-}
-
-interface ReportImagePrompt {
-    promptId: string;
-    promptText: string;
-    images: ReportImage[];
-}
-
-export interface ReportPage {
-    pageId: string;
-    pageTitle: string;
-    tldr: string;
-    content: string;
-    imagePrompts: ReportImagePrompt[];
-}
-
-// Raw Data Structures (matching JSON)
-export interface RawReportPage {
-    pageId: string;
-    pageTitle: string;
-    tldr: string;
-    content: string;
-    imageGroupIds: string[];
-}
-
-export interface RawSubSection {
-    subSectionId: string;
-    subSectionTitle: string;
-    pages: RawReportPage[];
-}
-
-export interface RawReportSection {
-    sectionId: string;
-    sectionTitle: string;
-    pages?: RawReportPage[];
-    subSections?: RawSubSection[];
-}
-
-interface ReportContentData {
-    reportId: string;
-    reportTitle: string;
-    sections: RawReportSection[];
-}
-
-// --- Store Interface ---
-
-export interface ReportState {
-    reportData: ReportContentData | null;
-    allPages: ReportPage[];
-    currentPageIndex: number;
-    isTreeNavOpen: boolean;
-    expandedSections: Record<string, boolean>;
-    // Audio/Presentation State
-    isPlaying: boolean;
-    playbackSpeed: number;
-}
-
-export interface ReportActions {
-    loadReportData: () => Promise<void>;
-    nextPage: () => void;
-    prevPage: () => void;
-    goToPageByIndex: (index: number) => void;
-    toggleTreeNav: () => void;
-    toggleSectionExpansion: (sectionId: string) => void;
-    setPlaybackSpeed: (speed: number) => void;
-    togglePlayback: () => void;
-}
-
-// --- Implementation ---
-
-export const useReportStore = create<ReportState & ReportActions>()(
-    persist(
-        (set, get) => ({
-            reportData: null,
-            allPages: [],
-            currentPageIndex: 0,
-            isTreeNavOpen: true,
-            expandedSections: {},
-            isPlaying: false,
-            playbackSpeed: 1,
-
-            loadReportData: async () => {
-                if (get().reportData) return;
-
-                try {
-                    // Load the Anguilla Presentation Data
-                    const response = await fetch('/data/anguilla_presentation.json');
-                    if (!response.ok) throw new Error('Failed to load presentation data');
-                    
-                    const data: ReportContentData = await response.json();
-                    
-                    // Flatten pages for linear navigation
-                    const pages: ReportPage[] = [];
-                    data.sections.forEach(section => {
-                        if (section.pages) {
-                            section.pages.forEach(p => pages.push({
-                                ...p,
-                                imagePrompts: [] // Placeholder for now
-                            }));
-                        }
-                        if (section.subSections) {
-                            section.subSections.forEach(sub => {
-                                sub.pages.forEach(p => pages.push({
-                                    ...p,
-                                    imagePrompts: []
-                                }));
-                            });
-                        }
-                    });
-
-                    set({ reportData: data, allPages: pages });
-                } catch (error) {
-                    console.error('Error loading report data:', error);
-                }
-            },
-
-            nextPage: () => {
-                const { currentPageIndex, allPages } = get();
-                if (currentPageIndex < allPages.length - 1) {
-                    set({ currentPageIndex: currentPageIndex + 1 });
-                }
-            },
-
-            prevPage: () => {
-                const { currentPageIndex } = get();
-                if (currentPageIndex > 0) {
-                    set({ currentPageIndex: currentPageIndex - 1 });
-                }
-            },
-
-            goToPageByIndex: (index) => {
-                const { allPages } = get();
-                if (index >= 0 && index < allPages.length) {
-                    set({ currentPageIndex: index });
-                }
-            },
-
-            toggleTreeNav: () => set(state => ({ isTreeNavOpen: !state.isTreeNavOpen })),
-
-            toggleSectionExpansion: (sectionId) => set(state => ({
-                expandedSections: {
-                    ...state.expandedSections,
-                    [sectionId]: !state.expandedSections[sectionId]
-                }
-            })),
-
-            setPlaybackSpeed: (speed) => set({ playbackSpeed: speed }),
-            togglePlayback: () => set(state => ({ isPlaying: !state.isPlaying })),
-        }),
-        {
-            name: 'anguilla-report-store',
-            storage: createJSONStorage(() => localStorage),
-            partialize: (state) => ({
-                currentPageIndex: state.currentPageIndex,
-                isTreeNavOpen: state.isTreeNavOpen,
-                expandedSections: state.expandedSections
-            })
-        }
-    )
-);
-[INFO] [6:41:25 AM] [SYNTAX-HIGHLIGHT] Received request for lang: tsx, id: src/components/ReportViewer/ReportViewer.tsx::import React, { useEffect } from 'react';
-import { useReportStore } from '../../state/reportStore';
-import { FaChevronLeft, FaChevronRight, FaBars, FaTimes } from 'react-icons/fa';
-import ReactMarkdown from 'react-markdown';
-
-// Simple internal components to avoid dependency hell for this iteration
-const NavButton: React.FC<{ onClick: () => void; disabled?: boolean; children: React.ReactNode }> = ({ onClick, disabled, children }) => (
-    <button
-        onClick={onClick}
-        disabled={disabled}
-        className={`p-2 rounded bg-gray-800 text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
-    >
-        {children}
-    </button>
-);
-
-const ReportViewer: React.FC = () => {
-    const { 
-        loadReportData, 
-        reportData, 
-        allPages, 
-        currentPageIndex, 
-        nextPage, 
-        prevPage,
-        isTreeNavOpen,
-        toggleTreeNav,
-        goToPageByIndex
-    } = useReportStore();
-
-    useEffect(() => {
-        loadReportData();
-    }, []);
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowRight') nextPage();
-            if (e.key === 'ArrowLeft') prevPage();
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [nextPage, prevPage]);
-
-    if (!reportData || allPages.length === 0) {
-        return <div className="flex items-center justify-center h-screen bg-gray-900 text-white">Loading Presentation...</div>;
-    }
-
-    const currentPage = allPages[currentPageIndex];
-
-    return (
-        <div className="flex h-screen bg-gray-900 text-gray-100 overflow-hidden font-sans">
-            {/* Sidebar Navigation */}
-            <div 
-                className={`bg-gray-800 border-r border-gray-700 transition-all duration-300 flex flex-col ${isTreeNavOpen ? 'w-64' : 'w-0'}`}
-                style={{ overflow: 'hidden' }}
-            >
-                <div className="p-4 border-b border-gray-700 font-bold text-cyan-400">
-                    {reportData.reportTitle}
-                </div>
-                <div className="flex-1 overflow-y-auto p-2">
-                    {reportData.sections.map((section, sIdx) => (
-                        <div key={section.sectionId} className="mb-4">
-                            <div className="text-xs uppercase tracking-wider text-gray-500 mb-2 px-2">
-                                {section.sectionTitle}
-                            </div>
-                            {section.pages?.map((page) => {
-                                const pageIndex = allPages.findIndex(p => p.pageId === page.pageId);
-                                const isActive = pageIndex === currentPageIndex;
-                                return (
-                                    <div 
-                                        key={page.pageId}
-                                        onClick={() => goToPageByIndex(pageIndex)}
-                                        className={`cursor-pointer px-2 py-1 rounded text-sm mb-1 truncate ${isActive ? 'bg-cyan-900 text-cyan-100' : 'hover:bg-gray-700 text-gray-300'}`}
-                                    >
-                                        {page.pageTitle}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Main Content Area */}
-            <div className="flex-1 flex flex-col min-w-0">
-                {/* Header */}
-                <div className="h-14 border-b border-gray-700 flex items-center justify-between px-4 bg-gray-800/50">
-                    <button onClick={toggleTreeNav} className="text-gray-400 hover:text-white">
-                        {isTreeNavOpen ? <FaTimes /> : <FaBars />}
-                    </button>
-                    <div className="text-sm text-gray-400">
-                        Slide {currentPageIndex + 1} of {allPages.length}
-                    </div>
-                </div>
-
-                {/* Slide Content */}
-                <div className="flex-1 overflow-y-auto p-8 md:p-12 flex justify-center">
-                    <div className="max-w-4xl w-full">
-                        <h1 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-6">
-                            {currentPage.pageTitle}
-                        </h1>
-                        
-                        {/* TL;DR Box */}
-                        <div className="bg-gray-800/50 border-l-4 border-orange-500 p-4 mb-8 rounded-r">
-                            <p className="text-lg text-gray-200 italic">
-                                {currentPage.tldr}
-                            </p>
-                        </div>
-
-                        {/* Main Markdown Content */}
-                        <div className="prose prose-invert prose-lg max-w-none">
-                            <ReactMarkdown>{currentPage.content}</ReactMarkdown>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Footer / Controls */}
-                <div className="h-16 border-t border-gray-700 bg-gray-800 flex items-center justify-center gap-4 px-4">
-                    <NavButton onClick={prevPage} disabled={currentPageIndex === 0}>
-                        <FaChevronLeft /> Previous
-                    </NavButton>
-                    
-                    <div className="w-64 h-2 bg-gray-700 rounded-full overflow-hidden">
-                        <div 
-                            className="h-full bg-cyan-500 transition-all duration-300"
-                            style={{ width: `${((currentPageIndex + 1) / allPages.length) * 100}%` }}
-                        />
-                    </div>
-
-                    <NavButton onClick={nextPage} disabled={currentPageIndex === allPages.length - 1}>
-                        Next <FaChevronRight />
-                    </NavButton>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default ReportViewer;
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Research Integration & Interactive Presentation Planning)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207) and Vision (A201). (Status: **Complete**)
-- [ ] **Develop Interactive Presentation:**
-    -   [ ] **Plan:** Create technical specification for the Interactive Report Viewer (A208).
-    -   [ ] **Scaffold:** Set up the Next.js project structure.
-    -   [ ] **Content:** Convert A201-A207 into the JSON format required by the viewer.
-    -   [ ] **Build:** Port the `report-viewer` components from the context.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Research Integration & Presentation Strategy
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research` and pivoting the presentation strategy from static slides to an Interactive Report.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-- **Action:** Updated A201 and A207 with these hard numbers. Created A208 to plan the software build for the presentation.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A201 - Anguilla Project - Vision and Master Plan.md::# Artifact A201: Anguilla Project - Vision and Master Plan
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Enrich with Research Data: Revenue, Water Loss, Energy Costs)
-
-- **Key/Value for A0:**
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation, leveraging its unique digital asset (.ai domain) and small population size. Updated with specific economic and infrastructural data points.
-- **Tags:** anguilla, strategy, vision, nation building, ai, sovereignty, resilience
-
-## 1. The Vision: Anguilla as the World's First AI-Native Nation
-
-Anguilla stands at a unique crossroads in history. Through a stroke of digital luck, it owns the most valuable real estate on the future internet: the **.ai** top-level domain. This asset generated approximately **US$32 million (EC$87 million)** in 2023 alone—nearly 20% of the government's total revenue.
-
-The vision is to transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. We propose a comprehensive national strategy to become the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and automated, and where the economy is driven by high-value cognitive labor.
-
-With a population of approximately 16,000, Anguilla is the perfect size for a "Micro-Pilot"—a living laboratory for the post-scarcity, high-cognitive-capital society that the rest of the world is only dreaming of.
-
-## 2. Guiding Principles
-
-To ensure this transformation aligns with the nation's values and survival needs, the strategy is anchored in three non-negotiable principles:
-
-1.  **Political Sovereignty & Data Independence:** We will not become a digital colony. Anguilla must own the infrastructure (servers, models, data) that powers its future. We will use AI to strengthen our independence, not increase our reliance on foreign powers.
-2.  **Cultural Preservation & Amplification:** Technology must serve the culture, not erase it. We will use AI to preserve Anguillian history, dialect, and stories, ensuring that the "AI-Native" identity is distinctly Anguillian.
-3.  **Climate Resilience & Survival:** We live on the front lines of climate change. Every technological implementation must directly contribute to the island's physical resilience against hurricanes, rising sea levels, and resource scarcity.
-
-## 3. The Strategic Pillars and The "Poly-Crisis"
-
-This vision is not a luxury; it is a survival strategy. Anguilla faces a "poly-crisis" that traditional methods cannot solve:
-*   **Water Security:** The island currently loses up to **80% of its desalinated water** to leakage, a catastrophic waste of energy and money.
-*   **Energy Insecurity:** Electricity costs are among the highest in the region (approx. **US$0.42/kWh**), driven by 99% reliance on imported diesel.
-*   **Governance Risk:** Physical records are vulnerable to hurricanes; the government needs a "Data Embassy" to ensure continuity.
-
-To address these, we propose five interconnected pillars:
-
-1.  **Economic Sovereignty (The ".ai" Capital):** Leveraging the .ai domain windfall not just as revenue, but as a "Digital Wealth Fund" to build **hurricane-resilient, green sovereign digital infrastructure** (local data centers, sovereign cloud) that ensures Anguilla is a landlord, not a tenant, in the AI economy.
-2.  **Cognitive Capital (The Citizen Architect):** Implementing a national upskilling program based on the "Vibecoding to Virtuosity" (V2V) methodology. The goal is to turn the population into the world's highest-density concentration of AI-literate professionals, while integrating **Cultural Heritage AI** modules to preserve local knowledge.
-3.  **Next-Gen Governance (The Automated State):** Reimagining the civil service with AI. Creating a "frictionless state" where citizenship, land registry, taxes, and business incorporation are handled by secure, automated agents, with a specific focus on **Continuity of Government** during climate disasters (The "Data Embassy" Model).
-4.  **Resilient Infrastructure (Smart Island):** Using AI to solve the physical challenges of island life. Deploying a **National Digital Twin** to detect the 80% water loss in real-time and optimize the energy grid to reduce the $0.42/kWh cost.
-5.  **Regulatory Innovation (The Global Sandbox):** Establishing Anguilla as a "Regulatory Sandbox" for ethical AI. Creating a legal framework that attracts global AI companies to test and deploy their systems safely, ensuring all testing respects local cultural and ethical norms.
-
-## 4. The "Micro-Pilot" Concept
-
-Why Anguilla? Because it is agile. Large nations are burdened by legacy systems, massive bureaucracies, and political gridlock. They cannot pivot quickly. Anguilla, with its small population and unified governance, can move at the speed of software.
-
-We propose positioning Anguilla to the world not just as a tourist destination, but as a **Model Nation**—a proof-of-concept for how a society can thrive in the age of AI. This narrative will attract not just tourists, but innovators, investors, and the world's attention.
-
-## 5. The Role of the Data Curation Environment (DCE)
-
-This transformation requires a toolset. We propose using the **Data Curation Environment (DCE)** as the operating system for this national project.
-*   **Planning:** Using the DCE's artifact-driven workflow to draft legislation, plan infrastructure, and design curricula.
-*   **Execution:** Using the Parallel Co-Pilot Panel to manage the implementation of digital services.
-*   **Education:** Using the V2V Academy platform to deliver the national upskilling program.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Integrate specific metrics from Research Data: Revenue, Water Loss, Energy Costs)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," woven with themes of political sovereignty, cultural preservation, and climate resilience.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue.
-
-But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building.
-
-My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**."
-
-## 2. The "Show, Don't Tell" Strategy (Interactive Report)
-
-We will not present a static slide deck. We will present a live, **Interactive Report** (running on the local `aiascent.dev` framework). This demonstrates the technology *is* the message.
-
-*   **The Demo:** "I used my own AI system to analyze your nation's critical challenges. Here is what we found, and here is the solution."
-*   **The Reveal:** Show the 5 Research Proposals (A202-A206) backed by the specific metrics:
-    *   **Resilience (Water):** "We know Anguilla loses up to **80%** of its desalinated water to leakage. We have a plan for a Digital Twin (A205) to stop this hemorrhage."
-    *   **Sovereignty (Energy):** "We know electricity costs **$0.42/kWh** because of diesel. We have a plan for a Green Sovereign Cloud (A202) to break this dependency."
-    *   **Continuity (Governance):** "We have a plan for a **Data Embassy** (A204)—modeled on Estonia—to ensure the Anguillian government exists in the cloud, immune to any Category 5 storm."
-
-## 3. Addressing the "Micro-Pilot" (The 16,000 Advantage)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity. A proof that a nation can be high-tech, culturally rich, and climate-resilient all at once."
-
-## 4. Your Credibility (The "Why You" Factor)
-
-Leverage your unique background to build trust.
-
-*   **Google:** "I train the models the world uses. I know their power, but I also know their limits."
-*   **DOD/NSA:** "I build training for the US military. I understand **security**. I understand **resilience**. I am not selling a crypto scheme. I am proposing a national defense strategy for your economy and your environment."
-*   **The Citizen Architect:** "I am not a coder. I am a 'Citizen Architect.' I built this platform myself using AI. I am proof that you don't need 16,000 computer scientists. You just need 16,000 empowered Anguillians."
-
-## 5. The Ask
-
-Don't ask for a massive contract immediately. Ask for the **Pilot**.
-
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE (e.g., the Work Permit queue).
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and documentation for the **Anguilla Project**. The initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Vision
-
-Anguilla currently generates significant revenue (~$32M USD in 2023) from .ai domain registrations. This project proposes a strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-1.  **Green, Hurricane-Proof Data Centers:** Powered by renewables, independent of the diesel grid.
-2.  **Cognitive Citizenry:** A national upskilling program to make Anguilla the most AI-literate nation on earth.
-3.  **Automated State:** A "Cloud Government" that ensures continuity even during Category 5 storms.
-
-## Repository Structure
-
-This repository is managed using the **Data Curation Environment (DCE)** methodology.
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A202 - Research Proposal - The AI Capital.md
-│   ├── A203 - Research Proposal - The Cognitive Citizenry.md
-│   ├── A204 - Research Proposal - The Automated State.md
-│   ├── A205 - Research Proposal - Resilient Island Systems.md
-│   ├── A206 - Research Proposal - The Global AI Sandbox.md
-│   └── A207 - Strategic Presentation Guide.md
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # Interactive Presentation Source Code
-└── src/                # Future prototype code
-```
-
-## Key Artifacts
-
-*   **[A201 - Vision and Master Plan](src/Artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A200 - Universal Task Checklist](src/Artifacts/A200%20-%20Anguilla%20Project%20-%20Universal%20Task%20Checklist.md):** Current project status and next steps.
-*   **[A207 - Strategic Presentation Guide](src/Artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The script and strategy for the meeting with the Minister of IT.
-
-## Getting Started
-
-1.  **Review the Vision:** Start with Artifact `A201`.
-2.  **Explore the Proposals:** Review `A202` through `A206` for specific vertical strategies (Infrastructure, Education, Governance, Climate, Regulation).
-3.  **Run the Presentation:**
-    ```bash
-    cd presentation
-    npm install
-    npm run dev
-    ```
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A208 - Anguilla Project - Interactive Presentation Plan.md::# Artifact A208: Anguilla Project - Interactive Presentation Plan
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A technical plan to adapt the `report-viewer` code into a bespoke presentation tool for the Minister meeting, transforming the static artifacts into an interactive, data-driven narrative.
-- **Tags:** presentation, report viewer, nextjs, react, planning, anguilla
-
-## 1. Overview & Goal
-
-The meeting with the Minister of Information Technology is a critical milestone. To demonstrate the power of the "Vibecoding to Virtuosity" (V2V) methodology and the "Automated State" concept, we will not use static slides. Instead, we will present an **Interactive Report**—a web-based application that allows the Minister to explore the proposals, visualize the data (e.g., the 80% water loss), and interact with the content.
-
-This plan outlines how we will port the existing `report-viewer` codebase (from `aiascent.game`) into the `anguilla-project` repository and adapt it for this specific presentation.
-
-## 2. Content Strategy: The "Six Chapters"
-
-The presentation will be structured into six interactive chapters, mapping directly to our core artifacts:
-
-1.  **The Vision (A201):** "From Domain Rent to Sovereign Infrastructure." Visualizing the revenue growth vs. the infrastructure gap.
-2.  **The AI Capital (A202):** "The Green Sovereign Cloud." Interactive diagrams of the hurricane-proof data center.
-3.  **Cognitive Citizenry (A203):** "The V2V Curriculum." A demo of the "Citizen Architect" learning path.
-4.  **The Automated State (A204):** "The Data Embassy." A simulation of government continuity during a storm.
-5.  **Resilient Systems (A205):** "The Digital Twin." Visualizing the water network and the 80% leakage problem.
-6.  **The Global Sandbox (A206):** "Ethical Innovation." The roadmap for regulatory leadership.
-
-## 3. Technical Architecture
-
-We will use the `Next.js` framework with `React` and `TailwindCSS`, reusing the robust components from the `report-viewer` context.
-
-### 3.1. File Structure
-
-```
-presentation/
-├── src/
-│   ├── components/
-│   │   ├── report/             # Ported ReportViewer components
-│   │   │   ├── ReportViewerModal.tsx
-│   │   │   ├── ReportTreeNav.tsx
-│   │   │   ├── ...
-│   │   └── ui/
-│   │       ├── MarkdownRenderer.tsx
-│   │       └── ...
-│   ├── state/
-│   │   └── reportStore.ts      # Zustand store for report state
-│   ├── data/
-│   │   ├── anguillaReport.json # The content of the presentation
-│   │   └── imageManifest.json  # Images for the slides
-│   └── pages/
-│       └── index.tsx           # Entry point
-```
-
-### 3.2. Data Adaptation
-
-We need to create a new `anguillaReport.json` file. This file will structure the content of artifacts A201-A206 into the JSON format expected by the `ReportViewer`.
-
-**Schema Example:**
-```json
-{
-  "reportId": "anguilla-strategy-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "1. The Vision",
-      "pages": [
-        {
-          "pageId": "vision-overview",
-          "pageTitle": "The .ai Windfall",
-          "tldr": "$32M USD in 2023. 20% of Revenue. How do we invest it?",
-          "content": "Full markdown content from A201..."
-        }
-      ]
-    }
-    // ...
-  ]
-}
-```
-
-## 4. Implementation Steps (Next Cycle)
-
-1.  **Scaffold:** Create the `presentation` directory and initialize a Next.js app.
-2.  **Port Components:** Copy the `context/report-viewer/*.tsx` files into `presentation/src/components/report/`.
-3.  **Port Store:** Copy `context/report-viewer/reportStore.ts` to `presentation/src/state/`.
-4.  **Create Data:** Construct `anguillaReport.json` by extracting content from the `src/Artifacts/*.md` files.
-5.  **Run & Polish:** Launch the app, verify navigation, and apply Anguilla-specific branding (colors, logos).
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0 - Anguilla Project - Master Artifact List.md::# Artifact A0: Anguilla Project - Master Artifact List
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Add A208)
-
-- **Key/Value for A0:**
-- **Description:** The definitive, parseable list of all documentation artifacts for the Anguilla Project.
-- **Tags:** master list, index, artifacts, anguilla
-
-## 1. Purpose
-
-This file serves as the definitive, parseable list of all documentation artifacts for the Anguilla Project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
-
-## 2. Artifacts List
-
-### A200. Anguilla Project - Universal Task Checklist
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-### A201. Anguilla Project - Vision and Master Plan
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation.
-- **Tags:** anguilla, strategy, vision, nation building, ai
-
-### A202. Research Proposal - The AI Capital
-- **Description:** A proposal focused on leveraging the .ai domain windfall to fund sovereign digital infrastructure.
-- **Tags:** anguilla, economics, .ai domain, infrastructure, sovereign wealth
-
-### A203. Research Proposal - The Cognitive Citizenry
-- **Description:** A proposal for a national upskilling initiative using the V2V/DCE methodology.
-- **Tags:** anguilla, education, upskilling, v2v, cognitive capital
-
-### A204. Research Proposal - The Automated State
-- **Description:** A proposal for modernizing Anguilla's governance through AI and "Data Embassy" resilience.
-- **Tags:** anguilla, governance, automation, public services, resilience
-
-### A205. Research Proposal - Resilient Island Systems
-- **Description:** A proposal for using AI and Digital Twins to manage critical island resources (water, energy) and enhance climate resilience.
-- **Tags:** anguilla, sustainability, environment, climate change, digital twin
-
-### A206. Research Proposal - The Global AI Sandbox
-- **Description:** A proposal to establish Anguilla as a "Regulatory Sandbox" for ethical AI development.
-- **Tags:** anguilla, regulation, policy, sandbox, innovation
-
-### A207. Strategic Presentation Guide
-- **Description:** A script and strategic guide for the meeting with the Minister of IT.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-### A208. Anguilla Project - Interactive Presentation Plan
-- **Description:** A technical plan to adapt the `report-viewer` code into a bespoke presentation tool for the Minister meeting.
-- **Tags:** presentation, report viewer, planning, anguilla
-
-### A214. Anguilla Project - GitHub Repository Setup Guide
-- **Description:** A step-by-step guide for setting up the GitHub repository for the Anguilla Project.
-- **Tags:** git, github, setup, anguilla, project management
-
-### A215. Anguilla Project - Migration Manifest
-- **Description:** A curated list of files to migrate from the `aiascent-dev` repository to the new `anguilla-project` repository.
-- **Tags:** anguilla, migration, setup, context curation, manifest
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Pivot to Interactive Report Presentation)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, specifically focusing on the creation of the **Interactive Presentation** for the Minister meeting.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting (Interactive Report)
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics. (Status: **Complete**)
-- [ ] **Build Interactive Presentation App:**
-    - [ ] **Scaffold App:** Initialize Next.js project in `presentation/` directory.
-    - [ ] **Port Viewer Code:** Migrate `report-viewer` components (Store, Viewers, Parsers) to the new app.
-    - [ ] **Generate Content JSON:** Convert artifacts A201-A206 into `reportContent.json`.
-    - [ ] **Generate Image Manifest:** Create `imageManifest.json` with prompts for visual assets.
-    - [ ] **Verify Local Run:** Ensure `npm run dev` launches the presentation successfully.
-- [ ] **Prepare Demo Environment:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live during the meeting.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Interactive Presentation Pivot
-- **Strategy Change:** Instead of a static slide deck, we are building a custom **Interactive Report App**. This aligns with the "Show, Don't Tell" strategy by demonstrating the very technology we are proposing (a sovereign, code-based artifact).
-- **Action:** Generating the `reportContent.json` to drive the app.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Interactive Report
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Refactor for Interactive App Structure)
-
-- **Key/Value for A0:**
-- **Description:** A strategic guide for the meeting with the Minister of IT. This artifact defines the structure and flow of the **Interactive Report Application** that will be used to present the proposal.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide, interactive report
-
-## 1. The Medium is the Message
-
-We are eschewing the traditional PowerPoint deck. Instead, we will present using a custom-built **Interactive Report App**.
-
-*   **Why:** To demonstrate competence and the power of the V2V methodology immediately. "Minister, we didn't just write a report; we built a sovereign application to host it."
-*   **The Format:** A web-based, navigable report featuring:
-    *   **Executive Summaries (TL;DR)** for rapid scanning.
-    *   **Deep Dive Content** available on demand.
-    *   **AI Chat Interface** (Ascentia) allowing the Minister to "ask the report" questions in real-time.
-
-## 2. Report Structure & Narrative Flow
-
-The app will be structured into sections corresponding to our core research proposals.
-
-### Section 1: The Vision (Attractor)
-*   **Artifact:** `A201 - Vision and Master Plan`
-*   **Key Narrative:** "From Domain Rent to Sovereign Infrastructure."
-*   **Visuals:** High-contrast imagery of Anguilla's map overlaid with digital nodes (Data Centers, Fiber links).
-*   **Key Data:** $32M revenue, 80% water loss, $0.42/kWh energy cost.
-
-### Section 2: The Economic Engine (Sovereignty)
-*   **Artifact:** `A202 - The AI Capital`
-*   **Key Narrative:** "The Digital Wealth Fund." Moving from passive income to active investment in hurricane-proof, green compute.
-*   **Visuals:** Renderings of a solar-powered, bunker-grade data center.
-
-### Section 3: The Human Engine (Culture)
-*   **Artifact:** `A203 - The Cognitive Citizenry`
-*   **Key Narrative:** "The Citizen Architect." Upskilling the population to ensure they are the masters of the AI, not the servants.
-*   **Visuals:** Anguillian students using tablets to control local infrastructure.
-
-### Section 4: The Operating System (Efficiency)
-*   **Artifact:** `A204 - The Automated State`
-*   **Key Narrative:** "Frictionless Governance." The Data Embassy concept—ensuring the state survives even if the island is offline.
-*   **Visuals:** Diagram of the "Cloud State" redundancy.
-
-### Section 5: The Physical Layer (Resilience)
-*   **Artifact:** `A205 - Resilient Island Systems`
-*   **Key Narrative:** "AI for Survival." Using Digital Twins to fix the water leaks and balance the grid.
-*   **Visuals:** A Digital Twin dashboard showing real-time water flow and energy usage.
-
-### Section 6: The Regulatory Shield (Ethics)
-*   **Artifact:** `A206 - The Global AI Sandbox`
-*   **Key Narrative:** "Ethical Innovation." Attracting the *right* kind of tech companies.
-*   **Visuals:** A seal of "Ethical AI Compliance."
-
-## 3. The "Ask" (Interactive)
-
-The final section of the app will be the **Micro-Pilot Proposal**.
-*   **Interactive Element:** A live checklist or timeline that we can adjust based on the Minister's feedback during the meeting.
-*   **The Ask:** "Grant us one cohort. 90 days. Let us prove it."
-
-## 4. Technical Requirements for Meeting
-
-*   **Hardware:** Laptop running the local Next.js development server.
-*   **Backup:** PDF export of the report content (just in case).
-*   **Demo:** A local LLM (if possible) or API connection to demonstrate the "Ask Ascentia" feature live.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and technical implementation for the **Anguilla Project**. The initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Structure
-
-This project is managed using the **Data Curation Environment (DCE)** methodology and is structured as a monorepo containing both policy artifacts and code.
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A0 - Master Artifact List.md
-│   ├── A201 - Vision and Master Plan.md
-│   └── ... (Research Proposals A202-A206)
-│
-├── presentation/       # Interactive Report Application (Next.js)
-│   ├── public/
-│   │   └── data/       # JSON content driving the presentation
-│   ├── src/            # React components and logic
-│   └── package.json
-│
-├── data/               # Raw research data (Financials, Climate reports)
-└── .vscode/            # DCE Extension configuration and history
-```
-
-## The Interactive Presentation
-
-The core deliverable for the Ministry meeting is an **Interactive Report App** located in the `presentation/` directory. This app demonstrates the V2V methodology by presenting our research as a navigable, AI-enhanced software product rather than a static document.
-
-### Running the Presentation Locally
-
-1.  Navigate to the presentation directory:
-    ```bash
-    cd presentation
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-3.  Start the development server:
-    ```bash
-    npm run dev
-    ```
-4.  Open your browser to `http://localhost:3000`.
-
-## Key Artifacts
-
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The narrative structure for the interactive report.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/public/data/reportContent.json::{
-  "reportId": "anguilla-vision-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "1. The Vision",
-      "pages": [
-        {
-          "pageId": "vision-overview",
-          "pageTitle": "From Domain Rent to Sovereign Infrastructure",
-          "tldr": "Anguilla has a unique opportunity to convert the $32M+ annual revenue from .ai domains into permanent, hurricane-proof infrastructure and human capital.",
-          "content": "## The Opportunity\n\nAnguilla stands at a unique crossroads in history. Through a stroke of digital luck, it owns the most valuable real estate on the future internet: the **.ai** top-level domain. This asset generated approximately **US$32 million (EC$87 million)** in 2023 alone—nearly 20% of the government's total revenue.\n\n## The Vision\n\nWe propose a comprehensive national strategy to transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. The goal is to become the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and automated, and where the economy is driven by high-value cognitive labor.\n\n## The Poly-Crisis\n\nThis is not a luxury; it is a survival strategy. Anguilla faces:\n*   **Water Security:** 80% of desalinated water is lost to leakage.\n*   **Energy Insecurity:** Electricity costs are ~$0.42/kWh due to diesel dependence.\n*   **Climate Vulnerability:** Existential threat from rising sea levels and hurricanes.",
-          "imageGroupIds": ["vision-main"]
-        },
-        {
-          "pageId": "vision-pillars",
-          "pageTitle": "The Strategic Pillars",
-          "tldr": "Five interconnected pillars to secure Anguilla's future: Economy, Education, Governance, Infrastructure, and Regulation.",
-          "content": "To achieve this vision, we propose a strategy built on five interconnected pillars:\n\n1.  **The AI Capital (Economic Sovereignty):** A Digital Wealth Fund to finance a Sovereign AI Cloud.\n2.  **The Cognitive Citizenry (Human Capital):** A national upskilling program (V2V) to create 'Citizen Architects'.\n3.  **The Automated State (Governance):** Frictionless, disaster-resilient government services.\n4.  **Resilient Island Systems (Infrastructure):** Digital Twins to manage water and energy.\n5.  **The Global AI Sandbox (Regulation):** A jurisdiction for ethical AI innovation.",
-          "imageGroupIds": ["vision-pillars"]
-        }
-      ]
-    },
-    {
-      "sectionId": "economy",
-      "sectionTitle": "2. The AI Capital",
-      "pages": [
-        {
-          "pageId": "economy-fund",
-          "pageTitle": "The Digital Wealth Fund",
-          "tldr": "Converting transient domain revenue into permanent physical assets.",
-          "content": "## The Problem\n\nCurrent .ai revenue is 'rent'. It depends on external market forces. Anguilla is a landlord, not a producer.\n\n## The Solution\n\nEstablish a **Digital Wealth Fund** funded by 50% of domain revenues. This fund will invest exclusively in domestic hyper-infrastructure:\n*   **Sovereign AI Cloud:** Hurricane-hardened data centers.\n*   **Green Energy:** Solar farms to power the compute.\n*   **Subsea Connectivity:** Redundant fiber for resilience.\n\n## Impact\n\nThis moves Anguilla up the value chain, from selling names to selling **compute** and **intelligence**.",
-          "imageGroupIds": ["economy-fund"]
-        }
-      ]
-    },
-    {
-      "sectionId": "education",
-      "sectionTitle": "3. Cognitive Citizenry",
-      "pages": [
-        {
-          "pageId": "education-v2v",
-          "pageTitle": "The National V2V Initiative",
-          "tldr": "Upskilling the entire population to be 'Citizen Architects' who can build their own tools.",
-          "content": "## The Challenge\n\nTraditional service jobs are at risk from automation. Importing foreign AI tools risks cultural erasure.\n\n## The Solution: V2V (Vibecoding to Virtuosity)\n\nWe propose a national upskilling program:\n*   **Citizen Architect Curriculum:** Teaching citizens to direct AI to build software, bypassing the need to learn complex syntax.\n*   **Cultural Heritage AI:** Training a sovereign model on Anguillian history, dialect, and law.\n\n## The Goal\n\nTo turn the population into the world's highest-density concentration of AI-literate professionals.",
-          "imageGroupIds": ["education-v2v"]
-        }
-      ]
-    },
-    {
-      "sectionId": "governance",
-      "sectionTitle": "4. The Automated State",
-      "pages": [
-        {
-          "pageId": "gov-resilience",
-          "pageTitle": "Frictionless & Resilient Governance",
-          "tldr": "A government that lives in the cloud, immune to hurricanes.",
-          "content": "## The Vulnerability\n\nPaper records and physical offices are single points of failure during a Category 5 hurricane. If the building goes, the state pauses.\n\n## The Solution: ACSA (Anguilla Civil Service AI)\n\n*   **Data Embassy:** Hosting critical registries (land, birth, business) in a secure, sovereign cloud abroad (e.g., UK/Estonia model).\n*   **Citizen Concierge:** A single app for all government services, with offline-first capability for disaster scenarios.\n*   **Automated Bureaucracy:** AI agents to handle routine permits and licenses instantly.",
-          "imageGroupIds": ["gov-resilience"]
-        }
-      ]
-    },
-    {
-      "sectionId": "infrastructure",
-      "sectionTitle": "5. Resilient Systems",
-      "pages": [
-        {
-          "pageId": "infra-twin",
-          "pageTitle": "The National Digital Twin",
-          "tldr": "Using AI to see the invisible: leaks, grid loads, and storm impacts.",
-          "content": "## The Crisis\n\n*   **Water:** 80% of desalinated water is lost to leakage.\n*   **Energy:** Grid instability limits renewable adoption.\n\n## The Solution: Digital Twin\n\nA real-time simulation of the island's infrastructure.\n*   **AI Leak Detection:** Identifying leaks instantly to save millions.\n*   **Smart Grid:** Balancing solar intermittency to reduce diesel burn.\n*   **Disaster Simulation:** Modeling storm surges to protect heritage sites and infrastructure.",
-          "imageGroupIds": ["infra-twin"]
-        }
-      ]
-    },
-    {
-      "sectionId": "sandbox",
-      "sectionTitle": "6. Global AI Sandbox",
-      "pages": [
-        {
-          "pageId": "sandbox-ethics",
-          "pageTitle": "A Jurisdiction for Ethical Innovation",
-          "tldr": "Attracting the right kind of companies with clear, ethical regulation.",
-          "content": "## The Opportunity\n\nThe global regulatory landscape is fragmented. Anguilla can set the standard.\n\n## The Solution\n\nEstablish a **Regulatory Sandbox** for ethical AI.\n*   **Fast-Track Licensing:** For companies that meet strict ethical and safety standards.\n*   **Data Trusts:** Legal frameworks to allow companies to train on local data *if* value is shared back to the community.\n*   **Cultural Protection:** Mandating respect for local norms in deployed AI agents.",
-          "imageGroupIds": ["sandbox-ethics"]
-        }
-      ]
-    },
-    {
-      "sectionId": "ask",
-      "sectionTitle": "7. The Ask",
-      "pages": [
-        {
-          "pageId": "ask-pilot",
-          "pageTitle": "The Micro-Pilot Proposal",
-          "tldr": "Give us 90 days and one cohort to prove it.",
-          "content": "## The Proposal\n\nWe are not asking for a massive contract today. We are asking for a mandate to prove this works.\n\n## The Micro-Pilot\n\n*   **Duration:** 90 Days.\n*   **Scope:** One cohort (e.g., a high school class or government department).\n*   **Deliverables:**\n    1.  A fully upskilled group of 'Citizen Architects'.\n    2.  A functional prototype of the 'Anguilla Key' digital ID app.\n    3.  A detailed roadmap for the Sovereign Cloud.\n\n**Let us build the model organism for the future of nations.**",
-          "imageGroupIds": ["ask-pilot"]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/public/data/imageManifest.json::{
-  "manifestId": "anguilla-presentation-v1",
-  "basePath": "/images/",
-  "imageGroups": {
-    "vision-main": {
-      "path": "vision/",
-      "prompt": "A futuristic, high-tech map of Anguilla glowing with digital nodes and fiber optic connections, symbolizing a smart nation. The ocean is turquoise, the land is digital green and gold. Cinematic lighting.",
-      "alt": "Digital map of Anguilla",
-      "baseFileName": "vision-map",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "vision-pillars": {
-      "path": "vision/",
-      "prompt": "Five monolithic, glowing pillars rising from the Caribbean sea, representing Economy, Education, Governance, Infrastructure, and Regulation. Solarpunk aesthetic.",
-      "alt": "Strategic Pillars",
-      "baseFileName": "pillars",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "economy-fund": {
-      "path": "economy/",
-      "prompt": "A sleek, hurricane-proof data center bunker in Anguilla, covered in solar panels and surrounded by palm trees. Modern concrete architecture, resilient design.",
-      "alt": "Sovereign Data Center",
-      "baseFileName": "datacenter",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "education-v2v": {
-      "path": "education/",
-      "prompt": "A diverse group of Anguillian students and elders working together on tablets, building software. A holographic AI tutor assists them. Warm, community-focused lighting.",
-      "alt": "Cognitive Citizenry",
-      "baseFileName": "education",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "gov-resilience": {
-      "path": "governance/",
-      "prompt": "A visualization of a 'Data Embassy': a secure server rack glowing with the Anguillian flag, located inside a high-tech vault in a snowy location (representing the UK/Canada backup).",
-      "alt": "Data Embassy",
-      "baseFileName": "embassy",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "infra-twin": {
-      "path": "infrastructure/",
-      "prompt": "A digital twin dashboard screen showing a 3D model of Anguilla's water pipe network, with red alerts for leaks and green lines for flow. High-tech UI.",
-      "alt": "Digital Twin Dashboard",
-      "baseFileName": "digital-twin",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "sandbox-ethics": {
-      "path": "sandbox/",
-      "prompt": "A futuristic seal or badge made of gold and glass, embossed with 'Anguilla Ethical AI Sandbox'. Clean, corporate, trustworthy design.",
-      "alt": "Regulatory Seal",
-      "baseFileName": "seal",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "ask-pilot": {
-      "path": "ask/",
-      "prompt": "A close-up of a handshake between a government official and a technologist, with a holographic roadmap floating above their hands. Partnership and future vision.",
-      "alt": "Partnership",
-      "baseFileName": "handshake",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    }
-  }
-}
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0 - Anguilla Project - Master Artifact List.md::# Artifact A0: Anguilla Project - Master Artifact List
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** The definitive, parseable list of all documentation artifacts for the Anguilla Project.
-- **Tags:** master list, index, artifacts, anguilla
-
-## 1. Purpose
-
-This file serves as the definitive, parseable list of all documentation artifacts for the Anguilla Project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
-
-## 2. Artifacts List
-
-### A200. Anguilla Project - Universal Task Checklist
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-### A201. Anguilla Project - Vision and Master Plan
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation.
-- **Tags:** anguilla, strategy, vision, nation building, ai
-
-### A202. Research Proposal - The AI Capital
-- **Description:** A proposal focused on leveraging the .ai domain windfall to fund sovereign digital infrastructure.
-- **Tags:** anguilla, economics, .ai domain, infrastructure, sovereign wealth
-
-### A203. Research Proposal - The Cognitive Citizenry
-- **Description:** A proposal for a national upskilling initiative using the V2V/DCE methodology.
-- **Tags:** anguilla, education, upskilling, v2v, cognitive capital
-
-### A204. Research Proposal - The Automated State
-- **Description:** A proposal for modernizing Anguilla's governance through AI and "Data Embassy" resilience.
-- **Tags:** anguilla, governance, automation, public services, resilience
-
-### A205. Research Proposal - Resilient Island Systems
-- **Description:** A proposal for using AI and Digital Twins to manage critical island resources (water, energy) and enhance climate resilience.
-- **Tags:** anguilla, sustainability, environment, climate change, digital twin
-
-### A206. Research Proposal - The Global AI Sandbox
-- **Description:** A proposal to establish Anguilla as a "Regulatory Sandbox" for ethical AI development.
-- **Tags:** anguilla, regulation, policy, sandbox, innovation
-
-### A207. Strategic Presentation Guide
-- **Description:** A script and strategic guide for the meeting with the Minister of IT.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-### A214. Anguilla Project - GitHub Repository Setup Guide
-- **Description:** A step-by-step guide for setting up the GitHub repository for the Anguilla Project.
-- **Tags:** git, github, setup, anguilla, project management
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Add Cycle 1 Research Integration tasks)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [ ] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **In Progress**)
-- [ ] **Develop Presentation Deck:** Create visual slides based on the narrative in `A207`.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-- **Action:** Updating A207 to reflect these hard numbers makes the pitch undeniable.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A201 - Anguilla Project - Vision and Master Plan.md::# Artifact A201: Anguilla Project - Vision and Master Plan
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C3 (Enrich with Research Data: Revenue, Water Loss, Energy Costs)
-
-- **Key/Value for A0:**
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation. Updated with specific economic and infrastructural data points to ground the strategy in the island's current reality.
-- **Tags:** anguilla, strategy, vision, nation building, ai, sovereignty, resilience
-
-## 1. The Vision: Anguilla as the World's First AI-Native Nation
-
-Anguilla stands at a unique crossroads in history. Through a stroke of digital luck, it owns the most valuable real estate on the future internet: the **.ai** top-level domain. This asset generated approximately **US$32 million (EC$87 million)** in 2023 alone—nearly 20% of the government's total revenue.
-
-The vision is to transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. We propose a comprehensive national strategy to become the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and automated, and where the economy is driven by high-value cognitive labor.
-
-With a population of approximately 16,000, Anguilla is the perfect size for a "Micro-Pilot"—a living laboratory for the post-scarcity, high-cognitive-capital society.
-
-## 2. The "Poly-Crisis" and the Imperative for Change
-
-This vision is not a luxury; it is a survival strategy. Anguilla faces a "poly-crisis" that traditional methods cannot solve:
-*   **Water Security:** The island currently loses up to **80% of its desalinated water** to leakage, a catastrophic waste of energy and money.
-*   **Energy Insecurity:** Electricity costs are among the highest in the region (approx. **US$0.42/kWh**), driven by 99% reliance on imported diesel.
-*   **Climate Vulnerability:** As a low-lying limestone island, Anguilla is existentially threatened by rising sea levels and intensifying hurricanes.
-
-The **Anguilla Digital Infrastructure Initiative** proposes using the .ai windfall to solve these physical problems through digital intelligence.
-
-## 3. The Strategic Pillars
-
-To achieve this vision, we propose a strategy built on five interconnected pillars:
-
-1.  **Economic Sovereignty (The ".ai" Capital):** Establish a **Digital Wealth Fund** funded by 50% of domain revenues. This fund will finance the **Sovereign AI Cloud**—a hurricane-hardened, solar-powered data center ecosystem that ensures data residency and operational continuity.
-2.  **Cognitive Capital (The Citizen Architect):** Implement a national upskilling program based on the **Vibecoding to Virtuosity (V2V)** methodology. The goal is to turn the population into the world's highest-density concentration of AI-literate professionals, capable of building their own tools to solve local problems.
-3.  **Next-Gen Governance (The Automated State):** Reimagining the civil service with AI. Creating a "frictionless state" where services like work permits and land licenses are handled by secure, automated agents. This includes establishing a **Data Embassy** (modeled on Estonia) to ensure the legal state survives even if physical infrastructure is destroyed.
-4.  **Resilient Infrastructure (Smart Island):** Deploying a **National Digital Twin**. This system will use AI and IoT sensors (via LoRaWAN) to detect water leaks in real-time, optimize desalination energy usage, and simulate hurricane impacts, turning reactive recovery into predictive resilience.
-5.  **Regulatory Innovation (The Global Sandbox):** Establishing Anguilla as a "Regulatory Sandbox" for ethical AI. Creating a legal framework that attracts global AI companies to test and deploy their systems safely, ensuring all testing respects local cultural and ethical norms.
-
-## 4. The "Micro-Pilot" Concept
-
-Why Anguilla? Because it is agile. Large nations are burdened by legacy systems, massive bureaucracies, and political gridlock. They cannot pivot quickly. Anguilla, with its small population and unified governance, can move at the speed of software.
-
-We propose positioning Anguilla to the world not just as a tourist destination, but as a **Model Nation**—a proof-of-concept for how a society can thrive in the age of AI. This narrative will attract not just tourists, but innovators, investors, and the world's attention.
-
-## 5. The Role of the Data Curation Environment (DCE)
-
-This transformation requires a toolset. We propose using the **Data Curation Environment (DCE)** as the operating system for this national project.
-*   **Planning:** Using the DCE's artifact-driven workflow to draft legislation, plan infrastructure, and design curricula.
-*   **Execution:** Using the Parallel Co-Pilot Panel to manage the implementation of digital services.
-*   **Education:** Using the V2V Academy platform to deliver the national upskilling program.
-
-This project is not just about installing technology; it is about building a new kind of society.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A202 - Research Proposal - The AI Capital.md::# Artifact A202: Research Proposal - The AI Capital
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Focus on Green, Hurricane-Resilient Infrastructure)
-
-- **Key/Value for A0:**
-- **Description:** A proposal focused on leveraging the .ai domain windfall to fund sovereign digital infrastructure, specifically emphasizing green, hurricane-resilient data centers.
-- **Tags:** anguilla, economics, .ai domain, infrastructure, sovereign wealth, green energy, resilience
-
-## 1. Title: The Digital Wealth Fund: From Domain Rent to Sovereign, Resilient Infrastructure
-
-## 2. Problem Statement
-Anguilla currently benefits from a significant windfall due to the sales of **.ai** domains. However, this revenue stream is essentially "rent"—it depends on the continued hype of AI and the policies of external registrars. Currently, Anguilla is a passive beneficiary of the AI boom. It does not own the *means of production* (compute, data centers, models) for the AI economy. Furthermore, standard digital infrastructure is vulnerable to the region's extreme weather events (hurricanes), posing a risk to any digital economy built upon it.
-
-## 3. Research Objectives
-1.  **Analyze Domain Revenue Sustainability:** Project the long-term viability of .ai domain revenue and identify risks (e.g., new TLDs, market saturation).
-2.  **Feasibility of Resilient Sovereign Compute:** Investigate the cost and engineering requirements for building a "Sovereign AI Cloud" that is **hurricane-proof** (e.g., reinforced concrete bunkers, underground facilities) and **energy-independent** (solar/wind/battery).
-3.  **Digital Wealth Fund Structure:** Research models for a Sovereign Wealth Fund specifically designed to reinvest digital rents into physical and digital infrastructure (e.g., Norway's oil fund model applied to digital assets).
-
-## 4. Proposed Solution: The Anguilla Digital Infrastructure Initiative
-We propose creating a **Digital Wealth Fund** funded by a percentage of .ai domain sales. This fund will invest exclusively in:
-*   **Resilient Data Centers:** Building small-footprint, Category 5 hurricane-resilient data centers. These facilities will host local government and business data, ensuring data sovereignty even during disasters.
-*   **Green Energy Integration:** Powering this infrastructure with renewable energy sources (solar farms, offshore wind) to ensure the AI economy does not burden the island's fossil fuel consumption or contribute to the climate crisis.
-*   **Subsea Connectivity:** Investing in fiber optic redundancy to ensure the island is never cut off.
-*   **Sovereign Models:** Fine-tuning open-source models (like Llama 3 or Mistral) specifically on Anguillan law, history, and culture, creating a "National AI" that is owned by the people, not a foreign corporation.
-
-## 5. Impact
-*   **Economic Resilience:** Diversifies the economy beyond tourism and domain rent.
-*   **Data Sovereignty:** Ensures that sensitive government and citizen data stays on the island, protected by local law.
-*   **Climate Adaptation:** Creates a robust digital backbone that can survive extreme weather events, ensuring communication and governance continue when they are needed most.
-*   **Global Prestige:** Positions Anguilla as a serious player in the digital infrastructure space, leading the way in "Green AI."
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A203 - Research Proposal - The Cognitive Citizenry.md::# Artifact A203: Research Proposal - The Cognitive Citizenry
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Add Cultural Heritage AI component)
-
-- **Key/Value for A0:**
-- **Description:** A proposal for a national upskilling initiative using the V2V/DCE methodology, featuring a "Cultural Heritage AI" component to preserve local history and dialect.
-- **Tags:** anguilla, education, upskilling, v2v, cognitive capital, workforce, culture, heritage
-
-## 1. Title: The Cognitive Citizenry: A National Upskilling and Cultural Preservation Strategy
-
-## 2. Problem Statement
-As AI automation advances, traditional service jobs are at risk. While upskilling is necessary, there is a risk that importing global AI curricula could erode local culture, replacing unique Anguillan identity with homogenized "silicon valley" values. Anguilla needs a strategy that modernizes the workforce *without* sacrificing its heritage.
-
-## 3. Research Objectives
-1.  **Skills Gap Analysis:** Assess the current digital literacy levels of the Anguillan workforce across key sectors.
-2.  **Cultural Archive Feasibility:** Determine the state of Anguilla's oral histories, historical documents, and cultural artifacts. How much is digitized? How much is at risk of being lost?
-3.  **Curriculum Adaptation:** Determine how to adapt the "Vibecoding to Virtuosity" (V2V) curriculum to be culturally relevant, using local metaphors and examples.
-
-## 4. Proposed Solution: The National V2V Initiative
-We propose a national program to provide every Anguillan citizen with:
-*   **A Personal AI Companion:** A free, government-issued account on a national AI platform.
-*   **The "Citizen Architect" Curriculum:** A modified version of the V2V Academy curriculum:
-    *   *Module 1: AI for Small Business:* Tailored for local tourism and service businesses.
-    *   *Module 2: AI for Education:* Providing AI tutors for every student.
-    *   *Module 3: AI for Civics:* Using AI to engage with the government.
-*   **The "Cultural Heritage AI" Project:** A national initiative to train a specific AI model on Anguillian history, dialect, folklore, and law.
-    *   **Oral History Drives:** Citizens (especially elders) are interviewed, and their stories are transcribed to train the model.
-    *   **Dialect Preservation:** The model is fine-tuned to understand and speak the local dialect, ensuring technology speaks the language of the people, not just standard English.
-
-## 5. Impact
-*   **Workforce Transformation:** Creates a globally competitive, AI-literate workforce.
-*   **Cultural Renaissance:** Uses cutting-edge technology to preserve and celebrate Anguillan heritage, preventing cultural erasure.
-*   **Intergenerational Connection:** Engages youth (technology) and elders (history) in a shared national project.
-*   **Global Leadership:** Anguilla becomes the first nation with 100% AI literacy and a sovereign cultural AI model.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A204 - Research Proposal - The Automated State.md::# Artifact A204: Research Proposal - The Automated State
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Focus on Continuity of Government and Disaster Resilience)
-
-- **Key/Value for A0:**
-- **Description:** A proposal for modernizing Anguilla's governance through AI, creating a frictionless, automated civil service with a focus on "Continuity of Government" during climate disasters.
-- **Tags:** anguilla, governance, automation, public services, efficiency, disaster recovery
-
-## 1. Title: The Automated State: Frictionless Governance and Disaster Resilience
-
-## 2. Problem Statement
-Bureaucracy is a tax on time and growth. But in an island nation facing climate change, bureaucracy can also be a single point of failure. Paper records and manual processes are vulnerable to destruction by hurricanes. If the physical government offices are damaged, the state ceases to function. Anguilla needs a government that is not only efficient but indestructible.
-
-## 3. Research Objectives
-1.  **Bureaucratic Audit:** Map the top 10 most frequent citizen-government interactions and measure their "time-to-completion."
-2.  **Data Digitization & Redundancy:** Assess the current state of government records. Determine the effort required to digitize them into a secure, cloud-native format that can be replicated across resilient data centers (see A202).
-3.  **Disaster Protocol Analysis:** Review current Continuity of Government (COG) plans. How does the government function if physical access is impossible?
-
-## 4. Proposed Solution: The Anguilla Civil Service AI (ACSA)
-We propose building **ACSA**, a suite of AI agents designed to handle routine government tasks and ensure continuity during crises.
-*   **The "Cloud State":** Moving all core registries (land, citizenship, business) to a secure, distributed ledger or database that is immune to physical destruction.
-*   **The "Citizen Concierge":** A single app where citizens can access all services. Crucially, this app includes a **"Disaster Mode"** that provides offline-first access to critical information, emergency alerts, and aid distribution coordination during a storm.
-*   **Automated Bureaucracy:**
-    *   *Incorporation Agent:* Fast-track business setup for global investors.
-    *   *Land Registry Agent:* Secure, transparent property transfers.
-
-## 5. Impact
-*   **Resilience:** The government continues to function even if physical infrastructure is damaged. Vital records are never lost.
-*   **Efficiency:** Frees up civil servants from rote paperwork to focus on high-value community services and disaster response.
-*   **Trust:** Reduces corruption and ensures that aid and services are delivered transparently and fairly, especially during crises.
-*   **Ease of Doing Business:** Anguilla becomes the most frictionless jurisdiction in the world.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A205 - Research Proposal - Resilient Island Systems.md::# Artifact A205: Research Proposal - Resilient Island Systems
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Deepen climate focus: Water Security and Digital Twin)
-
-- **Key/Value for A0:**
-- **Description:** A proposal for using AI to manage critical island resources (water, energy) and enhance climate resilience through predictive modeling and digital twins.
-- **Tags:** anguilla, sustainability, environment, climate change, resource management, digital twin
-
-## 1. Title: Resilient Island Systems: AI for Water Security and Survival
-
-## 2. Problem Statement
-As a small island nation, Anguilla is on the front lines of climate change. It faces existential risks from hurricanes, rising sea levels, and most critically, **fresh water scarcity**. Managing these fragile systems requires precise, real-time decision-making that human intuition alone cannot provide. Traditional resource management is reactive; survival requires proactive, predictive modeling.
-
-## 3. Research Objectives
-1.  **Resource Modeling:** Gather granular data on the island's water table, desalination capacity, energy grid load profiles, and food supply chains.
-2.  **Climate Vulnerability Assessment:** Identify specific infrastructure points most at risk from extreme weather events and sea-level rise.
-3.  **Sensor Network Feasibility:** Determine the cost and logistics of deploying IoT sensors across the island's utility networks to feed real-time data to an AI model.
-
-## 4. Proposed Solution: The Anguilla Digital Twin
-We propose creating a **Digital Twin** of the island's critical infrastructure—a live, AI-powered simulation.
-*   **AI-Optimized Desalination:** Using machine learning to predict water demand and optimize desalination plant energy usage, reducing costs and ensuring water security during droughts.
-*   **Hurricane Response Simulation:** A system that can run thousands of hurricane scenarios to predict damage, optimize evacuation routes, and pre-position emergency supplies before a storm hits.
-*   **Smart Grid & Microgrids:** Managing the integration of renewable energy (solar/wind) into the island's grid. The AI will manage microgrids that can "island" themselves off from the main grid during a storm, keeping critical services (hospitals, shelters) powered even if the main lines go down.
-*   **Heritage Site Protection:** Modeling the impact of sea-level rise on cultural heritage sites to prioritize preservation efforts.
-
-## 5. Impact
-*   **Survival:** Drastically improves water and energy security, saving lives during disasters.
-*   **Sustainability:** Reduces waste and reliance on imported fossil fuels.
-*   **Cultural Preservation:** Protects physical heritage sites from climate erasure.
-*   **Global Model:** Establishes Anguilla as a global leader in "Climate Tech" and adaptation strategies.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A206 - Research Proposal - The Global AI Sandbox.md::# Artifact A206: Research Proposal - The Global AI Sandbox
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Emphasize Ethical Alignment and Cultural Protection)
-
-- **Key/Value for A0:**
-- **Description:** A proposal to establish Anguilla as a "Regulatory Sandbox" for ethical AI development, ensuring frameworks respect local culture and prevent digital colonialism.
-- **Tags:** anguilla, regulation, policy, sandbox, innovation, ethics, sovereignty
-
-## 1. Title: The Global AI Sandbox: A Jurisdiction for Ethical Innovation
-
-## 2. Problem Statement
-The global regulatory landscape for AI is fragmented. While innovation is needed, there is a risk that small nations will become testing grounds for unethical technologies ("digital colonialism"). Anguilla has the opportunity to set a different standard: a jurisdiction that attracts innovation but mandates strict ethical alignment with local values and human rights.
-
-## 3. Research Objectives
-1.  **Legal Framework Analysis:** Review current Anguillan laws regarding liability, data privacy, and intellectual property to identify gaps for AI regulation.
-2.  **Ethical Alignment Study:** Consult with local community leaders and stakeholders to define the "Anguillian Ethical Standard" for AI (e.g., privacy, fairness, transparency).
-3.  **Risk Assessment:** Identify the risks of hosting experimental AI technologies and define the necessary "safety rails" to protect the population.
-
-## 4. Proposed Solution: The Anguilla Ethical AI Sandbox
-We propose establishing a legislative framework that designates Anguilla as a **"Special Economic Zone for Ethical AI."**
-*   **Fast-Track Licensing with Ethics Review:** A streamlined process for AI companies to operate, conditional on passing an ethics review based on the Anguillian Standard.
-*   **Liability Shields & Data Trusts:** Clear laws defining liability for AI actions. Creating "Data Trusts" that allow companies to train models on local data *only* if the value generated is shared back with the community (preventing data extraction).
-*   **The "Proving Ground":** Designating specific zones for testing real-world AI applications (e.g., autonomous delivery drones, AI-managed microgrids) under strict government supervision.
-*   **Cultural Protection Clause:** Mandating that any AI deployed in the public sphere must respect local cultural norms and not displace local labor without a transition plan.
-
-## 5. Impact
-*   **High-Quality Investment:** Attracts "conscientious" tech companies that value ethics and safety, filtering out predatory actors.
-*   **Sovereignty:** Ensures that Anguilla sets the rules of engagement for AI on its soil.
-*   **Global Influence:** Anguilla punches above its weight, helping to set the standards for global AI regulation that respects small nations.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Integrate specific metrics from Research Data: Revenue, Water Loss, Energy Costs)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," woven with themes of political sovereignty, cultural preservation, and climate resilience.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue.
-
-But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building.
-
-My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**."
-
-## 2. The "Show, Don't Tell" Strategy (Data-Driven)
-
-Do not just pitch slides. Use the **Data Curation Environment (DCE)** to demonstrate the power of the methodology, using the hard data we've curated.
-
-*   **The Demo:** "I used my own AI system to analyze your nation's critical challenges. Here is what we found, and here is the solution."
-*   **The Reveal:** Show the 5 Research Proposals (A202-A206) backed by the specific metrics:
-    *   **Resilience (Water):** "We know Anguilla loses up to **80%** of its desalinated water to leakage. We have a plan for a Digital Twin (A205) to stop this hemorrhage."
-    *   **Sovereignty (Energy):** "We know electricity costs **$0.42/kWh** because of diesel. We have a plan for a Green Sovereign Cloud (A202) to break this dependency."
-    *   **Continuity (Governance):** "We have a plan for a **Data Embassy** (A204)—modeled on Estonia—to ensure the Anguillian government exists in the cloud, immune to any Category 5 storm."
-
-## 3. Addressing the "Micro-Pilot" (The 16,000 Advantage)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity. A proof that a nation can be high-tech, culturally rich, and climate-resilient all at once."
-
-## 4. Your Credibility (The "Why You" Factor)
-
-Leverage your unique background to build trust.
-
-*   **Google:** "I train the models the world uses. I know their power, but I also know their limits."
-*   **DOD/NSA:** "I build training for the US military. I understand **security**. I understand **resilience**. I am not selling a crypto scheme. I am proposing a national defense strategy for your economy and your environment."
-*   **The Citizen Architect:** "I am not a coder. I am a 'Citizen Architect.' I built this platform myself using AI. I am proof that you don't need 16,000 computer scientists. You just need 16,000 empowered Anguillians."
-
-## 5. The Ask
-
-Don't ask for a massive contract immediately. Ask for the **Pilot**.
-
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE (e.g., the Work Permit queue).
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A214 - Anguilla Project - GitHub Repository Setup Guide.md::# Artifact A214: Anguilla Project - GitHub Repository Setup Guide
-# Date Created: C2
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** A step-by-step guide for setting up the GitHub repository for the Anguilla Project, ensuring proper version control for the research proposals and strategic plans.
-- **Tags:** git, github, setup, anguilla, project management
-
-## 1. Overview
-
-This guide outlines the steps to initialize the Git repository for the **Anguilla Project**. This repository will house all the research proposals (`A201`-`A207`), strategic plans, and future pilot program data.
-
-## 2. Repository Structure
-
-We will organize the repository to separate the strategic artifacts from potential future code or data.
-
-```
-anguilla-project/
-├── src/Artifacts/      # Research proposals and plans (A201-A207)
-├── presentation/       # Slides and assets for the Minister meeting
-├── data/               # Data gathered on Anguilla (economy, climate, etc.)
-├── src/                # Future code for prototypes (e.g., sovereign model fine-tuning scripts)
-├── README.md
-└── .gitignore
-```
-
-## 3. Initialization Steps
-
-1.  **Create Local Directory:**
-    ```bash
-    mkdir anguilla-project
-    cd anguilla-project
-    ```
-
-2.  **Initialize Git:**
-    ```bash
-    git init
-    ```
-
-3.  **Create .gitignore:**
-    Create a `.gitignore` file to exclude system files and sensitive data.
-    ```
-    node_modules/
-    .DS_Store
-    .env
-    *.log
-    .vscode/
-    ```
-
-4.  **Commit Initial Artifacts:**
-    Move the generated artifacts (`A201` through `A207`) into the `src/Artifacts/` folder.
-    ```bash
-    git add .
-    git commit -m "Initial commit: Strategic Vision and Research Proposals"
-    ```
-
-5.  **Create Remote Repository:**
-    Create a new repository on GitHub named `anguilla-project`.
-
-6.  **Push to Remote:**
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/anguilla-project.git
-    git branch -M main
-    git push -u origin main
-    ```
-
-## 4. Next Steps
-*   Begin populating the `presentation/` folder with assets for the meeting.
-*   Use the `A200 - Universal Task Checklist` to track progress on the pilot program setup.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and documentation for the **Anguilla Project**. The initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Vision
-
-Anguilla currently generates significant revenue (~$32M USD in 2023) from .ai domain registrations. This project proposes a strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-1.  **Green, Hurricane-Proof Data Centers:** Powered by renewables, independent of the diesel grid.
-2.  **Cognitive Citizenry:** A national upskilling program to make Anguilla the most AI-literate nation on earth.
-3.  **Automated State:** A "Cloud Government" that ensures continuity even during Category 5 storms.
-
-## Repository Structure
-
-This repository is managed using the **Data Curation Environment (DCE)** methodology.
-
-```
-anguilla-project/
-├── src/Artifacts/      # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A202 - Research Proposal - The AI Capital.md
-│   ├── A203 - Research Proposal - The Cognitive Citizenry.md
-│   ├── A204 - Research Proposal - The Automated State.md
-│   ├── A205 - Research Proposal - Resilient Island Systems.md
-│   ├── A206 - Research Proposal - The Global AI Sandbox.md
-│   └── A207 - Strategic Presentation Guide.md
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # Slides and visual assets for the Ministry meeting
-└── src/                # Future prototype code
-```
-
-## Key Artifacts
-
-*   **[A201 - Vision and Master Plan](src/Artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A200 - Universal Task Checklist](src/Artifacts/A200%20-%20Anguilla%20Project%20-%20Universal%20Task%20Checklist.md):** Current project status and next steps.
-*   **[A207 - Strategic Presentation Guide](src/Artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The script and strategy for the meeting with the Minister of IT.
-
-## Getting Started
-
-1.  **Review the Vision:** Start with Artifact `A201`.
-2.  **Explore the Proposals:** Review `A202` through `A206` for specific vertical strategies (Infrastructure, Education, Governance, Climate, Regulation).
-3.  **Check Status:** See `A200` for the current cycle's objectives.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Shift to Interactive Report Strategy)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [ ] **Develop Interactive Presentation:**
-    - [x] **Content Structure:** Map A201-A207 content to the Interactive Report JSON format. (Status: **Complete**)
-    - [ ] **Visual Assets:** Generate or curate images for each section of the report (e.g., DALL-E/Midjourney prompts for "Solar Data Center", "Digital Citizen").
-    - [ ] **Viewer Integration:** Deploy the `report-viewer` code (from `aiascent-dev`) to render the Anguilla content.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Interactive Report Pivot
-- **Strategy Shift:** Instead of a static slide deck, we are building an **Interactive Whitepaper**. This aligns with our "Show, Don't Tell" strategy by using the very tools we are pitching (the DCE/Report Viewer) to present the proposal.
-- **Action:** `presentation/anguilla_interactive_content.json` has been created as the data source for this view.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and documentation for the **Anguilla Project**. The initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Vision
-
-Anguilla currently generates significant revenue (~$32M USD in 2023) from .ai domain registrations. This project proposes a strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-1.  **Green, Hurricane-Proof Data Centers:** Powered by renewables, independent of the diesel grid.
-2.  **Cognitive Citizenry:** A national upskilling program to make Anguilla the most AI-literate nation on earth.
-3.  **Automated State:** A "Cloud Government" that ensures continuity even during Category 5 storms.
-
-## Repository Structure
-
-This repository is managed using the **Data Curation Environment (DCE)** methodology.
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A202 - Research Proposal - The AI Capital.md
-│   ├── A203 - Research Proposal - The Cognitive Citizenry.md
-│   ├── A204 - Research Proposal - The Automated State.md
-│   ├── A205 - Research Proposal - Resilient Island Systems.md
-│   ├── A206 - Research Proposal - The Global AI Sandbox.md
-│   └── A207 - Strategic Presentation Guide.md
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # Presentation Assets
-│   └── anguilla_interactive_content.json  # Structured content for the Interactive Report Viewer
-└── src/                # Future prototype code
-```
-
-## Key Deliverables
-
-### 1. The Interactive Presentation
-We are eschewing traditional slides for an **Interactive Whitepaper**. The content for this experience is located in `presentation/anguilla_interactive_content.json`. This file drives a web-based viewer that allows the Minister to explore the proposal's depth at their own pace.
-
-### 2. The Strategic Artifacts
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The narrative script for the meeting.
-
-## Getting Started
-
-1.  **Review the Vision:** Start with Artifact `A201`.
-2.  **Explore the Proposals:** Review `A202` through `A206` for specific vertical strategies (Infrastructure, Education, Governance, Climate, Regulation).
-3.  **Check Status:** See `A200` for the current cycle's objectives.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0 - Anguilla Project - Master Artifact List.md::# Artifact A0: Anguilla Project - Master Artifact List
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Add Presentation Content File)
-
-- **Key/Value for A0:**
-- **Description:** The definitive, parseable list of all documentation artifacts for the Anguilla Project.
-- **Tags:** master list, index, artifacts, anguilla
-
-## 1. Purpose
-
-This file serves as the definitive, parseable list of all documentation artifacts for the Anguilla Project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
-
-## 2. Artifacts List
-
-### A200. Anguilla Project - Universal Task Checklist
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-### A201. Anguilla Project - Vision and Master Plan
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation.
-- **Tags:** anguilla, strategy, vision, nation building, ai
-
-### A202. Research Proposal - The AI Capital
-- **Description:** A proposal focused on leveraging the .ai domain windfall to fund sovereign digital infrastructure.
-- **Tags:** anguilla, economics, .ai domain, infrastructure, sovereign wealth
-
-### A203. Research Proposal - The Cognitive Citizenry
-- **Description:** A proposal for a national upskilling initiative using the V2V/DCE methodology.
-- **Tags:** anguilla, education, upskilling, v2v, cognitive capital
-
-### A204. Research Proposal - The Automated State
-- **Description:** A proposal for modernizing Anguilla's governance through AI and "Data Embassy" resilience.
-- **Tags:** anguilla, governance, automation, public services, resilience
-
-### A205. Research Proposal - Resilient Island Systems
-- **Description:** A proposal for using AI and Digital Twins to manage critical island resources (water, energy) and enhance climate resilience.
-- **Tags:** anguilla, sustainability, environment, climate change, digital twin
-
-### A206. Research Proposal - The Global AI Sandbox
-- **Description:** A proposal to establish Anguilla as a "Regulatory Sandbox" for ethical AI development.
-- **Tags:** anguilla, regulation, policy, sandbox, innovation
-
-### A207. Strategic Presentation Guide
-- **Description:** A script and strategic guide for the meeting with the Minister of IT.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-### A208. Anguilla Interactive Presentation Content
-- **Description:** The structured JSON data file driving the interactive report viewer for the Minister presentation.
-- **Tags:** presentation, json, interactive report, content
-
-### A214. Anguilla Project - GitHub Repository Setup Guide
-- **Description:** A step-by-step guide for setting up the GitHub repository for the Anguilla Project.
-- **Tags:** git, github, setup, anguilla, project management
-
-### A215. Anguilla Project - Migration Manifest
-- **Description:** A curated list of files to migrate from the `aiascent-dev` repository to the new `anguilla-project` repository.
-- **Tags:** anguilla, migration, setup, context curation, manifest
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/anguilla_interactive_content.json::{
-  "reportId": "anguilla-strategy-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "The Vision",
-      "subSections": [
-        {
-          "subSectionId": "intro",
-          "subSectionTitle": "Introduction",
-          "pages": [
-            {
-              "pageId": "slide-01",
-              "pageTitle": "Ownership & Survival",
-              "tldr": "Anguilla owns the most valuable digital real estate in the world: .ai. It's time to convert that rent into sovereign power.",
-              "content": "Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue.\n\nBut right now, that revenue is just 'rent.' We are the landlords, but we don't own the building.\n\nMy proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**.",
-              "imageGroupIds": ["anguilla-digital-flag"]
-            },
-            {
-              "pageId": "slide-02",
-              "pageTitle": "The Master Plan",
-              "tldr": "Transforming Anguilla into the world's first AI-Native Nation through five strategic pillars.",
-              "content": "We propose a comprehensive national strategy to become the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and automated, and where the economy is driven by high-value cognitive labor.\n\n**The Strategic Pillars:**\n1. **Economic Sovereignty:** The '.ai' Capital\n2. **Cognitive Capital:** The Citizen Architect\n3. **Next-Gen Governance:** The Automated State\n4. **Resilient Infrastructure:** Smart Island\n5. **Regulatory Innovation:** The Global Sandbox",
-              "imageGroupIds": ["master-plan-pillars"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "infrastructure",
-      "sectionTitle": "The AI Capital",
-      "subSections": [
-        {
-          "subSectionId": "wealth-fund",
-          "subSectionTitle": "Digital Wealth Fund",
-          "pages": [
-            {
-              "pageId": "slide-03",
-              "pageTitle": "From Domain Rent to Sovereign Cloud",
-              "tldr": "Investing .ai revenue into hurricane-proof, green data centers to secure Anguilla's digital future.",
-              "content": "We propose creating a **Digital Wealth Fund** funded by a percentage of .ai domain sales. This fund will invest exclusively in **Sovereign Infrastructure**.\n\n*   **Resilient Data Centers:** Building small-footprint, Category 5 hurricane-resilient data centers. These facilities will host local government and business data, ensuring data sovereignty even during disasters.\n*   **Green Energy Integration:** Powering this infrastructure with renewable energy sources (solar farms, offshore wind) to ensure the AI economy does not burden the island's fossil fuel consumption.\n*   **Sovereign Models:** Fine-tuning open-source models specifically on Anguillan law, history, and culture.",
-              "imageGroupIds": ["sovereign-cloud-bunker"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "people",
-      "sectionTitle": "Cognitive Citizenry",
-      "subSections": [
-        {
-          "subSectionId": "education",
-          "subSectionTitle": "National Upskilling",
-          "pages": [
-            {
-              "pageId": "slide-04",
-              "pageTitle": "The Citizen Architect",
-              "tldr": "A national program to turn every Anguillian into an AI-literate builder, preserving culture while modernizing the workforce.",
-              "content": "We propose a national program to provide every Anguillan citizen with a Personal AI Companion and the **'Citizen Architect' Curriculum**.\n\n*   **Module 1: AI for Small Business:** Tailored for local tourism and service businesses.\n*   **Module 2: AI for Education:** Providing AI tutors for every student.\n*   **Module 3: AI for Civics:** Using AI to engage with the government.\n\n**Cultural Heritage AI:** A national initiative to train a specific AI model on Anguillian history, dialect, folklore, and law. We will use oral history drives to ensure the model speaks the language of the people, not just standard English.",
-              "imageGroupIds": ["citizen-architect-learning"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "governance",
-      "sectionTitle": "The Automated State",
-      "subSections": [
-        {
-          "subSectionId": "resilience",
-          "subSectionTitle": "Continuity of Government",
-          "pages": [
-            {
-              "pageId": "slide-05",
-              "pageTitle": "Frictionless & Indestructible",
-              "tldr": "Creating a 'Data Embassy' to ensure the government functions even after a Category 5 storm.",
-              "content": "Anguilla needs a government that is not only efficient but indestructible. We propose building **ACSA (Anguilla Civil Service AI)**.\n\n*   **The 'Cloud State':** Moving all core registries (land, citizenship, business) to a secure, distributed ledger that is immune to physical destruction.\n*   **Data Embassy:** Modeled on Estonia, we will host a backup of the nation's critical data in a secure foreign jurisdiction, ensuring the state survives even if the island's physical infrastructure is compromised.\n*   **The 'Citizen Concierge':** A single app where citizens can access all services, including a **'Disaster Mode'** for offline access to critical info during storms.",
-              "imageGroupIds": ["data-embassy-concept"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "environment",
-      "sectionTitle": "Resilient Island",
-      "subSections": [
-        {
-          "subSectionId": "digital-twin",
-          "subSectionTitle": "The Digital Twin",
-          "pages": [
-            {
-              "pageId": "slide-06",
-              "pageTitle": "AI for Water Security",
-              "tldr": "Using AI and IoT sensors to stop the 80% water loss and optimize energy usage.",
-              "content": "Anguilla loses up to **80%** of its desalinated water to leakage. We propose creating a **Digital Twin** of the island's critical infrastructure.\n\n*   **AI-Optimized Desalination:** Using machine learning to predict water demand and optimize desalination plant energy usage.\n*   **Smart Leak Detection:** Using IoT sensors to detect leaks in real-time, stopping the hemorrhage of expensive water.\n*   **Hurricane Simulation:** Running thousands of scenarios to predict damage and optimize evacuation routes before a storm hits.",
-              "imageGroupIds": ["digital-twin-water"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "conclusion",
-      "sectionTitle": "The Ask",
-      "subSections": [
-        {
-          "subSectionId": "micro-pilot",
-          "subSectionTitle": "The Micro-Pilot",
-          "pages": [
-            {
-              "pageId": "slide-07",
-              "pageTitle": "Let Us Prove It",
-              "tldr": "We are asking for a mandate to run a 90-day Micro-Pilot with one cohort to demonstrate the power of this vision.",
-              "content": "Minister, I am not asking for a massive contract immediately. I am asking for the mandate to run a **Micro-Pilot**.\n\nGive me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE.\n\nIf, in **90 days**, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital.",
-              "imageGroupIds": ["anguilla-future-horizon"]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C2 (Pivot to Interactive Report format)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [x] **Develop Presentation:** Create the data files for the Interactive Report (`reportContent.json` and `imageManifest.json`) to be used in the `ReportViewer` application. (Status: **Complete**)
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 2: Interactive Presentation
-- **Decision:** Switched from a static slide deck to an **Interactive Report** format using the `ReportViewer` component.
-- **Rationale:** Demonstrates the "product" (software built with AI) immediately during the pitch. "Show, don't tell."
-- **Artifacts Created:** `reportContent.json` (The narrative) and `imageManifest.json` (The visuals).
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-- **Action:** Updating A207 to reflect these hard numbers makes the pitch undeniable.
-[INFO] [6:41:26 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Adapted for Interactive Report Format)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," designed to accompany the Interactive Report.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide, interactive report
-
-## 1. Format: The Interactive Report
-
-Instead of a static slide deck, we will present using the **Interactive Report Viewer**. This application itself serves as a proof-of-concept, demonstrating the kind of sovereign software Anguilla can build.
-
-**The Flow:**
-1.  **The Hook:** Open the laptop to the "Executive Summary" page.
-2.  **The Journey:** Navigate through the 5 Strategic Pillars (Sections).
-3.  **The Ask:** Conclude with the "Micro-Pilot" proposal page.
-
-## 2. The Narrative Arc & Script
-
-### Section 1: The Vision (Introduction)
-*   **Visual:** A satellite view of Anguilla with a glowing digital network overlay.
-*   **Script:** "Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**. But right now, that revenue is just 'rent.' My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state."
-
-### Section 2: The AI Capital (Infrastructure)
-*   **Visual:** A hurricane-proof, solar-powered data center in Corito.
-*   **Script:** "We pay **$0.42/kWh** for electricity because of diesel. We propose a **Digital Wealth Fund** to build a Green Sovereign Cloud. We stop renting servers from Amazon and start owning the 'means of computation'."
-
-### Section 3: The Cognitive Citizenry (Education)
-*   **Visual:** Anguillian students using AI tablets in a classroom.
-*   **Script:** "We don't just need new servers; we need a new kind of citizen. The **V2V Initiative** will upskill our workforce. We will train a 'Cultural Heritage AI' that speaks *our* dialect and knows *our* history, ensuring our culture survives the digital age."
-
-### Section 4: The Automated State (Governance)
-*   **Visual:** A mobile app showing a "Digital ID" and a "Disaster Mode" alert.
-*   **Script:** "Bureaucracy is a tax on growth. We propose an **Automated State**—a frictionless civil service where permits and licenses are instant. Crucially, we will build a **Data Embassy** to ensure the government exists in the cloud, immune to any Category 5 storm."
-
-### Section 5: Resilient Island Systems (Environment)
-*   **Visual:** A Digital Twin dashboard showing water leak detection.
-*   **Script:** "We lose **80%** of our water to leakage. That is money bleeding into the ground. We will build a **Digital Twin** of the island to detect leaks in real-time and optimize our energy usage. This is AI for survival."
-
-### Section 6: The Global Sandbox (Regulation)
-*   **Visual:** A futuristic "Regulatory Sandbox" zone map.
-*   **Script:** "The world needs a safe place to test AI. Anguilla can be that **Global Sandbox**—a jurisdiction for ethical, regulated innovation."
-
-### Section 7: The Ask (Conclusion)
-*   **Visual:** A roadmap showing "Phase 1: Micro-Pilot."
-*   **Script:** "I am not asking for a massive contract today. I am asking for a **Micro-Pilot**. Give me one cohort—one class, one department. Let me prove this methodology works. In 90 days, we will show you a transformed group of Anguillians."
-
-## 3. Your Credibility (The "Why You" Factor)
-
-*   **Google/DOD Background:** Mention your experience training models for Google and the US Military to establish technical authority.
-*   **The Citizen Architect:** "I built this presentation software myself using the very AI tools I want to teach your people. I am proof that you don't need 16,000 computer scientists; you need 16,000 empowered citizens."
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: public/data/reports/reportContent.json::{
-  "reportId": "anguilla-vision-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "I. The Vision",
-      "pages": [
-        {
-          "pageId": "intro",
-          "pageTitle": "From Domain Rent to Sovereign Power",
-          "tldr": "Anguilla's .ai domain is a $32M/year windfall. We must convert this transient 'digital rent' into permanent sovereign infrastructure.",
-          "content": "Anguilla stands at a unique crossroads in history. Through a stroke of digital luck, we own the most valuable real estate on the future internet: the **.ai** top-level domain. \n\nIn 2023 alone, this asset generated approximately **US$32 million (EC$87 million)**—nearly 20% of the government's total revenue. \n\nCurrently, this is 'rent'. We are the landlords, but we don't own the building. The vision is to transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. We propose a comprehensive national strategy to become the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless, and where the economy is driven by high-value cognitive labor.",
-          "imageGroupIds": ["vision-intro"]
-        },
-        {
-          "pageId": "polycrisis",
-          "pageTitle": "The Poly-Crisis: Why We Must Act",
-          "tldr": "We face existential threats: 80% water loss, $0.42/kWh energy costs, and climate vulnerability. AI is our survival strategy.",
-          "content": "This vision is not a luxury; it is a survival strategy. Anguilla faces a 'poly-crisis' that traditional methods cannot solve:\n\n*   **Water Security:** We currently lose up to **80% of our desalinated water** to leakage. This is a catastrophic waste of energy and money.\n*   **Energy Insecurity:** Electricity costs are among the highest in the region (approx. **US$0.42/kWh**), driven by 99% reliance on imported diesel.\n*   **Climate Vulnerability:** As a low-lying limestone island, we are existentially threatened by rising sea levels and intensifying hurricanes.\n\nThe **Anguilla Digital Infrastructure Initiative** proposes using the .ai windfall to solve these physical problems through digital intelligence.",
-          "imageGroupIds": ["vision-crisis"]
-        }
-      ]
-    },
-    {
-      "sectionId": "capital",
-      "sectionTitle": "II. The AI Capital",
-      "pages": [
-        {
-          "pageId": "wealth-fund",
-          "pageTitle": "The Digital Wealth Fund",
-          "tldr": "A sovereign fund fueled by .ai revenue to finance hurricane-proof, green digital infrastructure.",
-          "content": "We propose creating a **Digital Wealth Fund** funded by 50% of domain revenues. Unlike traditional funds that invest abroad, this fund's mandate is domestic hyper-infrastructure.\n\nIt will finance the **Sovereign AI Cloud**—a hurricane-hardened, solar-powered data center ecosystem. This infrastructure ensures data residency and operational continuity, transforming Anguilla from a passive registrar into an active host of the global AI economy.",
-          "imageGroupIds": ["capital-fund"]
-        },
-        {
-          "pageId": "sovereign-cloud",
-          "pageTitle": "Green Sovereign Compute",
-          "tldr": "Breaking the diesel dependency with solar-powered data centers.",
-          "content": "Current energy costs make data centers unviable. The Digital Wealth Fund will finance the transition to renewable energy.\n\n*   **Green Energy:** Powering infrastructure with solar farms and battery storage to break the $0.42/kWh diesel cycle.\n*   **Resilience:** Building Category 5 hurricane-proof facilities ('Data Bunkers') to protect national data.\n*   **Sovereignty:** Hosting our own government and citizen data on our own soil, protected by our own laws.",
-          "imageGroupIds": ["capital-cloud"]
-        }
-      ]
-    },
-    {
-      "sectionId": "citizenry",
-      "sectionTitle": "III. The Cognitive Citizenry",
-      "pages": [
-        {
-          "pageId": "v2v",
-          "pageTitle": "The National V2V Initiative",
-          "tldr": "Upskilling the entire nation using the 'Vibecoding to Virtuosity' methodology. Every citizen becomes a builder.",
-          "content": "We cannot just import technology; we must import skills. We propose a national upskilling program based on the **Vibecoding to Virtuosity (V2V)** methodology.\n\n*   **The Goal:** To turn Anguilla into the world's highest-density concentration of AI-literate professionals.\n*   **The Method:** Teaching citizens to use AI as a 'force multiplier'—enabling a fisherman to analyze catch data, or a small business owner to automate their inventory, without needing a computer science degree.",
-          "imageGroupIds": ["citizenry-v2v"]
-        },
-        {
-          "pageId": "heritage",
-          "pageTitle": "The Cultural Heritage AI",
-          "tldr": "Preserving our dialect and history by training our own Sovereign AI model.",
-          "content": "As AI advances, there is a risk of 'digital colonialism' where our culture is erased by generic global models. We will fight back by building **AnguillaLLM**.\n\n*   **Sovereign Model:** A version of Llama 3 fine-tuned on Anguillian history, law, and dialect.\n*   **Preservation:** Capturing the oral histories of our elders and the nuances of our language.\n*   **Education:** Providing every student with an AI tutor that speaks *our* language and knows *our* story.",
-          "imageGroupIds": ["citizenry-heritage"]
-        }
-      ]
-    },
-    {
-      "sectionId": "state",
-      "sectionTitle": "IV. The Automated State",
-      "pages": [
-        {
-          "pageId": "frictionless",
-          "pageTitle": "Frictionless Governance",
-          "tldr": "Replacing bureaucracy with automation. Instant permits, licenses, and services.",
-          "content": "Bureaucracy is a tax on time. We propose **ACSA (Anguilla Civil Service AI)** to create a frictionless state.\n\n*   **Automated Services:** AI agents handle routine tasks like work permits, land registry checks, and business incorporation instantly.\n*   **Citizen Concierge:** A single mobile app for all government interactions.\n*   **Efficiency:** Freeing civil servants from rote paperwork to focus on high-value community service.",
-          "imageGroupIds": ["state-frictionless"]
-        },
-        {
-          "pageId": "data-embassy",
-          "pageTitle": "The Data Embassy",
-          "tldr": "Ensuring the government survives any storm by mirroring essential data to a secure sovereign cloud abroad.",
-          "content": "Resilience means the state must survive even if the island is devastated. We will implement the **Data Embassy** model (pioneered by Estonia).\n\n*   **Continuity of Government:** Mirroring critical registries (citizenship, land, finance) to a secure, sovereign server rack in a partner nation (e.g., UK or Canada).\n*   **Indestructible:** Ensuring that even in a Category 5 storm, the legal entity of Anguilla remains online and operational.",
-          "imageGroupIds": ["state-embassy"]
-        }
-      ]
-    },
-    {
-      "sectionId": "resilience",
-      "sectionTitle": "V. Resilient Systems",
-      "pages": [
-        {
-          "pageId": "digital-twin",
-          "pageTitle": "The National Digital Twin",
-          "tldr": "A real-time AI simulation of the island to manage water, energy, and disaster response.",
-          "content": "We cannot manage what we cannot see. We will build a **Digital Twin** of Anguilla—a live, AI-powered simulation of our physical island.\n\n*   **Water Security:** Using AI to detect leaks in real-time, aiming to reduce our 80% water loss to under 20%.\n*   **Energy Optimization:** Balancing solar output with demand to stabilize the grid.\n*   **Disaster Simulation:** Modeling hurricane impacts to optimize evacuation routes and infrastructure hardening *before* the storm hits.",
-          "imageGroupIds": ["resilience-twin"]
-        }
-      ]
-    },
-    {
-      "sectionId": "ask",
-      "sectionTitle": "VI. The Proposal",
-      "pages": [
-        {
-          "pageId": "micropilot",
-          "pageTitle": "Phase 1: The Micro-Pilot",
-          "tldr": "We are asking for a mandate to run a 90-day pilot with one cohort to prove the model.",
-          "content": "We are not asking for a massive contract today. We are asking for a mandate to prove this vision works.\n\n**The Micro-Pilot (90 Days):**\n1.  **One Cohort:** Select one high school class or government department.\n2.  **The Method:** Apply the V2V curriculum and equip them with the DCE toolset.\n3.  **The Goal:** In 90 days, they will be building their own AI tools to solve real local problems.\n\nLet us demonstrate that 16,000 empowered Anguillians can outperform 16,000 computer scientists.",
-          "imageGroupIds": ["ask-pilot"]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: public/data/reports/imageManifest.json::{
-  "manifestId": "anguilla-presentation-v1",
-  "basePath": "/images/presentation/",
-  "imageGroups": {
-    "vision-intro": {
-      "path": "vision/",
-      "prompt": "A futuristic, high-tech visualization of the island of Anguilla glowing with digital connections, symbolizing the .ai domain network connecting to the globe. Satellite view, night time, cyan and gold data streams.",
-      "alt": "Digital Anguilla Network",
-      "baseFileName": "vision-intro",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "vision-crisis": {
-      "path": "vision/",
-      "prompt": "A split screen comparison. Left: A dry, parched landscape representing water scarcity. Right: A sleek, modern desalination plant powered by solar panels. Cinematic lighting.",
-      "alt": "Water Scarcity vs Solution",
-      "baseFileName": "vision-crisis",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "capital-fund": {
-      "path": "capital/",
-      "prompt": "A conceptual visualization of a 'Digital Wealth Fund'. Digital coins flowing from a server rack into a physical foundation of a new, modern building. Gold and concrete textures.",
-      "alt": "Digital Wealth Fund Concept",
-      "baseFileName": "capital-fund",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "capital-cloud": {
-      "path": "capital/",
-      "prompt": "A hurricane-proof data center bunker in a tropical setting, covered in solar panels. Brutalist architecture meets eco-futurism. Storm clouds in the distance, but the facility is secure and glowing.",
-      "alt": "Sovereign Data Bunker",
-      "baseFileName": "capital-cloud",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "citizenry-v2v": {
-      "path": "citizenry/",
-      "prompt": "A diverse group of Anguillians (students, fishermen, office workers) using tablets and holographic interfaces to build software. They look empowered and focused. Caribbean setting.",
-      "alt": "Citizen Architects",
-      "baseFileName": "citizenry-v2v",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "citizenry-heritage": {
-      "path": "citizenry/",
-      "prompt": "An elderly Anguillian storyteller speaking to a futuristic AI interface that is visualizing their story as a hologram. Preservation of culture through technology. Warm, nostalgic lighting.",
-      "alt": "Cultural Heritage AI",
-      "baseFileName": "citizenry-heritage",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "state-frictionless": {
-      "path": "state/",
-      "prompt": "A clean, minimalist mobile app interface showing 'Anguilla Citizen Key'. Icons for 'Vote', 'Land', 'Tax', 'ID'. The background is a blurred government office, symbolizing the move to digital.",
-      "alt": "Citizen SuperApp",
-      "baseFileName": "state-frictionless",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "state-embassy": {
-      "path": "state/",
-      "prompt": "A server rack inside a high-security vault with the Anguilla flag on it. The vault is located in a snowy landscape (representing the foreign Data Embassy location), contrasting with the island vibe.",
-      "alt": "Data Embassy Vault",
-      "baseFileName": "state-embassy",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "resilience-twin": {
-      "path": "resilience/",
-      "prompt": "A 3D holographic map of Anguilla on a table. The map shows real-time water flow (blue lines) and energy grid (yellow lines). Red alert indicators show a detected leak. A hand is interacting with the hologram.",
-      "alt": "Digital Twin Dashboard",
-      "baseFileName": "resilience-twin",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "ask-pilot": {
-      "path": "ask/",
-      "prompt": "A roadmap graphic. Phase 1: Micro-Pilot (highlighted). Phase 2: Infrastructure. Phase 3: Nation Scale. The focus is on the immediate next step.",
-      "alt": "Micro-Pilot Roadmap",
-      "baseFileName": "ask-pilot",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    }
-  }
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C3 (Pivot to Interactive Report Presentation)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics into the Strategic Presentation Guide. (Status: **Complete**)
-- [ ] **Develop Interactive Presentation:**
-    - [x] **Content Structure:** Convert artifacts A201-A206 into the `presentation_content.json` format.
-    - [ ] **App Scaffolding:** Initialize the Next.js application for `src/prototypes/strategic-presentation`.
-    - [ ] **Component Integration:** Port the `report-viewer` components (`AudioControls`, `ImageNavigator`, etc.) into the new app.
-    - [ ] **Visual Assets:** Generate or source placeholder images for the `imageManifest.json`.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 3: The Interactive Pivot
-- **Decision:** Instead of a static slide deck, we are building an **Interactive Report**.
-- **Rationale:** "Show, Don't Tell." Using the very tool we are pitching (a custom software artifact) to present the strategy demonstrates the power of the V2V methodology better than any PowerPoint could.
-- **Action:** Generated `presentation_content.json` and updated `A207`.
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Interactive Pitch
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C3 (Pivot to Interactive Report format)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," utilizing the Interactive Report Viewer.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide, interactive
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue.
-
-But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building.
-
-My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**."
-
-## 2. The "Show, Don't Tell" Strategy (The Interactive Report)
-
-We will not use a static slide deck. We will use the **Interactive Report Viewer** running live on a laptop. This demonstrates the V2V methodology in real-time: *we built the presentation tool using the process we are pitching.*
-
-### **Navigation Flow**
-
-1.  **Section 1: The Vision (A201)**
-    *   *Visual:* High-quality image of a futuristic, green Anguilla.
-    *   *Key Point:* "The AI-Native Nation." Move from rentier to owner.
-    *   *Interactive Element:* Toggle between "Current State" (Diesel/Leakage) and "Future State" (Solar/Smart Grid).
-
-2.  **Section 2: The Digital Wealth Fund (A202)**
-    *   *Visual:* Diagrams of the Hurricane-Proof Data Center.
-    *   *Key Point:* "Sovereign Cloud." Hosting our own data, immune to storms.
-    *   *Data Point:* Electricity @ $0.42/kWh vs. Solar @ $0.15/kWh.
-
-3.  **Section 3: The Cognitive Citizenry (A203)**
-    *   *Visual:* Students using AI to learn local history.
-    *   *Key Point:* "We don't need 16,000 coders; we need 16,000 architects."
-    *   *Interactive Element:* Show a snippet of the "Anguillian Dialect" AI model.
-
-4.  **Section 4: The Automated State (A204)**
-    *   *Visual:* The "Citizen Concierge" App interface.
-    *   *Key Point:* "Continuity of Government." The Data Embassy concept.
-    *   *Scenario:* "If the Ministry roof blows off, the Ministry is still open on your phone."
-
-5.  **Section 5: Resilient Systems (A205)**
-    *   *Visual:* Digital Twin heatmap of water leaks.
-    *   *Key Point:* "Stopping the Hemorrhage." 80% water loss is unacceptable. AI finds the leaks.
-
-## 3. Addressing the "Micro-Pilot" (The 16,000 Advantage)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity."
-
-## 4. Your Credibility (The "Why You" Factor)
-
-Leverage your unique background to build trust.
-*   **Google:** "I train the models the world uses. I know their power, but I also know their limits."
-*   **DOD/NSA:** "I build training for the US military. I understand **security**. I understand **resilience**. I am not selling a crypto scheme. I am proposing a national defense strategy for your economy and your environment."
-*   **The Citizen Architect:** "I am not a coder. I am a 'Citizen Architect.' I built this presentation platform myself using AI. I am proof that you don't need 16,000 computer scientists. You just need 16,000 empowered Anguillians."
-
-## 5. The Ask
-
-Don't ask for a massive contract immediately. Ask for the **Pilot**.
-
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE.
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: src/prototypes/strategic-presentation/data/presentation_content.json::{
-  "reportId": "anguilla-vision-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "1. The Vision",
-      "pages": [
-        {
-          "pageId": "vision-01",
-          "pageTitle": "The Opportunity of a Generation",
-          "tldr": "Anguilla owns the most valuable digital real estate in the world: .ai. We must convert this rent into sovereign power.",
-          "content": "Minister, Anguilla stands at a unique crossroads in history. Through a stroke of digital luck, we own the most valuable real estate on the future internet: the **.ai** top-level domain. \n\nIn 2023 alone, this asset generated **US$32 million**—nearly 20% of the government's total revenue. But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building. \n\n**The Goal:** Transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. To become the world's first **AI-Native Nation**.",
-          "imageGroupIds": ["vision-intro"]
-        },
-        {
-          "pageId": "vision-02",
-          "pageTitle": "The Poly-Crisis",
-          "tldr": "This is not a luxury; it is a survival strategy. We face water scarcity, energy insecurity, and climate vulnerability.",
-          "content": "Why do this? Because traditional methods cannot solve our 'poly-crisis':\n\n*   **Water Security:** We lose up to **80%** of our desalinated water to leakage. A catastrophic waste.\n*   **Energy Insecurity:** Electricity costs **$0.42/kWh** due to diesel dependence.\n*   **Climate Vulnerability:** We are on the front lines of rising seas and hurricanes.\n\nWe propose using the .ai windfall to fund the **Anguilla Digital Infrastructure Initiative**—solving physical problems with digital intelligence.",
-          "imageGroupIds": ["poly-crisis"]
-        }
-      ]
-    },
-    {
-      "sectionId": "infrastructure",
-      "sectionTitle": "2. The AI Capital (Infrastructure)",
-      "pages": [
-        {
-          "pageId": "infra-01",
-          "pageTitle": "The Sovereign AI Cloud",
-          "tldr": "Investing .ai revenue into hurricane-proof, green data centers.",
-          "content": "We propose establishing a **Digital Wealth Fund**. 50% of domain revenues will finance the **Sovereign AI Cloud**.\n\n*   **Hurricane-Hardened:** Concrete, bunker-grade data centers designed to withstand Category 5 storms.\n*   **Green Energy:** Powered by solar and wind, breaking our reliance on imported diesel.\n*   **Data Sovereignty:** Keeping Anguillian government and citizen data on Anguillian soil, protected by our laws.",
-          "imageGroupIds": ["sovereign-cloud"]
-        }
-      ]
-    },
-    {
-      "sectionId": "education",
-      "sectionTitle": "3. The Cognitive Citizenry",
-      "pages": [
-        {
-          "pageId": "edu-01",
-          "pageTitle": "The Citizen Architect",
-          "tldr": "A national upskilling program to create the world's most AI-literate workforce.",
-          "content": "We don't need 16,000 computer scientists. We need 16,000 **Citizen Architects**.\n\nUsing the **V2V (Vibecoding to Virtuosity)** methodology, we will launch a national upskilling program. We will teach our people to use AI to build their own tools, automate their own businesses, and solve their own problems.\n\n*   **Module 1:** AI for Small Business (Tourism & Services)\n*   **Module 2:** AI for Education (Personalized Tutors)\n*   **Module 3:** AI for Civics (Government Interaction)",
-          "imageGroupIds": ["citizen-architect"]
-        },
-        {
-          "pageId": "edu-02",
-          "pageTitle": "Cultural Heritage AI",
-          "tldr": "Using AI to preserve our dialect, history, and stories.",
-          "content": "Technology should not erase culture; it should preserve it. We will train a **Sovereign AI Model** on Anguillian history, law, and dialect.\n\n*   **Oral Histories:** Digitizing the stories of our elders.\n*   **Dialect Preservation:** An AI that speaks *our* language, not just standard English.\n*   **Identity:** Ensuring the next generation learns from an AI that knows who they are.",
-          "imageGroupIds": ["cultural-ai"]
-        }
-      ]
-    },
-    {
-      "sectionId": "governance",
-      "sectionTitle": "4. The Automated State",
-      "pages": [
-        {
-          "pageId": "gov-01",
-          "pageTitle": "Frictionless Governance",
-          "tldr": "A government that never sleeps and never goes offline.",
-          "content": "Bureaucracy is a tax on time. We propose **ACSA (Anguilla Civil Service AI)**.\n\n*   **The Citizen Concierge:** A single app for all government services.\n*   **Automated Agents:** AI that handles routine tasks like work permits and land registry instantly.\n*   **The Data Embassy:** Modeled on Estonia, we will host a backup of our government in a secure cloud. If a hurricane destroys the Ministry, the government continues to function online.",
-          "imageGroupIds": ["automated-state"]
-        }
-      ]
-    },
-    {
-      "sectionId": "resilience",
-      "sectionTitle": "5. Resilient Systems",
-      "pages": [
-        {
-          "pageId": "res-01",
-          "pageTitle": "The National Digital Twin",
-          "tldr": "Using AI to see the invisible and predict the future.",
-          "content": "We cannot manage what we cannot measure. We will build a **Digital Twin** of Anguilla.\n\n*   **Water Security:** AI sensors to detect leaks in real-time, solving the 80% water loss crisis.\n*   **Energy Optimization:** Balancing solar and diesel generation to lower costs.\n*   **Disaster Simulation:** Simulating hurricane impacts to optimize evacuation and recovery.",
-          "imageGroupIds": ["digital-twin"]
-        }
-      ]
-    },
-    {
-      "sectionId": "ask",
-      "sectionTitle": "6. The Ask",
-      "pages": [
-        {
-          "pageId": "ask-01",
-          "pageTitle": "The Micro-Pilot",
-          "tldr": "Give us one cohort. 90 days. Let us prove it.",
-          "content": "We are not asking for a massive contract today. We are asking for a **Micro-Pilot**.\n\n**The Proposal:**\n1.  **One Cohort:** Give us one high school class or one government department.\n2.  **The Tools:** We equip them with the Data Curation Environment (DCE) and V2V training.\n3.  **The Goal:** In 90 days, they will build functional AI tools to solve real local problems.\n\nIf we succeed, we scale. If we fail, you lose nothing. Let's build the future of Anguilla, starting today.",
-          "imageGroupIds": ["the-ask"]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/prototypes/strategic-presentation/README.md::# Strategic Presentation Prototype
-
-This directory contains the data and configuration for the **Interactive Report Viewer** used to present the Anguilla Project strategy to the Ministry.
-
-## Overview
-
-Instead of a static slide deck, we utilize a custom-built interactive web application. This application demonstrates the power of the **Data Curation Environment (DCE)** and the **V2V Methodology** by serving as a "living artifact" of the project itself.
-
-## Structure
-
--   `data/presentation_content.json`: The core content file. This JSON structure drives the entire presentation, defining sections, pages, text, and image references. It is the "Source of Truth" for the pitch.
--   *(Future)* `src/`: Will contain the ported Next.js/React code for the viewer (AudioControls, ImageNavigator, etc.).
--   *(Future)* `public/`: Will host the images referenced in the content JSON.
-
-## How to Update Content
-
-To modify the presentation narrative:
-1.  Edit `data/presentation_content.json`.
-2.  Update the `tldr` or `content` fields for the relevant page.
-3.  If adding new sections, ensure unique `sectionId` and `pageId` values.
-
-## Running the Presentation (Planned)
-
-Once the code scaffolding is complete (Cycle 4+):
-
-1.  Navigate to this directory: `cd src/prototypes/strategic-presentation`
-2.  Install dependencies: `npm install`
-3.  Run the development server: `npm run dev`
-4.  Open `http://localhost:3000` in the browser.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Focus on Interactive Presentation Build)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [ ] **Build Interactive Presentation:**
-    - [ ] **Plan:** Define architecture for the interactive web-app presentation (A208). (Status: **In Progress**)
-    - [ ] **Content:** Convert A201-A207 into `reportContent.json` for the viewer. (Status: **In Progress**)
-    - [ ] **Code:** Scaffold Next.js app and port `report-viewer` components.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Interactive Presentation Build
-- **Decision:** Instead of a static slide deck, we are building an interactive web application (`presentation/`) using the `report-viewer` codebase. This aligns with the "Show, Don't Tell" strategy, demonstrating the power of the tools we are pitching.
-- **Content:** The content from A201-A207 is being structured into a JSON format to drive the interactive viewer.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A208 - Anguilla Project - Interactive Presentation Plan.md::# Artifact A208: Anguilla Project - Interactive Presentation Plan
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Technical and design plan for the interactive presentation web application to be used in the meeting with the Minister.
-- **Tags:** presentation, tech plan, nextjs, report-viewer, anguilla
-
-## 1. Overview
-
-To effectively pitch the "Anguilla Project," we will eschew traditional PowerPoint slides in favor of an **Interactive Whitepaper**. This web application will allow the presenter to navigate through the vision, research, and proposals in a dynamic, engaging way. It serves as a "meta-demonstration": the presentation itself is a product of the technology and methodology we are proposing.
-
-## 2. Technical Architecture
-
-The presentation will be a standalone **Next.js** application, adapted from the `report-viewer` components found in the `aiascent-dev` repository.
-
-### 2.1. Tech Stack
--   **Framework:** Next.js (React)
--   **Styling:** TailwindCSS (for rapid UI development)
--   **State Management:** Zustand (ported from `reportStore.ts`)
--   **Deployment:** Localhost (running on the presenter's laptop via `npm run dev`)
-
-### 2.2. Component Adaptation
-We will port the following components from the `aiascent-dev` context:
--   `ReportViewerModal`: The main container (adapted to be the full-page view).
--   `ReportTreeNav`: For navigation between sections (Vision, Proposals, Strategy).
--   `MarkdownRenderer`: To render the content of the artifacts.
--   `AudioControls` / `ImageNavigator`: Optional, depending on asset availability.
-
-### 2.3. Data Structure
-The content will be decoupled from the code, stored in `src/data/reportContent.json`. This allows for rapid iteration on the text without recompiling the application logic.
-
-**Schema:**
-```typescript
-interface ReportContent {
-  reportId: "anguilla-vision-v1";
-  reportTitle: "Anguilla: The First AI-Native Nation";
-  sections: [
-    {
-      sectionId: "vision",
-      sectionTitle: "Vision & Master Plan",
-      pages: [ ... ]
-    },
-    {
-      sectionId: "proposals",
-      sectionTitle: "Strategic Research Proposals",
-      pages: [ ... ]
-    }
-  ]
-}
-```
-
-## 3. Content Strategy
-
-The presentation will be structured to guide the conversation from the high-level "Why" to the specific "How."
-
-### Section 1: The Vision (A201)
--   **Page 1: The Opportunity:** The .ai windfall and the "Poly-Crisis."
--   **Page 2: The Vision:** Anguilla as an AI-Native Nation.
--   **Page 3: Strategic Pillars:** Sovereignty, Culture, Resilience.
-
-### Section 2: The Proposals (A202-A206)
--   **Page 4: The AI Capital:** Sovereign Cloud & Green Energy.
--   **Page 5: Cognitive Citizenry:** Upskilling & Cultural Heritage AI.
--   **Page 6: The Automated State:** Frictionless Governance.
--   **Page 7: Resilient Systems:** Digital Twin for Water & Energy.
--   **Page 8: Global Sandbox:** Ethical Regulation.
-
-### Section 3: The Path Forward (A207)
--   **Page 9: The Micro-Pilot:** The "Ask" – a 90-day proof of concept.
--   **Page 10: Next Steps:** Immediate actions.
-
-## 4. Implementation Steps
-
-1.  **Scaffold:** Initialize `presentation/` with Next.js.
-2.  **Data:** Generate `reportContent.json` from existing artifacts.
-3.  **Port:** Copy and adapt core components (`ReportViewer`, `Store`).
-4.  **Style:** Apply a "Sovereign/High-Tech" theme (Blues, Golds, Clean Typography).
-5.  **Run:** Verify functionality with `npm run dev`.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/data/reportContent.json::{
-  "reportId": "anguilla-vision-2025",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "vision",
-      "sectionTitle": "Vision & Master Plan",
-      "pages": [
-        {
-          "pageId": "vision-overview",
-          "pageTitle": "The Vision: An AI-Native Nation",
-          "tldr": "Anguilla stands at a crossroads. We propose converting the transient wealth of the .ai domain into permanent sovereign infrastructure, creating a nation empowered by intelligence.",
-          "content": "## The Opportunity\n\nAnguilla owns the most valuable real estate on the future internet: **.ai**. In 2023, this asset generated **$32 million USD**—nearly 20% of government revenue. But this is currently just 'rent.'\n\n## The Vision\n\nWe propose transforming Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. A **Cognitive Republic** where:\n\n*   **Every citizen** is an architect of digital tools.\n*   **Government** is frictionless, automated, and disaster-proof.\n*   **Infrastructure** is green, resilient, and sovereign.\n\n## Why Now?\n\nWe face a 'poly-crisis':\n*   **Water:** 80% loss of desalinated water.\n*   **Energy:** $0.42/kWh costs due to diesel dependence.\n*   **Climate:** Existential threat from hurricanes.\n\n**The Solution:** Use the digital windfall to solve the physical problems.",
-          "imageGroupIds": []
-        },
-        {
-          "pageId": "strategic-pillars",
-          "pageTitle": "Three Guiding Principles",
-          "tldr": "Our strategy is anchored in Sovereignty, Culture, and Resilience. We will not import the future; we will build it.",
-          "content": "### 1. Political Sovereignty & Data Independence\nWe will not become a digital colony. Anguilla must own the infrastructure—servers, models, and data—that powers its future. We will use AI to strengthen our independence, not increase reliance on foreign powers.\n\n### 2. Cultural Preservation & Amplification\nTechnology must serve the culture. We will use AI to preserve Anguillian history, dialect, and stories. Our 'National AI' will speak *our* language and know *our* history.\n\n### 3. Climate Resilience & Survival\nWe live on the front lines. Every technological implementation must directly contribute to physical resilience against hurricanes, rising sea levels, and resource scarcity. **The Cloud must protect the Land.**",
-          "imageGroupIds": []
-        }
-      ]
-    },
-    {
-      "sectionId": "proposals",
-      "sectionTitle": "Strategic Research Proposals",
-      "pages": [
-        {
-          "pageId": "ai-capital",
-          "pageTitle": "The AI Capital: Sovereign Infrastructure",
-          "tldr": "Investing .ai revenue into a Digital Wealth Fund to build hurricane-proof, green data centers.",
-          "content": "## The Problem\nWe rent our name to the world, but we don't own the servers. Our energy is expensive and dirty ($0.42/kWh).\n\n## The Solution: The Anguilla Digital Infrastructure Initiative\n\n*   **Digital Wealth Fund:** Ring-fence 50% of domain revenue for infrastructure.\n*   **Sovereign AI Cloud:** Build Category-5 hurricane-resilient data centers in Anguilla.\n*   **Green Energy:** Power this infrastructure with solar and wind to break diesel dependency.\n\n**Impact:** Economic diversification, data sovereignty, and a robust digital backbone that survives the storm.",
-          "imageGroupIds": []
-        },
-        {
-          "pageId": "cognitive-citizenry",
-          "pageTitle": "The Cognitive Citizenry",
-          "tldr": "A national upskilling program to turn every Anguillian into a 'Citizen Architect' using the V2V methodology.",
-          "content": "## The Problem\nAI automation threatens traditional service jobs. Importing foreign AI risks cultural erasure.\n\n## The Solution: The National V2V Initiative\n\n*   **Citizen Architect Curriculum:** Teach citizens to build their own tools using AI (Vibecoding to Virtuosity).\n*   **Cultural Heritage AI:** Train a sovereign model on Anguillian oral history, dialect, and law.\n*   **Personal AI Companion:** Provide every citizen with a secure, sovereign AI assistant.\n\n**Impact:** A globally competitive workforce that uses technology to preserve, not replace, its unique identity.",
-          "imageGroupIds": []
-        },
-        {
-          "pageId": "automated-state",
-          "pageTitle": "The Automated State",
-          "tldr": "Creating a frictionless, disaster-proof government with 'Data Embassies' and AI agents.",
-          "content": "## The Problem\nBureaucracy is a tax on time. Paper records are vulnerable to hurricanes. If the building goes, the state stops.\n\n## The Solution: Anguilla Civil Service AI (ACSA)\n\n*   **Data Embassy:** Host a 'Golden Copy' of national registries in a secure, overseas cloud (Estonia model) to ensure continuity of government.\n*   **Citizen Concierge:** A single app for all government services (permits, land, tax).\n*   **Automated Bureaucracy:** AI agents handle routine paperwork instantly.\n\n**Impact:** A government that never goes offline, even in a Category 5 storm.",
-          "imageGroupIds": []
-        },
-        {
-          "pageId": "resilient-systems",
-          "pageTitle": "Resilient Island Systems",
-          "tldr": "Using Digital Twins and AI to solve the water and energy crisis.",
-          "content": "## The Problem\nWe lose **80%** of our desalinated water to leaks. We rely on imported diesel for power.\n\n## The Solution: The Anguilla Digital Twin\n\n*   **AI Leak Detection:** Use real-time sensor data to find and fix water leaks instantly.\n*   **Smart Grid:** Optimize energy distribution and integrate renewables.\n*   **Disaster Simulation:** Simulate hurricane impacts to prioritize hardening and recovery.\n\n**Impact:** Water security, energy independence, and predictive survival.",
-          "imageGroupIds": []
-        }
-      ]
-    },
-    {
-      "sectionId": "path-forward",
-      "sectionTitle": "The Path Forward",
-      "pages": [
-        {
-          "pageId": "micro-pilot",
-          "pageTitle": "Phase 1: The Micro-Pilot",
-          "tldr": "We are asking for a mandate to run a 90-day pilot to prove this vision works.",
-          "content": "## The Ask\nWe are not asking for a massive contract today. We are asking for a **Micro-Pilot**.\n\n## The Plan (90 Days)\n\n1.  **One Cohort:** Give us one group (students or civil servants).\n2.  **One Problem:** Pick one high-friction process (e.g., Work Permits).\n3.  **Execution:** We will apply the V2V methodology and the DCE platform.\n\n**The Promise:** If, in 90 days, this cohort is not the most productive and innovative group on the island, we walk away. But when we succeed, we scale.",
-          "imageGroupIds": []
-        },
-        {
-          "pageId": "next-steps",
-          "pageTitle": "Immediate Next Steps",
-          "tldr": "Actionable steps to begin the transformation immediately.",
-          "content": "1.  **Approve Micro-Pilot:** Select the target cohort and problem area.\n2.  **Data Access:** Grant limited access to relevant non-sensitive data for the Digital Twin prototype.\n3.  **Stakeholder Alignment:** Schedule a workshop with key ministry heads.\n\n**Let's build the future, today.**",
-          "imageGroupIds": []
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/package.json::{
-  "name": "anguilla-presentation",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "14.1.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "zustand": "^4.5.0",
-    "react-icons": "^5.0.1",
-    "react-markdown": "^9.0.1",
-    "framer-motion": "^11.0.3",
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^2.2.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: presentation/README.md::# Anguilla Project - Interactive Presentation
-
-This is the interactive presentation application for the Anguilla Project. It replaces a traditional slide deck with a dynamic web application that showcases the project's vision, research, and proposals.
-
-## Getting Started
-
-1.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
-
-2.  **Run the Development Server:**
-    ```bash
-    npm run dev
-    ```
-
-3.  **Open the Presentation:**
-    Open [http://localhost:3000](http://localhost:3000) with your browser to view the presentation.
-
-## Structure
-
--   `src/data/reportContent.json`: Contains the text and structure of the presentation. Edit this file to update the content.
--   `src/components/`: Contains the React components adapted from the DCE `report-viewer`.
--   `src/state/`: Contains the Zustand store for managing navigation and state.
-
-## Usage
-
--   Use the **Arrow Keys** or on-screen controls to navigate between pages.
--   Use the **Tree Navigator** on the left to jump to specific sections.
--   The presentation is designed to be interactive—click on elements to explore deeper (future functionality).
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Research Integration Complete)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [ ] **Develop Presentation Deck:** Create visual slides based on the narrative in `A207`.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Research Integration
-- **Focus:** Validating the strategy with hard data.
-- **Key Metrics Confirmed:**
-    - **Financial Leverage:** The .ai revenue ($32M/yr) is sufficient to self-fund the entire resilience transformation without external debt.
-    - **Urgency:** The 80% water loss rate and $0.42/kWh energy cost provide the "burning platform" argument for immediate action via the Digital Twin (A205).
-    - **Feasibility:** The hardware cost for the sensor network (LoRaWAN) is negligible (<$30k), making the barrier to entry purely organizational, not financial.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Sharpen Financial Feasibility and Technical "How")
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," woven with themes of political sovereignty, cultural preservation, and climate resilience.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue.
-
-But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building.
-
-My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**."
-
-## 2. The "Show, Don't Tell" Strategy (Data-Driven)
-
-Do not just pitch slides. Use the **Data Curation Environment (DCE)** to demonstrate the power of the methodology, using the hard data we've curated.
-
-*   **The Demo:** "I used my own AI system to analyze your nation's critical challenges. Here is what we found, and here is the solution."
-*   **The Reveal:** Show the 5 Research Proposals (A202-A206) backed by the specific metrics:
-    *   **Resilience (Water):** "We know Anguilla loses up to **80%** of its desalinated water to leakage. We have a plan for a Digital Twin (A205) using **LoRaWAN sensors** to stop this hemorrhage. The hardware cost is less than $30,000."
-    *   **Sovereignty (Energy):** "We know electricity costs **$0.42/kWh** because of diesel. We have a plan for a Green Sovereign Cloud (A202) to break this dependency."
-    *   **Continuity (Governance):** "We have a plan for a **Data Embassy** (A204)—modeled on Estonia—to ensure the Anguillian government exists in the cloud, immune to any Category 5 storm."
-
-## 3. The Financial Argument (The "1%" Feasibility)
-
-**The Logic:**
-"You might ask, 'Can we afford this?' The answer is in your own treasury."
-
-*   **The Math:** "The Micro-Pilot we are proposing costs a fraction of **1%** of your annual .ai revenue. We are not asking for a loan. We are asking you to reinvest a tiny sliver of your digital windfall to secure the rest of it."
-*   **The ROI:** "If we reduce water loss by just 10% using the Digital Twin, the system pays for itself in months. If we upskill 50 youths to build AI tools, we create a new export sector."
-
-## 4. Addressing the "Micro-Pilot" (The 16,000 Advantage)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity. A proof that a nation can be high-tech, culturally rich, and climate-resilient all at once."
-
-## 5. Your Credibility (The "Why You" Factor)
-
-Leverage your unique background to build trust.
-
-*   **Google:** "I train the models the world uses. I know their power, but I also know their limits."
-*   **DOD/NSA:** "I build training for the US military. I understand **security**. I understand **resilience**. I am not selling a crypto scheme. I am proposing a national defense strategy for your economy and your environment."
-*   **The Citizen Architect:** "I am not a coder. I am a 'Citizen Architect.' I built this platform myself using AI. I am proof that you don't need 16,000 computer scientists. You just need 16,000 empowered Anguillians."
-
-## 6. The Ask
-
-Don't ask for a massive contract immediately. Ask for the **Pilot**.
-
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE.
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and documentation for the **Anguilla Project**. The initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Vision
-
-Anguilla currently generates significant revenue (~$32M USD in 2023) from .ai domain registrations. This project proposes a strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-
-1.  **The AI Capital (Economic Sovereignty):** Reinvesting domain revenue into a Digital Wealth Fund to finance green, hurricane-proof data centers and sovereign compute.
-2.  **Cognitive Citizenry (Human Capital):** A national upskilling program (V2V Academy) to make Anguilla the most AI-literate nation on earth, preserving local culture through "Sovereign Models."
-3.  **Automated State (Governance):** A "Cloud Government" that ensures continuity even during Category 5 storms, modeled on the Estonian "Data Embassy" concept.
-4.  **Resilient Island Systems (Climate):** deploying a National Digital Twin to solve the water crisis (80% leakage) and energy insecurity ($0.42/kWh).
-
-## Repository Structure
-
-This repository is managed using the **Data Curation Environment (DCE)** methodology, prioritizing "Documentation First."
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A202 - Research Proposal - The AI Capital.md
-│   ├── A203 - Research Proposal - The Cognitive Citizenry.md
-│   ├── A204 - Research Proposal - The Automated State.md
-│   ├── A205 - Research Proposal - Resilient Island Systems.md
-│   ├── A206 - Research Proposal - The Global AI Sandbox.md
-│   └── A207 - Strategic Presentation Guide.md
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-│   └── 00-initial-research/
-├── presentation/       # Slides and visual assets for the Ministry meeting
-└── src/                # Future prototype code
-```
-
-## Key Artifacts for Review
-
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The script and strategy for the meeting with the Minister of IT.
-*   **[A200 - Universal Task Checklist](artifacts/A200%20-%20Anguilla%20Project%20-%20Universal%20Task%20Checklist.md):** Current project status and next steps.
-
-## Getting Started
-
-1.  **Review the Vision:** Start with Artifact `A201`.
-2.  **Explore the Proposals:** Review `A202` through `A206` for specific vertical strategies (Infrastructure, Education, Governance, Climate, Regulation).
-3.  **Check Status:** See `A200` for the current cycle's objectives.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C3 (Pivot to Interactive Report format)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [x] **Initialize Repository:** Create `README.md` and set up Git structure. (Status: **Complete**)
-- [ ] **Develop Interactive Presentation:** Create `anguilla_presentation_content.json` based on the narrative in `A207` and the data in `A201-A206`, to be used with the Report Viewer. (Status: **In Progress**)
-- [ ] **Deploy Report Viewer:** Port the `report-viewer` code components into the `src/` directory to render the presentation.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-- **Action:** Updated A207 to reflect these hard numbers.
-
-#### Cycle 2: Presentation Pivot
-- **Focus:** Switching from static slides to an Interactive Report.
-- **Action:** Creating the JSON content payload and the repository README.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-> **"From Domain Rent to Sovereign Infrastructure"**
-
-## 1. Overview
-
-This repository contains the strategic planning, research, and technical assets for the **Anguilla Project**. This initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-This project utilizes the **Data Curation Environment (DCE)** methodology, emphasizing a "Documentation First" approach where strategic artifacts serve as the source of truth for execution.
-
-## 2. The Vision
-
-Anguilla currently generates significant revenue (~$32M USD in 2023) from .ai domain registrations. This project proposes a comprehensive strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-
-1.  **The AI Capital:** A Digital Wealth Fund financing green, hurricane-proof data centers.
-2.  **Cognitive Citizenry:** A national upskilling program (V2V) to create an AI-literate workforce.
-3.  **The Automated State:** A "Cloud Government" ensuring continuity during climate disasters.
-4.  **Resilient Systems:** AI-driven Digital Twins to solve water scarcity and energy insecurity.
-5.  **Global Sandbox:** A regulatory framework for ethical AI innovation.
-
-## 3. Repository Structure
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A202 - Research Proposal - The AI Capital.md
-│   ├── A203 - Research Proposal - The Cognitive Citizenry.md
-│   ├── A204 - Research Proposal - The Automated State.md
-│   ├── A205 - Research Proposal - Resilient Island Systems.md
-│   ├── A206 - Research Proposal - The Global AI Sandbox.md
-│   └── A207 - Strategic Presentation Guide.md
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # Assets for the Minister meeting (JSON content, images)
-└── src/                # Application code (Report Viewer, Prototypes)
-```
-
-## 4. Getting Started
-
-### Prerequisites
--   Node.js (v18+)
--   Git
-
-### Installation
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/YOUR_USERNAME/anguilla-project.git
-    cd anguilla-project
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-
-### Running the Interactive Presentation
-To view the strategic presentation for the Minister:
-```bash
-npm run dev
-```
-Navigate to `http://localhost:3000` (or the configured port) to launch the Report Viewer.
-
-## 5. Key Artifacts
-
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A200 - Universal Task Checklist](artifacts/A200%20-%20Anguilla%20Project%20-%20Universal%20Task%20Checklist.md):** Current project status and next steps.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The narrative script for the pitch.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: presentation/anguilla_presentation_content.json::{
-  "reportId": "anguilla-presentation-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "intro",
-      "sectionTitle": "The Opportunity",
-      "subSections": [
-        {
-          "subSectionId": "vision",
-          "subSectionTitle": "Ownership & Survival",
-          "pages": [
-            {
-              "pageId": "slide-01",
-              "pageTitle": "The .ai Paradox",
-              "tldr": "Anguilla owns the most valuable digital real estate in the world, but currently only collects 'rent'.",
-              "content": "Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue. \n\nBut right now, that revenue is just 'rent.' We are the landlords, but we don't own the building. The world comes to us for the name, but takes the value elsewhere. \n\nThis presentation outlines a strategy to convert that transient digital rent into permanent **Sovereign Infrastructure**. It is a plan to fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**.",
-              "imageGroupIds": ["img-ai-revenue-graph"]
-            },
-            {
-              "pageId": "slide-02",
-              "pageTitle": "The Poly-Crisis",
-              "tldr": "We face existential threats: water loss, energy costs, and climate vulnerability.",
-              "content": "Why is this transformation necessary? Because we face a 'poly-crisis' that traditional methods cannot solve:\n\n*   **Water Security:** We lose up to **80%** of our desalinated water to leakage. That is money pouring into the ground.\n*   **Energy Insecurity:** Electricity costs are among the highest in the region (**~$0.42/kWh**) due to 99% diesel dependence.\n*   **Climate Vulnerability:** As a low-lying island, we are on the front lines of rising seas and intensifying hurricanes.\n\nWe must use our digital windfall to solve these physical problems.",
-              "imageGroupIds": ["img-water-energy-crisis"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "strategy",
-      "sectionTitle": "The Strategic Pillars",
-      "subSections": [
-        {
-          "subSectionId": "pillar-1",
-          "subSectionTitle": "Pillar 1: The AI Capital",
-          "pages": [
-            {
-              "pageId": "slide-03",
-              "pageTitle": "The Digital Wealth Fund",
-              "tldr": "Reinvesting .ai revenue into Green, Hurricane-Proof Sovereign Cloud infrastructure.",
-              "content": "We propose establishing a **Digital Wealth Fund** funded by 50% of domain revenues. This fund will not just sit in a bank; it will build the **Sovereign AI Cloud**.\n\n*   **Resilient Infrastructure:** We will build small-footprint, Category 5 hurricane-resilient data centers. \n*   **Green Energy:** These centers will be powered by renewable energy (solar/wind), breaking our reliance on diesel.\n*   **Data Sovereignty:** This infrastructure ensures that Anguillian government and business data stays on Anguillian soil, protected by our laws.",
-              "imageGroupIds": ["img-sovereign-cloud"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar-2",
-          "subSectionTitle": "Pillar 2: Cognitive Citizenry",
-          "pages": [
-            {
-              "pageId": "slide-04",
-              "pageTitle": "The Citizen Architect",
-              "tldr": "A national upskilling program to create the world's most AI-literate workforce.",
-              "content": "Infrastructure is useless without the people to run it. We propose the **National V2V Initiative** to upskill our population.\n\n*   **Vibecoding to Virtuosity:** A curriculum that teaches citizens to direct AI to build tools, rather than just learning syntax.\n*   **Cultural Heritage AI:** We will train a sovereign model on Anguillian history, dialect, and law. We will use AI to *preserve* our culture, not replace it.\n*   **The Goal:** To turn our 16,000 citizens into a high-density powerhouse of cognitive capital.",
-              "imageGroupIds": ["img-v2v-education"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar-3",
-          "subSectionTitle": "Pillar 3: The Automated State",
-          "pages": [
-            {
-              "pageId": "slide-05",
-              "pageTitle": "Frictionless Governance",
-              "tldr": "AI agents to automate bureaucracy and ensure Continuity of Government.",
-              "content": "We will reimagine the civil service with **ACSA (Anguilla Civil Service AI)**.\n\n*   **Frictionless Services:** Automated agents for business incorporation, land registry, and work permits. \n*   **The Data Embassy:** Modeled on Estonia, we will back up our critical government data to secure, sovereign servers abroad. This ensures that even if a Category 5 storm destroys our physical offices, the **State of Anguilla** continues to exist and function in the cloud.",
-              "imageGroupIds": ["img-data-embassy"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar-4",
-          "subSectionTitle": "Pillar 4: Resilient Systems",
-          "pages": [
-            {
-              "pageId": "slide-06",
-              "pageTitle": "The National Digital Twin",
-              "tldr": "Using AI to solve the water and energy crisis through predictive modeling.",
-              "content": "We will deploy a **National Digital Twin**—a live, AI-powered simulation of our island.\n\n*   **Water Security:** AI sensors will detect leaks in real-time, aiming to reduce that 80% water loss to under 20%.\n*   **Energy Optimization:** The system will balance solar input with diesel backup to stabilize the grid and lower costs.\n*   **Disaster Simulation:** We will simulate hurricane impacts to optimize evacuation routes and infrastructure hardening before the storm hits.",
-              "imageGroupIds": ["img-digital-twin"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "execution",
-      "sectionTitle": "The Micro-Pilot",
-      "subSections": [
-        {
-          "subSectionId": "next-steps",
-          "subSectionTitle": "The Ask",
-          "pages": [
-            {
-              "pageId": "slide-07",
-              "pageTitle": "The 16,000 Advantage",
-              "tldr": "Anguilla's small size is its greatest asset. We can pivot faster than any other nation.",
-              "content": "You might think, 'We are too small.' Minister, **you are the perfect size.**\n\nLarge nations are Titanic ships; they cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student. We can secure every land deed.\n\nWe are not just a small island; we are a **Model Organism** for the future of humanity.",
-              "imageGroupIds": ["img-anguilla-map"]
-            },
-            {
-              "pageId": "slide-08",
-              "pageTitle": "Proposal: The 90-Day Micro-Pilot",
-              "tldr": "Give us one cohort to prove the model.",
-              "content": "We are not asking for a massive contract today. We are asking for a mandate to run a **Micro-Pilot**.\n\n**The Plan:**\n1.  **Select One Cohort:** A high school class or a government department.\n2.  **Deploy V2V:** We equip them with the Data Curation Environment and the V2V curriculum.\n3.  **Prove Value:** In 90 days, we demonstrate a measurable increase in productivity and innovation.\n\nIf we succeed, we scale. If we don't, you walk away. Let us build the **AI Capital** together.",
-              "imageGroupIds": ["img-micro-pilot-timeline"]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Update status and add Presentation tasks)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [x] **Project Initialization:** Create the root `README.md` to define the repository structure. (Status: **Complete**)
-- [ ] **Develop Presentation Deck:** Create visual slides/markdown based on the narrative in `A207`. (Status: **In Progress**)
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Research Integration & Presentation Build
-- **Focus:** Finalizing the pitch narrative with hard data and generating the presentation assets.
-- **Key Updates:**
-    -   **A207 Refinement:** Added 2025 revenue projections ($49M) and specific bureaucratic friction points (ALHL delays) to the script.
-    -   **README:** Established the repository's "Source of Truth" structure.
-    -   **Slides:** Generated the `Minister_Meeting_Slides.md` artifact.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Enhanced with 2025 Projections and ALHL Friction Data)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," woven with themes of political sovereignty, cultural preservation, and climate resilience.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023, this asset generated **$32 million USD**. But the projections for 2025 are even more staggering: **$49 million USD**—nearly half of your recurrent revenue.
-
-But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building. And more importantly, we don't own the *future* of that building.
-
-My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes that lose **80%** of our water, to power the grid that costs our businesses **$0.40/kWh**, and to secure the state against the next Irma."
-
-## 2. The "Show, Don't Tell" Strategy (Data-Driven)
-
-Do not just pitch slides. Use the **Data Curation Environment (DCE)** to demonstrate the power of the methodology, using the hard data we've curated.
-
-*   **The Demo:** "I used my own AI system to analyze your nation's critical challenges. Here is what we found, and here is the solution."
-*   **The Reveal:** Show the 5 Research Proposals (A202-A206) backed by the specific metrics:
-    *   **Resilience (Water):** "We know Anguilla loses up to **80%** of its desalinated water to leakage. We have a plan for a Digital Twin (A205) to stop this hemorrhage."
-    *   **Efficiency (Governance):** "We know that an Alien Land Holding License takes **3 to 6 months** to process. That is a tax on investment. Our 'Land Oracle' agent (A204) can reduce that to **48 hours**."
-    *   **Sovereignty (Energy):** "We know electricity costs **$0.42/kWh** because of diesel. We have a plan for a Green Sovereign Cloud (A202) to break this dependency."
-    *   **Continuity (Governance):** "We have a plan for a **Data Embassy** (A204)—modeled on Estonia—to ensure the Anguillian government exists in the cloud, immune to any Category 5 storm."
-
-## 3. Addressing the "Micro-Pilot" (The 16,000 Advantage)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity. A proof that a nation can be high-tech, culturally rich, and climate-resilient all at once."
-
-## 4. Your Credibility (The "Why You" Factor)
-
-Leverage your unique background to build trust.
-
-*   **Google:** "I train the models the world uses. I know their power, but I also know their limits."
-*   **DOD/NSA:** "I build training for the US military. I understand **security**. I understand **resilience**. I am not selling a crypto scheme. I am proposing a national defense strategy for your economy and your environment."
-*   **The Citizen Architect:** "I am not a coder. I am a 'Citizen Architect.' I built this platform myself using AI. I am proof that you don't need 16,000 computer scientists. You just need 16,000 empowered Anguillians."
-
-## 5. The Ask
-
-Don't ask for a massive contract immediately. Ask for the **Pilot**.
-
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government (e.g., the Land Registry). Let me apply the V2V methodology. Let me equip them with the DCE.
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## 1. Overview
-
-This repository contains the strategic planning, research, and technical documentation for the **Anguilla Project**. This initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## 2. Project Vision
-
-Anguilla currently generates significant revenue (projected **$49M USD** in 2025) from .ai domain registrations. This project proposes a strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-
-1.  **Green, Hurricane-Proof Data Centers:** Powered by renewables, independent of the diesel grid, hosting the "Sovereign AI Cloud."
-2.  **Cognitive Citizenry:** A national upskilling program (V2V Academy) to make Anguilla the most AI-literate nation on earth.
-3.  **Automated State:** A "Cloud Government" that ensures continuity even during Category 5 storms and reduces bureaucratic friction (e.g., reducing Land License wait times from months to days).
-
-## 3. Repository Structure
-
-This repository is managed using the **Data Curation Environment (DCE)** methodology, treating documentation as the primary source of truth.
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A200 - Universal Task Checklist.md
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A207 - Strategic Presentation Guide.md
-│   └── ... (Research Proposals A202-A206)
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # Slides and visual assets for the Ministry meeting
-│   └── Minister_Meeting_Slides.md
-└── src/                # Future prototype code
-```
-
-## 4. Key Artifacts
-
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A200 - Universal Task Checklist](artifacts/A200%20-%20Anguilla%20Project%20-%20Universal%20Task%20Checklist.md):** Current project status and next steps.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The script and strategy for the meeting with the Minister of IT.
-
-## 5. Getting Started
-
-1.  **Review the Vision:** Start with Artifact `A201`.
-2.  **Explore the Proposals:** Review `A202` through `A206` for specific vertical strategies (Infrastructure, Education, Governance, Climate, Regulation).
-3.  **Check Status:** See `A200` for the current cycle's objectives.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: presentation/Minister_Meeting_Slides.md::# Anguilla Project: Strategic Presentation Deck
-# Target Audience: Minister of Information Technology, Anguilla
-# Date: Cycle 1
-# Format: Markdown Slides (Convertible to PowerPoint/Keynote)
-
----
-
-## Slide 1: Title Slide
-
-# The Anguilla Project
-### From Domain Rent to Sovereign Infrastructure
-
-**Building the World's First AI-Native Nation**
-
----
-
-## Slide 2: The Opportunity (The "Hook")
-
-### The .ai Windfall: A Historic Anomaly
-
-*   **The Asset:** Anguilla owns the digital real estate of the future.
-*   **2023 Revenue:** **$32 Million USD** (~20% of Gov Revenue).
-*   **2025 Projection:** **$49 Million USD** (Approaching 50% of Recurrent Revenue).
-*   **The Risk:** Currently, this is "Rent." We are landlords, not owners.
-    *   *Vulnerable to:* Tech trends, Policy changes, Market saturation.
-
-**The Goal:** Convert this transient liquid capital into permanent **Sovereign Assets**.
-
----
-
-## Slide 3: The Challenge (The "Poly-Crisis")
-
-### Why We Cannot Wait
-
-Anguilla faces a convergence of existential threats that money alone cannot solve. We need **Intelligence**.
-
-1.  **Water Security:**
-    *   **80% Loss:** We lose 8 out of every 10 gallons of desalinated water to leakage.
-    *   *Result:* Massive financial hemorrhage and vulnerability to drought.
-2.  **Energy Insecurity:**
-    *   **$0.42/kWh:** Diesel dependency cripples business growth and inflates the cost of living.
-    *   *Result:* Economic stagnation and carbon vulnerability.
-3.  **Bureaucratic Friction:**
-    *   **3-6 Months:** The time to process an Alien Land Holding License.
-    *   *Result:* Investors take their capital to faster jurisdictions.
-
----
-
-## Slide 4: The Vision
-
-### The AI-Native Nation
-
-We propose transforming Anguilla into a **Cognitive Republic**.
-
-*   **Not just consumers of AI:** But creators, architects, and owners.
-*   **Not just a "Smart Island":** But a "Resilient Organism" that can predict storms, optimize resources, and automate governance.
-*   **The Model:** A "Micro-Pilot" nation. Small enough to be agile (16,000 people), significant enough to lead the world.
-
----
-
-## Slide 5: The Strategy (5 Pillars)
-
-### The Anguilla Digital Infrastructure Initiative
-
-1.  **The AI Capital (A202):**
-    *   Build a **Sovereign AI Cloud**. Hurricane-proof, green data centers.
-    *   Stop exporting data; start exporting compute.
-2.  **The Cognitive Citizenry (A203):**
-    *   **V2V Academy:** Upskill the workforce. From hospitality to "Citizen Architects."
-    *   **Cultural AI:** A model trained on *our* dialect and history.
-3.  **The Automated State (A204):**
-    *   **Citizen Concierge:** A single app for all government services.
-    *   **Data Embassy:** Government continuity in the cloud (Estonia Model).
-4.  **Resilient Systems (A205):**
-    *   **Digital Twin:** Real-time AI modeling to stop water leaks and balance the grid.
-5.  **Global Sandbox (A206):**
-    *   A regulatory haven for **Ethical AI** development.
-
----
-
-## Slide 6: The Solution
-
-### The "Automated State" in Action
-
-Imagine a government that never sleeps and never breaks.
-
-*   **Frictionless Business:**
-    *   Incorporation: **Instant**.
-    *   Work Permits: **Automated vetting** (Human review only for exceptions).
-    *   Land Licenses: Reduced from **6 months to 48 hours** using AI due diligence.
-*   **Disaster Resilience:**
-    *   If a Category 5 storm hits, the **Data Embassy** keeps the government running.
-    *   Records are safe. Aid is distributed via blockchain. Recovery begins immediately.
-
----
-
-## Slide 7: Why Us? (Credibility)
-
-### Built by Experience, tailored for Anguilla
-
-*   **Google & DOD Heritage:**
-    *   Experience training the models that run the world.
-    *   Experience building secure simulations for the US Military.
-*   **The "Citizen Architect" Proof:**
-    *   I am not a coder. I built this entire platform using the very methodology I propose to teach your citizens.
-    *   If I can do it, **every Anguillian can do it.**
-
----
-
-## Slide 8: The Ask
-
-### The Micro-Pilot
-
-We are not asking for a massive contract today. We are asking for a **Mandate to Prove It**.
-
-**The Proposal:**
-1.  **Grant us one cohort:** A high school class or a government department.
-2.  **Duration:** 90 Days.
-3.  **Goal:** Apply the V2V Methodology and DCE tools.
-
-**The Promise:**
-If they are not the most productive, innovative, and empowered group on the island in 90 days... we walk away.
-
-**But when we succeed... we scale.**
-
----
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C2 (Mark Presentation Data as Complete)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [x] **Develop Presentation Deck:** Create visual slides/interactive data based on the narrative in `A207`. (Status: **Complete - JSON Data Generated**)
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 2: Presentation Generation
-- **Action:** Converted the strategic narrative and research proposals into `anguilla_content.json` and `anguilla_manifest.json` to power the Interactive Report Viewer.
-- **Next Step:** Curator to swap these files into the active data directory and run the presentation.
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-- **Action:** Updating A207 to reflect these hard numbers makes the pitch undeniable.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C2 (Align with Interactive Report Structure)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," woven with themes of political sovereignty, cultural preservation, and climate resilience. Adapted for the Interactive Report Viewer.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**Format:** Interactive Report (Web-based)
-**Navigation:** Use the arrow keys to advance through the "pages" of the report during the meeting.
-
-### Section 1: The Vision (Pages 1-2)
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. The world comes to you for the *name*. But right now, they take the *value* elsewhere.
-
-My proposal is not just about technology. It is about **Sovereignty**. It is about **Culture**. And it is about **Survival**.
-
-Let's bring the value home. Let's make Anguilla not just the *registrar* of AI, but the *capital* of AI—a nation that owns its future, preserves its past, and is resilient against the storms to come."
-
-**Visuals:**
--   **Page 1 (Welcome):** Ascentia introducing the "Anguilla Project."
--   **Page 2 (Executive Summary):** The contrast between "Digital Rent" (current state) and "Sovereign Infrastructure" (future state).
-
-### Section 2: The Opportunity (Pages 3-5)
-
-**The Data:**
-"We are facing a unique moment. We have a windfall—$32M USD in 2023 alone. But we also face a poly-crisis: expensive energy ($0.42/kWh), water scarcity (80% leakage), and climate threats.
-
-We propose a **Digital Wealth Fund**. We take the transient revenue from .ai and invest it in permanent assets: Green Energy, Data Centers, and Human Capital."
-
-**Visuals:**
--   **Page 3:** The ".ai Windfall" charts.
--   **Page 4:** The "Poly-Crisis" breakdown (Water, Energy, Climate).
--   **Page 5:** The "Digital Wealth Fund" structure.
-
-### Section 3: The 5 Strategic Pillars (Pages 6-11)
-
-**The Solution:**
-"We have developed five detailed research proposals to transform this vision into reality. This isn't just a slide deck; these are actionable plans."
-
-*   **The AI Capital (Page 7):** "Building hurricane-proof, green data centers. We become the landlord, not just the registrar."
-*   **Cognitive Citizenry (Page 8):** "Upskilling our people. Not just learning to use AI, but building it. Preserving our dialect and culture in the model itself."
-*   **The Automated State (Page 9):** "A government that never sleeps and never goes offline. Data Embassies ensure our sovereignty survives any storm."
-*   **Resilient Systems (Page 10):** "A Digital Twin of the island. Using AI to find water leaks and balance the grid. Saving millions in wasted resources."
-*   **Global Sandbox (Page 11):** "A regulatory haven for ethical AI. Setting the standard for the world."
-
-### Section 4: The Ask (Pages 12-13)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity."
-
-**The Ask:**
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE.
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: public/data/reports/anguilla_content.json::{
-  "reportId": "anguilla-presentation-v1",
-  "reportTitle": "Anguilla: The First AI-Native Nation",
-  "sections": [
-    {
-      "sectionId": "intro",
-      "sectionTitle": "1. The Vision",
-      "subSections": [
-        {
-          "subSectionId": "welcome",
-          "subSectionTitle": "Welcome",
-          "pages": [
-            {
-              "pageId": "ax-01",
-              "pageTitle": "Anguilla: The First AI-Native Nation",
-              "tldr": "A strategic proposal to transform Anguilla from a passive beneficiary of the AI boom into a global leader in sovereign digital infrastructure.",
-              "content": "Honorable Minister, distinguished guests. Welcome to the future of Anguilla. \n\nWe stand at a crossroads. Today, Anguilla owns the most valuable address in the digital world: **.ai**. The world comes to you for the name. But right now, the value—the compute, the models, the innovation—resides elsewhere.\n\nThis presentation outlines a comprehensive strategy to bring that value home. To transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. \n\nOur vision is to build the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and disaster-resilient, and where the economy is driven by high-value cognitive labor.",
-              "imageGroupIds": ["group_ax-01-cover"]
-            },
-            {
-              "pageId": "ax-02",
-              "pageTitle": "Executive Summary: From Rent to Sovereignty",
-              "tldr": "We propose converting the transient revenue from .ai domains into permanent, resilient assets: green energy, sovereign cloud, and human capital.",
-              "content": "The core of our proposal is a shift from **Rentier Status** to **Sovereign Proprietorship**.\n\nCurrently, we collect fees. This is 'digital rent.' It is lucrative, but vulnerable. \n\nWe propose the **Anguilla Digital Infrastructure Initiative**. We will use the .ai windfall to fund:\n1.  **Sovereign Infrastructure:** Hurricane-proof, green data centers.\n2.  **Cognitive Capital:** A national upskilling program to create a workforce of 'Citizen Architects.'\n3.  **Automated Governance:** A 'Cloud State' that ensures continuity of government during any crisis.\n\nThis is a survival strategy. It integrates political sovereignty, cultural preservation, and climate resilience into a unified national operating system.",
-              "imageGroupIds": ["group_ax-02-summary"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "opportunity",
-      "sectionTitle": "2. The Opportunity & The Crisis",
-      "subSections": [
-        {
-          "subSectionId": "windfall",
-          "subSectionTitle": "The Digital Windfall",
-          "pages": [
-            {
-              "pageId": "ax-03",
-              "pageTitle": "The .ai Economic Singularity",
-              "tldr": "The .ai domain generated ~$32M USD in 2023, representing ~20% of government revenue. This is a historic opportunity.",
-              "content": "In 2023, the .ai domain generated approximately **US$32 million (EC$87 million)**. This single asset accounted for nearly **20%** of the government's total revenue.\n\nThis is an unprecedented 'virtual endowment.' It quadrupled our digital export earnings without a single new factory or hotel. \n\nHowever, this revenue is volatile. It depends on the global AI hype cycle. If we treat it as a permanent baseline for salaries, we risk fiscal instability. If we treat it as **Investment Capital**, we can transform our nation forever.",
-              "imageGroupIds": ["group_ax-03-revenue"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "polycrisis",
-          "subSectionTitle": "The Poly-Crisis",
-          "pages": [
-            {
-              "pageId": "ax-04",
-              "pageTitle": "The Imperative for Change",
-              "tldr": "We face a 'poly-crisis' of water scarcity, energy insecurity, and climate vulnerability that traditional methods cannot solve.",
-              "content": "Why must we act now? Because we face a convergence of threats that money alone cannot fix. We need intelligence.\n\n*   **Water Security:** We lose up to **80%** of our desalinated water to leakage. We are paying to pump water into the ground.\n*   **Energy Insecurity:** Our electricity costs are among the highest in the region (~**US$0.42/kWh**), driven by 99% reliance on imported diesel.\n*   **Climate Vulnerability:** As a low-lying island, we are on the front lines of rising seas and intensifying hurricanes.\n\nWe propose using the .ai windfall to solve these physical problems through digital intelligence.",
-              "imageGroupIds": ["group_ax-04-crisis"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "pillars",
-      "sectionTitle": "3. The 5 Strategic Pillars",
-      "subSections": [
-        {
-          "subSectionId": "pillar1",
-          "subSectionTitle": "Pillar 1: The AI Capital",
-          "pages": [
-            {
-              "pageId": "ax-05",
-              "pageTitle": "The Digital Wealth Fund",
-              "tldr": "Establishing a Sovereign Wealth Fund to finance the 'Sovereign AI Cloud'—green, resilient data centers.",
-              "content": "We propose the creation of a **Digital Wealth Fund**, funded by 50% of domain revenues. This fund will not just sit in a bank; it will build.\n\n**The Sovereign AI Cloud:**\nWe will construct hurricane-hardened, solar-powered data centers right here in Anguilla. \n\n*   **Resilience:** Bunkered infrastructure that stays online when the grid goes down.\n*   **Sovereignty:** Our data stays on our soil, protected by our laws.\n*   **Economy:** We stop renting cloud space from Amazon and Google. We become the host.",
-              "imageGroupIds": ["group_ax-05-infrastructure"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar2",
-          "subSectionTitle": "Pillar 2: Cognitive Citizenry",
-          "pages": [
-            {
-              "pageId": "ax-06",
-              "pageTitle": "The National V2V Initiative",
-              "tldr": "A national upskilling program to create 'Citizen Architects' and preserve our culture through AI.",
-              "content": "Technology must serve the culture, not erase it. We propose a national upskilling program based on the **Vibecoding to Virtuosity (V2V)** methodology.\n\n*   **Citizen Architects:** We will train our people—not just to code, but to *direct* AI. To build tools that solve their own problems.\n*   **Cultural Heritage AI:** We will train a sovereign AI model on Anguillian history, dialect, and stories. \n*   **Preservation:** We will use AI to preserve our oral histories and ensure the next generation interacts with technology that speaks *our* language.",
-              "imageGroupIds": ["group_ax-06-education"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar3",
-          "subSectionTitle": "Pillar 3: The Automated State",
-          "pages": [
-            {
-              "pageId": "ax-07",
-              "pageTitle": "Frictionless Governance & Data Embassies",
-              "tldr": "Reimagining the civil service with AI agents and ensuring continuity of government via 'Data Embassies'.",
-              "content": "We will build the **Anguilla Civil Service AI (ACSA)**.\n\n*   **Frictionless Service:** Automated agents to handle work permits, land registry, and business incorporation. Reducing days of paperwork to minutes of processing.\n*   **The Data Embassy:** Modeled on Estonia, we will host a backup of our entire government digital infrastructure in a secure, sovereign server abroad. Even if a Category 5 storm destroys every building on the island, the State of Anguilla survives in the cloud, ready to coordinate recovery.",
-              "imageGroupIds": ["group_ax-07-governance"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar4",
-          "subSectionTitle": "Pillar 4: Resilient Systems",
-          "pages": [
-            {
-              "pageId": "ax-08",
-              "pageTitle": "The National Digital Twin",
-              "tldr": "Using AI and IoT sensors to model our water and energy systems, predicting leaks and optimizing efficiency.",
-              "content": "We cannot manage what we cannot see. We propose building a **Digital Twin** of Anguilla.\n\n*   **Water Security:** IoT sensors will detect leaks in real-time, allowing us to attack that 80% loss rate.\n*   **Energy Optimization:** AI will balance our solar input with diesel generation, stabilizing the grid and lowering costs.\n*   **Disaster Simulation:** We will simulate hurricane impacts *before* they happen, optimizing evacuation routes and infrastructure hardening.",
-              "imageGroupIds": ["group_ax-08-resilience"]
-            }
-          ]
-        },
-        {
-          "subSectionId": "pillar5",
-          "subSectionTitle": "Pillar 5: Global Sandbox",
-          "pages": [
-            {
-              "pageId": "ax-09",
-              "pageTitle": "The Ethical AI Regulatory Sandbox",
-              "tldr": "Positioning Anguilla as a global jurisdiction for the safe and ethical testing of AI technologies.",
-              "content": "Anguilla can be more than a user of AI; we can be a regulator. We propose establishing a **Global AI Sandbox**.\n\n*   **Ethical Framework:** We will create a legal framework that attracts global companies to test their AI systems here, but only under strict ethical guidelines that respect human rights and local culture.\n*   **The 'Proving Ground':** Anguilla becomes a real-world lab for sustainable technologies, attracting investment and talent from around the globe.",
-              "imageGroupIds": ["group_ax-09-sandbox"]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sectionId": "ask",
-      "sectionTitle": "4. The Ask",
-      "subSections": [
-        {
-          "subSectionId": "micropilot",
-          "subSectionTitle": "The Micro-Pilot",
-          "pages": [
-            {
-              "pageId": "ax-10",
-              "pageTitle": "The 'Why You' Factor",
-              "tldr": "Why Anguilla? Because we are agile. Why us? Because we have the proven methodology.",
-              "content": "You might think, 'We are too small.' I tell you: **You are the perfect size.**\n\nLarge nations are Titanic ships; they cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student. We can secure every land deed.\n\n**The Ask:**\nI am asking for the mandate to run a **Micro-Pilot**.\n\nGive me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the Data Curation Environment.\n\nIf, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital.",
-              "imageGroupIds": ["group_ax-10-ask"]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: json, id: public/data/reports/anguilla_manifest.json::{
-  "manifestId": "anguilla-presentation-images",
-  "basePath": "/images/anguilla-presentation/",
-  "imageGroups": {
-    "group_ax-01-cover": {
-      "path": "01-cover/",
-      "prompt": "A cinematic, hyper-realistic wide shot of Anguilla's coastline at sunrise. In the foreground, a futuristic but unobtrusive glass data center blends with the limestone cliffs, powered by solar panels. The .ai logo is subtly integrated into the clouds or landscape. The lighting is golden and hopeful.",
-      "alt": "Anguilla coastline with futuristic sustainable infrastructure",
-      "baseFileName": "cover",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-02-summary": {
-      "path": "02-summary/",
-      "prompt": "A split screen comparison. On the left, a 'Rentier' model showing coins flowing into a bucket that has a hole in it. On the right, a 'Sovereign' model showing coins flowing into a complex, glowing engine of infrastructure (servers, schools, power grids) that is generating its own light.",
-      "alt": "Comparison of Rentier vs Sovereign economic models",
-      "baseFileName": "summary",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-03-revenue": {
-      "path": "03-revenue/",
-      "prompt": "A sleek, modern infographic chart showing the exponential growth of .ai domain revenue from 2018 to 2024. The curve goes sharply upwards. The chart is superimposed over a map of Anguilla, highlighting the island's digital footprint.",
-      "alt": "Chart showing exponential growth of .ai revenue",
-      "baseFileName": "revenue",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-04-crisis": {
-      "path": "04-crisis/",
-      "prompt": "A visual representation of the 'Poly-Crisis'. Three interconnected circles: 'Water Scarcity' showing a leaking pipe, 'Energy Insecurity' showing a diesel generator emitting smoke, and 'Climate Risk' showing a hurricane storm track. The background is a stormy Caribbean sky.",
-      "alt": "Diagram of the Poly-Crisis: Water, Energy, Climate",
-      "baseFileName": "crisis",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-05-infrastructure": {
-      "path": "05-infrastructure/",
-      "prompt": "A futuristic concept art of the 'Sovereign AI Cloud' facility in Anguilla. It is a hurricane-proof concrete structure, partially bermed into the earth, covered in solar panels and surrounded by wind turbines. It looks secure, resilient, and high-tech.",
-      "alt": "Concept art of the Sovereign AI Cloud facility",
-      "baseFileName": "infra",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-06-education": {
-      "path": "06-education/",
-      "prompt": "A diverse group of Anguillian students and elders gathering in a modern library or community center. They are using tablets and holographic displays to interact with an AI. The AI is displaying images of Anguillian history (salt picking, boat racing). The mood is intergenerational connection and learning.",
-      "alt": "Students and elders interacting with Cultural AI",
-      "baseFileName": "education",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-07-governance": {
-      "path": "07-governance/",
-      "prompt": "A visualization of the 'Data Embassy'. A digital map shows a secure connection line between Anguilla and a server vault in a snowy location (like Estonia or UK). A shield icon protects the data. On the Anguilla side, a citizen uses a mobile app to access government services instantly.",
-      "alt": "Data Embassy concept connecting Anguilla to secure offshore servers",
-      "baseFileName": "governance",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-08-resilience": {
-      "path": "08-resilience/",
-      "prompt": "A 'Digital Twin' visualization. A wireframe 3D model of Anguilla is overlaid on the real island. Data streams (blue for water, yellow for energy) flow through the wireframe. An AI interface highlights a specific pipe with a red alert 'Leak Detected'.",
-      "alt": "Digital Twin of Anguilla showing infrastructure data layers",
-      "baseFileName": "resilience",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-09-sandbox": {
-      "path": "09-sandbox/",
-      "prompt": "A futuristic 'Sandbox' environment. A glass dome over a section of the island where drones and robots are being tested safely. Outside the dome, the environment is pristine and protected. Symbols of law and ethics (scales of justice) float above the dome.",
-      "alt": "Regulatory Sandbox for ethical AI testing",
-      "baseFileName": "sandbox",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    },
-    "group_ax-10-ask": {
-      "path": "10-ask/",
-      "prompt": "A close-up of a handshake between a government official and a 'Citizen Architect'. In the background, a small pilot group is working on laptops, building tools. The lighting is warm and focuses on the human connection and the start of a partnership.",
-      "alt": "Handshake symbolizing the partnership for the Micro-Pilot",
-      "baseFileName": "ask",
-      "fileExtension": ".jpg",
-      "imageCount": 1
-    }
-  }
-}
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A200 - Anguilla Project - Universal Task Checklist.md::# Artifact A200: Anguilla Project - Universal Task Checklist
-# Date Created: C2
-# Author: AI Model & Curator
-# Updated on: C1 (Add Cycle 1 Research Integration tasks)
-
-- **Key/Value for A0:**
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-## 1. Purpose
-
-This checklist tracks the critical tasks required to launch the Anguilla Project, starting with the strategic presentation and moving into the execution of the Micro-Pilot.
-
-## 2. Task List
-
-### Phase 1: Preparation for Minister Meeting
-
-- [x] **Refine Research Proposals:** Ensure A201-A206 are fully updated with "Sovereignty, Culture, Resilience" themes. (Status: **Complete**)
-- [x] **Integrate Deep Research Data:** Review the `data/00-initial-research` files and inject specific metrics (revenue, water loss, energy costs) into the Strategic Presentation Guide (A207). (Status: **Complete**)
-- [x] **Create Repository README:** Establish the root `README.md` to guide navigation of the project context. (Status: **Complete**)
-- [ ] **Develop Presentation Deck:** Create visual slides or an interactive report based on the narrative in `A207`.
-- [ ] **Prepare Demo:** Set up a local instance of the DCE to demonstrate the "Artifact Creation" workflow live.
-- [ ] **Printed Materials:** Prepare high-quality printed copies of the "Vision and Master Plan" (A201) as a leave-behind.
-
-### Phase 2: Micro-Pilot Setup (Post-Meeting)
-
-- [ ] **Identify Cohort:** Work with the Ministry to select the initial group (e.g., a high school class or a government department).
-- [ ] **Curriculum Adaptation:** Customize the V2V Academy content (Module 1) for the specific cohort (e.g., "AI for Civics").
-- [ ] **Infrastructure Check:** Verify internet connectivity and hardware availability for the pilot group.
-- [ ] **Baseline Assessment:** Create a simple survey to measure the cohort's current AI literacy and sentiment before the pilot begins.
-
-### Phase 3: Execution & scaling
-
-- [ ] **Launch Pilot:** Begin the 90-day program.
-- [ ] **Weekly Review:** Track progress and adjust curriculum based on feedback.
-- [ ] **Final Report:** Generate a "Success Report" using the DCE to present to the Ministry for Phase 2 scaling.
-
-### Cycle History & Notes
-
-#### Cycle 1: Research Integration
-- **Focus:** Reviewing the detailed research papers in `data/00-initial-research`.
-- **Key Findings:**
-    - **Financial:** .ai revenue was ~$32M USD in 2023 (~20% of gov revenue).
-    - **Water Crisis:** 80% of desalinated water is lost to leakage (Non-Revenue Water).
-    - **Energy:** Electricity costs are ~$0.42/kWh due to diesel dependence.
-    - **Resilience:** "Data Embassy" concept (Estonia model) is a key precedent for the Automated State.
-- **Action:** Updated A201 and A207 to reflect these hard numbers, making the pitch undeniable.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A201 - Anguilla Project - Vision and Master Plan.md::# Artifact A201: Anguilla Project - Vision and Master Plan
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Enrich with Research Data: Revenue, Water Loss, Energy Costs)
-
-- **Key/Value for A0:**
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation. Updated with specific economic and infrastructural data points to ground the strategy in the island's current reality.
-- **Tags:** anguilla, strategy, vision, nation building, ai, sovereignty, resilience
-
-## 1. The Vision: Anguilla as the World's First AI-Native Nation
-
-Anguilla stands at a unique crossroads in history. Through a stroke of digital luck, it owns the most valuable real estate on the future internet: the **.ai** top-level domain. This asset generated approximately **US$32 million (EC$87 million)** in 2023 alone—nearly 20% of the government's total revenue.
-
-The vision is to transform Anguilla from the *symbolic* home of AI into the *literal* home of the AI economy. We propose a comprehensive national strategy to become the world's first **AI-Native Nation**: a society where every citizen is empowered by artificial intelligence, where government services are frictionless and automated, and where the economy is driven by high-value cognitive labor.
-
-With a population of approximately 16,000, Anguilla is the perfect size for a "Micro-Pilot"—a living laboratory for the post-scarcity, high-cognitive-capital society.
-
-## 2. The "Poly-Crisis" and the Imperative for Change
-
-This vision is not a luxury; it is a survival strategy. Anguilla faces a "poly-crisis" that traditional methods cannot solve:
-*   **Water Security:** The island currently loses up to **80% of its desalinated water** to leakage, a catastrophic waste of energy and money.
-*   **Energy Insecurity:** Electricity costs are among the highest in the region (approx. **US$0.42/kWh**), driven by 99% reliance on imported diesel.
-*   **Climate Vulnerability:** As a low-lying limestone island, Anguilla is existentially threatened by rising sea levels and intensifying hurricanes.
-
-The **Anguilla Digital Infrastructure Initiative** proposes using the .ai windfall to solve these physical problems through digital intelligence.
-
-## 3. The Strategic Pillars
-
-To achieve this vision, we propose a strategy built on five interconnected pillars:
-
-1.  **Economic Sovereignty (The ".ai" Capital):** Establish a **Digital Wealth Fund** funded by 50% of domain revenues. This fund will finance the **Sovereign AI Cloud**—a hurricane-hardened, solar-powered data center ecosystem that ensures data residency and operational continuity.
-2.  **Cognitive Capital (The Citizen Architect):** Implement a national upskilling program based on the **Vibecoding to Virtuosity (V2V)** methodology. The goal is to turn the population into the world's highest-density concentration of AI-literate professionals, capable of building their own tools to solve local problems.
-3.  **Next-Gen Governance (The Automated State):** Reimagining the civil service with AI. Creating a "frictionless state" where services like work permits and land licenses are handled by secure, automated agents. This includes establishing a **Data Embassy** (modeled on Estonia) to ensure the legal state survives even if physical infrastructure is destroyed.
-4.  **Resilient Infrastructure (Smart Island):** Deploying a **National Digital Twin**. This system will use AI and IoT sensors (via LoRaWAN) to detect water leaks in real-time, optimize desalination energy usage, and simulate hurricane impacts, turning reactive recovery into predictive resilience.
-5.  **Regulatory Innovation (The Global Sandbox):** Establishing Anguilla as a "Regulatory Sandbox" for ethical AI. Creating a legal framework that attracts global AI companies to test and deploy their systems safely, ensuring all testing respects local cultural and ethical norms.
-
-## 4. The "Micro-Pilot" Concept
-
-Why Anguilla? Because it is agile. Large nations are burdened by legacy systems, massive bureaucracies, and political gridlock. They cannot pivot quickly. Anguilla, with its small population and unified governance, can move at the speed of software.
-
-We propose positioning Anguilla to the world not just as a tourist destination, but as a **Model Nation**—a proof-of-concept for how a society can thrive in the age of AI. This narrative will attract not just tourists, but innovators, investors, and the world's attention.
-
-## 5. The Role of the Data Curation Environment (DCE)
-
-This transformation requires a toolset. We propose using the **Data Curation Environment (DCE)** as the operating system for this national project.
-*   **Planning:** Using the DCE's artifact-driven workflow to draft legislation, plan infrastructure, and design curricula.
-*   **Execution:** Using the Parallel Co-Pilot Panel to manage the implementation of digital services.
-*   **Education:** Using the V2V Academy platform to deliver the national upskilling program.
-
-This project is not just about installing technology; it is about building a new kind of society.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: artifacts/A207 - Strategic Presentation Guide.md::# Artifact A207: Strategic Presentation Guide - The Pitch to the Minister
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Integrate specific metrics from Research Data: Revenue, Water Loss, Energy Costs)
-
-- **Key/Value for A0:**
-- **Description:** A script and strategic guide for the meeting with the Minister of IT, outlining the narrative arc, key talking points, and the "ask," woven with themes of political sovereignty, cultural preservation, and climate resilience.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-
-## 1. The Core Narrative: "Ownership & Survival"
-
-**The Hook:**
-"Minister, Anguilla currently owns the most valuable address in the digital world: **.ai**. In 2023 alone, this asset generated **$32 million USD**—nearly 20% of your government's revenue.
-
-But right now, that revenue is just 'rent.' We are the landlords, but we don't own the building.
-
-My proposal is to convert that transient digital rent into permanent **Sovereign Infrastructure**. To fix the pipes, power the grid, and secure the state. This is about **Sovereignty**, **Culture**, and **Survival**."
-
-## 2. The "Show, Don't Tell" Strategy (Data-Driven)
-
-Do not just pitch slides. Use the **Data Curation Environment (DCE)** to demonstrate the power of the methodology, using the hard data we've curated.
-
-*   **The Demo:** "I used my own AI system to analyze your nation's critical challenges. Here is what we found, and here is the solution."
-*   **The Reveal:** Show the 5 Research Proposals (A202-A206) backed by the specific metrics:
-    *   **Resilience (Water):** "We know Anguilla loses up to **80%** of its desalinated water to leakage. We have a plan for a Digital Twin (A205) to stop this hemorrhage."
-    *   **Sovereignty (Energy):** "We know electricity costs **$0.42/kWh** because of diesel. We have a plan for a Green Sovereign Cloud (A202) to break this dependency."
-    *   **Continuity (Governance):** "We have a plan for a **Data Embassy** (A204)—modeled on Estonia—to ensure the Anguillian government exists in the cloud, immune to any Category 5 storm."
-
-## 3. Addressing the "Micro-Pilot" (The 16,000 Advantage)
-
-**The Pivot:**
-"You might think, 'We are too small.' I tell you: **You are the perfect size.**
-
-Large nations are Titanic ships. They cannot pivot. Anguilla is agile. With 16,000 people, we can touch everyone. We can give an AI tutor to every student that speaks *our* dialect. We can secure every land deed in a cloud that no hurricane can destroy.
-
-You are not a small island; you are a **Model Organism** for the future of humanity. A proof that a nation can be high-tech, culturally rich, and climate-resilient all at once."
-
-## 4. Your Credibility (The "Why You" Factor)
-
-Leverage your unique background to build trust.
-
-*   **Google:** "I train the models the world uses. I know their power, but I also know their limits."
-*   **DOD/NSA:** "I build training for the US military. I understand **security**. I understand **resilience**. I am not selling a crypto scheme. I am proposing a national defense strategy for your economy and your environment."
-*   **The Citizen Architect:** "I am not a coder. I am a 'Citizen Architect.' I built this platform myself using AI. I am proof that you don't need 16,000 computer scientists. You just need 16,000 empowered Anguillians."
-
-## 5. The Ask
-
-Don't ask for a massive contract immediately. Ask for the **Pilot**.
-
-"Minister, I am asking for the mandate to run a **Micro-Pilot**.
-
-Give me **one cohort**. One class of students, or one department of government. Let me apply the V2V methodology. Let me equip them with the DCE (e.g., the Work Permit queue).
-
-If, in 90 days, they are not the most productive, innovative group on this island—if we haven't proven we can protect our culture and build resilience—we walk away. But when we succeed... then we scale. Then we build the AI Capital."
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: README.md::# Anguilla Project: The First AI-Native Nation
-
-**"From Domain Rent to Sovereign Infrastructure"**
-
-## Overview
-
-This repository contains the strategic planning, research, and documentation for the **Anguilla Project**. The initiative aims to partner with the Government of Anguilla to leverage its unique digital asset—the **.ai** top-level domain—to transform the nation into a global leader in sovereign AI, climate resilience, and cognitive capital.
-
-## Project Vision
-
-Anguilla currently generates significant revenue (~$32M USD in 2023) from .ai domain registrations. This project proposes a strategy to convert this transient "digital rent" into permanent **Sovereign Infrastructure**:
-1.  **Green, Hurricane-Proof Data Centers:** Powered by renewables, independent of the diesel grid.
-2.  **Cognitive Citizenry:** A national upskilling program to make Anguilla the most AI-literate nation on earth.
-3.  **Automated State:** A "Cloud Government" that ensures continuity even during Category 5 storms.
-
-## Repository Structure
-
-This repository is managed using the **Data Curation Environment (DCE)** methodology.
-
-```
-anguilla-project/
-├── artifacts/          # The "Source of Truth" - Proposals, Plans, and Guides
-│   ├── A201 - Vision and Master Plan.md
-│   ├── A202 - Research Proposal - The AI Capital.md
-│   ├── A203 - Research Proposal - The Cognitive Citizenry.md
-│   ├── A204 - Research Proposal - The Automated State.md
-│   ├── A205 - Research Proposal - Resilient Island Systems.md
-│   ├── A206 - Research Proposal - The Global AI Sandbox.md
-│   └── A207 - Strategic Presentation Guide.md
-├── data/               # Raw research data (Financials, Climate reports, Infrastructure studies)
-├── presentation/       # Slides and visual assets for the Ministry meeting
-└── src/                # Future prototype code
-```
-
-## Key Artifacts
-
-*   **[A201 - Vision and Master Plan](artifacts/A201%20-%20Anguilla%20Project%20-%20Vision%20and%20Master%20Plan.md):** The comprehensive strategy document.
-*   **[A200 - Universal Task Checklist](artifacts/A200%20-%20Anguilla%20Project%20-%20Universal%20Task%20Checklist.md):** Current project status and next steps.
-*   **[A207 - Strategic Presentation Guide](artifacts/A207%20-%20Strategic%20Presentation%20Guide.md):** The script and strategy for the meeting with the Minister of IT.
-
-## Getting Started
-
-1.  **Review the Vision:** Start with Artifact `A201`.
-2.  **Explore the Proposals:** Review `A202` through `A206` for specific vertical strategies (Infrastructure, Education, Governance, Climate, Regulation).
-3.  **Check Status:** See `A200` for the current cycle's objectives.
-
----
-*Managed by the Data Curation Environment (DCE)*
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A0 - Anguilla Project - Master Artifact List.md::# Artifact A0: Anguilla Project - Master Artifact List
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** The definitive, parseable list of all documentation artifacts for the Anguilla Project.
-- **Tags:** master list, index, artifacts, anguilla
-
-## 1. Purpose
-
-This file serves as the definitive, parseable list of all documentation artifacts for the Anguilla Project. Maintaining this list is crucial for organizing project knowledge and ensuring that both human developers and AI assistants have a clear map of the "Source of Truth" documents.
-
-## 2. Artifacts List
-
-### I. Core Project Strategy & Planning
-
-### A1. Anguilla Project - Vision and Goals
-- **Description:** The high-level strategic vision for transforming Anguilla into the world's first AI-native nation, synthesizing the core research proposals.
-- **Tags:** vision, goals, strategy, roadmap, sovereign ai
-
-### A2. Anguilla Project - Phase 1 Requirements
-- **Description:** Detailed functional and technical requirements for the Phase 1 "Micro-Pilot," focusing on the V2V Education Initiative and the Citizen Concierge MVP.
-- **Tags:** requirements, phase 1, micro-pilot, v2v, citizen concierge
-
-### A3. Anguilla Project - Technical Scaffolding Plan
-- **Description:** The architectural blueprint for the project's repository structure, including the separation of documentation, prototype code, and data models.
-- **Tags:** technical plan, scaffolding, architecture, file structure
-
-### A7. Anguilla Project - Development and Testing Guide
-- **Description:** Standard operating procedures for contributing to the project, managing artifacts, and testing the DCE workflow.
-- **Tags:** development, testing, workflow, process, dce
-
-### A14. Anguilla Project - GitHub Repository Setup Guide
-- **Description:** Instructions for initializing the Git repository and managing version control for the project.
-- **Tags:** git, github, setup, version control
-
-### II. Research Proposals (The "Source of Truth" Library)
-
-### A200. Anguilla Project - Universal Task Checklist
-- **Description:** A task checklist for the Anguilla Project, tracking the preparation for the Minister meeting and the initial steps of the Micro-Pilot.
-- **Tags:** checklist, task management, anguilla, planning
-
-### A201. Anguilla Project - Vision and Master Plan
-- **Description:** The original high-level strategic vision document.
-- **Tags:** anguilla, strategy, vision, nation building, ai
-
-### A202. Research Proposal - The AI Capital
-- **Description:** A proposal focused on leveraging the .ai domain windfall to fund sovereign digital infrastructure.
-- **Tags:** anguilla, economics, .ai domain, infrastructure, sovereign wealth
-
-### A203. Research Proposal - The Cognitive Citizenry
-- **Description:** A proposal for a national upskilling initiative using the V2V/DCE methodology.
-- **Tags:** anguilla, education, upskilling, v2v, cognitive capital
-
-### A204. Research Proposal - The Automated State
-- **Description:** A proposal for modernizing Anguilla's governance through AI and "Data Embassy" resilience.
-- **Tags:** anguilla, governance, automation, public services, resilience
-
-### A205. Research Proposal - Resilient Island Systems
-- **Description:** A proposal for using AI and Digital Twins to manage critical island resources (water, energy) and enhance climate resilience.
-- **Tags:** anguilla, sustainability, environment, climate change, digital twin
-
-### A206. Research Proposal - The Global AI Sandbox
-- **Description:** A proposal to establish Anguilla as a "Regulatory Sandbox" for ethical AI development.
-- **Tags:** anguilla, regulation, policy, sandbox, innovation
-
-### A207. Strategic Presentation Guide
-- **Description:** A script and strategic guide for the meeting with the Minister of IT.
-- **Tags:** anguilla, presentation, strategy, pitch, meeting guide
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A1 - Anguilla Project - Vision and Goals.md::# Artifact A1: Anguilla Project - Vision and Goals
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** The definitive vision document for the Anguilla Project, synthesizing the research proposals into a concrete execution plan for creating the world's first AI-Native Nation.
-- **Tags:** vision, goals, strategy, roadmap, phase 1, phase 2, phase 3
-
-## 1. Project Vision
-
-The vision of the **Anguilla Project** is to transform the nation of Anguilla from a passive beneficiary of the AI boom into the world's first **AI-Native Nation**. By leveraging the sovereign wealth generated by the **.ai** domain, we aim to build a **Cognitive Republic**—a society where every citizen is empowered by artificial intelligence, where government services are frictionless and disaster-resilient, and where the economy is driven by high-value cognitive labor.
-
-This project is not just about technology; it is a survival strategy. It integrates **Political Sovereignty**, **Cultural Preservation**, and **Climate Resilience** into a unified national operating system.
-
-## 2. High-Level Goals & Phases
-
-The project will be executed in three overlapping phases, moving from a controlled pilot to national scale.
-
-### Phase 1: The Micro-Pilot (Months 1-6)
-
-The goal of this phase is to prove the efficacy of the "Vibecoding to Virtuosity" (V2V) methodology and the "Automated State" concept within a controlled environment.
--   **Core Functionality:**
-    -   **Cognitive Citizenry Pilot:** Launch the V2V curriculum with a single cohort (e.g., a high school class or government department) to demonstrate rapid upskilling.
-    -   **Citizen Concierge MVP:** Develop a prototype of the "Anguilla Key" mobile app, focusing on a single high-friction use case (e.g., Digital ID or Emergency Alerts).
--   **Outcome:** A fully upskilled cohort capable of building their own AI tools, and a functional prototype of the sovereign digital identity system.
-
-### Phase 2: The Infrastructure Build (Months 7-18)
-
-This phase focuses on laying the physical and digital foundations for the sovereign cloud.
--   **Core Functionality:**
-    -   **Sovereign Cloud Architecture:** Design and procure the "Data Embassy" infrastructure (sovereign servers hosted in a secure jurisdiction).
-    -   **Digital Twin V1:** Deploy the initial sensor network for the Water and Energy Digital Twin.
-    -   **National Rollout:** Expand the V2V program to the wider public and SME sector.
--   **Outcome:** A secure, resilient infrastructure capable of hosting national data, and a growing base of AI-literate citizens.
-
-### Phase 3: The Cognitive Republic (Months 19+)
-
-This phase focuses on full integration and the export of the "Anguilla Model."
--   **Core Functionality:**
-    -   **Full Automated State:** Transition 80% of government services to AI agents.
-    -   **Cultural Heritage AI:** Launch the "AnguillaLLM," fine-tuned on local history and dialect.
-    -   **Global Sandbox:** Open the regulatory sandbox for ethical AI testing.
--   **Outcome:** Anguilla becomes a global exporter of "Governance IP" and a model for climate-resilient, AI-driven development.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A2 - Anguilla Project - Phase 1 Requirements.md::# Artifact A2: Anguilla Project - Phase 1 Requirements
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Detailed requirements for the Phase 1 "Micro-Pilot," focusing on the V2V Education Initiative and the Citizen Concierge MVP.
-- **Tags:** requirements, phase 1, micro-pilot, v2v, citizen concierge, mvp
-
-## 1. Overview
-
-This document outlines the functional and technical requirements for **Phase 1: The Micro-Pilot**. The primary objective is to generate immediate, tangible value that validates the broader strategic vision. This phase focuses on two key deliverables: the **V2V Pilot Program** (Human Capital) and the **Citizen Concierge MVP** (Digital Infrastructure).
-
-## 2. Functional Requirements: V2V Pilot Program
-
-| ID | Requirement | User Story | Acceptance Criteria |
-|---|---|---|---|
-| REQ-V2V-01 | **Curriculum Adaptation** | As a pilot participant, I want learning materials that use local Anguillian examples, so that the concepts feel relevant to my life. | - Curriculum modules (A53/A54) are adapted to reference local industries (tourism, fishing) and dialect. <br> - Examples use local geography and cultural markers. |
-| REQ-V2V-02 | **AI-Assisted Learning** | As a student, I want access to a personalized AI tutor, so that I can learn at my own pace. | - Each student is provisioned with a "Cognitive Companion" (custom GPT or similar). <br> - The AI is prompted to act as a Socratic tutor, guiding rather than giving answers. |
-| REQ-V2V-03 | **Capstone Project** | As a program administrator, I want students to build a functional tool by the end of the pilot, so that we can demonstrate ROI. | - Every student completes a "Citizen Architect" project (e.g., a booking bot for a family business). <br> - The project must be deployed and usable. |
-
-## 3. Functional Requirements: Citizen Concierge MVP
-
-| ID | Requirement | User Story | Acceptance Criteria |
-|---|---|---|---|
-| REQ-APP-01 | **Digital Identity** | As a citizen, I want a secure digital ID on my phone, so that I can prove who I am without carrying physical papers. | - App generates a QR code representing the user's identity. <br> - Identity is verified against a dummy government database (for pilot). |
-| REQ-APP-02 | **Offline Mode** | As a user during a storm, I want to access my essential documents even without internet, so that I can receive aid. | - Critical data (ID, medical summary) is cached locally on the device. <br> - App functions fully in "Airplane Mode" for read-access. |
-| REQ-APP-03 | **Emergency Broadcast** | As the NEOC (National Emergency Operations Centre), I want to push an alert to all app users, so that I can coordinate evacuation. | - Push notification system integrated. <br> - Alerts persist on the home screen until dismissed. |
-
-## 4. Non-Functional Requirements
-
-| ID | Requirement | Description |
-|---|---|---|
-| NFR-01 | **Data Sovereignty** | All pilot data must be stored on servers that comply with the draft Data Protection Act. No sensitive citizen data should leave the jurisdiction (simulated for pilot). |
-| NFR-02 | **Accessibility** | The mobile app must be usable by elderly citizens and those with low digital literacy (simple UI, voice interaction). |
-| NFR-03 | **Resilience** | The backend infrastructure for the app must be deployed on a redundant cloud provider (simulating the Data Embassy) to ensure 99.99% uptime. |
-
-## 5. High-Level Design
-
-### V2V Pilot Architecture
--   **Platform:** Visual Studio Code with DCE Extension.
--   **Model:** Gemini 1.5 Pro or GPT-4o (via API).
--   **Content:** Markdown-based artifacts managed in a GitHub repository.
-
-### Citizen Concierge MVP Architecture
--   **Frontend:** React Native (for cross-platform iOS/Android support).
--   **Backend:** Node.js / Express (simulating the "Automated State" logic).
--   **Database:** PostgreSQL (for structured registry data).
--   **Offline Sync:** PouchDB / CouchDB or similar local-first sync architecture.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A3 - Anguilla Project - Technical Scaffolding Plan.md::# Artifact A3: Anguilla Project - Technical Scaffolding Plan
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** The architectural blueprint for the project's repository structure, including the separation of documentation, prototype code, and data models.
-- **Tags:** technical plan, scaffolding, architecture, file structure
-
-## 1. Overview
-
-This document outlines the technical scaffolding for the **Anguilla Project**. Unlike a standard software project, this repository serves a dual purpose: it acts as the **"Source of Truth"** for the national strategy (documentation) and as the **"Monorepo"** for the technical prototypes (Citizen Concierge, Digital Twin simulations).
-
-## 2. Technology Stack
-
--   **Documentation:** Markdown (managed via DCE).
--   **Prototypes (Web/Mobile):** React / React Native, TypeScript, TailwindCSS.
--   **Backend/API:** Node.js, Express.
--   **Data/Simulation:** Python (for Digital Twin modeling), PostgreSQL.
-
-## 3. Proposed File Structure
-
-The project will adhere to a monorepo structure to keep policy and code tightly integrated.
-
-```
-anguilla-project/
-├── .gitignore
-├── README.md
-├── package.json                # For managing dev dependencies (linters, etc.)
-│
-├── src/
-│   ├── Artifacts/              # THE SOURCE OF TRUTH
-│   │   ├── A0.md               # Master Artifact List
-│   │   ├── A1.md               # Vision
-│   │   └── ...                 # All planning & policy documents
-│   │
-│   ├── prototypes/             # Code for Micro-Pilot Phase
-│   │   ├── citizen-concierge/  # The Mobile App MVP
-│   │   │   ├── src/
-│   │   │   └── package.json
-│   │   │
-│   │   └── digital-twin-sim/   # Python/Jupyter notebooks for simulation
-│   │       ├── data/
-│   │       └── models/
-│   │
-│   └── shared/                 # Shared types and schemas
-│       ├── types/
-│       └── schemas/
-│
-└── data/                       # Raw data for research (migrated context)
-    ├── 00-initial-research/    # The original proposals (A200-A207)
-    └── ...
-```
-
-## 4. Key Architectural Concepts
-
--   **Policy-as-Code:** The `src/Artifacts` directory is the driver. Changes to policy (e.g., "Data Sovereignty Requirement") should be reflected in the artifacts first, then implemented in the `prototypes` code.
--   **Monorepo Strategy:** Keeping the strategic documents and the technical implementation in the same repository ensures that developers (and AI agents) always have the full context of *why* they are building something.
--   **Separation of Concerns:**
-    -   **`src/Artifacts`:** Human-readable strategy and requirements.
-    -   **`src/prototypes`:** Machine-executable code.
-    -   **`data/`:** Static reference material and research inputs.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A7 - Anguilla Project - Development and Testing Guide.md::# Artifact A7: Anguilla Project - Development and Testing Guide
-# Date Created: C1
-# Author: AI Model & Curator
-
-- **Key/Value for A0:**
-- **Description:** Standard operating procedures for contributing to the project, managing artifacts, and testing the DCE workflow.
-- **Tags:** development, testing, workflow, process, dce
-
-## 1. Purpose
-
-This guide provides the standard procedure for working within the **Anguilla Project** repository. It covers not just code development, but the lifecycle of **Artifact Creation** and **Strategic Planning**.
-
-## 2. The DCE Workflow
-
-This project utilizes the **Data Curation Environment (DCE)** workflow.
-
-### Step 1: Artifact-First Development
-Before writing any code or creating a new prototype:
-1.  **Update the Plan:** Modify the relevant artifact in `src/Artifacts/` (e.g., `A2 - Requirements`).
-2.  **Flatten Context:** Use the DCE to flatten the updated artifacts into your prompt.
-3.  **Generate Code:** Use the AI to generate the code based on the updated "Source of Truth."
-
-### Step 2: Managing the Master List (A0)
-Every time a new document is created:
-1.  Open `src/Artifacts/A0 - Anguilla Project - Master Artifact List.md`.
-2.  Add a new entry with the Artifact ID, Title, Description, and Tags.
-3.  Ensure the ID is unique (e.g., A1, A2, A200).
-
-## 3. Technical Development (Prototypes)
-
-### Installing Dependencies
-The project uses a root `package.json` for tooling and individual `package.json` files for prototypes.
-```bash
-# Install root dependencies
-npm install
-
-# Install prototype dependencies (e.g., Citizen Concierge)
-cd src/prototypes/citizen-concierge
-npm install
-```
-
-### Running Prototypes
-[Placeholder: Specific commands will be added once the prototypes are scaffolded in Cycle 1].
--   *Example:* `npm run dev` inside the prototype folder.
-
-## 4. Testing Strategy
-
-### Policy Consistency Check
--   **Manual Review:** Ensure that the code in `src/prototypes` complies with the constraints defined in `src/Artifacts` (e.g., "Offline First" requirement).
--   **AI Review:** Use the DCE to select the Requirement Artifact and the Code File, and ask the AI: "Does this code meet the requirements defined in A2?"
-
-### Functional Testing
--   Standard unit and integration tests will be defined within each prototype's directory.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/A14 - Anguilla Project - GitHub Repository Setup Guide.md::# Artifact A14: Anguilla Project - GitHub Repository Setup Guide
-# Date Created: C1
-# Author: AI Model & Curator
-# Updated on: C1 (Adapted from T14 for Anguilla Project)
-
-- **Key/Value for A0:**
-- **Description:** Instructions for initializing the Git repository and managing version control for the project.
-- **Tags:** git, github, setup, version control
-
-## 1. Overview
-
-This guide provides the necessary commands to turn the local **Anguilla Project** folder into a Git repository and link it to a remote GitHub repository. This ensures version control for both the strategic artifacts and the prototype code.
-
-## 2. Prerequisites
-
-*   You have `git` installed.
-*   You have a GitHub account.
-
-## 3. Step-by-Step Setup
-
-### Step 1: Create a New Repository on GitHub
-
-1.  Go to [github.com](https://github.com).
-2.  Create a new repository named `anguilla-project`.
-3.  **Do not** initialize with README, .gitignore, or license (we have them locally).
-
-### Step 2: Initialize Git Locally
-
-Open a terminal in the project root (`anguilla-project/`) and run:
-
-1.  **Initialize:**
-    ```bash
-    git init
-    ```
-
-2.  **Configure .gitignore:**
-    Ensure your `.gitignore` file includes:
-    ```
-    node_modules/
-    .DS_Store
-    .env
-    .vscode/
-    dist/
-    build/
-    ```
-
-3.  **Add Files:**
-    ```bash
-    git add .
-    ```
-
-4.  **Commit:**
-    ```bash
-    git commit -m "Initial commit: Project scaffolding and Cycle 0 artifacts"
-    ```
-
-5.  **Branch:**
-    ```bash
-    git branch -M main
-    ```
-
-### Step 3: Link and Push
-
-1.  **Add Remote:**
-    ```bash
-    git remote add origin https://github.com/YOUR_USERNAME/anguilla-project.git
-    ```
-
-2.  **Push:**
-    ```bash
-    git push -u origin main
-    ```
-
-## 4. The "Baseline" Workflow
-
-The DCE relies on Git for its "Test and Revert" loop.
-1.  **Baseline:** Before applying AI changes, click "Baseline (Commit)" in the DCE panel. This creates a save point.
-2.  **Test:** Apply the AI changes and review/test them.
-3.  **Restore:** If the changes are incorrect, click "Restore Baseline" to revert to the save point instantly.
-[INFO] [6:41:27 AM] [SYNTAX-HIGHLIGHT] Received request for lang: md, id: src/Artifacts/DCE_README.md::# Artifact A72: DCE - README for Artifacts
-# Date Created: C158
-# Author: AI Model & Curator
-# Updated on: C183 (Strengthen Git initialization and `.gitignore` guidance)
-
-- **Key/Value for A0:**
-- **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
-- **Tags:** documentation, onboarding, readme, source of truth
-
-## 1. Welcome to the Data Curation Environment (DCE)
-
-This directory (`src/Artifacts/`) is the heart of your project's planning and documentation. It's managed by the **Data Curation Environment (DCE)**, a VS Code extension designed to streamline AI-assisted development.
-
-This `README.md` file was automatically generated to provide context for you (the developer) and for the AI assistants you will be working with.
-
-## 2. What is an "Artifact"?
-
-In the context of this workflow, an **Artifact** is a formal, written document that serves as a "source of truth" for a specific part of your project. Think of these files as the official blueprints, plans, and records.
-
-The core principle of the DCE workflow is **"Documentation First."** Before writing code, you and your AI partner should first create or update an artifact that describes the plan.
-
-## 3. The Iterative Cycle Workflow
-
-Development in the DCE is organized into **Cycles**. You have just completed the initial setup.
-
-### Your Next Steps
-
-1.  **Initialize Your Git Repository (CRITICAL):**
-    To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
-    
-    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following commands:
-    ```bash
-    git init
-    # Create or update your .gitignore file with the line below
-    echo ".vscode/" >> .gitignore
-    git add .
-    git commit -m "Initial commit"
-    ```
-    **Why `.gitignore`?** The DCE saves its state in a `.vscode/dce_history.json` file. Adding `.vscode/` to your `.gitignore` is crucial to prevent the extension's UI from flashing every time it auto-saves. For a complete guide, refer to the `GitHub Repository Setup Guide.md` artifact.
-
-2.  **Submit Your First Prompt:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
-
-3.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
-
-4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
-
-This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
-[INFO] [6:41:27 AM] [File Existence] Received request to check paths: ["artifacts/A200 - Anguilla Project - Universal Task Checklist.md","README.md","presentation/reportContent.json","presentation/imageManifest.json","public/data/anguilla_presentation.json","src/state/reportStore.ts","src/components/ReportViewer/ReportViewer.tsx","src/Artifacts/A200 - Anguilla Project - Universal Task Checklist.md","src/Artifacts/A201 - Anguilla Project - Vision and Master Plan.md","src/Artifacts/A207 - Strategic Presentation Guide.md","src/Artifacts/A208 - Anguilla Project - Interactive Presentation Plan.md","src/Artifacts/A0 - Anguilla Project - Master Artifact List.md","artifacts/A207 - Strategic Presentation Guide.md","presentation/public/data/reportContent.json","presentation/public/data/imageManifest.json","src/Artifacts/A202 - Research Proposal - The AI Capital.md","src/Artifacts/A203 - Research Proposal - The Cognitive Citizenry.md","src/Artifacts/A204 - Research Proposal - The Automated State.md","src/Artifacts/A205 - Research Proposal - Resilient Island Systems.md","src/Artifacts/A206 - Research Proposal - The Global AI Sandbox.md","src/Artifacts/A214 - Anguilla Project - GitHub Repository Setup Guide.md","presentation/anguilla_interactive_content.json","public/data/reports/reportContent.json","public/data/reports/imageManifest.json","src/prototypes/strategic-presentation/data/presentation_content.json","src/prototypes/strategic-presentation/README.md","artifacts/A208 - Anguilla Project - Interactive Presentation Plan.md","presentation/data/reportContent.json","presentation/package.json","presentation/README.md","presentation/anguilla_presentation_content.json","presentation/Minister_Meeting_Slides.md","public/data/reports/anguilla_content.json","public/data/reports/anguilla_manifest.json","artifacts/A201 - Anguilla Project - Vision and Master Plan.md","src/Artifacts/A1 - Anguilla Project - Vision and Goals.md","src/Artifacts/A2 - Anguilla Project - Phase 1 Requirements.md","src/Artifacts/A3 - Anguilla Project - Technical Scaffolding Plan.md","src/Artifacts/A7 - Anguilla Project - Development and Testing Guide.md","src/Artifacts/A14 - Anguilla Project - GitHub Repository Setup Guide.md","src/Artifacts/DCE_README.md"]
-[INFO] [6:41:29 AM] [on-message] Received RequestInitialData. Forwarding to services.
-[INFO] [6:41:29 AM] [SelectionService] Found 59 paths in persisted state. Validating...
-[INFO] [6:41:29 AM] [SelectionService] Returning 59 valid paths.
-[INFO] [6:41:29 AM] Persisted current selection of 59 items.
-[INFO] [6:41:41 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-[INFO] [6:41:41 AM] [PCPP on-message] Received RequestInitialCycleData from client.
-
-</Ephemeral Context>
 <Previous Cycle 123 Summary of Actions>
 I have analyzed the persistent "Failed to initialize database" error. The error message `NODE_MODULE_VERSION 130` vs `136` confirms that `better-sqlite3` is still compiled for the system's Node.js (v20) instead of VS Code's Electron runtime (v33). Although `npm run rebuild` appeared to succeed, it likely skipped the module or used a cached build.
 
@@ -10474,10 +5897,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T12:54:54.430Z
+  Date Generated: 2025-12-03T13:49:53.022Z
   ---
   Total Files: 210
-  Approx. Tokens: 363772
+  Approx. Tokens: 362716
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -10486,10 +5909,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9295 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (7090 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (7109 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
-8. src\Artifacts\A11. DCE - Regression Case Studies.md (4636 tokens)
-9. src\backend\services\file-operation.service.ts (4526 tokens)
+8. src\backend\services\file-operation.service.ts (4838 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4546 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
@@ -10593,7 +6016,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 98. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-101. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+101. src\backend\services\file-operation.service.ts - Lines: 406 - Chars: 19352 - Tokens: 4838
 102. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
@@ -10623,22 +6046,22 @@ This file-centric approach helps in planning and prioritizing work, especially i
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 70 - Chars: 3089 - Tokens: 773
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 83 - Chars: 3346 - Tokens: 837
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 171 - Chars: 11043 - Tokens: 2761
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 184 - Chars: 11825 - Tokens: 2957
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 1256 - Chars: 28357 - Tokens: 7090
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17577 - Tokens: 4395
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1261 - Chars: 28435 - Tokens: 7109
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 315 - Chars: 18181 - Tokens: 4546
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 115 - Chars: 6540 - Tokens: 1635
-146. src\common\ipc\channels.type.ts - Lines: 129 - Chars: 9796 - Tokens: 2449
+145. src\common\ipc\channels.enum.ts - Lines: 116 - Chars: 6612 - Tokens: 1653
+146. src\common\ipc\channels.type.ts - Lines: 130 - Chars: 9922 - Tokens: 2481
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -10657,7 +6080,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 187 - Chars: 18541 - Tokens: 4636
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 98 - Chars: 10336 - Tokens: 2584
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -10667,8 +6090,8 @@ This file-centric approach helps in planning and prioritizing work, especially i
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7388 - Tokens: 1847
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9851 - Tokens: 2463
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11529 - Tokens: 2883
@@ -10699,7 +6122,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 205. package.json - Lines: 174 - Chars: 5715 - Tokens: 1429
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
-207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
+207. CHANGELOG.md - Lines: 49 - Chars: 3665 - Tokens: 917
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 98 - Chars: 5862 - Tokens: 1466
 209. src\backend\services\database.service.ts - Lines: 293 - Chars: 13722 - Tokens: 3431
 210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
@@ -17608,7 +13031,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C27 (Add handleNativeDiffRequest)
+// Updated on: C124 (Echo tabId in comparison and add markdown preview)
 import * as vscode from "vscode";
 import * as path from "path";
 import { promises as fs } from 'fs';
@@ -17649,6 +13072,28 @@ export class FileOperationService {
         } catch (error: any) {
             Services.loggerService.error(`[Native Diff] Failed to open diff view: ${error.message}`);
             vscode.window.showErrorMessage(`Failed to open diff view: ${error.message}`);
+        }
+    }
+
+    public async handleMarkdownPreviewRequest(filePath: string) {
+        Services.loggerService.log(`[Markdown Preview] Received request for: ${filePath}`);
+        try {
+            const workspaceRoot = this.getWorkspaceRoot();
+            const absolutePath = path.resolve(workspaceRoot, filePath);
+            const uri = vscode.Uri.file(absolutePath);
+            
+            // Ensure file exists before trying to preview
+            try {
+                await vscode.workspace.fs.stat(uri);
+            } catch {
+                 vscode.window.showErrorMessage(`File not found: ${filePath}`);
+                 return;
+            }
+
+            await vscode.commands.executeCommand('markdown.showPreview', uri);
+        } catch (error: any) {
+            Services.loggerService.error(`[Markdown Preview] Failed: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to open Markdown preview: ${error.message}`);
         }
     }
 
@@ -17711,8 +13156,8 @@ export class FileOperationService {
         }
     }
 
-    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
+    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, tabId: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Comparison] Received request for: ${filePath} (Tab: ${tabId})`);
         try {
             const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
@@ -17726,7 +13171,8 @@ export class FileOperationService {
                 filePath,
                 originalTokens,
                 modifiedTokens,
-                similarity
+                similarity,
+                tabId
             });
         } catch (error: any) {
             Services.loggerService.error(`[Comparison] Failed for ${filePath}: ${error.message}`);
@@ -17735,7 +13181,8 @@ export class FileOperationService {
                 filePath,
                 originalTokens: -1,
                 modifiedTokens: Math.ceil(modifiedContent.length / 4),
-                similarity: 0
+                similarity: 0,
+                tabId
             });
         }
     }
@@ -17782,6 +13229,7 @@ export class FileOperationService {
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
         const rootPath = this.getWorkspaceRoot();
+        Services.loggerService.log(`[File Existence] Root Path: ${rootPath}`);
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -17790,6 +13238,8 @@ export class FileOperationService {
     
             let absolutePath = path.resolve(rootPath, p);
             let normalizedPath = normalizePath(absolutePath);
+            
+            Services.loggerService.log(`[File Existence] Checking: ${p_raw} -> ${normalizedPath}`);
     
             try {
                 await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
@@ -22410,9 +17860,9 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C117 (No functional changes, verified onPaneResize prop)
+// Updated on: C124 (Update metrics key to use tabId, add Markdown preview)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -22522,8 +17972,16 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             });
         }
     };
+    
+    const handleMarkdownPreview = (e: React.MouseEvent, filePath: string) => {
+        e.stopPropagation();
+        clientIpc.sendToServer(ClientToServerChannel.RequestMarkdownPreview, { filePath });
+    };
 
-    const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(props.pathOverrides.get(props.selectedFilePath) || props.selectedFilePath) : null;
+    // C124 FIX: Use composite key for metrics lookup
+    const getMetricsKey = (filePath: string) => `${props.activeTab}:::${props.pathOverrides.get(filePath) || filePath}`;
+
+    const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(getMetricsKey(props.selectedFilePath)) : null;
 
     return (
         <div className="parsed-view-grid">
@@ -22532,16 +17990,21 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
-                        const metrics = props.comparisonMetrics.get(props.pathOverrides.get(file) || file);
+                        const metrics = props.comparisonMetrics.get(getMetricsKey(file));
                         const similarity = metrics?.similarity ?? 0;
                         const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
+                        const isMarkdown = file.toLowerCase().endsWith('.md');
+                        
                         return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{file}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
-                                {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                <div className="file-actions-container">
+                                    {fileExists && isMarkdown && <button className="native-diff-button styled-button" title="Open Preview" onClick={(e) => handleMarkdownPreview(e, file)}><VscPreview /></button>}
+                                    {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                </div>
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -22888,7 +18351,7 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C104 (Update RequestStopGeneration handler)
+// Updated on: C124 (Add RequestMarkdownPreview handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -23012,7 +18475,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
-        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
+        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, data.tabId, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
@@ -23060,6 +18523,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestNativeDiff, (data) => {
         fileOperationService.handleNativeDiffRequest(data.originalPath, data.modifiedContent, data.title);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMarkdownPreview, (data) => {
+        fileOperationService.handleMarkdownPreviewRequest(data.filePath);
     });
 }
 </file_artifact>
@@ -24126,10 +19593,15 @@ body {
         text-overflow: ellipsis;
     }
     
+    .file-actions-container {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+    }
+
     .native-diff-button {
         opacity: 0;
         transition: opacity 0.1s ease-in-out;
-        margin-left: auto;
         padding: 0 4px;
         font-size: 12px;
         background-color: var(--vscode-button-secondaryBackground);
@@ -24459,7 +19931,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C123 (Pass connectionMode to ResponseTabs)
+// Updated on: C124 (Pass tabId to requestAllMetrics and update comparisonMetrics handling)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -24504,7 +19976,21 @@ const App = () => {
     // --- State & Hooks Initialization ---
     const [responseCount, setResponseCount] = React.useState(4); 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
+    
+    const requestAllMetrics = React.useCallback((parsedResponse: any, tabId: number) => {
+         parsedResponse.filesUpdated.forEach((filePath: string) => {
+             const file = parsedResponse.files.find((f: any) => f.path === filePath);
+             if (file) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, {
+                     filePath,
+                     modifiedContent: file.content,
+                     tabId: tabId.toString()
+                 });
+             }
+         });
+    }, [clientIpc]);
+
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
@@ -25101,7 +20587,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/common/ipc/channels.enum.ts">
 // src/common/ipc/channels.enum.ts
-// Updated on: C95 (Replace StartGenerationUI)
+// Updated on: C124 (Add RequestMarkdownPreview)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -25132,6 +20618,7 @@ export enum ClientToServerChannel {
     RequestReadmeContent = "clientToServer.requestReadmeContent",
     RequestChangelogContent = "clientToServer.requestChangelogContent",
     RequestNativeDiff = "clientToServer.requestNativeDiff",
+    RequestMarkdownPreview = "clientToServer.requestMarkdownPreview",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -25219,10 +20706,10 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C107 (Add content to UpdateSingleGenerationProgress)
+// Updated on: C124 (Add tabId to comparison and markdown preview)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-import { PcppCycle } from "@/common/types/pcpp.types";
+import { PcppCycle, PcppResponse } from "@/common/types/pcpp.types";
 import { DceSettings } from "@/backend/services/settings.service";
 
 export type SelectionSet = { [name: string]: string[] };
@@ -25298,7 +20785,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle, costState: { totalPromptTokens: number, estimatedPromptCost: number, costBreakdown: any } } :
-    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
+    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; tabId: string } :
     T extends ClientToServerChannel.RequestExportHistory ? {} :
     T extends ClientToServerChannel.RequestImportHistory ? {} :
     T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
@@ -25311,6 +20798,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
     T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number; responseId: number; } :
     T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
+    T extends ClientToServerChannel.RequestMarkdownPreview ? { filePath: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -25333,7 +20821,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendInitialCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
-    T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
+    T extends ServerToClientChannel.SendFileComparison ? { filePath: string; tabId: string } & ComparisonMetrics :
     T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
@@ -26693,7 +22181,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C123 (Add ABI Mismatch case study)
+# Updated on: C124 (Consolidate native module build issues)
 
 ## 1. Purpose
 
@@ -26703,82 +22191,21 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
-### Case Study 028: ABI Mismatch with Non-Standard Electron Versions
+### Case Study 023: Native Module Build & ABI Mismatch (Consolidated)
 
--   **Artifacts Affected:** `node_modules`, `package.json`
--   **Cycles Observed:** C123
--   **Symptom:** Native module (e.g., `better-sqlite3`) fails to load with `NODE_MODULE_VERSION` mismatch (e.g., 130 vs 136), even after running `npm run rebuild`. The runtime Electron version reported in logs (e.g., 37.7.0) is significantly different from the standard stable version (e.g., 33.0.0).
--   **Root Cause Analysis (RCA):** The user is likely running a custom or nightly build of VS Code (or a fork like Cursor) that uses a newer or non-standard version of Electron. The standard `electron-rebuild` command infers the target version from the `electron` package in `devDependencies` (e.g., v33), resulting in a binary compiled for ABI 131/132, while the runtime requires ABI 136.
+-   **Artifacts Affected:** `node_modules`, `package.json`, `webpack.config.js`
+-   **Cycles Observed:** C119-C123
+-   **Symptom:** The extension fails to activate, hangs on build, or throws errors like `NODE_MODULE_VERSION 130. This version of Node.js requires NODE_MODULE_VERSION 136` when using native modules like `better-sqlite3`.
+-   **Root Cause Analysis (RCA):**
+    1.  **Webpack Bundling:** Webpack cannot bundle binary files (`.node`). They must be treated as external dependencies.
+    2.  **ABI Mismatch:** VS Code runs on a specific version of Electron, which uses a specific Node.js ABI (e.g., 136). Standard `npm install` compiles for the system's Node.js version (e.g., 127), causing a mismatch.
+    3.  **Electron Version Detection:** `electron-rebuild` sometimes fails to detect the correct target version if `electron` is not explicitly listed in `devDependencies`.
+    4.  **Compiler Standards:** Newer Electron versions (v33+) require C++20, which older native modules may not support.
 -   **Codified Solution & Best Practice:**
-    1.  Identify the *exact* Electron version of the runtime environment. This can be found in the extension's logs (if logged via `process.versions.electron`) or VS Code's "About" dialog.
-    2.  Force `electron-rebuild` to target that specific version using the `-v` flag.
-    3.  Command: `npm run rebuild -- -v <VERSION> -f` (e.g., `npm run rebuild -- -v 37.7.0 -f`).
-    4.  If the specific version is not available in the public registry (causing 404s), try targeting the closest standard Electron version that shares the same Node.js ABI version (e.g., Electron 34 beta for Node 22/ABI 136).
-
----
-
-### Case Study 027: Persistent Native Module Mismatch Despite Rebuild
-
--   **Artifacts Affected:** `node_modules`, `package.json`
--   **Cycles Observed:** C120-C122
--   **Symptom:** Repeated `NODE_MODULE_VERSION` errors (130 vs 136) for `better-sqlite3` even after running `npm run rebuild`.
--   **Root Cause Analysis (RCA):** The standard `electron-rebuild` process can sometimes fail to overwrite an existing prebuilt binary if it believes the module is already up-to-date or if there are caching issues. Additionally, running `npm rebuild` (without arguments) often defaults to the system Node.js version, undoing the Electron-specific build.
--   **Codified Solution & Best Practice:**
-    1.  Use the `electron-rebuild` executable directly from `node_modules/.bin/` to ensure the correct binary is used.
-    2.  Use the `-f` (force) flag to ensure a rebuild happens regardless of cache status.
-    3.  Use the `-w` (module) flag to target the specific problematic module.
-    4.  Command: `.\node_modules\.bin\electron-rebuild -f -w better-sqlite3`
-
----
-
-### Case Study 026: `better-sqlite3` Build Failure with C++20 Error
-
--   **Artifacts Affected:** `package.json`, `node_modules`
--   **Cycles Observed:** C122
--   **Symptom:** `npm run rebuild` fails with `error C1189: #error: "C++20 or later required."` when compiling `better-sqlite3`.
--   **Root Cause Analysis (RCA):** Electron 33 (and other recent versions) uses a newer V8 engine that mandates C++20 support. Older versions of `better-sqlite3` (e.g., v9.x) are configured to build with C++17, causing a compilation error when including the V8 headers provided by Electron.
--   **Codified Solution & Best Practice:**
-    1.  Upgrade `better-sqlite3` to a version that supports the newer Node.js/Electron environment (v11.x or later).
-    2.  Ensure `electron-rebuild` is run after the upgrade to recompile the native bindings with the correct standard.
-
----
-
-### Case Study 025: `electron-rebuild` Fails with "Unable to find electron's version number"
-
--   **Artifacts Affected:** `package.json`, `node_modules`
--   **Cycles Observed:** C122
--   **Symptom:** Running `npm run rebuild` (which executes `electron-rebuild`) fails with the error: `Error: Unable to find electron's version number, either install it or specify an explicit version`.
--   **Root Cause Analysis (RCA):** `electron-rebuild` attempts to detect the target Electron version by looking for the `electron` package in the project's dependencies. Since VS Code extensions typically only depend on the `vscode` engine and not `electron` directly, this check fails. Without a target version, the build cannot proceed.
--   **Codified Solution & Best Practice:**
-    1.  Explicitly add `electron` to `devDependencies` in `package.json`.
-    2.  The version should match the Electron version used by the target VS Code version (e.g., `^33.0.0` for VS Code 1.96+ or to match ABI 136).
-    3.  Run `npm install` to fetch the package, then `npm run rebuild`.
-
----
-
-### Case Study 024: Native Module Version Mismatch (`better-sqlite3`)
-
--   **Artifacts Affected:** `node_modules`
--   **Cycles Observed:** C120, C121
--   **Symptom:** The extension fails to activate or initialize the database service, throwing an error: `The module .../better_sqlite3.node was compiled against a different Node.js version using NODE_MODULE_VERSION 127. This version of Node.js requires NODE_MODULE_VERSION 136.`
--   **Root Cause Analysis (RCA):** VS Code extensions run within an Electron environment, which uses a specific version of Node.js (and thus a specific ABI version, e.g., 136). When `npm install` is run in a standard terminal, it compiles native modules like `better-sqlite3` for the system's installed Node.js version (e.g., ABI 127). This mismatch prevents the module from loading in the extension host.
--   **Codified Solution & Best Practice:**
-    1.  Native modules must be rebuilt specifically for the Electron version used by VS Code.
-    2.  Use the `@electron/rebuild` package. Add it to `devDependencies` and create a script: `"rebuild": "electron-rebuild"`.
-    3.  Run `npm run rebuild` after installing dependencies. This ensures the binary matches the runtime environment of VS Code.
-
----
-
-### Case Study 023: Webpack Build Hangs on PreLaunch Task with Native Modules
-
--   **Artifacts Affected:** `webpack.config.js`
--   **Cycles Observed:** C119
--   **Symptom:** When attempting to launch the extension (F5), VS Code hangs indefinitely with the message `Waiting for preLaunch Task "watch"...`. The terminal running the webpack task never reports "compiled successfully" or hangs silently.
--   **Root Cause Analysis (RCA):** The project introduced `better-sqlite3`, which is a native Node.js module (C++ bindings). Webpack, by default, attempts to bundle all imported dependencies into a single JavaScript file (`dist/extension.js`). It cannot bundle binary native modules. This causes the build process to fail or hang, preventing the task from signaling completion to VS Code.
--   **Codified Solution & Best Practice:**
-    1.  Identify any dependencies that rely on native binaries (e.g., `better-sqlite3`, `sqlite3`, `canvas`).
-    2.  In `webpack.config.js`, add these modules to the `externals` configuration object.
-    3.  Use the format `'module-name': 'commonjs module-name'`. This instructs Webpack to leave the `require('module-name')` statement intact in the output bundle, allowing the runtime (Node.js) to load the module directly from `node_modules`.
+    1.  **Webpack:** Add native modules to the `externals` section in `webpack.config.js` (e.g., `'better-sqlite3': 'commonjs better-sqlite3'`).
+    2.  **Dependencies:** Ensure `electron` (matching the target VS Code version) and `@electron/rebuild` are in `devDependencies`.
+    3.  **Rebuild Script:** Use a robust rebuild command: `electron-rebuild -f -w better-sqlite3`.
+    4.  **Force Version:** If mismatches persist (especially with custom VS Code builds), identify the runtime Electron version from logs and force the rebuild target: `npm run rebuild -- -v <VERSION> -f`.
 
 ---
 
@@ -26849,34 +22276,6 @@ This document serves as a living record of persistent or complex bugs. By docume
     2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
     3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
     4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
-
----
-
-### Case Study 017: Parser Appears to Corrupt Newline Sequences
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** C112, C113
--   **Symptom:** Valid double-newline sequences (`\n\n`) in the raw AI response are being rendered incorrectly in the UI as `n\n`. This indicates that a backslash is being stripped at some point during parsing or sanitization.
--   **Root Cause Analysis (RCA):** The exact cause is unclear, but the primary suspect is an overly aggressive string replacement intended to fix a different model-specific quirk (`n\n`). The logic is likely misinterpreting or incorrectly modifying valid newline escape sequences. A definitive RCA requires observing the data transformation.
--   **Codified Solution & Best Practice:**
-    1.  When debugging a string manipulation or parsing issue where the output is corrupted, the first step is to inject logging to trace the data's state at each step of the transformation.
-    2.  Add `logger.log` statements in the parser to output the string immediately after it's received and after each significant `replace()` or sanitization operation.
-    3.  This "before and after" logging provides an unambiguous view of how the data is being altered, allowing for the precise correction of the faulty logic.
-
----
-
-### Case Study 016: Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** C112
--   **Symptom:** When parsing a JSON response from the LLM, the final file content in the UI is corrupted. It shows extra `n` characters, for example, rendering `wordn\n` instead of `word\n`, or `wordn- list item` instead of `word\n- list item`.
--   **Root Cause Analysis (RCA):** The LLM, when instructed to produce JSON output, is not perfectly consistent in how it represents newlines within string values. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts an extra literal `n` character immediately before the newline (`...wordn\n...`) or before a markdown formatting character (`...wordn- list item...`). The existing parser correctly handled the standard `\n` but did not have a sanitization step to clean up these spurious `n` characters, causing them to be passed through to the final rendered output.
--   **Codified Solution & Best Practice:**
-    1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
-    2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
-    3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
-
----
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -27516,7 +22915,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C111 (Fix TPS calculation)
+// Updated on: C124 (Update comparison metrics handler to use tabId)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -27581,7 +22980,9 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            fileManagement.setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
+            // C124 FIX: Use composite key to store metrics
+            const key = `${metrics.tabId}:::${metrics.filePath}`;
+            fileManagement.setComparisonMetrics(prev => new Map(prev).set(key, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
@@ -27665,7 +23066,6 @@ export const usePcppIpc = (
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
 
-                // --- C111 FIX: Recalculate aggregate TPS ---
                 let totalTokens = 0;
                 let earliestStartTime = Infinity;
                 
@@ -27685,7 +23085,6 @@ export const usePcppIpc = (
                         generationManagement.setTps(currentTps);
                     }
                 }
-                // --- END C111 FIX ---
 
                 return newProgress;
             });
@@ -27734,7 +23133,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C123 (Fix tab count initialization logic)
+// Updated on: C124 (Pass tabId to requestAllMetrics)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -27750,7 +23149,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: ParsedResponse) => void
+    requestAllMetrics: (parsedResponse: ParsedResponse, tabId: number) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -27762,7 +23161,6 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        // C123 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
         for (let i = 1; i <= count; i++) {
@@ -27834,13 +23232,14 @@ export const useTabManagement = (
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
             const updatedTabs = { ...prevTabs };
-            Object.values(updatedTabs).forEach(tabState => {
+            Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+                const tabIdNum = parseInt(tabId, 10);
                 if (tabState.content && !tabState.parsedContent) {
                     const parsed = parseResponse(tabState.content);
                     tabState.parsedContent = parsed;
                     tabState.status = 'complete';
                     parsed.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
-                    requestAllMetrics(parsed);
+                    requestAllMetrics(parsed, tabIdNum);
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
                         const id = `${file.path}::${file.content}`;
@@ -36065,7 +31464,7 @@ To run the extension locally for development:
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.2.0",
+    "version": "1.2.0",
     "icon": "public/spiral.svg",
     "repository": {
         "type": "git",
@@ -36264,6 +31663,17 @@ SOFTWARE.
 # DCE Changelog
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
+
+## [1.2.0] - Q4 2025
+
+### Added
+- **SQLite Integration:** Replaced the brittle `dce_history.json` file storage with a robust SQLite database (`.vscode/dce.db`) for managing cycle history. This resolves the data loss issues caused by race conditions during autosave.
+- **Markdown Preview:** Added an "Open Preview" button to Markdown files in the Parallel Co-Pilot's "Associated Files" list, allowing users to view rendered documentation directly within VS Code.
+
+### Fixed
+- **Similarity Score Ghost Data:** Fixed a bug where similarity scores were incorrectly shared across different response tabs for the same file. Metrics are now correctly scoped to the specific response tab.
+- **Associated Files Mismatch:** Added enhanced logging and path normalization to diagnose and fix issues where files in the parsed response were incorrectly marked as missing.
+- **Native Module Build Issues:** Consolidated and updated documentation for troubleshooting ABI mismatches when building native modules like `better-sqlite3` for different Electron versions.
 
 ## [0.1.10] - Q3 2025
 

@@ -925,10 +925,15 @@ body {
         text-overflow: ellipsis;
     }
     
+    .file-actions-container {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+    }
+
     .native-diff-button {
         opacity: 0;
         transition: opacity 0.1s ease-in-out;
-        margin-left: auto;
         padding: 0 4px;
         font-size: 12px;
         background-color: var(--vscode-button-secondaryBackground);

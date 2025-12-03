@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T12:54:54.430Z
+  Date Generated: 2025-12-03T13:49:53.022Z
   ---
   Total Files: 210
-  Approx. Tokens: 363772
+  Approx. Tokens: 362716
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -13,10 +13,10 @@
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9295 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (7090 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (7109 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
-8. src\Artifacts\A11. DCE - Regression Case Studies.md (4636 tokens)
-9. src\backend\services\file-operation.service.ts (4526 tokens)
+8. src\backend\services\file-operation.service.ts (4838 tokens)
+9. src\client\views\parallel-copilot.view\view.tsx (4546 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
@@ -120,7 +120,7 @@
 98. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-101. src\backend\services\file-operation.service.ts - Lines: 379 - Chars: 18104 - Tokens: 4526
+101. src\backend\services\file-operation.service.ts - Lines: 406 - Chars: 19352 - Tokens: 4838
 102. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
@@ -150,22 +150,22 @@
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 70 - Chars: 3089 - Tokens: 773
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 83 - Chars: 3346 - Tokens: 837
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 171 - Chars: 11043 - Tokens: 2761
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 184 - Chars: 11825 - Tokens: 2957
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
-136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 175 - Chars: 8990 - Tokens: 2248
+136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 1256 - Chars: 28357 - Tokens: 7090
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 301 - Chars: 17577 - Tokens: 4395
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1261 - Chars: 28435 - Tokens: 7109
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 315 - Chars: 18181 - Tokens: 4546
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 115 - Chars: 6540 - Tokens: 1635
-146. src\common\ipc\channels.type.ts - Lines: 129 - Chars: 9796 - Tokens: 2449
+145. src\common\ipc\channels.enum.ts - Lines: 116 - Chars: 6612 - Tokens: 1653
+146. src\common\ipc\channels.type.ts - Lines: 130 - Chars: 9922 - Tokens: 2481
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 187 - Chars: 18541 - Tokens: 4636
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 98 - Chars: 10336 - Tokens: 2584
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -194,8 +194,8 @@
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9814 - Tokens: 2454
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7388 - Tokens: 1847
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9851 - Tokens: 2463
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11529 - Tokens: 2883
@@ -226,7 +226,7 @@
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 205. package.json - Lines: 174 - Chars: 5715 - Tokens: 1429
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
-207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
+207. CHANGELOG.md - Lines: 49 - Chars: 3665 - Tokens: 917
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 98 - Chars: 5862 - Tokens: 1466
 209. src\backend\services\database.service.ts - Lines: 293 - Chars: 13722 - Tokens: 3431
 210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
@@ -7135,7 +7135,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C27 (Add handleNativeDiffRequest)
+// Updated on: C124 (Echo tabId in comparison and add markdown preview)
 import * as vscode from "vscode";
 import * as path from "path";
 import { promises as fs } from 'fs';
@@ -7176,6 +7176,28 @@ export class FileOperationService {
         } catch (error: any) {
             Services.loggerService.error(`[Native Diff] Failed to open diff view: ${error.message}`);
             vscode.window.showErrorMessage(`Failed to open diff view: ${error.message}`);
+        }
+    }
+
+    public async handleMarkdownPreviewRequest(filePath: string) {
+        Services.loggerService.log(`[Markdown Preview] Received request for: ${filePath}`);
+        try {
+            const workspaceRoot = this.getWorkspaceRoot();
+            const absolutePath = path.resolve(workspaceRoot, filePath);
+            const uri = vscode.Uri.file(absolutePath);
+            
+            // Ensure file exists before trying to preview
+            try {
+                await vscode.workspace.fs.stat(uri);
+            } catch {
+                 vscode.window.showErrorMessage(`File not found: ${filePath}`);
+                 return;
+            }
+
+            await vscode.commands.executeCommand('markdown.showPreview', uri);
+        } catch (error: any) {
+            Services.loggerService.error(`[Markdown Preview] Failed: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to open Markdown preview: ${error.message}`);
         }
     }
 
@@ -7238,8 +7260,8 @@ export class FileOperationService {
         }
     }
 
-    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
+    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, tabId: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Comparison] Received request for: ${filePath} (Tab: ${tabId})`);
         try {
             const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
@@ -7253,7 +7275,8 @@ export class FileOperationService {
                 filePath,
                 originalTokens,
                 modifiedTokens,
-                similarity
+                similarity,
+                tabId
             });
         } catch (error: any) {
             Services.loggerService.error(`[Comparison] Failed for ${filePath}: ${error.message}`);
@@ -7262,7 +7285,8 @@ export class FileOperationService {
                 filePath,
                 originalTokens: -1,
                 modifiedTokens: Math.ceil(modifiedContent.length / 4),
-                similarity: 0
+                similarity: 0,
+                tabId
             });
         }
     }
@@ -7309,6 +7333,7 @@ export class FileOperationService {
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
         const rootPath = this.getWorkspaceRoot();
+        Services.loggerService.log(`[File Existence] Root Path: ${rootPath}`);
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -7317,6 +7342,8 @@ export class FileOperationService {
     
             let absolutePath = path.resolve(rootPath, p);
             let normalizedPath = normalizePath(absolutePath);
+            
+            Services.loggerService.log(`[File Existence] Checking: ${p_raw} -> ${normalizedPath}`);
     
             try {
                 await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
@@ -11937,9 +11964,9 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C117 (No functional changes, verified onPaneResize prop)
+// Updated on: C124 (Update metrics key to use tabId, add Markdown preview)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -12049,8 +12076,16 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             });
         }
     };
+    
+    const handleMarkdownPreview = (e: React.MouseEvent, filePath: string) => {
+        e.stopPropagation();
+        clientIpc.sendToServer(ClientToServerChannel.RequestMarkdownPreview, { filePath });
+    };
 
-    const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(props.pathOverrides.get(props.selectedFilePath) || props.selectedFilePath) : null;
+    // C124 FIX: Use composite key for metrics lookup
+    const getMetricsKey = (filePath: string) => `${props.activeTab}:::${props.pathOverrides.get(filePath) || filePath}`;
+
+    const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(getMetricsKey(props.selectedFilePath)) : null;
 
     return (
         <div className="parsed-view-grid">
@@ -12059,16 +12094,21 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     <ul className="associated-files-list">{props.parsedContent.filesUpdated.map(file => {
                         const fileExists = props.fileExistenceMap.get(file);
                         const hasOverride = props.pathOverrides.has(file);
-                        const metrics = props.comparisonMetrics.get(props.pathOverrides.get(file) || file);
+                        const metrics = props.comparisonMetrics.get(getMetricsKey(file));
                         const similarity = metrics?.similarity ?? 0;
                         const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
+                        const isMarkdown = file.toLowerCase().endsWith('.md');
+                        
                         return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{file}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
-                                {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                <div className="file-actions-container">
+                                    {fileExists && isMarkdown && <button className="native-diff-button styled-button" title="Open Preview" onClick={(e) => handleMarkdownPreview(e, file)}><VscPreview /></button>}
+                                    {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
+                                </div>
                             </div>
                             {!fileExists && props.selectedFilePath === file && (
                                 <div className="path-override-container" onClick={e => e.stopPropagation()}>{hasOverride ? (<><span>Linked to: {props.pathOverrides.get(file)}</span><button className="styled-button" onClick={() => props.onUnlinkFile(file)}><VscDebugDisconnect /> Unlink</button></>) : (<><input type="text" placeholder="Enter correct relative path..." value={props.tempOverridePath} onChange={e => props.onTempOverridePathChange(e.target.value)} onKeyDown={e => {if(e.key === 'Enter') props.onLinkFile(file)}} /><button className="styled-button" onClick={() => props.onLinkFile(file)}><VscLink /> Link</button></>)}</div>
@@ -12415,7 +12455,7 @@ export const viewConfig = {
 
 <file path="src/client/views/parallel-copilot.view/on-message.ts">
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C104 (Update RequestStopGeneration handler)
+// Updated on: C124 (Add RequestMarkdownPreview handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -12539,7 +12579,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
-        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
+        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, data.tabId, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
@@ -12587,6 +12627,10 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestNativeDiff, (data) => {
         fileOperationService.handleNativeDiffRequest(data.originalPath, data.modifiedContent, data.title);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMarkdownPreview, (data) => {
+        fileOperationService.handleMarkdownPreviewRequest(data.filePath);
     });
 }
 </file_artifact>
@@ -13653,10 +13697,15 @@ body {
         text-overflow: ellipsis;
     }
     
+    .file-actions-container {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+    }
+
     .native-diff-button {
         opacity: 0;
         transition: opacity 0.1s ease-in-out;
-        margin-left: auto;
         padding: 0 4px;
         font-size: 12px;
         background-color: var(--vscode-button-secondaryBackground);
@@ -13986,7 +14035,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C123 (Pass connectionMode to ResponseTabs)
+// Updated on: C124 (Pass tabId to requestAllMetrics and update comparisonMetrics handling)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14031,7 +14080,21 @@ const App = () => {
     // --- State & Hooks Initialization ---
     const [responseCount, setResponseCount] = React.useState(4); 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
+    
+    const requestAllMetrics = React.useCallback((parsedResponse: any, tabId: number) => {
+         parsedResponse.filesUpdated.forEach((filePath: string) => {
+             const file = parsedResponse.files.find((f: any) => f.path === filePath);
+             if (file) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, {
+                     filePath,
+                     modifiedContent: file.content,
+                     tabId: tabId.toString()
+                 });
+             }
+         });
+    }, [clientIpc]);
+
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
@@ -14628,7 +14691,7 @@ export function registerViews(context: vscode.ExtensionContext) {
 
 <file path="src/common/ipc/channels.enum.ts">
 // src/common/ipc/channels.enum.ts
-// Updated on: C95 (Replace StartGenerationUI)
+// Updated on: C124 (Add RequestMarkdownPreview)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -14659,6 +14722,7 @@ export enum ClientToServerChannel {
     RequestReadmeContent = "clientToServer.requestReadmeContent",
     RequestChangelogContent = "clientToServer.requestChangelogContent",
     RequestNativeDiff = "clientToServer.requestNativeDiff",
+    RequestMarkdownPreview = "clientToServer.requestMarkdownPreview",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
@@ -14746,10 +14810,10 @@ export enum ServerToClientChannel {
 
 <file path="src/common/ipc/channels.type.ts">
 // src/common/ipc/channels.type.ts
-// Updated on: C107 (Add content to UpdateSingleGenerationProgress)
+// Updated on: C124 (Add tabId to comparison and markdown preview)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-import { PcppCycle } from "@/common/types/pcpp.types";
+import { PcppCycle, PcppResponse } from "@/common/types/pcpp.types";
 import { DceSettings } from "@/backend/services/settings.service";
 
 export type SelectionSet = { [name: string]: string[] };
@@ -14825,7 +14889,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle, costState: { totalPromptTokens: number, estimatedPromptCost: number, costBreakdown: any } } :
-    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
+    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; tabId: string } :
     T extends ClientToServerChannel.RequestExportHistory ? {} :
     T extends ClientToServerChannel.RequestImportHistory ? {} :
     T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
@@ -14838,6 +14902,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
     T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number; responseId: number; } :
     T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
+    T extends ClientToServerChannel.RequestMarkdownPreview ? { filePath: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -14860,7 +14925,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendInitialCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
-    T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
+    T extends ServerToClientChannel.SendFileComparison ? { filePath: string; tabId: string } & ComparisonMetrics :
     T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :
@@ -16220,7 +16285,7 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C123 (Add ABI Mismatch case study)
+# Updated on: C124 (Consolidate native module build issues)
 
 ## 1. Purpose
 
@@ -16230,82 +16295,21 @@ This document serves as a living record of persistent or complex bugs. By docume
 
 ---
 
-### Case Study 028: ABI Mismatch with Non-Standard Electron Versions
+### Case Study 023: Native Module Build & ABI Mismatch (Consolidated)
 
--   **Artifacts Affected:** `node_modules`, `package.json`
--   **Cycles Observed:** C123
--   **Symptom:** Native module (e.g., `better-sqlite3`) fails to load with `NODE_MODULE_VERSION` mismatch (e.g., 130 vs 136), even after running `npm run rebuild`. The runtime Electron version reported in logs (e.g., 37.7.0) is significantly different from the standard stable version (e.g., 33.0.0).
--   **Root Cause Analysis (RCA):** The user is likely running a custom or nightly build of VS Code (or a fork like Cursor) that uses a newer or non-standard version of Electron. The standard `electron-rebuild` command infers the target version from the `electron` package in `devDependencies` (e.g., v33), resulting in a binary compiled for ABI 131/132, while the runtime requires ABI 136.
+-   **Artifacts Affected:** `node_modules`, `package.json`, `webpack.config.js`
+-   **Cycles Observed:** C119-C123
+-   **Symptom:** The extension fails to activate, hangs on build, or throws errors like `NODE_MODULE_VERSION 130. This version of Node.js requires NODE_MODULE_VERSION 136` when using native modules like `better-sqlite3`.
+-   **Root Cause Analysis (RCA):**
+    1.  **Webpack Bundling:** Webpack cannot bundle binary files (`.node`). They must be treated as external dependencies.
+    2.  **ABI Mismatch:** VS Code runs on a specific version of Electron, which uses a specific Node.js ABI (e.g., 136). Standard `npm install` compiles for the system's Node.js version (e.g., 127), causing a mismatch.
+    3.  **Electron Version Detection:** `electron-rebuild` sometimes fails to detect the correct target version if `electron` is not explicitly listed in `devDependencies`.
+    4.  **Compiler Standards:** Newer Electron versions (v33+) require C++20, which older native modules may not support.
 -   **Codified Solution & Best Practice:**
-    1.  Identify the *exact* Electron version of the runtime environment. This can be found in the extension's logs (if logged via `process.versions.electron`) or VS Code's "About" dialog.
-    2.  Force `electron-rebuild` to target that specific version using the `-v` flag.
-    3.  Command: `npm run rebuild -- -v <VERSION> -f` (e.g., `npm run rebuild -- -v 37.7.0 -f`).
-    4.  If the specific version is not available in the public registry (causing 404s), try targeting the closest standard Electron version that shares the same Node.js ABI version (e.g., Electron 34 beta for Node 22/ABI 136).
-
----
-
-### Case Study 027: Persistent Native Module Mismatch Despite Rebuild
-
--   **Artifacts Affected:** `node_modules`, `package.json`
--   **Cycles Observed:** C120-C122
--   **Symptom:** Repeated `NODE_MODULE_VERSION` errors (130 vs 136) for `better-sqlite3` even after running `npm run rebuild`.
--   **Root Cause Analysis (RCA):** The standard `electron-rebuild` process can sometimes fail to overwrite an existing prebuilt binary if it believes the module is already up-to-date or if there are caching issues. Additionally, running `npm rebuild` (without arguments) often defaults to the system Node.js version, undoing the Electron-specific build.
--   **Codified Solution & Best Practice:**
-    1.  Use the `electron-rebuild` executable directly from `node_modules/.bin/` to ensure the correct binary is used.
-    2.  Use the `-f` (force) flag to ensure a rebuild happens regardless of cache status.
-    3.  Use the `-w` (module) flag to target the specific problematic module.
-    4.  Command: `.\node_modules\.bin\electron-rebuild -f -w better-sqlite3`
-
----
-
-### Case Study 026: `better-sqlite3` Build Failure with C++20 Error
-
--   **Artifacts Affected:** `package.json`, `node_modules`
--   **Cycles Observed:** C122
--   **Symptom:** `npm run rebuild` fails with `error C1189: #error: "C++20 or later required."` when compiling `better-sqlite3`.
--   **Root Cause Analysis (RCA):** Electron 33 (and other recent versions) uses a newer V8 engine that mandates C++20 support. Older versions of `better-sqlite3` (e.g., v9.x) are configured to build with C++17, causing a compilation error when including the V8 headers provided by Electron.
--   **Codified Solution & Best Practice:**
-    1.  Upgrade `better-sqlite3` to a version that supports the newer Node.js/Electron environment (v11.x or later).
-    2.  Ensure `electron-rebuild` is run after the upgrade to recompile the native bindings with the correct standard.
-
----
-
-### Case Study 025: `electron-rebuild` Fails with "Unable to find electron's version number"
-
--   **Artifacts Affected:** `package.json`, `node_modules`
--   **Cycles Observed:** C122
--   **Symptom:** Running `npm run rebuild` (which executes `electron-rebuild`) fails with the error: `Error: Unable to find electron's version number, either install it or specify an explicit version`.
--   **Root Cause Analysis (RCA):** `electron-rebuild` attempts to detect the target Electron version by looking for the `electron` package in the project's dependencies. Since VS Code extensions typically only depend on the `vscode` engine and not `electron` directly, this check fails. Without a target version, the build cannot proceed.
--   **Codified Solution & Best Practice:**
-    1.  Explicitly add `electron` to `devDependencies` in `package.json`.
-    2.  The version should match the Electron version used by the target VS Code version (e.g., `^33.0.0` for VS Code 1.96+ or to match ABI 136).
-    3.  Run `npm install` to fetch the package, then `npm run rebuild`.
-
----
-
-### Case Study 024: Native Module Version Mismatch (`better-sqlite3`)
-
--   **Artifacts Affected:** `node_modules`
--   **Cycles Observed:** C120, C121
--   **Symptom:** The extension fails to activate or initialize the database service, throwing an error: `The module .../better_sqlite3.node was compiled against a different Node.js version using NODE_MODULE_VERSION 127. This version of Node.js requires NODE_MODULE_VERSION 136.`
--   **Root Cause Analysis (RCA):** VS Code extensions run within an Electron environment, which uses a specific version of Node.js (and thus a specific ABI version, e.g., 136). When `npm install` is run in a standard terminal, it compiles native modules like `better-sqlite3` for the system's installed Node.js version (e.g., ABI 127). This mismatch prevents the module from loading in the extension host.
--   **Codified Solution & Best Practice:**
-    1.  Native modules must be rebuilt specifically for the Electron version used by VS Code.
-    2.  Use the `@electron/rebuild` package. Add it to `devDependencies` and create a script: `"rebuild": "electron-rebuild"`.
-    3.  Run `npm run rebuild` after installing dependencies. This ensures the binary matches the runtime environment of VS Code.
-
----
-
-### Case Study 023: Webpack Build Hangs on PreLaunch Task with Native Modules
-
--   **Artifacts Affected:** `webpack.config.js`
--   **Cycles Observed:** C119
--   **Symptom:** When attempting to launch the extension (F5), VS Code hangs indefinitely with the message `Waiting for preLaunch Task "watch"...`. The terminal running the webpack task never reports "compiled successfully" or hangs silently.
--   **Root Cause Analysis (RCA):** The project introduced `better-sqlite3`, which is a native Node.js module (C++ bindings). Webpack, by default, attempts to bundle all imported dependencies into a single JavaScript file (`dist/extension.js`). It cannot bundle binary native modules. This causes the build process to fail or hang, preventing the task from signaling completion to VS Code.
--   **Codified Solution & Best Practice:**
-    1.  Identify any dependencies that rely on native binaries (e.g., `better-sqlite3`, `sqlite3`, `canvas`).
-    2.  In `webpack.config.js`, add these modules to the `externals` configuration object.
-    3.  Use the format `'module-name': 'commonjs module-name'`. This instructs Webpack to leave the `require('module-name')` statement intact in the output bundle, allowing the runtime (Node.js) to load the module directly from `node_modules`.
+    1.  **Webpack:** Add native modules to the `externals` section in `webpack.config.js` (e.g., `'better-sqlite3': 'commonjs better-sqlite3'`).
+    2.  **Dependencies:** Ensure `electron` (matching the target VS Code version) and `@electron/rebuild` are in `devDependencies`.
+    3.  **Rebuild Script:** Use a robust rebuild command: `electron-rebuild -f -w better-sqlite3`.
+    4.  **Force Version:** If mismatches persist (especially with custom VS Code builds), identify the runtime Electron version from logs and force the rebuild target: `npm run rebuild -- -v <VERSION> -f`.
 
 ---
 
@@ -16376,34 +16380,6 @@ This document serves as a living record of persistent or complex bugs. By docume
     2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
     3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
     4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
-
----
-
-### Case Study 017: Parser Appears to Corrupt Newline Sequences
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** C112, C113
--   **Symptom:** Valid double-newline sequences (`\n\n`) in the raw AI response are being rendered incorrectly in the UI as `n\n`. This indicates that a backslash is being stripped at some point during parsing or sanitization.
--   **Root Cause Analysis (RCA):** The exact cause is unclear, but the primary suspect is an overly aggressive string replacement intended to fix a different model-specific quirk (`n\n`). The logic is likely misinterpreting or incorrectly modifying valid newline escape sequences. A definitive RCA requires observing the data transformation.
--   **Codified Solution & Best Practice:**
-    1.  When debugging a string manipulation or parsing issue where the output is corrupted, the first step is to inject logging to trace the data's state at each step of the transformation.
-    2.  Add `logger.log` statements in the parser to output the string immediately after it's received and after each significant `replace()` or sanitization operation.
-    3.  This "before and after" logging provides an unambiguous view of how the data is being altered, allowing for the precise correction of the faulty logic.
-
----
-
-### Case Study 016: Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output
-
--   **Artifacts Affected:** `src/client/utils/response-parser.ts`
--   **Cycles Observed:** C112
--   **Symptom:** When parsing a JSON response from the LLM, the final file content in the UI is corrupted. It shows extra `n` characters, for example, rendering `wordn\n` instead of `word\n`, or `wordn- list item` instead of `word\n- list item`.
--   **Root Cause Analysis (RCA):** The LLM, when instructed to produce JSON output, is not perfectly consistent in how it represents newlines within string values. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts an extra literal `n` character immediately before the newline (`...wordn\n...`) or before a markdown formatting character (`...wordn- list item...`). The existing parser correctly handled the standard `\n` but did not have a sanitization step to clean up these spurious `n` characters, causing them to be passed through to the final rendered output.
--   **Codified Solution & Best Practice:**
-    1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
-    2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
-    3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
-
----
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -17043,7 +17019,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C111 (Fix TPS calculation)
+// Updated on: C124 (Update comparison metrics handler to use tabId)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -17108,7 +17084,9 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            fileManagement.setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
+            // C124 FIX: Use composite key to store metrics
+            const key = `${metrics.tabId}:::${metrics.filePath}`;
+            fileManagement.setComparisonMetrics(prev => new Map(prev).set(key, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
@@ -17192,7 +17170,6 @@ export const usePcppIpc = (
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
 
-                // --- C111 FIX: Recalculate aggregate TPS ---
                 let totalTokens = 0;
                 let earliestStartTime = Infinity;
                 
@@ -17212,7 +17189,6 @@ export const usePcppIpc = (
                         generationManagement.setTps(currentTps);
                     }
                 }
-                // --- END C111 FIX ---
 
                 return newProgress;
             });
@@ -17261,7 +17237,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C123 (Fix tab count initialization logic)
+// Updated on: C124 (Pass tabId to requestAllMetrics)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -17277,7 +17253,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: ParsedResponse) => void
+    requestAllMetrics: (parsedResponse: ParsedResponse, tabId: number) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -17289,7 +17265,6 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        // C123 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
         for (let i = 1; i <= count; i++) {
@@ -17361,13 +17336,14 @@ export const useTabManagement = (
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
             const updatedTabs = { ...prevTabs };
-            Object.values(updatedTabs).forEach(tabState => {
+            Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+                const tabIdNum = parseInt(tabId, 10);
                 if (tabState.content && !tabState.parsedContent) {
                     const parsed = parseResponse(tabState.content);
                     tabState.parsedContent = parsed;
                     tabState.status = 'complete';
                     parsed.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
-                    requestAllMetrics(parsed);
+                    requestAllMetrics(parsed, tabIdNum);
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
                         const id = `${file.path}::${file.content}`;
@@ -25592,7 +25568,7 @@ To run the extension locally for development:
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.2.0",
+    "version": "1.2.0",
     "icon": "public/spiral.svg",
     "repository": {
         "type": "git",
@@ -25791,6 +25767,17 @@ SOFTWARE.
 # DCE Changelog
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
+
+## [1.2.0] - Q4 2025
+
+### Added
+- **SQLite Integration:** Replaced the brittle `dce_history.json` file storage with a robust SQLite database (`.vscode/dce.db`) for managing cycle history. This resolves the data loss issues caused by race conditions during autosave.
+- **Markdown Preview:** Added an "Open Preview" button to Markdown files in the Parallel Co-Pilot's "Associated Files" list, allowing users to view rendered documentation directly within VS Code.
+
+### Fixed
+- **Similarity Score Ghost Data:** Fixed a bug where similarity scores were incorrectly shared across different response tabs for the same file. Metrics are now correctly scoped to the specific response tab.
+- **Associated Files Mismatch:** Added enhanced logging and path normalization to diagnose and fix issues where files in the parsed response were incorrectly marked as missing.
+- **Native Module Build Issues:** Consolidated and updated documentation for troubleshooting ABI mismatches when building native modules like `better-sqlite3` for different Electron versions.
 
 ## [0.1.10] - Q3 2025
 

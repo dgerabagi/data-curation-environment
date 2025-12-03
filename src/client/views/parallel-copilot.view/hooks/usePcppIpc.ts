@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C111 (Fix TPS calculation)
+// Updated on: C124 (Update comparison metrics handler to use tabId)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -64,7 +64,9 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            fileManagement.setComparisonMetrics(prev => new Map(prev).set(metrics.filePath, metrics));
+            // C124 FIX: Use composite key to store metrics
+            const key = `${metrics.tabId}:::${metrics.filePath}`;
+            fileManagement.setComparisonMetrics(prev => new Map(prev).set(key, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
@@ -148,7 +150,6 @@ export const usePcppIpc = (
                     newProgress.sort((a, b) => a.responseId - b.responseId);
                 }
 
-                // --- C111 FIX: Recalculate aggregate TPS ---
                 let totalTokens = 0;
                 let earliestStartTime = Infinity;
                 
@@ -168,7 +169,6 @@ export const usePcppIpc = (
                         generationManagement.setTps(currentTps);
                     }
                 }
-                // --- END C111 FIX ---
 
                 return newProgress;
             });

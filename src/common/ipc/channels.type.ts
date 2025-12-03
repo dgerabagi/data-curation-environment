@@ -1,8 +1,8 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C107 (Add content to UpdateSingleGenerationProgress)
+// Updated on: C124 (Add tabId to comparison and markdown preview)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
-import { PcppCycle } from "@/common/types/pcpp.types";
+import { PcppCycle, PcppResponse } from "@/common/types/pcpp.types";
 import { DceSettings } from "@/backend/services/settings.service";
 
 export type SelectionSet = { [name: string]: string[] };
@@ -78,7 +78,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestDeleteCycle ? { cycleId: number; } :
     T extends ClientToServerChannel.RequestResetHistory ? {} :
     T extends ClientToServerChannel.RequestLogState ? { currentState: PcppCycle, costState: { totalPromptTokens: number, estimatedPromptCost: number, costBreakdown: any } } :
-    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; } :
+    T extends ClientToServerChannel.RequestFileComparison ? { filePath: string; modifiedContent: string; tabId: string } :
     T extends ClientToServerChannel.RequestExportHistory ? {} :
     T extends ClientToServerChannel.RequestImportHistory ? {} :
     T extends ClientToServerChannel.RequestPromptCostEstimation ? { cycleData: PcppCycle } :
@@ -91,6 +91,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.SaveSettings ? { settings: DceSettings } :
     T extends ClientToServerChannel.RequestStopGeneration ? { cycleId: number; responseId: number; } :
     T extends ClientToServerChannel.RequestSingleRegeneration ? { cycleId: number, tabId: string } :
+    T extends ClientToServerChannel.RequestMarkdownPreview ? { filePath: string } :
     
     T extends ServerToClientChannel.SendWorkspaceFiles ? { files: FileNode[] } :
     T extends ServerToClientChannel.SendWorkspaceTrustState ? { isTrusted: boolean } :
@@ -113,7 +114,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ServerToClientChannel.SendInitialCycleData ? { cycleData: PcppCycle; projectScope?: string; } :
     T extends ServerToClientChannel.SendCycleData ? { cycleData: PcppCycle | null, projectScope?: string; } :
     T extends ServerToClientChannel.FilesWritten ? { paths: string[] } :
-    T extends ServerToClientChannel.SendFileComparison ? { filePath: string } & ComparisonMetrics :
+    T extends ServerToClientChannel.SendFileComparison ? { filePath: string; tabId: string } & ComparisonMetrics :
     T extends ServerToClientChannel.SendPromptCostEstimation ? { totalTokens: number; estimatedCost: number; breakdown: { [key: string]: number } } :
     T extends ServerToClientChannel.NotifyGitOperationResult ? { success: boolean; message: string; } :
     T extends ServerToClientChannel.SendGitStatus ? { isClean: boolean } :

@@ -2,6 +2,17 @@
 
 All notable changes to the "Data Curation Environment" extension will be documented in this file.
 
+## [1.2.0] - Q4 2025
+
+### Added
+- **SQLite Integration:** Replaced the brittle `dce_history.json` file storage with a robust SQLite database (`.vscode/dce.db`) for managing cycle history. This resolves the data loss issues caused by race conditions during autosave.
+- **Markdown Preview:** Added an "Open Preview" button to Markdown files in the Parallel Co-Pilot's "Associated Files" list, allowing users to view rendered documentation directly within VS Code.
+
+### Fixed
+- **Similarity Score Ghost Data:** Fixed a bug where similarity scores were incorrectly shared across different response tabs for the same file. Metrics are now correctly scoped to the specific response tab.
+- **Associated Files Mismatch:** Added enhanced logging and path normalization to diagnose and fix issues where files in the parsed response were incorrectly marked as missing.
+- **Native Module Build Issues:** Consolidated and updated documentation for troubleshooting ABI mismatches when building native modules like `better-sqlite3` for different Electron versions.
+
 ## [0.1.10] - Q3 2025
 
 ### Fixed

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C123 (Fix tab count initialization logic)
+// Updated on: C124 (Pass tabId to requestAllMetrics)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -15,7 +15,7 @@ export const useTabManagement = (
     initialIsParsedMode: boolean,
     initialIsSorted: boolean,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    requestAllMetrics: (parsedResponse: ParsedResponse) => void
+    requestAllMetrics: (parsedResponse: ParsedResponse, tabId: number) => void
 ) => {
     const [tabs, setTabs] = React.useState<{ [key: string]: PcppResponse }>({});
     const [activeTab, setActiveTab] = React.useState(initialActiveTab);
@@ -27,7 +27,6 @@ export const useTabManagement = (
     const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
         logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
         const newTabs: { [key: string]: PcppResponse } = {};
-        // C123 FIX: Use Math.max to ensure we respect the requested tab count even if responses are empty/fewer
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
         for (let i = 1; i <= count; i++) {
@@ -99,13 +98,14 @@ export const useTabManagement = (
         setTabs(prevTabs => {
             const allFilePaths = new Set<string>();
             const updatedTabs = { ...prevTabs };
-            Object.values(updatedTabs).forEach(tabState => {
+            Object.entries(updatedTabs).forEach(([tabId, tabState]) => {
+                const tabIdNum = parseInt(tabId, 10);
                 if (tabState.content && !tabState.parsedContent) {
                     const parsed = parseResponse(tabState.content);
                     tabState.parsedContent = parsed;
                     tabState.status = 'complete';
                     parsed.filesUpdated.forEach(filePath => allFilePaths.add(filePath));
-                    requestAllMetrics(parsed);
+                    requestAllMetrics(parsed, tabIdNum);
                     parsed.files.forEach(file => {
                         const lang = path.extname(file.path).substring(1) || 'plaintext';
                         const id = `${file.path}::${file.content}`;

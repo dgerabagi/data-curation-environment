@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C104 (Update RequestStopGeneration handler)
+// Updated on: C124 (Add RequestMarkdownPreview handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -123,7 +123,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestFileComparison, (data) => {
-        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, serverIpc);
+        fileOperationService.handleFileComparisonRequest(data.filePath, data.modifiedContent, data.tabId, serverIpc);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCopyTextToClipboard, (data) => {
@@ -171,5 +171,9 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     
     serverIpc.onClientMessage(ClientToServerChannel.RequestNativeDiff, (data) => {
         fileOperationService.handleNativeDiffRequest(data.originalPath, data.modifiedContent, data.title);
+    });
+
+    serverIpc.onClientMessage(ClientToServerChannel.RequestMarkdownPreview, (data) => {
+        fileOperationService.handleMarkdownPreviewRequest(data.filePath);
     });
 }

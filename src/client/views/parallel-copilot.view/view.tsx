@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C123 (Pass connectionMode to ResponseTabs)
+// Updated on: C124 (Pass tabId to requestAllMetrics and update comparisonMetrics handling)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -44,7 +44,21 @@ const App = () => {
     // --- State & Hooks Initialization ---
     const [responseCount, setResponseCount] = React.useState(4); 
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
-    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, () => {});
+    
+    const requestAllMetrics = React.useCallback((parsedResponse: any, tabId: number) => {
+         parsedResponse.filesUpdated.forEach((filePath: string) => {
+             const file = parsedResponse.files.find((f: any) => f.path === filePath);
+             if (file) {
+                 clientIpc.sendToServer(ClientToServerChannel.RequestFileComparison, {
+                     filePath,
+                     modifiedContent: file.content,
+                     tabId: tabId.toString()
+                 });
+             }
+         });
+    }, [clientIpc]);
+
+    const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);

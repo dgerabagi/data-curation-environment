@@ -3,7 +3,7 @@
     "publisher": "DCE-Developer",
     "displayName": "Data Curation Environment",
     "description": "A VS Code extension for curating context for Large Language Models.",
-    "version": "0.2.0",
+    "version": "1.2.0",
     "icon": "public/spiral.svg",
     "repository": {
         "type": "git",

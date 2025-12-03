@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C27 (Add handleNativeDiffRequest)
+// Updated on: C124 (Echo tabId in comparison and add markdown preview)
 import * as vscode from "vscode";
 import * as path from "path";
 import { promises as fs } from 'fs';
@@ -40,6 +40,28 @@ export class FileOperationService {
         } catch (error: any) {
             Services.loggerService.error(`[Native Diff] Failed to open diff view: ${error.message}`);
             vscode.window.showErrorMessage(`Failed to open diff view: ${error.message}`);
+        }
+    }
+
+    public async handleMarkdownPreviewRequest(filePath: string) {
+        Services.loggerService.log(`[Markdown Preview] Received request for: ${filePath}`);
+        try {
+            const workspaceRoot = this.getWorkspaceRoot();
+            const absolutePath = path.resolve(workspaceRoot, filePath);
+            const uri = vscode.Uri.file(absolutePath);
+            
+            // Ensure file exists before trying to preview
+            try {
+                await vscode.workspace.fs.stat(uri);
+            } catch {
+                 vscode.window.showErrorMessage(`File not found: ${filePath}`);
+                 return;
+            }
+
+            await vscode.commands.executeCommand('markdown.showPreview', uri);
+        } catch (error: any) {
+            Services.loggerService.error(`[Markdown Preview] Failed: ${error.message}`);
+            vscode.window.showErrorMessage(`Failed to open Markdown preview: ${error.message}`);
         }
     }
 
@@ -102,8 +124,8 @@ export class FileOperationService {
         }
     }
 
-    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[Comparison] Received request for: ${filePath}`);
+    public async handleFileComparisonRequest(filePath: string, modifiedContent: string, tabId: string, serverIpc: ServerPostMessageManager) {
+        Services.loggerService.log(`[Comparison] Received request for: ${filePath} (Tab: ${tabId})`);
         try {
             const absolutePath = path.resolve(this.getWorkspaceRoot(), filePath);
             const originalContentBuffer = await vscode.workspace.fs.readFile(vscode.Uri.file(absolutePath));
@@ -117,7 +139,8 @@ export class FileOperationService {
                 filePath,
                 originalTokens,
                 modifiedTokens,
-                similarity
+                similarity,
+                tabId
             });
         } catch (error: any) {
             Services.loggerService.error(`[Comparison] Failed for ${filePath}: ${error.message}`);
@@ -126,7 +149,8 @@ export class FileOperationService {
                 filePath,
                 originalTokens: -1,
                 modifiedTokens: Math.ceil(modifiedContent.length / 4),
-                similarity: 0
+                similarity: 0,
+                tabId
             });
         }
     }
@@ -173,6 +197,7 @@ export class FileOperationService {
     public async handleFileExistenceRequest(paths: string[], serverIpc: ServerPostMessageManager) {
         Services.loggerService.log(`[File Existence] Received request to check paths: ${JSON.stringify(paths)}`);
         const rootPath = this.getWorkspaceRoot();
+        Services.loggerService.log(`[File Existence] Root Path: ${rootPath}`);
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
@@ -181,6 +206,8 @@ export class FileOperationService {
     
             let absolutePath = path.resolve(rootPath, p);
             let normalizedPath = normalizePath(absolutePath);
+            
+            Services.loggerService.log(`[File Existence] Checking: ${p_raw} -> ${normalizedPath}`);
     
             try {
                 await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));

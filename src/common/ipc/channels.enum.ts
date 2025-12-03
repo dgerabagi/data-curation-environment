@@ -1,5 +1,5 @@
 // src/common/ipc/channels.enum.ts
-// Updated on: C95 (Replace StartGenerationUI)
+// Updated on: C124 (Add RequestMarkdownPreview)
 export enum ClientToServerChannel {
     RequestInitialData = "clientToServer.requestInitialData",
     RequestFlattenContext = "clientToServer.requestFlattenContext",
@@ -30,6 +30,7 @@ export enum ClientToServerChannel {
     RequestReadmeContent = "clientToServer.requestReadmeContent",
     RequestChangelogContent = "clientToServer.requestChangelogContent",
     RequestNativeDiff = "clientToServer.requestNativeDiff",
+    RequestMarkdownPreview = "clientToServer.requestMarkdownPreview",
 
     // Special File Handling
     RequestPdfToText = "clientToServer.requestPdfToText",
