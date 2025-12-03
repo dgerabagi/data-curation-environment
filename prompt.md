@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 119 - trying to implement sqlite
+Current Cycle 120 - project seems to be runnable via F5, but does not seem to be making a db yet
+Cycle 119 - trying to implement sqlite
 Cycle 118 - pivot to idea to solve for the brittle dce_history.json autosave occasionally causing total cycle data loss
 Cycle 117 - new website to promote dce
 Cycle 116 - finalize local llm, encryption, ui adjustment
@@ -857,6 +858,236 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 120>
+<Cycle Context>
+okay, i accepted the changes to webpack.config.js, but the same issue occured... however this time i just clicked 'Debug Anyway', because i like to live life on the edge like that, and it did seem to load my extension properly, eventually. here are the `Debug Console` logs that it produced i saw it metnion SQLite which is great (see `<Ephemeral Context>` below).
+
+okay, so i opened a pre-existing project that has its own dce_history.json with this new dev version of the dce with sqlite. i havent done anything yet except open it as the workspace, and i did check but it does still have the dce_history.json instead of any .db file, perhaps i have to 'trigger' an autosave? such instructinos would have been ideal to have in A118.
+
+ah okay, it seems we may have a bit of regression with the 'manual mode' (ever since i began vibe coding to develop the new parallel mode, i havent been testing the manual mode for any regression. we might have had some), this is what i see:
+
+this project workspace i opened is set to 'Manual Mode' in the dce settings & help, but for some reason, despite having 4 responses set in the dce parallel co-pilot, only 1 `Resp` tab is appearing. secondly, i am observing a 'refresh' button on the `Resp 1` tab, which is curious as the manual mode does not have the ability to automatically refresh a tab; the user must initiate a regeration in AIStudio proper, if that is their intention.
+
+third, i am observing that this project, despite having been on cycle 57, is appearing on cycle 1 only. its as if it doesnt see the dce_history.json that is present in `.vscode`
+
+in order to do a test, i wrote 'test' in the cycle 1's empty `Cycle Context` text box. i then checked to see what changes were done in .vscode, and i observed nothing. still the same 57 cycle history in json and no db file. i do have the 'output' logs from that environment i will provide in the ephemeral below as well as <2. dev environment output logs>.
+</Cycle Context>
+<Ephemeral Context>
+<debug console logs>
+(property) contextChooserView: string
+(node:9956) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+extensionHostProcess.js:216
+(Use `Code --trace-deprecation ...` to show where the warning was created)
+extensionHostProcess.js:216
+(node:9956) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+extensionHostProcess.js:216
+Gemini CodeAssist version 2.59.0
+extensionHostProcess.js:216
+2
+No workspace folders found.
+extensionHostProcess.js:216
+Handling content exclusion file changes and firing event...
+extensionHostProcess.js:216
+Reading AI content exclusion file: .aiexclude
+extensionHostProcess.js:216
+No workspace folders found.
+extensionHostProcess.js:216
+Startup phase BuildContext starting
+extensionHostProcess.js:216
+Reading AI content exclusion file: .gitignore
+extensionHostProcess.js:216
+No workspace folders found.
+extensionHostProcess.js:216
+Content exclusion file changes handled and event fired.
+extensionHostProcess.js:216
+AIExcludeProvider initialized.
+extensionHostProcess.js:216
+Startup phase BuildContext finished in 8ms
+extensionHostProcess.js:216
+Startup phase Activate starting
+extensionHostProcess.js:216
+Startup phase Activate.Preactivate starting
+extensionHostProcess.js:216
+Startup phase Activate.Preactivate finished in 1012ms
+extensionHostProcess.js:216
+Startup phase Activate.StartExperimentation starting
+extensionHostProcess.js:216
+Activating plugin Gemini Code Assist
+extensionHostProcess.js:216
+Enabled the Gemini Code Assist context hint provider
+extensionHostProcess.js:216
+Activating plugin Local agent
+extensionHostProcess.js:216
+Activating plugin MCP Server
+extensionHostProcess.js:216
+Startup phase Activate.StartExperimentation.PluginActivate starting
+extensionHostProcess.js:216
+Startup phase Activate.StartExperimentation.PluginActivate.GlobalActivate starting
+extensionHostProcess.js:216
+Done activating plugin Local agent, took 2.6502000000000407ms
+extensionHostProcess.js:216
+Done activating plugin MCP Server, took 3.360099999999875ms
+extensionHostProcess.js:216
+callClient: client not ready
+extensionHostProcess.js:216
+service/healthcheck {projectID: 'opportune-galaxy-9vgdw'} Bd {a: false, b: null}
+extensionHostProcess.js:216
+callClient: client not ready
+extensionHostProcess.js:216
+Checking language server extraction from c:\Users\dgera\.vscode\extensions\google.geminicodeassist-2.59.0\cloudcode_cli.zip - windows_amd64/cloudcode_cli.exe
+extensionHostProcess.js:216
+Client experimentation flags:  {enableQuickpickChat: true, enableEventsPipelinePolling: false, enableAdminCitationBlock: false, enableFlashCompletionsClientPostprocessing: false, enableFreeTier: true, …}
+extensionHostProcess.js:216
+callClient: client not ready
+extensionHostProcess.js:216
+Code path to binaries for win32 => c:\Users\dgera\AppData\Local\Programs\Microsoft VS Code\bin
+extensionHostProcess.js:216
+Skipping updating LS experimentation flags since LS is not ready.
+extensionHostProcess.js:216
+Language client not ready, skipping Code Customization Enabled message.
+extensionHostProcess.js:216
+callClient: client not ready
+extensionHostProcess.js:216
+Startup phase Activate.StartExperimentation finished in 788ms
+extensionHostProcess.js:216
+callClient: client not ready
+extensionHostProcess.js:216
+Resetting path to C:\Users\dgera\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Eclipse Adoptium\jdk-21.0.6.7-hotspot\bin;C:\Program Files\Oculus\Support\oculus-runtime;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.9.9\bin;C:\Program Files\dotnet\;C:\Program Files\Process Lasso\;C:\Program Files\GitHub CLI\;C:\Users\dgera\AppData\Local\Muse Hub\lib;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Git\cmd;C:\Users\dgera\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\dgera\AppData\Local\Programs\Python\Python311\;C:\Users\dgera\AppData\Local\Microsoft\WindowsApps;C:\Users\dgera\AppData\Local\Programs\Ollama;C:\Users\dgera\.lmstudio\bin;C:\Users\dgera\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\dgera\AppData\Roaming\npm;C:\Users\dgera\AppData\Local\Microsoft\WindowsApps;C:\Projects\Reference Projects\apache-maven-3.9.9\apache-maven\src\bin;
+extensionHostProcess.js:216
+No HTTP proxy configured for the agent process.
+extensionHostProcess.js:216
+No CA certificates configured for the agent process.
+extensionHostProcess.js:216
+running C:\Users\dgera\AppData\Local\Programs\Microsoft VS Code\Code.exe, c:\Users\dgera\.vscode\extensions\google.geminicodeassist-2.59.0\agent\a2a-server.mjs with {"ACSetupSvcPort":"23210","ACSvcPort":"17532","ALLUSERSPROFILE":"C:\\ProgramData","APPDATA":"C:\\Users\\dgera\\AppData\\Roaming","APPLICATIONINSIGHTS_CONFIGURATION_CONTENT":"{}","APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL":"1","APPLICATION_INSIGHTS_NO_STATSBEAT":"true","CHROME_CRASHPAD_PIPE_NAME":"\\\\.\\pipe\\crashpad_8080_VDLMOBTTLDFQDGKB","COMPUTERNAME":"TUFBOOK","ChocolateyInstall":"C:\\ProgramData\\chocolatey","ChocolateyLastPathUpdate":"133888718735678949","ComSpec":"C:\\WINDOWS\\system32\\cmd.exe","CommonProgramFiles":"C:\\Program Files\\Common Files","CommonProgramFiles(x86)":"C:\\Program Files (x86)\\Common Files","CommonProgramW6432":"C:\\Program Files\\Common Files","DriverData":"C:\\Windows\\System32\\Drivers\\DriverData","ELECTRON_NO_ATTACH_CONSOLE":"1","ELECTRON_RUN_AS_NODE":"1","EnableLog":"INFO","HOMEDRIVE":"C:","HOMEPATH":"\\Users\\dgera","JAVA_HOME":"C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\","LOCALAPPDATA":"C:\\Users\\dgera\\AppData\\Local","LOGONSERVER":"\\\\TUFBOOK","NUMBER_OF_PROCESSORS":"16","ORIGINAL_XDG_CURRENT_DESKTOP":"undefined","OS":"Windows_NT","OculusBase":"C:\\Program Files\\Oculus\\","OneDrive":"C:\\Users\\dgera\\OneDrive","OneDriveConsumer":"C:\\Users\\dgera\\OneDrive","PATHEXT":".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL","PROCESSOR_ARCHITECTURE":"AMD64","PROCESSOR_IDENTIFIER":"AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD","PROCESSOR_LEVEL":"25","PROCESSOR_REVISION":"4401","PROMPT":"$P$G","PSModulePath":"C:\\Users\\dgera\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules","PUBLIC":"C:\\Users\\Public","Path":"C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\bin;C:\\Program Files\\Oculus\\Support\\oculus-runtime;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\Program Files\\dotnet\\;C:\\Program Files\\Process Lasso\\;C:\\Program Files\\GitHub CLI\\;C:\\Users\\dgera\\AppData\\Local\\Muse Hub\\lib;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Git\\cmd;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\dgera\\AppData\\Local\\Programs\\Ollama;C:\\Users\\dgera\\.lmstudio\\bin;C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\dgera\\AppData\\Roaming\\npm;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Projects\\Reference Projects\\apache-maven-3.9.9\\apache-maven\\src\\bin;","ProgramData":"C:\\ProgramData","ProgramFiles":"C:\\Program Files","ProgramFiles(x86)":"C:\\Program Files (x86)","ProgramW6432":"C:\\Program Files","RlsSvcPort":"22112","SESSIONNAME":"Console","SystemDrive":"C:","SystemRoot":"C:\\WINDOWS","TEMP":"C:\\Users\\dgera\\AppData\\Local\\Temp","TMP":"C:\\Users\\dgera\\AppData\\Local\\Temp","USERDOMAIN":"TUFBOOK","USERDOMAIN_ROAMINGPROFILE":"TUFBOOK","USERNAME":"dgera","USERPROFILE":"C:\\Users\\dgera","VSCODE_CLI":"1","VSCODE_CRASH_REPORTER_PROCESS_TYPE":"extensionHost","VSCODE_CWD":"C:\\Projects\\DCE","VSCODE_ESM_ENTRYPOINT":"vs/workbench/api/node/extensionHostProcess","VSCODE_HANDLES_UNCAUGHT_ERRORS":"true","VSCODE_IPC_HOOK":"\\\\.\\pipe\\173d0207-1.106.3-main-sock","VSCODE_NLS_CONFIG":"{\"userLocale\":\"en-us\",\"osLocale\":\"en-us\",\"resolvedLanguage\":\"en\",\"defaultMessagesFile\":\"C:\\\\Users\\\\dgera\\\\AppData\\\\Local\\\\Programs\\\\Microsoft VS Code\\\\resources\\\\app\\\\out\\\\nls.messages.json\",\"locale\":\"en-us\",\"availableLanguages\":{}}","VSCODE_PID":"8080","WSLENV":"WT_SESSION:WT_PROFILE_ID:","WT_PROFILE_ID":"{61c54bbd-c2c6-5271-96e7-009a87ff44bf}","WT_SESSION":"4a75fc0e-7073-4063-8026-5b475b969b10","windir":"C:\\WINDOWS","GEMINI_YOLO_MODE":"false","DEBUG":"false","SURFACE":"VSCode","USE_CCPA":"1","GOOGLE_APPLICATION_CREDENTIALS":"C:\\Users\\dgera\\AppData\\Local\\google-vscode-extension\\auth\\application_default_credentials.json","GOOGLE_CLOUD_PROJECT":"opportune-galaxy-9vgdw","PATH":"C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\bin;C:\\Program Files\\Oculus\\Support\\oculus-runtime;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\Program Files\\dotnet\\;C:\\Program Files\\Process Lasso\\;C:\\Program Files\\GitHub CLI\\;C:\\Users\\dgera\\AppData\\Local\\Muse Hub\\lib;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Git\\cmd;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\;C:\\Users\\dgera\\AppData\\Local\\Programs\\Python\\Python311\\;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\dgera\\AppData\\Local\\Programs\\Ollama;C:\\Users\\dgera\\.lmstudio\\bin;C:\\Users\\dgera\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\dgera\\AppData\\Roaming\\npm;C:\\Users\\dgera\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Projects\\Reference Projects\\apache-maven-3.9.9\\apache-maven\\src\\bin;"}
+extensionHostProcess.js:216
+Get to https://cloudcode-pa.googleapis.com/v1internal:loadCodeAssist response: {"currentTier":{"id":"standard-tier","name":"Gemini Code Assist","description":"Unlimited coding assistant with the most powerful Gemini models","userDefinedCloudaicompanionProject":true,"privacyNotice":{},"quotaTier":"standard-tier"},"allowedTiers":[{"id":"standard-tier","name":"Gemini Code Assist","description":"Unlimited coding assistant with the most powerful Gemini models","userDefinedCloudaicompanionProject":true,"privacyNotice":{},"isDefault":true,"quotaTier":"standard-tier"}],"cloudaicompanionProject":"opportune-galaxy-9vgdw","gcpManaged":false,"manageSubscriptionUri":"https://accounts.google.com/AccountChooser?Email=dgerabagi%40gmail.com&continue=https%3A%2F%2Fone.google.com%2Fsettings","releaseChannel":{"type":"EXPERIMENTAL","name":"Preview Channel"},"g1Tier":"g1-ultra-tier"}, headers: {"x-cloudaicompanion-trace-id":["66ec863449868762"],"content-type":["application/json; charset=UTF-8"],"vary":["Origin, X-Origin, Referer"],"content-encoding":["gzip"],"date":["Wed, 03 Dec 2025 00:14:11 GMT"],"server":["ESF"],"x-xss-protection":["0"],"x-frame-options":["SAMEORIGIN"],"x-content-type-options":["nosniff"],"server-timing":["gfet5t7;dur=98, gfet4t7; dur=142"],"alt-svc":["h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"],"connection":["close"],"transfer-encoding":["chunked"]}
+extensionHostProcess.js:216
+LoadCodeAssistResponse: {"currentTier":{"id":"standard-tier","name":"Gemini Code Assist","description":"Unlimited coding assistant with the most powerful Gemini models","userDefinedCloudaicompanionProject":true,"privacyNotice":{},"quotaTier":"standard-tier"},"allowedTiers":[{"id":"standard-tier","name":"Gemini Code Assist","description":"Unlimited coding assistant with the most powerful Gemini models","userDefinedCloudaicompanionProject":true,"privacyNotice":{},"isDefault":true,"quotaTier":"standard-tier"}],"cloudaicompanionProject":"opportune-galaxy-9vgdw","gcpManaged":false,"manageSubscriptionUri":"https://accounts.google.com/AccountChooser?Email=dgerabagi%40gmail.com&continue=https%3A%2F%2Fone.google.com%2Fsettings","releaseChannel":{"type":"EXPERIMENTAL","name":"Preview Channel"},"g1Tier":"g1-ultra-tier"}
+extensionHostProcess.js:216
+3
+callClient: client not ready
+extensionHostProcess.js:216
+service/healthcheck {projectID: 'opportune-galaxy-9vgdw'} Bd {a: false, b: null}
+extensionHostProcess.js:216
+3
+callClient: client not ready
+extensionHostProcess.js:216
+Successfully notified LS of local agent server start
+extensionHostProcess.js:216
+Using existing C:\Users\dgera\AppData\Local\cloud-code\cloudcode_cli\cloudcode_cli\d70766b\cloudcode_cli.exe)
+extensionHostProcess.js:216
+isByoidContext false
+extensionHostProcess.js:216
+Starting AIPP Language Client
+extensionHostProcess.js:216
+Language server state changed from Stopped to Starting
+extensionHostProcess.js:216
+Language server state changed from Starting to Running
+extensionHostProcess.js:216
+AIPP Language Client Started
+extensionHostProcess.js:216
+Created the Gemini Code Assist completion provider
+extensionHostProcess.js:216
+Language client state is Running
+extensionHostProcess.js:216
+Successfully notified LS of local agent server start
+extensionHostProcess.js:216
+Client experimentation flags:  {enableQuickpickChat: true, enableEventsPipelinePolling: false, enableAdminCitationBlock: false, enableFlashCompletionsClientPostprocessing: false, enableFreeTier: true, …}
+extensionHostProcess.js:216
+Client experimentation flags:  {enableQuickpickChat: true, enableEventsPipelinePolling: false, enableAdminCitationBlock: false, enableFlashCompletionsClientPostprocessing: false, enableFreeTier: true, …}
+extensionHostProcess.js:216
+Client experimentation flags:  {enableQuickpickChat: true, enableEventsPipelinePolling: false, enableAdminCitationBlock: false, enableFlashCompletionsClientPostprocessing: false, enableFreeTier: true, …}
+extensionHostProcess.js:216
+service/healthcheck {projectID: 'opportune-galaxy-9vgdw'} Bd {a: false, b: null}
+extensionHostProcess.js:216
+service/healthcheck {projectID: 'opportune-galaxy-9vgdw'} Bd {a: false, b: null}
+extensionHostProcess.js:216
+Event polling service is already started or not enabled.
+extensionHostProcess.js:216
+Done activating plugin Gemini Code Assist, took 8687.8405ms
+extensionHostProcess.js:216
+Startup phase Activate.StartExperimentation.PluginActivate finished in 8684ms
+extensionHostProcess.js:216
+Startup phase Activate.GcloudStateContext starting
+extensionHostProcess.js:216
+Startup phase Activate.GcloudStateContext finished in 3ms
+extensionHostProcess.js:216
+Startup phase Activate.CheckUpdate starting
+extensionHostProcess.js:216
+Startup phase Activate.CheckUpdate finished in 0ms
+extensionHostProcess.js:216
+Startup phase Activate.StartExperimentation.PluginActivate.GlobalActivate finished in 8692ms
+extensionHostProcess.js:216
+Startup phase Activate.Postactivate starting
+extensionHostProcess.js:216
+Startup phase Activate.Postactivate finished in 0ms
+extensionHostProcess.js:216
+Generating listings...
+extensionHostProcess.js:216
+Startup phase Activate finished in 9723ms
+extensionHostProcess.js:216
+Extension activated
+</debug console logs>
+<2. dev environment output logs>
+[INFO] [6:17:35 PM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [6:17:35 PM] Services initializing...
+[ERROR] [6:17:35 PM] Failed to initialize database: Error: The module '\\?\c:\Projects\DCE\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 127. This version of Node.js requires
+NODE_MODULE_VERSION 136. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+[INFO] [6:17:35 PM] Services initialized successfully.
+[INFO] [6:17:35 PM] Registering 7 commands.
+[INFO] [6:17:35 PM] Context Chooser view message handler initialized.
+[INFO] [6:17:35 PM] Starry Night syntax highlighter initialized.
+[INFO] [6:17:36 PM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [6:17:36 PM] [SelectionService] Found 644 paths in persisted state. Validating...
+[INFO] [6:17:36 PM] [SelectionService] Returning 644 valid paths.
+[INFO] [6:17:36 PM] Persisted current selection of 644 items.
+[INFO] [6:17:40 PM] Received RequestExcelToText for: c:/Projects/altered-galaxy/packages/ag-client/public/data/sectors.csv
+[INFO] [6:17:40 PM] [Excel] Processing: c:/Projects/altered-galaxy/packages/ag-client/public/data/sectors.csv
+[INFO] [6:17:40 PM] Excel Parsed and cached: sectors.csv (344 tokens)
+[INFO] [6:19:14 PM] Executing dce.openParallelCopilot command to open WebviewPanel.
+[INFO] [6:19:14 PM] Parallel Co-Pilot view message handler initialized.
+[INFO] [6:19:15 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:19:15 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:19:30 PM] Executing dce.openSettingsPanel command.
+[INFO] [6:19:30 PM] Settings view message handler initialized.
+[INFO] [6:19:31 PM] Attempting to read README from extension path: c:\Projects\DCE\README.md
+[INFO] [6:19:31 PM] Attempting to read CHANGELOG from extension path: c:\Projects\DCE\CHANGELOG.md
+[INFO] [6:19:39 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:19:39 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [6:22:46 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [6:22:49 PM] Received RequestExcelToText for: c:/Projects/altered-galaxy/packages/ag-client/public/data/sectors.csv
+[INFO] [6:22:49 PM] Excel served from cache: c:/Projects/altered-galaxy/packages/ag-client/public/data/sectors.csv
+</2. dev environment output logs>
+</Ephemeral Context>
+<Previous Cycle 119 Summary of Actions>
+I have analyzed the critical data loss issue caused by the brittle, monolithic `dce_history.json` file. The root cause is the race condition and lack of atomicity when writing large JSON files to disk during autosaves.
+
+My course of action is to implement a robust **SQLite** database solution as requested. This will transition the "Source of Truth" for the project's state from a single, fragile text file to a transactional database engine. I will use `better-sqlite3` for high performance and synchronous operations, which fits the extension's architecture well.
+
+I will create a new `DatabaseService` to handle the SQLite connection, schema initialization, and data migration. I will then refactor the `HistoryService` to use this database instead of the file system, ensuring that `dce_history.json` is retired as a live storage medium and repurposed solely for import/export operations.
+
+**Note:** This is a significant architectural change. You will need to install the `better-sqlite3` dependency.
+
+1.  **Documentation (Planning):** Create `A118. DCE - Database Integration Plan.md` to map out the schema, migration strategy, and service architecture. Update `A0` to include it.
+2.  **Dependency Management:** Update `package.json` to include `better-sqlite3`.
+3.  **New Backend Service (`database.service.ts`):** Implement the `DatabaseService`.
+    *   **Initialization:** Open/create `.vscode/dce.db`.
+    *   **Schema:** Create tables for `key_value_store` (project scope), `cycles`, and `responses`.
+    *   **Migration:** Implement logic to detect an existing `dce_history.json`, import its data into the DB, and rename the JSON file to `.bak`.
+    *   **CRUD:** Provide methods for saving/loading cycles and responses.
+4.  **Refactor `HistoryService`:** Rewrite `history.service.ts` to consume `DatabaseService`.
+    *   Replace `_readHistoryFile` and `_writeHistoryFile` with DB queries.
+    *   Update `saveCycleData` to perform an `UPSERT` on the `cycles` and `responses` tables.
+    *   Update `getInitialCycle` and `getCycleData` to query the DB.
+    *   Update `getFullHistory` to reconstruct the full history object from the DB for `prompt.service` compatibility.
+    *   Refactor Import/Export to convert between the DB and the legacy JSON format.
+5.  **Service Integration:** Update `services.ts` to instantiate `DatabaseService` and inject it where needed.
+</Previous Cycle 119 Summary of Actions>
+</Cycle 120>
 
 <Cycle 119>
 <Cycle Context>
@@ -5638,10 +5869,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T00:00:49.500Z
+  Date Generated: 2025-12-03T00:26:53.744Z
   ---
   Total Files: 209
-  Approx. Tokens: 358095
+  Approx. Tokens: 361289
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5762,7 +5993,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 303 - Chars: 12211 - Tokens: 3053
+106. src\backend\services\history.service.ts - Lines: 303 - Chars: 12214 - Tokens: 3054
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
@@ -5821,7 +6052,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 13 - Chars: 558 - Tokens: 140
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 119 - Chars: 12814 - Tokens: 3204
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -5858,14 +6089,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 199. src\Artifacts\aiascent-dev-A7-Development-and-Testing-Guide.md - Lines: 48 - Chars: 1658 - Tokens: 415
 200. src\Artifacts\aiascent-dev-A9-GitHub-Repository-Setup-Guide.md - Lines: 68 - Chars: 2465 - Tokens: 617
 201. src\Artifacts\A117. DCE - FAQ for aiascent.dev Knowledge Base.md - Lines: 164 - Chars: 12446 - Tokens: 3112
-202. webpack.config.js - Lines: 112 - Chars: 3098 - Tokens: 775
+202. webpack.config.js - Lines: 113 - Chars: 3039 - Tokens: 760
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 205. package.json - Lines: 172 - Chars: 5617 - Tokens: 1405
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
-208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 90 - Chars: 4702 - Tokens: 1176
-209. src\backend\services\database.service.ts - Lines: 290 - Chars: 13446 - Tokens: 3362
+208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 93 - Chars: 5056 - Tokens: 1264
+209. src\backend\services\database.service.ts - Lines: 292 - Chars: 13671 - Tokens: 3418
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -13896,7 +14127,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C118 (Migrate to DatabaseService)
+// Updated on: C119 (Cleanup legacy file I/O logic)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -21837,16 +22068,122 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C94 (Add Onboarding Spinner race condition)
+# Updated on: C119 (Add Webpack Native Module Hang)
 
 ## 1. Purpose
 
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
 
 ---
-old cases removed (deprecated)
+
+### Case Study 023: Webpack Build Hangs on PreLaunch Task with Native Modules
+
+-   **Artifacts Affected:** `webpack.config.js`
+-   **Cycles Observed:** C119
+-   **Symptom:** When attempting to launch the extension (F5), VS Code hangs indefinitely with the message `Waiting for preLaunch Task "watch"...`. The terminal running the webpack task never reports "compiled successfully" or hangs silently.
+-   **Root Cause Analysis (RCA):** The project introduced `better-sqlite3`, which is a native Node.js module (C++ bindings). Webpack, by default, attempts to bundle all imported dependencies into a single JavaScript file (`dist/extension.js`). It cannot bundle binary native modules. This causes the build process to fail or hang, preventing the task from signaling completion to VS Code.
+-   **Codified Solution & Best Practice:**
+    1.  Identify any dependencies that rely on native binaries (e.g., `better-sqlite3`, `sqlite3`, `canvas`).
+    2.  In `webpack.config.js`, add these modules to the `externals` configuration object.
+    3.  Use the format `'module-name': 'commonjs module-name'`. This instructs Webpack to leave the `require('module-name')` statement intact in the output bundle, allowing the runtime (Node.js) to load the module directly from `node_modules`.
+
+---
+
+### Case Study 022: Parallel Requests Fail with ETIMEDOUT (Regression)
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C113, C115, C116
+-   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
+-   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a limited pool of sockets for concurrent connections to a single origin. When the application tries to open several long-lived streaming connections at once, the later requests can time out while waiting for a socket to become available. This is a recurring issue, indicating that previous fixes were not consistently applied.
+-   **Codified Solution & Best Practice:**
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP/HTTPS requests to a single host from a Node.js backend, do not rely on the default agent.
+    2.  Use a dedicated agent library like `agentkeepalive` to create a single, shared `HttpsAgent` instance at the module level.
+    3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
+    4.  **Crucially, ensure this custom agent is passed to *all* relevant `fetch` calls within the service to guarantee it is used for every request.**
+
+---
+
+### Case Study 021: Incorrect Un-escaping of Double-Escaped JSON String Content
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C115
+-   **Symptom:** When parsing a JSON response from the vLLM, the final content in the UI is corrupted with extra backslashes. For example, newlines appear as `\` instead of being processed, and quotes appear as `\"` or `\\"`.
+-   **Root Cause Analysis (RCA):** The LLM, when generating a JSON object as a string, sometimes "double-escapes" characters within its string values to ensure they are valid. For example, a newline becomes `\\n` and a quote becomes `\\\"`. The parser's logic for handling this was flawed. `JSON.parse` correctly handles the first level of escaping, but the subsequent manual `.replace()` calls in the hybrid parser were too simplistic and did not correctly handle the remaining escape sequences, leading to the visual artifacts.
+-   **Codified Solution & Best Practice:**
+    1.  When processing string values from an LLM-generated JSON, assume they may be double-escaped.
+    2.  Implement a robust, multi-step un-escaping sequence. The correct order is to first replace `\\\\` with `\\` (to handle literal backslashes), then replace `\\n` with a newline, `\\t` with a tab, and finally `\\"` with `"`.
+    3.  This sequence, applied after the main JSON structure is parsed, correctly reduces the escape levels and produces a clean, readable string for the UI.
+
+---
+
+### Case Study 020: Parallel Onboarding Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `llm.service.ts`, `OnboardingView.tsx`, `useGeneration.ts`, `view.tsx`
+-   **Cycles Observed:** C113, C115 (Regression)
+-   **Symptom:** When clicking "Generate Initial Responses" from the onboarding view with the number of responses set to > 1, only one response is successfully generated. The other requests fail with `connect ETIMEDOUT` errors in the logs.
+-   **Root Cause Analysis (RCA):** This is a complex issue with two contributing factors.
+    1.  **State Mismatch:** The `OnboardingView.tsx` component managed its own local state for the `responseCount`. This was separate from the `tabCount` state managed by the main PCPP view. While the value was correctly passed to the backend, this state divergence made the system harder to debug and reason about.
+    2.  **Connection Pooling:** The underlying issue is the `ETIMEDOUT` error, which indicates a client-side bottleneck in establishing concurrent connections to the proxy server, despite a previous fix (`agentkeepalive`) intended to solve this. Unifying the state is a prerequisite to ensure the correct parameters are being sent before further debugging of the connection pooling issue can be effective.
+-   **Codified Solution & Best Practice:**
+    1.  Avoid state divergence for critical parameters. The number of responses should be a single piece of state managed by a higher-order component or hook (`view.tsx` or `useGeneration.ts`). This state should be passed down as props to any child component that needs to read or modify it, ensuring a single source of truth.
+    2.  The `ETIMEDOUT` error points to a persistent issue with Node.js connection pooling in the extension host environment. The `agentkeepalive` solution needs to be re-verified or a different strategy for managing parallel long-lived connections may be required.
+
+---
+
+### Case Study 019: Backend SSE Parser Fails on Fragmented Data Chunks
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C108, C109, C110, C114
+-   **Symptom:** The DCE output log is flooded with `Could not parse JSON object from stream` warnings during response generation. The final response content is often corrupted or incomplete.
+-   **Root Cause Analysis (RCA):** The stream consumer in `llm.service.ts` was not correctly buffering incoming data from the vLLM server. It processed each `data` event from the stream as if it contained one or more complete, newline-terminated messages. However, a single logical SSE message from the server can be fragmented and sent across multiple TCP packets, resulting in the `data` event firing with an incomplete piece of a message. The parser would then attempt to parse this incomplete fragment, which is invalid JSON, leading to the error.
+-   **Codified Solution & Best Practice:**
+    1.  Stream consumers for protocols like SSE must be designed to handle fragmented messages. They cannot assume that each `data` event contains a complete message.
+    2.  The correct implementation is to maintain a persistent buffer outside the `stream.on('data')` handler.
+    3.  Each incoming chunk should be appended to this buffer.
+    4.  The buffer should then be processed in a loop, searching for the standard SSE message terminator (`\n\n`).
+    5.  Only the complete messages found before the terminator should be extracted and parsed. Any remaining text after the last terminator is an incomplete message and must be kept in the buffer to be prepended to the next incoming chunk.
+
+---
+
+### Case Study 018: Parallel Fetch Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C113
+-   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
+-   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a pool of sockets for connections. While the default `maxSockets` is technically `Infinity`, in practice, factors within the execution environment (like VS Code's extension host) can lead to exhaustion or delays in acquiring new sockets for concurrent requests to the same origin. When the application tries to open several connections at once, the later requests can time out while waiting for a socket to become available.
+-   **Codified Solution & Best Practice:**
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
+    2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
+    3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
+    4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
+
+---
+
+### Case Study 017: Parser Appears to Corrupt Newline Sequences
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112, C113
+-   **Symptom:** Valid double-newline sequences (`\n\n`) in the raw AI response are being rendered incorrectly in the UI as `n\n`. This indicates that a backslash is being stripped at some point during parsing or sanitization.
+-   **Root Cause Analysis (RCA):** The exact cause is unclear, but the primary suspect is an overly aggressive string replacement intended to fix a different model-specific quirk (`n\n`). The logic is likely misinterpreting or incorrectly modifying valid newline escape sequences. A definitive RCA requires observing the data transformation.
+-   **Codified Solution & Best Practice:**
+    1.  When debugging a string manipulation or parsing issue where the output is corrupted, the first step is to inject logging to trace the data's state at each step of the transformation.
+    2.  Add `logger.log` statements in the parser to output the string immediately after it's received and after each significant `replace()` or sanitization operation.
+    3.  This "before and after" logging provides an unambiguous view of how the data is being altered, allowing for the precise correction of the faulty logic.
+
+---
+
+### Case Study 016: Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112
+-   **Symptom:** When parsing a JSON response from the LLM, the final file content in the UI is corrupted. It shows extra `n` characters, for example, rendering `wordn\n` instead of `word\n`, or `wordn- list item` instead of `word\n- list item`.
+-   **Root Cause Analysis (RCA):** The LLM, when instructed to produce JSON output, is not perfectly consistent in how it represents newlines within string values. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts an extra literal `n` character immediately before the newline (`...wordn\n...`) or before a markdown formatting character (`...wordn- list item...`). The existing parser correctly handled the standard `\n` but did not have a sanitization step to clean up these spurious `n` characters, causing them to be passed through to the final rendered output.
+-   **Codified Solution & Best Practice:**
+    1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
+    2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
+    3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -30905,6 +31242,7 @@ const extensionConfig = {
     },
     externals: {
         vscode: 'commonjs vscode',
+        'better-sqlite3': 'commonjs better-sqlite3'
     },
 };
 
@@ -31270,6 +31608,7 @@ All notable changes to the "Data Curation Environment" extension will be documen
 # Artifact A118: DCE - Database Integration Plan
 # Date Created: C118
 # Author: AI Model & Curator
+# Updated on: C119 (Add Webpack external configuration)
 
 - **Key/Value for A0:**
 - **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
@@ -31294,6 +31633,7 @@ The `dce_history.json` format will be retained solely for **Import/Export** func
 ### 3.1. Database Technology
 -   **Library:** `better-sqlite3`. This library provides a synchronous API that is highly performant and fits well with the VS Code extension architecture (running in the Node.js Extension Host).
 -   **File Location:** `.vscode/dce.db` (inside the user's workspace).
+-   **Build Configuration (C119):** Because `better-sqlite3` is a native Node.js module, it **must** be excluded from the Webpack bundle. We will add it to the `externals` section of `webpack.config.js`.
 
 ### 3.2. Schema Design
 
@@ -31348,18 +31688,21 @@ Stores the AI responses associated with each cycle.
 ## 4. Implementation Plan
 
 1.  **Install Dependency:** `npm install better-sqlite3` (Curator action).
-2.  **Create `DatabaseService`:** Implement the connection, schema creation, migration logic, and CRUD operations.
-3.  **Refactor `HistoryService`:**
+2.  **Configure Webpack:** Update `webpack.config.js` to add `better-sqlite3` to `externals`.
+3.  **Create `DatabaseService`:** Implement the connection, schema creation, migration logic, and CRUD operations.
+4.  **Refactor `HistoryService`:**
     *   Remove file system calls for `.json`.
     *   Inject `DatabaseService`.
     *   Replace `_readHistoryFile` with a method that queries the DB and reconstructs the `PcppHistoryFile` object (to maintain compatibility with `PromptService`).
     *   Replace `saveCycleData` with atomic DB updates (`UPSERT`).
     *   Implement `handleExportHistory` to dump the DB back to JSON format.
     *   Implement `handleImportHistory` to wipe the DB and load from JSON.
-4.  **Update `Services`:** Register the new service.
+5.  **Update `Services`:** Register the new service.
 </file_artifact>
 
 <file path="src/backend/services/database.service.ts">
+// src/backend/services/database.service.ts
+// Updated on: C119 (Move path logic to initialize)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -31371,22 +31714,20 @@ export class DatabaseService {
     private db: Database.Database | null = null;
     private dbPath: string | undefined;
 
-    constructor() {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (workspaceFolders && workspaceFolders.length > 0) {
-            const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
-            if (!fs.existsSync(vscodeDir)) {
-                fs.mkdirSync(vscodeDir);
-            }
-            this.dbPath = path.join(vscodeDir, 'dce.db');
-        }
-    }
+    constructor() {}
 
     public initialize() {
-        if (!this.dbPath) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             Services.loggerService.warn("No workspace open, database cannot be initialized.");
             return;
         }
+
+        const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
+        if (!fs.existsSync(vscodeDir)) {
+            fs.mkdirSync(vscodeDir);
+        }
+        this.dbPath = path.join(vscodeDir, 'dce.db');
 
         try {
             this.db = new Database(this.dbPath);
@@ -31560,7 +31901,8 @@ export class DatabaseService {
             title: cycleRow.title,
             timestamp: cycleRow.timestamp,
             cycleContext: cycleRow.cycle_context,
-            ephemeralContext: cycleRow.ephemeral_context,
+            ephemeral_context: cycleRow.ephemeral_context, // Map DB column to type
+            ephemeralContext: cycleRow.ephemeral_context, // Handle both casing if needed, or map correctly
             tabCount: cycleRow.tab_count,
             activeTab: cycleRow.active_tab,
             isParsedMode: !!cycleRow.is_parsed_mode,
@@ -31570,6 +31912,7 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
+            connectionMode: cycleRow.connection_mode,
             responses
         };
     }

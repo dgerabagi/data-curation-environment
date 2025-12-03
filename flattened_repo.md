@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T00:00:49.500Z
+  Date Generated: 2025-12-03T00:26:53.744Z
   ---
   Total Files: 209
-  Approx. Tokens: 358095
+  Approx. Tokens: 361289
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -125,7 +125,7 @@
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 303 - Chars: 12211 - Tokens: 3053
+106. src\backend\services\history.service.ts - Lines: 303 - Chars: 12214 - Tokens: 3054
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 13 - Chars: 558 - Tokens: 140
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 119 - Chars: 12814 - Tokens: 3204
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -221,14 +221,14 @@
 199. src\Artifacts\aiascent-dev-A7-Development-and-Testing-Guide.md - Lines: 48 - Chars: 1658 - Tokens: 415
 200. src\Artifacts\aiascent-dev-A9-GitHub-Repository-Setup-Guide.md - Lines: 68 - Chars: 2465 - Tokens: 617
 201. src\Artifacts\A117. DCE - FAQ for aiascent.dev Knowledge Base.md - Lines: 164 - Chars: 12446 - Tokens: 3112
-202. webpack.config.js - Lines: 112 - Chars: 3098 - Tokens: 775
+202. webpack.config.js - Lines: 113 - Chars: 3039 - Tokens: 760
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
 205. package.json - Lines: 172 - Chars: 5617 - Tokens: 1405
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
-208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 90 - Chars: 4702 - Tokens: 1176
-209. src\backend\services\database.service.ts - Lines: 290 - Chars: 13446 - Tokens: 3362
+208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 93 - Chars: 5056 - Tokens: 1264
+209. src\backend\services\database.service.ts - Lines: 292 - Chars: 13671 - Tokens: 3418
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8259,7 +8259,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C118 (Migrate to DatabaseService)
+// Updated on: C119 (Cleanup legacy file I/O logic)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -16200,16 +16200,122 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C94 (Add Onboarding Spinner race condition)
+# Updated on: C119 (Add Webpack Native Module Hang)
 
 ## 1. Purpose
 
-This document serves as a living record of persistent or complex bugs that have recurred during development. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" that can be referenced to prevent the same mistakes from being reintroduced into the codebase.
+This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
 
 ---
-old cases removed (deprecated)
+
+### Case Study 023: Webpack Build Hangs on PreLaunch Task with Native Modules
+
+-   **Artifacts Affected:** `webpack.config.js`
+-   **Cycles Observed:** C119
+-   **Symptom:** When attempting to launch the extension (F5), VS Code hangs indefinitely with the message `Waiting for preLaunch Task "watch"...`. The terminal running the webpack task never reports "compiled successfully" or hangs silently.
+-   **Root Cause Analysis (RCA):** The project introduced `better-sqlite3`, which is a native Node.js module (C++ bindings). Webpack, by default, attempts to bundle all imported dependencies into a single JavaScript file (`dist/extension.js`). It cannot bundle binary native modules. This causes the build process to fail or hang, preventing the task from signaling completion to VS Code.
+-   **Codified Solution & Best Practice:**
+    1.  Identify any dependencies that rely on native binaries (e.g., `better-sqlite3`, `sqlite3`, `canvas`).
+    2.  In `webpack.config.js`, add these modules to the `externals` configuration object.
+    3.  Use the format `'module-name': 'commonjs module-name'`. This instructs Webpack to leave the `require('module-name')` statement intact in the output bundle, allowing the runtime (Node.js) to load the module directly from `node_modules`.
+
+---
+
+### Case Study 022: Parallel Requests Fail with ETIMEDOUT (Regression)
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C113, C115, C116
+-   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
+-   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a limited pool of sockets for concurrent connections to a single origin. When the application tries to open several long-lived streaming connections at once, the later requests can time out while waiting for a socket to become available. This is a recurring issue, indicating that previous fixes were not consistently applied.
+-   **Codified Solution & Best Practice:**
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP/HTTPS requests to a single host from a Node.js backend, do not rely on the default agent.
+    2.  Use a dedicated agent library like `agentkeepalive` to create a single, shared `HttpsAgent` instance at the module level.
+    3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
+    4.  **Crucially, ensure this custom agent is passed to *all* relevant `fetch` calls within the service to guarantee it is used for every request.**
+
+---
+
+### Case Study 021: Incorrect Un-escaping of Double-Escaped JSON String Content
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C115
+-   **Symptom:** When parsing a JSON response from the vLLM, the final content in the UI is corrupted with extra backslashes. For example, newlines appear as `\` instead of being processed, and quotes appear as `\"` or `\\"`.
+-   **Root Cause Analysis (RCA):** The LLM, when generating a JSON object as a string, sometimes "double-escapes" characters within its string values to ensure they are valid. For example, a newline becomes `\\n` and a quote becomes `\\\"`. The parser's logic for handling this was flawed. `JSON.parse` correctly handles the first level of escaping, but the subsequent manual `.replace()` calls in the hybrid parser were too simplistic and did not correctly handle the remaining escape sequences, leading to the visual artifacts.
+-   **Codified Solution & Best Practice:**
+    1.  When processing string values from an LLM-generated JSON, assume they may be double-escaped.
+    2.  Implement a robust, multi-step un-escaping sequence. The correct order is to first replace `\\\\` with `\\` (to handle literal backslashes), then replace `\\n` with a newline, `\\t` with a tab, and finally `\\"` with `"`.
+    3.  This sequence, applied after the main JSON structure is parsed, correctly reduces the escape levels and produces a clean, readable string for the UI.
+
+---
+
+### Case Study 020: Parallel Onboarding Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `llm.service.ts`, `OnboardingView.tsx`, `useGeneration.ts`, `view.tsx`
+-   **Cycles Observed:** C113, C115 (Regression)
+-   **Symptom:** When clicking "Generate Initial Responses" from the onboarding view with the number of responses set to > 1, only one response is successfully generated. The other requests fail with `connect ETIMEDOUT` errors in the logs.
+-   **Root Cause Analysis (RCA):** This is a complex issue with two contributing factors.
+    1.  **State Mismatch:** The `OnboardingView.tsx` component managed its own local state for the `responseCount`. This was separate from the `tabCount` state managed by the main PCPP view. While the value was correctly passed to the backend, this state divergence made the system harder to debug and reason about.
+    2.  **Connection Pooling:** The underlying issue is the `ETIMEDOUT` error, which indicates a client-side bottleneck in establishing concurrent connections to the proxy server, despite a previous fix (`agentkeepalive`) intended to solve this. Unifying the state is a prerequisite to ensure the correct parameters are being sent before further debugging of the connection pooling issue can be effective.
+-   **Codified Solution & Best Practice:**
+    1.  Avoid state divergence for critical parameters. The number of responses should be a single piece of state managed by a higher-order component or hook (`view.tsx` or `useGeneration.ts`). This state should be passed down as props to any child component that needs to read or modify it, ensuring a single source of truth.
+    2.  The `ETIMEDOUT` error points to a persistent issue with Node.js connection pooling in the extension host environment. The `agentkeepalive` solution needs to be re-verified or a different strategy for managing parallel long-lived connections may be required.
+
+---
+
+### Case Study 019: Backend SSE Parser Fails on Fragmented Data Chunks
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C108, C109, C110, C114
+-   **Symptom:** The DCE output log is flooded with `Could not parse JSON object from stream` warnings during response generation. The final response content is often corrupted or incomplete.
+-   **Root Cause Analysis (RCA):** The stream consumer in `llm.service.ts` was not correctly buffering incoming data from the vLLM server. It processed each `data` event from the stream as if it contained one or more complete, newline-terminated messages. However, a single logical SSE message from the server can be fragmented and sent across multiple TCP packets, resulting in the `data` event firing with an incomplete piece of a message. The parser would then attempt to parse this incomplete fragment, which is invalid JSON, leading to the error.
+-   **Codified Solution & Best Practice:**
+    1.  Stream consumers for protocols like SSE must be designed to handle fragmented messages. They cannot assume that each `data` event contains a complete message.
+    2.  The correct implementation is to maintain a persistent buffer outside the `stream.on('data')` handler.
+    3.  Each incoming chunk should be appended to this buffer.
+    4.  The buffer should then be processed in a loop, searching for the standard SSE message terminator (`\n\n`).
+    5.  Only the complete messages found before the terminator should be extracted and parsed. Any remaining text after the last terminator is an incomplete message and must be kept in the buffer to be prepended to the next incoming chunk.
+
+---
+
+### Case Study 018: Parallel Fetch Requests Fail with ETIMEDOUT
+
+-   **Artifacts Affected:** `src/backend/services/llm.service.ts`
+-   **Cycles Observed:** C113
+-   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
+-   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a pool of sockets for connections. While the default `maxSockets` is technically `Infinity`, in practice, factors within the execution environment (like VS Code's extension host) can lead to exhaustion or delays in acquiring new sockets for concurrent requests to the same origin. When the application tries to open several connections at once, the later requests can time out while waiting for a socket to become available.
+-   **Codified Solution & Best Practice:**
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
+    2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
+    3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
+    4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.
+
+---
+
+### Case Study 017: Parser Appears to Corrupt Newline Sequences
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112, C113
+-   **Symptom:** Valid double-newline sequences (`\n\n`) in the raw AI response are being rendered incorrectly in the UI as `n\n`. This indicates that a backslash is being stripped at some point during parsing or sanitization.
+-   **Root Cause Analysis (RCA):** The exact cause is unclear, but the primary suspect is an overly aggressive string replacement intended to fix a different model-specific quirk (`n\n`). The logic is likely misinterpreting or incorrectly modifying valid newline escape sequences. A definitive RCA requires observing the data transformation.
+-   **Codified Solution & Best Practice:**
+    1.  When debugging a string manipulation or parsing issue where the output is corrupted, the first step is to inject logging to trace the data's state at each step of the transformation.
+    2.  Add `logger.log` statements in the parser to output the string immediately after it's received and after each significant `replace()` or sanitization operation.
+    3.  This "before and after" logging provides an unambiguous view of how the data is being altered, allowing for the precise correction of the faulty logic.
+
+---
+
+### Case Study 016: Parser Fails to Sanitize Inconsistent Newlines from LLM JSON Output
+
+-   **Artifacts Affected:** `src/client/utils/response-parser.ts`
+-   **Cycles Observed:** C112
+-   **Symptom:** When parsing a JSON response from the LLM, the final file content in the UI is corrupted. It shows extra `n` characters, for example, rendering `wordn\n` instead of `word\n`, or `wordn- list item` instead of `word\n- list item`.
+-   **Root Cause Analysis (RCA):** The LLM, when instructed to produce JSON output, is not perfectly consistent in how it represents newlines within string values. While it correctly uses the `\n` escape sequence for most newlines, it sometimes erroneously inserts an extra literal `n` character immediately before the newline (`...wordn\n...`) or before a markdown formatting character (`...wordn- list item...`). The existing parser correctly handled the standard `\n` but did not have a sanitization step to clean up these spurious `n` characters, causing them to be passed through to the final rendered output.
+-   **Codified Solution & Best Practice:**
+    1.  Parsers for LLM output must be defensive and should include sanitization steps to handle common, minor formatting errors and model-specific quirks.
+    2.  After parsing the main structure (e.g., via `JSON.parse`), apply a series of targeted regular expression replacements to the string content to clean up known inconsistencies.
+    3.  For this specific issue, add a replacement for the pattern `n\n` -> `\n` to correct the malformed newlines without affecting legitimate uses of the letter 'n' in the text.
 </file_artifact>
 
 <file path="src/Artifacts/A101. DCE - Asynchronous Generation and State Persistence Plan.md">
@@ -25268,6 +25374,7 @@ const extensionConfig = {
     },
     externals: {
         vscode: 'commonjs vscode',
+        'better-sqlite3': 'commonjs better-sqlite3'
     },
 };
 
@@ -25633,6 +25740,7 @@ All notable changes to the "Data Curation Environment" extension will be documen
 # Artifact A118: DCE - Database Integration Plan
 # Date Created: C118
 # Author: AI Model & Curator
+# Updated on: C119 (Add Webpack external configuration)
 
 - **Key/Value for A0:**
 - **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
@@ -25657,6 +25765,7 @@ The `dce_history.json` format will be retained solely for **Import/Export** func
 ### 3.1. Database Technology
 -   **Library:** `better-sqlite3`. This library provides a synchronous API that is highly performant and fits well with the VS Code extension architecture (running in the Node.js Extension Host).
 -   **File Location:** `.vscode/dce.db` (inside the user's workspace).
+-   **Build Configuration (C119):** Because `better-sqlite3` is a native Node.js module, it **must** be excluded from the Webpack bundle. We will add it to the `externals` section of `webpack.config.js`.
 
 ### 3.2. Schema Design
 
@@ -25711,18 +25820,21 @@ Stores the AI responses associated with each cycle.
 ## 4. Implementation Plan
 
 1.  **Install Dependency:** `npm install better-sqlite3` (Curator action).
-2.  **Create `DatabaseService`:** Implement the connection, schema creation, migration logic, and CRUD operations.
-3.  **Refactor `HistoryService`:**
+2.  **Configure Webpack:** Update `webpack.config.js` to add `better-sqlite3` to `externals`.
+3.  **Create `DatabaseService`:** Implement the connection, schema creation, migration logic, and CRUD operations.
+4.  **Refactor `HistoryService`:**
     *   Remove file system calls for `.json`.
     *   Inject `DatabaseService`.
     *   Replace `_readHistoryFile` with a method that queries the DB and reconstructs the `PcppHistoryFile` object (to maintain compatibility with `PromptService`).
     *   Replace `saveCycleData` with atomic DB updates (`UPSERT`).
     *   Implement `handleExportHistory` to dump the DB back to JSON format.
     *   Implement `handleImportHistory` to wipe the DB and load from JSON.
-4.  **Update `Services`:** Register the new service.
+5.  **Update `Services`:** Register the new service.
 </file_artifact>
 
 <file path="src/backend/services/database.service.ts">
+// src/backend/services/database.service.ts
+// Updated on: C119 (Move path logic to initialize)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -25734,22 +25846,20 @@ export class DatabaseService {
     private db: Database.Database | null = null;
     private dbPath: string | undefined;
 
-    constructor() {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (workspaceFolders && workspaceFolders.length > 0) {
-            const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
-            if (!fs.existsSync(vscodeDir)) {
-                fs.mkdirSync(vscodeDir);
-            }
-            this.dbPath = path.join(vscodeDir, 'dce.db');
-        }
-    }
+    constructor() {}
 
     public initialize() {
-        if (!this.dbPath) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             Services.loggerService.warn("No workspace open, database cannot be initialized.");
             return;
         }
+
+        const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
+        if (!fs.existsSync(vscodeDir)) {
+            fs.mkdirSync(vscodeDir);
+        }
+        this.dbPath = path.join(vscodeDir, 'dce.db');
 
         try {
             this.db = new Database(this.dbPath);
@@ -25923,7 +26033,8 @@ export class DatabaseService {
             title: cycleRow.title,
             timestamp: cycleRow.timestamp,
             cycleContext: cycleRow.cycle_context,
-            ephemeralContext: cycleRow.ephemeral_context,
+            ephemeral_context: cycleRow.ephemeral_context, // Map DB column to type
+            ephemeralContext: cycleRow.ephemeral_context, // Handle both casing if needed, or map correctly
             tabCount: cycleRow.tab_count,
             activeTab: cycleRow.active_tab,
             isParsedMode: !!cycleRow.is_parsed_mode,
@@ -25933,6 +26044,7 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
+            connectionMode: cycleRow.connection_mode,
             responses
         };
     }

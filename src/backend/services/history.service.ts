@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C118 (Migrate to DatabaseService)
+// Updated on: C119 (Cleanup legacy file I/O logic)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';

@@ -51,6 +51,7 @@ const extensionConfig = {
     },
     externals: {
         vscode: 'commonjs vscode',
+        'better-sqlite3': 'commonjs better-sqlite3'
     },
 };
 

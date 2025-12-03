@@ -1,3 +1,5 @@
+// src/backend/services/database.service.ts
+// Updated on: C119 (Move path logic to initialize)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -9,22 +11,20 @@ export class DatabaseService {
     private db: Database.Database | null = null;
     private dbPath: string | undefined;
 
-    constructor() {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (workspaceFolders && workspaceFolders.length > 0) {
-            const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
-            if (!fs.existsSync(vscodeDir)) {
-                fs.mkdirSync(vscodeDir);
-            }
-            this.dbPath = path.join(vscodeDir, 'dce.db');
-        }
-    }
+    constructor() {}
 
     public initialize() {
-        if (!this.dbPath) {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders || workspaceFolders.length === 0) {
             Services.loggerService.warn("No workspace open, database cannot be initialized.");
             return;
         }
+
+        const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
+        if (!fs.existsSync(vscodeDir)) {
+            fs.mkdirSync(vscodeDir);
+        }
+        this.dbPath = path.join(vscodeDir, 'dce.db');
 
         try {
             this.db = new Database(this.dbPath);
@@ -198,7 +198,8 @@ export class DatabaseService {
             title: cycleRow.title,
             timestamp: cycleRow.timestamp,
             cycleContext: cycleRow.cycle_context,
-            ephemeralContext: cycleRow.ephemeral_context,
+            ephemeral_context: cycleRow.ephemeral_context, // Map DB column to type
+            ephemeralContext: cycleRow.ephemeral_context, // Handle both casing if needed, or map correctly
             tabCount: cycleRow.tab_count,
             activeTab: cycleRow.active_tab,
             isParsedMode: !!cycleRow.is_parsed_mode,
@@ -208,6 +209,7 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
+            connectionMode: cycleRow.connection_mode,
             responses
         };
     }
