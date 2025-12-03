@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 118 - pivot to idea to solve for the brittle dce_history.json autosave occasionally causing total cycle data loss
+Current Cycle 119 - trying to implement sqlite
+Cycle 118 - pivot to idea to solve for the brittle dce_history.json autosave occasionally causing total cycle data loss
 Cycle 117 - new website to promote dce
 Cycle 116 - finalize local llm, encryption, ui adjustment
 Cycle 115 - more parsing adjustments
@@ -324,7 +325,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C118 (Consolidate A117 FAQ artifacts)
+# Updated on: C118 (Add A118 Database Plan)
 
 ## 1. Purpose
 
@@ -766,6 +767,10 @@ No project scope defined.
 - **Description:** A comprehensive, consolidated Frequently Asked Questions (FAQ) document to serve as the primary knowledge base for the `aiascent.dev` website's RAG chatbot, Ascentia.
 - **Tags:** documentation, faq, knowledge base, rag, user guide
 
+### A118. DCE - Database Integration Plan
+- **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
+- **Tags:** plan, architecture, database, sqlite, persistence, data integrity
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -852,6 +857,34 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 119>
+<Cycle Context>
+okay, i encountered no issues with this command: `npm install better-sqlite3`
+
+its been a minute since i've developed in this environment, is there anything i need to do beyond that, other than completely Stopping the debug environment running the dev version of the DCE, and press F5 again to restart it? then it 'ought' to be in the 'database mode'?
+
+okay, that's what i did, now it just seems to be `Waiting for preLaunch Task "watch"...`, i can click `Debug Anyway`, `Configure Task`, or `Abort`. 
+
+imo, 50/50 chance, either im doing something wrong, or the implementation is not yet finished
+</Cycle Context>
+<Previous Cycle 118 Summary of Actions>
+I have analyzed the 11 provided FAQ artifacts and the request to consolidate them into a single, comprehensive, and de-duplicated document. My course of action is to first systematically categorize all unique questions from the provided documents. I will then merge the answers for similar questions, ensuring the final text is coherent and complete.
+
+During this process, I will address two specific requirements from the prompt. First, I will correct the installation instructions to accurately describe the process of installing a `.vsix` file within VS Code. Second, I will ensure the final FAQ clarifies that the "Manual Mode" of the DCE is free to use with tools like Google's AI Studio, distinguishing it from paid, API-based solutions.
+
+Finally, I will generate a new, single artifact, `A117. DCE - FAQ for aiascent.dev Knowledge Base`, containing the consolidated content and update the master artifact list to reflect this change, deprecating the now-redundant individual FAQ files.
+
+1.  **Categorize and Collect:** Read through all 11 `A117.x` artifacts and group all questions into logical categories (e.g., General Concepts, Installation, Core Workflow, Features, Troubleshooting).
+2.  **De-duplicate Questions:** For each category, identify similar or duplicate questions and select the best-phrased version to serve as the canonical question.
+3.  **Synthesize Answers:** Combine the information from the answers of all similar questions into a single, comprehensive, and well-written answer for each canonical question.
+4.  **Incorporate Specific Instructions:**
+    *   Find the "How do I install?" question and replace its answer with the correct procedure for installing a `.vsix` file, as requested.
+    *   Find or create a question regarding cost (e.g., "Is DCE free?") and explicitly mention that the manual workflow can be used with free tools like AI Studio, contrasting this with API-based methods that incur costs.
+5.  **Assemble New Artifact:** Create a new artifact, `A117. DCE - FAQ for aiascent.dev Knowledge Base.md`, and assemble the de-duplicated questions and synthesized answers into a single, logically ordered document.
+6.  **Update Master Artifact List:** Update `A0. DCE Master Artifact List.md` to replace the previous `A117` entry with the new, consolidated FAQ artifact.
+</Previous Cycle 118 Summary of Actions>
+</Cycle 119>
 
 <Cycle 118>
 <Cycle Context>
@@ -5605,10 +5638,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-02T22:53:38.246Z
+  Date Generated: 2025-12-03T00:00:49.500Z
   ---
-  Total Files: 207
-  Approx. Tokens: 354446
+  Total Files: 209
+  Approx. Tokens: 358095
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5616,7 +5649,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (9297 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (9234 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7090 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
 8. src\backend\services\file-operation.service.ts (4526 tokens)
@@ -5624,7 +5657,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 10. src\client\views\parallel-copilot.view\view.tsx (4376 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 528 - Chars: 37187 - Tokens: 9297
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 532 - Chars: 36936 - Tokens: 9234
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -5729,12 +5762,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 362 - Chars: 15614 - Tokens: 3904
+106. src\backend\services\history.service.ts - Lines: 303 - Chars: 12211 - Tokens: 3053
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
-111. src\backend\services\services.ts - Lines: 48 - Chars: 2245 - Tokens: 562
+111. src\backend\services\services.ts - Lines: 51 - Chars: 2436 - Tokens: 609
 112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
 113. src\backend\types\git.ts - Lines: 79 - Chars: 1944 - Tokens: 486
 114. src\client\components\file-tree\FileTree.tsx - Lines: 176 - Chars: 11127 - Tokens: 2782
@@ -5828,15 +5861,17 @@ This file-centric approach helps in planning and prioritizing work, especially i
 202. webpack.config.js - Lines: 112 - Chars: 3098 - Tokens: 775
 203. tsconfig.json - Lines: 27 - Chars: 632 - Tokens: 158
 204. README.md - Lines: 28 - Chars: 2456 - Tokens: 614
-205. package.json - Lines: 169 - Chars: 5705 - Tokens: 1427
+205. package.json - Lines: 172 - Chars: 5617 - Tokens: 1405
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 38 - Chars: 2614 - Tokens: 654
+208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 90 - Chars: 4702 - Tokens: 1176
+209. src\backend\services\database.service.ts - Lines: 290 - Chars: 13446 - Tokens: 3362
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C118 (Consolidate A117 FAQ artifacts)
+# Updated on: C118 (Add A118 Database Plan)
 
 ## 1. Purpose
 
@@ -6277,6 +6312,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A117. DCE - FAQ for aiascent.dev Knowledge Base
 - **Description:** A comprehensive, consolidated Frequently Asked Questions (FAQ) document to serve as the primary knowledge base for the `aiascent.dev` website's RAG chatbot, Ascentia.
 - **Tags:** documentation, faq, knowledge base, rag, user guide
+
+### A118. DCE - Database Integration Plan
+- **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
+- **Tags:** plan, architecture, database, sqlite, persistence, data integrity
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -13857,7 +13896,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C96 (Fix new cycle title bug)
+// Updated on: C118 (Migrate to DatabaseService)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -13871,7 +13910,6 @@ import { getContext } from '@/extension';
 const LAST_VIEWED_CYCLE_ID_KEY = 'dce.lastViewedCycleId';
 
 export class HistoryService {
-    private historyFilePath: string | undefined;
     private workspaceRoot: string | undefined;
 
     private get context(): vscode.ExtensionContext {
@@ -13882,51 +13920,14 @@ export class HistoryService {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
             this.workspaceRoot = workspaceFolders[0].uri.fsPath;
-            this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         }
     }
 
-    private async _readHistoryFile(): Promise<PcppHistoryFile> {
-        if (!this.historyFilePath) return { version: 1, cycles: [] };
-        try {
-            const content = await vscode.workspace.fs.readFile(vscode.Uri.file(this.historyFilePath));
-            return JSON.parse(Buffer.from(content).toString('utf-8'));
-        } catch (error) {
-            return { version: 1, cycles: [] };
-        }
-    }
-
-    private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {
-        if (!this.historyFilePath) return;
-
-        if (!data || !Array.isArray(data.cycles) || (data.cycles.length === 0 && data.projectScope === undefined)) {
-            const errorMessage = `[CRITICAL] Aborting write to dce_history.json: Data is invalid or empty.`;
-            Services.loggerService.error(errorMessage);
-            try {
-                if (this.workspaceRoot) {
-                    const logFilePath = path.join(this.workspaceRoot, 'log-state-logs.md');
-                    const logContent = `## DATA LOSS PREVENTION TRIGGERED ##\n\n**Timestamp:** ${new Date().toISOString()}\n\n**Reason:** Attempted to write an invalid or empty history object to dce_history.json. The write operation was aborted.\n\n**Problematic State Object:**\n\`\`\`json\n${JSON.stringify(data, null, 2)}\n\`\`\`\n`;
-                    await fs.writeFile(logFilePath, logContent, 'utf-8');
-                    Services.loggerService.log(`[CRITICAL] The invalid state object has been logged to log-state-logs.md`);
-                }
-            } catch (logError) {
-                Services.loggerService.error(`[CRITICAL] Failed to write data loss log: ${logError}`);
-            }
-            return;
-        }
-
-        const dir = path.dirname(this.historyFilePath);
-        try {
-            await vscode.workspace.fs.createDirectory(vscode.Uri.file(dir));
-            const content = Buffer.from(JSON.stringify(data, null, 2), 'utf-8');
-            await vscode.workspace.fs.writeFile(vscode.Uri.file(this.historyFilePath), content);
-        } catch (error) {
-            Services.loggerService.error(`Failed to write to dce_history.json: ${error}`);
-        }
-    }
-
+    // Reconstructs the full history object from the DB to maintain compatibility with PromptService
     public async getFullHistory(): Promise<PcppHistoryFile> {
-        return await this._readHistoryFile();
+        const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
+        const cycles = Services.databaseService.getAllCycles();
+        return { version: 1, projectScope, cycles };
     }
 
     public async saveLastViewedCycleId(id: number | null): Promise<void> {
@@ -13942,7 +13943,6 @@ export class HistoryService {
             return { cycleId: -1, timestamp: '', title: '', cycleContext: '', ephemeralContext: '', responses: {} };
         }
 
-        const history = await this._readHistoryFile();
         let isFreshEnvironment = true;
         try {
             await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/DCE_README.md')));
@@ -13973,39 +13973,40 @@ export class HistoryService {
              return defaultCycle;
         }
 
-        if (history.cycles.length === 0) {
-            const newHistory = { ...history, cycles: [defaultCycle] };
-            await this._writeHistoryFile(newHistory);
+        const cycles = Services.databaseService.getAllCycles();
+
+        if (cycles.length === 0) {
+            Services.databaseService.saveCycle(defaultCycle);
             return defaultCycle;
         }
 
         const lastViewedId = this.getLastViewedCycleId();
-        const cycleMap = new Map(history.cycles.map(c => [c.cycleId, c]));
+        const cycleMap = new Map(cycles.map(c => [c.cycleId, c]));
 
         if (lastViewedId !== undefined && cycleMap.has(lastViewedId)) {
             return cycleMap.get(lastViewedId)!;
         }
         
-        const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
+        const latestCycle = cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
         return latestCycle;
     }
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         if (cycleId === 0) {
-            const history = await this._readHistoryFile();
+            const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
             };
         }
-
-        const history = await this._readHistoryFile();
-        return history.cycles.find(c => c.cycleId === cycleId) || null;
+        return Services.databaseService.getCycle(cycleId);
     }
 
     public async saveProjectScope(scope: string): Promise<void> {
-        const history = await this._readHistoryFile();
-        history.projectScope = scope;
-        await this._writeHistoryFile(history);
+        Services.databaseService.setGlobalValue('project_scope', scope);
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
+        }
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
@@ -14014,17 +14015,7 @@ export class HistoryService {
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
         } else {
-            const history = await this._readHistoryFile();
-            const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
-
-            if (cycleIndex > -1) {
-                history.cycles[cycleIndex] = cycleData;
-            } else {
-                history.cycles.push(cycleData);
-            }
-            
-            history.cycles.sort((a, b) => a.cycleId - b.cycleId);
-            await this._writeHistoryFile(history);
+            Services.databaseService.saveCycle(cycleData);
         }
 
         if (serverIpc) {
@@ -14033,18 +14024,21 @@ export class HistoryService {
     }
 
     public async createNewCyclePlaceholder(tabCount: number): Promise<{ newCycle: PcppCycle; newMaxCycle: number; }> {
-        const history = await this._readHistoryFile();
-        const newCycleId = (history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
+        const cycles = Services.databaseService.getAllCycles();
+        const newCycleId = (cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
 
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
             newResponses[(i+1).toString()] = { content: '', status: 'generating' };
         }
+        
+        // Get default connection mode from settings
+        const settings = await Services.settingsService.getSettings();
 
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'New Cycle', // FIX: Do not programmatically set "Generating..."
+            title: 'New Cycle',
             cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
@@ -14052,63 +14046,46 @@ export class HistoryService {
             isParsedMode: true,
             status: 'generating',
             isEphemeralContextCollapsed: true,
+            connectionMode: settings.connectionMode, // Initialize with global default
         };
 
-        history.cycles.push(newCycle);
-        await this._writeHistoryFile(history);
+        Services.databaseService.saveCycle(newCycle);
         Services.loggerService.log(`Created new placeholder cycle ${newCycleId}.`);
         
         return { newCycle, newMaxCycle: newCycleId };
     }
     
     public async finalizeCycleStatus(cycleId: number): Promise<void> {
-        Services.loggerService.log(`[History] Finalizing status for cycle ${cycleId}.`);
-        const history = await this._readHistoryFile();
-        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {
             cycle.status = 'complete';
-            // Do not change title here, let user control it
-            await this._writeHistoryFile(history);
+            Services.databaseService.saveCycle(cycle);
             Services.loggerService.log(`[History] Cycle ${cycleId} status set to 'complete'.`);
-        } else {
-            Services.loggerService.warn(`[History] Could not find cycle ${cycleId} to finalize.`);
         }
     }
 
     public async updateCycleWithResponses(cycleId: number, responses: PcppResponse[]): Promise<void> {
-        const history = await this._readHistoryFile();
-        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleId);
-
-        if (cycleIndex > -1) {
-            const cycle = history.cycles[cycleIndex];
+        const cycle = Services.databaseService.getCycle(cycleId);
+        if (cycle) {
             Object.keys(cycle.responses).forEach((tabId, index) => {
                 if (responses[index]) {
-                    // Overwrite the placeholder with the rich response object
                     cycle.responses[tabId] = responses[index];
                 }
             });
-            await this._writeHistoryFile(history);
-            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses and their metrics.`);
-        } else {
-            Services.loggerService.error(`Could not find placeholder cycle ${cycleId} to update with responses.`);
+            Services.databaseService.saveCycle(cycle);
+            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses.`);
         }
     }
 
     public async updateSingleResponseInCycle(cycleId: number, tabId: string, newResponse: PcppResponse | null): Promise<void> {
-        const history = await this._readHistoryFile();
-        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {
             if (newResponse !== null) {
                 cycle.responses[tabId] = newResponse;
-                Services.loggerService.log(`Updated response content and metrics for tab ${tabId} in cycle ${cycleId}.`);
             } else {
-                // This means we are starting a regeneration
                 cycle.responses[tabId] = { content: '', status: 'generating' };
-                Services.loggerService.log(`Starting regeneration for tab ${tabId} in cycle ${cycleId}.`);
             }
-            await this._writeHistoryFile(history);
-        } else {
-            Services.loggerService.error(`Could not find cycle ${cycleId} to update response.`);
+            Services.databaseService.saveCycle(cycle);
         }
     }
 
@@ -14120,21 +14097,20 @@ export class HistoryService {
         );
 
         if (confirmation !== "Delete") {
-            const history = await this._readHistoryFile();
-            return history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+            const cycles = Services.databaseService.getAllCycles();
+            return cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
         }
         
-        let history = await this._readHistoryFile();
-        if (history.cycles.length <= 1) {
+        const cycles = Services.databaseService.getAllCycles();
+        if (cycles.length <= 1) {
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
             return 1;
         }
 
-        history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
-        await this._writeHistoryFile(history);
+        Services.databaseService.deleteCycle(cycleId);
         
-        const updatedHistory = await this._readHistoryFile();
-        const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+        const updatedCycles = Services.databaseService.getAllCycles();
+        const newMaxCycle = updatedCycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
 
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
@@ -14154,27 +14130,21 @@ export class HistoryService {
             return;
         }
 
-        if (this.historyFilePath) {
-            try {
-                await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
-                await this.saveLastViewedCycleId(null);
-                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
-                if (serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
-                }
-            } catch (error) {
-                Services.loggerService.error(`Failed to delete dce_history.json: ${error}`);
-            }
+        Services.databaseService.reset();
+        await this.saveLastViewedCycleId(null);
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
         }
     }
 
     public async handleExportHistory() {
-        if (!this.historyFilePath || !this.workspaceRoot) {
-            vscode.window.showErrorMessage("History file path not found.");
+        if (!this.workspaceRoot) {
+            vscode.window.showErrorMessage("No workspace open.");
             return;
         }
         try {
-            const historyContent = await this._readHistoryFile();
+            const historyContent = await this.getFullHistory();
             const saveUri = await vscode.window.showSaveDialog({
                 defaultUri: vscode.Uri.file(path.join(this.workspaceRoot, 'dce_history_export.json')),
                 filters: { 'JSON': ['json'] }
@@ -14189,8 +14159,8 @@ export class HistoryService {
     }
 
     public async handleImportHistory() {
-        if (!this.historyFilePath) {
-            vscode.window.showErrorMessage("History file path not found.");
+        if (!this.workspaceRoot) {
+            vscode.window.showErrorMessage("No workspace open.");
             return;
         }
         try {
@@ -14202,7 +14172,17 @@ export class HistoryService {
                 const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
-                    await this._writeHistoryFile(historyData);
+                    // Wipe DB and load from JSON
+                    Services.databaseService.reset();
+                    
+                    if (historyData.projectScope) {
+                        Services.databaseService.setGlobalValue('project_scope', historyData.projectScope);
+                    }
+                    
+                    for (const cycle of historyData.cycles) {
+                        Services.databaseService.saveCycle(cycle);
+                    }
+
                     await this.saveLastViewedCycleId(null);
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
                     const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
@@ -15086,6 +15066,7 @@ import { GitService } from "./git.service";
 import { ResponseContentProvider } from "../providers/ResponseContentProvider";
 import { SettingsService } from "./settings.service";
 import { LlmService } from "./llm.service";
+import { DatabaseService } from "./database.service";
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -15097,6 +15078,7 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
+    public databaseService = new DatabaseService(); // Init first
     public historyService!: HistoryService;
     public promptService!: PromptService;
     public gitService = new GitService();
@@ -15108,6 +15090,7 @@ class ServiceContainer {
     public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
         this.context = context;
         this.loggerService.log("Services initializing...");
+        this.databaseService.initialize(); // Initialize DB connection
         this.promptService = new PromptService(context.extensionUri);
         this.historyService = new HistoryService();
         this.fileTreeService = new FileTreeService(gitApi);
@@ -31156,7 +31139,7 @@ To run the extension locally for development:
                 }
             ],
             "activityBar/view/title": [
-                 {
+                {
                     "command": "dce.showParallelCopilot",
                     "when": "viewContainer == dce-parallel-copilot-container"
                 }
@@ -31171,47 +31154,49 @@ To run the extension locally for development:
         "lint": "eslint src --ext ts"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.24.7",
+        "@babel/preset-typescript": "^7.24.7",
+        "@types/better-sqlite3": "^7.6.10",
         "@types/node": "18.x",
+        "@types/path-browserify": "^1.0.2",
+        "@types/prismjs": "^1.26.4",
+        "@types/react-dom": "^18.3.0",
         "@types/vscode": "^1.90.0",
         "@typescript-eslint/eslint-plugin": "^7.7.1",
         "@typescript-eslint/parser": "^7.7.1",
+        "babel-loader": "^9.1.3",
+        "copy-webpack-plugin": "^12.0.2",
+        "css-loader": "^7.1.2",
         "eslint": "^8.57.0",
+        "mini-css-extract-plugin": "^2.9.0",
+        "path-browserify": "^1.0.1",
+        "postcss-loader": "^8.1.1",
+        "process": "^0.11.10",
+        "sass": "^1.78.0",
+        "sass-loader": "^16.0.1",
+        "style-loader": "^4.0.0",
         "ts-loader": "^9.5.1",
         "typescript": "^5.4.5",
         "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "copy-webpack-plugin": "^12.0.2",
-        "mini-css-extract-plugin": "^2.9.0",
-        "style-loader": "^4.0.0",
-        "css-loader": "^7.1.2",
-        "sass-loader": "^16.0.1",
-        "sass": "^1.78.0",
-        "postcss-loader": "^8.1.1",
-        "babel-loader": "^9.1.3",
-        "@babel/preset-react": "^7.24.7",
-        "@babel/preset-typescript": "^7.24.7",
-        "process": "^0.11.10",
-        "path-browserify": "^1.0.1",
-        "@types/prismjs": "^1.26.4",
-        "@types/react-dom": "^18.3.0",
-        "@types/path-browserify": "^1.0.2"
+        "webpack-cli": "^5.1.4"
     },
     "dependencies": {
-        "agentkeepalive": "^4.5.0",
+        "@types/diff": "^5.2.1",
         "@wooorm/starry-night": "^3.8.0",
+        "agentkeepalive": "^4.5.0",
+        "better-sqlite3": "^9.6.0",
+        "diff": "^5.2.0",
         "hast-util-to-html": "^9.0.1",
+        "mammoth": "^1.8.0",
+        "node-fetch": "^2.6.7",
+        "pdf-parse": "^1.1.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-icons": "^5.3.0",
         "react-markdown": "^9.0.1",
-        "rxjs": "^7.8.1",
         "reflect-metadata": "^0.2.2",
-        "pdf-parse": "^1.1.1",
-        "xlsx": "^0.18.5",
-        "mammoth": "^1.8.0",
-        "diff": "^5.2.0",
-        "@types/diff": "^5.2.1",
-        "node-fetch": "^2.6.7"
+        "rxjs": "^7.8.1",
+        "xlsx": "^0.18.5"
     }
 }
 </file_artifact>
@@ -31279,6 +31264,392 @@ All notable changes to the "Data Curation Environment" extension will be documen
 ### Fixed
 - **Command Registration:** Fixed a critical activation error caused by a command being registered twice.
 - **Exclusion List:** `tsconfig.tsbuildinfo` and `dist` directories are now correctly excluded from selection and the flattened context.
+</file_artifact>
+
+<file path="src/Artifacts/A118. DCE - Database Integration Plan.md">
+# Artifact A118: DCE - Database Integration Plan
+# Date Created: C118
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to transition from the brittle `dce_history.json` file to a robust SQLite database for managing cycle history, solving data loss issues.
+- **Tags:** plan, architecture, database, sqlite, persistence, data integrity
+
+## 1. Problem Statement
+
+The current persistence mechanism relies on a single, monolithic JSON file (`.vscode/dce_history.json`). As the project history grows, this file becomes large (potentially 100MB+). The "autosave" feature writes this entire file to disk on every significant change (debounced). This approach has critical flaws:
+
+1.  **Race Conditions:** Rapid navigation or edits can trigger multiple writes, leading to data loss if a write is interrupted or if the in-memory state is stale when a write occurs.
+2.  **Performance:** Serializing and writing a huge JSON string is CPU and I/O intensive, causing UI freezes (flashing) and lag.
+3.  **Fragility:** A single write error can corrupt the entire history.
+
+## 2. The Solution: SQLite Database
+
+We will replace the live `dce_history.json` with a local SQLite database (`.vscode/dce.db`). SQLite is transactional, atomic, and efficient for partial updates. This ensures that saving a single response or updating a cycle title does not require rewriting the entire history.
+
+The `dce_history.json` format will be retained solely for **Import/Export** functionality, allowing users to share or backup their projects.
+
+## 3. Technical Architecture
+
+### 3.1. Database Technology
+-   **Library:** `better-sqlite3`. This library provides a synchronous API that is highly performant and fits well with the VS Code extension architecture (running in the Node.js Extension Host).
+-   **File Location:** `.vscode/dce.db` (inside the user's workspace).
+
+### 3.2. Schema Design
+
+**Table: `key_value_store`**
+Stores global project settings and state.
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `key` | TEXT | PRIMARY KEY | E.g., 'project_scope', 'last_viewed_cycle_id' |
+| `value` | TEXT | | JSON stringified value |
+
+**Table: `cycles`**
+Stores the metadata for each development cycle.
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | INTEGER | PRIMARY KEY | The Cycle ID (0, 1, 2...) |
+| `title` | TEXT | | |
+| `timestamp` | TEXT | | ISO string |
+| `cycle_context` | TEXT | | |
+| `ephemeral_context` | TEXT | | |
+| `tab_count` | INTEGER | | |
+| `active_tab` | INTEGER | | |
+| `is_parsed_mode` | INTEGER | | Boolean (0/1) |
+| `is_sorted_by_tokens` | INTEGER | | Boolean (0/1) |
+| `selected_response_id` | TEXT | | |
+| `left_pane_width` | INTEGER | | |
+| `status` | TEXT | | 'generating' | 'complete' |
+| `connection_mode` | TEXT | | 'manual' | 'demo' | 'url' |
+| `active_workflow_step` | TEXT | | |
+| `is_ephemeral_context_collapsed` | INTEGER | | Boolean (0/1) |
+
+**Table: `responses`**
+Stores the AI responses associated with each cycle.
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `cycle_id` | INTEGER | | Foreign Key -> cycles.id |
+| `tab_id` | TEXT | | '1', '2', etc. |
+| `content` | TEXT | | Raw response content |
+| `status` | TEXT | | 'pending' | 'generating' | 'complete' | ... |
+| `start_time` | INTEGER | | Timestamp |
+| `end_time` | INTEGER | | Timestamp |
+| `thinking_tokens` | INTEGER | | |
+| `response_tokens` | INTEGER | | |
+| PRIMARY KEY | (`cycle_id`, `tab_id`) | | Composite Key |
+
+### 3.3. Migration Strategy
+
+1.  **Detection:** On startup, the `DatabaseService` checks for `.vscode/dce.db`.
+2.  **Import:** If the DB is missing but `dce_history.json` exists, it reads the JSON and populates the DB tables.
+3.  **Archive:** After successful import, it renames `dce_history.json` to `dce_history.json.bak`.
+4.  **Initialization:** If neither exists, it initializes an empty DB with the schema.
+
+## 4. Implementation Plan
+
+1.  **Install Dependency:** `npm install better-sqlite3` (Curator action).
+2.  **Create `DatabaseService`:** Implement the connection, schema creation, migration logic, and CRUD operations.
+3.  **Refactor `HistoryService`:**
+    *   Remove file system calls for `.json`.
+    *   Inject `DatabaseService`.
+    *   Replace `_readHistoryFile` with a method that queries the DB and reconstructs the `PcppHistoryFile` object (to maintain compatibility with `PromptService`).
+    *   Replace `saveCycleData` with atomic DB updates (`UPSERT`).
+    *   Implement `handleExportHistory` to dump the DB back to JSON format.
+    *   Implement `handleImportHistory` to wipe the DB and load from JSON.
+4.  **Update `Services`:** Register the new service.
+</file_artifact>
+
+<file path="src/backend/services/database.service.ts">
+import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
+import Database from 'better-sqlite3';
+import { Services } from './services';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
+
+export class DatabaseService {
+    private db: Database.Database | null = null;
+    private dbPath: string | undefined;
+
+    constructor() {
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (workspaceFolders && workspaceFolders.length > 0) {
+            const vscodeDir = path.join(workspaceFolders[0].uri.fsPath, '.vscode');
+            if (!fs.existsSync(vscodeDir)) {
+                fs.mkdirSync(vscodeDir);
+            }
+            this.dbPath = path.join(vscodeDir, 'dce.db');
+        }
+    }
+
+    public initialize() {
+        if (!this.dbPath) {
+            Services.loggerService.warn("No workspace open, database cannot be initialized.");
+            return;
+        }
+
+        try {
+            this.db = new Database(this.dbPath);
+            this.db.pragma('journal_mode = WAL');
+            this.createTables();
+            this.migrateFromLegacyJson();
+            Services.loggerService.log(`Database initialized at ${this.dbPath}`);
+        } catch (error) {
+            Services.loggerService.error(`Failed to initialize database: ${error}`);
+        }
+    }
+
+    private createTables() {
+        if (!this.db) return;
+
+        this.db.exec(`
+            CREATE TABLE IF NOT EXISTS key_value_store (
+                key TEXT PRIMARY KEY,
+                value TEXT
+            );
+
+            CREATE TABLE IF NOT EXISTS cycles (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                timestamp TEXT,
+                cycle_context TEXT,
+                ephemeral_context TEXT,
+                tab_count INTEGER,
+                active_tab INTEGER,
+                is_parsed_mode INTEGER,
+                is_sorted_by_tokens INTEGER,
+                selected_response_id TEXT,
+                left_pane_width INTEGER,
+                status TEXT,
+                connection_mode TEXT,
+                active_workflow_step TEXT,
+                is_ephemeral_context_collapsed INTEGER
+            );
+
+            CREATE TABLE IF NOT EXISTS responses (
+                cycle_id INTEGER,
+                tab_id TEXT,
+                content TEXT,
+                status TEXT,
+                start_time INTEGER,
+                thinking_end_time INTEGER,
+                end_time INTEGER,
+                thinking_tokens INTEGER,
+                response_tokens INTEGER,
+                parsed_content TEXT, -- JSON string
+                PRIMARY KEY (cycle_id, tab_id),
+                FOREIGN KEY (cycle_id) REFERENCES cycles(id) ON DELETE CASCADE
+            );
+        `);
+    }
+
+    private migrateFromLegacyJson() {
+        if (!this.db || !this.dbPath) return;
+        
+        const jsonPath = path.join(path.dirname(this.dbPath), 'dce_history.json');
+        if (!fs.existsSync(jsonPath)) return;
+
+        // Check if DB is empty
+        const row = this.db.prepare('SELECT count(*) as count FROM cycles').get() as { count: number };
+        if (row.count > 0) return; // Already populated
+
+        Services.loggerService.log("Migrating legacy dce_history.json to SQLite...");
+        
+        try {
+            const content = fs.readFileSync(jsonPath, 'utf-8');
+            const history = JSON.parse(content);
+
+            if (history.projectScope) {
+                this.setGlobalValue('project_scope', history.projectScope);
+            }
+
+            const insertCycle = this.db.prepare(`
+                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed)
+                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed)
+            `);
+
+            const insertResponse = this.db.prepare(`
+                INSERT INTO responses (cycle_id, tab_id, content, status, start_time, thinking_end_time, end_time, thinking_tokens, response_tokens, parsed_content)
+                VALUES (@cycleId, @tabId, @content, @status, @startTime, @thinkingEndTime, @endTime, @thinkingTokens, @responseTokens, @parsedContent)
+            `);
+
+            const transaction = this.db.transaction((cycles: PcppCycle[]) => {
+                for (const cycle of cycles) {
+                    insertCycle.run({
+                        id: cycle.cycleId,
+                        title: cycle.title,
+                        timestamp: cycle.timestamp,
+                        cycleContext: cycle.cycleContext,
+                        ephemeralContext: cycle.ephemeralContext,
+                        tabCount: cycle.tabCount || 4,
+                        activeTab: cycle.activeTab || 1,
+                        isParsedMode: cycle.isParsedMode ? 1 : 0,
+                        isSortedByTokens: cycle.isSortedByTokens ? 1 : 0,
+                        selectedResponseId: cycle.selectedResponseId || null,
+                        leftPaneWidth: cycle.leftPaneWidth || 33,
+                        status: cycle.status || 'complete',
+                        connectionMode: (cycle as any).connectionMode || null,
+                        activeWorkflowStep: cycle.activeWorkflowStep || null,
+                        isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0
+                    });
+
+                    for (const [tabId, resp] of Object.entries(cycle.responses)) {
+                        insertResponse.run({
+                            cycleId: cycle.cycleId,
+                            tabId: tabId,
+                            content: resp.content,
+                            status: resp.status,
+                            startTime: resp.startTime || null,
+                            thinkingEndTime: resp.thinkingEndTime || null,
+                            endTime: resp.endTime || null,
+                            thinkingTokens: resp.thinkingTokens || 0,
+                            responseTokens: resp.responseTokens || 0,
+                            parsedContent: resp.parsedContent ? JSON.stringify(resp.parsedContent) : null
+                        });
+                    }
+                }
+            });
+
+            transaction(history.cycles);
+            
+            fs.renameSync(jsonPath, jsonPath + '.bak');
+            Services.loggerService.log("Migration complete. Legacy file renamed to .bak");
+
+        } catch (error) {
+            Services.loggerService.error(`Migration failed: ${error}`);
+        }
+    }
+
+    public setGlobalValue(key: string, value: any) {
+        if (!this.db) return;
+        const stmt = this.db.prepare(`INSERT INTO key_value_store (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?`);
+        const strVal = JSON.stringify(value);
+        stmt.run(key, strVal, strVal);
+    }
+
+    public getGlobalValue<T>(key: string): T | undefined {
+        if (!this.db) return undefined;
+        const row = this.db.prepare('SELECT value FROM key_value_store WHERE key = ?').get(key) as { value: string } | undefined;
+        if (row) return JSON.parse(row.value);
+        return undefined;
+    }
+
+    public getCycle(id: number): PcppCycle | null {
+        if (!this.db) return null;
+        const cycleRow = this.db.prepare('SELECT * FROM cycles WHERE id = ?').get(id) as any;
+        if (!cycleRow) return null;
+
+        const responseRows = this.db.prepare('SELECT * FROM responses WHERE cycle_id = ?').all(id) as any[];
+        const responses: { [key: string]: PcppResponse } = {};
+        
+        responseRows.forEach(r => {
+            responses[r.tab_id] = {
+                content: r.content,
+                status: r.status,
+                startTime: r.start_time,
+                thinkingEndTime: r.thinking_end_time,
+                endTime: r.end_time,
+                thinkingTokens: r.thinking_tokens,
+                responseTokens: r.response_tokens,
+                parsedContent: r.parsed_content ? JSON.parse(r.parsed_content) : null
+            };
+        });
+
+        return {
+            cycleId: cycleRow.id,
+            title: cycleRow.title,
+            timestamp: cycleRow.timestamp,
+            cycleContext: cycleRow.cycle_context,
+            ephemeralContext: cycleRow.ephemeral_context,
+            tabCount: cycleRow.tab_count,
+            activeTab: cycleRow.active_tab,
+            isParsedMode: !!cycleRow.is_parsed_mode,
+            isSortedByTokens: !!cycleRow.is_sorted_by_tokens,
+            selectedResponseId: cycleRow.selected_response_id,
+            leftPaneWidth: cycleRow.left_pane_width,
+            status: cycleRow.status,
+            activeWorkflowStep: cycleRow.active_workflow_step,
+            isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
+            responses
+        };
+    }
+
+    public getAllCycles(): PcppCycle[] {
+        if (!this.db) return [];
+        const cycleRows = this.db.prepare('SELECT id FROM cycles ORDER BY id ASC').all() as { id: number }[];
+        return cycleRows.map(row => this.getCycle(row.id)!);
+    }
+
+    public saveCycle(cycle: PcppCycle) {
+        if (!this.db) return;
+        
+        const upsertCycle = this.db.prepare(`
+            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed)
+            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed)
+            ON CONFLICT(id) DO UPDATE SET
+                title=@title, cycle_context=@cycleContext, ephemeral_context=@ephemeralContext, tab_count=@tabCount, active_tab=@activeTab, is_parsed_mode=@isParsedMode,
+                is_sorted_by_tokens=@isSortedByTokens, selected_response_id=@selectedResponseId, left_pane_width=@leftPaneWidth, status=@status,
+                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed
+        `);
+
+        const upsertResponse = this.db.prepare(`
+            INSERT INTO responses (cycle_id, tab_id, content, status, start_time, thinking_end_time, end_time, thinking_tokens, response_tokens, parsed_content)
+            VALUES (@cycleId, @tabId, @content, @status, @startTime, @thinkingEndTime, @endTime, @thinkingTokens, @responseTokens, @parsedContent)
+            ON CONFLICT(cycle_id, tab_id) DO UPDATE SET
+                content=@content, status=@status, start_time=@startTime, thinking_end_time=@thinkingEndTime, end_time=@endTime,
+                thinking_tokens=@thinkingTokens, response_tokens=@responseTokens, parsed_content=@parsedContent
+        `);
+
+        const transaction = this.db.transaction(() => {
+            upsertCycle.run({
+                id: cycle.cycleId,
+                title: cycle.title,
+                timestamp: cycle.timestamp,
+                cycleContext: cycle.cycleContext,
+                ephemeralContext: cycle.ephemeralContext,
+                tabCount: cycle.tabCount || 4,
+                activeTab: cycle.activeTab || 1,
+                isParsedMode: cycle.isParsedMode ? 1 : 0,
+                isSortedByTokens: cycle.isSortedByTokens ? 1 : 0,
+                selectedResponseId: cycle.selectedResponseId || null,
+                leftPaneWidth: cycle.leftPaneWidth || 33,
+                status: cycle.status || 'complete',
+                connectionMode: (cycle as any).connectionMode || null,
+                activeWorkflowStep: cycle.activeWorkflowStep || null,
+                isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0
+            });
+
+            for (const [tabId, resp] of Object.entries(cycle.responses)) {
+                upsertResponse.run({
+                    cycleId: cycle.cycleId,
+                    tabId: tabId,
+                    content: resp.content,
+                    status: resp.status,
+                    startTime: resp.startTime || null,
+                    thinkingEndTime: resp.thinkingEndTime || null,
+                    endTime: resp.endTime || null,
+                    thinkingTokens: resp.thinkingTokens || 0,
+                    responseTokens: resp.responseTokens || 0,
+                    parsedContent: resp.parsedContent ? JSON.stringify(resp.parsedContent) : null
+                });
+            }
+        });
+
+        transaction();
+    }
+
+    public deleteCycle(id: number) {
+        if (!this.db) return;
+        this.db.prepare('DELETE FROM cycles WHERE id = ?').run(id);
+        // Cascade delete on responses is handled by schema constraint, but better-sqlite3 might need explicit check depending on build
+        this.db.prepare('DELETE FROM responses WHERE cycle_id = ?').run(id);
+    }
+
+    public reset() {
+        if (!this.db) return;
+        this.db.exec('DELETE FROM cycles; DELETE FROM responses; DELETE FROM key_value_store;');
+    }
+}
 </file_artifact>
 
 

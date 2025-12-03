@@ -15,6 +15,7 @@ import { GitService } from "./git.service";
 import { ResponseContentProvider } from "../providers/ResponseContentProvider";
 import { SettingsService } from "./settings.service";
 import { LlmService } from "./llm.service";
+import { DatabaseService } from "./database.service";
 
 class ServiceContainer {
     public fileTreeService!: FileTreeService;
@@ -26,6 +27,7 @@ class ServiceContainer {
     public selectionService = new SelectionService();
     public loggerService = LoggerService.getInstance();
     public actionService = new ActionService();
+    public databaseService = new DatabaseService(); // Init first
     public historyService!: HistoryService;
     public promptService!: PromptService;
     public gitService = new GitService();
@@ -37,6 +39,7 @@ class ServiceContainer {
     public initialize(context: vscode.ExtensionContext, gitApi?: GitAPI) {
         this.context = context;
         this.loggerService.log("Services initializing...");
+        this.databaseService.initialize(); // Initialize DB connection
         this.promptService = new PromptService(context.extensionUri);
         this.historyService = new HistoryService();
         this.fileTreeService = new FileTreeService(gitApi);

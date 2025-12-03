@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C96 (Fix new cycle title bug)
+// Updated on: C118 (Migrate to DatabaseService)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -13,7 +13,6 @@ import { getContext } from '@/extension';
 const LAST_VIEWED_CYCLE_ID_KEY = 'dce.lastViewedCycleId';
 
 export class HistoryService {
-    private historyFilePath: string | undefined;
     private workspaceRoot: string | undefined;
 
     private get context(): vscode.ExtensionContext {
@@ -24,51 +23,14 @@ export class HistoryService {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (workspaceFolders && workspaceFolders.length > 0) {
             this.workspaceRoot = workspaceFolders[0].uri.fsPath;
-            this.historyFilePath = path.join(this.workspaceRoot, '.vscode', 'dce_history.json');
         }
     }
 
-    private async _readHistoryFile(): Promise<PcppHistoryFile> {
-        if (!this.historyFilePath) return { version: 1, cycles: [] };
-        try {
-            const content = await vscode.workspace.fs.readFile(vscode.Uri.file(this.historyFilePath));
-            return JSON.parse(Buffer.from(content).toString('utf-8'));
-        } catch (error) {
-            return { version: 1, cycles: [] };
-        }
-    }
-
-    private async _writeHistoryFile(data: PcppHistoryFile): Promise<void> {
-        if (!this.historyFilePath) return;
-
-        if (!data || !Array.isArray(data.cycles) || (data.cycles.length === 0 && data.projectScope === undefined)) {
-            const errorMessage = `[CRITICAL] Aborting write to dce_history.json: Data is invalid or empty.`;
-            Services.loggerService.error(errorMessage);
-            try {
-                if (this.workspaceRoot) {
-                    const logFilePath = path.join(this.workspaceRoot, 'log-state-logs.md');
-                    const logContent = `## DATA LOSS PREVENTION TRIGGERED ##\n\n**Timestamp:** ${new Date().toISOString()}\n\n**Reason:** Attempted to write an invalid or empty history object to dce_history.json. The write operation was aborted.\n\n**Problematic State Object:**\n\`\`\`json\n${JSON.stringify(data, null, 2)}\n\`\`\`\n`;
-                    await fs.writeFile(logFilePath, logContent, 'utf-8');
-                    Services.loggerService.log(`[CRITICAL] The invalid state object has been logged to log-state-logs.md`);
-                }
-            } catch (logError) {
-                Services.loggerService.error(`[CRITICAL] Failed to write data loss log: ${logError}`);
-            }
-            return;
-        }
-
-        const dir = path.dirname(this.historyFilePath);
-        try {
-            await vscode.workspace.fs.createDirectory(vscode.Uri.file(dir));
-            const content = Buffer.from(JSON.stringify(data, null, 2), 'utf-8');
-            await vscode.workspace.fs.writeFile(vscode.Uri.file(this.historyFilePath), content);
-        } catch (error) {
-            Services.loggerService.error(`Failed to write to dce_history.json: ${error}`);
-        }
-    }
-
+    // Reconstructs the full history object from the DB to maintain compatibility with PromptService
     public async getFullHistory(): Promise<PcppHistoryFile> {
-        return await this._readHistoryFile();
+        const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
+        const cycles = Services.databaseService.getAllCycles();
+        return { version: 1, projectScope, cycles };
     }
 
     public async saveLastViewedCycleId(id: number | null): Promise<void> {
@@ -84,7 +46,6 @@ export class HistoryService {
             return { cycleId: -1, timestamp: '', title: '', cycleContext: '', ephemeralContext: '', responses: {} };
         }
 
-        const history = await this._readHistoryFile();
         let isFreshEnvironment = true;
         try {
             await vscode.workspace.fs.stat(vscode.Uri.file(path.join(this.workspaceRoot, 'src/Artifacts/DCE_README.md')));
@@ -115,39 +76,40 @@ export class HistoryService {
              return defaultCycle;
         }
 
-        if (history.cycles.length === 0) {
-            const newHistory = { ...history, cycles: [defaultCycle] };
-            await this._writeHistoryFile(newHistory);
+        const cycles = Services.databaseService.getAllCycles();
+
+        if (cycles.length === 0) {
+            Services.databaseService.saveCycle(defaultCycle);
             return defaultCycle;
         }
 
         const lastViewedId = this.getLastViewedCycleId();
-        const cycleMap = new Map(history.cycles.map(c => [c.cycleId, c]));
+        const cycleMap = new Map(cycles.map(c => [c.cycleId, c]));
 
         if (lastViewedId !== undefined && cycleMap.has(lastViewedId)) {
             return cycleMap.get(lastViewedId)!;
         }
         
-        const latestCycle = history.cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
+        const latestCycle = cycles.reduce((latest, current) => current.cycleId > latest.cycleId ? current : latest);
         return latestCycle;
     }
 
     public async getCycleData(cycleId: number): Promise<PcppCycle | null> {
         if (cycleId === 0) {
-            const history = await this._readHistoryFile();
+            const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: history.projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete'
             };
         }
-
-        const history = await this._readHistoryFile();
-        return history.cycles.find(c => c.cycleId === cycleId) || null;
+        return Services.databaseService.getCycle(cycleId);
     }
 
     public async saveProjectScope(scope: string): Promise<void> {
-        const history = await this._readHistoryFile();
-        history.projectScope = scope;
-        await this._writeHistoryFile(history);
+        Services.databaseService.setGlobalValue('project_scope', scope);
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.NotifySaveComplete, { cycleId: 0 });
+        }
     }
 
     public async saveCycleData(cycleData: PcppCycle): Promise<void> {
@@ -156,17 +118,7 @@ export class HistoryService {
         if (cycleData.cycleId === 0) {
             await this.saveProjectScope(cycleData.cycleContext);
         } else {
-            const history = await this._readHistoryFile();
-            const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleData.cycleId);
-
-            if (cycleIndex > -1) {
-                history.cycles[cycleIndex] = cycleData;
-            } else {
-                history.cycles.push(cycleData);
-            }
-            
-            history.cycles.sort((a, b) => a.cycleId - b.cycleId);
-            await this._writeHistoryFile(history);
+            Services.databaseService.saveCycle(cycleData);
         }
 
         if (serverIpc) {
@@ -175,18 +127,21 @@ export class HistoryService {
     }
 
     public async createNewCyclePlaceholder(tabCount: number): Promise<{ newCycle: PcppCycle; newMaxCycle: number; }> {
-        const history = await this._readHistoryFile();
-        const newCycleId = (history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
+        const cycles = Services.databaseService.getAllCycles();
+        const newCycleId = (cycles.reduce((max, c) => Math.max(max, c.cycleId), 0)) + 1;
 
         const newResponses: { [tabId: string]: PcppResponse } = {};
         for(let i = 0; i < tabCount; i++) {
             newResponses[(i+1).toString()] = { content: '', status: 'generating' };
         }
+        
+        // Get default connection mode from settings
+        const settings = await Services.settingsService.getSettings();
 
         const newCycle: PcppCycle = {
             cycleId: newCycleId,
             timestamp: new Date().toISOString(),
-            title: 'New Cycle', // FIX: Do not programmatically set "Generating..."
+            title: 'New Cycle',
             cycleContext: '',
             ephemeralContext: '',
             responses: newResponses,
@@ -194,63 +149,46 @@ export class HistoryService {
             isParsedMode: true,
             status: 'generating',
             isEphemeralContextCollapsed: true,
+            connectionMode: settings.connectionMode, // Initialize with global default
         };
 
-        history.cycles.push(newCycle);
-        await this._writeHistoryFile(history);
+        Services.databaseService.saveCycle(newCycle);
         Services.loggerService.log(`Created new placeholder cycle ${newCycleId}.`);
         
         return { newCycle, newMaxCycle: newCycleId };
     }
     
     public async finalizeCycleStatus(cycleId: number): Promise<void> {
-        Services.loggerService.log(`[History] Finalizing status for cycle ${cycleId}.`);
-        const history = await this._readHistoryFile();
-        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {
             cycle.status = 'complete';
-            // Do not change title here, let user control it
-            await this._writeHistoryFile(history);
+            Services.databaseService.saveCycle(cycle);
             Services.loggerService.log(`[History] Cycle ${cycleId} status set to 'complete'.`);
-        } else {
-            Services.loggerService.warn(`[History] Could not find cycle ${cycleId} to finalize.`);
         }
     }
 
     public async updateCycleWithResponses(cycleId: number, responses: PcppResponse[]): Promise<void> {
-        const history = await this._readHistoryFile();
-        const cycleIndex = history.cycles.findIndex(c => c.cycleId === cycleId);
-
-        if (cycleIndex > -1) {
-            const cycle = history.cycles[cycleIndex];
+        const cycle = Services.databaseService.getCycle(cycleId);
+        if (cycle) {
             Object.keys(cycle.responses).forEach((tabId, index) => {
                 if (responses[index]) {
-                    // Overwrite the placeholder with the rich response object
                     cycle.responses[tabId] = responses[index];
                 }
             });
-            await this._writeHistoryFile(history);
-            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses and their metrics.`);
-        } else {
-            Services.loggerService.error(`Could not find placeholder cycle ${cycleId} to update with responses.`);
+            Services.databaseService.saveCycle(cycle);
+            Services.loggerService.log(`Updated cycle ${cycleId} with ${responses.length} responses.`);
         }
     }
 
     public async updateSingleResponseInCycle(cycleId: number, tabId: string, newResponse: PcppResponse | null): Promise<void> {
-        const history = await this._readHistoryFile();
-        const cycle = history.cycles.find(c => c.cycleId === cycleId);
+        const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {
             if (newResponse !== null) {
                 cycle.responses[tabId] = newResponse;
-                Services.loggerService.log(`Updated response content and metrics for tab ${tabId} in cycle ${cycleId}.`);
             } else {
-                // This means we are starting a regeneration
                 cycle.responses[tabId] = { content: '', status: 'generating' };
-                Services.loggerService.log(`Starting regeneration for tab ${tabId} in cycle ${cycleId}.`);
             }
-            await this._writeHistoryFile(history);
-        } else {
-            Services.loggerService.error(`Could not find cycle ${cycleId} to update response.`);
+            Services.databaseService.saveCycle(cycle);
         }
     }
 
@@ -262,21 +200,20 @@ export class HistoryService {
         );
 
         if (confirmation !== "Delete") {
-            const history = await this._readHistoryFile();
-            return history.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+            const cycles = Services.databaseService.getAllCycles();
+            return cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
         }
         
-        let history = await this._readHistoryFile();
-        if (history.cycles.length <= 1) {
+        const cycles = Services.databaseService.getAllCycles();
+        if (cycles.length <= 1) {
             vscode.window.showWarningMessage("Cannot delete the last cycle.");
             return 1;
         }
 
-        history.cycles = history.cycles.filter(c => c.cycleId !== cycleId);
-        await this._writeHistoryFile(history);
+        Services.databaseService.deleteCycle(cycleId);
         
-        const updatedHistory = await this._readHistoryFile();
-        const newMaxCycle = updatedHistory.cycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
+        const updatedCycles = Services.databaseService.getAllCycles();
+        const newMaxCycle = updatedCycles.reduce((max, c) => Math.max(max, c.cycleId), 0);
 
         const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
         if (serverIpc) {
@@ -296,27 +233,21 @@ export class HistoryService {
             return;
         }
 
-        if (this.historyFilePath) {
-            try {
-                await vscode.workspace.fs.delete(vscode.Uri.file(this.historyFilePath));
-                await this.saveLastViewedCycleId(null);
-                 const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
-                if (serverIpc) {
-                    serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
-                }
-            } catch (error) {
-                Services.loggerService.error(`Failed to delete dce_history.json: ${error}`);
-            }
+        Services.databaseService.reset();
+        await this.saveLastViewedCycleId(null);
+        const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
+        if (serverIpc) {
+            serverIpc.sendToClient(ServerToClientChannel.ForceRefresh, { reason: 'history' });
         }
     }
 
     public async handleExportHistory() {
-        if (!this.historyFilePath || !this.workspaceRoot) {
-            vscode.window.showErrorMessage("History file path not found.");
+        if (!this.workspaceRoot) {
+            vscode.window.showErrorMessage("No workspace open.");
             return;
         }
         try {
-            const historyContent = await this._readHistoryFile();
+            const historyContent = await this.getFullHistory();
             const saveUri = await vscode.window.showSaveDialog({
                 defaultUri: vscode.Uri.file(path.join(this.workspaceRoot, 'dce_history_export.json')),
                 filters: { 'JSON': ['json'] }
@@ -331,8 +262,8 @@ export class HistoryService {
     }
 
     public async handleImportHistory() {
-        if (!this.historyFilePath) {
-            vscode.window.showErrorMessage("History file path not found.");
+        if (!this.workspaceRoot) {
+            vscode.window.showErrorMessage("No workspace open.");
             return;
         }
         try {
@@ -344,7 +275,17 @@ export class HistoryService {
                 const content = await fs.readFile(openUris[0].fsPath, 'utf-8');
                 const historyData = JSON.parse(content);
                 if (historyData.version && Array.isArray(historyData.cycles)) {
-                    await this._writeHistoryFile(historyData);
+                    // Wipe DB and load from JSON
+                    Services.databaseService.reset();
+                    
+                    if (historyData.projectScope) {
+                        Services.databaseService.setGlobalValue('project_scope', historyData.projectScope);
+                    }
+                    
+                    for (const cycle of historyData.cycles) {
+                        Services.databaseService.saveCycle(cycle);
+                    }
+
                     await this.saveLastViewedCycleId(null);
                     vscode.window.showInformationMessage("Cycle history imported successfully. Reloading...");
                     const serverIpc = serverIPCs[VIEW_TYPES.PANEL.PARALLEL_COPILOT];
