@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 125 - observations and new ideas
+Current Cycle 126 - focus on associated file problem
+Cycle 125 - observations and new ideas
 Cycle 124 - Eureka!
 Cycle 123 - exact same node version discrepency (130 v 136)
 Cycle 122 - even more prog
@@ -331,7 +332,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C121 (Add A119 Checklist)
+# Updated on: C126 (Add A120, A121)
 
 ## 1. Purpose
 
@@ -781,6 +782,14 @@ No project scope defined.
 - **Description:** A structured checklist for the next phase of development, focusing on stabilizing the new SQLite database integration.
 - **Tags:** checklist, planning, database, sqlite
 
+### A120. DCE - Database Maintenance Guide
+- **Description:** A guide for developers on how to maintain, migrate, and debug the SQLite database used by the DCE extension.
+- **Tags:** guide, database, sqlite, maintenance, migration, debugging
+
+### A121. DCE - Master Artifact List Automation Plan
+- **Description:** A plan to automate the maintenance of the Master Artifact List (A0) by programmatically scanning artifact files for metadata tags.
+- **Tags:** plan, automation, documentation, maintenance, a0
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -867,6 +876,35 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 126>
+<Cycle Context>
+okay new day! i downloaded sqlite viewer. lets work to knock out these issues one by one. lets start with the associated files.
+
+currently, when loading an existing project, the files do not seem to be associating. im going to reload the extension in a brand new project and run two cycles on it to see how it handles adding files and then finding the associated files to get another datapoint. 
+
+well, that would take some time, before i do that, and since full backward compatibility would be ideal and so worth, perhaps you can focus on this issue and perhaps surface some logs relevant to the code where it is trying to make this file association with an incoming file parsed from a response and its matching file in the repo?
+</Cycle Context>
+<Previous Cycle 125 Summary of Actions>
+I have analyzed the request to finalize the SQLite integration, clean up the regression case studies, and address the frontend issues (associated files mismatch, similarity score accuracy, and markdown preview).
+
+My course of action is to:
+1.  **Clean up `A11`:** Consolidate the multiple native module/ABI mismatch case studies into a single, comprehensive entry to reduce clutter.
+2.  **Fix Similarity Score Bug:** Update the comparison logic to be "tab-aware". I will modify the IPC channels and backend service to pass the `tabId` through the comparison request/response cycle. This ensures that the metrics map in the frontend correctly distinguishes between different responses for the same file, preventing the "99% similar" ghost data issue.
+3.  **Fix Associated Files Mismatch:** I will add detailed logging to the `handleFileExistenceRequest` method in the backend to diagnose why `README.md` is reporting as missing. I suspect a path resolution nuance on Windows.
+4.  **Add Markdown Preview:** I will implement a "Preview" button for Markdown files in the `ParsedView`. This will trigger a new backend handler that executes the `markdown.showPreview` command.
+5.  **Version Bump:** I will update `package.json` and `CHANGELOG.md` to version 1.2.0.
+
+1.  **Update `src/Artifacts/A11. DCE - Regression Case Studies.md`:** Consolidate Case Studies 023-028 into a single "Native Module Build & ABI Mismatch" entry.
+2.  **Update `src/common/ipc/channels.type.ts`:** Update `RequestFileComparison` and `SendFileComparison` to include `tabId`.
+3.  **Update `src/backend/services/file-operation.service.ts`:** Update `handleFileComparisonRequest` to echo `tabId`. Add `handleMarkdownPreviewRequest`. Add logging to `handleFileExistenceRequest`.
+4.  **Update `src/client/views/parallel-copilot.view/view.tsx`:** Update `requestAllMetrics` to pass `tabId`. Update `comparisonMetrics` state to use a composite key (`${tabId}:::${filePath}`). Handle the `SendFileComparison` update with this key.
+5.  **Update `src/client/views/parallel-copilot.view/hooks/useTabManagement.ts`:** Pass `tabId` (the loop index) to `requestAllMetrics` inside `parseAllTabs`.
+6.  **Update `src/client/views/parallel-copilot.view/components/ParsedView.tsx`:** Update the metrics lookup to use the composite key. Add the "Open Preview" button for `.md` files.
+7.  **Update `src/client/views/parallel-copilot.view/on-message.ts`:** Add handler for `RequestMarkdownPreview`.
+8.  **Update `package.json` & `CHANGELOG.md`:** Bump version to 1.2.0.
+</Previous Cycle 125 Summary of Actions>
+</Cycle 126>
 
 <Cycle 125>
 <Cycle Context>
@@ -5897,10 +5935,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-03T13:49:53.022Z
+  Date Generated: 2025-12-04T12:14:28.311Z
   ---
-  Total Files: 210
-  Approx. Tokens: 362716
+  Total Files: 212
+  Approx. Tokens: 365246
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -5908,15 +5946,15 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (9295 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (9421 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7109 tokens)
 7. src\backend\services\prompt.service.ts (5240 tokens)
-8. src\backend\services\file-operation.service.ts (4838 tokens)
-9. src\client\views\parallel-copilot.view\view.tsx (4546 tokens)
+8. src\client\views\parallel-copilot.view\view.tsx (5014 tokens)
+9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 536 - Chars: 37177 - Tokens: 9295
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 544 - Chars: 37681 - Tokens: 9421
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -6016,12 +6054,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 98. src\backend\providers\ResponseContentProvider.ts - Lines: 24 - Chars: 1160 - Tokens: 290
 99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
-101. src\backend\services\file-operation.service.ts - Lines: 406 - Chars: 19352 - Tokens: 4838
-102. src\backend\services\file-tree.service.ts - Lines: 282 - Chars: 14582 - Tokens: 3646
+101. src\backend\services\file-operation.service.ts - Lines: 411 - Chars: 19728 - Tokens: 4932
+102. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 14796 - Tokens: 3699
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
-105. src\backend\services\highlighting.service.ts - Lines: 84 - Chars: 4226 - Tokens: 1057
-106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12672 - Tokens: 3168
+105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
+106. src\backend\services\history.service.ts - Lines: 307 - Chars: 12378 - Tokens: 3095
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
@@ -6046,7 +6084,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 70 - Chars: 3089 - Tokens: 773
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 83 - Chars: 3346 - Tokens: 837
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 184 - Chars: 11825 - Tokens: 2957
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 192 - Chars: 12275 - Tokens: 3069
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
@@ -6054,7 +6092,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1261 - Chars: 28435 - Tokens: 7109
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 315 - Chars: 18181 - Tokens: 4546
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 355 - Chars: 20055 - Tokens: 5014
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -6066,7 +6104,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-151. src\common\types\pcpp.types.ts - Lines: 60 - Chars: 1942 - Tokens: 486
+151. src\common\types\pcpp.types.ts - Lines: 57 - Chars: 1582 - Tokens: 396
 152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 435 - Tokens: 109
 153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -6087,7 +6125,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 56 - Chars: 5343 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 130 - Chars: 5602 - Tokens: 1401
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 131 - Chars: 5672 - Tokens: 1418
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9851 - Tokens: 2463
@@ -6124,14 +6162,16 @@ This file-centric approach helps in planning and prioritizing work, especially i
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 49 - Chars: 3665 - Tokens: 917
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 98 - Chars: 5862 - Tokens: 1466
-209. src\backend\services\database.service.ts - Lines: 293 - Chars: 13722 - Tokens: 3431
+209. src\backend\services\database.service.ts - Lines: 321 - Chars: 15243 - Tokens: 3811
 210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
+211. src\Artifacts\A120. DCE - Database Maintenance Guide.md - Lines: 67 - Chars: 3388 - Tokens: 847
+212. src\Artifacts\A121. DCE - Master Artifact List Automation Plan.md - Lines: 56 - Chars: 2821 - Tokens: 706
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C121 (Add A119 Checklist)
+# Updated on: C126 (Add A120, A121)
 
 ## 1. Purpose
 
@@ -6580,6 +6620,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A119. DCE - Universal Task Checklist for Cycle 122+
 - **Description:** A structured checklist for the next phase of development, focusing on stabilizing the new SQLite database integration.
 - **Tags:** checklist, planning, database, sqlite
+
+### A120. DCE - Database Maintenance Guide
+- **Description:** A guide for developers on how to maintain, migrate, and debug the SQLite database used by the DCE extension.
+- **Tags:** guide, database, sqlite, maintenance, migration, debugging
+
+### A121. DCE - Master Artifact List Automation Plan
+- **Description:** A plan to automate the maintenance of the Master Artifact List (A0) by programmatically scanning artifact files for metadata tags.
+- **Tags:** plan, automation, documentation, maintenance, a0
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -13031,7 +13079,7 @@ export class ContentExtractionService {
 
 <file path="src/backend/services/file-operation.service.ts">
 // src/backend/services/file-operation.service.ts
-// Updated on: C124 (Echo tabId in comparison and add markdown preview)
+// Updated on: C126 (Add enhanced logging to handleFileExistenceRequest)
 import * as vscode from "vscode";
 import * as path from "path";
 import { promises as fs } from 'fs';
@@ -13233,9 +13281,11 @@ export class FileOperationService {
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
+            // Normalize path separators and trim quotes
             const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
             if (!p) return;
     
+            // Resolve to absolute path, then normalize to forward slashes
             let absolutePath = path.resolve(rootPath, p);
             let normalizedPath = normalizePath(absolutePath);
             
@@ -13245,6 +13295,7 @@ export class FileOperationService {
                 await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
                 existenceMap[p_raw] = true;
             } catch {
+                // Fallback check for Artifacts (sometimes referenced relatively)
                 if (/^A\d+/.test(p)) {
                     const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
                     const normalizedArtifactPath = normalizePath(artifactPath);
@@ -13321,7 +13372,9 @@ export class FileOperationService {
 
     public async handleOpenFileRequest(filePath: string) {
         try {
-            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
+            // Ensure path is absolute
+            const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(this.getWorkspaceRoot(), filePath);
+            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(absolutePath));
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to open file ${filePath}: ${error.message}`);
         }
@@ -13532,6 +13585,10 @@ export class FileTreeService {
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
                 return;
             }
+            // Also ignore dce.db related files
+            if (normalizedPath.includes('.vscode/dce.db')) {
+                return;
+            }
             for (const pattern of EXCLUSION_PATTERNS) {
                 if (normalizedPath.includes(`/${pattern}/`)) {
                     return;
@@ -13543,6 +13600,7 @@ export class FileTreeService {
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) return;
+            if (normalizedPath.includes('.vscode/dce.db')) return;
             
             const isNonSelectable = !this._isSelectable(normalizedPath, vscode.FileType.File);
             if (isNonSelectable) {
@@ -14099,7 +14157,8 @@ export class GitService {
 </file_artifact>
 
 <file path="src/backend/services/highlighting.service.ts">
-// Updated on: C3 (Add handleHighlightContextRequest)
+// src/backend/services/highlighting.service.ts
+// Updated on: C126 (Add JSON grammar)
 import { createStarryNight, common } from '@wooorm/starry-night';
 import sourceTsx from '@wooorm/starry-night/source.tsx';
 import sourceJs from '@wooorm/starry-night/source.js';
@@ -14108,6 +14167,7 @@ import sourceCss from '@wooorm/starry-night/source.css';
 import sourceScss from '@wooorm/starry-night/source.css.scss';
 import textHtml from '@wooorm/starry-night/text.html.basic';
 import textMd from '@wooorm/starry-night/text.md';
+import sourceJson from '@wooorm/starry-night/source.json'; // C126 Added
 import { toHtml } from 'hast-util-to-html';
 import { Services } from './services';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
@@ -14122,7 +14182,8 @@ export class HighlightingService {
 
     private async initializeStarryNight() {
         try {
-            const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml, textMd];
+            // C126: Added sourceJson to the grammars list
+            const grammars = [...common, sourceTsx, sourceJs, sourceTs, sourceCss, sourceScss, textHtml, textMd, sourceJson];
             this.starryNight = await createStarryNight(grammars);
             Services.loggerService.log('Starry Night syntax highlighter initialized.');
         } catch (error) {
@@ -14131,18 +14192,17 @@ export class HighlightingService {
     }
     
     public async handleSyntaxHighlightRequest(code: string, lang: string, id: string, serverIpc: ServerPostMessageManager) {
-        const truncatedCode = code.length > 20 ? `${code.substring(0, 20)}[...]` : code;
-        Services.loggerService.log(`[SYNTAX-HIGHLIGHT] Received request for lang: ${lang}, id: ${id}`);
-        
         if (!this.starryNight) {
             Services.loggerService.error('Starry Night not initialized, cannot highlight.');
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
             return;
         }
 
+        // Map 'json' to 'source.json' explicitly if needed, though starry-night usually handles standard aliases.
         const scope = this.starryNight.flagToScope(lang);
+        
         if (!scope) {
-            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: ${lang}`);
+            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: ${lang}. Defaulting to plain text.`);
             serverIpc.sendToClient(ServerToClientChannel.SendSyntaxHighlight, { highlightedHtml: `<pre><code>${code}</code></pre>`, id });
             return;
         }
@@ -14159,26 +14219,17 @@ export class HighlightingService {
     }
 
     public async handleHighlightContextRequest(context: string, id: string, serverIpc: ServerPostMessageManager) {
-        Services.loggerService.log(`[CONTEXT-HIGHLIGHT] Received request for id: ${id}`);
         if (!this.starryNight) {
-            Services.loggerService.error('Starry Night not initialized, cannot highlight context.');
             serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
             return;
         }
 
         const scope = this.starryNight.flagToScope('markdown');
-        if (!scope) {
-            Services.loggerService.warn(`[WARN] No Starry Night scope found for language: markdown`);
-            serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
-            return;
-        }
-        
         try {
             const tree = this.starryNight.highlight(context, scope);
             const hastHtml = toHtml(tree);
             serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: hastHtml, id });
         } catch (error) {
-            Services.loggerService.error(`Starry Night context highlighting failed: ${error}`);
             serverIpc.sendToClient(ServerToClientChannel.SendHighlightContext, { highlightedHtml: context, id });
         }
     }
@@ -14187,11 +14238,11 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C121 (Fix default cycle connection mode initialization)
+// Updated on: C126 (Include isCycleCollapsed in default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
-import { PcppCycle, PcppHistoryFile, PcppResponse } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -14214,8 +14265,7 @@ export class HistoryService {
         }
     }
 
-    // Reconstructs the full history object from the DB to maintain compatibility with PromptService
-    public async getFullHistory(): Promise<PcppHistoryFile> {
+    public async getFullHistory(): Promise<any> {
         const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
         const cycles = Services.databaseService.getAllCycles();
         return { version: 1, projectScope, cycles };
@@ -14240,7 +14290,6 @@ export class HistoryService {
             isFreshEnvironment = false;
         } catch (e) { isFreshEnvironment = true; }
         
-        // Fetch global settings to initialize connectionMode correctly
         const settings = await Services.settingsService.getSettings();
 
         const defaultCycle: PcppCycle = {
@@ -14261,7 +14310,8 @@ export class HistoryService {
             activeWorkflowStep: null,
             status: 'complete',
             isEphemeralContextCollapsed: true,
-            connectionMode: settings.connectionMode, // Initialize with global default
+            isCycleCollapsed: false, // C126: Default to expanded
+            connectionMode: settings.connectionMode,
         };
 
         if (isFreshEnvironment) {
@@ -14271,7 +14321,6 @@ export class HistoryService {
         const cycles = Services.databaseService.getAllCycles();
 
         if (cycles.length === 0) {
-            // If no cycles exist in DB (e.g., fresh install or cleared DB), create default
             Services.databaseService.saveCycle(defaultCycle);
             return defaultCycle;
         }
@@ -14292,7 +14341,7 @@ export class HistoryService {
             const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
             const settings = await Services.settingsService.getSettings();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -14329,7 +14378,6 @@ export class HistoryService {
             newResponses[(i+1).toString()] = { content: '', status: 'generating' };
         }
         
-        // Get default connection mode from settings
         const settings = await Services.settingsService.getSettings();
 
         const newCycle: PcppCycle = {
@@ -14343,7 +14391,8 @@ export class HistoryService {
             isParsedMode: true,
             status: 'generating',
             isEphemeralContextCollapsed: true,
-            connectionMode: settings.connectionMode, // Initialize with global default
+            isCycleCollapsed: false,
+            connectionMode: settings.connectionMode,
         };
 
         Services.databaseService.saveCycle(newCycle);
@@ -17860,7 +17909,7 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C124 (Update metrics key to use tabId, add Markdown preview)
+// Updated on: C126 (Add Open File on double click)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -17977,8 +18026,12 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
         e.stopPropagation();
         clientIpc.sendToServer(ClientToServerChannel.RequestMarkdownPreview, { filePath });
     };
+    
+    const handleOpenFile = (e: React.MouseEvent, filePath: string) => {
+        e.stopPropagation();
+        clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: filePath });
+    };
 
-    // C124 FIX: Use composite key for metrics lookup
     const getMetricsKey = (filePath: string) => `${props.activeTab}:::${props.pathOverrides.get(filePath) || filePath}`;
 
     const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(getMetricsKey(props.selectedFilePath)) : null;
@@ -17995,7 +18048,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                         const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
                         const isMarkdown = file.toLowerCase().endsWith('.md');
                         
-                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onDoubleClick={(e) => handleOpenFile(e, file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
@@ -18024,7 +18077,11 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             <div className="parsed-view-right">
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
+                    <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button>
+                    {props.selectedFilePath?.toLowerCase().endsWith('.md') && (
+                        <button onClick={(e) => handleMarkdownPreview(e, props.selectedFilePath!)} title="Open Markdown Preview"><VscPreview /></button>
+                    )}
+                    </div>
                 </div>
                 <CodeViewer htmlContent={props.viewableContent} />
             </div>
@@ -19931,7 +19988,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C124 (Pass tabId to requestAllMetrics and update comparisonMetrics handling)
+// Updated on: C126 (Fix Select All, Persistence, and Accept logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -19947,13 +20004,13 @@ import ResponsePane from './components/ResponsePane';
 import WorkflowToolbar from './components/WorkflowToolbar';
 import GenerationProgressDisplay from './components/GenerationProgressDisplay';
 
-// Import custom hooks
 import { useCycleManagement } from './hooks/useCycleManagement';
 import { useTabManagement } from './hooks/useTabManagement';
 import { useFileManagement } from './hooks/useFileManagement';
 import { useGeneration } from './hooks/useGeneration';
 import { useWorkflow } from './hooks/useWorkflow';
 import { usePcppIpc } from './hooks/usePcppIpc';
+import { logger } from '@/client/utils/logger';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -19972,9 +20029,8 @@ const App = () => {
     const saveStateRef = React.useRef<() => void>(() => {});
     const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
     const [leftPaneWidth, setLeftPaneWidth] = React.useState(initialData.cycle?.leftPaneWidth || 33);
-
-    // --- State & Hooks Initialization ---
     const [responseCount, setResponseCount] = React.useState(4); 
+
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
     
     const requestAllMetrics = React.useCallback((parsedResponse: any, tabId: number) => {
@@ -19995,7 +20051,6 @@ const App = () => {
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
-    // --- IPC Message Handling ---
     usePcppIpc(
         cycleManagement,
         tabManagement,
@@ -20004,13 +20059,12 @@ const App = () => {
         setWorkflowStep
     );
 
-    // --- Core Save Logic ---
     const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth });
     stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth };
 
     saveStateRef.current = React.useCallback(() => {
         const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth } = stateRef.current;
-        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed } = cycleManagement;
         const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
@@ -20033,6 +20087,7 @@ const App = () => {
             pathOverrides: Object.fromEntries(pathOverrides),
             activeWorkflowStep: workflowStep || undefined,
             isEphemeralContextCollapsed,
+            isCycleCollapsed,
             leftPaneWidth,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
@@ -20060,29 +20115,38 @@ const App = () => {
     }, [fileManagement.selectedFilePath, tabManagement.tabs, tabManagement.activeTab, fileManagement.highlightedCodeBlocks]);
 
 
-    // --- Component Logic & Rendering ---
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
-            setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+        const handleLoadedCycle = (cycleData: PcppCycle) => {
             setForceShowResponseView(false);
             if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
             if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
+            
+            // C126 FIX: Correctly hydrate the selected files state from the persisted data
+            if (cycleData.selectedFilesForReplacement) {
+                fileManagement.setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement));
+            } else {
+                fileManagement.setSelectedFilesForReplacement(new Set());
+            }
+        };
+
+        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
+            setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+            handleLoadedCycle(cycleData);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
             if (cycleData) {
-                setForceShowResponseView(false);
-                if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
-                if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
+                handleLoadedCycle(cycleData);
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
+            fileManagement.setSelectedFilesForReplacement(new Set()); // Clear selection on new cycle
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
-    }, [clientIpc]);
+    }, [clientIpc, fileManagement.setSelectedFilesForReplacement]);
 
     if (cycleManagement.currentCycle === null) return <div>Loading...</div>;
-    if (cycleManagement.currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
+    if (cycleManagement.currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
     const onScopeChange = (scope: string) => { if (cycleManagement.currentCycle?.cycleId === 0) { cycleManagement.onCycleContextChange(scope); } };
 
@@ -20124,6 +20188,39 @@ const App = () => {
     
     const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;
 
+    // C126 FIX: Select All Implementation
+    const handleSelectAll = () => {
+        const currentTabId = tabManagement.activeTab.toString();
+        const activeTabData = tabManagement.tabs[currentTabId];
+        if (activeTabData?.parsedContent) {
+            const newSelection = new Set(fileManagement.selectedFilesForReplacement);
+            activeTabData.parsedContent.filesUpdated.forEach(filePath => {
+                newSelection.add(`${currentTabId}:::${filePath}`);
+            });
+            fileManagement.setSelectedFilesForReplacement(newSelection);
+            cycleManagement.setSaveStatus('unsaved');
+        }
+    };
+
+    // C126 FIX: Accept Selected Implementation
+    const handleAcceptSelected = () => {
+        const filesToWrite = [];
+        for (const compositeKey of fileManagement.selectedFilesForReplacement) {
+            const [tabId, filePath] = compositeKey.split(':::');
+            const tabData = tabManagement.tabs[tabId];
+            if (tabData && tabData.parsedContent) {
+                const file = tabData.parsedContent.files.find(f => f.path === filePath);
+                if (file) {
+                    filesToWrite.push({ path: file.path, content: file.content });
+                }
+            }
+        }
+        
+        if (filesToWrite.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        }
+    };
+
     return <div className="pc-view-container">
         <div className="pc-header">
             <div className="pc-toolbar">
@@ -20136,7 +20233,7 @@ const App = () => {
                 <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => cycleManagement.setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => { cycleManagement.setIsCycleCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator 
                 currentCycle={cycleManagement.currentCycle.cycleId} 
                 maxCycle={cycleManagement.maxCycle} 
@@ -20201,9 +20298,9 @@ const App = () => {
                         onSelectResponse={cycleManagement.handleSelectResponse}
                         onBaseline={() => {}}
                         onRestore={() => {}}
-                        onAcceptSelected={() => {}}
-                        onSelectAll={() => {}}
-                        onDeselectAll={() => fileManagement.setSelectedFilesForReplacement(new Set())}
+                        onAcceptSelected={handleAcceptSelected}
+                        onSelectAll={handleSelectAll}
+                        onDeselectAll={() => { fileManagement.setSelectedFilesForReplacement(new Set()); cycleManagement.setSaveStatus('unsaved'); }}
                         selectedFilesForReplacementCount={fileManagement.selectedFilesForReplacement.size}
                         workflowStep={workflowStep}
                     />
@@ -20965,21 +21062,16 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C116 (Add leftPaneWidth for persistence)
+// Updated on: C126 (Add isCycleCollapsed)
 export interface PcppResponse {
     content: string;
-    // The single source of truth for the response's state
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
-    
-    // Parsed content, formerly in TabState
     parsedContent?: ParsedResponse | null;
-
-    // Persisted Metrics for the Response UI
-    startTime?: number;         // Timestamp (Date.now()) when generation for this response started
-    thinkingEndTime?: number;   // Timestamp when the 'thinking' phase ended and 'generating' began
-    endTime?: number;           // Timestamp when the response was fully received
-    thinkingTokens?: number;    // Total tokens from the 'thinking' phase
-    responseTokens?: number;    // Total tokens from the 'response' phase (the actual content)
+    startTime?: number;
+    thinkingEndTime?: number;
+    endTime?: number;
+    thinkingTokens?: number;
+    responseTokens?: number;
 }
 
 export interface PcppCycle {
@@ -21002,6 +21094,8 @@ export interface PcppCycle {
     activeWorkflowStep?: string;
     status?: 'complete' | 'generating';
     isEphemeralContextCollapsed?: boolean;
+    isCycleCollapsed?: boolean; // C126: New field for persisting cycle section collapse state
+    connectionMode?: string;
 }
 
 export interface PcppHistoryFile {
@@ -22590,7 +22684,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C93 (Remove debouncing logic)
+// Updated on: C126 (Add isCycleCollapsed)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -22607,7 +22701,7 @@ export const useCycleManagement = (
     const [cycleTitle, setCycleTitle] = React.useState(initialCycle?.title || '');
     const [cycleContext, setCycleContext] = React.useState(initialCycle?.cycleContext || '');
     const [ephemeralContext, setEphemeralContext] = React.useState(initialCycle?.ephemeralContext || '');
-    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(initialCycle?.isCycleCollapsed || false);
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
@@ -22618,10 +22712,10 @@ export const useCycleManagement = (
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
-        // Handle Cycle 0 where context comes from project scope
         setCycleContext(cycleData.cycleId === 0 ? (scope || '') : cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
+        setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
     }, []);
@@ -22650,6 +22744,7 @@ export const useCycleManagement = (
             timestamp: new Date().toISOString(),
             status: 'complete',
             isEphemeralContextCollapsed: true,
+            isCycleCollapsed: false,
         };
         loadCycleData(newCycle);
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
@@ -31814,7 +31909,7 @@ Stores the AI responses associated with each cycle.
 
 <file path="src/backend/services/database.service.ts">
 // src/backend/services/database.service.ts
-// Updated on: C123 (Add environment version logging)
+// Updated on: C126 (Add schema migration for is_cycle_collapsed)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -31848,6 +31943,7 @@ export class DatabaseService {
             this.db = new Database(this.dbPath);
             this.db.pragma('journal_mode = WAL');
             this.createTables();
+            this.migrateSchema(); // Run migrations after table creation
             this.migrateFromLegacyJson();
             Services.loggerService.log(`Database initialized at ${this.dbPath}`);
         } catch (error) {
@@ -31879,7 +31975,8 @@ export class DatabaseService {
                 status TEXT,
                 connection_mode TEXT,
                 active_workflow_step TEXT,
-                is_ephemeral_context_collapsed INTEGER
+                is_ephemeral_context_collapsed INTEGER,
+                is_cycle_collapsed INTEGER -- Added in C126
             );
 
             CREATE TABLE IF NOT EXISTS responses (
@@ -31897,6 +31994,30 @@ export class DatabaseService {
                 FOREIGN KEY (cycle_id) REFERENCES cycles(id) ON DELETE CASCADE
             );
         `);
+    }
+
+    private migrateSchema() {
+        if (!this.db) return;
+        try {
+            const tableInfo = this.db.pragma('table_info(cycles)') as any[];
+            
+            // Check for is_cycle_collapsed (C126)
+            const hasIsCycleCollapsed = tableInfo.some(col => col.name === 'is_cycle_collapsed');
+            if (!hasIsCycleCollapsed) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN is_cycle_collapsed INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added is_cycle_collapsed to cycles table.');
+            }
+
+            // Check for is_ephemeral_context_collapsed (C118/C126 catch-up)
+            const hasIsEphemeralContextCollapsed = tableInfo.some(col => col.name === 'is_ephemeral_context_collapsed');
+            if (!hasIsEphemeralContextCollapsed) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN is_ephemeral_context_collapsed INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added is_ephemeral_context_collapsed to cycles table.');
+            }
+
+        } catch (error) {
+            Services.loggerService.error(`Schema migration failed: ${error}`);
+        }
     }
 
     private migrateFromLegacyJson() {
@@ -31920,8 +32041,8 @@ export class DatabaseService {
             }
 
             const insertCycle = this.db.prepare(`
-                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed)
-                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed)
+                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed)
+                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed)
             `);
 
             const insertResponse = this.db.prepare(`
@@ -31946,7 +32067,8 @@ export class DatabaseService {
                         status: cycle.status || 'complete',
                         connectionMode: (cycle as any).connectionMode || null,
                         activeWorkflowStep: cycle.activeWorkflowStep || null,
-                        isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0
+                        isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
+                        isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0
                     });
 
                     for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -32026,6 +32148,7 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
+            isCycleCollapsed: !!cycleRow.is_cycle_collapsed,
             responses
         };
     }
@@ -32040,12 +32163,12 @@ export class DatabaseService {
         if (!this.db) return;
         
         const upsertCycle = this.db.prepare(`
-            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed)
-            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed)
+            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed)
+            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed)
             ON CONFLICT(id) DO UPDATE SET
                 title=@title, cycle_context=@cycleContext, ephemeral_context=@ephemeralContext, tab_count=@tabCount, active_tab=@activeTab, is_parsed_mode=@isParsedMode,
                 is_sorted_by_tokens=@isSortedByTokens, selected_response_id=@selectedResponseId, left_pane_width=@leftPaneWidth, status=@status,
-                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed
+                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed
         `);
 
         const upsertResponse = this.db.prepare(`
@@ -32072,7 +32195,8 @@ export class DatabaseService {
                 status: cycle.status || 'complete',
                 connectionMode: (cycle as any).connectionMode || null,
                 activeWorkflowStep: cycle.activeWorkflowStep || null,
-                isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0
+                isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
+                isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0
             });
 
             for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -32097,7 +32221,6 @@ export class DatabaseService {
     public deleteCycle(id: number) {
         if (!this.db) return;
         this.db.prepare('DELETE FROM cycles WHERE id = ?').run(id);
-        // Cascade delete on responses is handled by schema constraint, but better-sqlite3 might need explicit check depending on build
         this.db.prepare('DELETE FROM responses WHERE cycle_id = ?').run(id);
     }
 
@@ -32148,6 +32271,135 @@ This artifact provides a structured checklist for the next phase of development,
 - **More than one cycle?** No
 
 - [ ] **Task (T-ID: 2.1):** Create the Universal Task Checklist for the next cycle based on current progress and backlog.
+</file_artifact>
+
+<file path="src/Artifacts/A120. DCE - Database Maintenance Guide.md">
+# Artifact A120: DCE - Database Maintenance Guide
+# Date Created: C126
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A guide for developers on how to maintain, migrate, and debug the SQLite database used by the DCE extension.
+- **Tags:** guide, database, sqlite, maintenance, migration, debugging
+
+## 1. Overview
+
+The Data Curation Environment (DCE) uses a local SQLite database (`.vscode/dce.db`) to store project history, cycles, and responses. This ensures data integrity and performance. This guide outlines the procedures for maintaining this database, including schema migrations, debugging, and manual editing.
+
+## 2. Database Location
+
+The database is located in the user's workspace:
+*   **Path:** `.vscode/dce.db`
+*   **WAL File:** `.vscode/dce.db-wal` (Write-Ahead Log - do not delete while DB is open)
+*   **SHM File:** `.vscode/dce.db-shm` (Shared Memory - do not delete while DB is open)
+
+## 3. Schema Management & Migrations
+
+As the extension evolves, the database schema will need to change (e.g., adding new columns for new features).
+
+### 3.1. Adding a New Column
+To add a new column to an existing table (e.g., `cycles`):
+
+1.  **Modify `pcpp.types.ts`:** Update the TypeScript interface (e.g., `PcppCycle`) to include the new property.
+2.  **Update `DatabaseService.ts`:**
+    *   **`createTables()`:** Update the `CREATE TABLE` statement to include the new column for *new* databases.
+    *   **`migrateSchema()` (New Method):** Implement a migration check.
+        ```typescript
+        private migrateSchema() {
+            // Example: Check if 'is_cycle_collapsed' exists
+            const tableInfo = this.db.pragma('table_info(cycles)') as any[];
+            const hasColumn = tableInfo.some(col => col.name === 'is_cycle_collapsed');
+            
+            if (!hasColumn) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN is_cycle_collapsed INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added is_cycle_collapsed to cycles table.');
+            }
+        }
+        ```
+    *   **`initialize()`:** Call `this.migrateSchema()` after `createTables()`.
+3.  **Update `HistoryService.ts`:** Ensure the `saveCycle` and `getCycle` methods map the new TypeScript property to the new database column.
+
+### 3.2. Breaking Changes
+If a change requires a complete schema restructure (rare), it is often safer to:
+1.  Rename the existing table (e.g., `cycles_v1`).
+2.  Create the new table (`cycles`).
+3.  Run a migration script to copy/transform data from `cycles_v1` to `cycles`.
+4.  Drop `cycles_v1`.
+
+## 4. Debugging & Inspection
+
+To inspect the database contents during development:
+
+1.  **VS Code Extensions:** Use an extension like "SQLite" or "SQLite Viewer" to open `.vscode/dce.db` directly within VS Code.
+2.  **CLI:** Use the `sqlite3` command-line tool:
+    ```bash
+    sqlite3 .vscode/dce.db "SELECT id, title, status FROM cycles ORDER BY id DESC LIMIT 5;"
+    ```
+3.  **Logs:** The `DatabaseService` logs all major operations and errors to the "Data Curation Environment" output channel.
+
+## 5. Backup & Recovery
+
+*   **Automatic Backup:** The legacy `dce_history.json` is renamed to `dce_history.json.bak` upon migration.
+*   **Manual Export:** Users can export their history to JSON via the "Export History" button in the PCPP. This JSON can be re-imported to rebuild the database.
+</file_artifact>
+
+<file path="src/Artifacts/A121. DCE - Master Artifact List Automation Plan.md">
+# Artifact A121: DCE - Master Artifact List Automation Plan
+# Date Created: C126
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A plan to automate the maintenance of the Master Artifact List (A0) by programmatically scanning artifact files for metadata tags.
+- **Tags:** plan, automation, documentation, maintenance, a0
+
+## 1. Vision & Goal
+
+The Master Artifact List (`A0`) is the central index of the project's documentation. Currently, it is maintained manually, which is error-prone and tedious. The goal is to automate the generation and update of `A0` by scanning the `src/Artifacts` directory.
+
+We will treat the individual artifact files as the "Source of Truth." Each artifact will contain a standardized metadata header. The system will read these headers and compile the `A0` list dynamically.
+
+## 2. Metadata Schema
+
+Every artifact file MUST start with a metadata block formatted as YAML-like comments or specific Markdown lines that are easily regex-parseable.
+
+**Standard Header Format:**
+```markdown
+# Artifact A[ID]: [Title]
+# Date Created: [Cycle]
+# Author: [Author]
+# Updated on: [Cycle] ([Change Log])
+
+- **Key/Value for A0:**
+- **Description:** [A concise description for A0]
+- **Tags:** [comma, separated, tags]
+```
+
+## 3. Technical Implementation Plan
+
+### 3.1. New Service: `ArtifactService`
+We will create a new backend service, `ArtifactService`, responsible for managing documentation artifacts.
+
+**Responsibilities:**
+1.  **Scan:** Read all `.md` files in `src/Artifacts`.
+2.  **Parse:** Extract ID, Title, Description, and Tags from the header of each file.
+3.  **Generate:** Construct the `A0. DCE Master Artifact List.md` content.
+4.  **Update:** Write the new `A0` content to disk.
+
+### 3.2. State Awareness (Selection Sync)
+The user expressed a desire for the `A0` list to be "state-aware" regarding selected files.
+*   **Concept:** If a user deselects an artifact in the File Tree View (FTV), should it be removed from `A0`?
+*   **Analysis:** `A0` serves as a global index. Removing items from `A0` just because they aren't currently selected for the *prompt* might degrade its utility as a map.
+*   **Refined Approach:** `A0` should list *all* available artifacts. However, we can add a dynamic "Status" or "Included" indicator to the `A0` generation if it's being generated for a prompt context.
+
+### 3.3. Automation Triggers
+*   **On Command:** A command `dce.refreshMasterArtifactList` to manually trigger the rebuild.
+*   **On Save:** A file watcher on `src/Artifacts/*.md` could trigger a rebuild (debounced) whenever a documentation file is modified.
+
+## 4. Implementation Steps (Future Cycle)
+1.  Create `ArtifactService.ts`.
+2.  Implement regex parsers for the standard header.
+3.  Implement the `generateA0` method.
+4.  Register the command and watcher.
 </file_artifact>
 
 

@@ -1,5 +1,5 @@
 // src/backend/services/database.service.ts
-// Updated on: C123 (Add environment version logging)
+// Updated on: C126 (Add schema migration for is_cycle_collapsed)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -33,6 +33,7 @@ export class DatabaseService {
             this.db = new Database(this.dbPath);
             this.db.pragma('journal_mode = WAL');
             this.createTables();
+            this.migrateSchema(); // Run migrations after table creation
             this.migrateFromLegacyJson();
             Services.loggerService.log(`Database initialized at ${this.dbPath}`);
         } catch (error) {
@@ -64,7 +65,8 @@ export class DatabaseService {
                 status TEXT,
                 connection_mode TEXT,
                 active_workflow_step TEXT,
-                is_ephemeral_context_collapsed INTEGER
+                is_ephemeral_context_collapsed INTEGER,
+                is_cycle_collapsed INTEGER -- Added in C126
             );
 
             CREATE TABLE IF NOT EXISTS responses (
@@ -82,6 +84,30 @@ export class DatabaseService {
                 FOREIGN KEY (cycle_id) REFERENCES cycles(id) ON DELETE CASCADE
             );
         `);
+    }
+
+    private migrateSchema() {
+        if (!this.db) return;
+        try {
+            const tableInfo = this.db.pragma('table_info(cycles)') as any[];
+            
+            // Check for is_cycle_collapsed (C126)
+            const hasIsCycleCollapsed = tableInfo.some(col => col.name === 'is_cycle_collapsed');
+            if (!hasIsCycleCollapsed) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN is_cycle_collapsed INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added is_cycle_collapsed to cycles table.');
+            }
+
+            // Check for is_ephemeral_context_collapsed (C118/C126 catch-up)
+            const hasIsEphemeralContextCollapsed = tableInfo.some(col => col.name === 'is_ephemeral_context_collapsed');
+            if (!hasIsEphemeralContextCollapsed) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN is_ephemeral_context_collapsed INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added is_ephemeral_context_collapsed to cycles table.');
+            }
+
+        } catch (error) {
+            Services.loggerService.error(`Schema migration failed: ${error}`);
+        }
     }
 
     private migrateFromLegacyJson() {
@@ -105,8 +131,8 @@ export class DatabaseService {
             }
 
             const insertCycle = this.db.prepare(`
-                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed)
-                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed)
+                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed)
+                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed)
             `);
 
             const insertResponse = this.db.prepare(`
@@ -131,7 +157,8 @@ export class DatabaseService {
                         status: cycle.status || 'complete',
                         connectionMode: (cycle as any).connectionMode || null,
                         activeWorkflowStep: cycle.activeWorkflowStep || null,
-                        isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0
+                        isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
+                        isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0
                     });
 
                     for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -211,6 +238,7 @@ export class DatabaseService {
             status: cycleRow.status,
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
+            isCycleCollapsed: !!cycleRow.is_cycle_collapsed,
             responses
         };
     }
@@ -225,12 +253,12 @@ export class DatabaseService {
         if (!this.db) return;
         
         const upsertCycle = this.db.prepare(`
-            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed)
-            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed)
+            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed)
+            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed)
             ON CONFLICT(id) DO UPDATE SET
                 title=@title, cycle_context=@cycleContext, ephemeral_context=@ephemeralContext, tab_count=@tabCount, active_tab=@activeTab, is_parsed_mode=@isParsedMode,
                 is_sorted_by_tokens=@isSortedByTokens, selected_response_id=@selectedResponseId, left_pane_width=@leftPaneWidth, status=@status,
-                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed
+                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed
         `);
 
         const upsertResponse = this.db.prepare(`
@@ -257,7 +285,8 @@ export class DatabaseService {
                 status: cycle.status || 'complete',
                 connectionMode: (cycle as any).connectionMode || null,
                 activeWorkflowStep: cycle.activeWorkflowStep || null,
-                isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0
+                isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
+                isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0
             });
 
             for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -282,7 +311,6 @@ export class DatabaseService {
     public deleteCycle(id: number) {
         if (!this.db) return;
         this.db.prepare('DELETE FROM cycles WHERE id = ?').run(id);
-        // Cascade delete on responses is handled by schema constraint, but better-sqlite3 might need explicit check depending on build
         this.db.prepare('DELETE FROM responses WHERE cycle_id = ?').run(id);
     }
 

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C124 (Pass tabId to requestAllMetrics and update comparisonMetrics handling)
+// Updated on: C126 (Fix Select All, Persistence, and Accept logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -15,13 +15,13 @@ import ResponsePane from './components/ResponsePane';
 import WorkflowToolbar from './components/WorkflowToolbar';
 import GenerationProgressDisplay from './components/GenerationProgressDisplay';
 
-// Import custom hooks
 import { useCycleManagement } from './hooks/useCycleManagement';
 import { useTabManagement } from './hooks/useTabManagement';
 import { useFileManagement } from './hooks/useFileManagement';
 import { useGeneration } from './hooks/useGeneration';
 import { useWorkflow } from './hooks/useWorkflow';
 import { usePcppIpc } from './hooks/usePcppIpc';
+import { logger } from '@/client/utils/logger';
 
 const CollapsibleSection: React.FC<{ title: string; children: React.ReactNode; isCollapsed: boolean; onToggle: () => void; collapsedContent?: React.ReactNode; className?: string; extraHeaderContent?: React.ReactNode; }> = ({ title, children, isCollapsed, onToggle, collapsedContent, className, extraHeaderContent }) => (
     <div className="collapsible-section">
@@ -40,9 +40,8 @@ const App = () => {
     const saveStateRef = React.useRef<() => void>(() => {});
     const [forceShowResponseView, setForceShowResponseView] = React.useState(false);
     const [leftPaneWidth, setLeftPaneWidth] = React.useState(initialData.cycle?.leftPaneWidth || 33);
-
-    // --- State & Hooks Initialization ---
     const [responseCount, setResponseCount] = React.useState(4); 
+
     const cycleManagement = useCycleManagement(initialData.cycle, initialData.scope, initialData.maxCycle);
     
     const requestAllMetrics = React.useCallback((parsedResponse: any, tabId: number) => {
@@ -63,7 +62,6 @@ const App = () => {
     const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
     const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
-    // --- IPC Message Handling ---
     usePcppIpc(
         cycleManagement,
         tabManagement,
@@ -72,13 +70,12 @@ const App = () => {
         setWorkflowStep
     );
 
-    // --- Core Save Logic ---
     const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth });
     stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth };
 
     saveStateRef.current = React.useCallback(() => {
         const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth } = stateRef.current;
-        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId } = cycleManagement;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed } = cycleManagement;
         const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
@@ -101,6 +98,7 @@ const App = () => {
             pathOverrides: Object.fromEntries(pathOverrides),
             activeWorkflowStep: workflowStep || undefined,
             isEphemeralContextCollapsed,
+            isCycleCollapsed,
             leftPaneWidth,
         };
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
@@ -128,29 +126,38 @@ const App = () => {
     }, [fileManagement.selectedFilePath, tabManagement.tabs, tabManagement.activeTab, fileManagement.highlightedCodeBlocks]);
 
 
-    // --- Component Logic & Rendering ---
     React.useEffect(() => {
-        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
-            setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+        const handleLoadedCycle = (cycleData: PcppCycle) => {
             setForceShowResponseView(false);
             if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
             if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
+            
+            // C126 FIX: Correctly hydrate the selected files state from the persisted data
+            if (cycleData.selectedFilesForReplacement) {
+                fileManagement.setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement));
+            } else {
+                fileManagement.setSelectedFilesForReplacement(new Set());
+            }
+        };
+
+        clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData as any, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
+            setInitialData({cycle: cycleData, scope: projectScope, maxCycle: cycleData.cycleId });
+            handleLoadedCycle(cycleData);
         });
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData as any, ({ cycleData }: { cycleData: PcppCycle | null }) => {
             if (cycleData) {
-                setForceShowResponseView(false);
-                if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
-                if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
+                handleLoadedCycle(cycleData);
             }
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
+            fileManagement.setSelectedFilesForReplacement(new Set()); // Clear selection on new cycle
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
-    }, [clientIpc]);
+    }, [clientIpc, fileManagement.setSelectedFilesForReplacement]);
 
     if (cycleManagement.currentCycle === null) return <div>Loading...</div>;
-    if (cycleManagement.currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder for the Data Curation Environment to manage.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
+    if (cycleManagement.currentCycle.cycleId === -1) return <div className="onboarding-container"><h1>No Folder Opened</h1><p>You have not yet opened a folder.</p><button className="dce-button-primary" onClick={() => clientIpc.sendToServer(ClientToServerChannel.RequestOpenFolder, {})}><VscFolder /> Open Folder</button></div>;
     
     const onScopeChange = (scope: string) => { if (cycleManagement.currentCycle?.cycleId === 0) { cycleManagement.onCycleContextChange(scope); } };
 
@@ -192,6 +199,39 @@ const App = () => {
     
     const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;
 
+    // C126 FIX: Select All Implementation
+    const handleSelectAll = () => {
+        const currentTabId = tabManagement.activeTab.toString();
+        const activeTabData = tabManagement.tabs[currentTabId];
+        if (activeTabData?.parsedContent) {
+            const newSelection = new Set(fileManagement.selectedFilesForReplacement);
+            activeTabData.parsedContent.filesUpdated.forEach(filePath => {
+                newSelection.add(`${currentTabId}:::${filePath}`);
+            });
+            fileManagement.setSelectedFilesForReplacement(newSelection);
+            cycleManagement.setSaveStatus('unsaved');
+        }
+    };
+
+    // C126 FIX: Accept Selected Implementation
+    const handleAcceptSelected = () => {
+        const filesToWrite = [];
+        for (const compositeKey of fileManagement.selectedFilesForReplacement) {
+            const [tabId, filePath] = compositeKey.split(':::');
+            const tabData = tabManagement.tabs[tabId];
+            if (tabData && tabData.parsedContent) {
+                const file = tabData.parsedContent.files.find(f => f.path === filePath);
+                if (file) {
+                    filesToWrite.push({ path: file.path, content: file.content });
+                }
+            }
+        }
+        
+        if (filesToWrite.length > 0) {
+            clientIpc.sendToServer(ClientToServerChannel.RequestBatchFileWrite, { files: filesToWrite });
+        }
+    };
+
     return <div className="pc-view-container">
         <div className="pc-header">
             <div className="pc-toolbar">
@@ -204,7 +244,7 @@ const App = () => {
                 <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => cycleManagement.setIsCycleCollapsed(p => !p)} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => { cycleManagement.setIsCycleCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
             <CycleNavigator 
                 currentCycle={cycleManagement.currentCycle.cycleId} 
                 maxCycle={cycleManagement.maxCycle} 
@@ -269,9 +309,9 @@ const App = () => {
                         onSelectResponse={cycleManagement.handleSelectResponse}
                         onBaseline={() => {}}
                         onRestore={() => {}}
-                        onAcceptSelected={() => {}}
-                        onSelectAll={() => {}}
-                        onDeselectAll={() => fileManagement.setSelectedFilesForReplacement(new Set())}
+                        onAcceptSelected={handleAcceptSelected}
+                        onSelectAll={handleSelectAll}
+                        onDeselectAll={() => { fileManagement.setSelectedFilesForReplacement(new Set()); cycleManagement.setSaveStatus('unsaved'); }}
                         selectedFilesForReplacementCount={fileManagement.selectedFilesForReplacement.size}
                         workflowStep={workflowStep}
                     />

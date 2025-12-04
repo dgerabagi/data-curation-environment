@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C93 (Remove debouncing logic)
+// Updated on: C126 (Add isCycleCollapsed)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -16,7 +16,7 @@ export const useCycleManagement = (
     const [cycleTitle, setCycleTitle] = React.useState(initialCycle?.title || '');
     const [cycleContext, setCycleContext] = React.useState(initialCycle?.cycleContext || '');
     const [ephemeralContext, setEphemeralContext] = React.useState(initialCycle?.ephemeralContext || '');
-    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(false);
+    const [isCycleCollapsed, setIsCycleCollapsed] = React.useState(initialCycle?.isCycleCollapsed || false);
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
@@ -27,10 +27,10 @@ export const useCycleManagement = (
         setCurrentCycle(cycleData);
         setProjectScope(scope);
         setCycleTitle(cycleData.title);
-        // Handle Cycle 0 where context comes from project scope
         setCycleContext(cycleData.cycleId === 0 ? (scope || '') : cycleData.cycleContext);
         setEphemeralContext(cycleData.ephemeralContext);
         setIsEphemeralContextCollapsed(cycleData.isEphemeralContextCollapsed ?? true);
+        setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
     }, []);
@@ -59,6 +59,7 @@ export const useCycleManagement = (
             timestamp: new Date().toISOString(),
             status: 'complete',
             isEphemeralContextCollapsed: true,
+            isCycleCollapsed: false,
         };
         loadCycleData(newCycle);
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });

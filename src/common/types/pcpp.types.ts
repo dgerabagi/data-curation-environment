@@ -1,19 +1,14 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C116 (Add leftPaneWidth for persistence)
+// Updated on: C126 (Add isCycleCollapsed)
 export interface PcppResponse {
     content: string;
-    // The single source of truth for the response's state
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
-    
-    // Parsed content, formerly in TabState
     parsedContent?: ParsedResponse | null;
-
-    // Persisted Metrics for the Response UI
-    startTime?: number;         // Timestamp (Date.now()) when generation for this response started
-    thinkingEndTime?: number;   // Timestamp when the 'thinking' phase ended and 'generating' began
-    endTime?: number;           // Timestamp when the response was fully received
-    thinkingTokens?: number;    // Total tokens from the 'thinking' phase
-    responseTokens?: number;    // Total tokens from the 'response' phase (the actual content)
+    startTime?: number;
+    thinkingEndTime?: number;
+    endTime?: number;
+    thinkingTokens?: number;
+    responseTokens?: number;
 }
 
 export interface PcppCycle {
@@ -36,6 +31,8 @@ export interface PcppCycle {
     activeWorkflowStep?: string;
     status?: 'complete' | 'generating';
     isEphemeralContextCollapsed?: boolean;
+    isCycleCollapsed?: boolean; // C126: New field for persisting cycle section collapse state
+    connectionMode?: string;
 }
 
 export interface PcppHistoryFile {

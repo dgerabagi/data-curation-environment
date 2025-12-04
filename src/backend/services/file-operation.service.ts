@@ -1,5 +1,5 @@
 // src/backend/services/file-operation.service.ts
-// Updated on: C124 (Echo tabId in comparison and add markdown preview)
+// Updated on: C126 (Add enhanced logging to handleFileExistenceRequest)
 import * as vscode from "vscode";
 import * as path from "path";
 import { promises as fs } from 'fs';
@@ -201,9 +201,11 @@ export class FileOperationService {
     
         const existenceMap: { [path: string]: boolean } = {};
         const checks = paths.map(async (p_raw) => {
+            // Normalize path separators and trim quotes
             const p = p_raw.trim().replace(/^[`"']|[`"']$/g, '');
             if (!p) return;
     
+            // Resolve to absolute path, then normalize to forward slashes
             let absolutePath = path.resolve(rootPath, p);
             let normalizedPath = normalizePath(absolutePath);
             
@@ -213,6 +215,7 @@ export class FileOperationService {
                 await vscode.workspace.fs.stat(vscode.Uri.file(normalizedPath));
                 existenceMap[p_raw] = true;
             } catch {
+                // Fallback check for Artifacts (sometimes referenced relatively)
                 if (/^A\d+/.test(p)) {
                     const artifactPath = path.resolve(rootPath, 'src/Artifacts', p);
                     const normalizedArtifactPath = normalizePath(artifactPath);
@@ -289,7 +292,9 @@ export class FileOperationService {
 
     public async handleOpenFileRequest(filePath: string) {
         try {
-            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(filePath));
+            // Ensure path is absolute
+            const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(this.getWorkspaceRoot(), filePath);
+            await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(absolutePath));
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to open file ${filePath}: ${error.message}`);
         }

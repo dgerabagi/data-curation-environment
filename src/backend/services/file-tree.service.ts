@@ -91,6 +91,10 @@ export class FileTreeService {
             if (this.historyFilePath && normalizedPath === this.historyFilePath) {
                 return;
             }
+            // Also ignore dce.db related files
+            if (normalizedPath.includes('.vscode/dce.db')) {
+                return;
+            }
             for (const pattern of EXCLUSION_PATTERNS) {
                 if (normalizedPath.includes(`/${pattern}/`)) {
                     return;
@@ -102,6 +106,7 @@ export class FileTreeService {
         this.watcher.onDidCreate(async (uri: vscode.Uri) => {
             const normalizedPath = normalizePath(uri.fsPath);
             if (this.historyFilePath && normalizedPath === this.historyFilePath) return;
+            if (normalizedPath.includes('.vscode/dce.db')) return;
             
             const isNonSelectable = !this._isSelectable(normalizedPath, vscode.FileType.File);
             if (isNonSelectable) {

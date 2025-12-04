@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C124 (Update metrics key to use tabId, add Markdown preview)
+// Updated on: C126 (Add Open File on double click)
 import * as React from 'react';
 import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
@@ -116,8 +116,12 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
         e.stopPropagation();
         clientIpc.sendToServer(ClientToServerChannel.RequestMarkdownPreview, { filePath });
     };
+    
+    const handleOpenFile = (e: React.MouseEvent, filePath: string) => {
+        e.stopPropagation();
+        clientIpc.sendToServer(ClientToServerChannel.RequestOpenFile, { path: filePath });
+    };
 
-    // C124 FIX: Use composite key for metrics lookup
     const getMetricsKey = (filePath: string) => `${props.activeTab}:::${props.pathOverrides.get(filePath) || filePath}`;
 
     const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(getMetricsKey(props.selectedFilePath)) : null;
@@ -134,7 +138,7 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                         const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
                         const isMarkdown = file.toLowerCase().endsWith('.md');
                         
-                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onDoubleClick={(e) => handleOpenFile(e, file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
@@ -163,7 +167,11 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
             <div className="parsed-view-right">
                 <div className="file-content-viewer-header">
                     <span className="file-path" title={props.selectedFilePath || ''}>{props.selectedFilePath ? path.basename(props.selectedFilePath) : 'No file selected'}</span>
-                    <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button></div>
+                    <div className="file-actions"><div className="file-metadata">{currentComparisonMetrics && currentComparisonMetrics.originalTokens !== -1 && (<><span>Original: {formatLargeNumber(currentComparisonMetrics.originalTokens, 1)} tk</span><span>New: {formatLargeNumber(currentComparisonMetrics.modifiedTokens, 1)} tk</span><span>Similarity: {(currentComparisonMetrics.similarity * 100).toFixed(0)}%</span></>)}{currentComparisonMetrics && currentComparisonMetrics.originalTokens === -1 && (<span style={{color: 'var(--vscode-errorForeground)'}}>Original file not found</span>)}</div><button onClick={props.onCopyContent} title="Copy file content" disabled={!props.selectedFilePath}><VscClippy /></button>
+                    {props.selectedFilePath?.toLowerCase().endsWith('.md') && (
+                        <button onClick={(e) => handleMarkdownPreview(e, props.selectedFilePath!)} title="Open Markdown Preview"><VscPreview /></button>
+                    )}
+                    </div>
                 </div>
                 <CodeViewer htmlContent={props.viewableContent} />
             </div>

@@ -1,9 +1,9 @@
 // src/backend/services/history.service.ts
-// Updated on: C121 (Fix default cycle connection mode initialization)
+// Updated on: C126 (Include isCycleCollapsed in default cycle)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
-import { PcppCycle, PcppHistoryFile, PcppResponse } from '@/common/types/pcpp.types';
+import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 import { serverIPCs } from '@/client/views';
 import { VIEW_TYPES } from '@/common/view-types';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -26,8 +26,7 @@ export class HistoryService {
         }
     }
 
-    // Reconstructs the full history object from the DB to maintain compatibility with PromptService
-    public async getFullHistory(): Promise<PcppHistoryFile> {
+    public async getFullHistory(): Promise<any> {
         const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
         const cycles = Services.databaseService.getAllCycles();
         return { version: 1, projectScope, cycles };
@@ -52,7 +51,6 @@ export class HistoryService {
             isFreshEnvironment = false;
         } catch (e) { isFreshEnvironment = true; }
         
-        // Fetch global settings to initialize connectionMode correctly
         const settings = await Services.settingsService.getSettings();
 
         const defaultCycle: PcppCycle = {
@@ -73,7 +71,8 @@ export class HistoryService {
             activeWorkflowStep: null,
             status: 'complete',
             isEphemeralContextCollapsed: true,
-            connectionMode: settings.connectionMode, // Initialize with global default
+            isCycleCollapsed: false, // C126: Default to expanded
+            connectionMode: settings.connectionMode,
         };
 
         if (isFreshEnvironment) {
@@ -83,7 +82,6 @@ export class HistoryService {
         const cycles = Services.databaseService.getAllCycles();
 
         if (cycles.length === 0) {
-            // If no cycles exist in DB (e.g., fresh install or cleared DB), create default
             Services.databaseService.saveCycle(defaultCycle);
             return defaultCycle;
         }
@@ -104,7 +102,7 @@ export class HistoryService {
             const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
             const settings = await Services.settingsService.getSettings();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -141,7 +139,6 @@ export class HistoryService {
             newResponses[(i+1).toString()] = { content: '', status: 'generating' };
         }
         
-        // Get default connection mode from settings
         const settings = await Services.settingsService.getSettings();
 
         const newCycle: PcppCycle = {
@@ -155,7 +152,8 @@ export class HistoryService {
             isParsedMode: true,
             status: 'generating',
             isEphemeralContextCollapsed: true,
-            connectionMode: settings.connectionMode, // Initialize with global default
+            isCycleCollapsed: false,
+            connectionMode: settings.connectionMode,
         };
 
         Services.databaseService.saveCycle(newCycle);
