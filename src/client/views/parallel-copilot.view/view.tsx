@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C138 (Force synchronous save of hasGeneratedPrompt in handleGeneratePrompt)
+// Updated on: C139 (Explicitly reset workflow step on new cycle)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -267,24 +267,18 @@ const App = () => {
     };
 
     const handleGeneratePrompt = () => {
-        // C138 FIX: Synchronously construct the updated state and save it IMMEDIATELY.
-        // This bypasses the React state update cycle which is too slow before the view is destroyed.
         const currentState = getCurrentCycleState();
         if (currentState) {
             const updatedCycleData = {
                 ...currentState,
-                hasGeneratedPrompt: true // Force this to true
+                hasGeneratedPrompt: true 
             };
 
             logger.log(`[View] Requesting prompt generation for Cycle ${updatedCycleData.cycleId} (Synchronous Save)`);
             
-            // 1. Trigger file generation
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData: updatedCycleData });
-            
-            // 2. Force immediate persistence of the updated state
             clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: updatedCycleData });
             
-            // 3. Update local React state for UI consistency (though view might unload)
             cycleManagement.setHasGeneratedPrompt(true);
             cycleManagement.setSaveStatus('saved'); 
         }
@@ -343,8 +337,6 @@ const App = () => {
 
     const handleRestore = () => {
         const filesToDelete: string[] = [];
-        // Logic to determine newly created files would go here if we were tracking them more granularly
-        // For now, we rely on the backend's git clean
         clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete });
     };
 
@@ -352,6 +344,8 @@ const App = () => {
         cycleManagement.handleNewCycle(e);
         tabManagement.resetAndLoadTabs({}, false);
         fileManagement.setSelectedFilesForReplacement(new Set());
+        // C139 FIX: Explicitly reset the workflow step to prevent race condition with stale state
+        setWorkflowStep('awaitingResponsePaste_1');
     };
 
     return <div className="pc-view-container">
