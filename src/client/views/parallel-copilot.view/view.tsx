@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C131 (Add cost request effect and display)
+// Updated on: C132 (Add visibility save handler and cost breakdown tooltip)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -114,7 +114,19 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
-    // C131: Debounced cost request
+    // C132: Force save on visibility change (tab switch)
+    React.useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                logger.log('[View] Webview hidden, forcing save.');
+                saveStateRef.current();
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }, []);
+
+    // Debounced cost request
     React.useEffect(() => {
         const handler = setTimeout(() => {
             if (cycleManagement.currentCycle) {
@@ -180,7 +192,6 @@ const App = () => {
             setForceShowResponseView(false);
             fileManagement.setSelectedFilesForReplacement(new Set());
         });
-        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc, fileManagement.setSelectedFilesForReplacement]);
 
     if (cycleManagement.currentCycle === null) return <div>Loading...</div>;
@@ -204,8 +215,14 @@ const App = () => {
     }
     
     const collapsedNavigator = <div>...</div>;
-    // C131: Render cost
-    const totalPromptCostDisplay = <span className="total-prompt-cost" title={`${cycleManagement.totalTokens} tokens`}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
+    
+    // C132: Generate tooltip text from breakdown
+    const costTooltipText = Object.entries(cycleManagement.costBreakdown)
+        .map(([key, tokens]) => `${key}: ${tokens} tokens`)
+        .join('\n');
+    const finalCostTooltip = `${cycleManagement.totalTokens} total tokens\n\n${costTooltipText}`;
+
+    const totalPromptCostDisplay = <span className="total-prompt-cost" title={finalCostTooltip}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
     
     const SaveStatusIndicator = () => {
         let icon;
@@ -262,7 +279,6 @@ const App = () => {
     const handleBaseline = () => {
         const { currentCycle, cycleTitle } = cycleManagement;
         if (!currentCycle) return;
-        // C131: Log for debugging
         logger.log(`[view.tsx] handleBaseline clicked. Title: ${cycleTitle}`);
         const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
         clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });

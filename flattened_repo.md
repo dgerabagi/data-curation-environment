@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T18:11:21.604Z
+  Date Generated: 2025-12-04T18:40:27.157Z
   ---
   Total Files: 222
-  Approx. Tokens: 376457
+  Approx. Tokens: 376722
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,7 +14,7 @@
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5569 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5735 tokens)
 8. src\backend\services\prompt.service.ts (5232 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -148,17 +148,17 @@
 126. src\client\views\context-chooser.view\view.tsx - Lines: 151 - Chars: 16129 - Tokens: 4033
 127. src\client\views\parallel-copilot.view\components\CodeViewer.tsx - Lines: 33 - Chars: 1284 - Tokens: 321
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 70 - Chars: 3089 - Tokens: 773
-129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 83 - Chars: 3346 - Tokens: 837
+129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 84 - Chars: 3407 - Tokens: 852
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 204 - Chars: 13097 - Tokens: 3275
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 121 - Chars: 5297 - Tokens: 1325
-134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
+134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4042 - Tokens: 1011
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 407 - Chars: 22274 - Tokens: 5569
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 423 - Chars: 22940 - Tokens: 5735
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -191,12 +191,12 @@
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 139 - Chars: 5957 - Tokens: 1490
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 143 - Chars: 6130 - Tokens: 1533
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 218 - Chars: 10067 - Tokens: 2517
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 223 - Chars: 10364 - Tokens: 2591
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 92 - Chars: 3377 - Tokens: 845
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 101 - Chars: 3337 - Tokens: 835
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -11904,6 +11904,7 @@ export default ContextInputs;
 
 <file path="src/client/views/parallel-copilot.view/components/CycleNavigator.tsx">
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
+// Updated on: C132 (Verify workflow highlight for + button)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 
@@ -14247,7 +14248,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C131 (Add cost request effect and display)
+// Updated on: C132 (Add visibility save handler and cost breakdown tooltip)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14362,7 +14363,19 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
-    // C131: Debounced cost request
+    // C132: Force save on visibility change (tab switch)
+    React.useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                logger.log('[View] Webview hidden, forcing save.');
+                saveStateRef.current();
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }, []);
+
+    // Debounced cost request
     React.useEffect(() => {
         const handler = setTimeout(() => {
             if (cycleManagement.currentCycle) {
@@ -14428,7 +14441,6 @@ const App = () => {
             setForceShowResponseView(false);
             fileManagement.setSelectedFilesForReplacement(new Set());
         });
-        clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc, fileManagement.setSelectedFilesForReplacement]);
 
     if (cycleManagement.currentCycle === null) return <div>Loading...</div>;
@@ -14452,8 +14464,14 @@ const App = () => {
     }
     
     const collapsedNavigator = <div>...</div>;
-    // C131: Render cost
-    const totalPromptCostDisplay = <span className="total-prompt-cost" title={`${cycleManagement.totalTokens} tokens`}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
+    
+    // C132: Generate tooltip text from breakdown
+    const costTooltipText = Object.entries(cycleManagement.costBreakdown)
+        .map(([key, tokens]) => `${key}: ${tokens} tokens`)
+        .join('\n');
+    const finalCostTooltip = `${cycleManagement.totalTokens} total tokens\n\n${costTooltipText}`;
+
+    const totalPromptCostDisplay = <span className="total-prompt-cost" title={finalCostTooltip}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
     
     const SaveStatusIndicator = () => {
         let icon;
@@ -14510,7 +14528,6 @@ const App = () => {
     const handleBaseline = () => {
         const { currentCycle, cycleTitle } = cycleManagement;
         if (!currentCycle) return;
-        // C131: Log for debugging
         logger.log(`[view.tsx] handleBaseline clicked. Title: ${cycleTitle}`);
         const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
         clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });
@@ -17005,7 +17022,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C131 (Add cost/token state)
+// Updated on: C132 (Add costBreakdown state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -17030,6 +17047,8 @@ export const useCycleManagement = (
     // C131: New state for cost calculation
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
+    // C132: Cost breakdown
+    const [costBreakdown, setCostBreakdown] = React.useState<{ [key: string]: number }>({});
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -17130,6 +17149,8 @@ export const useCycleManagement = (
         setEstimatedCost,
         totalTokens,
         setTotalTokens,
+        costBreakdown,
+        setCostBreakdown,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -17339,7 +17360,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C131 (Add cost handler and workflow advance on file write)
+// Updated on: C132 (Fix response bleed by updating tabs on cycle load)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -17375,12 +17396,18 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             cycleManagement.loadCycleData(cycleData, projectScope);
             cycleManagement.setMaxCycle(cycleData.cycleId);
+            // C132 Fix: Ensure tabs are loaded from the initial cycle data
+            tabManagement.resetAndLoadTabs(cycleData.responses);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
-            if (cycleData) cycleManagement.loadCycleData(cycleData, projectScope);
+            if (cycleData) {
+                cycleManagement.loadCycleData(cycleData, projectScope);
+                // C132 Fix: Critical! Update tabs when cycle changes to prevent data bleeding/corruption
+                tabManagement.resetAndLoadTabs(cycleData.responses);
+            }
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
@@ -17401,7 +17428,6 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
-            // C131: Advance workflow step when files are accepted
             setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
@@ -17411,9 +17437,9 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            // C131: Update cost state
             cycleManagement.setTotalTokens(totalTokens);
             cycleManagement.setEstimatedCost(estimatedCost);
+            cycleManagement.setCostBreakdown(breakdown);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
@@ -17743,7 +17769,7 @@ export const useTabManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useWorkflow.ts">
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C131 (Improve sort step logic)
+// Updated on: C132 (Fix readyForNewCycle transition)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -17762,9 +17788,22 @@ export const useWorkflow = (
 
     React.useEffect(() => {
         if (workflowStep === null) return;
-        if (workflowStep === 'readyForNewCycle') return;
+        
+        if (isReadyForNextCycle) {
+            setWorkflowStep('readyForNewCycle');
+            return;
+        }
+
+        if (workflowStep === 'readyForNewCycle') {
+            if (!isReadyForNextCycle) {
+                // Fallback if criteria are unmet
+                setWorkflowStep('awaitingGeneratePrompt');
+            }
+            return;
+        }
+        
         if (workflowStep === 'awaitingGeneratePrompt') {
-            if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt');
+            // Handled by isReadyForNextCycle check above
             return;
         }
         if (workflowStep === 'awaitingCycleTitle') {
@@ -17780,11 +17819,9 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingAccept') {
-            // This is handled by IPC message FilesWritten
             return;
         }
         if (workflowStep === 'awaitingBaseline') {
-            // Logic handled by IPC hook (SendGitStatus / NotifyGitOperationResult)
             return;
         }
         if (workflowStep === 'awaitingFileSelect') {
@@ -17800,7 +17837,6 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingSort') {
-            // C131: If user selects a response, assume they skipped sort and move to baseline
             if (selectedResponseId) {
                 setWorkflowStep('awaitingBaseline');
                 return;
@@ -17812,7 +17848,6 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingParse') {
             if (isParsedMode) {
-                // C131: Default to awaitingSort, but if already sorted or selected, logic above handles it
                 setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort');
             }
             return;

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C131 (Add cost/token state)
+// Updated on: C132 (Add costBreakdown state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -24,6 +24,8 @@ export const useCycleManagement = (
     // C131: New state for cost calculation
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
+    // C132: Cost breakdown
+    const [costBreakdown, setCostBreakdown] = React.useState<{ [key: string]: number }>({});
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -124,6 +126,8 @@ export const useCycleManagement = (
         setEstimatedCost,
         totalTokens,
         setTotalTokens,
+        costBreakdown,
+        setCostBreakdown,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,

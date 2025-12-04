@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C131 (Improve sort step logic)
+// Updated on: C132 (Fix readyForNewCycle transition)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -18,9 +18,22 @@ export const useWorkflow = (
 
     React.useEffect(() => {
         if (workflowStep === null) return;
-        if (workflowStep === 'readyForNewCycle') return;
+        
+        if (isReadyForNextCycle) {
+            setWorkflowStep('readyForNewCycle');
+            return;
+        }
+
+        if (workflowStep === 'readyForNewCycle') {
+            if (!isReadyForNextCycle) {
+                // Fallback if criteria are unmet
+                setWorkflowStep('awaitingGeneratePrompt');
+            }
+            return;
+        }
+        
         if (workflowStep === 'awaitingGeneratePrompt') {
-            if (isReadyForNextCycle) setWorkflowStep('awaitingGeneratePrompt');
+            // Handled by isReadyForNextCycle check above
             return;
         }
         if (workflowStep === 'awaitingCycleTitle') {
@@ -36,11 +49,9 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingAccept') {
-            // This is handled by IPC message FilesWritten
             return;
         }
         if (workflowStep === 'awaitingBaseline') {
-            // Logic handled by IPC hook (SendGitStatus / NotifyGitOperationResult)
             return;
         }
         if (workflowStep === 'awaitingFileSelect') {
@@ -56,7 +67,6 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingSort') {
-            // C131: If user selects a response, assume they skipped sort and move to baseline
             if (selectedResponseId) {
                 setWorkflowStep('awaitingBaseline');
                 return;
@@ -68,7 +78,6 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingParse') {
             if (isParsedMode) {
-                // C131: Default to awaitingSort, but if already sorted or selected, logic above handles it
                 setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort');
             }
             return;

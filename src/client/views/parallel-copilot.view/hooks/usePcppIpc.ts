@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C131 (Add cost handler and workflow advance on file write)
+// Updated on: C132 (Fix response bleed by updating tabs on cycle load)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -35,12 +35,18 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             cycleManagement.loadCycleData(cycleData, projectScope);
             cycleManagement.setMaxCycle(cycleData.cycleId);
+            // C132 Fix: Ensure tabs are loaded from the initial cycle data
+            tabManagement.resetAndLoadTabs(cycleData.responses);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
-            if (cycleData) cycleManagement.loadCycleData(cycleData, projectScope);
+            if (cycleData) {
+                cycleManagement.loadCycleData(cycleData, projectScope);
+                // C132 Fix: Critical! Update tabs when cycle changes to prevent data bleeding/corruption
+                tabManagement.resetAndLoadTabs(cycleData.responses);
+            }
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendSyntaxHighlight, ({ highlightedHtml, id }) => {
@@ -61,7 +67,6 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
-            // C131: Advance workflow step when files are accepted
             setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
@@ -71,9 +76,9 @@ export const usePcppIpc = (
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            // C131: Update cost state
             cycleManagement.setTotalTokens(totalTokens);
             cycleManagement.setEstimatedCost(estimatedCost);
+            cycleManagement.setCostBreakdown(breakdown);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {

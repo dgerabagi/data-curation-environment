@@ -1,4 +1,5 @@
 // src/client/views/parallel-copilot.view/components/CycleNavigator.tsx
+// Updated on: C132 (Verify workflow highlight for + button)
 import * as React from 'react';
 import { VscChevronLeft, VscChevronRight, VscAdd, VscTrash, VscSync, VscCloudUpload, VscCloudDownload } from 'react-icons/vsc';
 
