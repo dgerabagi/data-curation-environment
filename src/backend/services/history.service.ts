@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C136 (Initialize hasGeneratedPrompt)
+// Updated on: C138 (Ensure hasGeneratedPrompt is initialized)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -65,7 +65,7 @@ export class HistoryService {
             selectedResponseId: null, 
             selectedFilesForReplacement: [], 
             tabCount: 4, 
-            activeTab: 1,
+            activeTab: 1, 
             isSortedByTokens: false, 
             pathOverrides: {},
             activeWorkflowStep: null,
@@ -73,7 +73,7 @@ export class HistoryService {
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
-            hasGeneratedPrompt: false, // C136: Initialize to false
+            hasGeneratedPrompt: false,
         };
 
         if (isFreshEnvironment) {
@@ -157,7 +157,7 @@ export class HistoryService {
             isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
             selectedFilesForReplacement: [],
-            hasGeneratedPrompt: false // C136: New cycle hasn't generated prompt yet
+            hasGeneratedPrompt: false
         };
 
         Services.databaseService.saveCycle(newCycle);
@@ -166,7 +166,6 @@ export class HistoryService {
         return { newCycle, newMaxCycle: newCycleId };
     }
     
-    // ... rest of the file (finalizeCycleStatus, updateCycleWithResponses, etc.) remains unchanged ...
     public async finalizeCycleStatus(cycleId: number): Promise<void> {
         const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {

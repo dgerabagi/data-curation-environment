@@ -1,5 +1,5 @@
 // src/backend/services/database.service.ts
-// Updated on: C136 (Add schema migration for has_generated_prompt)
+// Updated on: C138 (Ensure has_generated_prompt column exists)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -68,7 +68,7 @@ export class DatabaseService {
                 is_ephemeral_context_collapsed INTEGER,
                 is_cycle_collapsed INTEGER,
                 selected_files_for_replacement TEXT,
-                has_generated_prompt INTEGER -- Added in C136
+                has_generated_prompt INTEGER
             );
 
             CREATE TABLE IF NOT EXISTS responses (
@@ -93,28 +93,25 @@ export class DatabaseService {
         try {
             const tableInfo = this.db.pragma('table_info(cycles)') as any[];
             
-            // Check for is_cycle_collapsed (C126)
             const hasIsCycleCollapsed = tableInfo.some(col => col.name === 'is_cycle_collapsed');
             if (!hasIsCycleCollapsed) {
                 this.db.exec('ALTER TABLE cycles ADD COLUMN is_cycle_collapsed INTEGER DEFAULT 0');
                 Services.loggerService.log('Migrated database: Added is_cycle_collapsed to cycles table.');
             }
 
-            // Check for is_ephemeral_context_collapsed (C118/C126 catch-up)
             const hasIsEphemeralContextCollapsed = tableInfo.some(col => col.name === 'is_ephemeral_context_collapsed');
             if (!hasIsEphemeralContextCollapsed) {
                 this.db.exec('ALTER TABLE cycles ADD COLUMN is_ephemeral_context_collapsed INTEGER DEFAULT 0');
                 Services.loggerService.log('Migrated database: Added is_ephemeral_context_collapsed to cycles table.');
             }
             
-            // Check for selected_files_for_replacement (C126 Fix)
             const hasSelectedFiles = tableInfo.some(col => col.name === 'selected_files_for_replacement');
             if (!hasSelectedFiles) {
                 this.db.exec('ALTER TABLE cycles ADD COLUMN selected_files_for_replacement TEXT DEFAULT "[]"');
                 Services.loggerService.log('Migrated database: Added selected_files_for_replacement to cycles table.');
             }
 
-            // Check for has_generated_prompt (C136)
+            // C138: Ensure has_generated_prompt exists
             const hasGeneratedPrompt = tableInfo.some(col => col.name === 'has_generated_prompt');
             if (!hasGeneratedPrompt) {
                 this.db.exec('ALTER TABLE cycles ADD COLUMN has_generated_prompt INTEGER DEFAULT 0');
@@ -132,9 +129,8 @@ export class DatabaseService {
         const jsonPath = path.join(path.dirname(this.dbPath), 'dce_history.json');
         if (!fs.existsSync(jsonPath)) return;
 
-        // Check if DB is empty
         const row = this.db.prepare('SELECT count(*) as count FROM cycles').get() as { count: number };
-        if (row.count > 0) return; // Already populated
+        if (row.count > 0) return; 
 
         Services.loggerService.log("Migrating legacy dce_history.json to SQLite...");
         

@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C136 (Add hasGeneratedPrompt)
+// Updated on: C138 (Add hasGeneratedPrompt)
 export interface PcppResponse {
     content: string;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
@@ -33,7 +33,7 @@ export interface PcppCycle {
     isEphemeralContextCollapsed?: boolean;
     isCycleCollapsed?: boolean;
     connectionMode?: string;
-    hasGeneratedPrompt?: boolean; // C136: Persist prompt generation state
+    hasGeneratedPrompt?: boolean; // C138: Track if prompt has been generated for this cycle
 }
 
 export interface PcppHistoryFile {

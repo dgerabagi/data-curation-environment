@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C136 (Add cycleId dependency and auto-reset logic)
+// Updated on: C138 (Add hasGeneratedPrompt check)
 import * as React from 'react';
 import { PcppResponse } from '@/common/types/pcpp.types';
 
@@ -15,35 +15,30 @@ export const useWorkflow = (
     tabs: { [key: string]: PcppResponse },
     tabCount: number,
     hasGeneratedPrompt: boolean,
-    cycleId: number // C136: Add cycleId to props
+    cycleId: number
 ) => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(initialWorkflowStep);
 
-    // C136: Reset workflow step when cycle changes
     React.useEffect(() => {
-        // If we are loading a cycle with a saved workflow step, honor it.
-        // Otherwise, if it's a new or unstarted cycle (workflowStep is null/undefined),
-        // we attempt to auto-initialize the starting step.
         if (initialWorkflowStep) {
             setWorkflowStep(initialWorkflowStep);
         } else if (cycleId > 0) {
-             // For any cycle > 0 without a saved step, assume we are starting fresh.
-             // If tabs are empty, we are likely waiting for paste.
              const firstTabContent = tabs['1']?.content;
              if (!firstTabContent) {
                  setWorkflowStep('awaitingResponsePaste_1');
              } else {
-                 // If content exists but no step saved, maybe we are parsing?
                  setWorkflowStep('awaitingParse');
              }
         } else if (cycleId === 0) {
             setWorkflowStep('awaitingProjectScope');
         }
-    }, [cycleId, initialWorkflowStep]); // Only run when cycle ID or initial step changes (on load)
+    }, [cycleId, initialWorkflowStep]);
 
     React.useEffect(() => {
         if (workflowStep === null) return;
         
+        // C138: If the prompt is generated and all data is present, jump to the final step.
+        // This overrides any "fallback" logic that might be triggered by a stale state.
         if (isReadyForNextCycle) {
             setWorkflowStep('readyForNewCycle');
             return;
@@ -57,7 +52,6 @@ export const useWorkflow = (
         }
         
         if (workflowStep === 'awaitingGeneratePrompt') {
-            // Wait for isReadyForNextCycle to kick in
             return;
         }
 

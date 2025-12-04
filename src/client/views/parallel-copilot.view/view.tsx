@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C137 (Calculate disabled reason locally, clear selection on new cycle)
+// Updated on: C138 (Force synchronous save of hasGeneratedPrompt in handleGeneratePrompt)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -267,12 +267,26 @@ const App = () => {
     };
 
     const handleGeneratePrompt = () => {
-        const cycleData = getCurrentCycleState();
-        if (cycleData) {
-            logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
-            clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
+        // C138 FIX: Synchronously construct the updated state and save it IMMEDIATELY.
+        // This bypasses the React state update cycle which is too slow before the view is destroyed.
+        const currentState = getCurrentCycleState();
+        if (currentState) {
+            const updatedCycleData = {
+                ...currentState,
+                hasGeneratedPrompt: true // Force this to true
+            };
+
+            logger.log(`[View] Requesting prompt generation for Cycle ${updatedCycleData.cycleId} (Synchronous Save)`);
+            
+            // 1. Trigger file generation
+            clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData: updatedCycleData });
+            
+            // 2. Force immediate persistence of the updated state
+            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData: updatedCycleData });
+            
+            // 3. Update local React state for UI consistency (though view might unload)
             cycleManagement.setHasGeneratedPrompt(true);
-            cycleManagement.setSaveStatus('unsaved');
+            cycleManagement.setSaveStatus('saved'); 
         }
     };
 

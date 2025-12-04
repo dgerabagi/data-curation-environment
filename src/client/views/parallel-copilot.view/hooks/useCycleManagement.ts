@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C136 (Load hasGeneratedPrompt from persistent state)
+// Updated on: C138 (Load hasGeneratedPrompt from persisted cycle data)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -21,7 +21,7 @@ export const useCycleManagement = (
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
     
-    const [hasGeneratedPrompt, setHasGeneratedPrompt] = React.useState(false);
+    const [hasGeneratedPrompt, setHasGeneratedPrompt] = React.useState(!!initialCycle?.hasGeneratedPrompt);
 
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
@@ -39,7 +39,7 @@ export const useCycleManagement = (
         setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
-        // C136: Use the persisted value from the cycle data
+        // C138: Ensure we load the persisted state for hasGeneratedPrompt
         setHasGeneratedPrompt(!!cycleData.hasGeneratedPrompt); 
     }, []);
 
@@ -93,7 +93,6 @@ export const useCycleManagement = (
         setHasGeneratedPrompt(false); 
     }, []);
 
-    // ... rest of handlers (handleDeleteCycle, handleResetHistory, etc.) ...
     const handleDeleteCycle = React.useCallback(() => {
         if (currentCycle !== null) {
             clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId });
