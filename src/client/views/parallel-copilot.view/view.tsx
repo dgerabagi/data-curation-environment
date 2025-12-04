@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C134 (Fix parsing state on new cycle)
+// Updated on: C135 (Reset selection on new cycle, update isReady logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -60,17 +60,24 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); // Pass false initially, memoize below
+
+    // C135: Updated logic to require prompt generation before new cycle
     const isReadyForNextCycle = React.useMemo(() => {
-        return !!(
+        const basicReqs = !!(
             cycleManagement.cycleTitle && 
             cycleManagement.cycleTitle.trim() !== 'New Cycle' &&
             cycleManagement.cycleContext && 
             cycleManagement.selectedResponseId
         );
-    }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId]);
 
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, isReadyForNextCycle, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+        if (generationManagement.connectionMode === 'manual') {
+            return basicReqs && cycleManagement.hasGeneratedPrompt;
+        }
+        return basicReqs;
+    }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
+
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount, cycleManagement.hasGeneratedPrompt);
     
     usePcppIpc(
         cycleManagement,
@@ -119,7 +126,6 @@ const App = () => {
         }
     }, [clientIpc, getCurrentCycleState]);
 
-    // C132: Force save on visibility change (tab switch)
     React.useEffect(() => {
         const handleVisibilityChange = () => {
             if (document.visibilityState === 'hidden') {
@@ -131,7 +137,6 @@ const App = () => {
         return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, []);
 
-    // Debounced cost request
     React.useEffect(() => {
         const handler = setTimeout(() => {
             const cycleData = getCurrentCycleState();
@@ -238,12 +243,15 @@ const App = () => {
         if (cycleData) {
             logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
+            cycleManagement.setHasGeneratedPrompt(true);
         }
     };
 
     const renderHeaderButtons = () => {
+        const isGeneratePromptHighlighted = workflowStep === 'awaitingGeneratePrompt';
+        
         if (generationManagement.connectionMode === 'manual') {
-            return <button onClick={handleGeneratePrompt}><VscFileCode /> Generate prompt.md</button>;
+            return <button onClick={handleGeneratePrompt} className={isGeneratePromptHighlighted ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
             return <button onClick={generationManagement.handleGenerateResponses} disabled={generationManagement.isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
         }
@@ -298,6 +306,8 @@ const App = () => {
         cycleManagement.handleNewCycle(e);
         // C134: Explicitly reset to UNPARSED mode for a new manual cycle
         tabManagement.resetAndLoadTabs({}, false);
+        // C135: Explicitly reset selected files for the new cycle
+        fileManagement.setSelectedFilesForReplacement(new Set());
     };
 
     return <div className="pc-view-container">

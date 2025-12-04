@@ -1,5 +1,5 @@
 // src/backend/services/file-tree.service.ts
-// Updated on: C26 (Add targeted logging)
+// Updated on: C135 (Fix _isSelectable for .gitignore)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -237,7 +237,14 @@ export class FileTreeService {
             if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
                 return normalizedPath.includes(`/${pattern.slice(3, -3)}/`);
             }
-            if (name.startsWith(pattern)) return true;
+            // C135: Improved check for prefixes like .git vs .gitignore
+            if (name.startsWith(pattern)) {
+                // If the pattern is a prefix (like '.git'), ensure we don't match '.gitignore'
+                // by checking if the next char is a delimiter or end of string, OR if the pattern itself is special
+                if (pattern === '.git' && name !== '.git') return false;
+                if (pattern === '.vscode' && name !== '.vscode') return false;
+                return true;
+            }
             return false;
         });
     }

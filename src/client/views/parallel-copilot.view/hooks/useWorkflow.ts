@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C134 (Reorder workflow: Select Files -> Baseline)
+// Updated on: C135 (Add hasGeneratedPrompt to logic)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -12,7 +12,8 @@ export const useWorkflow = (
     isSortedByTokens: boolean,
     isParsedMode: boolean,
     tabs: any,
-    tabCount: number
+    tabCount: number,
+    hasGeneratedPrompt: boolean
 ) => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(initialWorkflowStep);
 
@@ -26,15 +27,20 @@ export const useWorkflow = (
 
         if (workflowStep === 'readyForNewCycle') {
             if (!isReadyForNextCycle) {
+                // If no longer ready, go back to prompt generation step
                 setWorkflowStep('awaitingGeneratePrompt');
             }
             return;
         }
         
+        // C135: Highlight prompt generation if title/context are ready but prompt hasn't been generated yet
         if (workflowStep === 'awaitingGeneratePrompt') {
-            // Handled by isReadyForNextCycle check above
+            if (hasGeneratedPrompt) {
+                // Wait for isReadyForNextCycle to kick in (requires selected response)
+            }
             return;
         }
+
         if (workflowStep === 'awaitingCycleTitle') {
             if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') {
                 setWorkflowStep('awaitingGeneratePrompt');
@@ -55,14 +61,12 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingFileSelect') {
             if (selectedFilesForReplacement.size > 0) {
-                // C134: Reordered workflow. After selecting files, prompt to Baseline.
                 setWorkflowStep('awaitingBaseline');
             }
             return;
         }
         if (workflowStep === 'awaitingResponseSelect') {
             if (selectedResponseId) {
-                // C134: Reordered workflow. After selecting response, prompt to select files.
                 setWorkflowStep('awaitingFileSelect');
             }
             return;
@@ -93,7 +97,7 @@ export const useWorkflow = (
             }
             setWorkflowStep('awaitingParse');
         }
-    }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle]);
+    }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, hasGeneratedPrompt]);
 
     return {
         workflowStep,

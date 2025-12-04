@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T20:17:48.454Z
+  Date Generated: 2025-12-04T21:17:15.447Z
   ---
   Total Files: 222
-  Approx. Tokens: 377225
+  Approx. Tokens: 377904
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,8 +14,8 @@
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5762 tokens)
-8. src\backend\services\prompt.service.ts (4992 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5930 tokens)
+8. src\backend\services\prompt.service.ts (5086 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
@@ -121,14 +121,14 @@
 99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 101. src\backend\services\file-operation.service.ts - Lines: 411 - Chars: 19728 - Tokens: 4932
-102. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 15082 - Tokens: 3771
+102. src\backend\services\file-tree.service.ts - Lines: 294 - Chars: 15279 - Tokens: 3820
 103. src\backend\services\flattener.service.ts - Lines: 296 - Chars: 15044 - Tokens: 3761
-104. src\backend\services\git.service.ts - Lines: 173 - Chars: 7770 - Tokens: 1943
+104. src\backend\services\git.service.ts - Lines: 173 - Chars: 7854 - Tokens: 1964
 105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
 106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12779 - Tokens: 3195
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 19968 - Tokens: 4992
+109. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 20341 - Tokens: 5086
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 51 - Chars: 2436 - Tokens: 609
 112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -158,14 +158,14 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8981 - Tokens: 2246
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 141 - Chars: 6424 - Tokens: 1606
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 430 - Chars: 23045 - Tokens: 5762
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 440 - Chars: 23719 - Tokens: 5930
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
 143. src\client\views\settings.view\view.tsx - Lines: 134 - Chars: 7159 - Tokens: 1790
 144. src\client\views\index.ts - Lines: 39 - Chars: 1928 - Tokens: 482
-145. src\common\ipc\channels.enum.ts - Lines: 116 - Chars: 6612 - Tokens: 1653
-146. src\common\ipc\channels.type.ts - Lines: 130 - Chars: 9871 - Tokens: 2468
+145. src\common\ipc\channels.enum.ts - Lines: 116 - Chars: 6727 - Tokens: 1682
+146. src\common\ipc\channels.type.ts - Lines: 130 - Chars: 10000 - Tokens: 2500
 147. src\common\ipc\client-ipc.ts - Lines: 44 - Chars: 1588 - Tokens: 397
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
@@ -184,19 +184,19 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 120 - Chars: 12297 - Tokens: 3075
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 120 - Chars: 12416 - Tokens: 3104
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4866 - Tokens: 1217
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 143 - Chars: 6272 - Tokens: 1568
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 154 - Chars: 6737 - Tokens: 1685
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 225 - Chars: 10550 - Tokens: 2638
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 184 - Chars: 7541 - Tokens: 1886
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 102 - Chars: 3487 - Tokens: 872
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 194 - Chars: 7979 - Tokens: 1995
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 106 - Chars: 3611 - Tokens: 903
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -7571,7 +7571,7 @@ export class FileOperationService {
 
 <file path="src/backend/services/file-tree.service.ts">
 // src/backend/services/file-tree.service.ts
-// Updated on: C26 (Add targeted logging)
+// Updated on: C135 (Fix _isSelectable for .gitignore)
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs/promises";
@@ -7809,7 +7809,14 @@ export class FileTreeService {
             if (pattern.startsWith('**/') && pattern.endsWith('/**')) {
                 return normalizedPath.includes(`/${pattern.slice(3, -3)}/`);
             }
-            if (name.startsWith(pattern)) return true;
+            // C135: Improved check for prefixes like .git vs .gitignore
+            if (name.startsWith(pattern)) {
+                // If the pattern is a prefix (like '.git'), ensure we don't match '.gitignore'
+                // by checking if the next char is a delimiter or end of string, OR if the pattern itself is special
+                if (pattern === '.git' && name !== '.git') return false;
+                if (pattern === '.vscode' && name !== '.vscode') return false;
+                return true;
+            }
             return false;
         });
     }
@@ -8160,7 +8167,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C134 (Expand .gitignore)
+// Updated on: C135 (Remove DCE-specific dev folders from default gitignore)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -8223,7 +8230,7 @@ export class GitService {
                 '*.vsix',
                 '.vscode-test/',
                 '.vscode/',
-                'The-Creator-AI-main/',
+                // 'The-Creator-AI-main/', // C135: Removed project-specific exclusion
                 'prompt.md',
                 '.vscode/dce_cache/'
             ];
@@ -14250,7 +14257,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C134 (Fix parsing state on new cycle)
+// Updated on: C135 (Reset selection on new cycle, update isReady logic)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14311,17 +14318,24 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); // Pass false initially, memoize below
+
+    // C135: Updated logic to require prompt generation before new cycle
     const isReadyForNextCycle = React.useMemo(() => {
-        return !!(
+        const basicReqs = !!(
             cycleManagement.cycleTitle && 
             cycleManagement.cycleTitle.trim() !== 'New Cycle' &&
             cycleManagement.cycleContext && 
             cycleManagement.selectedResponseId
         );
-    }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId]);
 
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, isReadyForNextCycle, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+        if (generationManagement.connectionMode === 'manual') {
+            return basicReqs && cycleManagement.hasGeneratedPrompt;
+        }
+        return basicReqs;
+    }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
+
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount, cycleManagement.hasGeneratedPrompt);
     
     usePcppIpc(
         cycleManagement,
@@ -14370,7 +14384,6 @@ const App = () => {
         }
     }, [clientIpc, getCurrentCycleState]);
 
-    // C132: Force save on visibility change (tab switch)
     React.useEffect(() => {
         const handleVisibilityChange = () => {
             if (document.visibilityState === 'hidden') {
@@ -14382,7 +14395,6 @@ const App = () => {
         return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, []);
 
-    // Debounced cost request
     React.useEffect(() => {
         const handler = setTimeout(() => {
             const cycleData = getCurrentCycleState();
@@ -14489,12 +14501,15 @@ const App = () => {
         if (cycleData) {
             logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
+            cycleManagement.setHasGeneratedPrompt(true);
         }
     };
 
     const renderHeaderButtons = () => {
+        const isGeneratePromptHighlighted = workflowStep === 'awaitingGeneratePrompt';
+        
         if (generationManagement.connectionMode === 'manual') {
-            return <button onClick={handleGeneratePrompt}><VscFileCode /> Generate prompt.md</button>;
+            return <button onClick={handleGeneratePrompt} className={isGeneratePromptHighlighted ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
             return <button onClick={generationManagement.handleGenerateResponses} disabled={generationManagement.isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
         }
@@ -14549,6 +14564,8 @@ const App = () => {
         cycleManagement.handleNewCycle(e);
         // C134: Explicitly reset to UNPARSED mode for a new manual cycle
         tabManagement.resetAndLoadTabs({}, false);
+        // C135: Explicitly reset selected files for the new cycle
+        fileManagement.setSelectedFilesForReplacement(new Set());
     };
 
     return <div className="pc-view-container">
@@ -17043,7 +17060,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C132 (Add costBreakdown state)
+// Updated on: C135 (Add hasGeneratedPrompt state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -17065,6 +17082,9 @@ export const useCycleManagement = (
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
     
+    // C135: Track if prompt has been generated for the current cycle state
+    const [hasGeneratedPrompt, setHasGeneratedPrompt] = React.useState(false);
+
     // C131: New state for cost calculation
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
@@ -17083,6 +17103,8 @@ export const useCycleManagement = (
         setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
+        // Assume loaded cycles (that are complete) have had their prompt generated
+        setHasGeneratedPrompt(true); 
     }, []);
 
     const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
@@ -17112,6 +17134,7 @@ export const useCycleManagement = (
             isCycleCollapsed: false,
         };
         loadCycleData(newCycle);
+        setHasGeneratedPrompt(false); // Reset for new cycle
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
     }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
@@ -17119,16 +17142,19 @@ export const useCycleManagement = (
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
         setSaveStatus('unsaved');
+        setHasGeneratedPrompt(false); // Reset when content changes
     }, []);
 
     const onEphemeralContextChange = React.useCallback((value: string) => {
         setEphemeralContext(value);
         setSaveStatus('unsaved');
+        setHasGeneratedPrompt(false); // Reset when content changes
     }, []);
 
     const onTitleChange = React.useCallback((title: string) => {
         setCycleTitle(title);
         setSaveStatus('unsaved');
+        setHasGeneratedPrompt(false); // Reset when content changes
     }, []);
 
     const handleDeleteCycle = React.useCallback(() => {
@@ -17172,6 +17198,8 @@ export const useCycleManagement = (
         setTotalTokens,
         costBreakdown,
         setCostBreakdown,
+        hasGeneratedPrompt,
+        setHasGeneratedPrompt,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -17609,7 +17637,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C134 (Allow explicit setting of isParsedMode in resetAndLoadTabs)
+// Updated on: C135 (Add prompt.md paste guard)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -17698,6 +17726,16 @@ export const useTabManagement = (
 
     const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
+        
+        // C135: Guard against pasting the prompt itself
+        if (pastedText.includes('<prompt.md>') || pastedText.includes('<M1. artifact schema>')) {
+            e.preventDefault();
+            clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { 
+                message: "It looks like you are trying to paste the prompt.md file. Please paste the AI's response instead." 
+            });
+            return;
+        }
+
         const currentContent = tabs[tabIndex.toString()]?.content || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
         if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
@@ -17706,7 +17744,7 @@ export const useTabManagement = (
         } else {
             handleContentChange(pastedText, tabIndex);
         }
-    }, [tabs, tabCount, handleContentChange]);
+    }, [tabs, tabCount, handleContentChange, clientIpc]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {
@@ -17796,7 +17834,7 @@ export const useTabManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useWorkflow.ts">
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C134 (Reorder workflow: Select Files -> Baseline)
+// Updated on: C135 (Add hasGeneratedPrompt to logic)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -17809,7 +17847,8 @@ export const useWorkflow = (
     isSortedByTokens: boolean,
     isParsedMode: boolean,
     tabs: any,
-    tabCount: number
+    tabCount: number,
+    hasGeneratedPrompt: boolean
 ) => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(initialWorkflowStep);
 
@@ -17823,15 +17862,20 @@ export const useWorkflow = (
 
         if (workflowStep === 'readyForNewCycle') {
             if (!isReadyForNextCycle) {
+                // If no longer ready, go back to prompt generation step
                 setWorkflowStep('awaitingGeneratePrompt');
             }
             return;
         }
         
+        // C135: Highlight prompt generation if title/context are ready but prompt hasn't been generated yet
         if (workflowStep === 'awaitingGeneratePrompt') {
-            // Handled by isReadyForNextCycle check above
+            if (hasGeneratedPrompt) {
+                // Wait for isReadyForNextCycle to kick in (requires selected response)
+            }
             return;
         }
+
         if (workflowStep === 'awaitingCycleTitle') {
             if (cycleTitle.trim() && cycleTitle.trim() !== 'New Cycle') {
                 setWorkflowStep('awaitingGeneratePrompt');
@@ -17852,14 +17896,12 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingFileSelect') {
             if (selectedFilesForReplacement.size > 0) {
-                // C134: Reordered workflow. After selecting files, prompt to Baseline.
                 setWorkflowStep('awaitingBaseline');
             }
             return;
         }
         if (workflowStep === 'awaitingResponseSelect') {
             if (selectedResponseId) {
-                // C134: Reordered workflow. After selecting response, prompt to select files.
                 setWorkflowStep('awaitingFileSelect');
             }
             return;
@@ -17890,7 +17932,7 @@ export const useWorkflow = (
             }
             setWorkflowStep('awaitingParse');
         }
-    }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle]);
+    }, [workflowStep, selectedFilesForReplacement, selectedResponseId, isSortedByTokens, isParsedMode, tabs, cycleContext, cycleTitle, tabCount, isReadyForNextCycle, hasGeneratedPrompt]);
 
     return {
         workflowStep,

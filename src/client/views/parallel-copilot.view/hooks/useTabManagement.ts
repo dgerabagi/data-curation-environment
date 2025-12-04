@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C134 (Allow explicit setting of isParsedMode in resetAndLoadTabs)
+// Updated on: C135 (Add prompt.md paste guard)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -88,6 +88,16 @@ export const useTabManagement = (
 
     const handlePaste = React.useCallback((e: React.ClipboardEvent, tabIndex: number) => {
         const pastedText = e.clipboardData.getData('text');
+        
+        // C135: Guard against pasting the prompt itself
+        if (pastedText.includes('<prompt.md>') || pastedText.includes('<M1. artifact schema>')) {
+            e.preventDefault();
+            clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { 
+                message: "It looks like you are trying to paste the prompt.md file. Please paste the AI's response instead." 
+            });
+            return;
+        }
+
         const currentContent = tabs[tabIndex.toString()]?.content || '';
         const tokenCount = Math.ceil(pastedText.length / 4);
         if (tokenCount > 1000 && currentContent.trim() === '' && tabIndex < tabCount) {
@@ -96,7 +106,7 @@ export const useTabManagement = (
         } else {
             handleContentChange(pastedText, tabIndex);
         }
-    }, [tabs, tabCount, handleContentChange]);
+    }, [tabs, tabCount, handleContentChange, clientIpc]);
     
     const parseAllTabs = React.useCallback(() => {
         setTabs(prevTabs => {

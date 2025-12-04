@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C134 (Expand .gitignore)
+// Updated on: C135 (Remove DCE-specific dev folders from default gitignore)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -62,7 +62,7 @@ export class GitService {
                 '*.vsix',
                 '.vscode-test/',
                 '.vscode/',
-                'The-Creator-AI-main/',
+                // 'The-Creator-AI-main/', // C135: Removed project-specific exclusion
                 'prompt.md',
                 '.vscode/dce_cache/'
             ];

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C132 (Add costBreakdown state)
+// Updated on: C135 (Add hasGeneratedPrompt state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -21,6 +21,9 @@ export const useCycleManagement = (
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
     
+    // C135: Track if prompt has been generated for the current cycle state
+    const [hasGeneratedPrompt, setHasGeneratedPrompt] = React.useState(false);
+
     // C131: New state for cost calculation
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
@@ -39,6 +42,8 @@ export const useCycleManagement = (
         setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
+        // Assume loaded cycles (that are complete) have had their prompt generated
+        setHasGeneratedPrompt(true); 
     }, []);
 
     const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
@@ -68,6 +73,7 @@ export const useCycleManagement = (
             isCycleCollapsed: false,
         };
         loadCycleData(newCycle);
+        setHasGeneratedPrompt(false); // Reset for new cycle
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
     }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
@@ -75,16 +81,19 @@ export const useCycleManagement = (
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
         setSaveStatus('unsaved');
+        setHasGeneratedPrompt(false); // Reset when content changes
     }, []);
 
     const onEphemeralContextChange = React.useCallback((value: string) => {
         setEphemeralContext(value);
         setSaveStatus('unsaved');
+        setHasGeneratedPrompt(false); // Reset when content changes
     }, []);
 
     const onTitleChange = React.useCallback((title: string) => {
         setCycleTitle(title);
         setSaveStatus('unsaved');
+        setHasGeneratedPrompt(false); // Reset when content changes
     }, []);
 
     const handleDeleteCycle = React.useCallback(() => {
@@ -128,6 +137,8 @@ export const useCycleManagement = (
         setTotalTokens,
         costBreakdown,
         setCostBreakdown,
+        hasGeneratedPrompt,
+        setHasGeneratedPrompt,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
