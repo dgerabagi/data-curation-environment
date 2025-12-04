@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C128 (Add styles for markdown preview pane)
+// Updated on: C129 (Add contrast fix for autosave icon in selected header)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -54,6 +54,11 @@
     .saved {
         color: var(--vscode-testing-iconPassed); // green
     }
+}
+
+// C129 FIX: Ensure visibility against green header background
+.collapsible-header.selected .save-status-indicator .saved {
+    color: var(--vscode-button-foreground); // Usually white
 }
 
 .spinner {

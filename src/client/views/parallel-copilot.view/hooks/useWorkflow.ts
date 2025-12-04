@@ -68,7 +68,8 @@ export const useWorkflow = (
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
         if (waitingForPaste) {
             for (let i = 1; i <= tabCount; i++) {
-                if (!tabs[i.toString()]?.rawContent?.trim()) {
+                // C129 FIX: Changed rawContent to content to match PcppResponse interface
+                if (!tabs[i.toString()]?.content?.trim()) {
                     setWorkflowStep(`awaitingResponsePaste_${i}`);
                     return;
                 }

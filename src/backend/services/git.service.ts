@@ -1,8 +1,9 @@
 // src/backend/services/git.service.ts
-// Updated on: C12 (Refine Restore logic)
+// Updated on: C129 (Automate .gitignore creation)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
+import * as fs from 'fs/promises';
 import { Services } from './services';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -35,9 +36,40 @@ export class GitService {
 
     public async handleGitInitRequest() {
         Services.loggerService.log("Executing Git Init.");
+        const workspaceRoot = this.getWorkspaceRoot();
+        if (!workspaceRoot) {
+             vscode.window.showErrorMessage("No workspace open.");
+             return;
+        }
+
         try {
             await this.execGitCommand('git init');
-            vscode.window.showInformationMessage("Successfully initialized Git repository. You can now create a baseline.");
+            
+            // C129: Create .gitignore automatically
+            const gitignorePath = path.join(workspaceRoot, '.gitignore');
+            let gitignoreContent = '';
+            try {
+                gitignoreContent = await fs.readFile(gitignorePath, 'utf-8');
+            } catch (e) {
+                // File doesn't exist, start fresh
+            }
+
+            let updated = false;
+            if (!gitignoreContent.includes('.vscode/')) {
+                gitignoreContent += '\n.vscode/\n';
+                updated = true;
+            }
+            if (!gitignoreContent.includes('node_modules/')) {
+                gitignoreContent += '\nnode_modules/\n';
+                updated = true;
+            }
+
+            if (updated) {
+                await fs.writeFile(gitignorePath, gitignoreContent.trim() + '\n', 'utf-8');
+                Services.loggerService.log(".gitignore created/updated.");
+            }
+
+            vscode.window.showInformationMessage("Successfully initialized Git repository and configured .gitignore.");
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to initialize Git repository: ${error.message}`);
         }

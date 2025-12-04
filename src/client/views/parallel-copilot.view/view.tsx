@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C126 (Fix Select All, Persistence, and Accept logic)
+// Updated on: C129 (Fix response bleed, green light logic, and autosave contrast)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -59,8 +59,19 @@ const App = () => {
 
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+    
+    // C129: Re-implement readiness logic
+    const isReadyForNextCycle = React.useMemo(() => {
+        return !!(
+            cycleManagement.cycleTitle && 
+            cycleManagement.cycleTitle.trim() !== 'New Cycle' &&
+            cycleManagement.cycleContext && 
+            cycleManagement.selectedResponseId
+        );
+    }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId]);
+
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, isReadyForNextCycle, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     usePcppIpc(
         cycleManagement,
@@ -132,7 +143,6 @@ const App = () => {
             if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
             if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
             
-            // C126 FIX: Correctly hydrate the selected files state from the persisted data
             if (cycleData.selectedFilesForReplacement) {
                 fileManagement.setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement));
             } else {
@@ -151,7 +161,7 @@ const App = () => {
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
-            fileManagement.setSelectedFilesForReplacement(new Set()); // Clear selection on new cycle
+            fileManagement.setSelectedFilesForReplacement(new Set());
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc, fileManagement.setSelectedFilesForReplacement]);
@@ -199,7 +209,6 @@ const App = () => {
     
     const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;
 
-    // C126 FIX: Select All Implementation
     const handleSelectAll = () => {
         const currentTabId = tabManagement.activeTab.toString();
         const activeTabData = tabManagement.tabs[currentTabId];
@@ -213,7 +222,6 @@ const App = () => {
         }
     };
 
-    // C126 FIX: Accept Selected Implementation
     const handleAcceptSelected = () => {
         const filesToWrite = [];
         for (const compositeKey of fileManagement.selectedFilesForReplacement) {
@@ -232,6 +240,12 @@ const App = () => {
         }
     };
 
+    // C129 FIX: Wrapper to ensure tabs are reset when creating a new cycle
+    const handleNewCycleWrapper = (e: React.MouseEvent) => {
+        cycleManagement.handleNewCycle(e);
+        tabManagement.resetAndLoadTabs({});
+    };
+
     return <div className="pc-view-container">
         <div className="pc-header">
             <div className="pc-toolbar">
@@ -244,14 +258,21 @@ const App = () => {
                 <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => { cycleManagement.setIsCycleCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+        <CollapsibleSection 
+            title="Cycle & Context" 
+            isCollapsed={cycleManagement.isCycleCollapsed} 
+            onToggle={() => { cycleManagement.setIsCycleCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} 
+            collapsedContent={collapsedNavigator} 
+            extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}
+            className={isReadyForNextCycle ? 'selected' : ''}
+        >
             <CycleNavigator 
                 currentCycle={cycleManagement.currentCycle.cycleId} 
                 maxCycle={cycleManagement.maxCycle} 
                 cycleTitle={cycleManagement.cycleTitle} 
-                isNewCycleButtonDisabled={!true} 
+                isNewCycleButtonDisabled={!isReadyForNextCycle} 
                 onCycleChange={cycleManagement.handleCycleChange} 
-                onNewCycle={cycleManagement.handleNewCycle} 
+                onNewCycle={handleNewCycleWrapper} 
                 onTitleChange={cycleManagement.onTitleChange} 
                 onDeleteCycle={cycleManagement.handleDeleteCycle} 
                 onResetHistory={cycleManagement.handleResetHistory} 

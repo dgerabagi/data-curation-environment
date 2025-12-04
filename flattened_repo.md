@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T14:13:38.578Z
+  Date Generated: 2025-12-04T17:34:16.857Z
   ---
   Total Files: 222
-  Approx. Tokens: 375074
+  Approx. Tokens: 375559
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -12,15 +12,15 @@
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (9485 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (7573 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
 7. src\backend\services\prompt.service.ts (5232 tokens)
-8. src\client\views\parallel-copilot.view\view.tsx (5014 tokens)
+8. src\client\views\parallel-copilot.view\view.tsx (5174 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 37940 - Tokens: 9485
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 37942 - Tokens: 9486
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -75,7 +75,7 @@
 53. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 54. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
 55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 123 - Chars: 5850 - Tokens: 1463
-56. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 59 - Chars: 10311 - Tokens: 2578
+56. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 59 - Chars: 10104 - Tokens: 2526
 57. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 58. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 46 - Chars: 3849 - Tokens: 963
@@ -88,7 +88,7 @@
 66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
 67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
 68. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 55 - Chars: 2867 - Tokens: 717
+69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2920 - Tokens: 730
 70. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 71. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
 72. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
@@ -123,7 +123,7 @@
 101. src\backend\services\file-operation.service.ts - Lines: 411 - Chars: 19728 - Tokens: 4932
 102. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 14796 - Tokens: 3699
 103. src\backend\services\flattener.service.ts - Lines: 296 - Chars: 15044 - Tokens: 3761
-104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
+104. src\backend\services\git.service.ts - Lines: 162 - Chars: 7487 - Tokens: 1872
 105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
 106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12471 - Tokens: 3118
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
@@ -157,8 +157,8 @@
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 1326 - Chars: 30292 - Tokens: 7573
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 355 - Chars: 20055 - Tokens: 5014
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 376 - Chars: 20695 - Tokens: 5174
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -196,7 +196,7 @@
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
 175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9851 - Tokens: 2463
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 85 - Chars: 2986 - Tokens: 747
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -247,7 +247,7 @@
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C127 (Add A122)
+# Updated on: C129 (Update A72)
 
 ## 1. Purpose
 
@@ -4116,7 +4116,7 @@ I have analyzed the request. My course of action is to update the main component
 21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
 
-22. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response. NOTE: the two `\` were added to the last sentence just to break the parser within the DCE itself; if you're 'in-situ', do be sure to NOT include them if you are attempting to instruct the 'in-situ' curator.
+22. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response.
 </file_artifact>
 
 <file path="src/Artifacts/A53. DCE - Phase 2 - Token Count and Similarity Analysis.md">
@@ -4827,7 +4827,7 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 # Artifact A72: DCE - README for Artifacts
 # Date Created: C158
 # Author: AI Model & Curator
-# Updated on: C128 (Enhanced Git initialization instructions)
+# Updated on: C129 (Move Git Init to Step 3 and automate .gitignore)
 
 - **Key/Value for A0:**
 - **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
@@ -4849,36 +4849,24 @@ The core principle of the DCE workflow is **"Documentation First."** Before writ
 
 Development in the DCE is organized into **Cycles**. You have just completed the initial setup.
 
-### Your Next Steps (CRITICAL)
+### Your Next Steps
 
-To take full advantage of the DCE's features—especially the "Baseline" and "Restore" buttons for safe testing—you **must** initialize a Git repository for this project.
+1.  **Generate Responses:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
 
-**Do this now:**
+2.  **Review and Accept:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
 
-1.  Open a terminal in your project's root directory (VS Code menu: `Terminal > New Terminal`).
-2.  Run the following commands in order:
+3.  **Baseline & Secure (Git Initialization):**
+    Once you have accepted your first set of files (Cycle 1), you should initialize your Git repository to enable the DCE's powerful testing features ("Baseline" and "Restore").
+    
+    *   In the DCE panel, click the **"Baseline (Commit)"** button.
+    *   If your repository is not yet initialized, the DCE will prompt you to initialize it.
+    *   Click **"Initialize Repository"**. This will automatically run `git init` and create a `.gitignore` file that correctly excludes DCE system files (`.vscode/`), preventing UI issues.
+    
+    This creates a safe "restore point" for your project.
 
-    ```bash
-    # 1. Initialize the repository
-    git init
+4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
 
-    # 2. Create a .gitignore file to exclude DCE system files
-    # This is CRITICAL to prevent the extension from flashing/refreshing constantly.
-    echo ".vscode/" >> .gitignore
-    echo "node_modules/" >> .gitignore
-
-    # 3. Stage all current files
-    git add .
-
-    # 4. Create your first commit
-    git commit -m "Initial commit: DCE Project Setup"
-    ```
-
-3.  **Submit Your First Prompt:** The `prompt.md` file has been automatically generated for you. It contains your project plan and instructions. Copy its entire contents and paste it into your preferred AI chat interface (e.g., Google AI Studio, ChatGPT).
-
-4.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
-
-5.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
+This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
 </file_artifact>
 
 <file path="src/Artifacts/A73. DCE - GitService Plan.md">
@@ -8172,10 +8160,11 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C12 (Refine Restore logic)
+// Updated on: C129 (Automate .gitignore creation)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
+import * as fs from 'fs/promises';
 import { Services } from './services';
 import { ServerPostMessageManager } from '@/common/ipc/server-ipc';
 import { ServerToClientChannel } from '@/common/ipc/channels.enum';
@@ -8208,9 +8197,40 @@ export class GitService {
 
     public async handleGitInitRequest() {
         Services.loggerService.log("Executing Git Init.");
+        const workspaceRoot = this.getWorkspaceRoot();
+        if (!workspaceRoot) {
+             vscode.window.showErrorMessage("No workspace open.");
+             return;
+        }
+
         try {
             await this.execGitCommand('git init');
-            vscode.window.showInformationMessage("Successfully initialized Git repository. You can now create a baseline.");
+            
+            // C129: Create .gitignore automatically
+            const gitignorePath = path.join(workspaceRoot, '.gitignore');
+            let gitignoreContent = '';
+            try {
+                gitignoreContent = await fs.readFile(gitignorePath, 'utf-8');
+            } catch (e) {
+                // File doesn't exist, start fresh
+            }
+
+            let updated = false;
+            if (!gitignoreContent.includes('.vscode/')) {
+                gitignoreContent += '\n.vscode/\n';
+                updated = true;
+            }
+            if (!gitignoreContent.includes('node_modules/')) {
+                gitignoreContent += '\nnode_modules/\n';
+                updated = true;
+            }
+
+            if (updated) {
+                await fs.writeFile(gitignorePath, gitignoreContent.trim() + '\n', 'utf-8');
+                Services.loggerService.log(".gitignore created/updated.");
+            }
+
+            vscode.window.showInformationMessage("Successfully initialized Git repository and configured .gitignore.");
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to initialize Git repository: ${error.message}`);
         }
@@ -12889,7 +12909,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C128 (Add styles for markdown preview pane)
+// Updated on: C129 (Add contrast fix for autosave icon in selected header)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -12944,6 +12964,11 @@ export default OnboardingView;
     .saved {
         color: var(--vscode-testing-iconPassed); // green
     }
+}
+
+// C129 FIX: Ensure visibility against green header background
+.collapsible-header.selected .save-status-indicator .saved {
+    color: var(--vscode-button-foreground); // Usually white
 }
 
 .spinner {
@@ -14218,7 +14243,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C126 (Fix Select All, Persistence, and Accept logic)
+// Updated on: C129 (Fix response bleed, green light logic, and autosave contrast)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14278,8 +14303,19 @@ const App = () => {
 
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, true, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, true, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
+    
+    // C129: Re-implement readiness logic
+    const isReadyForNextCycle = React.useMemo(() => {
+        return !!(
+            cycleManagement.cycleTitle && 
+            cycleManagement.cycleTitle.trim() !== 'New Cycle' &&
+            cycleManagement.cycleContext && 
+            cycleManagement.selectedResponseId
+        );
+    }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId]);
+
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, isReadyForNextCycle, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount);
+    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount);
     
     usePcppIpc(
         cycleManagement,
@@ -14351,7 +14387,6 @@ const App = () => {
             if(cycleData.tabCount) setResponseCount(cycleData.tabCount);
             if(cycleData.leftPaneWidth) setLeftPaneWidth(cycleData.leftPaneWidth);
             
-            // C126 FIX: Correctly hydrate the selected files state from the persisted data
             if (cycleData.selectedFilesForReplacement) {
                 fileManagement.setSelectedFilesForReplacement(new Set(cycleData.selectedFilesForReplacement));
             } else {
@@ -14370,7 +14405,7 @@ const App = () => {
         });
         clientIpc.onServerMessage(ServerToClientChannel.NavigateToNewGeneratingCycle as any, () => {
             setForceShowResponseView(false);
-            fileManagement.setSelectedFilesForReplacement(new Set()); // Clear selection on new cycle
+            fileManagement.setSelectedFilesForReplacement(new Set());
         });
         clientIpc.sendToServer(ClientToServerChannel.RequestInitialCycleData, {});
     }, [clientIpc, fileManagement.setSelectedFilesForReplacement]);
@@ -14418,7 +14453,6 @@ const App = () => {
     
     const showProgressView = cycleManagement.currentCycle.status === 'generating' && !forceShowResponseView;
 
-    // C126 FIX: Select All Implementation
     const handleSelectAll = () => {
         const currentTabId = tabManagement.activeTab.toString();
         const activeTabData = tabManagement.tabs[currentTabId];
@@ -14432,7 +14466,6 @@ const App = () => {
         }
     };
 
-    // C126 FIX: Accept Selected Implementation
     const handleAcceptSelected = () => {
         const filesToWrite = [];
         for (const compositeKey of fileManagement.selectedFilesForReplacement) {
@@ -14451,6 +14484,12 @@ const App = () => {
         }
     };
 
+    // C129 FIX: Wrapper to ensure tabs are reset when creating a new cycle
+    const handleNewCycleWrapper = (e: React.MouseEvent) => {
+        cycleManagement.handleNewCycle(e);
+        tabManagement.resetAndLoadTabs({});
+    };
+
     return <div className="pc-view-container">
         <div className="pc-header">
             <div className="pc-toolbar">
@@ -14463,14 +14502,21 @@ const App = () => {
                 <input type="number" id="tab-count" min="1" max="20" value={responseCount} onChange={e => setResponseCount(parseInt(e.target.value, 10) || 1)} />
             </div>
         </div>
-        <CollapsibleSection title="Cycle & Context" isCollapsed={cycleManagement.isCycleCollapsed} onToggle={() => { cycleManagement.setIsCycleCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} collapsedContent={collapsedNavigator} extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}>
+        <CollapsibleSection 
+            title="Cycle & Context" 
+            isCollapsed={cycleManagement.isCycleCollapsed} 
+            onToggle={() => { cycleManagement.setIsCycleCollapsed(p => !p); cycleManagement.setSaveStatus('unsaved'); }} 
+            collapsedContent={collapsedNavigator} 
+            extraHeaderContent={<div style={{display: 'flex', alignItems: 'center', gap: '8px'}}><SaveStatusIndicator /> {totalPromptCostDisplay}</div>}
+            className={isReadyForNextCycle ? 'selected' : ''}
+        >
             <CycleNavigator 
                 currentCycle={cycleManagement.currentCycle.cycleId} 
                 maxCycle={cycleManagement.maxCycle} 
                 cycleTitle={cycleManagement.cycleTitle} 
-                isNewCycleButtonDisabled={!true} 
+                isNewCycleButtonDisabled={!isReadyForNextCycle} 
                 onCycleChange={cycleManagement.handleCycleChange} 
-                onNewCycle={cycleManagement.handleNewCycle} 
+                onNewCycle={handleNewCycleWrapper} 
                 onTitleChange={cycleManagement.onTitleChange} 
                 onDeleteCycle={cycleManagement.handleDeleteCycle} 
                 onResetHistory={cycleManagement.handleResetHistory} 
@@ -17710,7 +17756,8 @@ export const useWorkflow = (
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
         if (waitingForPaste) {
             for (let i = 1; i <= tabCount; i++) {
-                if (!tabs[i.toString()]?.rawContent?.trim()) {
+                // C129 FIX: Changed rawContent to content to match PcppResponse interface
+                if (!tabs[i.toString()]?.content?.trim()) {
                     setWorkflowStep(`awaitingResponsePaste_${i}`);
                     return;
                 }
