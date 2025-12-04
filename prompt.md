@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 137 - this animated workflow is still borked, no real progress, slight regression
+Current Cycle 138 - final solution on this damn animated workflow
+Cycle 137 - this animated workflow is still borked, no real progress, slight regression
 Cycle 136 - almost perfect!
 Cycle 135 - more great progress keep it up this DCE is feeling like the real deal!
 Cycle 134 - two tiny issues and a rethink on the approach to .gitignore
@@ -891,6 +892,43 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 138>
+<Cycle Context>
+okay we are definitely struggling here. i just tested all responses, and all three misinterpreted this in the same way. this must mean im not explaining this correctly.
+
+you -should- understand what it is that im -trying- to do.
+
+can you -explain- how this animated workflow -should- go, in spite of my lack of ability to? we have an artifact, update the artifact with that interpretation and then implement it.
+
+for full context, ill describe what im seeing and what i dont like about it one last time, but im leaning on your interpretration ultimately to get us through this silly holdup.
+
+each time, after clicking `Generate prompt.md`, what would happen is the two files open, yes fine, i close them both to return to the pcpp. when i return to the pcpp, on all 4 responses that i tested, the state i returned to was the `Select All` was the highlighted step, why i have no idea, but then also i still couldnt create a new cycle, and this time when i hovered, they all gave the same reason, they all said i hadnt generated a prompt.md yet! yes i did! the damn button was animated! i clicked it! each time! and each time i returned it said i hadnt clicked it. frustrating.
+
+my goal is that one of these conversations will come back with a working explanation of the animated workflow and have enacted it, such taht we can get through this mess.
+</Cycle Context>
+<Previous Cycle 137 Summary of Actions>
+I have analyzed the issue where the animated workflow breaks after the first cycle. The root causes are:
+1.  **State Persistence:** The `hasGeneratedPrompt` state was transient. When the user switched tabs to view the generated prompt file, the PCPP webview reloaded, losing this state. This caused `isReadyForNextCycle` to evaluate to `false`, preventing the `+` button from highlighting.
+2.  **Workflow Reset Logic:** The `useWorkflow` hook lacked logic to reset the workflow step when switching to a new cycle. It would get stuck on the previous cycle's "Ready for New Cycle" state or fail to initialize the "Paste Response" step for the new cycle.
+
+My course of action is to persist `hasGeneratedPrompt` in the database so it survives view reloads, and to update `useWorkflow` to intelligently reset its state when the cycle ID changes.
+
+1.  **Update Data Model:** Add `hasGeneratedPrompt` to `PcppCycle` in `pcpp.types.ts` and update the database schema in `database.service.ts`.
+2.  **Update Backend:** Update `HistoryService` and `DatabaseService` to save and load this new field.
+3.  **Update Frontend Hooks:**
+    *   `useCycleManagement.ts`: Load `hasGeneratedPrompt` from the cycle data.
+    *   `useWorkflow.ts`: Add logic to reset the workflow step when `cycleId` changes and to auto-initialize to `awaitingResponsePaste_1` for new cycles.
+4.  **Update View:** Update `view.tsx` to ensure the state is saved when generating the prompt.
+
+1.  **Update `pcpp.types.ts`:** Add `hasGeneratedPrompt?: boolean` to `PcppCycle`.
+2.  **Update `database.service.ts`:** Add `has_generated_prompt` column to `cycles` table and update save/load logic. Add a migration for existing databases.
+3.  **Update `history.service.ts`:** Initialize `hasGeneratedPrompt` in default cycles.
+4.  **Update `useCycleManagement.ts`:** Update `loadCycleData` to use the persisted value.
+5.  **Update `useWorkflow.ts`:** Add `cycleId` dependency and auto-initialization logic.
+6.  **Update `view.tsx`:** Pass `cycleId` to `useWorkflow` and ensure `hasGeneratedPrompt` is saved.
+</Previous Cycle 137 Summary of Actions>
+</Cycle 138>
 
 <Cycle 137>
 <Cycle Context>
@@ -6343,10 +6381,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T21:40:35.269Z
+  Date Generated: 2025-12-04T22:12:30.246Z
   ---
   Total Files: 222
-  Approx. Tokens: 378378
+  Approx. Tokens: 378446
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6356,7 +6394,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5981 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (6203 tokens)
 8. src\backend\services\prompt.service.ts (5086 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -6500,7 +6538,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8981 - Tokens: 2246
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 141 - Chars: 6424 - Tokens: 1606
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 454 - Chars: 23924 - Tokens: 5981
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 470 - Chars: 24812 - Tokens: 6203
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -6533,10 +6571,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 152 - Chars: 6593 - Tokens: 1649
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 152 - Chars: 6744 - Tokens: 1686
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
-174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 225 - Chars: 10774 - Tokens: 2694
+174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 76 - Chars: 3494 - Tokens: 874
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 223 - Chars: 10351 - Tokens: 2588
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 194 - Chars: 7979 - Tokens: 1995
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 126 - Chars: 4592 - Tokens: 1148
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
@@ -20601,7 +20639,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C136 (Pass cycleId to useWorkflow, persist hasGeneratedPrompt)
+// Updated on: C137 (Calculate disabled reason locally, clear selection on new cycle)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -20662,7 +20700,7 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); 
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); 
 
     const isReadyForNextCycle = React.useMemo(() => {
         const basicReqs = !!(
@@ -20678,7 +20716,21 @@ const App = () => {
         return basicReqs;
     }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
 
-    // C136: Pass cycleId to useWorkflow
+    const newCycleButtonDisabledReason = React.useMemo(() => {
+        if (cycleManagement.currentCycle?.cycleId === 0) return "Onboarding incomplete.";
+        
+        const reasons: string[] = [];
+        if (!cycleManagement.cycleTitle || cycleManagement.cycleTitle.trim() === 'New Cycle') reasons.push("Cycle Title");
+        if (!cycleManagement.cycleContext) reasons.push("Cycle Context");
+        if (!cycleManagement.selectedResponseId) reasons.push("Selected Response");
+        
+        if (generationManagement.connectionMode === 'manual' && !cycleManagement.hasGeneratedPrompt) reasons.push("Generate prompt.md");
+
+        if (reasons.length > 0) return `Missing: ${reasons.join(', ')}`;
+        return "";
+    }, [cycleManagement.currentCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
+
+
     const { workflowStep, setWorkflowStep } = useWorkflow(
         null, 
         isReadyForNextCycle, 
@@ -20691,7 +20743,7 @@ const App = () => {
         tabManagement.tabs, 
         tabManagement.tabCount, 
         cycleManagement.hasGeneratedPrompt,
-        cycleManagement.currentCycle?.cycleId || -1 // Pass current cycle ID
+        cycleManagement.currentCycle?.cycleId || -1
     );
     
     usePcppIpc(
@@ -20730,7 +20782,7 @@ const App = () => {
             isEphemeralContextCollapsed,
             isCycleCollapsed,
             leftPaneWidth,
-            hasGeneratedPrompt, // C136: Include in save state
+            hasGeneratedPrompt,
         };
     }, []);
 
@@ -20860,7 +20912,6 @@ const App = () => {
             logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
             cycleManagement.setHasGeneratedPrompt(true);
-            // C136: Ensure this state change is saved immediately so it persists on reload
             cycleManagement.setSaveStatus('unsaved');
         }
     };
@@ -20871,7 +20922,7 @@ const App = () => {
         if (generationManagement.connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} className={isGeneratePromptHighlighted ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
-            return <button onClick={generationManagement.handleGenerateResponses} disabled={generationManagement.isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
+            return <button onClick={generationManagement.handleGenerateResponses} disabled={!isReadyForNextCycle}><VscWand /> Generate responses</button>;
         }
     };
     
@@ -20917,7 +20968,10 @@ const App = () => {
     };
 
     const handleRestore = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
+        const filesToDelete: string[] = [];
+        // Logic to determine newly created files would go here if we were tracking them more granularly
+        // For now, we rely on the backend's git clean
+        clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete });
     };
 
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
@@ -20959,7 +21013,7 @@ const App = () => {
                 onExportHistory={cycleManagement.handleExportHistory} 
                 onImportHistory={cycleManagement.handleImportHistory} 
                 workflowStep={workflowStep} 
-                disabledReason={generationManagement.newCycleButtonDisabledReason} 
+                disabledReason={newCycleButtonDisabledReason} 
                 saveStatus={cycleManagement.saveStatus} 
             />
             <ContextInputs 
@@ -23678,7 +23732,7 @@ export const useFileManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useGeneration.ts">
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C115 (Use responseCount prop)
+// Updated on: C137 (Remove disabled logic to avoid circular deps)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -23689,11 +23743,9 @@ import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 export const useGeneration = (
     currentCycle: PcppCycle | null,
     getCurrentCycleData: () => PcppCycle | null,
-    isReadyForNextCycle: boolean,
-    newCycleButtonDisabledReason: string,
     setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    responseCount: number // Use prop
+    responseCount: number
 ) => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
@@ -23740,11 +23792,6 @@ export const useGeneration = (
         clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId, responseId });
     }, [clientIpc, setGenerationProgress]);
 
-    const isGenerateResponsesDisabled = React.useMemo(() => {
-        if (currentCycle?.cycleId === 0) return true;
-        return !isReadyForNextCycle;
-    }, [currentCycle, isReadyForNextCycle]);
-
     return {
         connectionMode,
         setConnectionMode,
@@ -23758,15 +23805,13 @@ export const useGeneration = (
         handleStartGeneration,
         handleRegenerateTab,
         handleStopGeneration,
-        isGenerateResponsesDisabled,
-        newCycleButtonDisabledReason,
     };
 };
 </file_artifact>
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C134 (Update workflow transition for Baseline and Generating Cycle)
+// Updated on: C137 (Clear selectedFilesForReplacement on FilesWritten)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -23832,6 +23877,8 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
+            // C137: Clear the selection state after files are written to prevent workflow confusion
+            fileManagement.setSelectedFilesForReplacement(new Set());
             setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
@@ -23851,7 +23898,6 @@ export const usePcppIpc = (
                 setWorkflowStep(prevStep => {
                     if (prevStep === 'awaitingBaseline') {
                         clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message });
-                        // C134: Reordered workflow. After Baseline, go to Accept.
                         return 'awaitingAccept';
                     }
                     return prevStep;
@@ -23860,7 +23906,6 @@ export const usePcppIpc = (
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => {
-            // C134: Reordered workflow. If already clean (or skipped), go to Accept.
             setWorkflowStep(prev => (isClean && prev === 'awaitingBaseline') ? 'awaitingAccept' : prev);
         });
 
@@ -23881,8 +23926,6 @@ export const usePcppIpc = (
             logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
             cycleManagement.setMaxCycle(newMaxCycle);
             cycleManagement.loadCycleData(newCycleData);
-            // C134: For a generating cycle (Demo Mode), we WANT parsed mode enabled to show progress UI components if needed, 
-            // or at least to be ready for the incoming JSON.
             tabManagement.resetAndLoadTabs(newCycleData.responses, true);
 
             const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {

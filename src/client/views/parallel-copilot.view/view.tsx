@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C136 (Pass cycleId to useWorkflow, persist hasGeneratedPrompt)
+// Updated on: C137 (Calculate disabled reason locally, clear selection on new cycle)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -60,7 +60,7 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); 
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); 
 
     const isReadyForNextCycle = React.useMemo(() => {
         const basicReqs = !!(
@@ -76,7 +76,21 @@ const App = () => {
         return basicReqs;
     }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
 
-    // C136: Pass cycleId to useWorkflow
+    const newCycleButtonDisabledReason = React.useMemo(() => {
+        if (cycleManagement.currentCycle?.cycleId === 0) return "Onboarding incomplete.";
+        
+        const reasons: string[] = [];
+        if (!cycleManagement.cycleTitle || cycleManagement.cycleTitle.trim() === 'New Cycle') reasons.push("Cycle Title");
+        if (!cycleManagement.cycleContext) reasons.push("Cycle Context");
+        if (!cycleManagement.selectedResponseId) reasons.push("Selected Response");
+        
+        if (generationManagement.connectionMode === 'manual' && !cycleManagement.hasGeneratedPrompt) reasons.push("Generate prompt.md");
+
+        if (reasons.length > 0) return `Missing: ${reasons.join(', ')}`;
+        return "";
+    }, [cycleManagement.currentCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
+
+
     const { workflowStep, setWorkflowStep } = useWorkflow(
         null, 
         isReadyForNextCycle, 
@@ -89,7 +103,7 @@ const App = () => {
         tabManagement.tabs, 
         tabManagement.tabCount, 
         cycleManagement.hasGeneratedPrompt,
-        cycleManagement.currentCycle?.cycleId || -1 // Pass current cycle ID
+        cycleManagement.currentCycle?.cycleId || -1
     );
     
     usePcppIpc(
@@ -128,7 +142,7 @@ const App = () => {
             isEphemeralContextCollapsed,
             isCycleCollapsed,
             leftPaneWidth,
-            hasGeneratedPrompt, // C136: Include in save state
+            hasGeneratedPrompt,
         };
     }, []);
 
@@ -258,7 +272,6 @@ const App = () => {
             logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
             cycleManagement.setHasGeneratedPrompt(true);
-            // C136: Ensure this state change is saved immediately so it persists on reload
             cycleManagement.setSaveStatus('unsaved');
         }
     };
@@ -269,7 +282,7 @@ const App = () => {
         if (generationManagement.connectionMode === 'manual') {
             return <button onClick={handleGeneratePrompt} className={isGeneratePromptHighlighted ? 'workflow-highlight' : ''}><VscFileCode /> Generate prompt.md</button>;
         } else {
-            return <button onClick={generationManagement.handleGenerateResponses} disabled={generationManagement.isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
+            return <button onClick={generationManagement.handleGenerateResponses} disabled={!isReadyForNextCycle}><VscWand /> Generate responses</button>;
         }
     };
     
@@ -315,7 +328,10 @@ const App = () => {
     };
 
     const handleRestore = () => {
-        clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
+        const filesToDelete: string[] = [];
+        // Logic to determine newly created files would go here if we were tracking them more granularly
+        // For now, we rely on the backend's git clean
+        clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete });
     };
 
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
@@ -357,7 +373,7 @@ const App = () => {
                 onExportHistory={cycleManagement.handleExportHistory} 
                 onImportHistory={cycleManagement.handleImportHistory} 
                 workflowStep={workflowStep} 
-                disabledReason={generationManagement.newCycleButtonDisabledReason} 
+                disabledReason={newCycleButtonDisabledReason} 
                 saveStatus={cycleManagement.saveStatus} 
             />
             <ContextInputs 

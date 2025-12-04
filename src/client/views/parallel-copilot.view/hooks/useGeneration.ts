@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useGeneration.ts
-// Updated on: C115 (Use responseCount prop)
+// Updated on: C137 (Remove disabled logic to avoid circular deps)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -10,11 +10,9 @@ import { PcppCycle, PcppResponse } from '@/common/types/pcpp.types';
 export const useGeneration = (
     currentCycle: PcppCycle | null,
     getCurrentCycleData: () => PcppCycle | null,
-    isReadyForNextCycle: boolean,
-    newCycleButtonDisabledReason: string,
     setTabs: React.Dispatch<React.SetStateAction<{ [key: string]: PcppResponse }>>,
     setSaveStatus: (status: 'unsaved' | 'saving' | 'saved') => void,
-    responseCount: number // Use prop
+    responseCount: number
 ) => {
     const [connectionMode, setConnectionMode] = React.useState<ConnectionMode>('manual');
     const [generationProgress, setGenerationProgress] = React.useState<GenerationProgress[]>([]);
@@ -61,11 +59,6 @@ export const useGeneration = (
         clientIpc.sendToServer(ClientToServerChannel.RequestStopGeneration, { cycleId, responseId });
     }, [clientIpc, setGenerationProgress]);
 
-    const isGenerateResponsesDisabled = React.useMemo(() => {
-        if (currentCycle?.cycleId === 0) return true;
-        return !isReadyForNextCycle;
-    }, [currentCycle, isReadyForNextCycle]);
-
     return {
         connectionMode,
         setConnectionMode,
@@ -79,7 +72,5 @@ export const useGeneration = (
         handleStartGeneration,
         handleRegenerateTab,
         handleStopGeneration,
-        isGenerateResponsesDisabled,
-        newCycleButtonDisabledReason,
     };
 };

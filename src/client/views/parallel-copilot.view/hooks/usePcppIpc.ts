@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C134 (Update workflow transition for Baseline and Generating Cycle)
+// Updated on: C137 (Clear selectedFilesForReplacement on FilesWritten)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -65,6 +65,8 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
+            // C137: Clear the selection state after files are written to prevent workflow confusion
+            fileManagement.setSelectedFilesForReplacement(new Set());
             setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
@@ -84,7 +86,6 @@ export const usePcppIpc = (
                 setWorkflowStep(prevStep => {
                     if (prevStep === 'awaitingBaseline') {
                         clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message });
-                        // C134: Reordered workflow. After Baseline, go to Accept.
                         return 'awaitingAccept';
                     }
                     return prevStep;
@@ -93,7 +94,6 @@ export const usePcppIpc = (
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => {
-            // C134: Reordered workflow. If already clean (or skipped), go to Accept.
             setWorkflowStep(prev => (isClean && prev === 'awaitingBaseline') ? 'awaitingAccept' : prev);
         });
 
@@ -114,8 +114,6 @@ export const usePcppIpc = (
             logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
             cycleManagement.setMaxCycle(newMaxCycle);
             cycleManagement.loadCycleData(newCycleData);
-            // C134: For a generating cycle (Demo Mode), we WANT parsed mode enabled to show progress UI components if needed, 
-            // or at least to be ready for the incoming JSON.
             tabManagement.resetAndLoadTabs(newCycleData.responses, true);
 
             const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
