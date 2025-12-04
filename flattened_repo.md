@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T17:34:16.857Z
+  Date Generated: 2025-12-04T17:47:44.294Z
   ---
   Total Files: 222
-  Approx. Tokens: 375559
+  Approx. Tokens: 375985
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,8 +14,8 @@
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\backend\services\prompt.service.ts (5232 tokens)
-8. src\client\views\parallel-copilot.view\view.tsx (5174 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5321 tokens)
+8. src\backend\services\prompt.service.ts (5232 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
@@ -152,13 +152,13 @@
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
 131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 204 - Chars: 13097 - Tokens: 3275
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
-133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
+133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 121 - Chars: 5297 - Tokens: 1325
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 376 - Chars: 20695 - Tokens: 5174
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 389 - Chars: 21282 - Tokens: 5321
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -184,7 +184,7 @@
 162. src\client\utils\response-parser.ts - Lines: 171 - Chars: 7819 - Tokens: 1955
 163. src\client\views\parallel-copilot.view\components\GenerationProgressDisplay.tsx - Lines: 170 - Chars: 8339 - Tokens: 2085
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
-165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 98 - Chars: 10336 - Tokens: 2584
+165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 108 - Chars: 11305 - Tokens: 2827
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
 167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4866 - Tokens: 1217
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
@@ -12364,7 +12364,7 @@ export default ResponsePane;
 
 <file path="src/client/views/parallel-copilot.view/components/ResponseTabs.tsx">
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C123 (Hide regenerate button in manual mode)
+// Updated on: C130 (Add workflow highlight to Sort button)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
@@ -12471,7 +12471,11 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                         <VscEye />
                     </button>
                 )}
-                <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
+                <button 
+                    onClick={onSortToggle} 
+                    className={`sort-button ${isSortedByTokens ? 'active' : ''} ${workflowStep === 'awaitingSort' ? 'workflow-highlight' : ''}`} 
+                    title="Sort responses by token count"
+                >
                     {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
                 </button>
             </div>
@@ -14243,7 +14247,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C129 (Fix response bleed, green light logic, and autosave contrast)
+// Updated on: C130 (Implement Baseline and Restore button handlers)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14304,7 +14308,6 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
-    // C129: Re-implement readiness logic
     const isReadyForNextCycle = React.useMemo(() => {
         return !!(
             cycleManagement.cycleTitle && 
@@ -14484,7 +14487,21 @@ const App = () => {
         }
     };
 
-    // C129 FIX: Wrapper to ensure tabs are reset when creating a new cycle
+    // C130: Implement Baseline Handler
+    const handleBaseline = () => {
+        const { currentCycle, cycleTitle } = cycleManagement;
+        if (!currentCycle) return;
+        const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
+        clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });
+    };
+
+    // C130: Implement Restore Handler
+    const handleRestore = () => {
+        // Basic restore for now. Advanced logic to delete newly created files can be added later.
+        clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
+    };
+
+    // Wrapper to ensure tabs are reset when creating a new cycle
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
         tabManagement.resetAndLoadTabs({});
@@ -14572,8 +14589,8 @@ const App = () => {
                         selectedResponseId={cycleManagement.selectedResponseId}
                         activeTab={tabManagement.activeTab}
                         onSelectResponse={cycleManagement.handleSelectResponse}
-                        onBaseline={() => {}}
-                        onRestore={() => {}}
+                        onBaseline={handleBaseline}
+                        onRestore={handleRestore}
                         onAcceptSelected={handleAcceptSelected}
                         onSelectAll={handleSelectAll}
                         onDeselectAll={() => { fileManagement.setSelectedFilesForReplacement(new Set()); cycleManagement.setSaveStatus('unsaved'); }}
@@ -16551,13 +16568,23 @@ The goal is to refactor the settings panel to support a CRUD (Create, Read, Upda
 # Artifact A11: DCE - Regression Case Studies
 # Date Created: C16
 # Author: AI Model & Curator
-# Updated on: C124 (Consolidate native module build issues)
+# Updated on: C130 (Add non-functional workflow buttons case)
 
 ## 1. Purpose
 
 This document serves as a living record of persistent or complex bugs. By documenting the root cause analysis (RCA) and the confirmed solution for each issue, we create a "source of truth" to prevent the same mistakes from being reintroduced into the codebase.
 
 ## 2. Case Studies
+
+---
+
+### Case Study 024: Workflow Buttons Non-Functional After Centralization
+
+-   **Artifacts Affected:** `view.tsx`, `WorkflowToolbar.tsx`
+-   **Cycles Observed:** C130
+-   **Symptom:** The "Baseline (Commit)" and "Restore Baseline" buttons in the centralized `WorkflowToolbar` were visible and animated correctly but did nothing when clicked.
+-   **Root Cause Analysis (RCA):** When the buttons were moved from the main `view.tsx` component to the `WorkflowToolbar` child component, the event handlers (`handleBaseline`, `handleRestore`) were not implemented in the parent. Instead, empty placeholder functions (`() => {}`) were passed as props, severing the connection between the UI and the IPC logic.
+-   **Codified Solution & Best Practice:** When refactoring or moving UI components, always verify that the event handlers passed as props are fully implemented in the parent container. Ensure that critical logic (like IPC calls) is not lost during the move.
 
 ---
 

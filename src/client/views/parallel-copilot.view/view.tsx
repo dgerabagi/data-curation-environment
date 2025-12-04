@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C129 (Fix response bleed, green light logic, and autosave contrast)
+// Updated on: C130 (Implement Baseline and Restore button handlers)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -60,7 +60,6 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
-    // C129: Re-implement readiness logic
     const isReadyForNextCycle = React.useMemo(() => {
         return !!(
             cycleManagement.cycleTitle && 
@@ -240,7 +239,21 @@ const App = () => {
         }
     };
 
-    // C129 FIX: Wrapper to ensure tabs are reset when creating a new cycle
+    // C130: Implement Baseline Handler
+    const handleBaseline = () => {
+        const { currentCycle, cycleTitle } = cycleManagement;
+        if (!currentCycle) return;
+        const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
+        clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });
+    };
+
+    // C130: Implement Restore Handler
+    const handleRestore = () => {
+        // Basic restore for now. Advanced logic to delete newly created files can be added later.
+        clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
+    };
+
+    // Wrapper to ensure tabs are reset when creating a new cycle
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
         tabManagement.resetAndLoadTabs({});
@@ -328,8 +341,8 @@ const App = () => {
                         selectedResponseId={cycleManagement.selectedResponseId}
                         activeTab={tabManagement.activeTab}
                         onSelectResponse={cycleManagement.handleSelectResponse}
-                        onBaseline={() => {}}
-                        onRestore={() => {}}
+                        onBaseline={handleBaseline}
+                        onRestore={handleRestore}
                         onAcceptSelected={handleAcceptSelected}
                         onSelectAll={handleSelectAll}
                         onDeselectAll={() => { fileManagement.setSelectedFilesForReplacement(new Set()); cycleManagement.setSaveStatus('unsaved'); }}

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/components/ResponseTabs.tsx
-// Updated on: C123 (Hide regenerate button in manual mode)
+// Updated on: C130 (Add workflow highlight to Sort button)
 import * as React from 'react';
 import { VscFileCode, VscSymbolNumeric, VscListOrdered, VscListUnordered, VscSync, VscLoading, VscCheck, VscEye } from 'react-icons/vsc';
 import { PcppResponse } from '@/common/types/pcpp.types';
@@ -106,7 +106,11 @@ const ResponseTabs: React.FC<ResponseTabsProps> = ({
                         <VscEye />
                     </button>
                 )}
-                <button onClick={onSortToggle} className={`sort-button ${isSortedByTokens ? 'active' : ''}`} title="Sort responses by token count">
+                <button 
+                    onClick={onSortToggle} 
+                    className={`sort-button ${isSortedByTokens ? 'active' : ''} ${workflowStep === 'awaitingSort' ? 'workflow-highlight' : ''}`} 
+                    title="Sort responses by token count"
+                >
                     {isSortedByTokens ? <VscListOrdered/> : <VscListUnordered />} Sort
                 </button>
             </div>
