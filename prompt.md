@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 127 - seems to be good! lets try to 'roll in' a quick QoL win...
+Current Cycle 128 - great work! tiny alignments needed due to architecture change before we continue developing new things
+Cycle 127 - seems to be good! lets try to 'roll in' a quick QoL win...
 Cycle 126 - focus on associated file problem
 Cycle 125 - observations and new ideas
 Cycle 124 - Eureka!
@@ -877,6 +878,51 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 128>
+<Cycle Context>
+fantastic! can we do one or two tiny alterations with the workflow when onboarding when the user clicks the button to generate their initial prompt (when in manual mode)? which is, instead of opening the 'raw' DCE_README.md, can we open it in the vscode `Open Preview (Ctrl+Shift+V)` window?
+
+next, the DCE_README.md could have its initialize get repo instructions enhanced. they were made a bit before we codified/formalized that bit a little. usually folks get lost on those details and dont read the rest, which is overall the more important bit (that to say not to diminish the importance of git initialization...)
+
+a second improvement to this point in the workflow that ive noticed was just a tiny oversight on my part. ive been manually ahndling the oversight when ive needed to, but here it is, basically sometimes a user isnt start a project from scratch, but will first curate some data files in to their project directory before they even start their initial prompt, because that data needs to be there from the begging of the convo for them. what ive been doiong is manually combining them, but there is nor eason for us to no tjust do that right now, by them i mean the flattened_repo.md and the prompt.md, as we do in every other subsequent cycle.
+
+some where early on in the interaction schema, can we make sure its known that the prompt.md is coming form the data curation environment and so thats where the AI is? in a sense? like for instance i saw in one of the curator activities, it said to perform these actions using the IDE that you are using and said (Eg. Cursor, etc) and i was like, i think its been unspoken maybe? that its in the dce in vscode? i dunna just a sentence or adding to a sentence this notion might be valuable.
+
+for the `Open Markdown Preview` button, lets alter this:
+
+i would like, if its a markdown file, to just be shown to the user in our view as the markdown preview. can we do that? there isnt a reason for a user to look at raw markdown. code files, thats what they are, raw code, and should be viewed in our view as such (so in other words no change there).
+
+howeevr, the button itself... just tweaked. we should still have a button there, for any file type, but it just opens that file. this solves for a QoL issue i mentioned before where if i want to open that file i have to manually track it down. if there would just be a button to open that file from here, then thats going to save me lots of time.
+
+so, the focus for this cycle, lets do these QoL or interaction-related things now before we attack the directory summarization or move on to the master artifact list automation, which will also require another alteration to the interaction schema itself as well, but in a more targeted way.
+
+
+
+
+</Cycle Context>
+<Previous Cycle 127 Summary of Actions>
+I have analyzed the issues reported in Cycle 126. The primary bugs are related to state persistence (selected files not saving), database schema missing a column, and path resolution for associated files.
+
+My course of action is to:
+1.  **Fix Database Schema:** Add the missing `selected_files_for_replacement` column to the `cycles` table in `dce.db` via a schema migration. This will fix the selection persistence issue.
+2.  **Update History Service:** Ensure `selectedFilesForReplacement` is correctly serialized/deserialized when saving/loading cycles from the database.
+3.  **Fix Associated Files:** Enhance `handleFileExistenceRequest` in the backend to robustly handle path normalization, ensuring files like `README.md` are correctly identified.
+4.  **Fix "Accept Selected" & "Select All":** Review and refine the logic in `view.tsx` to ensure it correctly handles the composite keys (`tabId:::path`) used for file selection.
+5.  **JSON Syntax Highlighting:** Verify `sourceJson` is registered in `highlighting.service.ts`.
+6.  **Documentation:** Create the requested `A120` (DB Maintenance) and `A121` (Master Artifact Automation) artifacts.
+
+1.  **Create `A120. DCE - Database Maintenance Guide.md`**: Document DB location and maintenance procedures.
+2.  **Create `A121. DCE - Master Artifact List Automation Plan.md`**: Plan for automating A0.
+3.  **Update `A0. DCE Master Artifact List.md`**: Add new artifacts.
+4.  **Update `src/backend/services/database.service.ts`**: Add `selected_files_for_replacement` column to `cycles` table and implement migration logic.
+5.  **Update `src/backend/services/history.service.ts`**: Update `saveCycle` and `getCycle` to handle the `selectedFilesForReplacement` property.
+6.  **Update `src/backend/services/file-operation.service.ts`**: Improve `handleFileExistenceRequest` with better path normalization and logging.
+7.  **Update `src/backend/services/highlighting.service.ts`**: Explicitly ensure JSON grammar is loaded.
+8.  **Update `src/client/views/parallel-copilot.view/view.tsx`**: Fix `handleAcceptSelected` and `handleSelectAll` logic, and ensure `selectedFilesForReplacement` is correctly hydrated from the loaded cycle.
+9.  **Update `src/client/views/parallel-copilot.view/components/ParsedView.tsx`**: Ensure double-click opens the file.
+</Previous Cycle 127 Summary of Actions>
+</Cycle 128>
 
 <Cycle 127>
 <Cycle Context>
@@ -5978,10 +6024,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T12:49:21.922Z
+  Date Generated: 2025-12-04T13:26:59.436Z
   ---
-  Total Files: 221
-  Approx. Tokens: 372943
+  Total Files: 222
+  Approx. Tokens: 373726
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6218,6 +6264,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 219. external_context\personal-project\altered-galaxy\scripts\scrape_wiki.py - Lines: 155 - Chars: 7716 - Tokens: 1929
 220. external_context\personal-project\altered-galaxy\scripts\simulate-movement.js - Lines: 161 - Chars: 5945 - Tokens: 1487
 221. external_context\personal-project\altered-galaxy\scripts\truncate-data-files.js - Lines: 112 - Chars: 4084 - Tokens: 1021
+222. src\Artifacts\A122. DCE - Directory Summarization & Large Data Strategy.md - Lines: 57 - Chars: 3129 - Tokens: 783
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -33236,6 +33283,66 @@ console.log('---');
 processDirectory(absoluteTargetDir);
 console.log('---');
 console.log('Finished truncation process.');
+</file_artifact>
+
+<file path="src/Artifacts/A122. DCE - Directory Summarization & Large Data Strategy.md">
+# Artifact A122: DCE - Directory Summarization & Large Data Strategy
+# Date Created: C127
+# Author: AI Model & Curator
+
+- **Key/Value for A0:**
+- **Description:** A strategy to manage token bloat by summarizing large asset directories and truncating massive data files.
+- **Tags:** strategy, optimization, tokens, d-info, truncation, large files
+
+## 1. Problem Statement
+
+As projects grow, they often accumulate large numbers of asset files (images, audio) or massive data definition files. Including these in the AI context "raw" leads to significant token bloat.
+1.  **Asset Directories:** A folder with 2,000 images generates 2,000 entries in the flattened context. Even if the content is skipped, the file paths and metadata headers consume thousands of tokens.
+2.  **Data Files:** Large TypeScript data files (e.g., item definitions, RPG stats) can consume tens of thousands of tokens while providing low "structural" value to the AI, which often only needs to know the *shape* of the data.
+
+## 2. Strategy 1: Directory Summarization (`d-info`)
+
+**Goal:** Replace the verbose listing of hundreds of individual files with a concise summary of the directory's contents.
+
+**Mechanism:**
+*   **Trigger:** When the Flattener Service processes the selected files, it groups them by their parent directory. If the number of selected files in a single directory exceeds a threshold (e.g., **50 files**), the "Summarization Mode" is triggered for that directory.
+*   **Action:** The individual file entries are removed from the flattening queue. They are replaced by a single, virtual file entry named `d-info.md` within that directory.
+*   **Content:** The virtual `d-info.md` file contains:
+    *   Total file count.
+    *   Directory location relative to the project root.
+    *   A concise list of the filenames.
+
+**Output Format:**
+```markdown
+<d-info.md (directory info)>
+File Count: 150
+Directory Located at: packages/ag-client/public/assets/icons/items/
+Files:
+1. icon_001.png
+2. icon_002.png
+...
+</d-info.md (directory info)>
+```
+
+## 3. Strategy 2: Large Data Truncation (Planned)
+
+**Goal:** Provide the AI with the *structure* (schema) of large data files without burdening it with the *volume* of the data.
+
+**Mechanism (Future Implementation):**
+*   **Detection:** Identify large `.ts` or `.json` files that primarily contain arrays of objects or large dictionaries.
+*   **Truncation:** Generate a temporary `.local.ts` version of the file.
+*   **Logic:**
+    *   Keep the file header (imports, variable declarations).
+    *   Keep the first entry of the array/object (to show the schema/structure).
+    *   Insert a comment `// ... [X items truncated] ...`.
+    *   Keep the last entry (to show the closing syntax).
+*   **Context:** The system will prefer the `.local.ts` version for the context window, while the original file remains untouched on disk.
+
+## 4. Benefits
+
+*   **Token Efficiency:** Drastically reduces the overhead of asset-heavy projects.
+*   **Context Clarity:** Reduces noise, allowing the AI to focus on code logic rather than file lists.
+*   **Performance:** Faster flattening and prompt generation.
 </file_artifact>
 
 

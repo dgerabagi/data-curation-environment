@@ -1,4 +1,4 @@
-// Updated on: C26 (Remove logging)
+// Updated on: C127 (Implement Directory Summarization d-info)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -38,7 +38,10 @@ export class FlattenerService {
         const allFilePaths = await this.expandDirectories(selectedPaths);
         const uniqueFilePaths = [...new Set(allFilePaths)];
 
-        const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
+        // C127: Consolidate large directories
+        const { paths: processedPaths, summaryMap } = this.consolidateSelections(uniqueFilePaths);
+
+        const fileStatsPromises = processedPaths.map(filePath => this.getFileStatsAndContent(filePath, rootPath, summaryMap.get(filePath)));
         const results = await Promise.all(fileStatsPromises);
         
         return this.generateOutputContent(results, rootPath, 'in-memory-prompt.md', false);
@@ -62,7 +65,10 @@ export class FlattenerService {
             const allFilePaths = await this.expandDirectories(selectedPaths);
             const uniqueFilePaths = [...new Set(allFilePaths.map(p => normalizePath(p)))];
 
-            const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
+            // C127: Consolidate large directories
+            const { paths: processedPaths, summaryMap } = this.consolidateSelections(uniqueFilePaths);
+
+            const fileStatsPromises = processedPaths.map(filePath => this.getFileStatsAndContent(filePath, rootPath, summaryMap.get(filePath)));
             const results = await Promise.all(fileStatsPromises);
             const validResults = results.filter(r => !r.error);
 
@@ -86,6 +92,33 @@ export class FlattenerService {
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to flatten context: ${error.message}`);
         }
+    }
+
+    // C127: Group files by directory and summarize if > 50
+    private consolidateSelections(paths: string[]): { paths: string[], summaryMap: Map<string, string[]> } {
+        const dirMap = new Map<string, string[]>();
+        const summaryMap = new Map<string, string[]>();
+        const finalPaths: string[] = [];
+
+        // 1. Group files by directory
+        for (const p of paths) {
+            const dir = path.dirname(p);
+            if (!dirMap.has(dir)) dirMap.set(dir, []);
+            dirMap.get(dir)!.push(p);
+        }
+
+        // 2. Decide whether to summarize
+        for (const [dir, files] of dirMap.entries()) {
+            if (files.length > 50) { // Threshold
+                const dInfoPath = path.join(dir, 'd-info.md').replace(/\\/g, '/');
+                summaryMap.set(dInfoPath, files.sort());
+                finalPaths.push(dInfoPath);
+            } else {
+                finalPaths.push(...files);
+            }
+        }
+
+        return { paths: finalPaths, summaryMap };
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
@@ -158,9 +191,33 @@ export class FlattenerService {
         }
     }
 
-    private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
+    private async getFileStatsAndContent(filePath: string, rootPath: string, summaryFiles?: string[]): Promise<FileStats> {
         const extension = path.extname(filePath).toLowerCase();
         
+        // C127: Handle virtual d-info.md
+        if (path.basename(filePath) === 'd-info.md' && summaryFiles) {
+            const relativeDir = path.relative(rootPath, path.dirname(filePath)).replace(/\\/g, '/');
+            let content = `<d-info.md (directory info)>\n`;
+            content += `File Count: ${summaryFiles.length}\n`;
+            content += `Directory Located at: ${relativeDir}/\n`;
+            content += `Files:\n`;
+            summaryFiles.forEach((f, i) => {
+                content += `${i + 1}. ${path.basename(f)}\n`;
+            });
+            content += `</d-info.md (directory info)>`;
+            
+            return { 
+                filePath, 
+                lines: content.split('\n').length, 
+                characters: content.length, 
+                tokens: Math.ceil(content.length / 4), 
+                content, 
+                error: null, 
+                isBinary: false, 
+                sizeInBytes: 0 
+            };
+        }
+
         if (extension === '.pdf') {
             const virtualContent = Services.contentExtractionService.getVirtualPdfContent(filePath);
             if (virtualContent) return { filePath, content: virtualContent.text, lines: virtualContent.text.split('\n').length, characters: virtualContent.text.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
