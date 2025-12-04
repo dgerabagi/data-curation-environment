@@ -1,5 +1,5 @@
 // src/backend/services/history.service.ts
-// Updated on: C126 (Include isCycleCollapsed in default cycle)
+// Updated on: C136 (Initialize hasGeneratedPrompt)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -71,8 +71,9 @@ export class HistoryService {
             activeWorkflowStep: null,
             status: 'complete',
             isEphemeralContextCollapsed: true,
-            isCycleCollapsed: false, // C126: Default to expanded
+            isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
+            hasGeneratedPrompt: false, // C136: Initialize to false
         };
 
         if (isFreshEnvironment) {
@@ -103,7 +104,7 @@ export class HistoryService {
             const settings = await Services.settingsService.getSettings();
             return {
                 cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false,
-                selectedFilesForReplacement: []
+                selectedFilesForReplacement: [], hasGeneratedPrompt: true
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -155,7 +156,8 @@ export class HistoryService {
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
-            selectedFilesForReplacement: []
+            selectedFilesForReplacement: [],
+            hasGeneratedPrompt: false // C136: New cycle hasn't generated prompt yet
         };
 
         Services.databaseService.saveCycle(newCycle);
@@ -164,6 +166,7 @@ export class HistoryService {
         return { newCycle, newMaxCycle: newCycleId };
     }
     
+    // ... rest of the file (finalizeCycleStatus, updateCycleWithResponses, etc.) remains unchanged ...
     public async finalizeCycleStatus(cycleId: number): Promise<void> {
         const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {

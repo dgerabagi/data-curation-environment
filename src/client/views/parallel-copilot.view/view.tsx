@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C135 (Reset selection on new cycle, update isReady logic)
+// Updated on: C136 (Pass cycleId to useWorkflow, persist hasGeneratedPrompt)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -60,9 +60,8 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); // Pass false initially, memoize below
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); 
 
-    // C135: Updated logic to require prompt generation before new cycle
     const isReadyForNextCycle = React.useMemo(() => {
         const basicReqs = !!(
             cycleManagement.cycleTitle && 
@@ -77,7 +76,21 @@ const App = () => {
         return basicReqs;
     }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
 
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount, cycleManagement.hasGeneratedPrompt);
+    // C136: Pass cycleId to useWorkflow
+    const { workflowStep, setWorkflowStep } = useWorkflow(
+        null, 
+        isReadyForNextCycle, 
+        cycleManagement.cycleTitle, 
+        cycleManagement.cycleContext, 
+        fileManagement.selectedFilesForReplacement, 
+        cycleManagement.selectedResponseId, 
+        tabManagement.isSortedByTokens, 
+        tabManagement.isParsedMode, 
+        tabManagement.tabs, 
+        tabManagement.tabCount, 
+        cycleManagement.hasGeneratedPrompt,
+        cycleManagement.currentCycle?.cycleId || -1 // Pass current cycle ID
+    );
     
     usePcppIpc(
         cycleManagement,
@@ -92,7 +105,7 @@ const App = () => {
 
     const getCurrentCycleState = React.useCallback((): PcppCycle | null => {
         const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth } = stateRef.current;
-        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed } = cycleManagement;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed, hasGeneratedPrompt } = cycleManagement;
         const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
@@ -115,6 +128,7 @@ const App = () => {
             isEphemeralContextCollapsed,
             isCycleCollapsed,
             leftPaneWidth,
+            hasGeneratedPrompt, // C136: Include in save state
         };
     }, []);
 
@@ -244,6 +258,8 @@ const App = () => {
             logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
             cycleManagement.setHasGeneratedPrompt(true);
+            // C136: Ensure this state change is saved immediately so it persists on reload
+            cycleManagement.setSaveStatus('unsaved');
         }
     };
 
@@ -304,9 +320,7 @@ const App = () => {
 
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
-        // C134: Explicitly reset to UNPARSED mode for a new manual cycle
         tabManagement.resetAndLoadTabs({}, false);
-        // C135: Explicitly reset selected files for the new cycle
         fileManagement.setSelectedFilesForReplacement(new Set());
     };
 

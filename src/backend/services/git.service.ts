@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C135 (Remove DCE-specific dev folders from default gitignore)
+// Updated on: C136 (Clean up .gitignore generation)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -45,7 +45,7 @@ export class GitService {
         try {
             await this.execGitCommand('git init');
             
-            // C134: Enhanced .gitignore creation
+            // C136: Cleaned up .gitignore creation
             const gitignorePath = path.join(workspaceRoot, '.gitignore');
             let gitignoreContent = '';
             try {
@@ -62,7 +62,6 @@ export class GitService {
                 '*.vsix',
                 '.vscode-test/',
                 '.vscode/',
-                // 'The-Creator-AI-main/', // C135: Removed project-specific exclusion
                 'prompt.md',
                 '.vscode/dce_cache/'
             ];

@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T21:17:15.447Z
+  Date Generated: 2025-12-04T21:40:35.269Z
   ---
   Total Files: 222
-  Approx. Tokens: 377904
+  Approx. Tokens: 378378
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,7 +14,7 @@
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5930 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5981 tokens)
 8. src\backend\services\prompt.service.ts (5086 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -123,9 +123,9 @@
 101. src\backend\services\file-operation.service.ts - Lines: 411 - Chars: 19728 - Tokens: 4932
 102. src\backend\services\file-tree.service.ts - Lines: 294 - Chars: 15279 - Tokens: 3820
 103. src\backend\services\flattener.service.ts - Lines: 296 - Chars: 15044 - Tokens: 3761
-104. src\backend\services\git.service.ts - Lines: 173 - Chars: 7854 - Tokens: 1964
+104. src\backend\services\git.service.ts - Lines: 172 - Chars: 7745 - Tokens: 1937
 105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
-106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12779 - Tokens: 3195
+106. src\backend\services\history.service.ts - Lines: 312 - Chars: 12714 - Tokens: 3179
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 20341 - Tokens: 5086
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8981 - Tokens: 2246
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 141 - Chars: 6424 - Tokens: 1606
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 440 - Chars: 23719 - Tokens: 5930
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 454 - Chars: 23924 - Tokens: 5981
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -170,7 +170,7 @@
 148. src\common\ipc\get-vscode-api.ts - Lines: 12 - Chars: 239 - Tokens: 60
 149. src\common\ipc\server-ipc.ts - Lines: 42 - Chars: 1562 - Tokens: 391
 150. src\common\types\file-node.ts - Lines: 16 - Chars: 487 - Tokens: 122
-151. src\common\types\pcpp.types.ts - Lines: 57 - Chars: 1582 - Tokens: 396
+151. src\common\types\pcpp.types.ts - Lines: 58 - Chars: 1596 - Tokens: 399
 152. src\common\types\vscode-webview.d.ts - Lines: 15 - Chars: 435 - Tokens: 109
 153. src\common\utils\formatting.ts - Lines: 141 - Chars: 4606 - Tokens: 1152
 154. src\common\utils\similarity.ts - Lines: 36 - Chars: 1188 - Tokens: 297
@@ -191,12 +191,12 @@
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 154 - Chars: 6737 - Tokens: 1685
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 152 - Chars: 6593 - Tokens: 1649
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 225 - Chars: 10550 - Tokens: 2638
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 225 - Chars: 10774 - Tokens: 2694
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 194 - Chars: 7979 - Tokens: 1995
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 106 - Chars: 3611 - Tokens: 903
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 126 - Chars: 4592 - Tokens: 1148
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -228,7 +228,7 @@
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 49 - Chars: 3665 - Tokens: 917
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 98 - Chars: 5862 - Tokens: 1466
-209. src\backend\services\database.service.ts - Lines: 332 - Chars: 16325 - Tokens: 4082
+209. src\backend\services\database.service.ts - Lines: 343 - Chars: 17120 - Tokens: 4280
 210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
 211. src\Artifacts\A120. DCE - Database Maintenance Guide.md - Lines: 67 - Chars: 3388 - Tokens: 847
 212. src\Artifacts\A121. DCE - Master Artifact List Automation Plan.md - Lines: 56 - Chars: 2821 - Tokens: 706
@@ -8167,7 +8167,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C135 (Remove DCE-specific dev folders from default gitignore)
+// Updated on: C136 (Clean up .gitignore generation)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -8213,7 +8213,7 @@ export class GitService {
         try {
             await this.execGitCommand('git init');
             
-            // C134: Enhanced .gitignore creation
+            // C136: Cleaned up .gitignore creation
             const gitignorePath = path.join(workspaceRoot, '.gitignore');
             let gitignoreContent = '';
             try {
@@ -8230,7 +8230,6 @@ export class GitService {
                 '*.vsix',
                 '.vscode-test/',
                 '.vscode/',
-                // 'The-Creator-AI-main/', // C135: Removed project-specific exclusion
                 'prompt.md',
                 '.vscode/dce_cache/'
             ];
@@ -8423,7 +8422,7 @@ export class HighlightingService {
 
 <file path="src/backend/services/history.service.ts">
 // src/backend/services/history.service.ts
-// Updated on: C126 (Include isCycleCollapsed in default cycle)
+// Updated on: C136 (Initialize hasGeneratedPrompt)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Services } from './services';
@@ -8495,8 +8494,9 @@ export class HistoryService {
             activeWorkflowStep: null,
             status: 'complete',
             isEphemeralContextCollapsed: true,
-            isCycleCollapsed: false, // C126: Default to expanded
+            isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
+            hasGeneratedPrompt: false, // C136: Initialize to false
         };
 
         if (isFreshEnvironment) {
@@ -8527,7 +8527,7 @@ export class HistoryService {
             const settings = await Services.settingsService.getSettings();
             return {
                 cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false,
-                selectedFilesForReplacement: []
+                selectedFilesForReplacement: [], hasGeneratedPrompt: true
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -8579,7 +8579,8 @@ export class HistoryService {
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
-            selectedFilesForReplacement: []
+            selectedFilesForReplacement: [],
+            hasGeneratedPrompt: false // C136: New cycle hasn't generated prompt yet
         };
 
         Services.databaseService.saveCycle(newCycle);
@@ -8588,6 +8589,7 @@ export class HistoryService {
         return { newCycle, newMaxCycle: newCycleId };
     }
     
+    // ... rest of the file (finalizeCycleStatus, updateCycleWithResponses, etc.) remains unchanged ...
     public async finalizeCycleStatus(cycleId: number): Promise<void> {
         const cycle = Services.databaseService.getCycle(cycleId);
         if (cycle) {
@@ -14257,7 +14259,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C135 (Reset selection on new cycle, update isReady logic)
+// Updated on: C136 (Pass cycleId to useWorkflow, persist hasGeneratedPrompt)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14318,9 +14320,8 @@ const App = () => {
     const tabManagement = useTabManagement(initialData.cycle?.responses || {}, responseCount, initialData.cycle?.activeTab || 1, initialData.cycle?.isParsedMode || false, initialData.cycle?.isSortedByTokens || false, cycleManagement.setSaveStatus, requestAllMetrics);
     const fileManagement = useFileManagement(tabManagement.activeTab, tabManagement.tabs, cycleManagement.setSaveStatus);
     
-    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); // Pass false initially, memoize below
+    const generationManagement = useGeneration(cycleManagement.currentCycle, () => stateRef.current.cycleManagement.currentCycle, false, '', tabManagement.setTabs, cycleManagement.setSaveStatus, responseCount); 
 
-    // C135: Updated logic to require prompt generation before new cycle
     const isReadyForNextCycle = React.useMemo(() => {
         const basicReqs = !!(
             cycleManagement.cycleTitle && 
@@ -14335,7 +14336,21 @@ const App = () => {
         return basicReqs;
     }, [cycleManagement.cycleTitle, cycleManagement.cycleContext, cycleManagement.selectedResponseId, cycleManagement.hasGeneratedPrompt, generationManagement.connectionMode]);
 
-    const { workflowStep, setWorkflowStep } = useWorkflow(null, isReadyForNextCycle, cycleManagement.cycleTitle, cycleManagement.cycleContext, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId, tabManagement.isSortedByTokens, tabManagement.isParsedMode, tabManagement.tabs, tabManagement.tabCount, cycleManagement.hasGeneratedPrompt);
+    // C136: Pass cycleId to useWorkflow
+    const { workflowStep, setWorkflowStep } = useWorkflow(
+        null, 
+        isReadyForNextCycle, 
+        cycleManagement.cycleTitle, 
+        cycleManagement.cycleContext, 
+        fileManagement.selectedFilesForReplacement, 
+        cycleManagement.selectedResponseId, 
+        tabManagement.isSortedByTokens, 
+        tabManagement.isParsedMode, 
+        tabManagement.tabs, 
+        tabManagement.tabCount, 
+        cycleManagement.hasGeneratedPrompt,
+        cycleManagement.currentCycle?.cycleId || -1 // Pass current cycle ID
+    );
     
     usePcppIpc(
         cycleManagement,
@@ -14350,7 +14365,7 @@ const App = () => {
 
     const getCurrentCycleState = React.useCallback((): PcppCycle | null => {
         const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth } = stateRef.current;
-        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed } = cycleManagement;
+        const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed, hasGeneratedPrompt } = cycleManagement;
         const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
@@ -14373,6 +14388,7 @@ const App = () => {
             isEphemeralContextCollapsed,
             isCycleCollapsed,
             leftPaneWidth,
+            hasGeneratedPrompt, // C136: Include in save state
         };
     }, []);
 
@@ -14502,6 +14518,8 @@ const App = () => {
             logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
             clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
             cycleManagement.setHasGeneratedPrompt(true);
+            // C136: Ensure this state change is saved immediately so it persists on reload
+            cycleManagement.setSaveStatus('unsaved');
         }
     };
 
@@ -14562,9 +14580,7 @@ const App = () => {
 
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
-        // C134: Explicitly reset to UNPARSED mode for a new manual cycle
         tabManagement.resetAndLoadTabs({}, false);
-        // C135: Explicitly reset selected files for the new cycle
         fileManagement.setSelectedFilesForReplacement(new Set());
     };
 
@@ -15416,7 +15432,7 @@ export interface FileNode {
 
 <file path="src/common/types/pcpp.types.ts">
 // src/common/types/pcpp.types.ts
-// Updated on: C126 (Add isCycleCollapsed)
+// Updated on: C136 (Add hasGeneratedPrompt)
 export interface PcppResponse {
     content: string;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
@@ -15448,8 +15464,9 @@ export interface PcppCycle {
     activeWorkflowStep?: string;
     status?: 'complete' | 'generating';
     isEphemeralContextCollapsed?: boolean;
-    isCycleCollapsed?: boolean; // C126: New field for persisting cycle section collapse state
+    isCycleCollapsed?: boolean;
     connectionMode?: string;
+    hasGeneratedPrompt?: boolean; // C136: Persist prompt generation state
 }
 
 export interface PcppHistoryFile {
@@ -17060,7 +17077,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C135 (Add hasGeneratedPrompt state)
+// Updated on: C136 (Load hasGeneratedPrompt from persistent state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -17082,13 +17099,10 @@ export const useCycleManagement = (
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
     
-    // C135: Track if prompt has been generated for the current cycle state
     const [hasGeneratedPrompt, setHasGeneratedPrompt] = React.useState(false);
 
-    // C131: New state for cost calculation
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
-    // C132: Cost breakdown
     const [costBreakdown, setCostBreakdown] = React.useState<{ [key: string]: number }>({});
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -17103,8 +17117,8 @@ export const useCycleManagement = (
         setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
-        // Assume loaded cycles (that are complete) have had their prompt generated
-        setHasGeneratedPrompt(true); 
+        // C136: Use the persisted value from the cycle data
+        setHasGeneratedPrompt(!!cycleData.hasGeneratedPrompt); 
     }, []);
 
     const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
@@ -17132,9 +17146,9 @@ export const useCycleManagement = (
             status: 'complete',
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
+            hasGeneratedPrompt: false, // Start fresh
         };
         loadCycleData(newCycle);
-        setHasGeneratedPrompt(false); // Reset for new cycle
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
     }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
@@ -17142,21 +17156,22 @@ export const useCycleManagement = (
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
         setSaveStatus('unsaved');
-        setHasGeneratedPrompt(false); // Reset when content changes
+        setHasGeneratedPrompt(false); 
     }, []);
 
     const onEphemeralContextChange = React.useCallback((value: string) => {
         setEphemeralContext(value);
         setSaveStatus('unsaved');
-        setHasGeneratedPrompt(false); // Reset when content changes
+        setHasGeneratedPrompt(false); 
     }, []);
 
     const onTitleChange = React.useCallback((title: string) => {
         setCycleTitle(title);
         setSaveStatus('unsaved');
-        setHasGeneratedPrompt(false); // Reset when content changes
+        setHasGeneratedPrompt(false); 
     }, []);
 
+    // ... rest of handlers (handleDeleteCycle, handleResetHistory, etc.) ...
     const handleDeleteCycle = React.useCallback(() => {
         if (currentCycle !== null) {
             clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId });
@@ -17834,8 +17849,9 @@ export const useTabManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useWorkflow.ts">
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C135 (Add hasGeneratedPrompt to logic)
+// Updated on: C136 (Add cycleId dependency and auto-reset logic)
 import * as React from 'react';
+import { PcppResponse } from '@/common/types/pcpp.types';
 
 export const useWorkflow = (
     initialWorkflowStep: string | null,
@@ -17846,11 +17862,34 @@ export const useWorkflow = (
     selectedResponseId: string | null,
     isSortedByTokens: boolean,
     isParsedMode: boolean,
-    tabs: any,
+    tabs: { [key: string]: PcppResponse },
     tabCount: number,
-    hasGeneratedPrompt: boolean
+    hasGeneratedPrompt: boolean,
+    cycleId: number // C136: Add cycleId to props
 ) => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(initialWorkflowStep);
+
+    // C136: Reset workflow step when cycle changes
+    React.useEffect(() => {
+        // If we are loading a cycle with a saved workflow step, honor it.
+        // Otherwise, if it's a new or unstarted cycle (workflowStep is null/undefined),
+        // we attempt to auto-initialize the starting step.
+        if (initialWorkflowStep) {
+            setWorkflowStep(initialWorkflowStep);
+        } else if (cycleId > 0) {
+             // For any cycle > 0 without a saved step, assume we are starting fresh.
+             // If tabs are empty, we are likely waiting for paste.
+             const firstTabContent = tabs['1']?.content;
+             if (!firstTabContent) {
+                 setWorkflowStep('awaitingResponsePaste_1');
+             } else {
+                 // If content exists but no step saved, maybe we are parsing?
+                 setWorkflowStep('awaitingParse');
+             }
+        } else if (cycleId === 0) {
+            setWorkflowStep('awaitingProjectScope');
+        }
+    }, [cycleId, initialWorkflowStep]); // Only run when cycle ID or initial step changes (on load)
 
     React.useEffect(() => {
         if (workflowStep === null) return;
@@ -17862,17 +17901,13 @@ export const useWorkflow = (
 
         if (workflowStep === 'readyForNewCycle') {
             if (!isReadyForNextCycle) {
-                // If no longer ready, go back to prompt generation step
                 setWorkflowStep('awaitingGeneratePrompt');
             }
             return;
         }
         
-        // C135: Highlight prompt generation if title/context are ready but prompt hasn't been generated yet
         if (workflowStep === 'awaitingGeneratePrompt') {
-            if (hasGeneratedPrompt) {
-                // Wait for isReadyForNextCycle to kick in (requires selected response)
-            }
+            // Wait for isReadyForNextCycle to kick in
             return;
         }
 
@@ -26354,7 +26389,7 @@ Stores the AI responses associated with each cycle.
 
 <file path="src/backend/services/database.service.ts">
 // src/backend/services/database.service.ts
-// Updated on: C126 (Add schema migration for is_cycle_collapsed)
+// Updated on: C136 (Add schema migration for has_generated_prompt)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -26421,8 +26456,9 @@ export class DatabaseService {
                 connection_mode TEXT,
                 active_workflow_step TEXT,
                 is_ephemeral_context_collapsed INTEGER,
-                is_cycle_collapsed INTEGER, -- Added in C126
-                selected_files_for_replacement TEXT -- Added in C126 Fix
+                is_cycle_collapsed INTEGER,
+                selected_files_for_replacement TEXT,
+                has_generated_prompt INTEGER -- Added in C136
             );
 
             CREATE TABLE IF NOT EXISTS responses (
@@ -26468,6 +26504,13 @@ export class DatabaseService {
                 Services.loggerService.log('Migrated database: Added selected_files_for_replacement to cycles table.');
             }
 
+            // Check for has_generated_prompt (C136)
+            const hasGeneratedPrompt = tableInfo.some(col => col.name === 'has_generated_prompt');
+            if (!hasGeneratedPrompt) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN has_generated_prompt INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added has_generated_prompt to cycles table.');
+            }
+
         } catch (error) {
             Services.loggerService.error(`Schema migration failed: ${error}`);
         }
@@ -26494,8 +26537,8 @@ export class DatabaseService {
             }
 
             const insertCycle = this.db.prepare(`
-                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement)
-                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement)
+                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement, has_generated_prompt)
+                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement, @hasGeneratedPrompt)
             `);
 
             const insertResponse = this.db.prepare(`
@@ -26522,7 +26565,8 @@ export class DatabaseService {
                         activeWorkflowStep: cycle.activeWorkflowStep || null,
                         isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
                         isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0,
-                        selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || [])
+                        selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || []),
+                        hasGeneratedPrompt: (cycle as any).hasGeneratedPrompt ? 1 : 0
                     });
 
                     for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -26604,6 +26648,7 @@ export class DatabaseService {
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
             isCycleCollapsed: !!cycleRow.is_cycle_collapsed,
             selectedFilesForReplacement: cycleRow.selected_files_for_replacement ? JSON.parse(cycleRow.selected_files_for_replacement) : [],
+            hasGeneratedPrompt: !!cycleRow.has_generated_prompt,
             responses
         };
     }
@@ -26618,12 +26663,12 @@ export class DatabaseService {
         if (!this.db) return;
         
         const upsertCycle = this.db.prepare(`
-            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement)
-            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement)
+            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement, has_generated_prompt)
+            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement, @hasGeneratedPrompt)
             ON CONFLICT(id) DO UPDATE SET
                 title=@title, cycle_context=@cycleContext, ephemeral_context=@ephemeralContext, tab_count=@tabCount, active_tab=@activeTab, is_parsed_mode=@isParsedMode,
                 is_sorted_by_tokens=@isSortedByTokens, selected_response_id=@selectedResponseId, left_pane_width=@leftPaneWidth, status=@status,
-                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed, selected_files_for_replacement=@selectedFilesForReplacement
+                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed, selected_files_for_replacement=@selectedFilesForReplacement, has_generated_prompt=@hasGeneratedPrompt
         `);
 
         const upsertResponse = this.db.prepare(`
@@ -26652,7 +26697,8 @@ export class DatabaseService {
                 activeWorkflowStep: cycle.activeWorkflowStep || null,
                 isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
                 isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0,
-                selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || [])
+                selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || []),
+                hasGeneratedPrompt: cycle.hasGeneratedPrompt ? 1 : 0
             });
 
             for (const [tabId, resp] of Object.entries(cycle.responses)) {

@@ -1,5 +1,5 @@
 // src/backend/services/database.service.ts
-// Updated on: C126 (Add schema migration for is_cycle_collapsed)
+// Updated on: C136 (Add schema migration for has_generated_prompt)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -66,8 +66,9 @@ export class DatabaseService {
                 connection_mode TEXT,
                 active_workflow_step TEXT,
                 is_ephemeral_context_collapsed INTEGER,
-                is_cycle_collapsed INTEGER, -- Added in C126
-                selected_files_for_replacement TEXT -- Added in C126 Fix
+                is_cycle_collapsed INTEGER,
+                selected_files_for_replacement TEXT,
+                has_generated_prompt INTEGER -- Added in C136
             );
 
             CREATE TABLE IF NOT EXISTS responses (
@@ -113,6 +114,13 @@ export class DatabaseService {
                 Services.loggerService.log('Migrated database: Added selected_files_for_replacement to cycles table.');
             }
 
+            // Check for has_generated_prompt (C136)
+            const hasGeneratedPrompt = tableInfo.some(col => col.name === 'has_generated_prompt');
+            if (!hasGeneratedPrompt) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN has_generated_prompt INTEGER DEFAULT 0');
+                Services.loggerService.log('Migrated database: Added has_generated_prompt to cycles table.');
+            }
+
         } catch (error) {
             Services.loggerService.error(`Schema migration failed: ${error}`);
         }
@@ -139,8 +147,8 @@ export class DatabaseService {
             }
 
             const insertCycle = this.db.prepare(`
-                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement)
-                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement)
+                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement, has_generated_prompt)
+                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement, @hasGeneratedPrompt)
             `);
 
             const insertResponse = this.db.prepare(`
@@ -167,7 +175,8 @@ export class DatabaseService {
                         activeWorkflowStep: cycle.activeWorkflowStep || null,
                         isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
                         isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0,
-                        selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || [])
+                        selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || []),
+                        hasGeneratedPrompt: (cycle as any).hasGeneratedPrompt ? 1 : 0
                     });
 
                     for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -249,6 +258,7 @@ export class DatabaseService {
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
             isCycleCollapsed: !!cycleRow.is_cycle_collapsed,
             selectedFilesForReplacement: cycleRow.selected_files_for_replacement ? JSON.parse(cycleRow.selected_files_for_replacement) : [],
+            hasGeneratedPrompt: !!cycleRow.has_generated_prompt,
             responses
         };
     }
@@ -263,12 +273,12 @@ export class DatabaseService {
         if (!this.db) return;
         
         const upsertCycle = this.db.prepare(`
-            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement)
-            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement)
+            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement, has_generated_prompt)
+            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement, @hasGeneratedPrompt)
             ON CONFLICT(id) DO UPDATE SET
                 title=@title, cycle_context=@cycleContext, ephemeral_context=@ephemeralContext, tab_count=@tabCount, active_tab=@activeTab, is_parsed_mode=@isParsedMode,
                 is_sorted_by_tokens=@isSortedByTokens, selected_response_id=@selectedResponseId, left_pane_width=@leftPaneWidth, status=@status,
-                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed, selected_files_for_replacement=@selectedFilesForReplacement
+                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed, selected_files_for_replacement=@selectedFilesForReplacement, has_generated_prompt=@hasGeneratedPrompt
         `);
 
         const upsertResponse = this.db.prepare(`
@@ -297,7 +307,8 @@ export class DatabaseService {
                 activeWorkflowStep: cycle.activeWorkflowStep || null,
                 isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
                 isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0,
-                selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || [])
+                selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || []),
+                hasGeneratedPrompt: cycle.hasGeneratedPrompt ? 1 : 0
             });
 
             for (const [tabId, resp] of Object.entries(cycle.responses)) {

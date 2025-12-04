@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C135 (Add hasGeneratedPrompt state)
+// Updated on: C136 (Load hasGeneratedPrompt from persistent state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -21,13 +21,10 @@ export const useCycleManagement = (
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
     
-    // C135: Track if prompt has been generated for the current cycle state
     const [hasGeneratedPrompt, setHasGeneratedPrompt] = React.useState(false);
 
-    // C131: New state for cost calculation
     const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
     const [totalTokens, setTotalTokens] = React.useState<number>(0);
-    // C132: Cost breakdown
     const [costBreakdown, setCostBreakdown] = React.useState<{ [key: string]: number }>({});
 
     const clientIpc = ClientPostMessageManager.getInstance();
@@ -42,8 +39,8 @@ export const useCycleManagement = (
         setIsCycleCollapsed(cycleData.isCycleCollapsed || false);
         setSelectedResponseId(cycleData.selectedResponseId || null);
         setSaveStatus('saved');
-        // Assume loaded cycles (that are complete) have had their prompt generated
-        setHasGeneratedPrompt(true); 
+        // C136: Use the persisted value from the cycle data
+        setHasGeneratedPrompt(!!cycleData.hasGeneratedPrompt); 
     }, []);
 
     const handleCycleChange = React.useCallback((e: React.MouseEvent | null, newCycleId: number) => {
@@ -71,9 +68,9 @@ export const useCycleManagement = (
             status: 'complete',
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
+            hasGeneratedPrompt: false, // Start fresh
         };
         loadCycleData(newCycle);
-        setHasGeneratedPrompt(false); // Reset for new cycle
         clientIpc.sendToServer(ClientToServerChannel.SaveLastViewedCycle, { cycleId: newCycleId });
         setSaveStatus('unsaved');
     }, [saveStatus, maxCycle, currentCycle, loadCycleData, clientIpc]);
@@ -81,21 +78,22 @@ export const useCycleManagement = (
     const onCycleContextChange = React.useCallback((value: string) => {
         setCycleContext(value);
         setSaveStatus('unsaved');
-        setHasGeneratedPrompt(false); // Reset when content changes
+        setHasGeneratedPrompt(false); 
     }, []);
 
     const onEphemeralContextChange = React.useCallback((value: string) => {
         setEphemeralContext(value);
         setSaveStatus('unsaved');
-        setHasGeneratedPrompt(false); // Reset when content changes
+        setHasGeneratedPrompt(false); 
     }, []);
 
     const onTitleChange = React.useCallback((title: string) => {
         setCycleTitle(title);
         setSaveStatus('unsaved');
-        setHasGeneratedPrompt(false); // Reset when content changes
+        setHasGeneratedPrompt(false); 
     }, []);
 
+    // ... rest of handlers (handleDeleteCycle, handleResetHistory, etc.) ...
     const handleDeleteCycle = React.useCallback(() => {
         if (currentCycle !== null) {
             clientIpc.sendToServer(ClientToServerChannel.RequestDeleteCycle, { cycleId: currentCycle.cycleId });

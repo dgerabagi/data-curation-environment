@@ -1,5 +1,5 @@
 // src/common/types/pcpp.types.ts
-// Updated on: C126 (Add isCycleCollapsed)
+// Updated on: C136 (Add hasGeneratedPrompt)
 export interface PcppResponse {
     content: string;
     status: 'pending' | 'thinking' | 'generating' | 'complete' | 'error' | 'stopped';
@@ -31,8 +31,9 @@ export interface PcppCycle {
     activeWorkflowStep?: string;
     status?: 'complete' | 'generating';
     isEphemeralContextCollapsed?: boolean;
-    isCycleCollapsed?: boolean; // C126: New field for persisting cycle section collapse state
+    isCycleCollapsed?: boolean;
     connectionMode?: string;
+    hasGeneratedPrompt?: boolean; // C136: Persist prompt generation state
 }
 
 export interface PcppHistoryFile {

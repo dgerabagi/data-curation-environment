@@ -1,6 +1,7 @@
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C135 (Add hasGeneratedPrompt to logic)
+// Updated on: C136 (Add cycleId dependency and auto-reset logic)
 import * as React from 'react';
+import { PcppResponse } from '@/common/types/pcpp.types';
 
 export const useWorkflow = (
     initialWorkflowStep: string | null,
@@ -11,11 +12,34 @@ export const useWorkflow = (
     selectedResponseId: string | null,
     isSortedByTokens: boolean,
     isParsedMode: boolean,
-    tabs: any,
+    tabs: { [key: string]: PcppResponse },
     tabCount: number,
-    hasGeneratedPrompt: boolean
+    hasGeneratedPrompt: boolean,
+    cycleId: number // C136: Add cycleId to props
 ) => {
     const [workflowStep, setWorkflowStep] = React.useState<string | null>(initialWorkflowStep);
+
+    // C136: Reset workflow step when cycle changes
+    React.useEffect(() => {
+        // If we are loading a cycle with a saved workflow step, honor it.
+        // Otherwise, if it's a new or unstarted cycle (workflowStep is null/undefined),
+        // we attempt to auto-initialize the starting step.
+        if (initialWorkflowStep) {
+            setWorkflowStep(initialWorkflowStep);
+        } else if (cycleId > 0) {
+             // For any cycle > 0 without a saved step, assume we are starting fresh.
+             // If tabs are empty, we are likely waiting for paste.
+             const firstTabContent = tabs['1']?.content;
+             if (!firstTabContent) {
+                 setWorkflowStep('awaitingResponsePaste_1');
+             } else {
+                 // If content exists but no step saved, maybe we are parsing?
+                 setWorkflowStep('awaitingParse');
+             }
+        } else if (cycleId === 0) {
+            setWorkflowStep('awaitingProjectScope');
+        }
+    }, [cycleId, initialWorkflowStep]); // Only run when cycle ID or initial step changes (on load)
 
     React.useEffect(() => {
         if (workflowStep === null) return;
@@ -27,17 +51,13 @@ export const useWorkflow = (
 
         if (workflowStep === 'readyForNewCycle') {
             if (!isReadyForNextCycle) {
-                // If no longer ready, go back to prompt generation step
                 setWorkflowStep('awaitingGeneratePrompt');
             }
             return;
         }
         
-        // C135: Highlight prompt generation if title/context are ready but prompt hasn't been generated yet
         if (workflowStep === 'awaitingGeneratePrompt') {
-            if (hasGeneratedPrompt) {
-                // Wait for isReadyForNextCycle to kick in (requires selected response)
-            }
+            // Wait for isReadyForNextCycle to kick in
             return;
         }
 
