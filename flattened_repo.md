@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T12:14:28.311Z
+  Date Generated: 2025-12-04T12:49:21.922Z
   ---
-  Total Files: 212
-  Approx. Tokens: 365246
+  Total Files: 221
+  Approx. Tokens: 372943
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -125,7 +125,7 @@
 103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
-106. src\backend\services\history.service.ts - Lines: 307 - Chars: 12378 - Tokens: 3095
+106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12471 - Tokens: 3118
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
@@ -228,10 +228,19 @@
 206. LICENSE - Lines: 21 - Chars: 1092 - Tokens: 273
 207. CHANGELOG.md - Lines: 49 - Chars: 3665 - Tokens: 917
 208. src\Artifacts\A118. DCE - Database Integration Plan.md - Lines: 98 - Chars: 5862 - Tokens: 1466
-209. src\backend\services\database.service.ts - Lines: 321 - Chars: 15243 - Tokens: 3811
+209. src\backend\services\database.service.ts - Lines: 332 - Chars: 16325 - Tokens: 4082
 210. src\Artifacts\A119. DCE - Universal Task Checklist for Cycle 122+.md - Lines: 39 - Chars: 2026 - Tokens: 507
 211. src\Artifacts\A120. DCE - Database Maintenance Guide.md - Lines: 67 - Chars: 3388 - Tokens: 847
 212. src\Artifacts\A121. DCE - Master Artifact List Automation Plan.md - Lines: 56 - Chars: 2821 - Tokens: 706
+213. external_context\personal-project\altered-galaxy\scripts\fix-shared-imports.js - Lines: 65 - Chars: 2128 - Tokens: 532
+214. external_context\personal-project\altered-galaxy\scripts\generate-d-info.js - Lines: 96 - Chars: 3496 - Tokens: 874
+215. external_context\personal-project\altered-galaxy\scripts\migrate-items.js - Lines: 56 - Chars: 2216 - Tokens: 554
+216. external_context\personal-project\altered-galaxy\scripts\README.md - Lines: 37 - Chars: 2012 - Tokens: 503
+217. external_context\personal-project\altered-galaxy\scripts\rename-files.js - Lines: 61 - Chars: 1987 - Tokens: 497
+218. external_context\personal-project\altered-galaxy\scripts\requirements.txt - Lines: 2 - Chars: 23 - Tokens: 6
+219. external_context\personal-project\altered-galaxy\scripts\scrape_wiki.py - Lines: 155 - Chars: 7716 - Tokens: 1929
+220. external_context\personal-project\altered-galaxy\scripts\simulate-movement.js - Lines: 161 - Chars: 5945 - Tokens: 1487
+221. external_context\personal-project\altered-galaxy\scripts\truncate-data-files.js - Lines: 112 - Chars: 4084 - Tokens: 1021
 
 <file path="src/Artifacts/A0. DCE Master Artifact List.md">
 # Artifact A0: DCE Master Artifact List
@@ -8407,7 +8416,8 @@ export class HistoryService {
             const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
             const settings = await Services.settingsService.getSettings();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false,
+                selectedFilesForReplacement: []
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -8459,6 +8469,7 @@ export class HistoryService {
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
+            selectedFilesForReplacement: []
         };
 
         Services.databaseService.saveCycle(newCycle);
@@ -26042,7 +26053,8 @@ export class DatabaseService {
                 connection_mode TEXT,
                 active_workflow_step TEXT,
                 is_ephemeral_context_collapsed INTEGER,
-                is_cycle_collapsed INTEGER -- Added in C126
+                is_cycle_collapsed INTEGER, -- Added in C126
+                selected_files_for_replacement TEXT -- Added in C126 Fix
             );
 
             CREATE TABLE IF NOT EXISTS responses (
@@ -26080,6 +26092,13 @@ export class DatabaseService {
                 this.db.exec('ALTER TABLE cycles ADD COLUMN is_ephemeral_context_collapsed INTEGER DEFAULT 0');
                 Services.loggerService.log('Migrated database: Added is_ephemeral_context_collapsed to cycles table.');
             }
+            
+            // Check for selected_files_for_replacement (C126 Fix)
+            const hasSelectedFiles = tableInfo.some(col => col.name === 'selected_files_for_replacement');
+            if (!hasSelectedFiles) {
+                this.db.exec('ALTER TABLE cycles ADD COLUMN selected_files_for_replacement TEXT DEFAULT "[]"');
+                Services.loggerService.log('Migrated database: Added selected_files_for_replacement to cycles table.');
+            }
 
         } catch (error) {
             Services.loggerService.error(`Schema migration failed: ${error}`);
@@ -26107,8 +26126,8 @@ export class DatabaseService {
             }
 
             const insertCycle = this.db.prepare(`
-                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed)
-                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed)
+                INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement)
+                VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement)
             `);
 
             const insertResponse = this.db.prepare(`
@@ -26134,7 +26153,8 @@ export class DatabaseService {
                         connectionMode: (cycle as any).connectionMode || null,
                         activeWorkflowStep: cycle.activeWorkflowStep || null,
                         isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
-                        isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0
+                        isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0,
+                        selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || [])
                     });
 
                     for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -26215,6 +26235,7 @@ export class DatabaseService {
             activeWorkflowStep: cycleRow.active_workflow_step,
             isEphemeralContextCollapsed: !!cycleRow.is_ephemeral_context_collapsed,
             isCycleCollapsed: !!cycleRow.is_cycle_collapsed,
+            selectedFilesForReplacement: cycleRow.selected_files_for_replacement ? JSON.parse(cycleRow.selected_files_for_replacement) : [],
             responses
         };
     }
@@ -26229,12 +26250,12 @@ export class DatabaseService {
         if (!this.db) return;
         
         const upsertCycle = this.db.prepare(`
-            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed)
-            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed)
+            INSERT INTO cycles (id, title, timestamp, cycle_context, ephemeral_context, tab_count, active_tab, is_parsed_mode, is_sorted_by_tokens, selected_response_id, left_pane_width, status, connection_mode, active_workflow_step, is_ephemeral_context_collapsed, is_cycle_collapsed, selected_files_for_replacement)
+            VALUES (@id, @title, @timestamp, @cycleContext, @ephemeralContext, @tabCount, @activeTab, @isParsedMode, @isSortedByTokens, @selectedResponseId, @leftPaneWidth, @status, @connectionMode, @activeWorkflowStep, @isEphemeralContextCollapsed, @isCycleCollapsed, @selectedFilesForReplacement)
             ON CONFLICT(id) DO UPDATE SET
                 title=@title, cycle_context=@cycleContext, ephemeral_context=@ephemeralContext, tab_count=@tabCount, active_tab=@activeTab, is_parsed_mode=@isParsedMode,
                 is_sorted_by_tokens=@isSortedByTokens, selected_response_id=@selectedResponseId, left_pane_width=@leftPaneWidth, status=@status,
-                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed
+                connection_mode=@connectionMode, active_workflow_step=@activeWorkflowStep, is_ephemeral_context_collapsed=@isEphemeralContextCollapsed, is_cycle_collapsed=@isCycleCollapsed, selected_files_for_replacement=@selectedFilesForReplacement
         `);
 
         const upsertResponse = this.db.prepare(`
@@ -26262,7 +26283,8 @@ export class DatabaseService {
                 connectionMode: (cycle as any).connectionMode || null,
                 activeWorkflowStep: cycle.activeWorkflowStep || null,
                 isEphemeralContextCollapsed: cycle.isEphemeralContextCollapsed ? 1 : 0,
-                isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0
+                isCycleCollapsed: cycle.isCycleCollapsed ? 1 : 0,
+                selectedFilesForReplacement: JSON.stringify(cycle.selectedFilesForReplacement || [])
             });
 
             for (const [tabId, resp] of Object.entries(cycle.responses)) {
@@ -26466,5 +26488,776 @@ The user expressed a desire for the `A0` list to be "state-aware" regarding sele
 2.  Implement regex parsers for the standard header.
 3.  Implement the `generateA0` method.
 4.  Register the command and watcher.
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/fix-shared-imports.js">
+/**
+ * SCRIPT: fix-shared-imports.js
+ * PURPOSE: Fixes circular dependency issues in @ag/shared where internal files import from '@ag/shared'
+ *          instead of relative paths. This resolves TS5055 "Overwrite input file" errors.
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const sharedDataDir = path.resolve(__dirname, '../packages/ag-shared/src/data/items');
+
+function processDirectory(dir) {
+    if (!fs.existsSync(dir)) {
+        console.warn(`Directory not found: ${dir}`);
+        return;
+    }
+
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            processDirectory(fullPath);
+        } else if (entry.name.endsWith('.ts')) {
+            fixImport(fullPath);
+        }
+    }
+}
+
+function fixImport(filePath) {
+    let content = fs.readFileSync(filePath, 'utf-8');
+    let changed = false;
+
+    // Calculate relative path to 'src/types/item.types'
+    // We assume the structure packages/ag-shared/src/data/items/...
+    // and types are in packages/ag-shared/src/types/item.types.ts
+    
+    // Logic:
+    // 1. Get dir of current file.
+    // 2. Find relative path from dir to 'packages/ag-shared/src/types/item.types'
+    
+    const typesPath = path.resolve(__dirname, '../packages/ag-shared/src/types/item.types');
+    const fileDir = path.dirname(filePath);
+    
+    // Get relative path, remove extension for import
+    let relativePath = path.relative(fileDir, typesPath).replace(/\\/g, '/');
+    if (!relativePath.startsWith('.')) relativePath = './' + relativePath;
+
+    // Regex to find: import { ... } from '@ag/shared';
+    const regex = /from\s+['"]@ag\/shared['"];/g;
+
+    if (regex.test(content)) {
+        content = content.replace(regex, `from '${relativePath}';`);
+        changed = true;
+    }
+
+    if (changed) {
+        fs.writeFileSync(filePath, content, 'utf-8');
+        console.log(`Fixed imports in: ${filePath}`);
+    }
+}
+
+console.log('Starting Shared Import Fix...');
+processDirectory(sharedDataDir);
+console.log('Finished.');
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/generate-d-info.js">
+/*
+ * SCRIPT: generate-d-info.js
+ * AUTHOR: AI Model & Curator
+ * DATE: C80
+ * UPDATED: C101 (Fixed command-line argument parsing)
+ * PURPOSE: To recursively scan a directory and generate `d-info.md` summary files.
+ *          This is used to consolidate thousands of small `.png.txt` files into a few
+ *          summary files to reduce the token count for AI context.
+ *
+ * USAGE: 
+ * 1. Run the script from the project root directory.
+ * 2. Pass the target directory as an argument.
+ * 3. Example: `npm run script:generate-d-info -- packages/ag-client/public/assets/icons/items`
+ *          `npm run script:generate-d-info -- packages/ag-server/maps`
+ *          `npm run script:generate-d-info -- C:\Projects\altered-galaxy\packages\ag-client\public\assets\audio\sfx\weapons
+ *          `npm run script:generate-d-info -- packages\ag-client\public\assets\audio\sfx\weapons`
+ *          `npm run script:generate-d-info -- packages\ag-client\public\assets\sprites\units\npc\xylos\boss\effects`
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// --- CONFIGURATION ---
+const rootDirectoryArg = process.argv[2];
+const outputFileName = 'd-info.md';
+// -------------------
+
+if (!rootDirectoryArg) {
+    console.error('Error: Please provide a target directory path as an argument.');
+    console.error('Example: npm run script:generate-d-info -- path/to/your/assets');
+    process.exit(1);
+}
+
+const rootDirectory = path.resolve(process.cwd(), rootDirectoryArg);
+
+
+/**
+ * Recursively processes a directory to generate d-info.md files.
+ * @param {string} dir - The directory path to process.
+ */
+function processDirectory(dir) {
+  try {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    const files = [];
+    const subdirectories = [];
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        subdirectories.push(entry.name);
+      } else {
+        // Exclude the output file itself and any other unwanted files from the list
+        if (entry.name !== outputFileName && !entry.name.startsWith('.')) {
+          files.push(entry.name);
+        }
+      }
+    }
+
+    // Only create a d-info.md file if there are other files present
+    if (files.length > 0) {
+      const relativeDir = path.relative(path.join(rootDirectory, '..', '..'), dir); // Make path more readable
+      
+      let content = `<d-info.md (directory info)>\n`;
+      content += `File Count: ${files.length}\n`;
+      content += `Directory Located at: ${relativeDir.replace(/\\/g, '/')}/\n`;
+      content += `Files:\n`;
+      
+      files.sort().forEach((file, index) => {
+        content += `${index + 1}. ${file}\n`;
+      });
+      content += `</d-info.md (directory info)>`;
+
+      const outputPath = path.join(dir, outputFileName);
+      fs.writeFileSync(outputPath, content);
+      console.log(`Generated: ${outputPath}`);
+    }
+
+    // Recurse into subdirectories
+    for (const subdir of subdirectories) {
+      processDirectory(path.join(dir, subdir));
+    }
+  } catch (error) {
+    console.error(`Error processing directory ${dir}:`, error);
+  }
+}
+
+console.log(`Starting directory info generation in: ${rootDirectory}`);
+console.log('---');
+
+if (fs.existsSync(rootDirectory)) {
+  processDirectory(rootDirectory);
+} else {
+  console.error(`Error: Root directory not found at ${rootDirectory}`);
+}
+
+console.log('---');
+console.log('Finished generating directory info files.');
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/migrate-items.js">
+const fs = require('fs');
+const path = require('path');
+
+const projectRoot = path.resolve(__dirname, '..');
+const clientItemsDir = path.join(projectRoot, 'packages', 'ag-client', 'src', 'data', 'items');
+const serverItemsDir = path.join(projectRoot, 'packages', 'ag-server', 'src', 'data', 'items');
+const sharedDataDir = path.join(projectRoot, 'packages', 'ag-shared', 'src', 'data');
+const sharedItemsDir = path.join(sharedDataDir, 'items');
+
+function copyRecursiveSync(src, dest) {
+    const exists = fs.existsSync(src);
+    const stats = exists && fs.statSync(src);
+    const isDirectory = exists && stats.isDirectory();
+
+    if (isDirectory) {
+        if (!fs.existsSync(dest)) {
+            fs.mkdirSync(dest, { recursive: true });
+        }
+        fs.readdirSync(src).forEach((childItemName) => {
+            copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
+        });
+    } else {
+        if (!fs.existsSync(path.dirname(dest))) {
+            fs.mkdirSync(path.dirname(dest), { recursive: true });
+        }
+        fs.copyFileSync(src, dest);
+    }
+}
+
+console.log('Starting Item Data Migration...');
+
+// 1. Create Shared Directory
+if (!fs.existsSync(sharedItemsDir)) {
+    console.log(`Creating ${sharedItemsDir}...`);
+    fs.mkdirSync(sharedItemsDir, { recursive: true });
+}
+
+// 2. Copy from Client (Source of Truth for most files)
+if (fs.existsSync(clientItemsDir)) {
+    console.log(`Copying items from Client to Shared...`);
+    copyRecursiveSync(clientItemsDir, sharedItemsDir);
+} else {
+    console.warn(`Client items directory not found: ${clientItemsDir}`);
+}
+
+// 3. Update Shared index.ts to export data
+const sharedIndex = path.join(projectRoot, 'packages', 'ag-shared', 'src', 'index.ts');
+let indexContent = fs.readFileSync(sharedIndex, 'utf-8');
+if (!indexContent.includes("export * from './data/items'")) {
+    console.log(`Updating Shared index.ts...`);
+    indexContent += "\nexport * from './data/items';\n";
+    fs.writeFileSync(sharedIndex, indexContent);
+}
+
+console.log('Migration of files complete.');
+console.log('ACTION REQUIRED: Please update client and server imports to use @ag/shared and delete old data directories manually to ensure safety.');
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/README.md">
+# Scripts Directory
+
+This directory contains utility scripts for project maintenance and workflow optimization.
+
+## `rename-files.js`
+
+**Purpose:** To recursively find files in a directory and remove a specific suffix from their names. This is useful for batch-cleaning files downloaded from services that add their own branding to filenames.
+
+**Usage:**
+1.  **COPY** this script to the root of the directory you want to clean up (e.g., `C:\Users\YourUser\Downloads\my-images`).
+2.  Open a terminal or command prompt in that same directory.
+3.  Run the script with the command: `node rename-files.js`
+
+The script is pre-configured to remove `-Photoroom` from filenames. You can change the `suffixToRemove` variable inside the script if needed.
+
+## `generate-d-info.js` (Updated C100)
+
+**Purpose:** To recursively scan a specified directory and generate a `d-info.md` summary file in each subdirectory that contains assets.
+
+**Usage:**
+1.  Run this script from the **project root directory**.
+2.  Use the configured npm script and pass the target directory as an argument.
+    ```bash
+    # Note the '--' is important for passing arguments to the script via npm
+    npm run script:generate-d-info -- packages/ag-client/public/assets/icons/items
+    ```
+3.  This script is a key part of our token management strategy. It consolidates thousands of small `.png.txt` files into a few summary files, which dramatically reduces the token count required for providing context to the AI.
+
+## `truncate-data-files.js` (New C100)
+
+**Purpose:** To recursively scan a directory and create truncated `.local.ts` versions of large `*Data.ts` files. The `.local` version contains only the first and last entries of a data array, preserving the file's structure while reducing token count for AI context.
+
+**Usage:**
+1.  Run this script from the **project root directory**.
+2.  Use the configured npm script and pass the target directory as an argument.
+    ```bash
+    npm run script:truncate-data -- packages/ag-server/src/data
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/rename-files.js">
+/*
+ * SCRIPT: rename-files.js
+ * AUTHOR: AI Model & Curator
+ * DATE: C80
+ * PURPOSE: To recursively scan a directory and remove a specific suffix from filenames.
+ *
+ * USAGE:
+ * 1. COPY this script to the root of the directory you want to clean up (e.g., your main downloads folder).
+ * 2. Open a terminal/command prompt in that directory.
+ * 3. Run the script with the command: `node rename-files.js`
+ *
+ * NOTE: This script performs file operations directly. It's always a good idea to have a backup.
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// --- CONFIGURATION ---
+const directoryToScan = process.cwd(); // This makes the script run in the directory it's placed in.
+const suffixToRemove = '-Photoroom';
+// -------------------
+
+/**
+ * Recursively walks a directory, renaming files that match the criteria.
+ * @param {string} dir - The directory path to scan.
+ */
+function walkAndRename(dir) {
+  try {
+    const files = fs.readdirSync(dir);
+    
+    files.forEach((file) => {
+      const filePath = path.join(dir, file);
+      try {
+        const stat = fs.statSync(filePath);
+        if (stat.isDirectory()) {
+          walkAndRename(filePath); // Recurse into subdirectory
+        } else if (file.includes(suffixToRemove)) {
+          const newFileName = file.replace(suffixToRemove, '');
+          const newFilePath = path.join(dir, newFileName);
+          
+          fs.renameSync(filePath, newFilePath);
+          console.log(`Renamed: ${filePath} -> ${newFilePath}`);
+        }
+      } catch (statError) {
+        console.error(`Could not stat file ${filePath}:`, statError);
+      }
+    });
+  } catch (readError) {
+    console.error(`Could not read directory ${dir}:`, readError);
+  }
+}
+
+console.log(`Starting file rename process...`);
+console.log(`Target directory: ${directoryToScan}`);
+console.log(`Suffix to remove: "${suffixToRemove}"`);
+console.log('---');
+
+walkAndRename(directoryToScan);
+
+console.log('---');
+console.log('Finished renaming files.');
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/requirements.txt">
+requests
+beautifulsoup4
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/scrape_wiki.py">
+import requests
+from bs4 import BeautifulSoup
+import re
+import time
+import os
+
+def scrape_fandom_page(page_title):
+    # Handle known redirects or corrections observed in the fandom wiki
+    original_title = page_title
+    if page_title == "Galery":
+        page_title = "Gallery"
+    if page_title == "Specture":
+        page_title = "Spectre"
+    if page_title == "Planets & Ressources":
+         page_title = "Planets & Resources"
+    if page_title == "Super-Organics":
+        page_title = "Super Organics"
+
+    base_url = "https://shattered-galaxy.fandom.com/wiki/"
+    # Basic URL encoding for titles
+    url_title = page_title.replace(" ", "_")
+    # Use requests.utils.quote to handle special characters like '&' correctly
+    url = base_url + requests.utils.quote(url_title)
+
+    headers = {
+        # Use a generic User-Agent to avoid being blocked
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'}
+
+    try:
+        # allow_redirects=True handles cases where the wiki normalizes the URL (e.g., capitalization)
+        response = requests.get(url, headers=headers, timeout=15, allow_redirects=True)
+
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.content, 'html.parser')
+            # The main content area in MediaWiki/Fandom
+            content_div = soup.find('div', class_='mw-parser-output')
+
+            if content_div:
+                # Remove known noisy elements (TOC, edit links, navigation boxes, sidebars, etc.)
+                # This improves the signal-to-noise ratio of the scraped text.
+                for noisy_element in content_div.find_all(['div', 'span', 'aside'], class_=['toc', 'editsection', 'navbox', 'metadata', 'mw-editsection', 'portable-infobox', 'page-header__actions', 'WikiaBar']):
+                     if noisy_element:
+                        noisy_element.decompose()
+
+                # Extract text, using newline as a separator to preserve some structure (like lists/paragraphs)
+                text = content_div.get_text(separator='\n', strip=True)
+
+                # Basic cleanup
+                text = re.sub(r'\[\d+\]', '', text) # Remove citations like [1]
+                text = re.sub(r'(\n\s*){3,}', '\n\n', text) # Collapse excessive newlines
+
+                return text.strip()
+            else:
+                return f"Could not find main content area (mw-parser-output) on page: {response.url}"
+        elif response.status_code == 404:
+             return f"Page not found (404): {url}"
+        else:
+            return f"Failed to fetch page: {url} (Status code: {response.status_code})"
+    except requests.RequestException as e:
+        return f"Error fetching page: {url} ({e})"
+
+def main():
+    # The raw list provided in the Cycle 1 context
+    page_list = [
+        "Ability Glossary", "Abomination", "Albatross", "Apparition", "Arbalest",
+        "Army & Skill-Points", "Aviation Advanced", "Aviation Bonus & Misc", "Aviation Prime",
+        "Ballista", "Banshee", "Basic Equipment", "Battles", "Behemoth",
+        "Biodirves & Engines", "Charise", "Charnal", "Chimera", "Clout Table", "Condor",
+        "Daeva", "Defense", "Dythe", "Eagle", "Equipment", "Falcon", "Galery", "Gallery",
+        "Gear-Doc", "Ghast", "Gryphon", "Hawk", "Hotkeys & Chat-Commands", "Hydra", "Imp",
+        "Infantry Advanced", "Infantry Bonus & Misc", "Infantry I", "Infantry Misc",
+        "Infantry Prime", "Informative Links", "Jorias", "Larva, Scave, Knell", "Leviathan",
+        "Liche", "Lithubik", "Main Page", "Mamos, Momos, Mamos", "Manta, Onnir", "Manticore",
+        "Mantlet", "Max. Skill-Units", "Medic", "Mephit", "Miasam", "Miasmal",
+        "Mobile Advanced", "Mobile Bonus & Misc", "Mobile Prime", "Offense",
+        "Oizys, Boreas, Eris, Lyssa", "Orbus", "Organic", "Organic Bonus & Misc", "Organic Misc",
+        "Owl", "Pegasus", "Pelican", "Phantom", "Phoenix", "Planets & Resources",
+        "Planets & Ressources", "Poda, Kritsk, Mlortha", "Quorg", "Rayoks", "Red-Eye",
+        "Reincarnation", "Remakes, Private Servers, and Spiritual Successors", "Revenant",
+        "Roc", "Sapper", "Shade", "Shattered Galaxy Wiki", "Slanth, Crudgin, Rouke",
+        "Spectre", "Specture", "Spirit", "Super-Organics", "Super Organics", "Trebuchet",
+        "Triage", "Ubik, Tyr, Haltyr", "Virus", "Volte", "Vulture", "Vytyr", "War Pigeon",
+        "Weapon & Armor", "Wight", "Wraith"
+    ]
+
+    # Normalize and deduplicate the list based on known corrections
+    unique_pages = []
+    seen = set()
+    for page in page_list:
+        normalized = page
+        if normalized == "Galery":
+            normalized = "Gallery"
+        if normalized == "Specture":
+            normalized = "Spectre"
+        if normalized == "Planets & Ressources":
+            normalized = "Planets & Resources"
+        if normalized == "Super-Organics":
+            normalized = "Super Organics"
+
+        if normalized not in seen:
+            # We use the normalized name for scraping and organization
+            unique_pages.append(normalized)
+            seen.add(normalized)
+
+    scraped_data = {}
+    start_time = time.time()
+    print(f"Starting scrape of {len(unique_pages)} unique pages...")
+
+    for i, page in enumerate(unique_pages):
+        print(f"Scraping page {i+1}/{len(unique_pages)}: {page}")
+        content = scrape_fandom_page(page)
+        scraped_data[page] = content
+        time.sleep(0.2) # Be polite to the server
+
+    end_time = time.time()
+    print(f"Scraping finished in {end_time - start_time:.2f} seconds.")
+
+    # Define the output path for the consolidated artifact
+    # Assuming the script is run from the project root
+    output_dir = os.path.join("src", "Artifacts")
+    os.makedirs(output_dir, exist_ok=True)
+    output_file = os.path.join(output_dir, "AlteredGalaxy-A25-Wiki-Scrape-C1.md")
+
+    # Write the results to the artifact file
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write("# Artifact A25: Altered Galaxy - Shattered Galaxy Wiki Scrape (C1)\n")
+        f.write("# Date Created: C1\n")
+        f.write("# Author: AI Model (Scraper Script) & Curator\n")
+        f.write("\n- **Key/Value for A0:**\n")
+        f.write(f"- **Description:** The raw text content scraped from the Shattered Galaxy Fandom Wiki ({len(scraped_data)} pages) in Cycle 1, providing essential data on units, items, and mechanics.\n")
+        f.write("- **Tags:** research, data sourcing, raw data, shattered galaxy, wiki scrape\n")
+        f.write("\n## 1. Overview\n\n")
+        f.write("This artifact contains the raw text scraped from the Shattered Galaxy Fandom Wiki (https://shattered-galaxy.fandom.com/). This data is crucial for filling the content gaps identified in A18 and A19.\n\n")
+        f.write(f"Total Pages Scraped: {len(scraped_data)}\n\n")
+        f.write("## 2. Scraped Content\n")
+
+        # Write the content of each page into the consolidated file
+        for title, content in scraped_data.items():
+            clean_title = title.replace("#", "").strip()
+            # Ensure the URL in the markdown is correctly formatted
+            url_segment = requests.utils.quote(title.replace(" ", "_"))
+            f.write(f"\n---\n\n### Page: {clean_title}\n\n")
+            f.write(f"Source: https://shattered-galaxy.fandom.com/wiki/{url_segment}\n\n")
+            f.write("```text\n")
+            if content:
+                f.write(content)
+            else:
+                f.write("No content scraped (see scraper logs for details).")
+            f.write("\n```\n")
+
+    print(f"\nSuccessfully wrote consolidated scraped data to {output_file}")
+
+if __name__ == "__main__":
+    main()
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/simulate-movement.js">
+/**
+ * SCRIPT: simulate-movement.js
+ * PURPOSE: To simulate and debug movement logic for Carriers and Fleets without running the full server.
+ *          Diagnoses overshoot issues and acceleration spikes using a rectangular path.
+ * USAGE: npm run script:simulate
+ */
+
+// Mock Entity
+let fleet = { 
+    x: 0, 
+    y: 0, 
+    vx: 0, 
+    vy: 0, 
+    targetX: 0, 
+    targetY: 0, 
+    maxSpeed: 400, // Matches server MAX_SPEED
+    path: [
+        {x: 1000, y: 0},
+        {x: 1000, y: 1000},
+        {x: 0, y: 1000},
+        {x: 0, y: 0}
+    ] 
+};
+
+const TICK_RATE = 30;
+const DT = 1 / TICK_RATE;
+const MAX_ACCEL = 150; // Matches server MAX_ACCEL
+const ARRIVAL_RADIUS = 50;
+const DECEL_RADIUS = 300;
+const STOP_THRESHOLD = 4;
+
+// Initialize first target
+let next = fleet.path.shift();
+fleet.targetX = next.x;
+fleet.targetY = next.y;
+
+console.log("--- SIMULATION START: RECTANGLE LAP ---");
+console.log(`Route: (0,0) -> (1000,0) -> (1000,1000) -> (0,1000) -> (0,0)`);
+
+for (let i = 0; i < 600; i++) { // Run for 20 seconds (600 ticks)
+    const dx = fleet.targetX - fleet.x;
+    const dy = fleet.targetY - fleet.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    
+    // Waypoint Passing Logic (Lookahead)
+    const vecToTarget = { x: dx, y: dy };
+    const vel = { x: fleet.vx, y: fleet.vy };
+    const dot = vecToTarget.x * vel.x + vecToTarget.y * vel.y;
+                            
+    if ((dist < ARRIVAL_RADIUS || (dist < ARRIVAL_RADIUS * 2 && dot < 0)) && fleet.path.length > 0) {
+        console.log(`[Tick ${i}] *** WAYPOINT REACHED (${fleet.targetX}, ${fleet.targetY}) ***`);
+        const nextPoint = fleet.path.shift();
+        fleet.targetX = nextPoint.x;
+        fleet.targetY = nextPoint.y;
+        // Note: We do NOT zero velocity here, preserving momentum for the turn
+    } else if (dist < STOP_THRESHOLD && fleet.path.length === 0) {
+        console.log(`[Tick ${i}] *** FINAL DESTINATION REACHED (${fleet.targetX}, ${fleet.targetY}) ***`);
+        break;
+    }
+
+    let ax = 0;
+    let ay = 0;
+    const applyAccel = (fx, fy) => {
+        ax = Math.max(-MAX_ACCEL * 2, Math.min(MAX_ACCEL * 2, fx));
+        ay = Math.max(-MAX_ACCEL * 2, Math.min(MAX_ACCEL * 2, fy));
+    };
+
+    // Physics Logic (Mirrors physicsSystem.ts)
+    const isFinalWaypoint = fleet.path.length === 0;
+    
+    // Calculate turn angle for Cornering Logic
+    let decelRadius = DECEL_RADIUS;
+    let targetSpeedMultiplier = 1.0;
+    
+    if (!isFinalWaypoint && fleet.path.length > 0) {
+            const nextPoint = fleet.path[0];
+            const vecCurrent = { x: fleet.targetX - fleet.x, y: fleet.targetY - fleet.y };
+            const vecNext = { x: nextPoint.x - fleet.targetX, y: nextPoint.y - fleet.targetY };
+            
+            const magCurrent = Math.sqrt(vecCurrent.x*vecCurrent.x + vecCurrent.y*vecCurrent.y);
+            const magNext = Math.sqrt(vecNext.x*vecNext.x + vecNext.y*vecNext.y);
+            
+            if (magCurrent > 0 && magNext > 0) {
+                // Dot product
+                const dot = (vecCurrent.x * vecNext.x + vecCurrent.y * vecNext.y) / (magCurrent * magNext);
+                const angle = Math.acos(Math.max(-1, Math.min(1, dot))); // radians
+                
+                const angleDeg = angle * (180 / Math.PI);
+                
+                // Straight Shot (0-20 deg)
+                if (angleDeg < 20) {
+                    decelRadius = 0; // Do not brake
+                } 
+                // Standard Turn (20-90 deg)
+                else if (angleDeg < 90) {
+                    decelRadius = DECEL_RADIUS * 0.5; // Brake slightly
+                    targetSpeedMultiplier = 0.75;
+                }
+                // Hairpin (> 90 deg)
+                else {
+                    decelRadius = DECEL_RADIUS * 1.5; // Brake earlier
+                    targetSpeedMultiplier = 0.2; // Brake harder
+                }
+            }
+    }
+    
+    if (isFinalWaypoint) {
+         if (dist < DECEL_RADIUS) {
+            // Arrival Damping
+            const desiredSpeed = fleet.maxSpeed * (dist / DECEL_RADIUS);
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const desiredVx = nx * desiredSpeed;
+            const desiredVy = ny * desiredSpeed;
+            applyAccel((desiredVx - fleet.vx)*2, (desiredVy - fleet.vy)*2);
+         } else {
+             const nx = dx / dist;
+             const ny = dy / dist;
+             const desiredVx = nx * fleet.maxSpeed;
+             const desiredVy = ny * fleet.maxSpeed;
+             applyAccel(desiredVx - fleet.vx, desiredVy - fleet.vy);
+         }
+    } else {
+         // Cruising / Turning
+         const nx = dx / dist;
+         const ny = dy / dist;
+         
+         let targetSpeed = fleet.maxSpeed;
+         
+         // Apply Cornering Brake
+         if (decelRadius > 0 && dist < decelRadius) {
+                targetSpeed = fleet.maxSpeed * targetSpeedMultiplier + (fleet.maxSpeed * (1-targetSpeedMultiplier) * (dist / decelRadius));
+         }
+
+         const desiredVx = nx * targetSpeed;
+         const desiredVy = ny * targetSpeed;
+         
+         const forceMult = targetSpeed < fleet.maxSpeed ? 2 : 1;
+         applyAccel((desiredVx - fleet.vx) * forceMult, (desiredVy - fleet.vy) * forceMult);
+    }
+
+    fleet.vx += ax * DT;
+    fleet.vy += ay * DT;
+    
+    // Clamp Max Speed
+    const speed = Math.sqrt(fleet.vx*fleet.vx + fleet.vy*fleet.vy);
+    if (speed > fleet.maxSpeed) {
+        fleet.vx = (fleet.vx / speed) * fleet.maxSpeed;
+        fleet.vy = (fleet.vy / speed) * fleet.maxSpeed;
+    }
+    
+    fleet.x += fleet.vx * DT;
+    fleet.y += fleet.vy * DT;
+
+    // Log every 5 ticks to reduce noise, but keep granularity high enough
+    if (i % 5 === 0) {
+        console.log(`Tick ${i}: Pos(${fleet.x.toFixed(0)},${fleet.y.toFixed(0)}) Speed=${speed.toFixed(0)} Dist=${dist.toFixed(0)} Target=(${fleet.targetX},${fleet.targetY})`);
+    }
+}
+
+console.log("--- SIMULATION END ---");
+</file_artifact>
+
+<file path="external_context/personal-project/altered-galaxy/scripts/truncate-data-files.js">
+/*
+ * SCRIPT: truncate-data-files.js
+ * AUTHOR: AI Model & Curator
+ * DATE: C100
+ * UPDATED: C102 (Enhanced to handle object-based data files like chassisSpecData)
+ * PURPOSE: To recursively scan a directory and create truncated `.local.ts` versions
+ *          of large data files. The local version contains only the first
+ *          and last entries of a data array/object to reduce token count for AI context
+ *          while preserving the file's structure.
+ *
+ * USAGE:
+ * 1. Run the script from the project root directory.
+ * 2. Pass the target directory as an argument.
+ * 3. Example: `npm run script:truncate-data -- packages\ag-shared\src\data\items`
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const targetDirArg = process.argv[2];
+
+if (!targetDirArg) {
+  console.error('Error: Please provide a target directory path as an argument.');
+  console.error('Example: npm run script:truncate-data -- packages/ag-server/src/data');
+  process.exit(1);
+}
+
+const absoluteTargetDir = path.resolve(process.cwd(), targetDirArg);
+
+function processDirectory(dir) {
+  if (!fs.existsSync(dir)) {
+    console.error(`Directory not found: ${dir}`);
+    return;
+  }
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      processDirectory(fullPath);
+    } else if ((entry.name.endsWith('Data.ts') || entry.name.endsWith('Weapons.ts')) && !entry.name.endsWith('.local.ts')) {
+      createLocalVersion(fullPath);
+    }
+  }
+}
+
+function createLocalVersion(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    
+    // Try matching array structure first
+    let match = content.match(/(const\s+\w+\s*:\s*[^=\[]+\[\]\s*=\s*)\[([\s\S]*)\];/);
+    if (match && match[2]) {
+      const arrayContent = match[2].trim();
+      if (arrayContent === '') {
+        console.log(`Skipping ${filePath}: Array is empty.`);
+        return;
+      }
+      const objects = arrayContent.match(/\{[\s\S]*?\}(?=\s*,|\s*$)/g);
+      if (!objects || objects.length < 2) {
+        console.log(`Skipping ${filePath}: Contains fewer than 2 array objects.`);
+        return;
+      }
+
+      const header = match[1];
+      const newContent = `${header}[\n  ${objects[0]},\n  // [...]\n  ${objects[objects.length - 1]}\n];`;
+      const finalContent = content.replace(match[0], newContent);
+      const newFilePath = filePath.replace('.ts', '.local.ts');
+      fs.writeFileSync(newFilePath, finalContent);
+      console.log(`Generated: ${newFilePath}`);
+      return;
+    }
+
+    // Fallback to matching object structure (for chassisSpecData, etc.)
+    match = content.match(/(export const \w+\s*:\s*Record<string, \w+>\s*=\s*)\{([\s\S]*)\};/);
+    if (match && match[2]) {
+      const objectContent = match[2].trim();
+      if (objectContent === '') {
+        console.log(`Skipping ${filePath}: Object is empty.`);
+        return;
+      }
+      
+      // This regex is designed to capture top-level properties like "Key": { ... }
+      const properties = objectContent.match(/"[^"]+"\s*:\s*\{[\s\S]*?\}(?=,?\s*\n)/g);
+
+      if (!properties || properties.length < 2) {
+        console.log(`Skipping ${filePath}: Contains fewer than 2 object properties.`);
+        return;
+      }
+
+      const header = match[1];
+      const newContent = `${header}{\n  ${properties[0]},\n  // [...]\n  ${properties[properties.length - 1]}\n};`;
+      const finalContent = content.replace(match[0], newContent);
+      const newFilePath = filePath.replace('.ts', '.local.ts');
+      fs.writeFileSync(newFilePath, finalContent);
+      console.log(`Generated: ${newFilePath}`);
+      return;
+    }
+
+    console.log(`Skipping ${filePath}: No recognized data array or object found.`);
+
+  } catch (error) {
+    console.error(`Error processing file ${filePath}:`, error);
+  }
+}
+
+console.log(`Starting data file truncation process in: ${absoluteTargetDir}`);
+console.log('---');
+processDirectory(absoluteTargetDir);
+console.log('---');
+console.log('Finished truncation process.');
 </file_artifact>
 

@@ -102,7 +102,8 @@ export class HistoryService {
             const projectScope = Services.databaseService.getGlobalValue<string>('project_scope');
             const settings = await Services.settingsService.getSettings();
             return {
-                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false
+                cycleId: 0, timestamp: new Date().toISOString(), title: 'Project Setup', cycleContext: projectScope || '', ephemeralContext: '', responses: {}, isParsedMode: false, tabCount: 4, isSortedByTokens: false, pathOverrides: {}, status: 'complete', connectionMode: settings.connectionMode, isCycleCollapsed: false,
+                selectedFilesForReplacement: []
             };
         }
         return Services.databaseService.getCycle(cycleId);
@@ -154,6 +155,7 @@ export class HistoryService {
             isEphemeralContextCollapsed: true,
             isCycleCollapsed: false,
             connectionMode: settings.connectionMode,
+            selectedFilesForReplacement: []
         };
 
         Services.databaseService.saveCycle(newCycle);
