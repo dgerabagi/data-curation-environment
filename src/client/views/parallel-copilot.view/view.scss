@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C116 (Add styles for resizer)
+// Updated on: C128 (Add styles for markdown preview pane)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -884,6 +884,71 @@ body {
     code > span {
         line-height: 1.5;
         background-color: transparent !important;
+    }
+}
+
+/* C128: Markdown Preview Pane Styles */
+.markdown-preview-pane {
+    flex-grow: 1;
+    min-height: 0;
+    border: 1px solid var(--vscode-panel-border);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background-color: var(--vscode-editor-background);
+    overflow: auto;
+    padding: 16px;
+    font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+    font-size: var(--vscode-markdown-font-size, 14px);
+    line-height: 1.6;
+    color: var(--vscode-editor-foreground);
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        line-height: 1.25;
+    }
+    
+    h1 { font-size: 2em; border-bottom: 1px solid var(--vscode-panel-border); padding-bottom: 0.3em; }
+    h2 { font-size: 1.5em; border-bottom: 1px solid var(--vscode-panel-border); padding-bottom: 0.3em; }
+    
+    p, ul, ol {
+        margin-bottom: 1em;
+    }
+    
+    code {
+        font-family: var(--vscode-editor-font-family);
+        background-color: rgba(127, 127, 127, 0.1);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    
+    pre {
+        background-color: rgba(127, 127, 127, 0.1);
+        padding: 16px;
+        overflow: auto;
+        border-radius: 3px;
+        
+        code {
+            background-color: transparent;
+            padding: 0;
+        }
+    }
+    
+    blockquote {
+        border-left: 4px solid var(--vscode-textBlockQuote-border);
+        background-color: var(--vscode-textBlockQuote-background);
+        margin: 0;
+        padding: 0 1em;
+        color: var(--vscode-textBlockQuote-foreground);
+    }
+    
+    a {
+        color: var(--vscode-textLink-foreground);
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 

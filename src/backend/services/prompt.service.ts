@@ -1,5 +1,5 @@
 // src/backend/services/prompt.service.ts
-// Updated on: C95 (Use new IPC channel)
+// Updated on: C128 (Use markdown preview for README, log selection count)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -214,9 +214,12 @@ ${staticContext.trim()}
     public async generatePromptString(cycleData: PcppCycle): Promise<string> {
         Services.loggerService.log(`[Prompt Gen] Starting prompt string generation for Cycle ${cycleData.cycleId}.`);
         const lastSelection = await Services.selectionService.getLastSelection();
+        Services.loggerService.log(`[Prompt Gen] Found ${lastSelection.length} files in current selection.`);
+        
         let flattenedContent = '<!-- No files selected for flattening -->';
         if (lastSelection.length > 0) {
             flattenedContent = await Services.flattenerService.getFlattenedContent(lastSelection);
+            Services.loggerService.log(`[Prompt Gen] Generated flattened content (${Math.ceil(flattenedContent.length / 4)} tokens).`);
         }
         
         const promptParts = await this.getPromptParts(cycleData, flattenedContent);
@@ -337,7 +340,8 @@ ${staticContext.trim()}
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
             if (readmePath) {
-                await Services.fileOperationService.handleOpenFileRequest(readmePath);
+                // C128 UPDATE: Open README in Preview Mode
+                await Services.fileOperationService.handleMarkdownPreviewRequest(readmePath);
             }
 
         } catch (error: any) {

@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 128 - great work! tiny alignments needed due to architecture change before we continue developing new things
+Current Cycle 129 - revise dce_readme once more, animated workflow gets stuck, cycle criteria indicator, seeing old responses in new cycles
+Cycle 128 - great work! tiny alignments needed due to architecture change before we continue developing new things
 Cycle 127 - seems to be good! lets try to 'roll in' a quick QoL win...
 Cycle 126 - focus on associated file problem
 Cycle 125 - observations and new ideas
@@ -334,7 +335,7 @@ No project scope defined.
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C126 (Add A120, A121)
+# Updated on: C127 (Add A122)
 
 ## 1. Purpose
 
@@ -792,6 +793,10 @@ No project scope defined.
 - **Description:** A plan to automate the maintenance of the Master Artifact List (A0) by programmatically scanning artifact files for metadata tags.
 - **Tags:** plan, automation, documentation, maintenance, a0
 
+### A122. DCE - Directory Summarization & Large Data Strategy
+- **Description:** A strategy to manage token bloat by summarizing large asset directories and truncating massive data files.
+- **Tags:** strategy, optimization, tokens, d-info, truncation, large files
+
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
 - **Tags:** history, log, development process, cycles
@@ -878,6 +883,53 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 129>
+<Cycle Context>
+excellent work! okay im reviewing the new dce_readme, but the step 3 git init instructions are still... meh, this is because i want to automate this as much as possible. cant we just make the .gitignore for the user and place the appropriate entries in there at this point in time?
+
+additionally, the best time to do 'git init' is not at that point in time, it is actually after the user has sent off, and received their responses. note: im observing a slight issue with the animated highlight workflow, it seemed to get stuch highlighted on `Resp 1` even after i pasted in a response there. it did scucessfully tab to the next response, but the highlight did not follow suit.
+
+so, the best time for git init is basically after the user pastes in all their initial responses. then, when the animated highlight gets to teh baseline (commit) at this stage for the first time during this cycle 1, when the user clicks that, if their environment is not already initialized, they'll get the prompt and the button to do so in the toast. if they have git installed, then it performs the action correctly. if it does not, i do not know exactly what currently happens and do not have an environment without git to test it on, but yeah, we'd just instruct them to install the thing ultimately. assuming they have git is what we will do currently.
+
+assuming they have git, thats when they initialize, and then they click baseline again, and it does the baseline, and then so on through the animated workflow. so thats what i meant when i said last cycle to update the dce readme, can you do it that way?
+
+im noticing that, even after meeting all criteria in order to create a new cycle via `+` button, the cycle & context bar is no longer lighting up green. this was a visual indicator that the user was ready for the next cycle can we make sure we fix that regression?
+
+additionally, whenever this is green, the green autosave checkmark becomes hard to see, can we consider that when we re-implement?
+
+okay, i believe ive detected the first issue related to the db. i just did the first cycle in a new project, accepted the responses, the files came in, however, when i click on the `+` to go to cycle 2, i for some reason still see all of the cycle 1 responses filling up my four response tabs. when navigating from a cycle to a new cycle page (or upon creation of a new cycle, rather) there arent any responses yet, and so those response tabs need to start to reflect that. they should not be displaying the previous cycles responses.
+
+
+</Cycle Context>
+<Previous Cycle 128 Summary of Actions>
+I have analyzed the requests for Cycle 127.
+
+**1. New Feature Planning (Token Optimization):**
+I will create a new artifact, **`A122. DCE - Token Optimization Strategy.md`**, to document your "Directory Info" (`d-info`) and "Truncated Data" strategies. This will serve as the blueprint for integrating your scripts into the DCE workflow to manage token usage for large asset directories and data files.
+
+**2. Documentation Updates:**
+I will create the requested **`A120. DCE - Database Maintenance Guide.md`** and **`A121. DCE - Master Artifact List Automation Plan.md`**, and update **`A0`** to include them.
+
+**3. Critical Bug Fixes & Persistence:**
+I will address the broken selection logic and missing persistence in the Parallel Co-Pilot Panel.
+*   **Selection Logic:** I will fix `Select All` and `Accept Selected` in `view.tsx` to correctly handle the new composite keys (`${tabId}:::${filePath}`).
+*   **Persistence:** I will update `database.service.ts` and `history.service.ts` to persist `selectedFilesForReplacement` and `isCycleCollapsed` to the SQLite database. This ensures your selection state and UI layout are saved.
+*   **JSON Highlighting:** I will add `source.json` to `highlighting.service.ts` to fix the white text issue.
+*   **File Existence:** I will improve the path normalization in `file-operation.service.ts` to resolve the issue where existing files (like `README.md`) are marked as missing.
+
+1.  **Create `A120. DCE - Database Maintenance Guide.md`**: Document database procedures.
+2.  **Create `A121. DCE - Master Artifact List Automation Plan.md`**: Plan for automating A0.
+3.  **Create `A122. DCE - Token Optimization Strategy.md`**: Document the `d-info` and `truncate-data` strategies.
+4.  **Update `A0. DCE Master Artifact List.md`**: Register the new artifacts.
+5.  **Update `src/common/types/pcpp.types.ts`**: Add `selectedFilesForReplacement` and `isCycleCollapsed` to `PcppCycle`.
+6.  **Update `src/backend/services/database.service.ts`**: Add schema migration for the new fields.
+7.  **Update `src/backend/services/history.service.ts`**: Implement save/load logic for the new fields.
+8.  **Update `src/backend/services/highlighting.service.ts`**: Enable JSON syntax highlighting.
+9.  **Update `src/backend/services/file-operation.service.ts`**: Fix file existence check path normalization.
+10. **Update `src/client/views/parallel-copilot.view/view.tsx`**: Fix `Select All` and `Accept Selected` logic to use composite keys; ensure state is correctly hydrated from history.
+</Previous Cycle 128 Summary of Actions>
+</Cycle 129>
 
 <Cycle 128>
 <Cycle Context>
@@ -6024,10 +6076,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T13:26:59.436Z
+  Date Generated: 2025-12-04T14:13:38.578Z
   ---
   Total Files: 222
-  Approx. Tokens: 373726
+  Approx. Tokens: 375074
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6035,15 +6087,15 @@ This file-centric approach helps in planning and prioritizing work, especially i
 2. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_vllm_app.py (15557 tokens)
 3. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html (14154 tokens)
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
-5. src\Artifacts\A0. DCE Master Artifact List.md (9421 tokens)
-6. src\client\views\parallel-copilot.view\view.scss (7109 tokens)
-7. src\backend\services\prompt.service.ts (5240 tokens)
+5. src\Artifacts\A0. DCE Master Artifact List.md (9485 tokens)
+6. src\client\views\parallel-copilot.view\view.scss (7573 tokens)
+7. src\backend\services\prompt.service.ts (5232 tokens)
 8. src\client\views\parallel-copilot.view\view.tsx (5014 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
 
 <!-- Full File List -->
-1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 544 - Chars: 37681 - Tokens: 9421
+1. src\Artifacts\A0. DCE Master Artifact List.md - Lines: 548 - Chars: 37940 - Tokens: 9485
 2. src\Artifacts\A1. DCE - Project Vision and Goals.md - Lines: 41 - Chars: 3995 - Tokens: 999
 3. src\Artifacts\A2. DCE - Phase 1 - Context Chooser - Requirements & Design.md - Lines: 20 - Chars: 3329 - Tokens: 833
 4. src\Artifacts\A3. DCE - Technical Scaffolding Plan.md - Lines: 55 - Chars: 3684 - Tokens: 921
@@ -6098,7 +6150,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 53. src\Artifacts\A51. DCE - A-B-C Testing Strategy for UI Bugs.md - Lines: 81 - Chars: 5490 - Tokens: 1373
 54. src\Artifacts\A52. DCE - Interaction Schema Refinement.md - Lines: 66 - Chars: 3444 - Tokens: 861
 55. src\Artifacts\A52.1 DCE - Parser Logic and AI Guidance.md - Lines: 123 - Chars: 5850 - Tokens: 1463
-56. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 57 - Chars: 9891 - Tokens: 2473
+56. src\Artifacts\A52.2 DCE - Interaction Schema Source.md - Lines: 59 - Chars: 10311 - Tokens: 2578
 57. src\Artifacts\A53. DCE - Phase 2 - Token Count and Similarity Analysis.md - Lines: 43 - Chars: 3500 - Tokens: 875
 58. src\Artifacts\A55. DCE - FSService Refactoring Plan.md - Lines: 77 - Chars: 4022 - Tokens: 1006
 59. src\Artifacts\A57. DCE - Phase 2 - Cycle Management Plan.md - Lines: 46 - Chars: 3849 - Tokens: 963
@@ -6111,7 +6163,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
 67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
 68. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
-69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 47 - Chars: 3127 - Tokens: 782
+69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 55 - Chars: 2867 - Tokens: 717
 70. src\Artifacts\A73. DCE - GitService Plan.md - Lines: 44 - Chars: 2548 - Tokens: 637
 71. src\Artifacts\A74. DCE - Per-Input Undo-Redo Feature Plan.md - Lines: 49 - Chars: 3624 - Tokens: 906
 72. src\Artifacts\A75. DCE - Text Area Component A-B-C Test Plan.md - Lines: 50 - Chars: 4761 - Tokens: 1191
@@ -6145,13 +6197,13 @@ This file-centric approach helps in planning and prioritizing work, especially i
 100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 101. src\backend\services\file-operation.service.ts - Lines: 411 - Chars: 19728 - Tokens: 4932
 102. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 14796 - Tokens: 3699
-103. src\backend\services\flattener.service.ts - Lines: 239 - Chars: 12609 - Tokens: 3153
+103. src\backend\services\flattener.service.ts - Lines: 296 - Chars: 15044 - Tokens: 3761
 104. src\backend\services\git.service.ts - Lines: 130 - Chars: 6332 - Tokens: 1583
 105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
 106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12471 - Tokens: 3118
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
-109. src\backend\services\prompt.service.ts - Lines: 389 - Chars: 20960 - Tokens: 5240
+109. src\backend\services\prompt.service.ts - Lines: 393 - Chars: 20928 - Tokens: 5232
 110. src\backend\services\selection.service.ts - Lines: 133 - Chars: 5410 - Tokens: 1353
 111. src\backend\services\services.ts - Lines: 51 - Chars: 2436 - Tokens: 609
 112. src\backend\services\settings.service.ts - Lines: 44 - Chars: 1713 - Tokens: 429
@@ -6173,14 +6225,14 @@ This file-centric approach helps in planning and prioritizing work, especially i
 128. src\client\views\parallel-copilot.view\components\ContextInputs.tsx - Lines: 70 - Chars: 3089 - Tokens: 773
 129. src\client\views\parallel-copilot.view\components\CycleNavigator.tsx - Lines: 83 - Chars: 3346 - Tokens: 837
 130. src\client\views\parallel-copilot.view\components\HighlightedTextarea.tsx - Lines: 89 - Chars: 3521 - Tokens: 881
-131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 192 - Chars: 12275 - Tokens: 3069
+131. src\client\views\parallel-copilot.view\components\ParsedView.tsx - Lines: 204 - Chars: 13097 - Tokens: 3275
 132. src\client\views\parallel-copilot.view\components\ResponsePane.tsx - Lines: 72 - Chars: 2948 - Tokens: 737
 133. src\client\views\parallel-copilot.view\components\ResponseTabs.tsx - Lines: 117 - Chars: 5154 - Tokens: 1289
 134. src\client\views\parallel-copilot.view\components\WorkflowToolbar.tsx - Lines: 95 - Chars: 4136 - Tokens: 1034
 135. src\client\views\parallel-copilot.view\index.ts - Lines: 9 - Chars: 238 - Tokens: 60
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
-138. src\client\views\parallel-copilot.view\view.scss - Lines: 1261 - Chars: 28435 - Tokens: 7109
+138. src\client\views\parallel-copilot.view\view.scss - Lines: 1326 - Chars: 30292 - Tokens: 7573
 139. src\client\views\parallel-copilot.view\view.tsx - Lines: 355 - Chars: 20055 - Tokens: 5014
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
@@ -6209,10 +6261,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 164. src\Artifacts\A100. DCE - Model Card & Settings Refactor Plan.md - Lines: 46 - Chars: 5168 - Tokens: 1292
 165. src\Artifacts\A11. DCE - Regression Case Studies.md - Lines: 98 - Chars: 10336 - Tokens: 2584
 166. src\Artifacts\A101. DCE - Asynchronous Generation and State Persistence Plan.md - Lines: 45 - Chars: 4498 - Tokens: 1125
-167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4930 - Tokens: 1233
+167. src\Artifacts\A103. DCE - Consolidated Response UI Plan.md - Lines: 65 - Chars: 4866 - Tokens: 1217
 168. src\Artifacts\A105. DCE - vLLM Performance and Quantization Guide.md - Lines: 57 - Chars: 4079 - Tokens: 1020
-169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 56 - Chars: 5343 - Tokens: 1336
-170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4404 - Tokens: 1101
+169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
+170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
 172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 131 - Chars: 5672 - Tokens: 1418
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
@@ -6221,7 +6273,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
 177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 84 - Chars: 2898 - Tokens: 725
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
-179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11529 - Tokens: 2883
+179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
 181. GPT-OSS-HARMONY-REFERENCE-REPO\custom_python_instruction.py - Lines: 59 - Chars: 1605 - Tokens: 402
 182. GPT-OSS-HARMONY-REFERENCE-REPO\harmony_educational_demo.html - Lines: 1323 - Chars: 56615 - Tokens: 14154
@@ -6270,7 +6322,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 # Artifact A0: DCE Master Artifact List
 # Date Created: C1
 # Author: AI Model & Curator
-# Updated on: C126 (Add A120, A121)
+# Updated on: C127 (Add A122)
 
 ## 1. Purpose
 
@@ -6727,6 +6779,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 ### A121. DCE - Master Artifact List Automation Plan
 - **Description:** A plan to automate the maintenance of the Master Artifact List (A0) by programmatically scanning artifact files for metadata tags.
 - **Tags:** plan, automation, documentation, maintenance, a0
+
+### A122. DCE - Directory Summarization & Large Data Strategy
+- **Description:** A strategy to manage token bloat by summarizing large asset directories and truncating massive data files.
+- **Tags:** strategy, optimization, tokens, d-info, truncation, large files
 
 ### A200. Cycle Log
 - **Description:** A log of all development cycles for historical reference and context.
@@ -10080,13 +10136,15 @@ I have analyzed the request. My course of action is to update the main component
 # Artifact A52.2: DCE - Interaction Schema Source
 # Date Created: C156
 # Author: AI Model & Curator
-# Updated on: C6 (Clarify closing tag and add curator activity section)
+# Updated on: C128 (Add DCE context sentence)
 
 - **Key/Value for A0:**
 - **Description:** The canonical source text for the M3. Interaction Schema, which is injected into all generated prompts.
 - **Tags:** documentation, process, interaction schema, source of truth
 
 ## Interaction Schema Text
+
+**Note:** This prompt is generated by the Data Curation Environment (DCE) extension within VS Code. When instructions refer to 'the IDE', 'curator activity', or 'accepting files', they refer to this specific environment and its workflow.
 
 1.  Artifacts are complete, individual texts enclosed in `<xmltags>`. To ensure consistent parsing by the DCE extension, all file artifacts **must** be enclosed in `<file path="path/to/file.ts">...</file_artifact>` tags. The path must be relative to the workspace root. **The closing tag must be exactly `</file_artifact>`.** Do not use the file path in the closing tag (e.g., `</file path="...">` is incorrect). Do not write the closing tag as `</file>` or `</file_path>`. Only `</file_artifact>` will parse successfully.
 
@@ -10133,7 +10191,7 @@ I have analyzed the request. My course of action is to update the main component
 21. Each time we create a new documentation artifact, lets also create the key/value pairs needed for me to add it into our Master Artifact List. they can simply be added into the new artifact itself and ill make the new entry in A0. this will solve for me manually generating a description and tag for each new documentation artifact. also, dont place `/` in the title/name of a documentation artifact. VSCode treats it as a folder separator.
 21.1. when creating a new documentation artifact, also just update the master artifacts list itself.
 
-22. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response.
+22. **New: Curator Activity Section:** If you need the human curator to perform an action that you cannot (e.g., delete a file, run a specific command), include these instructions in a dedicated `<curator_activity>...</curator_activity>` section in your response. NOTE: the two `\` were added to the last sentence just to break the parser within the DCE itself; if you're 'in-situ', do be sure to NOT include them if you are attempting to instruct the 'in-situ' curator.
 </file_artifact>
 
 <file path="src/Artifacts/A53. DCE - Phase 2 - Token Count and Similarity Analysis.md">
@@ -10844,7 +10902,7 @@ Review the user's project scope in M4. Your task is to act as a senior project a
 # Artifact A72: DCE - README for Artifacts
 # Date Created: C158
 # Author: AI Model & Curator
-# Updated on: C183 (Strengthen Git initialization and `.gitignore` guidance)
+# Updated on: C128 (Enhanced Git initialization instructions)
 
 - **Key/Value for A0:**
 - **Description:** The content for the `README.md` file that is automatically created in a new project's `src/Artifacts` directory, explaining the purpose of the extension and the artifact-driven workflow.
@@ -10866,28 +10924,36 @@ The core principle of the DCE workflow is **"Documentation First."** Before writ
 
 Development in the DCE is organized into **Cycles**. You have just completed the initial setup.
 
-### Your Next Steps
+### Your Next Steps (CRITICAL)
 
-1.  **Initialize Your Git Repository (CRITICAL):**
-    To take full advantage of the DCE's testing workflow (creating baselines and restoring changes), you **must** initialize a Git repository.
-    
-    Open a terminal in your project's root directory (you can use the integrated terminal in VS Code: `Terminal > New Terminal`) and run the following commands:
+To take full advantage of the DCE's features—especially the "Baseline" and "Restore" buttons for safe testing—you **must** initialize a Git repository for this project.
+
+**Do this now:**
+
+1.  Open a terminal in your project's root directory (VS Code menu: `Terminal > New Terminal`).
+2.  Run the following commands in order:
+
     ```bash
+    # 1. Initialize the repository
     git init
-    # Create or update your .gitignore file with the line below
+
+    # 2. Create a .gitignore file to exclude DCE system files
+    # This is CRITICAL to prevent the extension from flashing/refreshing constantly.
     echo ".vscode/" >> .gitignore
+    echo "node_modules/" >> .gitignore
+
+    # 3. Stage all current files
     git add .
-    git commit -m "Initial commit"
+
+    # 4. Create your first commit
+    git commit -m "Initial commit: DCE Project Setup"
     ```
-    **Why `.gitignore`?** The DCE saves its state in a `.vscode/dce_history.json` file. Adding `.vscode/` to your `.gitignore` is crucial to prevent the extension's UI from flashing every time it auto-saves. For a complete guide, refer to the `GitHub Repository Setup Guide.md` artifact.
 
-2.  **Submit Your First Prompt:** The `prompt.md` file has been automatically opened for you. This file contains your project plan and instructions for the AI. Copy its entire contents and paste it into your preferred AI chat interface (like Google's AI Studio, ChatGPT, etc.).
+3.  **Submit Your First Prompt:** The `prompt.md` file has been automatically generated for you. It contains your project plan and instructions. Copy its entire contents and paste it into your preferred AI chat interface (e.g., Google AI Studio, ChatGPT).
 
-3.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
+4.  **Review and Accept Responses:** Paste the AI's responses back into the "Resp 1", "Resp 2", etc. tabs in the Parallel Co-Pilot panel. The UI will guide you through parsing the responses, selecting the best one, and accepting its changes into your workspace.
 
-4.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
-
-This structured, iterative process helps maintain project quality and ensures that both human and AI developers are always aligned with the project's goals.
+5.  **Repeat:** This completes a cycle. You then start the next cycle, building upon the newly accepted code and documentation.
 </file_artifact>
 
 <file path="src/Artifacts/A73. DCE - GitService Plan.md">
@@ -13881,7 +13947,7 @@ export class FileTreeService {
 </file_artifact>
 
 <file path="src/backend/services/flattener.service.ts">
-// Updated on: C26 (Remove logging)
+// Updated on: C127 (Implement Directory Summarization d-info)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs/promises';
@@ -13921,7 +13987,10 @@ export class FlattenerService {
         const allFilePaths = await this.expandDirectories(selectedPaths);
         const uniqueFilePaths = [...new Set(allFilePaths)];
 
-        const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
+        // C127: Consolidate large directories
+        const { paths: processedPaths, summaryMap } = this.consolidateSelections(uniqueFilePaths);
+
+        const fileStatsPromises = processedPaths.map(filePath => this.getFileStatsAndContent(filePath, rootPath, summaryMap.get(filePath)));
         const results = await Promise.all(fileStatsPromises);
         
         return this.generateOutputContent(results, rootPath, 'in-memory-prompt.md', false);
@@ -13945,7 +14014,10 @@ export class FlattenerService {
             const allFilePaths = await this.expandDirectories(selectedPaths);
             const uniqueFilePaths = [...new Set(allFilePaths.map(p => normalizePath(p)))];
 
-            const fileStatsPromises = uniqueFilePaths.map(filePath => this.getFileStatsAndContent(filePath));
+            // C127: Consolidate large directories
+            const { paths: processedPaths, summaryMap } = this.consolidateSelections(uniqueFilePaths);
+
+            const fileStatsPromises = processedPaths.map(filePath => this.getFileStatsAndContent(filePath, rootPath, summaryMap.get(filePath)));
             const results = await Promise.all(fileStatsPromises);
             const validResults = results.filter(r => !r.error);
 
@@ -13969,6 +14041,33 @@ export class FlattenerService {
         } catch (error: any) {
             vscode.window.showErrorMessage(`Failed to flatten context: ${error.message}`);
         }
+    }
+
+    // C127: Group files by directory and summarize if > 50
+    private consolidateSelections(paths: string[]): { paths: string[], summaryMap: Map<string, string[]> } {
+        const dirMap = new Map<string, string[]>();
+        const summaryMap = new Map<string, string[]>();
+        const finalPaths: string[] = [];
+
+        // 1. Group files by directory
+        for (const p of paths) {
+            const dir = path.dirname(p);
+            if (!dirMap.has(dir)) dirMap.set(dir, []);
+            dirMap.get(dir)!.push(p);
+        }
+
+        // 2. Decide whether to summarize
+        for (const [dir, files] of dirMap.entries()) {
+            if (files.length > 50) { // Threshold
+                const dInfoPath = path.join(dir, 'd-info.md').replace(/\\/g, '/');
+                summaryMap.set(dInfoPath, files.sort());
+                finalPaths.push(dInfoPath);
+            } else {
+                finalPaths.push(...files);
+            }
+        }
+
+        return { paths: finalPaths, summaryMap };
     }
 
     private async expandDirectories(paths: string[]): Promise<string[]> {
@@ -14041,9 +14140,33 @@ export class FlattenerService {
         }
     }
 
-    private async getFileStatsAndContent(filePath: string): Promise<FileStats> {
+    private async getFileStatsAndContent(filePath: string, rootPath: string, summaryFiles?: string[]): Promise<FileStats> {
         const extension = path.extname(filePath).toLowerCase();
         
+        // C127: Handle virtual d-info.md
+        if (path.basename(filePath) === 'd-info.md' && summaryFiles) {
+            const relativeDir = path.relative(rootPath, path.dirname(filePath)).replace(/\\/g, '/');
+            let content = `<d-info.md (directory info)>\n`;
+            content += `File Count: ${summaryFiles.length}\n`;
+            content += `Directory Located at: ${relativeDir}/\n`;
+            content += `Files:\n`;
+            summaryFiles.forEach((f, i) => {
+                content += `${i + 1}. ${path.basename(f)}\n`;
+            });
+            content += `</d-info.md (directory info)>`;
+            
+            return { 
+                filePath, 
+                lines: content.split('\n').length, 
+                characters: content.length, 
+                tokens: Math.ceil(content.length / 4), 
+                content, 
+                error: null, 
+                isBinary: false, 
+                sizeInBytes: 0 
+            };
+        }
+
         if (extension === '.pdf') {
             const virtualContent = Services.contentExtractionService.getVirtualPdfContent(filePath);
             if (virtualContent) return { filePath, content: virtualContent.text, lines: virtualContent.text.split('\n').length, characters: virtualContent.text.length, tokens: virtualContent.tokenCount, error: null, isBinary: false, sizeInBytes: 0 };
@@ -14969,7 +15092,7 @@ export class LoggerService {
 
 <file path="src/backend/services/prompt.service.ts">
 // src/backend/services/prompt.service.ts
-// Updated on: C95 (Use new IPC channel)
+// Updated on: C128 (Use markdown preview for README, log selection count)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -15184,9 +15307,12 @@ ${staticContext.trim()}
     public async generatePromptString(cycleData: PcppCycle): Promise<string> {
         Services.loggerService.log(`[Prompt Gen] Starting prompt string generation for Cycle ${cycleData.cycleId}.`);
         const lastSelection = await Services.selectionService.getLastSelection();
+        Services.loggerService.log(`[Prompt Gen] Found ${lastSelection.length} files in current selection.`);
+        
         let flattenedContent = '<!-- No files selected for flattening -->';
         if (lastSelection.length > 0) {
             flattenedContent = await Services.flattenerService.getFlattenedContent(lastSelection);
+            Services.loggerService.log(`[Prompt Gen] Generated flattened content (${Math.ceil(flattenedContent.length / 4)} tokens).`);
         }
         
         const promptParts = await this.getPromptParts(cycleData, flattenedContent);
@@ -15307,7 +15433,8 @@ ${staticContext.trim()}
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
             if (readmePath) {
-                await Services.fileOperationService.handleOpenFileRequest(readmePath);
+                // C128 UPDATE: Open README in Preview Mode
+                await Services.fileOperationService.handleMarkdownPreviewRequest(readmePath);
             }
 
         } catch (error: any) {
@@ -18010,9 +18137,9 @@ export default HighlightedTextarea;
 
 <file path="src/client/views/parallel-copilot.view/components/ParsedView.tsx">
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C126 (Add Open File on double click)
+// Updated on: C128 (Add Open File button and Markdown Preview in right pane)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview, VscGoToFile } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -18137,6 +18264,10 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
 
     const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(getMetricsKey(props.selectedFilePath)) : null;
 
+    // C128: Determine if we should show the markdown preview in the right pane
+    const isSelectedMarkdown = props.selectedFilePath?.toLowerCase().endsWith('.md');
+    const selectedFileContent = props.parsedContent.files.find(f => f.path === props.selectedFilePath)?.content;
+
     return (
         <div className="parsed-view-grid">
             <div className="parsed-view-left" ref={leftPaneRef} style={{ flexBasis: `${props.leftPaneWidth}%` }}>
@@ -18149,13 +18280,15 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                         const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
                         const isMarkdown = file.toLowerCase().endsWith('.md');
                         
-                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onDoubleClick={(e) => handleOpenFile(e, file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{file}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                                 <div className="file-actions-container">
+                                    {/* C128: Added Open File button for all files */}
+                                    {fileExists && <button className="native-diff-button styled-button" title="Open File" onClick={(e) => handleOpenFile(e, file)}><VscGoToFile /></button>}
                                     {fileExists && isMarkdown && <button className="native-diff-button styled-button" title="Open Preview" onClick={(e) => handleMarkdownPreview(e, file)}><VscPreview /></button>}
                                     {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                                 </div>
@@ -18184,7 +18317,13 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     )}
                     </div>
                 </div>
-                <CodeViewer htmlContent={props.viewableContent} />
+                {isSelectedMarkdown && selectedFileContent ? (
+                     <div className="markdown-preview-pane">
+                        <ReactMarkdown>{selectedFileContent}</ReactMarkdown>
+                     </div>
+                ) : (
+                    <CodeViewer htmlContent={props.viewableContent} />
+                )}
             </div>
             {contextMenu && (
                 <>
@@ -18825,7 +18964,7 @@ export default OnboardingView;
 
 <file path="src/client/views/parallel-copilot.view/view.scss">
 // src/client/views/parallel-copilot.view/view.scss
-// Updated on: C116 (Add styles for resizer)
+// Updated on: C128 (Add styles for markdown preview pane)
 @keyframes pulsing-glow {
     0% {
         box-shadow: 0 0 3px 0px var(--vscode-focusBorder);
@@ -19710,6 +19849,71 @@ body {
     code > span {
         line-height: 1.5;
         background-color: transparent !important;
+    }
+}
+
+/* C128: Markdown Preview Pane Styles */
+.markdown-preview-pane {
+    flex-grow: 1;
+    min-height: 0;
+    border: 1px solid var(--vscode-panel-border);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background-color: var(--vscode-editor-background);
+    overflow: auto;
+    padding: 16px;
+    font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+    font-size: var(--vscode-markdown-font-size, 14px);
+    line-height: 1.6;
+    color: var(--vscode-editor-foreground);
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        line-height: 1.25;
+    }
+    
+    h1 { font-size: 2em; border-bottom: 1px solid var(--vscode-panel-border); padding-bottom: 0.3em; }
+    h2 { font-size: 1.5em; border-bottom: 1px solid var(--vscode-panel-border); padding-bottom: 0.3em; }
+    
+    p, ul, ol {
+        margin-bottom: 1em;
+    }
+    
+    code {
+        font-family: var(--vscode-editor-font-family);
+        background-color: rgba(127, 127, 127, 0.1);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    
+    pre {
+        background-color: rgba(127, 127, 127, 0.1);
+        padding: 16px;
+        overflow: auto;
+        border-radius: 3px;
+        
+        code {
+            background-color: transparent;
+            padding: 0;
+        }
+    }
+    
+    blockquote {
+        border-left: 4px solid var(--vscode-textBlockQuote-border);
+        background-color: var(--vscode-textBlockQuote-background);
+        margin: 0;
+        padding: 0 1em;
+        color: var(--vscode-textBlockQuote-foreground);
+    }
+    
+    a {
+        color: var(--vscode-textLink-foreground);
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
@@ -23759,7 +23963,7 @@ This document serves as a living record of persistent or complex bugs. By docume
 -   **Symptom:** When the backend attempts to make multiple parallel `fetch` requests to the same host (e.g., generating 4 responses simultaneously), some of the requests fail with a `connect ETIMEDOUT` error. This results in only one or two responses being generated successfully.
 -   **Root Cause Analysis (RCA):** The default Node.js `http.Agent` (used by `node-fetch`) has a pool of sockets for connections. While the default `maxSockets` is technically `Infinity`, in practice, factors within the execution environment (like VS Code's extension host) can lead to exhaustion or delays in acquiring new sockets for concurrent requests to the same origin. When the application tries to open several connections at once, the later requests can time out while waiting for a socket to become available.
 -   **Codified Solution & Best Practice:**
-    1.  When an application needs to make a high number of concurrent, long-lived HTTP requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
+    1.  When an application needs to make a high number of concurrent, long-lived HTTP/HTTPS requests to a single host from a Node.js backend, do not rely on the default `http.Agent`.
     2.  Use a dedicated agent library like `agentkeepalive` to create a custom `HttpsAgent` instance.
     3.  Configure this agent with a high `maxSockets` value (e.g., 100) to ensure a large enough connection pool is available.
     4.  Pass this custom agent to all relevant `fetch` calls. This provides robust and performant connection pooling, preventing timeout errors caused by socket exhaustion.

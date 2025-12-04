@@ -1,7 +1,7 @@
 // src/client/views/parallel-copilot.view/components/ParsedView.tsx
-// Updated on: C126 (Add Open File on double click)
+// Updated on: C128 (Add Open File button and Markdown Preview in right pane)
 import * as React from 'react';
-import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview } from 'react-icons/vsc';
+import { VscCheck, VscError, VscDebugDisconnect, VscLink, VscClippy, VscChevronDown, VscDiff, VscPreview, VscGoToFile } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import * as path from 'path-browserify';
 import { ParsedResponse } from '@/common/types/pcpp.types';
@@ -126,6 +126,10 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
 
     const currentComparisonMetrics = props.selectedFilePath ? props.comparisonMetrics.get(getMetricsKey(props.selectedFilePath)) : null;
 
+    // C128: Determine if we should show the markdown preview in the right pane
+    const isSelectedMarkdown = props.selectedFilePath?.toLowerCase().endsWith('.md');
+    const selectedFileContent = props.parsedContent.files.find(f => f.path === props.selectedFilePath)?.content;
+
     return (
         <div className="parsed-view-grid">
             <div className="parsed-view-left" ref={leftPaneRef} style={{ flexBasis: `${props.leftPaneWidth}%` }}>
@@ -138,13 +142,15 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                         const bgColor = (metrics && fileExists) ? getSimilarityColor(similarity) : 'transparent';
                         const isMarkdown = file.toLowerCase().endsWith('.md');
                         
-                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onDoubleClick={(e) => handleOpenFile(e, file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
+                        return <li key={file} className={props.selectedFilePath === file ? 'selected' : ''} onClick={() => props.onSelectForViewing(file)} onContextMenu={(e) => handleContextMenu(e, file)} title={file} style={{ backgroundColor: bgColor }}>
                             <div className="file-row">
                                 <input type="checkbox" checked={props.selectedFilesForReplacement.has(`${props.activeTab}:::${file}`)} onChange={() => props.onFileSelectionToggle(file)} onClick={e => e.stopPropagation()} />
                                 {fileExists ? <VscCheck className="status-icon exists" /> : <VscError className="status-icon not-exists" />}
                                 <span className="file-path-text" title={file}>{file}</span>
                                 {metrics && fileExists && <span className="similarity-score">{ (similarity * 100).toFixed(0) }%</span>}
                                 <div className="file-actions-container">
+                                    {/* C128: Added Open File button for all files */}
+                                    {fileExists && <button className="native-diff-button styled-button" title="Open File" onClick={(e) => handleOpenFile(e, file)}><VscGoToFile /></button>}
                                     {fileExists && isMarkdown && <button className="native-diff-button styled-button" title="Open Preview" onClick={(e) => handleMarkdownPreview(e, file)}><VscPreview /></button>}
                                     {fileExists && <button className="native-diff-button styled-button" title="Open Changes" onClick={(e) => handleNativeDiff(e, file)}><VscDiff /></button>}
                                 </div>
@@ -173,7 +179,13 @@ const ParsedView: React.FC<ParsedViewProps> = (props) => {
                     )}
                     </div>
                 </div>
-                <CodeViewer htmlContent={props.viewableContent} />
+                {isSelectedMarkdown && selectedFileContent ? (
+                     <div className="markdown-preview-pane">
+                        <ReactMarkdown>{selectedFileContent}</ReactMarkdown>
+                     </div>
+                ) : (
+                    <CodeViewer htmlContent={props.viewableContent} />
+                )}
             </div>
             {contextMenu && (
                 <>
