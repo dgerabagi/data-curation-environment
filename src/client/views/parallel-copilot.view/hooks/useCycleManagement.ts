@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C126 (Add isCycleCollapsed)
+// Updated on: C131 (Add cost/token state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -20,6 +20,10 @@ export const useCycleManagement = (
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
+    
+    // C131: New state for cost calculation
+    const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
+    const [totalTokens, setTotalTokens] = React.useState<number>(0);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -116,6 +120,10 @@ export const useCycleManagement = (
         saveStatus,
         setSaveStatus,
         selectedResponseId,
+        estimatedCost,
+        setEstimatedCost,
+        totalTokens,
+        setTotalTokens,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,

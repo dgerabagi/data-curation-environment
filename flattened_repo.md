@@ -1,10 +1,10 @@
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T17:47:44.294Z
+  Date Generated: 2025-12-04T18:11:21.604Z
   ---
   Total Files: 222
-  Approx. Tokens: 375985
+  Approx. Tokens: 376457
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -14,7 +14,7 @@
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5321 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5569 tokens)
 8. src\backend\services\prompt.service.ts (5232 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -158,7 +158,7 @@
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 389 - Chars: 21282 - Tokens: 5321
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 407 - Chars: 22274 - Tokens: 5569
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -191,12 +191,12 @@
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 131 - Chars: 5672 - Tokens: 1418
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 139 - Chars: 5957 - Tokens: 1490
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9851 - Tokens: 2463
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 218 - Chars: 10067 - Tokens: 2517
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 85 - Chars: 2986 - Tokens: 747
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 92 - Chars: 3377 - Tokens: 845
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -14247,7 +14247,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C130 (Implement Baseline and Restore button handlers)
+// Updated on: C131 (Add cost request effect and display)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -14362,6 +14362,24 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
+    // C131: Debounced cost request
+    React.useEffect(() => {
+        const handler = setTimeout(() => {
+            if (cycleManagement.currentCycle) {
+                const cycleData: PcppCycle = {
+                    ...cycleManagement.currentCycle,
+                    title: cycleManagement.cycleTitle,
+                    cycleContext: cycleManagement.cycleContext,
+                    ephemeralContext: cycleManagement.ephemeralContext,
+                    responses: tabManagement.tabs,
+                    selectedFilesForReplacement: Array.from(fileManagement.selectedFilesForReplacement),
+                };
+                clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData });
+            }
+        }, 1000);
+        return () => clearTimeout(handler);
+    }, [cycleManagement.cycleContext, cycleManagement.ephemeralContext, cycleManagement.cycleTitle, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId]);
+
     React.useEffect(() => {
         if (cycleManagement.saveStatus === 'unsaved') {
             const handler = setTimeout(() => {
@@ -14434,7 +14452,9 @@ const App = () => {
     }
     
     const collapsedNavigator = <div>...</div>;
-    const totalPromptCostDisplay = <span>...</span>;
+    // C131: Render cost
+    const totalPromptCostDisplay = <span className="total-prompt-cost" title={`${cycleManagement.totalTokens} tokens`}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
+    
     const SaveStatusIndicator = () => {
         let icon;
         let title;
@@ -14487,21 +14507,19 @@ const App = () => {
         }
     };
 
-    // C130: Implement Baseline Handler
     const handleBaseline = () => {
         const { currentCycle, cycleTitle } = cycleManagement;
         if (!currentCycle) return;
+        // C131: Log for debugging
+        logger.log(`[view.tsx] handleBaseline clicked. Title: ${cycleTitle}`);
         const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
         clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });
     };
 
-    // C130: Implement Restore Handler
     const handleRestore = () => {
-        // Basic restore for now. Advanced logic to delete newly created files can be added later.
         clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
     };
 
-    // Wrapper to ensure tabs are reset when creating a new cycle
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
         tabManagement.resetAndLoadTabs({});
@@ -16987,7 +17005,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C126 (Add isCycleCollapsed)
+// Updated on: C131 (Add cost/token state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -17008,6 +17026,10 @@ export const useCycleManagement = (
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
+    
+    // C131: New state for cost calculation
+    const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
+    const [totalTokens, setTotalTokens] = React.useState<number>(0);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -17104,6 +17126,10 @@ export const useCycleManagement = (
         saveStatus,
         setSaveStatus,
         selectedResponseId,
+        estimatedCost,
+        setEstimatedCost,
+        totalTokens,
+        setTotalTokens,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -17313,7 +17339,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C124 (Update comparison metrics handler to use tabId)
+// Updated on: C131 (Add cost handler and workflow advance on file write)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -17375,16 +17401,19 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
+            // C131: Advance workflow step when files are accepted
+            setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            // C124 FIX: Use composite key to store metrics
             const key = `${metrics.tabId}:::${metrics.filePath}`;
             fileManagement.setComparisonMetrics(prev => new Map(prev).set(key, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            // Placeholder for cost state update
+            // C131: Update cost state
+            cycleManagement.setTotalTokens(totalTokens);
+            cycleManagement.setEstimatedCost(estimatedCost);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
@@ -17714,6 +17743,7 @@ export const useTabManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useWorkflow.ts">
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
+// Updated on: C131 (Improve sort step logic)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -17750,10 +17780,11 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingAccept') {
+            // This is handled by IPC message FilesWritten
             return;
         }
         if (workflowStep === 'awaitingBaseline') {
-            // Logic moved to IPC hook
+            // Logic handled by IPC hook (SendGitStatus / NotifyGitOperationResult)
             return;
         }
         if (workflowStep === 'awaitingFileSelect') {
@@ -17769,6 +17800,11 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingSort') {
+            // C131: If user selects a response, assume they skipped sort and move to baseline
+            if (selectedResponseId) {
+                setWorkflowStep('awaitingBaseline');
+                return;
+            }
             if (isSortedByTokens) {
                 setWorkflowStep('awaitingResponseSelect');
             }
@@ -17776,6 +17812,7 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingParse') {
             if (isParsedMode) {
+                // C131: Default to awaitingSort, but if already sorted or selected, logic above handles it
                 setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort');
             }
             return;
@@ -17783,7 +17820,6 @@ export const useWorkflow = (
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
         if (waitingForPaste) {
             for (let i = 1; i <= tabCount; i++) {
-                // C129 FIX: Changed rawContent to content to match PcppResponse interface
                 if (!tabs[i.toString()]?.content?.trim()) {
                     setWorkflowStep(`awaitingResponsePaste_${i}`);
                     return;

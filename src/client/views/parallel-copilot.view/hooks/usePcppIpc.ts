@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C124 (Update comparison metrics handler to use tabId)
+// Updated on: C131 (Add cost handler and workflow advance on file write)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -61,16 +61,19 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
+            // C131: Advance workflow step when files are accepted
+            setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            // C124 FIX: Use composite key to store metrics
             const key = `${metrics.tabId}:::${metrics.filePath}`;
             fileManagement.setComparisonMetrics(prev => new Map(prev).set(key, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            // Placeholder for cost state update
+            // C131: Update cost state
+            cycleManagement.setTotalTokens(totalTokens);
+            cycleManagement.setEstimatedCost(estimatedCost);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {

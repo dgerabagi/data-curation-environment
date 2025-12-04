@@ -1,4 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
+// Updated on: C131 (Improve sort step logic)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -35,10 +36,11 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingAccept') {
+            // This is handled by IPC message FilesWritten
             return;
         }
         if (workflowStep === 'awaitingBaseline') {
-            // Logic moved to IPC hook
+            // Logic handled by IPC hook (SendGitStatus / NotifyGitOperationResult)
             return;
         }
         if (workflowStep === 'awaitingFileSelect') {
@@ -54,6 +56,11 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingSort') {
+            // C131: If user selects a response, assume they skipped sort and move to baseline
+            if (selectedResponseId) {
+                setWorkflowStep('awaitingBaseline');
+                return;
+            }
             if (isSortedByTokens) {
                 setWorkflowStep('awaitingResponseSelect');
             }
@@ -61,6 +68,7 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingParse') {
             if (isParsedMode) {
+                // C131: Default to awaitingSort, but if already sorted or selected, logic above handles it
                 setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort');
             }
             return;
@@ -68,7 +76,6 @@ export const useWorkflow = (
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
         if (waitingForPaste) {
             for (let i = 1; i <= tabCount; i++) {
-                // C129 FIX: Changed rawContent to content to match PcppResponse interface
                 if (!tabs[i.toString()]?.content?.trim()) {
                     setWorkflowStep(`awaitingResponsePaste_${i}`);
                     return;

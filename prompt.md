@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 131 - tiny fixes left, everything is largely working splendidly great work!
+Current Cycle 132 - still responses arent retained and are getting lost
+Cycle 131 - tiny fixes left, everything is largely working splendidly great work!
 Cycle 130 - quick hiccup in the animated workflow with the sort button, baseline (commit) button seems non-functional
 Cycle 129 - revise dce_readme once more, animated workflow gets stuck, cycle criteria indicator, seeing old responses in new cycles
 Cycle 128 - great work! tiny alignments needed due to architecture change before we continue developing new things
@@ -885,6 +886,345 @@ No project scope defined.
 </M5. organized artifacts list>
 
 <M6. Cycles>
+
+<Cycle 132>
+<Cycle Context>
+okay nice! however the cost breakdown has lost all of its efficacy. i guess it wasnt even codified? do you have the necessary information in the cycle context to rebuild it? if not ill re-describe it. supposed to have a breakdown of the tokens for the user, not just a raw unformatted token count number.
+
+im observing that the `+` is not animating when its supposed to (when all criteria are met to make a new cycle, including the final cycle title modification).
+
+okay, full stop. you did not resolve the responses. they're still completely not working. heres what i mean:
+
+i paste in responses 1 through 4 after receiving the responses from the intiial prompt in my test.
+
+after pasting in the 4 responses, when i create and navigate to cycle 2, i previously reported that we were successful because i no longer saw the initial responses. while thats good and true, it wasnt the full story, because now when i navigate back to cycle 1, the responses i had pasted in there have disappeared! note that i am observing that i do not even need to 'create a second cycle' to instigate the data loss, if i simply paste a response into the text field, and not even click parse or anything, if i just navigatea way from and back to the pcpp, the text i pasted disappears. 
+
+ill place the dce output logs in ephemeral just in case theres anything relevatn in there
+
+
+</Cycle Context>
+<Ephemeral Context>
+[INFO] [11:59:19 AM] Congratulations, your extension "Data Curation Environment" is now active!
+[INFO] [11:59:19 AM] Services initializing...
+[INFO] [11:59:19 AM] [Env] Node: 22.20.0, Electron: 37.7.0, ABI: 136
+[INFO] [11:59:19 AM] Database initialized at c:\Projects\aatower-02\.vscode\dce.db
+[INFO] [11:59:19 AM] Services initialized successfully.
+[INFO] [11:59:19 AM] Registering 7 commands.
+[INFO] [11:59:20 AM] Fresh environment, automatically opening Parallel Co-Pilot Panel.
+[INFO] [11:59:20 AM] Parallel Co-Pilot view message handler initialized.
+[INFO] [11:59:20 AM] Starry Night syntax highlighter initialized.
+[INFO] [11:59:20 AM] Context Chooser view message handler initialized.
+[INFO] [11:59:20 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [11:59:20 AM] [on-message] Received RequestInitialData. Forwarding to services.
+[INFO] [11:59:20 AM] [SelectionService] No last selection found in state.
+[INFO] [11:59:20 AM] Persisted current selection of 0 items.
+[INFO] [11:59:21 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [11:59:21 AM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [11:59:21 AM] [FTV Refresh] Full refresh triggered. Reason: file change: .vscode
+[INFO] [11:59:24 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [11:59:25 AM] [SelectionService] No last selection found in state.
+[INFO] [11:59:25 AM] [CostCalc] Found 0 selected files.
+[INFO] [11:59:25 AM] [CostCalc] No files selected, sending 0 cost.
+[INFO] [11:59:31 AM] [SelectionService] No last selection found in state.
+[INFO] [11:59:31 AM] [CostCalc] Found 0 selected files.
+[INFO] [11:59:31 AM] [CostCalc] No files selected, sending 0 cost.
+[INFO] [11:59:35 AM] Generating prompt.md file for cycle 0...
+[INFO] [11:59:35 AM] [SelectionService] No last selection found in state.
+[WARN] [11:59:35 AM] No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.
+[INFO] [11:59:35 AM] [Prompt Gen] Starting prompt string generation for Cycle 0.
+[INFO] [11:59:35 AM] [SelectionService] No last selection found in state.
+[INFO] [11:59:35 AM] [Prompt Gen] Found 0 files in current selection.
+[INFO] [11:59:35 AM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 0
+[INFO] [11:59:35 AM] [Prompt Gen] Cycle map updated with fresh data for cycle 0. Context length: 35
+[INFO] [11:59:35 AM] [FTV Refresh] Full refresh triggered. Reason: file change: src
+[INFO] [11:59:35 AM] [FTV Refresh] Full refresh triggered. Reason: file change: Artifacts
+[INFO] [11:59:35 AM] [FTV Refresh] Full refresh triggered. Reason: file change: DCE_README.md
+[INFO] [11:59:35 AM] Successfully generated prompt.md file for Cycle 0.
+[INFO] [11:59:35 AM] [Auto-Add] Processing queue with 3 files: ["c:/Projects/aatower-02/src","c:/Projects/aatower-02/src/Artifacts","c:/Projects/aatower-02/src/Artifacts/DCE_README.md"]
+[INFO] [11:59:35 AM] [SelectionService] No last selection found in state.
+[INFO] [11:59:36 AM] [Markdown Preview] Received request for: c:\Projects\aatower-02\src\Artifacts\DCE_README.md
+[INFO] [11:59:36 AM] Persisted current selection of 3 items.
+[INFO] [11:59:36 AM] [Auto-Add] Sending ApplySelectionSet to client with 3 total paths.
+[INFO] [11:59:36 AM] [FTV Refresh] Full refresh triggered. Reason: file change: prompt.md
+[WARN] [11:59:36 AM] [WebView] [TreeView] Could not find ref for active file: c:/Projects/aatower-02/prompt.md
+[INFO] [11:59:36 AM] Persisted current selection of 3 items.
+[INFO] [11:59:37 AM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [12:01:36 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [12:01:36 PM] [PCPP on-message] Received RequestInitialCycleData from client.
+[INFO] [12:01:37 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [12:01:37 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [12:01:37 PM] [CostCalc] Found 3 selected files.
+[INFO] [12:01:37 PM] [CostCalc] In-memory flattened content generated (746 tokens).
+[INFO] [12:01:37 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [12:01:37 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
+[INFO] [12:01:37 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:01:37 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:01:37 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:01:37 PM]   - M2 Cycle Overview: 28 tokens
+[INFO] [12:01:37 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:01:37 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:01:37 PM]   - M5 Artifact List: 30 tokens
+[INFO] [12:01:37 PM]   - M6 Cycles: 10945 tokens
+[INFO] [12:01:37 PM]   - M7 Flattened Repo: 756 tokens
+[INFO] [12:01:37 PM] [CostCalc] Total Tokens: 15832, Estimated Cost: $0.019790000000000002
+[INFO] [12:01:37 PM] [CostCalc] Sending estimation to client.
+[INFO] [12:02:03 PM] [Comparison] Received request for: A0. Master Artifact List.md (Tab: 1)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A1. Project Vision and Goals.md (Tab: 1)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A2. Technical Scaffolding Plan.md (Tab: 1)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A3. Development and Testing Guide.md (Tab: 1)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A4. GitHub Repository Setup Guide.md (Tab: 1)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A0. Master Artifact List.md (Tab: 2)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A1. Project Vision and Goals.md (Tab: 2)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A2. Technical Scaffolding Plan.md (Tab: 2)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A3. Development and Testing Guide.md (Tab: 2)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A4. GitHub Repository Setup Guide.md (Tab: 2)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A5. Implementation Roadmap.md (Tab: 2)
+[ERROR] [12:02:03 PM] [Comparison] Failed for A0. Master Artifact List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A0. Master Artifact List.md'
+[INFO] [12:02:03 PM] [Comparison] Received request for: A1. Master Artifact List.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A2. Project Vision and Goals.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A3. Phase 1 Requirements & Design.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A4. Technical Scaffolding Plan.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A5. Development and Testing Guide.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A6. GitHub Repository Setup Guide.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A7. Universal Task Checklist.md (Tab: 3)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A0. Master Artifact List.md (Tab: 4)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A1. Project Vision and Goals.md (Tab: 4)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A2. Technical Scaffolding Plan.md (Tab: 4)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A3. Phase 1 Requirements & Game Design.md (Tab: 4)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A4. Development and Testing Guide.md (Tab: 4)
+[INFO] [12:02:03 PM] [Comparison] Received request for: A5. GitHub Repository Setup Guide.md (Tab: 4)
+[INFO] [12:02:03 PM] [File Existence] Received request to check paths: ["A0. Master Artifact List.md","A1. Project Vision and Goals.md","A2. Technical Scaffolding Plan.md","A3. Development and Testing Guide.md","A4. GitHub Repository Setup Guide.md","A5. Implementation Roadmap.md","A1. Master Artifact List.md","A2. Project Vision and Goals.md","A3. Phase 1 Requirements & Design.md","A4. Technical Scaffolding Plan.md","A5. Development and Testing Guide.md","A6. GitHub Repository Setup Guide.md","A7. Universal Task Checklist.md","A3. Phase 1 Requirements & Game Design.md","A4. Development and Testing Guide.md","A5. GitHub Repository Setup Guide.md"]
+[INFO] [12:02:03 PM] [File Existence] Root Path: c:\Projects\aatower-02
+[INFO] [12:02:03 PM] [File Existence] Checking: A0. Master Artifact List.md -> c:/Projects/aatower-02/A0. Master Artifact List.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A1. Project Vision and Goals.md -> c:/Projects/aatower-02/A1. Project Vision and Goals.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A2. Technical Scaffolding Plan.md -> c:/Projects/aatower-02/A2. Technical Scaffolding Plan.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A3. Development and Testing Guide.md -> c:/Projects/aatower-02/A3. Development and Testing Guide.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A4. GitHub Repository Setup Guide.md -> c:/Projects/aatower-02/A4. GitHub Repository Setup Guide.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A5. Implementation Roadmap.md -> c:/Projects/aatower-02/A5. Implementation Roadmap.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A1. Master Artifact List.md -> c:/Projects/aatower-02/A1. Master Artifact List.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A2. Project Vision and Goals.md -> c:/Projects/aatower-02/A2. Project Vision and Goals.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A3. Phase 1 Requirements & Design.md -> c:/Projects/aatower-02/A3. Phase 1 Requirements & Design.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A4. Technical Scaffolding Plan.md -> c:/Projects/aatower-02/A4. Technical Scaffolding Plan.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A5. Development and Testing Guide.md -> c:/Projects/aatower-02/A5. Development and Testing Guide.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A6. GitHub Repository Setup Guide.md -> c:/Projects/aatower-02/A6. GitHub Repository Setup Guide.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A7. Universal Task Checklist.md -> c:/Projects/aatower-02/A7. Universal Task Checklist.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A3. Phase 1 Requirements & Game Design.md -> c:/Projects/aatower-02/A3. Phase 1 Requirements & Game Design.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A4. Development and Testing Guide.md -> c:/Projects/aatower-02/A4. Development and Testing Guide.md
+[INFO] [12:02:03 PM] [File Existence] Checking: A5. GitHub Repository Setup Guide.md -> c:/Projects/aatower-02/A5. GitHub Repository Setup Guide.md
+[ERROR] [12:02:03 PM] [Comparison] Failed for A1. Project Vision and Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A1. Project Vision and Goals.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A2. Technical Scaffolding Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A2. Technical Scaffolding Plan.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A3. Development and Testing Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A3. Development and Testing Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A4. GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A4. GitHub Repository Setup Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A0. Master Artifact List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A0. Master Artifact List.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A1. Project Vision and Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A1. Project Vision and Goals.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A2. Technical Scaffolding Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A2. Technical Scaffolding Plan.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A3. Development and Testing Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A3. Development and Testing Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A4. GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A4. GitHub Repository Setup Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A5. Implementation Roadmap.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A5. Implementation Roadmap.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A1. Master Artifact List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A1. Master Artifact List.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A2. Project Vision and Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A2. Project Vision and Goals.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A3. Phase 1 Requirements & Design.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A3. Phase 1 Requirements & Design.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A4. Technical Scaffolding Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A4. Technical Scaffolding Plan.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A5. Development and Testing Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A5. Development and Testing Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A6. GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A6. GitHub Repository Setup Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A7. Universal Task Checklist.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A7. Universal Task Checklist.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A0. Master Artifact List.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A0. Master Artifact List.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A1. Project Vision and Goals.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A1. Project Vision and Goals.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A2. Technical Scaffolding Plan.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A2. Technical Scaffolding Plan.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A3. Phase 1 Requirements & Game Design.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A3. Phase 1 Requirements & Game Design.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A4. Development and Testing Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A4. Development and Testing Guide.md'
+[ERROR] [12:02:03 PM] [Comparison] Failed for A5. GitHub Repository Setup Guide.md: Error: ENOENT: no such file or directory, open 'c:\Projects\aatower-02\A5. GitHub Repository Setup Guide.md'
+[INFO] [12:02:08 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [12:02:08 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [12:02:08 PM] [CostCalc] Found 3 selected files.
+[INFO] [12:02:08 PM] [CostCalc] In-memory flattened content generated (746 tokens).
+[INFO] [12:02:08 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [12:02:08 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
+[INFO] [12:02:08 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:02:08 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:02:08 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:02:08 PM]   - M2 Cycle Overview: 28 tokens
+[INFO] [12:02:08 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:02:08 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:02:08 PM]   - M5 Artifact List: 30 tokens
+[INFO] [12:02:08 PM]   - M6 Cycles: 10945 tokens
+[INFO] [12:02:08 PM]   - M7 Flattened Repo: 756 tokens
+[INFO] [12:02:08 PM] [CostCalc] Total Tokens: 15832, Estimated Cost: $0.019790000000000002
+[INFO] [12:02:08 PM] [CostCalc] Sending estimation to client.
+[INFO] [12:02:09 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[ERROR] [12:02:09 PM] Git command error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+[INFO] [12:02:12 PM] Executing dce.gitInit command.
+[INFO] [12:02:12 PM] Executing Git Init.
+[INFO] [12:02:12 PM] .gitignore created/updated.
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .git
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: HEAD
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: config
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: description
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: hooks
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: applypatch-msg.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: commit-msg.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: fsmonitor-watchman.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: post-update.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: pre-applypatch.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: pre-commit.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: pre-merge-commit.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: pre-push.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: pre-rebase.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: pre-receive.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: prepare-commit-msg.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: push-to-checkout.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: sendemail-validate.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: update.sample
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: info
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: exclude
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: refs
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: heads
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: tags
+[INFO] [12:02:12 PM] [FTV Refresh] Full refresh triggered. Reason: file change: .gitignore
+[INFO] [12:02:13 PM] [FTV Refresh] Full refresh triggered. Reason: git repo opened
+[INFO] [12:02:14 PM] Executing Git Baseline with message: "DCE Baseline: Cycle 1 - New Cycle"
+[WARN] [12:02:14 PM] Git command stderr: warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'prompt.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Artifacts/DCE_README.md', LF will be replaced by CRLF the next time Git touches it
+
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: index
+[INFO] [12:02:14 PM] [GIT_SERVICE] Sending NotifyGitOperationResult: {"success":true,"message":"Successfully created baseline commit."}
+[INFO] [12:02:14 PM] [UI NOTIFY] Received request to show message: "Successfully created baseline commit."
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: COMMIT_EDITMSG
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: logs
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: HEAD
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: refs
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: heads
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: master
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: master
+[INFO] [12:02:14 PM] [FTV Refresh] Full refresh triggered. Reason: file change: index
+[INFO] [12:02:16 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [12:02:16 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [12:02:16 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [12:02:16 PM] [CostCalc] Found 3 selected files.
+[INFO] [12:02:16 PM] [CostCalc] In-memory flattened content generated (746 tokens).
+[INFO] [12:02:16 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [12:02:16 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 0
+[INFO] [12:02:16 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:02:16 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:02:16 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:02:16 PM]   - M2 Cycle Overview: 28 tokens
+[INFO] [12:02:16 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:02:16 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:02:16 PM]   - M5 Artifact List: 30 tokens
+[INFO] [12:02:16 PM]   - M6 Cycles: 10945 tokens
+[INFO] [12:02:16 PM]   - M7 Flattened Repo: 756 tokens
+[INFO] [12:02:16 PM] [CostCalc] Total Tokens: 15832, Estimated Cost: $0.019790000000000002
+[INFO] [12:02:16 PM] [CostCalc] Sending estimation to client.
+[INFO] [12:02:17 PM] [File Operation] Received request to write 6 files.
+[INFO] [12:02:17 PM] Successfully wrote content to: A0. Master Artifact List.md
+[INFO] [12:02:17 PM] Successfully wrote content to: A1. Project Vision and Goals.md
+[INFO] [12:02:17 PM] Successfully wrote content to: A2. Technical Scaffolding Plan.md
+[INFO] [12:02:17 PM] Successfully wrote content to: A3. Phase 1 Requirements & Game Design.md
+[INFO] [12:02:17 PM] Successfully wrote content to: A4. Development and Testing Guide.md
+[INFO] [12:02:17 PM] Successfully wrote content to: A5. GitHub Repository Setup Guide.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A0. Master Artifact List.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A1. Project Vision and Goals.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A2. Technical Scaffolding Plan.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A3. Phase 1 Requirements & Game Design.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A4. Development and Testing Guide.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A5. GitHub Repository Setup Guide.md
+[INFO] [12:02:17 PM] [FTV Refresh] Full refresh triggered. Reason: file change: A0. Master Artifact List.md
+[INFO] [12:02:17 PM] [Auto-Add] Processing queue with 6 files: ["c:/Projects/aatower-02/A0. Master Artifact List.md","c:/Projects/aatower-02/A1. Project Vision and Goals.md","c:/Projects/aatower-02/A2. Technical Scaffolding Plan.md","c:/Projects/aatower-02/A3. Phase 1 Requirements & Game Design.md","c:/Projects/aatower-02/A4. Development and Testing Guide.md","c:/Projects/aatower-02/A5. GitHub Repository Setup Guide.md"]
+[INFO] [12:02:17 PM] [SelectionService] Found 3 paths in persisted state. Validating...
+[INFO] [12:02:17 PM] [SelectionService] Returning 3 valid paths.
+[INFO] [12:02:17 PM] Persisted current selection of 9 items.
+[INFO] [12:02:17 PM] [Auto-Add] Sending ApplySelectionSet to client with 9 total paths.
+[INFO] [12:02:17 PM] Persisted current selection of 9 items.
+[INFO] [12:02:19 PM] [C161 DEBUG] IPC received RequestWorkspaceFiles. force=true
+[INFO] [12:02:40 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [12:02:40 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [12:02:40 PM] [CostCalc] Found 9 selected files.
+[INFO] [12:02:40 PM] [CostCalc] In-memory flattened content generated (4569 tokens).
+[INFO] [12:02:40 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [12:02:40 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 38
+[INFO] [12:02:40 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:02:40 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:02:40 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:02:40 PM]   - M2 Cycle Overview: 28 tokens
+[INFO] [12:02:40 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:02:40 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:02:40 PM]   - M5 Artifact List: 558 tokens
+[INFO] [12:02:40 PM]   - M6 Cycles: 10963 tokens
+[INFO] [12:02:40 PM]   - M7 Flattened Repo: 4579 tokens
+[INFO] [12:02:40 PM] [CostCalc] Total Tokens: 20201, Estimated Cost: $0.025251250000000003
+[INFO] [12:02:40 PM] [CostCalc] Sending estimation to client.
+[INFO] [12:02:45 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [12:02:45 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [12:02:45 PM] [CostCalc] Found 9 selected files.
+[INFO] [12:02:45 PM] [CostCalc] In-memory flattened content generated (4569 tokens).
+[INFO] [12:02:45 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [12:02:45 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 38
+[INFO] [12:02:45 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:02:45 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:02:45 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:02:45 PM]   - M2 Cycle Overview: 31 tokens
+[INFO] [12:02:45 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:02:45 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:02:45 PM]   - M5 Artifact List: 558 tokens
+[INFO] [12:02:45 PM]   - M6 Cycles: 10963 tokens
+[INFO] [12:02:45 PM]   - M7 Flattened Repo: 4579 tokens
+[INFO] [12:02:45 PM] [CostCalc] Total Tokens: 20204, Estimated Cost: $0.025255000000000003
+[INFO] [12:02:45 PM] [CostCalc] Sending estimation to client.
+[INFO] [12:04:33 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [12:04:33 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [12:04:33 PM] [CostCalc] Found 9 selected files.
+[INFO] [12:04:33 PM] [CostCalc] In-memory flattened content generated (4569 tokens).
+[INFO] [12:04:33 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 2
+[INFO] [12:04:33 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 2. Context length: 0
+[INFO] [12:04:33 PM] [Prompt Gen] Processing Cycle 2 for M6 block.
+[INFO] [12:04:33 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:04:33 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:04:33 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:04:33 PM]   - M2 Cycle Overview: 36 tokens
+[INFO] [12:04:33 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:04:33 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:04:33 PM]   - M5 Artifact List: 558 tokens
+[INFO] [12:04:33 PM]   - M6 Cycles: 11322 tokens
+[INFO] [12:04:33 PM]   - M7 Flattened Repo: 4579 tokens
+[INFO] [12:04:33 PM] [CostCalc] Total Tokens: 20568, Estimated Cost: $0.025710000000000004
+[INFO] [12:04:33 PM] [CostCalc] Sending estimation to client.
+[INFO] [12:04:37 PM] [SelectionService] Found 9 paths in persisted state. Validating...
+[INFO] [12:04:37 PM] [SelectionService] Returning 9 valid paths.
+[INFO] [12:04:37 PM] [CostCalc] Found 9 selected files.
+[INFO] [12:04:37 PM] [CostCalc] In-memory flattened content generated (4569 tokens).
+[INFO] [12:04:37 PM] [Prompt Gen] Generating cycles content. Current cycle ID from frontend: 1
+[INFO] [12:04:37 PM] [Prompt Gen] Cycle map updated with fresh data for cycle 1. Context length: 38
+[INFO] [12:04:37 PM] [Prompt Gen] Processing Cycle 1 for M6 block.
+[INFO] [12:04:37 PM] [CostCalc] Calculating breakdown:
+[INFO] [12:04:37 PM]   - M1 Artifact Schema: 48 tokens
+[INFO] [12:04:37 PM]   - M2 Cycle Overview: 31 tokens
+[INFO] [12:04:37 PM]   - M3 Interaction Schema: 4002 tokens
+[INFO] [12:04:37 PM]   - M4 Project Scope: 23 tokens
+[INFO] [12:04:37 PM]   - M5 Artifact List: 558 tokens
+[INFO] [12:04:37 PM]   - M6 Cycles: 10963 tokens
+[INFO] [12:04:37 PM]   - M7 Flattened Repo: 4579 tokens
+[INFO] [12:04:37 PM] [CostCalc] Total Tokens: 20204, Estimated Cost: $0.025255000000000003
+[INFO] [12:04:37 PM] [CostCalc] Sending estimation to client.
+
+</Ephemeral Context>
+<Previous Cycle 131 Summary of Actions>
+I have analyzed the issues reported in Cycle 130.
+1.  **Animated Workflow Hiccup:** The "Sort" button fails to animate when the workflow step is `awaitingSort` because the `workflow-highlight` class is missing from the button's JSX in `ResponseTabs.tsx`.
+2.  **Baseline Button Non-Functional:** The "Baseline (Commit)" and "Restore Baseline" buttons do nothing because their `onClick` handlers in `view.tsx` are currently empty placeholder functions (`() => {}`).
+
+My course of action is to:
+1.  **Fix `ResponseTabs.tsx`:** Add the conditional `workflow-highlight` class to the Sort button based on the `workflowStep` prop.
+2.  **Fix `view.tsx`:** Implement the `handleBaseline` and `handleRestore` functions. `handleBaseline` will construct a commit message and send a `RequestGitBaseline` IPC message. `handleRestore` will send a `RequestGitRestore` IPC message. I will then pass these handlers to the `WorkflowToolbar` component.
+3.  **Update `A11`:** Document the regression of the workflow buttons.
+
+1.  **Update `src/client/views/parallel-copilot.view/components/ResponseTabs.tsx`**: Add logic to apply the `workflow-highlight` class to the "Sort" button when `workflowStep === 'awaitingSort'`.
+2.  **Update `src/client/views/parallel-copilot.view/view.tsx`**: Implement `handleBaseline` and `handleRestore` functions and pass them to the `WorkflowToolbar`.
+3.  **Update `src/Artifacts/A11. DCE - Regression Case Studies.md`**: Add a case study for the non-functional workflow buttons.
+</Previous Cycle 131 Summary of Actions>
+</Cycle 132>
 
 <Cycle 131>
 <Cycle Context>
@@ -6138,10 +6478,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T17:47:44.294Z
+  Date Generated: 2025-12-04T18:11:21.604Z
   ---
   Total Files: 222
-  Approx. Tokens: 375985
+  Approx. Tokens: 376457
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6151,7 +6491,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5321 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5569 tokens)
 8. src\backend\services\prompt.service.ts (5232 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -6295,7 +6635,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8997 - Tokens: 2250
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 131 - Chars: 6049 - Tokens: 1513
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 389 - Chars: 21282 - Tokens: 5321
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 407 - Chars: 22274 - Tokens: 5569
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -6328,12 +6668,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 131 - Chars: 5672 - Tokens: 1418
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 139 - Chars: 5957 - Tokens: 1490
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 215 - Chars: 9851 - Tokens: 2463
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 218 - Chars: 10067 - Tokens: 2517
 176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 85 - Chars: 2986 - Tokens: 747
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 92 - Chars: 3377 - Tokens: 845
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -20384,7 +20724,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C130 (Implement Baseline and Restore button handlers)
+// Updated on: C131 (Add cost request effect and display)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -20499,6 +20839,24 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
+    // C131: Debounced cost request
+    React.useEffect(() => {
+        const handler = setTimeout(() => {
+            if (cycleManagement.currentCycle) {
+                const cycleData: PcppCycle = {
+                    ...cycleManagement.currentCycle,
+                    title: cycleManagement.cycleTitle,
+                    cycleContext: cycleManagement.cycleContext,
+                    ephemeralContext: cycleManagement.ephemeralContext,
+                    responses: tabManagement.tabs,
+                    selectedFilesForReplacement: Array.from(fileManagement.selectedFilesForReplacement),
+                };
+                clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData });
+            }
+        }, 1000);
+        return () => clearTimeout(handler);
+    }, [cycleManagement.cycleContext, cycleManagement.ephemeralContext, cycleManagement.cycleTitle, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId]);
+
     React.useEffect(() => {
         if (cycleManagement.saveStatus === 'unsaved') {
             const handler = setTimeout(() => {
@@ -20571,7 +20929,9 @@ const App = () => {
     }
     
     const collapsedNavigator = <div>...</div>;
-    const totalPromptCostDisplay = <span>...</span>;
+    // C131: Render cost
+    const totalPromptCostDisplay = <span className="total-prompt-cost" title={`${cycleManagement.totalTokens} tokens`}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
+    
     const SaveStatusIndicator = () => {
         let icon;
         let title;
@@ -20624,21 +20984,19 @@ const App = () => {
         }
     };
 
-    // C130: Implement Baseline Handler
     const handleBaseline = () => {
         const { currentCycle, cycleTitle } = cycleManagement;
         if (!currentCycle) return;
+        // C131: Log for debugging
+        logger.log(`[view.tsx] handleBaseline clicked. Title: ${cycleTitle}`);
         const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
         clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });
     };
 
-    // C130: Implement Restore Handler
     const handleRestore = () => {
-        // Basic restore for now. Advanced logic to delete newly created files can be added later.
         clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
     };
 
-    // Wrapper to ensure tabs are reset when creating a new cycle
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
         tabManagement.resetAndLoadTabs({});
@@ -23124,7 +23482,7 @@ This document lists the feedback and tasks from the first official development c
 
 <file path="src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useCycleManagement.ts
-// Updated on: C126 (Add isCycleCollapsed)
+// Updated on: C131 (Add cost/token state)
 import * as React from 'react';
 import { PcppCycle } from '@/common/types/pcpp.types';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
@@ -23145,6 +23503,10 @@ export const useCycleManagement = (
     const [isEphemeralContextCollapsed, setIsEphemeralContextCollapsed] = React.useState(initialCycle?.isEphemeralContextCollapsed ?? true);
     const [saveStatus, setSaveStatus] = React.useState<'saved' | 'saving' | 'unsaved'>('saved');
     const [selectedResponseId, setSelectedResponseId] = React.useState<string | null>(initialCycle?.selectedResponseId || null);
+    
+    // C131: New state for cost calculation
+    const [estimatedCost, setEstimatedCost] = React.useState<number>(0);
+    const [totalTokens, setTotalTokens] = React.useState<number>(0);
 
     const clientIpc = ClientPostMessageManager.getInstance();
 
@@ -23241,6 +23603,10 @@ export const useCycleManagement = (
         saveStatus,
         setSaveStatus,
         selectedResponseId,
+        estimatedCost,
+        setEstimatedCost,
+        totalTokens,
+        setTotalTokens,
         loadCycleData,
         handleCycleChange,
         handleNewCycle,
@@ -23450,7 +23816,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C124 (Update comparison metrics handler to use tabId)
+// Updated on: C131 (Add cost handler and workflow advance on file write)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -23512,16 +23878,19 @@ export const usePcppIpc = (
                 paths.forEach(p => newMap.set(p, true));
                 return newMap;
             });
+            // C131: Advance workflow step when files are accepted
+            setWorkflowStep(prev => prev === 'awaitingAccept' ? 'awaitingCycleContext' : prev);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendFileComparison, (metrics) => {
-            // C124 FIX: Use composite key to store metrics
             const key = `${metrics.tabId}:::${metrics.filePath}`;
             fileManagement.setComparisonMetrics(prev => new Map(prev).set(key, metrics));
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.SendPromptCostEstimation, ({ totalTokens, estimatedCost, breakdown }) => {
-            // Placeholder for cost state update
+            // C131: Update cost state
+            cycleManagement.setTotalTokens(totalTokens);
+            cycleManagement.setEstimatedCost(estimatedCost);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifyGitOperationResult, (result) => {
@@ -23851,6 +24220,7 @@ export const useTabManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useWorkflow.ts">
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
+// Updated on: C131 (Improve sort step logic)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -23887,10 +24257,11 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingAccept') {
+            // This is handled by IPC message FilesWritten
             return;
         }
         if (workflowStep === 'awaitingBaseline') {
-            // Logic moved to IPC hook
+            // Logic handled by IPC hook (SendGitStatus / NotifyGitOperationResult)
             return;
         }
         if (workflowStep === 'awaitingFileSelect') {
@@ -23906,6 +24277,11 @@ export const useWorkflow = (
             return;
         }
         if (workflowStep === 'awaitingSort') {
+            // C131: If user selects a response, assume they skipped sort and move to baseline
+            if (selectedResponseId) {
+                setWorkflowStep('awaitingBaseline');
+                return;
+            }
             if (isSortedByTokens) {
                 setWorkflowStep('awaitingResponseSelect');
             }
@@ -23913,6 +24289,7 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingParse') {
             if (isParsedMode) {
+                // C131: Default to awaitingSort, but if already sorted or selected, logic above handles it
                 setWorkflowStep(isSortedByTokens ? 'awaitingResponseSelect' : 'awaitingSort');
             }
             return;
@@ -23920,7 +24297,6 @@ export const useWorkflow = (
         const waitingForPaste = workflowStep?.startsWith('awaitingResponsePaste');
         if (waitingForPaste) {
             for (let i = 1; i <= tabCount; i++) {
-                // C129 FIX: Changed rawContent to content to match PcppResponse interface
                 if (!tabs[i.toString()]?.content?.trim()) {
                     setWorkflowStep(`awaitingResponsePaste_${i}`);
                     return;

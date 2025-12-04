@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C130 (Implement Baseline and Restore button handlers)
+// Updated on: C131 (Add cost request effect and display)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -114,6 +114,24 @@ const App = () => {
         clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
     }, [clientIpc]);
 
+    // C131: Debounced cost request
+    React.useEffect(() => {
+        const handler = setTimeout(() => {
+            if (cycleManagement.currentCycle) {
+                const cycleData: PcppCycle = {
+                    ...cycleManagement.currentCycle,
+                    title: cycleManagement.cycleTitle,
+                    cycleContext: cycleManagement.cycleContext,
+                    ephemeralContext: cycleManagement.ephemeralContext,
+                    responses: tabManagement.tabs,
+                    selectedFilesForReplacement: Array.from(fileManagement.selectedFilesForReplacement),
+                };
+                clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData });
+            }
+        }, 1000);
+        return () => clearTimeout(handler);
+    }, [cycleManagement.cycleContext, cycleManagement.ephemeralContext, cycleManagement.cycleTitle, fileManagement.selectedFilesForReplacement, cycleManagement.selectedResponseId]);
+
     React.useEffect(() => {
         if (cycleManagement.saveStatus === 'unsaved') {
             const handler = setTimeout(() => {
@@ -186,7 +204,9 @@ const App = () => {
     }
     
     const collapsedNavigator = <div>...</div>;
-    const totalPromptCostDisplay = <span>...</span>;
+    // C131: Render cost
+    const totalPromptCostDisplay = <span className="total-prompt-cost" title={`${cycleManagement.totalTokens} tokens`}>${cycleManagement.estimatedCost.toFixed(4)}</span>;
+    
     const SaveStatusIndicator = () => {
         let icon;
         let title;
@@ -239,21 +259,19 @@ const App = () => {
         }
     };
 
-    // C130: Implement Baseline Handler
     const handleBaseline = () => {
         const { currentCycle, cycleTitle } = cycleManagement;
         if (!currentCycle) return;
+        // C131: Log for debugging
+        logger.log(`[view.tsx] handleBaseline clicked. Title: ${cycleTitle}`);
         const commitMessage = `DCE Baseline: Cycle ${currentCycle.cycleId} - ${cycleTitle}`;
         clientIpc.sendToServer(ClientToServerChannel.RequestGitBaseline, { commitMessage });
     };
 
-    // C130: Implement Restore Handler
     const handleRestore = () => {
-        // Basic restore for now. Advanced logic to delete newly created files can be added later.
         clientIpc.sendToServer(ClientToServerChannel.RequestGitRestore, { filesToDelete: [] });
     };
 
-    // Wrapper to ensure tabs are reset when creating a new cycle
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
         tabManagement.resetAndLoadTabs({});
