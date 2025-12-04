@@ -1,5 +1,5 @@
 // src/common/ipc/channels.type.ts
-// Updated on: C124 (Add tabId to comparison and markdown preview)
+// Updated on: C133 (Update RequestCreatePromptFile payload)
 import { FileNode } from "@/common/types/file-node";
 import { ClientToServerChannel, ServerToClientChannel } from "./channels.enum";
 import { PcppCycle, PcppResponse } from "@/common/types/pcpp.types";
@@ -64,7 +64,7 @@ export type ChannelBody<T extends ClientToServerChannel | ServerToClientChannel>
     T extends ClientToServerChannel.RequestLastSelection ? {} :
     T extends ClientToServerChannel.SaveAutoAddState ? { enabled: boolean } :
     T extends ClientToServerChannel.VSCodeCommand ? { command: string, args?: any[] } :
-    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleTitle: string; currentCycle: number; selectedFiles: string[] } :
+    T extends ClientToServerChannel.RequestCreatePromptFile ? { cycleData: PcppCycle } :
     T extends ClientToServerChannel.RequestBatchGeneration ? { cycleData: PcppCycle, count: number } :
     T extends ClientToServerChannel.RequestNewCycleAndGenerate ? { cycleData: PcppCycle, count: number } :
     T extends ClientToServerChannel.RequestInitialArtifactsAndGeneration ? { projectScope: string, responseCount: number } :

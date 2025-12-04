@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/on-message.ts
-// Updated on: C124 (Add RequestMarkdownPreview handler)
+// Updated on: C133 (Update RequestCreatePromptFile handler)
 import { ServerPostMessageManager } from "@/common/ipc/server-ipc";
 import { Services } from "@/backend/services/services";
 import { ClientToServerChannel, ServerToClientChannel } from "@/common/ipc/channels.enum";
@@ -11,7 +11,7 @@ export function onMessage(serverIpc: ServerPostMessageManager) {
     loggerService.log("Parallel Co-Pilot view message handler initialized.");
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestCreatePromptFile, (data) => {
-        promptService.generatePromptFile(data.cycleTitle, data.currentCycle);
+        promptService.generatePromptFile(data.cycleData);
     });
 
     serverIpc.onClientMessage(ClientToServerChannel.RequestNewCycleAndGenerate, async (data) => {

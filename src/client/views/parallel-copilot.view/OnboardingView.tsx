@@ -1,10 +1,11 @@
 // src/client/views/parallel-copilot.view/OnboardingView.tsx
-// Updated on: C115 (Use props for response count)
+// Updated on: C133 (Update handleGenerate to send PcppCycle)
 import * as React from 'react';
 import { VscRocket, VscArrowRight, VscLoading, VscCheck, VscWarning } from 'react-icons/vsc';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ClientToServerChannel } from '@/common/ipc/channels.enum';
 import { logger } from '@/client/utils/logger';
+import { PcppCycle } from '@/common/types/pcpp.types';
 
 interface OnboardingViewProps {
     projectScope: string;
@@ -55,7 +56,16 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({
                 onStartGeneration(projectScope, responseCount);
             } else {
                 logger.log("Sending request to generate Cycle 0 prompt and save project scope.");
-                clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleTitle: 'Initial Artifacts', currentCycle: 0, selectedFiles: [] });
+                const cycleData: PcppCycle = {
+                    cycleId: 0,
+                    title: 'Initial Artifacts',
+                    cycleContext: projectScope,
+                    ephemeralContext: '',
+                    responses: {},
+                    timestamp: new Date().toISOString(),
+                    status: 'complete'
+                };
+                clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
                 setPromptGenerated(true);
             }
         }

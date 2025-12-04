@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C132 (Add visibility save handler and cost breakdown tooltip)
+// Updated on: C133 (Implement handleGeneratePrompt)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -83,17 +83,15 @@ const App = () => {
     const stateRef = React.useRef({ cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth });
     stateRef.current = { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth };
 
-    saveStateRef.current = React.useCallback(() => {
+    const getCurrentCycleState = React.useCallback((): PcppCycle | null => {
         const { cycleManagement, tabManagement, fileManagement, workflowStep, responseCount, leftPaneWidth } = stateRef.current;
         const { currentCycle, cycleTitle, cycleContext, ephemeralContext, isEphemeralContextCollapsed, selectedResponseId, isCycleCollapsed } = cycleManagement;
         const { tabs, activeTab, isParsedMode, isSortedByTokens } = tabManagement;
         const { selectedFilesForReplacement, pathOverrides } = fileManagement;
         
-        if (currentCycle === null) return;
-        
-        cycleManagement.setSaveStatus('saving');
-        
-        const cycleData: PcppCycle = {
+        if (currentCycle === null) return null;
+
+        return {
             ...currentCycle,
             title: cycleTitle,
             cycleContext,
@@ -111,8 +109,15 @@ const App = () => {
             isCycleCollapsed,
             leftPaneWidth,
         };
-        clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
-    }, [clientIpc]);
+    }, []);
+
+    saveStateRef.current = React.useCallback(() => {
+        const cycleData = getCurrentCycleState();
+        if (cycleData) {
+            cycleManagement.setSaveStatus('saving');
+            clientIpc.sendToServer(ClientToServerChannel.SaveCycleData, { cycleData });
+        }
+    }, [clientIpc, getCurrentCycleState]);
 
     // C132: Force save on visibility change (tab switch)
     React.useEffect(() => {
@@ -129,15 +134,8 @@ const App = () => {
     // Debounced cost request
     React.useEffect(() => {
         const handler = setTimeout(() => {
-            if (cycleManagement.currentCycle) {
-                const cycleData: PcppCycle = {
-                    ...cycleManagement.currentCycle,
-                    title: cycleManagement.cycleTitle,
-                    cycleContext: cycleManagement.cycleContext,
-                    ephemeralContext: cycleManagement.ephemeralContext,
-                    responses: tabManagement.tabs,
-                    selectedFilesForReplacement: Array.from(fileManagement.selectedFilesForReplacement),
-                };
+            const cycleData = getCurrentCycleState();
+            if (cycleData) {
                 clientIpc.sendToServer(ClientToServerChannel.RequestPromptCostBreakdown, { cycleData });
             }
         }, 1000);
@@ -235,9 +233,18 @@ const App = () => {
         }
         return <div className="save-status-indicator" title={title}>{icon}</div>;
     };
+
+    const handleGeneratePrompt = () => {
+        const cycleData = getCurrentCycleState();
+        if (cycleData) {
+            logger.log(`[View] Requesting prompt generation for Cycle ${cycleData.cycleId}`);
+            clientIpc.sendToServer(ClientToServerChannel.RequestCreatePromptFile, { cycleData });
+        }
+    };
+
     const renderHeaderButtons = () => {
         if (generationManagement.connectionMode === 'manual') {
-            return <button><VscFileCode /> Generate prompt.md</button>;
+            return <button onClick={handleGeneratePrompt}><VscFileCode /> Generate prompt.md</button>;
         } else {
             return <button onClick={generationManagement.handleGenerateResponses} disabled={generationManagement.isGenerateResponsesDisabled}><VscWand /> Generate responses</button>;
         }

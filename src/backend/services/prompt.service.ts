@@ -1,5 +1,5 @@
 // src/backend/services/prompt.service.ts
-// Updated on: C128 (Use markdown preview for README, log selection count)
+// Updated on: C133 (Accept full cycleData for prompt generation)
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { promises as fs } from 'fs';
@@ -284,7 +284,7 @@ ${staticContext.trim()}
         }
     }
 
-    public async generatePromptFile(cycleTitle: string, currentCycleId: number) {
+    public async generatePromptFile(cycleData: PcppCycle) {
         if (!this.workspaceRoot) {
             vscode.window.showErrorMessage("Cannot generate prompt: No workspace folder is open.");
             return;
@@ -293,7 +293,7 @@ ${staticContext.trim()}
         const promptMdPath = path.join(rootPath, 'prompt.md');
 
         try {
-            Services.loggerService.log(`Generating prompt.md file for cycle ${currentCycleId}...`);
+            Services.loggerService.log(`Generating prompt.md file for cycle ${cycleData.cycleId}...`);
             
             const lastSelection = await Services.selectionService.getLastSelection();
             if (lastSelection.length > 0) {
@@ -302,11 +302,9 @@ ${staticContext.trim()}
                 Services.loggerService.warn("No files selected for flattening. 'flattened_repo.md' may be stale or non-existent.");
             }
             
-            const fullHistoryFile = await Services.historyService.getFullHistory();
-            let currentCycleData: PcppCycle | undefined;
             let readmePath: string | undefined;
 
-            if (currentCycleId === 0) {
+            if (cycleData.cycleId === 0) {
                 const artifactsDirInWorkspace = path.join(this.workspaceRoot, 'src', 'Artifacts');
                 await vscode.workspace.fs.createDirectory(vscode.Uri.file(artifactsDirInWorkspace));
                 
@@ -314,33 +312,16 @@ ${staticContext.trim()}
                 const readmeUri = vscode.Uri.file(path.join(artifactsDirInWorkspace, 'DCE_README.md'));
                 readmePath = readmeUri.fsPath;
                 await vscode.workspace.fs.writeFile(readmeUri, Buffer.from(readmeContent, 'utf-8'));
-
-                currentCycleData = {
-                    cycleId: 0,
-                    title: cycleTitle,
-                    cycleContext: fullHistoryFile.projectScope || '',
-                    ephemeralContext: '',
-                    responses: {},
-                    timestamp: new Date().toISOString(),
-                    status: 'complete'
-                };
-            } else {
-                const historyCycle = fullHistoryFile.cycles.find(c => c.cycleId === currentCycleId);
-                if (!historyCycle) {
-                    throw new Error(`Could not find data for current cycle (${currentCycleId}) in history.`);
-                }
-                currentCycleData = { ...historyCycle, title: cycleTitle };
             }
 
-            const finalPrompt = await this.generatePromptString(currentCycleData);
+            const finalPrompt = await this.generatePromptString(cycleData);
 
             await fs.writeFile(promptMdPath, finalPrompt, 'utf-8');
-            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${currentCycleId}.`);
-            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${currentCycleId}.`);
+            vscode.window.showInformationMessage(`Successfully generated prompt.md for Cycle ${cycleData.cycleId}.`);
+            Services.loggerService.log(`Successfully generated prompt.md file for Cycle ${cycleData.cycleId}.`);
 
             await Services.fileOperationService.handleOpenFileRequest(promptMdPath);
             if (readmePath) {
-                // C128 UPDATE: Open README in Preview Mode
                 await Services.fileOperationService.handleMarkdownPreviewRequest(readmePath);
             }
 
