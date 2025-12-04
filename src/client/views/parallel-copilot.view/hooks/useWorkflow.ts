@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C132 (Fix readyForNewCycle transition)
+// Updated on: C134 (Reorder workflow: Select Files -> Baseline)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -26,7 +26,6 @@ export const useWorkflow = (
 
         if (workflowStep === 'readyForNewCycle') {
             if (!isReadyForNextCycle) {
-                // Fallback if criteria are unmet
                 setWorkflowStep('awaitingGeneratePrompt');
             }
             return;
@@ -56,19 +55,21 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingFileSelect') {
             if (selectedFilesForReplacement.size > 0) {
-                setWorkflowStep('awaitingAccept');
+                // C134: Reordered workflow. After selecting files, prompt to Baseline.
+                setWorkflowStep('awaitingBaseline');
             }
             return;
         }
         if (workflowStep === 'awaitingResponseSelect') {
             if (selectedResponseId) {
-                setWorkflowStep('awaitingBaseline');
+                // C134: Reordered workflow. After selecting response, prompt to select files.
+                setWorkflowStep('awaitingFileSelect');
             }
             return;
         }
         if (workflowStep === 'awaitingSort') {
             if (selectedResponseId) {
-                setWorkflowStep('awaitingBaseline');
+                setWorkflowStep('awaitingFileSelect');
                 return;
             }
             if (isSortedByTokens) {

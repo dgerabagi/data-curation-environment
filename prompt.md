@@ -11,7 +11,8 @@ M7. Flattened Repo
 </M1. artifact schema>
 
 <M2. cycle overview>
-Current Cycle 134 - two tiny issues and a rethink on the approach to .gitignore
+Current Cycle 135 - more great progress keep it up this DCE is feeling like the real deal!
+Cycle 134 - two tiny issues and a rethink on the approach to .gitignore
 Cycle 133 - `Generate prompt.md` doesnt work (the initial one during onboarding seems to work, they both basically do the same)
 Cycle 132 - still responses arent retained and are getting lost
 Cycle 131 - tiny fixes left, everything is largely working splendidly great work!
@@ -889,6 +890,38 @@ No project scope defined.
 
 <M6. Cycles>
 
+<Cycle 135>
+<Cycle Context>
+nice! every cycle we are getting further and further! okay. now at this point ive gotten to the workflow where the `+` is highlighted, but it is a big premature, because before im ready to `+` create a new cycle, i would have had to sent off the previous cycles prompt and have gotten a response. then, when im looking for a place to put these new responses, id be going to create `+`. so, in terms of the animated workflow, after ive written up my cycle context, and then after ive updated the cyclte title, i would need to click `Generate prompt.md`. once the prompt has been generated for that cycle, then we can animate the `+`.
+
+at this point, even though the `+` is animated, im going to go ahead and click the `Generate prompt.md` to continue my test/playthrough.
+
+note: im noticinge that .gitignore is still not selectable in the FTV, but also, its got DCE-specific content in it that i think it shouldnt (Eg. `The-Creator-AI-main/`)
+
+OHHH! huge/hilarious QOL improvement if we could make this... sometimes ai studio doesnt scroll itself down in the conversation, but when im copying/pasting many responses quickly i cant always detect that, and sometimes i occasionally accidentaly copy/paste my entire prompt.md inadvertently in to a response tab. i bet we could easily detect that event and stop the paste before it occurs and notify the user with a simple toast about what it seemed like they were trying to do. like checking to see if the paste starts with `<prompt.md>` lol
+
+okay, im noticing one more tiny issue we need to address. im recognizing that the count in the parenthesis in the `Accept Selected (#)` tab text is carrying over from the previous cycle. what i mean is, what im currently looking at is a brand new, fresh cycle 3 where all i have done is clicked `+` on cycle 2. im going to do somethign unorthodox at this point and click `Parse All` (unorthodox because there is not yet anything placed in text fields to parse), but in doing so, i reveal that the current state of the button in question in this state is: `Accept Selected (13)`. this is because in cycle 2, i had selected 13 items. but this is not cycle 2, this is cycle 3. in cycle 3 no responses have been pasted, and so it is not possible to have made any file selections yet in which to accept.
+
+</Cycle Context>
+<Previous Cycle 134 Summary of Actions>
+I have analyzed the issue where the "Generate prompt.md" button is unresponsive. The root cause is that the button in `view.tsx` has no `onClick` handler attached to it. Additionally, to ensure the generated prompt reflects the latest user edits without a race condition, I will update the workflow to pass the full cycle data from the frontend to the backend, rather than relying on the backend to read potentially stale data from disk.
+
+My course of action is to:
+1.  **Update IPC:** Modify `RequestCreatePromptFile` in `channels.type.ts` to accept the full `PcppCycle` object.
+2.  **Update Backend:** Refactor `PromptService.generatePromptFile` to use this passed `cycleData` instead of reading the current cycle from history. This ensures "what you see is what you get" for the prompt.
+3.  **Update Frontend (`view.tsx`):** Implement `handleGeneratePrompt` to construct the `PcppCycle` object from the current state and send it. Attach this handler to the button.
+4.  **Update Frontend (`OnboardingView.tsx`):** Update the onboarding generation logic to construct and send a minimal `PcppCycle` object (Cycle 0) to match the new IPC signature.
+5.  **Documentation:** Add a regression case study for the missing button handler.
+
+1.  **Update `src/common/ipc/channels.type.ts`**: Change `RequestCreatePromptFile` payload to `{ cycleData: PcppCycle }`.
+2.  **Update `src/backend/services/prompt.service.ts`**: Modify `generatePromptFile` to accept `cycleData` and use it directly.
+3.  **Update `src/client/views/parallel-copilot.view/on-message.ts`**: Update the message handler to pass `data.cycleData`.
+4.  **Update `src/client/views/parallel-copilot.view/view.tsx`**: Implement `handleGeneratePrompt` and attach it to the button.
+5.  **Update `src/client/views/parallel-copilot.view/OnboardingView.tsx`**: Update `handleGenerate` to send the correct payload.
+6.  **Update `src/Artifacts/A11. DCE - Regression Case Studies.md`**: Add the case study.
+</Previous Cycle 134 Summary of Actions>
+</Cycle 135>
+
 <Cycle 134>
 <Cycle Context>
 okay, the changes from the previous cycle were very good! now im detecting these two tiny issues:
@@ -903,20 +936,6 @@ ah, no, you can't, its excluded from context. do you think that is an oversight?
 
 
 </Cycle Context>
-<Ephemeral Context>
-<.gitignore>
-node_modules
-package-lock.json
-dist
-out
-*.vsix
-.vscode-test/
-.vscode/
-The-Creator-AI-main/
-prompt.md
-.vscode/dce_cache/
-</.gitignore>
-</Ephemeral Context>
 <Previous Cycle 133 Summary of Actions>
 I have analyzed the issues reported in Cycle 132.
 1.  **Cost Breakdown:** The backend calculates the breakdown, but it's not being stored or displayed in the UI. I will add state for `costBreakdown` and display it in the tooltip of the cost display.
@@ -6262,10 +6281,10 @@ This file-centric approach helps in planning and prioritizing work, especially i
 <!--
   File: flattened_repo.md
   Source Directory: c:\Projects\DCE
-  Date Generated: 2025-12-04T19:27:52.537Z
+  Date Generated: 2025-12-04T20:17:48.454Z
   ---
   Total Files: 222
-  Approx. Tokens: 376825
+  Approx. Tokens: 377225
 -->
 
 <!-- Top 10 Text Files by Token Count -->
@@ -6275,7 +6294,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 4. GPT-OSS-HARMONY-REFERENCE-REPO\python_d20_response.json (9910 tokens)
 5. src\Artifacts\A0. DCE Master Artifact List.md (9486 tokens)
 6. src\client\views\parallel-copilot.view\view.scss (7625 tokens)
-7. src\client\views\parallel-copilot.view\view.tsx (5754 tokens)
+7. src\client\views\parallel-copilot.view\view.tsx (5762 tokens)
 8. src\backend\services\prompt.service.ts (4992 tokens)
 9. src\backend\services\file-operation.service.ts (4932 tokens)
 10. src\client\components\tree-view\TreeView.tsx (4422 tokens)
@@ -6346,7 +6365,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 63. src\Artifacts\A65. DCE - Universal Task Checklist.md - Lines: 93 - Chars: 5650 - Tokens: 1413
 64. src\Artifacts\A67. DCE - PCPP View Refactoring Plan.md - Lines: 47 - Chars: 3583 - Tokens: 896
 65. src\Artifacts\A68. DCE - PCPP Context Pane UX Plan.md - Lines: 37 - Chars: 3347 - Tokens: 837
-66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3772 - Tokens: 943
+66. src\Artifacts\A69. DCE - Animated UI Workflow Guide.md - Lines: 68 - Chars: 3803 - Tokens: 951
 67. src\Artifacts\A70. DCE - Git-Integrated Testing Workflow Plan.md - Lines: 61 - Chars: 6827 - Tokens: 1707
 68. src\Artifacts\A71. Sample M0 Prompt.md - Lines: 76 - Chars: 10822 - Tokens: 2706
 69. src\Artifacts\A72. DCE - README for Artifacts.md - Lines: 43 - Chars: 2920 - Tokens: 730
@@ -6382,11 +6401,11 @@ This file-centric approach helps in planning and prioritizing work, especially i
 99. src\backend\services\action.service.ts - Lines: 71 - Chars: 2444 - Tokens: 611
 100. src\backend\services\content-extraction.service.ts - Lines: 148 - Chars: 7681 - Tokens: 1921
 101. src\backend\services\file-operation.service.ts - Lines: 411 - Chars: 19728 - Tokens: 4932
-102. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 14796 - Tokens: 3699
+102. src\backend\services\file-tree.service.ts - Lines: 287 - Chars: 15082 - Tokens: 3771
 103. src\backend\services\flattener.service.ts - Lines: 296 - Chars: 15044 - Tokens: 3761
-104. src\backend\services\git.service.ts - Lines: 162 - Chars: 7487 - Tokens: 1872
+104. src\backend\services\git.service.ts - Lines: 173 - Chars: 7770 - Tokens: 1943
 105. src\backend\services\highlighting.service.ts - Lines: 77 - Chars: 3788 - Tokens: 947
-106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12471 - Tokens: 3118
+106. src\backend\services\history.service.ts - Lines: 309 - Chars: 12779 - Tokens: 3195
 107. src\backend\services\llm.service.ts - Lines: 276 - Chars: 13767 - Tokens: 3442
 108. src\backend\services\logger.service.ts - Lines: 38 - Chars: 1078 - Tokens: 270
 109. src\backend\services\prompt.service.ts - Lines: 374 - Chars: 19968 - Tokens: 4992
@@ -6419,7 +6438,7 @@ This file-centric approach helps in planning and prioritizing work, especially i
 136. src\client\views\parallel-copilot.view\on-message.ts - Lines: 179 - Chars: 8981 - Tokens: 2246
 137. src\client\views\parallel-copilot.view\OnboardingView.tsx - Lines: 141 - Chars: 6424 - Tokens: 1606
 138. src\client\views\parallel-copilot.view\view.scss - Lines: 1331 - Chars: 30497 - Tokens: 7625
-139. src\client\views\parallel-copilot.view\view.tsx - Lines: 430 - Chars: 23014 - Tokens: 5754
+139. src\client\views\parallel-copilot.view\view.tsx - Lines: 430 - Chars: 23045 - Tokens: 5762
 140. src\client\views\settings.view\index.ts - Lines: 8 - Chars: 281 - Tokens: 71
 141. src\client\views\settings.view\on-message.ts - Lines: 27 - Chars: 1222 - Tokens: 306
 142. src\client\views\settings.view\view.scss - Lines: 115 - Chars: 2285 - Tokens: 572
@@ -6452,12 +6471,12 @@ This file-centric approach helps in planning and prioritizing work, especially i
 169. src\Artifacts\A105. DCE - PCPP View Refactoring Plan for Cycle 76.md - Lines: 55 - Chars: 5342 - Tokens: 1336
 170. src\Artifacts\A106. DCE - vLLM Performance and Quantization Guide.md - Lines: 45 - Chars: 4360 - Tokens: 1090
 171. src\Artifacts\A66. DCE - Cycle 1 - Task Tracker.md - Lines: 25 - Chars: 1830 - Tokens: 458
-172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 143 - Chars: 6130 - Tokens: 1533
+172. src\client\views\parallel-copilot.view\hooks\useCycleManagement.ts - Lines: 143 - Chars: 6272 - Tokens: 1568
 173. src\client\views\parallel-copilot.view\hooks\useFileManagement.ts - Lines: 101 - Chars: 4347 - Tokens: 1087
 174. src\client\views\parallel-copilot.view\hooks\useGeneration.ts - Lines: 85 - Chars: 3834 - Tokens: 959
-175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 223 - Chars: 10364 - Tokens: 2591
-176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 180 - Chars: 7363 - Tokens: 1841
-177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 101 - Chars: 3337 - Tokens: 835
+175. src\client\views\parallel-copilot.view\hooks\usePcppIpc.ts - Lines: 225 - Chars: 10550 - Tokens: 2638
+176. src\client\views\parallel-copilot.view\hooks\useTabManagement.ts - Lines: 184 - Chars: 7541 - Tokens: 1886
+177. src\client\views\parallel-copilot.view\hooks\useWorkflow.ts - Lines: 102 - Chars: 3487 - Tokens: 872
 178. src\Artifacts\A110. DCE - Response UI State Persistence and Workflow Plan.md - Lines: 82 - Chars: 5020 - Tokens: 1255
 179. src\Artifacts\A111. DCE - New Regression Case Studies.md - Lines: 108 - Chars: 11535 - Tokens: 2884
 180. GPT-OSS-HARMONY-REFERENCE-REPO\builtin_tool_instructions.py - Lines: 122 - Chars: 3044 - Tokens: 761
@@ -10874,7 +10893,7 @@ The "Cycle Context" and "Ephemeral Context" text areas in the Parallel Co-Pilot 
 # Artifact A69: DCE - Animated UI Workflow Guide
 # Date Created: C169
 # Author: AI Model & Curator
-# Updated on: C187 (Correct final workflow steps)
+# Updated on: C134 (Reorder workflow: Select Files -> Baseline)
 
 ## 1. Overview & Goal
 
@@ -10918,14 +10937,14 @@ The highlighting will follow this specific sequence of user actions:
 8.  **Select a Response:** User reviews the responses.
     *   **Highlight:** The **`Select This Response`** button on each tab pulses.
 
-9.  **Create Baseline:** User clicks `Select This Response`.
+9.  **Select Files for Acceptance (C134 Reorder):** User clicks `Select This Response`.
+    *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
+
+10. **Create Baseline (C134 Reorder):** User checks files in the "Associated Files" list.
     *   **Highlight:** The **`Baseline (Commit)`** button pulses.
     *   **State-Aware Skip:** This step is skipped if the backend reports that the Git working tree is already clean.
 
-10. **Select Files for Acceptance:** A successful baseline is created.
-    *   **Highlight:** The "Associated Files" list panel and the **`Select All`** button within it pulse.
-
-11. **Accept Changes:** User checks one or more files in the "Associated Files" list.
+11. **Accept Changes:** User clicks `Baseline (Commit)`.
     *   **Highlight:** The **`Accept Selected`** button pulses.
 
 12. **Write Context:** User clicks `Accept Selected`.
@@ -14421,7 +14440,7 @@ export class FlattenerService {
 
 <file path="src/backend/services/git.service.ts">
 // src/backend/services/git.service.ts
-// Updated on: C129 (Automate .gitignore creation)
+// Updated on: C134 (Expand .gitignore)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -14467,7 +14486,7 @@ export class GitService {
         try {
             await this.execGitCommand('git init');
             
-            // C129: Create .gitignore automatically
+            // C134: Enhanced .gitignore creation
             const gitignorePath = path.join(workspaceRoot, '.gitignore');
             let gitignoreContent = '';
             try {
@@ -14476,19 +14495,30 @@ export class GitService {
                 // File doesn't exist, start fresh
             }
 
+            const entriesToAdd = [
+                'node_modules',
+                'package-lock.json',
+                'dist',
+                'out',
+                '*.vsix',
+                '.vscode-test/',
+                '.vscode/',
+                'The-Creator-AI-main/',
+                'prompt.md',
+                '.vscode/dce_cache/'
+            ];
+
             let updated = false;
-            if (!gitignoreContent.includes('.vscode/')) {
-                gitignoreContent += '\n.vscode/\n';
-                updated = true;
-            }
-            if (!gitignoreContent.includes('node_modules/')) {
-                gitignoreContent += '\nnode_modules/\n';
-                updated = true;
+            for (const entry of entriesToAdd) {
+                if (!gitignoreContent.includes(entry)) {
+                    gitignoreContent += `\n${entry}\n`;
+                    updated = true;
+                }
             }
 
             if (updated) {
                 await fs.writeFile(gitignorePath, gitignoreContent.trim() + '\n', 'utf-8');
-                Services.loggerService.log(".gitignore created/updated.");
+                Services.loggerService.log(".gitignore created/updated with comprehensive exclusions.");
             }
 
             vscode.window.showInformationMessage("Successfully initialized Git repository and configured .gitignore.");
@@ -20500,7 +20530,7 @@ body {
 
 <file path="src/client/views/parallel-copilot.view/view.tsx">
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C133 (Implement handleGeneratePrompt)
+// Updated on: C134 (Fix parsing state on new cycle)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -20715,7 +20745,6 @@ const App = () => {
     
     const collapsedNavigator = <div>...</div>;
     
-    // C132: Generate tooltip text from breakdown
     const costTooltipText = Object.entries(cycleManagement.costBreakdown)
         .map(([key, tokens]) => `${key}: ${tokens} tokens`)
         .join('\n');
@@ -20798,7 +20827,8 @@ const App = () => {
 
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
-        tabManagement.resetAndLoadTabs({});
+        // C134: Explicitly reset to UNPARSED mode for a new manual cycle
+        tabManagement.resetAndLoadTabs({}, false);
     };
 
     return <div className="pc-view-container">
@@ -23631,7 +23661,7 @@ export const useGeneration = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts">
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C132 (Fix response bleed by updating tabs on cycle load)
+// Updated on: C134 (Update workflow transition for Baseline and Generating Cycle)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -23667,7 +23697,6 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             cycleManagement.loadCycleData(cycleData, projectScope);
             cycleManagement.setMaxCycle(cycleData.cycleId);
-            // C132 Fix: Ensure tabs are loaded from the initial cycle data
             tabManagement.resetAndLoadTabs(cycleData.responses);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
@@ -23676,7 +23705,6 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
             if (cycleData) {
                 cycleManagement.loadCycleData(cycleData, projectScope);
-                // C132 Fix: Critical! Update tabs when cycle changes to prevent data bleeding/corruption
                 tabManagement.resetAndLoadTabs(cycleData.responses);
             }
         });
@@ -23718,7 +23746,8 @@ export const usePcppIpc = (
                 setWorkflowStep(prevStep => {
                     if (prevStep === 'awaitingBaseline') {
                         clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message });
-                        return 'awaitingFileSelect';
+                        // C134: Reordered workflow. After Baseline, go to Accept.
+                        return 'awaitingAccept';
                     }
                     return prevStep;
                 });
@@ -23726,7 +23755,8 @@ export const usePcppIpc = (
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => {
-            setWorkflowStep(prev => (isClean && prev === 'awaitingBaseline') ? 'awaitingFileSelect' : prev);
+            // C134: Reordered workflow. If already clean (or skipped), go to Accept.
+            setWorkflowStep(prev => (isClean && prev === 'awaitingBaseline') ? 'awaitingAccept' : prev);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
@@ -23746,7 +23776,9 @@ export const usePcppIpc = (
             logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
             cycleManagement.setMaxCycle(newMaxCycle);
             cycleManagement.loadCycleData(newCycleData);
-            tabManagement.resetAndLoadTabs(newCycleData.responses);
+            // C134: For a generating cycle (Demo Mode), we WANT parsed mode enabled to show progress UI components if needed, 
+            // or at least to be ready for the incoming JSON.
+            tabManagement.resetAndLoadTabs(newCycleData.responses, true);
 
             const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
                 const responseId = parseInt(key, 10);
@@ -23857,7 +23889,7 @@ export const usePcppIpc = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useTabManagement.ts">
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C124 (Pass tabId to requestAllMetrics)
+// Updated on: C134 (Allow explicit setting of isParsedMode in resetAndLoadTabs)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -23882,8 +23914,8 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
-        logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
+    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }, newIsParsedMode?: boolean) => {
+        logger.log(`[useTabManagement] Resetting and loading tabs. New Parse Mode: ${newIsParsedMode}`);
         const newTabs: { [key: string]: PcppResponse } = {};
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
@@ -23899,12 +23931,16 @@ export const useTabManagement = (
         }
         setTabs(newTabs);
         setTabCount(count);
+        
+        if (newIsParsedMode !== undefined) {
+            setIsParsedMode(newIsParsedMode);
+        }
     }, [initialTabCount]);
 
     React.useEffect(() => {
-        resetAndLoadTabs(initialResponses);
+        // Initial load
+        resetAndLoadTabs(initialResponses, initialIsParsedMode);
         setActiveTab(initialActiveTab);
-        setIsParsedMode(initialIsParsedMode);
         setIsSortedByTokens(initialIsSorted);
     }, [initialResponses, initialActiveTab, initialIsParsedMode, initialIsSorted, resetAndLoadTabs]);
 
@@ -24040,7 +24076,7 @@ export const useTabManagement = (
 
 <file path="src/client/views/parallel-copilot.view/hooks/useWorkflow.ts">
 // src/client/views/parallel-copilot.view/hooks/useWorkflow.ts
-// Updated on: C132 (Fix readyForNewCycle transition)
+// Updated on: C134 (Reorder workflow: Select Files -> Baseline)
 import * as React from 'react';
 
 export const useWorkflow = (
@@ -24067,7 +24103,6 @@ export const useWorkflow = (
 
         if (workflowStep === 'readyForNewCycle') {
             if (!isReadyForNextCycle) {
-                // Fallback if criteria are unmet
                 setWorkflowStep('awaitingGeneratePrompt');
             }
             return;
@@ -24097,19 +24132,21 @@ export const useWorkflow = (
         }
         if (workflowStep === 'awaitingFileSelect') {
             if (selectedFilesForReplacement.size > 0) {
-                setWorkflowStep('awaitingAccept');
+                // C134: Reordered workflow. After selecting files, prompt to Baseline.
+                setWorkflowStep('awaitingBaseline');
             }
             return;
         }
         if (workflowStep === 'awaitingResponseSelect') {
             if (selectedResponseId) {
-                setWorkflowStep('awaitingBaseline');
+                // C134: Reordered workflow. After selecting response, prompt to select files.
+                setWorkflowStep('awaitingFileSelect');
             }
             return;
         }
         if (workflowStep === 'awaitingSort') {
             if (selectedResponseId) {
-                setWorkflowStep('awaitingBaseline');
+                setWorkflowStep('awaitingFileSelect');
                 return;
             }
             if (isSortedByTokens) {

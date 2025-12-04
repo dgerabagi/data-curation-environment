@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/view.tsx
-// Updated on: C133 (Implement handleGeneratePrompt)
+// Updated on: C134 (Fix parsing state on new cycle)
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './view.scss';
@@ -214,7 +214,6 @@ const App = () => {
     
     const collapsedNavigator = <div>...</div>;
     
-    // C132: Generate tooltip text from breakdown
     const costTooltipText = Object.entries(cycleManagement.costBreakdown)
         .map(([key, tokens]) => `${key}: ${tokens} tokens`)
         .join('\n');
@@ -297,7 +296,8 @@ const App = () => {
 
     const handleNewCycleWrapper = (e: React.MouseEvent) => {
         cycleManagement.handleNewCycle(e);
-        tabManagement.resetAndLoadTabs({});
+        // C134: Explicitly reset to UNPARSED mode for a new manual cycle
+        tabManagement.resetAndLoadTabs({}, false);
     };
 
     return <div className="pc-view-container">

@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/useTabManagement.ts
-// Updated on: C124 (Pass tabId to requestAllMetrics)
+// Updated on: C134 (Allow explicit setting of isParsedMode in resetAndLoadTabs)
 import * as React from 'react';
 import { ParsedResponse, PcppResponse } from '@/common/types/pcpp.types';
 import { parseResponse } from '@/client/utils/response-parser';
@@ -24,8 +24,8 @@ export const useTabManagement = (
     const [isSortedByTokens, setIsSortedByTokens] = React.useState(initialIsSorted);
     const clientIpc = ClientPostMessageManager.getInstance();
 
-    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }) => {
-        logger.log('[useTabManagement] Resetting and loading tabs from new cycle data.');
+    const resetAndLoadTabs = React.useCallback((responses: { [key: string]: PcppResponse }, newIsParsedMode?: boolean) => {
+        logger.log(`[useTabManagement] Resetting and loading tabs. New Parse Mode: ${newIsParsedMode}`);
         const newTabs: { [key: string]: PcppResponse } = {};
         const count = Math.max(Object.keys(responses).length, initialTabCount);
         
@@ -41,12 +41,16 @@ export const useTabManagement = (
         }
         setTabs(newTabs);
         setTabCount(count);
+        
+        if (newIsParsedMode !== undefined) {
+            setIsParsedMode(newIsParsedMode);
+        }
     }, [initialTabCount]);
 
     React.useEffect(() => {
-        resetAndLoadTabs(initialResponses);
+        // Initial load
+        resetAndLoadTabs(initialResponses, initialIsParsedMode);
         setActiveTab(initialActiveTab);
-        setIsParsedMode(initialIsParsedMode);
         setIsSortedByTokens(initialIsSorted);
     }, [initialResponses, initialActiveTab, initialIsParsedMode, initialIsSorted, resetAndLoadTabs]);
 

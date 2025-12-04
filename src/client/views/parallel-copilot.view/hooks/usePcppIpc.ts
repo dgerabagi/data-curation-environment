@@ -1,5 +1,5 @@
 // src/client/views/parallel-copilot.view/hooks/usePcppIpc.ts
-// Updated on: C132 (Fix response bleed by updating tabs on cycle load)
+// Updated on: C134 (Update workflow transition for Baseline and Generating Cycle)
 import * as React from 'react';
 import { ClientPostMessageManager } from '@/common/ipc/client-ipc';
 import { ServerToClientChannel, ClientToServerChannel } from '@/common/ipc/channels.enum';
@@ -35,7 +35,6 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendInitialCycleData, ({ cycleData, projectScope }: { cycleData: PcppCycle, projectScope: string }) => {
             cycleManagement.loadCycleData(cycleData, projectScope);
             cycleManagement.setMaxCycle(cycleData.cycleId);
-            // C132 Fix: Ensure tabs are loaded from the initial cycle data
             tabManagement.resetAndLoadTabs(cycleData.responses);
             if (cycleData.cycleId === 0) setWorkflowStep('awaitingProjectScope');
             else if (cycleData.cycleId === 1 && !cycleData.cycleContext) setWorkflowStep('awaitingResponsePaste_1');
@@ -44,7 +43,6 @@ export const usePcppIpc = (
         clientIpc.onServerMessage(ServerToClientChannel.SendCycleData, ({ cycleData, projectScope }) => {
             if (cycleData) {
                 cycleManagement.loadCycleData(cycleData, projectScope);
-                // C132 Fix: Critical! Update tabs when cycle changes to prevent data bleeding/corruption
                 tabManagement.resetAndLoadTabs(cycleData.responses);
             }
         });
@@ -86,7 +84,8 @@ export const usePcppIpc = (
                 setWorkflowStep(prevStep => {
                     if (prevStep === 'awaitingBaseline') {
                         clientIpc.sendToServer(ClientToServerChannel.RequestShowInformationMessage, { message: result.message });
-                        return 'awaitingFileSelect';
+                        // C134: Reordered workflow. After Baseline, go to Accept.
+                        return 'awaitingAccept';
                     }
                     return prevStep;
                 });
@@ -94,7 +93,8 @@ export const usePcppIpc = (
         });
         
         clientIpc.onServerMessage(ServerToClientChannel.SendGitStatus, ({ isClean }) => {
-            setWorkflowStep(prev => (isClean && prev === 'awaitingBaseline') ? 'awaitingFileSelect' : prev);
+            // C134: Reordered workflow. If already clean (or skipped), go to Accept.
+            setWorkflowStep(prev => (isClean && prev === 'awaitingBaseline') ? 'awaitingAccept' : prev);
         });
 
         clientIpc.onServerMessage(ServerToClientChannel.NotifySaveComplete, ({ cycleId }) => {
@@ -114,7 +114,9 @@ export const usePcppIpc = (
             logger.log(`[IPC] Received NavigateToNewGeneratingCycle for C${newCycleData.cycleId}. Updating state atomically.`);
             cycleManagement.setMaxCycle(newMaxCycle);
             cycleManagement.loadCycleData(newCycleData);
-            tabManagement.resetAndLoadTabs(newCycleData.responses);
+            // C134: For a generating cycle (Demo Mode), we WANT parsed mode enabled to show progress UI components if needed, 
+            // or at least to be ready for the incoming JSON.
+            tabManagement.resetAndLoadTabs(newCycleData.responses, true);
 
             const initialProgress: GenerationProgress[] = Object.keys(newCycleData.responses).map(key => {
                 const responseId = parseInt(key, 10);

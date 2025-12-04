@@ -1,5 +1,5 @@
 // src/backend/services/git.service.ts
-// Updated on: C129 (Automate .gitignore creation)
+// Updated on: C134 (Expand .gitignore)
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import * as path from 'path';
@@ -45,7 +45,7 @@ export class GitService {
         try {
             await this.execGitCommand('git init');
             
-            // C129: Create .gitignore automatically
+            // C134: Enhanced .gitignore creation
             const gitignorePath = path.join(workspaceRoot, '.gitignore');
             let gitignoreContent = '';
             try {
@@ -54,19 +54,30 @@ export class GitService {
                 // File doesn't exist, start fresh
             }
 
+            const entriesToAdd = [
+                'node_modules',
+                'package-lock.json',
+                'dist',
+                'out',
+                '*.vsix',
+                '.vscode-test/',
+                '.vscode/',
+                'The-Creator-AI-main/',
+                'prompt.md',
+                '.vscode/dce_cache/'
+            ];
+
             let updated = false;
-            if (!gitignoreContent.includes('.vscode/')) {
-                gitignoreContent += '\n.vscode/\n';
-                updated = true;
-            }
-            if (!gitignoreContent.includes('node_modules/')) {
-                gitignoreContent += '\nnode_modules/\n';
-                updated = true;
+            for (const entry of entriesToAdd) {
+                if (!gitignoreContent.includes(entry)) {
+                    gitignoreContent += `\n${entry}\n`;
+                    updated = true;
+                }
             }
 
             if (updated) {
                 await fs.writeFile(gitignorePath, gitignoreContent.trim() + '\n', 'utf-8');
-                Services.loggerService.log(".gitignore created/updated.");
+                Services.loggerService.log(".gitignore created/updated with comprehensive exclusions.");
             }
 
             vscode.window.showInformationMessage("Successfully initialized Git repository and configured .gitignore.");
